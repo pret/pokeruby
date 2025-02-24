@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "Route110_TrickHousePuzzle4_EventScript_16276B",
+      "script": "Route110_TrickHousePuzzle4_EventScript_Cora",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "Route110_TrickHousePuzzle4_EventScript_162799",
+      "script": "Route110_TrickHousePuzzle4_EventScript_Jill",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route110_TrickHousePuzzle4_EventScript_162782",
+      "script": "Route110_TrickHousePuzzle4_EventScript_Yuji",
       "flag": "0"
     },
     {
@@ -60,8 +60,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route110_TrickHousePuzzle4_EventScript_1B1A92",
-      "flag": "FLAG_ITEM_TRICK_HOUSE_PUZZLE_4_1"
+      "script": "Route110_TrickHousePuzzle4_EventScript_ItemMechMail",
+      "flag": "FLAG_ITEM_TRICK_HOUSE_PUZZLE_4_MECH_MAIL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
@@ -238,7 +238,7 @@
       "y": 5,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route110_TrickHousePuzzle4_EventScript_16274E"
+      "script": "Route110_TrickHousePuzzle4_EventScript_Scroll"
     }
   ]
 }

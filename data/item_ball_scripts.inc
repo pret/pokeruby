@@ -478,39 +478,39 @@ CaveOfOrigin_B3F_EventScript_1B1A44:: @ 81B1A44
 	finditem ITEM_HM07_WATERFALL
 	end
 
-Route110_TrickHousePuzzle1_EventScript_1B1A51:: @ 81B1A51
+Route110_TrickHousePuzzle1_EventScript_ItemOrangeMail:: @ 81B1A51
 	finditem ITEM_ORANGE_MAIL
 	end
 
-Route110_TrickHousePuzzle2_EventScript_1B1A5E:: @ 81B1A5E
+Route110_TrickHousePuzzle2_EventScript_ItemHarborMail:: @ 81B1A5E
 	finditem ITEM_HARBOR_MAIL
 	end
 
-Route110_TrickHousePuzzle2_EventScript_1B1A6B:: @ 81B1A6B
+Route110_TrickHousePuzzle2_EventScript_ItemWaveMail:: @ 81B1A6B
 	finditem ITEM_WAVE_MAIL
 	end
 
-Route110_TrickHousePuzzle3_EventScript_1B1A78:: @ 81B1A78
+Route110_TrickHousePuzzle3_EventScript_ItemShadowMail:: @ 81B1A78
 	finditem ITEM_SHADOW_MAIL
 	end
 
-Route110_TrickHousePuzzle3_EventScript_1B1A85:: @ 81B1A85
+Route110_TrickHousePuzzle3_EventScript_ItemWoodMail:: @ 81B1A85
 	finditem ITEM_WOOD_MAIL
 	end
 
-Route110_TrickHousePuzzle4_EventScript_1B1A92:: @ 81B1A92
+Route110_TrickHousePuzzle4_EventScript_ItemMechMail:: @ 81B1A92
 	finditem ITEM_MECH_MAIL
 	end
 
-Route110_TrickHousePuzzle6_EventScript_1B1A9F:: @ 81B1A9F
+Route110_TrickHousePuzzle6_EventScript_ItemGlitterMail:: @ 81B1A9F
 	finditem ITEM_GLITTER_MAIL
 	end
 
-Route110_TrickHousePuzzle7_EventScript_1B1AAC:: @ 81B1AAC
+Route110_TrickHousePuzzle7_EventScript_ItemTropicMail:: @ 81B1AAC
 	finditem ITEM_TROPIC_MAIL
 	end
 
-Route110_TrickHousePuzzle8_EventScript_1B1AB9:: @ 81B1AB9
+Route110_TrickHousePuzzle8_EventScript_ItemBeadMail:: @ 81B1AB9
 	finditem ITEM_BEAD_MAIL
 	end
 

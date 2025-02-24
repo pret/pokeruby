@@ -1,43 +1,43 @@
 Route110_TrickHousePuzzle6_MapScripts:: @ 81630CD
-	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle6_MapScript1_1630D8
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route110_TrickHousePuzzle6_MapScript2_1630DC
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle6_OnTransition
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route110_TrickHousePuzzle6_OnWarp
 	.byte 0
 
-Route110_TrickHousePuzzle6_MapScript1_1630D8:: @ 81630D8
+Route110_TrickHousePuzzle6_OnTransition:: @ 81630D8
 	special RotatingGate_InitPuzzle
 	end
 
-Route110_TrickHousePuzzle6_MapScript2_1630DC:: @ 81630DC
-	map_script_2 VAR_TEMP_0, 16384, Route110_TrickHousePuzzle6_EventScript_1630E6
+Route110_TrickHousePuzzle6_OnWarp:: @ 81630DC
+	map_script_2 VAR_TEMP_0, 16384, Route110_TrickHousePuzzle6_EventScript_InitPuzzle
 	.2byte 0
 
-Route110_TrickHousePuzzle6_EventScript_1630E6:: @ 81630E6
+Route110_TrickHousePuzzle6_EventScript_InitPuzzle:: @ 81630E6
 	special RotatingGate_InitPuzzleAndGraphics
 	end
 
-Route110_TrickHousePuzzle6_EventScript_1630EA:: @ 81630EA
+Route110_TrickHousePuzzle6_EventScript_Scroll:: @ 81630EA
 	lockall
 	compare VAR_TRICK_HOUSE_PUZZLE_6_STATE, 0
-	goto_if_eq Route110_TrickHousePuzzle6_EventScript_1630FC
-	goto Route110_TrickHousePuzzle6_EventScript_161892
+	goto_if_eq Route110_TrickHousePuzzle6_EventScript_ReadScroll
+	goto Route110_TrickHousePuzzle6_EventScript_ReadScrollAgain
 	end
 
-Route110_TrickHousePuzzle6_EventScript_1630FC:: @ 81630FC
+Route110_TrickHousePuzzle6_EventScript_ReadScroll:: @ 81630FC
 	setvar VAR_TRICK_HOUSE_PUZZLE_6_STATE, 1
-	goto Route110_TrickHousePuzzle6_EventScript_16189C
+	goto Route110_TrickHousePuzzle6_EventScript_FoundScroll
 	end
 
-Route110_TrickHousePuzzle6_EventScript_163107:: @ 8163107
-	trainerbattle_single TRAINER_SOPHIA, Route110_TrickHousePuzzle6_Text_19DC87, Route110_TrickHousePuzzle6_Text_19DCC6
-	msgbox Route110_TrickHousePuzzle6_Text_19DCE7, MSGBOX_AUTOCLOSE
+Route110_TrickHousePuzzle6_EventScript_Sophia:: @ 8163107
+	trainerbattle_single TRAINER_SOPHIA, Route110_TrickHousePuzzle6_Text_SophiaIntro, Route110_TrickHousePuzzle6_Text_SophiaDefeat
+	msgbox Route110_TrickHousePuzzle6_Text_SophiaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route110_TrickHousePuzzle6_EventScript_16311E:: @ 816311E
-	trainerbattle_single TRAINER_BENNY, Route110_TrickHousePuzzle6_Text_19DD49, Route110_TrickHousePuzzle6_Text_19DD83
-	msgbox Route110_TrickHousePuzzle6_Text_19DD96, MSGBOX_AUTOCLOSE
+Route110_TrickHousePuzzle6_EventScript_Benny:: @ 816311E
+	trainerbattle_single TRAINER_BENNY, Route110_TrickHousePuzzle6_Text_BennyIntro, Route110_TrickHousePuzzle6_Text_BennyDefeat
+	msgbox Route110_TrickHousePuzzle6_Text_BennyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route110_TrickHousePuzzle6_EventScript_163135:: @ 8163135
-	trainerbattle_single TRAINER_SEBASTIAN, Route110_TrickHousePuzzle6_Text_19DDCF, Route110_TrickHousePuzzle6_Text_19DDFE
-	msgbox Route110_TrickHousePuzzle6_Text_19DE44, MSGBOX_AUTOCLOSE
+Route110_TrickHousePuzzle6_EventScript_Sebastian:: @ 8163135
+	trainerbattle_single TRAINER_SEBASTIAN, Route110_TrickHousePuzzle6_Text_SebastianIntro, Route110_TrickHousePuzzle6_Text_SebastianDefeat
+	msgbox Route110_TrickHousePuzzle6_Text_SebastianPostBattle, MSGBOX_AUTOCLOSE
 	end

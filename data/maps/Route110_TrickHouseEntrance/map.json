@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route110_TrickHouseEntrance_EventScript_16121A",
+      "script": "Route110_TrickHouseEntrance_EventScript_TrickMaster",
       "flag": "FLAG_HIDE_TRICKMASTER_ENTRANCE"
     }
   ],
@@ -56,7 +56,7 @@
       "elevation": 3,
       "var": "VAR_TRICK_HOUSE_ENTRANCE_STATE",
       "var_value": "0",
-      "script": "Route110_TrickHouseEntrance_EventScript_1618B0"
+      "script": "Route110_TrickHouseEntrance_EventScript_TrickMasterHiding"
     },
     {
       "type": "trigger",
@@ -65,7 +65,7 @@
       "elevation": 3,
       "var": "VAR_TRICK_HOUSE_ENTRANCE_STATE",
       "var_value": "0",
-      "script": "Route110_TrickHouseEntrance_EventScript_1618B0"
+      "script": "Route110_TrickHouseEntrance_EventScript_TrickMasterHiding"
     },
     {
       "type": "trigger",
@@ -74,7 +74,7 @@
       "elevation": 3,
       "var": "VAR_TRICK_HOUSE_ENTRANCE_STATE",
       "var_value": "0",
-      "script": "Route110_TrickHouseEntrance_EventScript_1618B0"
+      "script": "Route110_TrickHouseEntrance_EventScript_TrickMasterHiding"
     },
     {
       "type": "trigger",
@@ -83,7 +83,7 @@
       "elevation": 3,
       "var": "VAR_TRICK_HOUSE_ENTRANCE_STATE",
       "var_value": "0",
-      "script": "Route110_TrickHouseEntrance_EventScript_1618B0"
+      "script": "Route110_TrickHouseEntrance_EventScript_TrickMasterHiding"
     }
   ],
   "bg_events": [
@@ -93,7 +93,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "Route110_TrickHouseEntrance_EventScript_16158A"
+      "script": "Route110_TrickHouseEntrance_EventScript_Door"
     }
   ]
 }

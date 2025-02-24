@@ -681,17 +681,17 @@ gStdScripts_End::
 	.include "data/maps/Route109_SeashoreHouse/text.inc"
 	.include "data/maps/Route110_TrickHouseEntrance/text.inc"
 
-Route110_TrickHousePuzzle1_Text_19C1B8:: @ 819C1B8
+Route110_TrickHousePuzzle1_Text_FoundAScroll:: @ 819C1B8
 	.string "{PLAYER} found a scroll.$"
 
-Route110_TrickHousePuzzle1_Text_19C1CB:: @ 819C1CB
+Route110_TrickHousePuzzle1_Text_MemorizedTheCode:: @ 819C1CB
 	.string "{PLAYER} memorized the secret code\n"
 	.string "written on the scroll.$"
 
-Route110_TrickHousePuzzle1_Text_19C1FF:: @ 819C1FF
+Route110_TrickHousePuzzle1_Text_SecretCodeOnIt:: @ 819C1FF
 	.string "A secret code is written on it.$"
 
-UnknownString_819C21F: @ 819C21F
+Route110_TrickHousePuzzle_Text_DoorLockedWriteSecretCodeHere: @ 819C21F
 	.string "The door is locked.\p"
 	.string "...On closer inspection, this is written\n"
 	.string "on it: “Write the secret code here.”$"

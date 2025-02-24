@@ -1,170 +1,170 @@
 Route110_TrickHouseEnd_MapScripts:: @ 8161936
-	map_script MAP_SCRIPT_ON_RESUME, Route110_TrickHouseEnd_MapScript1_16194B
-	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHouseEnd_MapScript1_161957
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route110_TrickHouseEnd_MapScript2_16197C
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route110_TrickHouseEnd_MapScript2_161965
+	map_script MAP_SCRIPT_ON_RESUME, Route110_TrickHouseEnd_OnResume
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHouseEnd_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route110_TrickHouseEnd_OnFrame
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route110_TrickHouseEnd_OnWarp
 	.byte 0
 
-Route110_TrickHouseEnd_MapScript1_16194B:: @ 816194B
+Route110_TrickHouseEnd_OnResume:: @ 816194B
 	compare VAR_TEMP_1, 1
-	call_if_eq Route110_TrickHouseEnd_EventScript_161994
+	call_if_eq Route110_TrickHouseEnd_EventScript_SetDoorClosedMetatile
 	end
 
-Route110_TrickHouseEnd_MapScript1_161957:: @ 8161957
+Route110_TrickHouseEnd_OnTransition:: @ 8161957
 	setvar VAR_TEMP_1, 0
 	setvar VAR_TEMP_2, 0
 	special SetTrickHouseEndRoomFlag
 	end
 
-Route110_TrickHouseEnd_MapScript2_161965:: @ 8161965
-	map_script_2 VAR_TEMP_2, 0, Route110_TrickHouseEnd_EventScript_16196F
+Route110_TrickHouseEnd_OnWarp:: @ 8161965
+	map_script_2 VAR_TEMP_2, 0, Route110_TrickHouseEnd_EventScript_SetTrickMasterPos
 	.2byte 0
 
-Route110_TrickHouseEnd_EventScript_16196F:: @ 816196F
+Route110_TrickHouseEnd_EventScript_SetTrickMasterPos:: @ 816196F
 	addobject 1
 	showobjectat 1, MAP_ROUTE110_TRICK_HOUSE_END
 	turnobject 1, 4
 	end
 
-Route110_TrickHouseEnd_MapScript2_16197C:: @ 816197C
-	map_script_2 VAR_TEMP_1, 0, Route110_TrickHouseEnd_EventScript_161986
+Route110_TrickHouseEnd_OnFrame:: @ 816197C
+	map_script_2 VAR_TEMP_1, 0, Route110_TrickHouseEnd_EventScript_CloseDoor
 	.2byte 0
 
-Route110_TrickHouseEnd_EventScript_161986:: @ 8161986
+Route110_TrickHouseEnd_EventScript_CloseDoor:: @ 8161986
 	setvar VAR_TEMP_1, 1
-	call Route110_TrickHouseEnd_EventScript_161994
+	call Route110_TrickHouseEnd_EventScript_SetDoorClosedMetatile
 	special DrawWholeMapView
 	end
 
-Route110_TrickHouseEnd_EventScript_161994:: @ 8161994
+Route110_TrickHouseEnd_EventScript_SetDoorClosedMetatile:: @ 8161994
 	setmetatile 10, 1, METATILE_GenericBuilding_TrickHouse_Door_Closed, 1
 	return
 
-Route110_TrickHouseEnd_EventScript_16199E:: @ 816199E
+Route110_TrickHouseEnd_EventScript_TrickMaster:: @ 816199E
 	lock
 	faceplayer
-	msgbox Route110_TrickHouseEnd_Text_19C281, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEnd_Text_YouveMadeItToMe, MSGBOX_DEFAULT
 	setvar VAR_TEMP_2, 1
 	switch VAR_TRICK_HOUSE_ROOMS_COMPLETED
-	case 0, Route110_TrickHouseEnd_EventScript_161A0B
-	case 1, Route110_TrickHouseEnd_EventScript_161A47
-	case 2, Route110_TrickHouseEnd_EventScript_161A83
-	case 3, Route110_TrickHouseEnd_EventScript_161ABF
-	case 4, Route110_TrickHouseEnd_EventScript_161AFB
-	case 5, Route110_TrickHouseEnd_EventScript_161B37
-	case 6, Route110_TrickHouseEnd_EventScript_161B73
-	case 7, Route110_TrickHouseEnd_EventScript_161BAF
+	case 0, Route110_TrickHouseEnd_EventScript_CompletedPuzzle1
+	case 1, Route110_TrickHouseEnd_EventScript_CompletedPuzzle2
+	case 2, Route110_TrickHouseEnd_EventScript_CompletedPuzzle3
+	case 3, Route110_TrickHouseEnd_EventScript_CompletedPuzzle4
+	case 4, Route110_TrickHouseEnd_EventScript_CompletedPuzzle5
+	case 5, Route110_TrickHouseEnd_EventScript_CompletedPuzzle6
+	case 6, Route110_TrickHouseEnd_EventScript_CompletedPuzzle7
+	case 7, Route110_TrickHouseEnd_EventScript_CompletedPuzzle8
 	end
 
-Route110_TrickHouseEnd_EventScript_161A0B:: @ 8161A0B
-	msgbox Route110_TrickHouseEnd_Text_19C2B2, MSGBOX_DEFAULT
-	msgbox Route110_TrickHouseEnd_Text_19C90B, MSGBOX_DEFAULT
+Route110_TrickHouseEnd_EventScript_CompletedPuzzle1:: @ 8161A0B
+	msgbox Route110_TrickHouseEnd_Text_AllNightToPlantTrees, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem ITEM_RARE_CANDY
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEnd_EventScript_161C4E
-	msgbox Route110_TrickHouseEnd_Text_19C9BD, MSGBOX_DEFAULT
+	call_if_eq Route110_TrickHouseEnd_EventScript_BagFull
+	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
 	closemessage
-	call Route110_TrickHouseEnd_EventScript_161C2E
+	call Route110_TrickHouseEnd_EventScript_TrickMasterExit
 	release
 	end
 
-Route110_TrickHouseEnd_EventScript_161A47:: @ 8161A47
-	msgbox Route110_TrickHouseEnd_Text_19C333, MSGBOX_DEFAULT
-	msgbox Route110_TrickHouseEnd_Text_19C90B, MSGBOX_DEFAULT
+Route110_TrickHouseEnd_EventScript_CompletedPuzzle2:: @ 8161A47
+	msgbox Route110_TrickHouseEnd_Text_AllNightToMakeMaze, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem ITEM_TIMER_BALL
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEnd_EventScript_161C4E
-	msgbox Route110_TrickHouseEnd_Text_19C9BD, MSGBOX_DEFAULT
+	call_if_eq Route110_TrickHouseEnd_EventScript_BagFull
+	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
 	closemessage
-	call Route110_TrickHouseEnd_EventScript_161C2E
+	call Route110_TrickHouseEnd_EventScript_TrickMasterExit
 	release
 	end
 
-Route110_TrickHouseEnd_EventScript_161A83:: @ 8161A83
+Route110_TrickHouseEnd_EventScript_CompletedPuzzle3:: @ 8161A83
 	msgbox Route110_TrickHouseEnd_Text_19C3A7, MSGBOX_DEFAULT
-	msgbox Route110_TrickHouseEnd_Text_19C90B, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem ITEM_HARD_STONE
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEnd_EventScript_161C4E
-	msgbox Route110_TrickHouseEnd_Text_19C9BD, MSGBOX_DEFAULT
+	call_if_eq Route110_TrickHouseEnd_EventScript_BagFull
+	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
 	closemessage
-	call Route110_TrickHouseEnd_EventScript_161C2E
+	call Route110_TrickHouseEnd_EventScript_TrickMasterExit
 	release
 	end
 
-Route110_TrickHouseEnd_EventScript_161ABF:: @ 8161ABF
-	msgbox Route110_TrickHouseEnd_Text_19C41F, MSGBOX_DEFAULT
-	msgbox Route110_TrickHouseEnd_Text_19C90B, MSGBOX_DEFAULT
+Route110_TrickHouseEnd_EventScript_CompletedPuzzle4:: @ 8161ABF
+	msgbox Route110_TrickHouseEnd_Text_AllNightToShoveBoulders, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem ITEM_SMOKE_BALL
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEnd_EventScript_161C4E
-	msgbox Route110_TrickHouseEnd_Text_19C9BD, MSGBOX_DEFAULT
+	call_if_eq Route110_TrickHouseEnd_EventScript_BagFull
+	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
 	closemessage
-	call Route110_TrickHouseEnd_EventScript_161C2E
+	call Route110_TrickHouseEnd_EventScript_TrickMasterExit
 	release
 	end
 
-Route110_TrickHouseEnd_EventScript_161AFB:: @ 8161AFB
-	msgbox Route110_TrickHouseEnd_Text_19C491, MSGBOX_DEFAULT
-	msgbox Route110_TrickHouseEnd_Text_19C90B, MSGBOX_DEFAULT
+Route110_TrickHouseEnd_EventScript_CompletedPuzzle5:: @ 8161AFB
+	msgbox Route110_TrickHouseEnd_Text_AllNightToMakeMechadolls, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem ITEM_TM12_TAUNT
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEnd_EventScript_161C4E
-	msgbox Route110_TrickHouseEnd_Text_19C9BD, MSGBOX_DEFAULT
+	call_if_eq Route110_TrickHouseEnd_EventScript_BagFull
+	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
 	closemessage
-	call Route110_TrickHouseEnd_EventScript_161C2E
+	call Route110_TrickHouseEnd_EventScript_TrickMasterExit
 	release
 	end
 
-Route110_TrickHouseEnd_EventScript_161B37:: @ 8161B37
-	msgbox Route110_TrickHouseEnd_Text_19C515, MSGBOX_DEFAULT
-	msgbox Route110_TrickHouseEnd_Text_19C90B, MSGBOX_DEFAULT
+Route110_TrickHouseEnd_EventScript_CompletedPuzzle6:: @ 8161B37
+	msgbox Route110_TrickHouseEnd_Text_AllNightToInstallDoors, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem ITEM_MAGNET
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEnd_EventScript_161C4E
-	msgbox Route110_TrickHouseEnd_Text_19C9BD, MSGBOX_DEFAULT
+	call_if_eq Route110_TrickHouseEnd_EventScript_BagFull
+	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
 	closemessage
-	call Route110_TrickHouseEnd_EventScript_161C2E
+	call Route110_TrickHouseEnd_EventScript_TrickMasterExit
 	release
 	end
 
-Route110_TrickHouseEnd_EventScript_161B73:: @ 8161B73
-	msgbox Route110_TrickHouseEnd_Text_19C567, MSGBOX_DEFAULT
-	msgbox Route110_TrickHouseEnd_Text_19C90B, MSGBOX_DEFAULT
+Route110_TrickHouseEnd_EventScript_CompletedPuzzle7:: @ 8161B73
+	msgbox Route110_TrickHouseEnd_Text_AllNightSettingUpArrows, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem ITEM_PP_MAX
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEnd_EventScript_161C4E
-	msgbox Route110_TrickHouseEnd_Text_19C9BD, MSGBOX_DEFAULT
+	call_if_eq Route110_TrickHouseEnd_EventScript_BagFull
+	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
 	closemessage
-	call Route110_TrickHouseEnd_EventScript_161C2E
+	call Route110_TrickHouseEnd_EventScript_TrickMasterExit
 	release
 	end
 
-Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
-	msgbox Route110_TrickHouseEnd_Text_19C5AF, MSGBOX_DEFAULT
+Route110_TrickHouseEnd_EventScript_CompletedPuzzle8:: @ 8161BAF
+	msgbox Route110_TrickHouseEnd_Text_AllNightPolishingFloors, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 1
-	call_if_eq Route110_TrickHouseEnd_EventScript_161C74
+	call_if_eq Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwaySouth
 	compare VAR_FACING, 2
-	call_if_eq Route110_TrickHouseEnd_EventScript_161C7F
+	call_if_eq Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayNorth
 	compare VAR_FACING, 3
-	call_if_eq Route110_TrickHouseEnd_EventScript_161C8A
+	call_if_eq Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayWest
 	compare VAR_FACING, 4
-	call_if_eq Route110_TrickHouseEnd_EventScript_161C95
+	call_if_eq Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayEast
 	delay 30
-	msgbox Route110_TrickHouseEnd_Text_19C602, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEnd_Text_FountainOfIdeasRunDry, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	delay 30
-	msgbox Route110_TrickHouseEnd_Text_19C691, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEnd_Text_DefeatedMeTakeTent, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	.ifdef SAPPHIRE
 	givedecoration DECOR_BLUE_TENT
@@ -172,80 +172,80 @@ Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
 	givedecoration DECOR_RED_TENT
 	.endc
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEnd_EventScript_161C61
-	msgbox Route110_TrickHouseEnd_Text_19C85C, MSGBOX_DEFAULT
-	call Route110_TrickHouseEnd_EventScript_161C2E
+	call_if_eq Route110_TrickHouseEnd_EventScript_NoRoomForTent
+	msgbox Route110_TrickHouseEnd_Text_LeavingOnJourney, MSGBOX_DEFAULT
+	call Route110_TrickHouseEnd_EventScript_TrickMasterExit
 	special ResetTrickHouseEndRoomFlag
 	release
 	end
 
-Route110_TrickHouseEnd_EventScript_161C2E:: @ 8161C2E
-	applymovement 1, Route110_TrickHouseEnd_Movement_161315
+Route110_TrickHouseEnd_EventScript_TrickMasterExit:: @ 8161C2E
+	applymovement 1, Route110_TrickHouseEnd_Movement_TrickMasterSpin
 	waitmovement 0
 	playse SE_M_EXPLOSION
-	applymovement 1, Route110_TrickHouseEnd_Movement_16131E
+	applymovement 1, Route110_TrickHouseEnd_Movement_TrickMasterJumpAway
 	waitmovement 0
 	removeobject 1
 	addvar VAR_TRICK_HOUSE_ROOMS_COMPLETED, 1
 	return
 
-Route110_TrickHouseEnd_EventScript_161C4E:: @ 8161C4E
+Route110_TrickHouseEnd_EventScript_BagFull:: @ 8161C4E
 	call Common_EventScript_BagIsFull
-	msgbox Route110_TrickHouseEnd_Text_19C92E, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEnd_Text_NoRoomForThis, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 1
 	return
 
-Route110_TrickHouseEnd_EventScript_161C61:: @ 8161C61
+Route110_TrickHouseEnd_EventScript_NoRoomForTent:: @ 8161C61
 	call Common_EventScript_NoRoomForDecor
-	msgbox Route110_TrickHouseEnd_Text_19C7D7, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEnd_Text_NoRoomInPC, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 1
 	return
 
-Route110_TrickHouseEnd_EventScript_161C74:: @ 8161C74
+Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwaySouth:: @ 8161C74
 	applymovement 1, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
-Route110_TrickHouseEnd_EventScript_161C7F:: @ 8161C7F
+Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayNorth:: @ 8161C7F
 	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
-Route110_TrickHouseEnd_EventScript_161C8A:: @ 8161C8A
+Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayWest:: @ 8161C8A
 	applymovement 1, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
-Route110_TrickHouseEnd_EventScript_161C95:: @ 8161C95
+Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayEast:: @ 8161C95
 	applymovement 1, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
-Route110_TrickHouseEnd_EventScript_161CA0:: @ 8161CA0
+Route110_TrickHouseEnd_EventScript_TrickMasterExitTrigger:: @ 8161CA0
 	lockall
 	turnobject 1, 3
 	playse SE_PIN
 	applymovement 1, Common_Movement_ExclamationMark
 	waitmovement 0
 	delay 20
-	applymovement 1, Route110_TrickHouseEnd_Movement_161CEA
+	applymovement 1, Route110_TrickHouseEnd_Movement_TrickMasterSurprise
 	waitmovement 0
 	playse SE_M_EXPLOSION
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	msgbox Route110_TrickHouseEnd_Text_19CA8B, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEnd_Text_YoureIgnoringMe, MSGBOX_DEFAULT
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Route110_TrickHouseEnd_Movement_161CE8
+	applymovement OBJ_EVENT_ID_PLAYER, Route110_TrickHouseEnd_Movement_KeepPlayerInRoom
 	waitmovement 0
 	delay 4
 	turnobject 1, 4
 	releaseall
 	end
 
-Route110_TrickHouseEnd_Movement_161CE8:: @ 8161CE8
+Route110_TrickHouseEnd_Movement_KeepPlayerInRoom:: @ 8161CE8
 	walk_down
 	step_end
 
-Route110_TrickHouseEnd_Movement_161CEA:: @ 8161CEA
+Route110_TrickHouseEnd_Movement_TrickMasterSurprise:: @ 8161CEA
 	jump_in_place_left
 	step_end
