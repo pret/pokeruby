@@ -21,7 +21,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_Rooms_1F_EventScript_15E986",
+      "script": "AbandonedShip_Rooms_1F_EventScript_Gentleman",
       "flag": "0"
     },
     {
@@ -34,8 +34,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_Rooms_1F_EventScript_1B187D",
-      "flag": "FLAG_ITEM_ABANDONED_SHIP_ROOMS_1F_1"
+      "script": "AbandonedShip_Rooms_1F_EventScript_ItemHarborMail",
+      "flag": "FLAG_ITEM_ABANDONED_SHIP_ROOMS_1F_HARBOR_MAIL"
     }
   ],
   "warp_events": [

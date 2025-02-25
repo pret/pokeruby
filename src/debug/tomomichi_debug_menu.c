@@ -773,7 +773,7 @@ static const struct MenuAction gUnknown_Debug_083C1A9C[] = {
 static const u8 gUnknown_Debug_083C1AAC[] = {2};
 
 static const u16 gUnknown_Debug_083C1AAE[][9] = {
-    {FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_2, FLAG_ITEM_MOSSDEEP_STEVENS_HOUSE_HM08}
+    {FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_2_SCANNER, FLAG_ITEM_MOSSDEEP_STEVENS_HOUSE_HM08}
 };
 
 static const u8 gUnknown_Debug_083C1AC0[] = DTR("ジムリーダー", "GYM LEADER");
