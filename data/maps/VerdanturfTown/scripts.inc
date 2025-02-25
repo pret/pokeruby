@@ -1,63 +1,63 @@
 VerdanturfTown_MapScripts:: @ 814E854
-	map_script MAP_SCRIPT_ON_TRANSITION, VerdanturfTown_MapScript1_14E85A
+	map_script MAP_SCRIPT_ON_TRANSITION, VerdanturfTown_OnTransition
 	.byte 0
 
-VerdanturfTown_MapScript1_14E85A:: @ 814E85A
+VerdanturfTown_OnTransition:: @ 814E85A
 	setflag FLAG_VISITED_VERDANTURF_TOWN
 	setvar VAR_LINK_CONTEST_ROOM_STATE, 0
 	setflag FLAG_HIDE_CONTEST_REPORTER_VERDANTURF
 	end
 
-VerdanturfTown_EventScript_14E866:: @ 814E866
+VerdanturfTown_EventScript_Twin:: @ 814E866
 	lock
 	faceplayer
-	goto_if_set FLAG_RUSTURF_TUNNEL_OPENED, VerdanturfTown_EventScript_14E885
-	msgbox VerdanturfTown_Text_16CAEB, MSGBOX_DEFAULT
+	goto_if_set FLAG_RUSTURF_TUNNEL_OPENED, VerdanturfTown_EventScript_TwinTunnelOpen
+	msgbox VerdanturfTown_Text_ManTryingToDigTunnel, MSGBOX_DEFAULT
 	applymovement 2, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
-VerdanturfTown_EventScript_14E885:: @ 814E885
-	msgbox VerdanturfTown_Text_16CBCE, MSGBOX_DEFAULT
+VerdanturfTown_EventScript_TwinTunnelOpen:: @ 814E885
+	msgbox VerdanturfTown_Text_ManDugTunnelForLove, MSGBOX_DEFAULT
 	applymovement 2, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
-VerdanturfTown_EventScript_14E899:: @ 814E899
-	msgbox VerdanturfTown_Text_16CC24, MSGBOX_NPC
+VerdanturfTown_EventScript_Man:: @ 814E899
+	msgbox VerdanturfTown_Text_AirCleanHere, MSGBOX_NPC
 	end
 
-VerdanturfTown_EventScript_14E8A2:: @ 814E8A2
-	msgbox VerdanturfTown_Text_16CCD0, MSGBOX_NPC
+VerdanturfTown_EventScript_Camper:: @ 814E8A2
+	msgbox VerdanturfTown_Text_MakeContestDebut, MSGBOX_NPC
 	end
 
-VerdanturfTown_EventScript_14E8AB:: @ 814E8AB
+VerdanturfTown_EventScript_Boy:: @ 814E8AB
 	lock
 	faceplayer
-	goto_if_set FLAG_RUSTURF_TUNNEL_OPENED, VerdanturfTown_EventScript_14E8C0
-	msgbox VerdanturfTown_Text_16CD4D, MSGBOX_DEFAULT
+	goto_if_set FLAG_RUSTURF_TUNNEL_OPENED, VerdanturfTown_EventScript_BoyTunnelOpen
+	msgbox VerdanturfTown_Text_GuyTryingToBustThroughCave, MSGBOX_DEFAULT
 	release
 	end
 
-VerdanturfTown_EventScript_14E8C0:: @ 814E8C0
-	msgbox VerdanturfTown_Text_16CE30, MSGBOX_DEFAULT
+VerdanturfTown_EventScript_BoyTunnelOpen:: @ 814E8C0
+	msgbox VerdanturfTown_Text_EasyToGetToRustboroNow, MSGBOX_DEFAULT
 	release
 	end
 
-VerdanturfTown_EventScript_14E8CA:: @ 814E8CA
-	msgbox VerdanturfTown_Text_16CEC0, MSGBOX_SIGN
+VerdanturfTown_EventScript_TownSign:: @ 814E8CA
+	msgbox VerdanturfTown_Text_TownSign, MSGBOX_SIGN
 	end
 
-VerdanturfTown_EventScript_14E8D3:: @ 814E8D3
-	msgbox VerdanturfTown_Text_16CF0D, MSGBOX_SIGN
+VerdanturfTown_EventScript_WandasHouseSign:: @ 814E8D3
+	msgbox VerdanturfTown_Text_WandasHouse, MSGBOX_SIGN
 	end
 
-VerdanturfTown_EventScript_14E8DC:: @ 814E8DC
-	msgbox VerdanturfTown_Text_16CF1B, MSGBOX_SIGN
+VerdanturfTown_EventScript_PokemonContestNormalRankSign:: @ 814E8DC
+	msgbox VerdanturfTown_Text_PokemonContestNormalRankSign, MSGBOX_SIGN
 	end
 
-VerdanturfTown_EventScript_14E8E5:: @ 814E8E5
-	msgbox VerdanturfTown_Text_16CF6D, MSGBOX_SIGN
+VerdanturfTown_EventScript_RusturfTunnelSign:: @ 814E8E5
+	msgbox VerdanturfTown_Text_RusturfTunnelSign, MSGBOX_SIGN
 	end
