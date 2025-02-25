@@ -1,24 +1,24 @@
 AbandonedShip_CaptainsOffice_MapScripts:: @ 815EAF4
 	.byte 0
 
-AbandonedShip_CaptainsOffice_EventScript_15EAF5:: @ 815EAF5
+AbandonedShip_CaptainsOffice_EventScript_CaptSternAide:: @ 815EAF5
 	lock
 	faceplayer
-	goto_if_set FLAG_EXCHANGED_SCANNER, AbandonedShip_CaptainsOffice_EventScript_15EB2D
+	goto_if_set FLAG_EXCHANGED_SCANNER, AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus
 	checkitem ITEM_SCANNER, 1
 	compare VAR_RESULT, 1
-	goto_if_eq AbandonedShip_CaptainsOffice_EventScript_15EB23
-	goto_if_set FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_2, AbandonedShip_CaptainsOffice_EventScript_15EB2D
-	msgbox AbandonedShip_CaptainsOffice_Text_198C85, MSGBOX_DEFAULT
+	goto_if_eq AbandonedShip_CaptainsOffice_EventScript_CanYouDeliverScanner
+	goto_if_set FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_2_SCANNER, AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus
+	msgbox AbandonedShip_CaptainsOffice_Text_NoSuccessFindingScanner, MSGBOX_DEFAULT
 	release
 	end
 
-AbandonedShip_CaptainsOffice_EventScript_15EB23:: @ 815EB23
-	msgbox AbandonedShip_CaptainsOffice_Text_198D00, MSGBOX_DEFAULT
+AbandonedShip_CaptainsOffice_EventScript_CanYouDeliverScanner:: @ 815EB23
+	msgbox AbandonedShip_CaptainsOffice_Text_OhCanYouDeliverScanner, MSGBOX_DEFAULT
 	release
 	end
 
-AbandonedShip_CaptainsOffice_EventScript_15EB2D:: @ 815EB2D
-	msgbox AbandonedShip_CaptainsOffice_Text_198D7B, MSGBOX_DEFAULT
+AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus:: @ 815EB2D
+	msgbox AbandonedShip_CaptainsOffice_Text_ThisIsSSCactus, MSGBOX_DEFAULT
 	release
 	end

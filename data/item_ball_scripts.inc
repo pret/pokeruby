@@ -334,43 +334,43 @@ NewMauville_Inside_EventScript_1B1870:: @ 81B1870
 	finditem ITEM_PARALYZE_HEAL
 	end
 
-AbandonedShip_Rooms_1F_EventScript_1B187D:: @ 81B187D
+AbandonedShip_Rooms_1F_EventScript_ItemHarborMail:: @ 81B187D
 	finditem ITEM_HARBOR_MAIL
 	end
 
-AbandonedShip_Rooms_B1F_EventScript_1B188A:: @ 81B188A
+AbandonedShip_Rooms_B1F_EventScript_ItemEscapeRope:: @ 81B188A
 	finditem ITEM_ESCAPE_ROPE
 	end
 
-AbandonedShip_Rooms2_B1F_EventScript_1B1897:: @ 81B1897
+AbandonedShip_Rooms2_B1F_EventScript_ItemDiveBall:: @ 81B1897
 	finditem ITEM_DIVE_BALL
 	end
 
-AbandonedShip_Room_B1F_EventScript_1B18A4:: @ 81B18A4
+AbandonedShip_Room_B1F_EventScript_ItemTMIceBeam:: @ 81B18A4
 	finditem ITEM_TM13_ICE_BEAM
 	end
 
-AbandonedShip_Rooms2_1F_EventScript_1B18B1:: @ 81B18B1
+AbandonedShip_Rooms2_1F_EventScript_ItemRevive:: @ 81B18B1
 	finditem ITEM_REVIVE
 	end
 
-AbandonedShip_CaptainsOffice_EventScript_1B18BE:: @ 81B18BE
+AbandonedShip_CaptainsOffice_EventScript_ItemStorageKey:: @ 81B18BE
 	finditem ITEM_STORAGE_KEY
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_1B18CB:: @ 81B18CB
+AbandonedShip_HiddenFloorRooms_EventScript_ItemLuxuryBall:: @ 81B18CB
 	finditem ITEM_LUXURY_BALL
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_1B18D8:: @ 81B18D8
+AbandonedShip_HiddenFloorRooms_EventScript_ItemScanner:: @ 81B18D8
 	finditem ITEM_SCANNER
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_1B18E5:: @ 81B18E5
+AbandonedShip_HiddenFloorRooms_EventScript_ItemWaterStone:: @ 81B18E5
 	finditem ITEM_WATER_STONE
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_1B18F2:: @ 81B18F2
+AbandonedShip_HiddenFloorRooms_EventScript_ItemTMRainDance:: @ 81B18F2
 	finditem ITEM_TM18_RAIN_DANCE
 	end
 

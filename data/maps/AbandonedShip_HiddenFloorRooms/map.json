@@ -21,8 +21,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_HiddenFloorRooms_EventScript_1B18CB",
-      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_1"
+      "script": "AbandonedShip_HiddenFloorRooms_EventScript_ItemLuxuryBall",
+      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_6_LUXURY_BALL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -34,8 +34,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_HiddenFloorRooms_EventScript_1B18D8",
-      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_2"
+      "script": "AbandonedShip_HiddenFloorRooms_EventScript_ItemScanner",
+      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_2_SCANNER"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -47,8 +47,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_HiddenFloorRooms_EventScript_1B18F2",
-      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_4"
+      "script": "AbandonedShip_HiddenFloorRooms_EventScript_ItemTMRainDance",
+      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_1_TM_RAIN_DANCE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -60,8 +60,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_HiddenFloorRooms_EventScript_1B18E5",
-      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_3"
+      "script": "AbandonedShip_HiddenFloorRooms_EventScript_ItemWaterStone",
+      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_3_WATER_STONE"
     }
   ],
   "warp_events": [
@@ -137,7 +137,7 @@
       "y": 10,
       "elevation": 3,
       "item": "ITEM_ROOM_1_KEY",
-      "flag": "FLAG_HIDDEN_ITEM_1F"
+      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_1_KEY"
     },
     {
       "type": "hidden_item",
@@ -145,7 +145,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_ROOM_2_KEY",
-      "flag": "FLAG_HIDDEN_ITEM_20"
+      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_2_KEY"
     },
     {
       "type": "hidden_item",
@@ -153,7 +153,7 @@
       "y": 12,
       "elevation": 3,
       "item": "ITEM_ROOM_4_KEY",
-      "flag": "FLAG_HIDDEN_ITEM_21"
+      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_4_KEY"
     },
     {
       "type": "hidden_item",
@@ -161,7 +161,7 @@
       "y": 2,
       "elevation": 0,
       "item": "ITEM_ROOM_6_KEY",
-      "flag": "FLAG_HIDDEN_ITEM_22"
+      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_6_KEY"
     },
     {
       "type": "sign",
@@ -169,7 +169,7 @@
       "y": 5,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "AbandonedShip_HiddenFloorRooms_EventScript_15EEAB"
+      "script": "AbandonedShip_HiddenFloorRooms_EventScript_Trash"
     },
     {
       "type": "sign",
@@ -177,7 +177,7 @@
       "y": 3,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "AbandonedShip_HiddenFloorRooms_EventScript_15EEAB"
+      "script": "AbandonedShip_HiddenFloorRooms_EventScript_Trash"
     },
     {
       "type": "sign",
@@ -185,7 +185,7 @@
       "y": 10,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "AbandonedShip_HiddenFloorRooms_EventScript_15EEAB"
+      "script": "AbandonedShip_HiddenFloorRooms_EventScript_Trash"
     },
     {
       "type": "sign",
@@ -193,7 +193,7 @@
       "y": 3,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "AbandonedShip_HiddenFloorRooms_EventScript_15EEAB"
+      "script": "AbandonedShip_HiddenFloorRooms_EventScript_Trash"
     },
     {
       "type": "sign",
@@ -201,7 +201,7 @@
       "y": 2,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "AbandonedShip_HiddenFloorRooms_EventScript_15EEAB"
+      "script": "AbandonedShip_HiddenFloorRooms_EventScript_Trash"
     },
     {
       "type": "sign",
@@ -209,7 +209,7 @@
       "y": 6,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "AbandonedShip_HiddenFloorRooms_EventScript_15EEAB"
+      "script": "AbandonedShip_HiddenFloorRooms_EventScript_Trash"
     }
   ]
 }
