@@ -40,8 +40,8 @@ FallarborTown_EventScript_Azurill:: @ 814E826
 	release
 	end
 
-FallarborTown_EventScript_PokemonContestSuperRankSign:: @ 814E839
-	msgbox FallarborTown_Text_PokemonContestSuperRankSign, MSGBOX_SIGN
+FallarborTown_EventScript_ContestHallSign:: @ 814E839
+	msgbox FallarborTown_Text_ContestHallSign, MSGBOX_SIGN
 	end
 
 FallarborTown_EventScript_TownSign:: @ 814E842

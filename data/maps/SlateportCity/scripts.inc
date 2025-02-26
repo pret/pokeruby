@@ -192,7 +192,7 @@ SlateportCity_EventScript_Woman1EvilTeamGone:: @ 814BC29
 	end
 
 SlateportCity_EventScript_ContestHallSign:: @ 814BC33
-	msgbox SlateportCity_Text_PokemonContestHyperRankSign, MSGBOX_SIGN
+	msgbox SlateportCity_Text_ContestHallSign, MSGBOX_SIGN
 	end
 
 SlateportCity_EventScript_SternsShipyardSign:: @ 814BC3C

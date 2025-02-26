@@ -264,7 +264,7 @@ SlateportCity_Text_PleaseComeWithMe:: @ 816583A
 	.string "{PLAYER}{KUN}!\n"
 	.string "Please, come with me!$"
 
-SlateportCity_Text_PokemonContestHyperRankSign:: @ 8165856
+SlateportCity_Text_ContestHallSign:: @ 8165856
 	.string "POKéMON CONTESTS\n"
 	.string "HYPER RANK REGISTRATION\l"
 	.string "“Let it burn! POKéMON TRAINERS!”$"

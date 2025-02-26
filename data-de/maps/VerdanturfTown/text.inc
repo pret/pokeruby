@@ -55,7 +55,7 @@ VerdanturfTown_Text_TownSign:: @ 816CEC0
 VerdanturfTown_Text_WandasHouse:: @ 816CF0D
 	.string "HEIKES HAUS$"
 
-VerdanturfTown_Text_PokemonContestNormalRankSign:: @ 816CF1B
+VerdanturfTown_Text_ContestHallSign:: @ 816CF1B
 	.string "POKéMON WETTBEWERBE\n"
 	.string "NORMAL-KLASSE REGISTRIERUNGEN\p"
 	.string "“Kommt her, all ihr POKéMON-TRAINER!”$"

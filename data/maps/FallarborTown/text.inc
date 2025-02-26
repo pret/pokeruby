@@ -27,7 +27,7 @@ FallarborTown_Text_HaveYouChallengedFlannery:: @ 816C941
 	.string "become a great TRAINER in her own\l"
 	.string "right.$"
 
-FallarborTown_Text_PokemonContestSuperRankSign:: @ 816CA39
+FallarborTown_Text_ContestHallSign:: @ 816CA39
 	.string "POKéMON CONTESTS\n"
 	.string "SUPER RANK REGISTRATION\p"
 	.string "“Burst on to the POKéMON scene!”$"

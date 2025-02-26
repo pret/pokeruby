@@ -54,8 +54,8 @@ VerdanturfTown_EventScript_WandasHouseSign:: @ 814E8D3
 	msgbox VerdanturfTown_Text_WandasHouse, MSGBOX_SIGN
 	end
 
-VerdanturfTown_EventScript_PokemonContestNormalRankSign:: @ 814E8DC
-	msgbox VerdanturfTown_Text_PokemonContestNormalRankSign, MSGBOX_SIGN
+VerdanturfTown_EventScript_ContestHallSign:: @ 814E8DC
+	msgbox VerdanturfTown_Text_ContestHallSign, MSGBOX_SIGN
 	end
 
 VerdanturfTown_EventScript_RusturfTunnelSign:: @ 814E8E5

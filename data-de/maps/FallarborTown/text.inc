@@ -30,7 +30,7 @@ FallarborTown_Text_HaveYouChallengedFlannery:: @ 816C941
 	.string "FLAVIA ebenfalls ein großer TRAINER\l"
 	.string "wird.$"
 
-FallarborTown_Text_PokemonContestSuperRankSign:: @ 816CA39
+FallarborTown_Text_ContestHallSign:: @ 816CA39
 	.string "POKéMON WETTBEWERBE\n"
 	.string "SUPER-KLASSE REGISTRIERUNGEN\p"
 	.string "“Brecht in die POKéMON-Szene\n"

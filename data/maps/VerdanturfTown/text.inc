@@ -50,7 +50,7 @@ VerdanturfTown_Text_TownSign:: @ 816CEC0
 VerdanturfTown_Text_WandasHouse:: @ 816CF0D
 	.string "WANDA'S HOUSE$"
 
-VerdanturfTown_Text_PokemonContestNormalRankSign:: @ 816CF1B
+VerdanturfTown_Text_ContestHallSign:: @ 816CF1B
 	.string "POKéMON CONTESTS\n"
 	.string "NORMAL RANK REGISTRATION\p"
 	.string "“Gather here, all ye POKéMON TRAINERS!”$"
