@@ -1088,7 +1088,7 @@ UnknownString_81A1141: @ 81A1141
 	.string "{PLAYER} is out of useable POKéMON!\p"
 	.string "{PLAYER} whited out!$"
 
-SlateportCity_Text_1A116E:: @ 81A116E
+gText_ComeBackWithSecretPower:: @ 81A116E
 	.string "Do you know the TM SECRET POWER?\p"
 	.string "Our group, we love the TM SECRET\n"
 	.string "POWER.\p"

@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "OldaleTown_EventScript_14DDB3",
+      "script": "OldaleTown_EventScript_Girl",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "OldaleTown_EventScript_14DDBC",
+      "script": "OldaleTown_EventScript_MartEmployee",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "OldaleTown_EventScript_14DEDF",
+      "script": "OldaleTown_EventScript_FootprintsMan",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "OldaleTown_EventScript_14DF30",
+      "script": "OldaleTown_EventScript_Rival",
       "flag": "FLAG_HIDE_RIVAL_OLDALE_TOWN"
     }
   ],
@@ -118,7 +118,7 @@
       "elevation": 3,
       "var": "VAR_ROUTE102_ACCESSIBLE",
       "var_value": "0",
-      "script": "OldaleTown_EventScript_14DEFF"
+      "script": "OldaleTown_EventScript_BlockedPath"
     },
     {
       "type": "trigger",
@@ -127,7 +127,7 @@
       "elevation": 3,
       "var": "VAR_OLDALE_STATE",
       "var_value": "1",
-      "script": "OldaleTown_EventScript_14DF41"
+      "script": "OldaleTown_EventScript_RivalTrigger1"
     },
     {
       "type": "trigger",
@@ -136,7 +136,7 @@
       "elevation": 3,
       "var": "VAR_OLDALE_STATE",
       "var_value": "1",
-      "script": "OldaleTown_EventScript_14DF5C"
+      "script": "OldaleTown_EventScript_RivalTrigger2"
     },
     {
       "type": "trigger",
@@ -145,7 +145,7 @@
       "elevation": 3,
       "var": "VAR_OLDALE_STATE",
       "var_value": "1",
-      "script": "OldaleTown_EventScript_14DF77"
+      "script": "OldaleTown_EventScript_RivalTrigger3"
     }
   ],
   "bg_events": [
@@ -155,7 +155,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "OldaleTown_EventScript_14DDAA"
+      "script": "OldaleTown_EventScript_TownSign"
     },
     {
       "type": "sign",

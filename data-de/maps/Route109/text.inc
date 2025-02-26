@@ -1,4 +1,4 @@
-DewfordTown_Text_16E080:: @ 816E080
+DewfordTown_Text_BrineyLandedInSlateportDeliverGoods:: @ 816E080
 	.string "MR. BRACK: Ahoi!\n"
 	.string "Wir haben in GRAPHITPORT CITY angelegt.\p"
 	.string "Ich vermute, du gehst jetzt zu KAPT.\n"
@@ -20,7 +20,7 @@ Route109_Text_16E1B1:: @ 816E1B1
 	.string "MR. BRACK: Dann geh und überbringe die\n"
 	.string "DEVON-WAREN. Ich warte hier.$"
 
-DewfordTown_Text_16E1FA:: @ 816E1FA
+DewfordTown_Text_BrineyLandedInSlateport:: @ 816E1FA
 	.string "MR. BRACK: Ahoi! Wir haben in\n"
 	.string "GRAPHITPORT CITY angelegt!\p"
 	.string "Wann immer du magst, können wir wieder\n"

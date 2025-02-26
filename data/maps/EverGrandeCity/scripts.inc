@@ -1,24 +1,24 @@
 EverGrandeCity_MapScripts:: @ 814D4D5
-	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_MapScript1_14D4DB
+	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_OnTransition
 	.byte 0
 
-EverGrandeCity_MapScript1_14D4DB:: @ 814D4DB
+EverGrandeCity_OnTransition:: @ 814D4DB
 	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetLegendaryWeather
 	end
 
-EverGrandeCity_EventScript_14D4E5:: @ 814D4E5
-	msgbox EverGrandeCity_Text_16A74D, MSGBOX_SIGN
+EverGrandeCity_EventScript_VictoryRoadSign:: @ 814D4E5
+	msgbox EverGrandeCity_Text_EnteringVictoryRoad, MSGBOX_SIGN
 	end
 
-EverGrandeCity_EventScript_14D4EE:: @ 814D4EE
-	msgbox EverGrandeCity_Text_16A787, MSGBOX_SIGN
+EverGrandeCity_EventScript_CitySign:: @ 814D4EE
+	msgbox EverGrandeCity_Text_CitySign, MSGBOX_SIGN
 	end
 
-EverGrandeCity_EventScript_14D4F7:: @ 814D4F7
-	msgbox EverGrandeCity_Text_16A763, MSGBOX_SIGN
+EverGrandeCity_EventScript_PokemonLeagueSign:: @ 814D4F7
+	msgbox EverGrandeCity_Text_EnteringPokemonLeague, MSGBOX_SIGN
 	end
 
-EverGrandeCity_EventScript_14D500:: @ 814D500
+EverGrandeCity_EventScript_SetVisitedEverGrande:: @ 814D500
 	setflag FLAG_VISITED_EVER_GRANDE_CITY
 	setvar VAR_TEMP_1, 1
 	end

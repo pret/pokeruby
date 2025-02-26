@@ -73,7 +73,7 @@ Route120_Text_1C5A4D:: @ 81C5A4D
 	.string "Ich habe einige BEEREN vom\n"
 	.string "BEERENMEISTER erhalten.$"
 
-LilycoveCity_Text_1C5A7A:: @ 81C5A7A
+LilycoveCity_Text_BerrySuitsYou:: @ 81C5A7A
 	.string "Also, im Grunde ist es so...\p"
 	.string "Ein Anzug passt zu mir wie die\n"
 	.string "Brise zum Meer - perfekt!\p"
@@ -81,11 +81,11 @@ LilycoveCity_Text_1C5A7A:: @ 81C5A7A
 	.string "“T”...\p"
 	.string "Warum ist das so?$"
 
-LilycoveCity_Text_1C5B1D:: @ 81C5B1D
+LilycoveCity_Text_BecauseYoureTrainer:: @ 81C5B1D
 	.string "Also, im Grunde ist es so...\p"
 	.string "Weil du ein TRAINER bist.$"
 
-LilycoveCity_Text_1C5B5D:: @ 81C5B5D
+LilycoveCity_Text_PokeblocksSuitPokemon:: @ 81C5B5D
 	.string "Grundsätzlich verhält es sich so...\p"
 	.string "So wie die würdevolle Einfachheit mich\n"
 	.string "ziert, zieren {POKEBLOCK} POKéMON.$"
@@ -205,7 +205,7 @@ Route104_PrettyPetalFlowerShop_Text_1C6335:: @ 81C6335
 	.string "POKéMON daraus machen.\p"
 	.string "Ich möchte auch Süßigkeiten haben.$"
 
-SootopolisCity_Text_1C63F2:: @ 81C63F2
+SootopolisCity_Text_NameIsKiriHaveOneOfThese:: @ 81C63F2
 	.string "Hi, wie heißt du?\p"
 	.string "... ... ... ... ... ... ... ... ...\n"
 	.string "Okay. Netter Name!\p"
@@ -215,26 +215,26 @@ SootopolisCity_Text_1C63F2:: @ 81C63F2
 	.string "Das war ihr Wunsch.\p"
 	.string "Hier, das schenke ich dir.$"
 
-SootopolisCity_Text_1C64D0:: @ 81C64D0
+SootopolisCity_Text_GiveYouThisBerryToo:: @ 81C64D0
 	.string "BERTA will dir auch diese BEERE geben.\n"
 	.string "Ich mag sie sehr!$"
 
-SootopolisCity_Text_1C650B:: @ 81C650B
+SootopolisCity_Text_WhatKindOfWishInYourName:: @ 81C650B
 	.string "Ich frage mich, welcher Wunsch in deinem\n"
 	.string "Namen verborgen ist.$"
 
-SootopolisCity_Text_1C6540:: @ 81C6540
+SootopolisCity_Text_KiriBornInSeasons:: @ 81C6540
 	.string "Frühling, Sommer, Herbst und Winter.\p"
 	.string "Wenn du im Frühling geboren bist, magst\n"
 	.string "du dann den Frühling? Wenn du im Sommer\l"
 	.string "geboren bist, magst du den Sommer?$"
 
-SootopolisCity_Text_1C65D4:: @ 81C65D4
+SootopolisCity_Text_ThenILoveAutumn:: @ 81C65D4
 	.string "Dann wurde BERTA im Herbst geboren,\n"
 	.string "denn ich liebe den Herbst!\p"
 	.string "Welche Jahreszeit hast du am liebsten?$"
 
-SootopolisCity_Text_1C6626:: @ 81C6626
+SootopolisCity_Text_OhDoesntMatter:: @ 81C6626
 	.string "Oh...\n"
 	.string "Das macht nichts...\p"
 	.string "Es gibt so viel, was ich wissen möchte...$"

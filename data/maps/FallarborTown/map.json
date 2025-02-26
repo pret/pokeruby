@@ -32,7 +32,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_EventScript_14E814",
+      "script": "FallarborTown_EventScript_Girl",
       "flag": "0"
     },
     {
@@ -45,7 +45,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_EventScript_14E7F5",
+      "script": "FallarborTown_EventScript_ExpertM",
       "flag": "0"
     },
     {
@@ -58,7 +58,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_EventScript_14E81D",
+      "script": "FallarborTown_EventScript_Gentleman",
       "flag": "0"
     },
     {
@@ -71,7 +71,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_EventScript_14E826",
+      "script": "FallarborTown_EventScript_Azurill",
       "flag": "FLAG_HIDE_AZURILL_FALLARBOR"
     }
   ],
@@ -136,7 +136,7 @@
       "y": 8,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "FallarborTown_EventScript_14E839"
+      "script": "FallarborTown_EventScript_ContestHallSign"
     },
     {
       "type": "sign",
@@ -152,7 +152,7 @@
       "y": 11,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "FallarborTown_EventScript_14E842"
+      "script": "FallarborTown_EventScript_TownSign"
     },
     {
       "type": "sign",
@@ -168,7 +168,7 @@
       "y": 7,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "FallarborTown_EventScript_14E84B"
+      "script": "FallarborTown_EventScript_MoveTutorSign"
     },
     {
       "type": "hidden_item",
@@ -176,7 +176,7 @@
       "y": 15,
       "elevation": 3,
       "item": "ITEM_NUGGET",
-      "flag": "FLAG_HIDDEN_ITEM_1C"
+      "flag": "FLAG_HIDDEN_ITEM_FALLARBOR_TOWN_NUGGET"
     }
   ]
 }
