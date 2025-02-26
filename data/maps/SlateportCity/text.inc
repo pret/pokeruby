@@ -157,17 +157,17 @@ SlateportCity_Text_ContestHallBuiltRecently:: @ 816507C
 	.string "I plan on entering after I improve the\n"
 	.string "condition of my POKéMON.$"
 
-SlateportCity_Text_DoYouKnowBerryBlender:: @ 81650F1
+SlateportCity_Text_DoYouKnowAboutBerryBlender:: @ 81650F1
 	.string "Do you know about the machine\n"
 	.string "BERRY BLENDER?$"
 
-SlateportCity_Text_ExplainBerryBlender:: @ 816511E
+SlateportCity_Text_FasterSpinBetterPokeblocks:: @ 816511E
 	.string "People have to work together to get it\n"
 	.string "to spin faster.\p"
 	.string "The faster you can make it spin, the\n"
 	.string "better {POKEBLOCK}S you can get, I've heard.$"
 
-SlateportCity_Text_ExplainPokeblock:: @ 81651A1
+SlateportCity_Text_ExplainBerryBlender:: @ 81651A1
 	.string "It's used for making a kind of candy\n"
 	.string "called a {POKEBLOCK}.\p"
 	.string "If you give a good {POKEBLOCK} to a POKéMON,\n"

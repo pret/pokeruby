@@ -1,4 +1,4 @@
-PetalburgCity_Text_16D361:: @ 816D361
+Route102_Text_WatchMeCatchPokemon:: @ 816D361
 	.string "WALLY: {PLAYER}...\n"
 	.string "POKéMON hide in tall grass like this,\l"
 	.string "don't they?\p"
@@ -6,11 +6,11 @@ PetalburgCity_Text_16D361:: @ 816D361
 	.string "catch one properly.\p"
 	.string "...Whoa!$"
 
-PetalburgCity_Text_16D3DE:: @ 816D3DE
+Route102_Text_WallyIDidIt:: @ 816D3DE
 	.string "WALLY: I did it... It's my...\n"
 	.string "My POKéMON!$"
 
-PetalburgCity_Text_16D408:: @ 816D408
+Route102_Text_LetsGoBack:: @ 816D408
 	.string "{PLAYER}, thank you!\n"
 	.string "Let's go back to the GYM!$"
 

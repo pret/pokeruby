@@ -218,7 +218,7 @@ Route133_EventScript_1B16F7:: @ 81B16F7
 	finditem ITEM_STAR_PIECE
 	end
 
-PetalburgCity_EventScript_1B1704:: @ 81B1704
+PetalburgCity_EventScript_ItemMaxRevive:: @ 81B1704
 	finditem ITEM_MAX_REVIVE
 	end
 
@@ -226,11 +226,11 @@ PetalburgCity_EventScript_1B1711:: @ 81B1711
 	finditem ITEM_ETHER
 	end
 
-MauvilleCity_EventScript_1B171E:: @ 81B171E
+MauvilleCity_EventScript_ItemXSpeed:: @ 81B171E
 	finditem ITEM_X_SPEED
 	end
 
-RustboroCity_EventScript_1B172B:: @ 81B172B
+RustboroCity_EventScript_ItemXDefend:: @ 81B172B
 	finditem ITEM_X_DEFEND
 	end
 

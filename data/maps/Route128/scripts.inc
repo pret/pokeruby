@@ -4,7 +4,7 @@ Route128_MapScripts:: @ 815211B
 	.byte 0
 
 Route128_MapScript1_152126:: @ 8152126
-	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetLegendaryWeather
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAbnormalWeather
 	call Common_EventScript_SetupEvilTeamGfxIds
 	end
 

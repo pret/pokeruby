@@ -859,7 +859,7 @@ Common_EventScript_NoRoomForDecor:: @ 81A02B8
 	msgbox Text_NoRoomLeftForAnother, MSGBOX_DEFAULT
 	return
 
-Common_EventScript_SetLegendaryWeather:: @ 81A02C1
+Common_EventScript_SetAbnormalWeather:: @ 81A02C1
 	.ifdef SAPPHIRE
 	setweather WEATHER_RAIN_HEAVY
 	.else
@@ -1094,7 +1094,7 @@ UnknownString_81A1141: @ 81A1141
 	.string "mehr!\p"
 	.string "{PLAYER} wird ohnmächtig!$"
 
-SlateportCity_Text_1A116E:: @ 81A116E
+gText_ComeBackWithSecretPower:: @ 81A116E
 	.string "Kennst du die TM GEHEIMPOWER?\p"
 	.string "In unserer Gruppe mögen alle die TM\n"
 	.string "GEHEIMPOWER.\p"

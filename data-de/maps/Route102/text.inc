@@ -1,4 +1,4 @@
-PetalburgCity_Text_16D361:: @ 816D361
+Route102_Text_WatchMeCatchPokemon:: @ 816D361
 	.string "HEIKO: {PLAYER}...\n"
 	.string "POKéMON verstecken sich in hohem Gras\l"
 	.string "wie diesem hier, oder?\p"
@@ -6,11 +6,11 @@ PetalburgCity_Text_16D361:: @ 816D361
 	.string "auch richtig fange.\p"
 	.string "...Whoa!$"
 
-PetalburgCity_Text_16D3DE:: @ 816D3DE
+Route102_Text_WallyIDidIt:: @ 816D3DE
 	.string "HEIKO: Ich habe es geschafft... Es\n"
 	.string "gehört mir... Mein POKéMON!!!$"
 
-PetalburgCity_Text_16D408:: @ 816D408
+Route102_Text_LetsGoBack:: @ 816D408
 	.string "{PLAYER}, danke schön!\n"
 	.string "Lass uns zurück zur ARENA gehen!$"
 

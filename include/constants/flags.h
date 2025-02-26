@@ -161,7 +161,7 @@
 #define FLAG_ENCOUNTERED_LATIAS_OR_LATIOS    0xCE
 
 #define FLAG_RECEIVED_BASEMENT_KEY          0xD0
-#define FLAG_RECEIVED_TM24                  0xD1
+#define FLAG_GOT_TM_THUNDERBOLT_FROM_WATTSON                  0xD1
 
 #define FLAG_RECEIVED_RED_OR_BLUE_ORB       0xD4
 #define FLAG_RECEIVED_PREMIER_BALL_RUSTBORO 0xD5
@@ -257,7 +257,7 @@
 
 // hidden item flags
 #define FLAG_HIDDEN_ITEMS_START  0x258
-#define FLAG_HIDDEN_ITEM_0       0x258
+#define FLAG_HIDDEN_ITEM_LAVARIDGE_TOWN_ICE_HEAL       0x258
 #define FLAG_HIDDEN_ITEM_1       0x259
 #define FLAG_HIDDEN_ITEM_2       0x25A
 #define FLAG_HIDDEN_ITEM_3       0x25B
@@ -285,7 +285,7 @@
 #define FLAG_HIDDEN_ITEM_19      0x271
 #define FLAG_HIDDEN_ITEM_1A      0x272
 #define FLAG_HIDDEN_ITEM_1B      0x273
-#define FLAG_HIDDEN_ITEM_1C      0x274
+#define FLAG_HIDDEN_ITEM_FALLARBOR_TOWN_NUGGET      0x274
 #define FLAG_HIDDEN_ITEM_1D      0x275
 #define FLAG_HIDDEN_ITEM_1E      0x276
 #define FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_1_KEY      0x277
@@ -300,7 +300,7 @@
 #define FLAG_HIDDEN_ITEM_28      0x280
 #define FLAG_HIDDEN_ITEM_29      0x281
 #define FLAG_HIDDEN_ITEM_2A      0x282
-#define FLAG_HIDDEN_ITEM_2B      0x283
+#define FLAG_HIDDEN_ITEM_LILYCOVE_CITY_PP_UP      0x283
 #define FLAG_HIDDEN_ITEM_2C      0x284
 #define FLAG_HIDDEN_ITEM_2D      0x285
 #define FLAG_HIDDEN_ITEM_2E      0x286
@@ -332,7 +332,7 @@
 #define FLAG_HIDDEN_ITEM_48      0x2A0
 #define FLAG_HIDDEN_ITEM_49      0x2A1
 #define FLAG_HIDDEN_ITEM_4A      0x2A2
-#define FLAG_HIDDEN_ITEM_4B      0x2A3
+#define FLAG_HIDDEN_ITEM_LILYCOVE_CITY_POKE_BALL      0x2A3
 #define FLAG_HIDDEN_ITEM_4C      0x2A4
 #define FLAG_HIDDEN_ITEM_4D      0x2A5
 #define FLAG_HIDDEN_ITEM_4E      0x2A6
@@ -650,9 +650,9 @@
 #define FLAG_ITEM_ROUTE132_1                0x40C
 #define FLAG_ITEM_ROUTE133_1                0x40D
 #define FLAG_ITEM_ROUTE133_2                0x40E
-#define FLAG_ITEM_PETALBURG_1               0x40F
+#define FLAG_ITEM_PETALBURG_CITY_MAX_REVIVE               0x40F
 #define FLAG_ITEM_PETALBURG_2               0x410
-#define FLAG_ITEM_RUSTBORO_1                0x411
+#define FLAG_ITEM_RUSTBORO_CITY_X_DEFEND                0x411
 #define FLAG_ITEM_LILYCOVE_1                0x412
 #define FLAG_ITEM_MOSSDEEP_1                0x413
 #define FLAG_ITEM_METEOR_FALLS_1F_1R_1      0x414
@@ -727,7 +727,7 @@
 #define FLAG_ITEM_SHOAL_CAVE_LOW_TIDE_ICE_ROOM_2 0x459
 #define FLAG_ITEM_ROUTE103_1                0x45A
 #define FLAG_ITEM_ROUTE104_3                0x45B
-#define FLAG_ITEM_MAUVILLE_1                0x45C
+#define FLAG_ITEM_MAUVILLE_CITY_X_SPEED                0x45C
 #define FLAG_ITEM_PETALBURG_WOODS_4         0x45D
 #define FLAG_ITEM_ROUTE115_4                0x45E
 #define FLAG_ITEM_SAFARI_ZONE_NORTHEAST_1   0x45F

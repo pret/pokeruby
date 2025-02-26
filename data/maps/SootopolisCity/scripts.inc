@@ -37,7 +37,7 @@ SootopolisCity_OnTransition:: @ 814D10D
 	end
 
 SootopolisCity_EventScript_SetWeather:: @ 814D123
-	call Common_EventScript_SetLegendaryWeather
+	call Common_EventScript_SetAbnormalWeather
 	setobjectxyperm 1, 29, 19
 	setobjectxyperm 2, 33, 19
 	compare VAR_SOOTOPOLIS_STATE, 1

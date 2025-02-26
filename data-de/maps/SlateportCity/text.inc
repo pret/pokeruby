@@ -161,17 +161,17 @@ SlateportCity_Text_ContestHallBuiltRecently:: @ 816507C
 	.string "Ich plane dort hinzugehen, wenn ich\n"
 	.string "meine POKéMON besser trainiert habe.$"
 
-SlateportCity_Text_DoYouKnowBerryBlender:: @ 81650F1
+SlateportCity_Text_DoYouKnowAboutBerryBlender:: @ 81650F1
 	.string "Hast du schon mal etwas über den\n"
 	.string "BEERENMIXER gehört?$"
 
-SlateportCity_Text_ExplainBerryBlender:: @ 816511E
+SlateportCity_Text_FasterSpinBetterPokeblocks:: @ 816511E
 	.string "Man muss mit anderen zusammenarbeiten,\n"
 	.string "um ihn schneller drehen zu können.\p"
 	.string "Ich habe gehört, je schneller man ihn\n"
 	.string "dreht, desto besser werden die {POKEBLOCK}.$"
 
-SlateportCity_Text_ExplainPokeblock:: @ 81651A1
+SlateportCity_Text_ExplainBerryBlender:: @ 81651A1
 	.string "Damit stellt man eine Leckerei her, die\n"
 	.string "{POKEBLOCK} genannt wird.\p"
 	.string "Wenn du einem POKéMON einen guten\n"

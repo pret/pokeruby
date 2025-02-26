@@ -158,12 +158,12 @@ Route104_EventScript_14EFD5:: @ 814EFD5
 	end
 
 Route104_EventScript_14F08B:: @ 814F08B
-	msgbox Route104_Text_16B347, MSGBOX_DEFAULT
+	msgbox Route104_Text_LandedInDewfordDeliverLetter, MSGBOX_DEFAULT
 	releaseall
 	end
 
 Route104_EventScript_14F095:: @ 814F095
-	msgbox Route104_Text_16B4B5, MSGBOX_DEFAULT
+	msgbox Route104_Text_BrineyLandedInDewford, MSGBOX_DEFAULT
 	releaseall
 	end
 

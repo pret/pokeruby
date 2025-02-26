@@ -282,7 +282,7 @@ SlateportCity_EventScript_Man2:: @ 814BCFD
 SlateportCity_EventScript_SchoolKid:: @ 814BD06
 	lock
 	faceplayer
-	msgbox SlateportCity_Text_DoYouKnowBerryBlender, MSGBOX_YESNO
+	msgbox SlateportCity_Text_DoYouKnowAboutBerryBlender, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	call_if_eq SlateportCity_EventScript_ExplainBerryBlender
 	compare VAR_RESULT, NO
@@ -291,11 +291,11 @@ SlateportCity_EventScript_SchoolKid:: @ 814BD06
 	end
 
 SlateportCity_EventScript_ExplainBerryBlender:: @ 814BD28
-	msgbox SlateportCity_Text_ExplainBerryBlender, MSGBOX_DEFAULT
+	msgbox SlateportCity_Text_FasterSpinBetterPokeblocks, MSGBOX_DEFAULT
 	return
 
 SlateportCity_EventScript_ExplainPokeblock:: @ 814BD31
-	msgbox SlateportCity_Text_ExplainPokeblock, MSGBOX_DEFAULT
+	msgbox SlateportCity_Text_ExplainBerryBlender, MSGBOX_DEFAULT
 	return
 
 SlateportCity_EventScript_EvilTeamGrunt1:: @ 814BD3A
