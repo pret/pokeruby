@@ -21,7 +21,7 @@ SootopolisCity_Text_WonderWhatWorldIsLike:: @ 81697A7
 	.string "Ich frage mich, wie die Welt hinter\n"
 	.string "diesem Horizont aussieht?$"
 
-SootopolisCity_Text_NoOrdinaryTourist:: @ 8169813
+SootopolisCity_Text_NoOrdinaryTourist1:: @ 8169813
 	.string "Hm! Du bist den ganzen Weg nach\n"
 	.string "XENEROVILLE gekommen? Du bist\l"
 	.string "kein normaler Tourist.\p"
@@ -194,7 +194,7 @@ SootopolisCity_Text_BecomeYourFan:: @ 816A531
 	.string "besiegt!?! Wirklich!?!\p"
 	.string "Dann werde ich vielleicht dein Fan!$"
 
-SootopolisCity_Text_NoOrdinaryTourist:: @ 816A587
+SootopolisCity_Text_NoOrdinaryTourist2:: @ 816A587
 	.string "Hm! Du bist den ganzen Weg nach\n"
 	.string "XENEROVILLE gekommen? Du bist\l"
 	.string "kein gewöhnlicher Tourist.\p"
