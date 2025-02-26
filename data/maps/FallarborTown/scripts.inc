@@ -45,8 +45,6 @@ FallarborTown_EventScript_ContestHallSign:: @ 814E839
 	end
 
 FallarborTown_EventScript_TownSign:: @ 814E842
-MeteorFalls_1F_1R_EventScript_TownSign:: @ 814E842
-MeteorFalls_1F_2R_EventScript_TownSign:: @ 814E842
 	msgbox FallarborTown_Text_TownSign, MSGBOX_SIGN
 	end
 
