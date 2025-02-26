@@ -15,7 +15,7 @@ LittlerootTown_OnTransition:: @ 814D514
 	compare VAR_LITTLEROOT_HOUSES_STATE_2, 4
 	call_if_eq LittlerootTown_EventScript_SetExitedHouseAfterLatiSSTicketEvent
 	compare VAR_OLDALE_STATE, 1
-	call_if_eq LittlerootTown_EventScript_HideMapNamePopup
+	call_if_eq LittlerootTown_EventScript_MoveRivalFromOldale
 	compare VAR_LITTLEROOT_RIVAL_STATE, 3
 	call_if_eq LittlerootTown_EventScript_SetRivalLeftForRoute103
 	end
@@ -24,7 +24,7 @@ LittlerootTown_EventScript_SetRivalLeftForRoute103:: @ 814D563
 	setflag FLAG_RIVAL_LEFT_FOR_ROUTE103
 	return
 
-LittlerootTown_EventScript_HideMapNamePopup:: @ 814D567
+LittlerootTown_EventScript_MoveRivalFromOldale:: @ 814D567
 	setvar VAR_OLDALE_STATE, 2
 	setflag FLAG_HIDE_RIVAL_OLDALE_TOWN
 	return
