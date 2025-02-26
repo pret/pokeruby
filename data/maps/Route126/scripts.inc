@@ -3,7 +3,7 @@ Route126_MapScripts:: @ 8151FFE
 	.byte 0
 
 Route126_MapScript1_152004:: @ 8152004
-	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAbnormalWeather
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetLegendaryWeather
 	end
 
 Route126_EventScript_15200E:: @ 815200E

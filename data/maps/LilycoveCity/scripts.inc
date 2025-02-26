@@ -7,7 +7,7 @@ LilycoveCity_OnTransition:: @ 814CA20
 	setflag FLAG_VISITED_LILYCOVE_CITY
 	setvar VAR_LINK_CONTEST_ROOM_STATE, 0
 	setflag FLAG_HIDE_CONTEST_REPORTER_LILYCOVE
-	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAbnormalWeather
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetLegendaryWeather
 	call Common_EventScript_SetupEvilTeamGfxIds
 	call Common_EventScript_SetupRivalGfxId
 	end
