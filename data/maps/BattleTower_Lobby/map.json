@@ -64,6 +64,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_TOWER_LOBBY_REPORTER",
       "graphics_id": "OBJ_EVENT_GFX_REPORTER_F",
       "x": 4,
       "y": 7,

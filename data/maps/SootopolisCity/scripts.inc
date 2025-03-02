@@ -203,7 +203,7 @@ ClosedSootopolisDoorScript:: @ 814D2FF
 SootopolisCity_EventScript_14D308:: @ 814D308
 	lockall
 	applymovement 10, Common_Movement_WalkInPlaceFastestLeft
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	playse SE_PIN
 	applymovement 10, Common_Movement_ExclamationMark
@@ -219,7 +219,7 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	.endif
 	closemessage
 	applymovement 10, SootopolisCity_Movement_14D417
-	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Movement_14D440
+	applymovement LOCALID_PLAYER, SootopolisCity_Movement_14D440
 	waitmovement 10
 	.ifdef SAPPHIRE
 	msgbox SootopolisCity_Text_1699FD, MSGBOX_DEFAULT
@@ -240,10 +240,10 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	delay 30
 	applymovement 5, SootopolisCity_Movement_14D46A
 	applymovement 10, SootopolisCity_Movement_14D41D
-	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Movement_14D445
+	applymovement LOCALID_PLAYER, SootopolisCity_Movement_14D445
 	waitmovement 0
 	applymovement 5, Common_Movement_WalkInPlaceFastestRight
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	delay 30
 	applymovement 10, Common_Movement_WalkInPlaceFastestDown
@@ -256,7 +256,7 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	closemessage
 	delay 30
 	applymovement 5, SootopolisCity_Movement_14D47C
-	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Movement_14D457
+	applymovement LOCALID_PLAYER, SootopolisCity_Movement_14D457
 	applymovement 10, SootopolisCity_Movement_14D42D
 	waitmovement 0
 	applymovement 5, Common_Movement_WalkInPlaceFastestLeft
@@ -266,7 +266,7 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	.else
 	msgbox SootopolisCity_Text_16A06C, MSGBOX_DEFAULT
 	.endif
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox SootopolisCity_Text_169C99, MSGBOX_DEFAULT

@@ -79,7 +79,7 @@ MossdeepCity_Gym_EventScript_15A5EA:: @ 815A5EA
 	lockall
 	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_1, MossdeepCity_Gym_EventScript_15A621
 	setflag FLAG_MOSSDEEP_GYM_SWITCH_1
-	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_Gym_Movement_15A7F7
+	applymovement LOCALID_PLAYER, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
 	setmetatile 5, 5, METATILE_MossdeepGym_RedArrow_Right, 0
 	setmetatile 2, 7, METATILE_MossdeepGym_Switch_Down, 1
@@ -94,7 +94,7 @@ MossdeepCity_Gym_EventScript_15A619:: @ 815A619
 
 MossdeepCity_Gym_EventScript_15A621:: @ 815A621
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_1
-	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_Gym_Movement_15A7F7
+	applymovement LOCALID_PLAYER, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
 	setmetatile 5, 5, METATILE_MossdeepGym_RedArrow_Left, 0
 	setmetatile 2, 7, METATILE_MossdeepGym_Switch_Up, 1
@@ -105,7 +105,7 @@ MossdeepCity_Gym_EventScript_15A646:: @ 815A646
 	lockall
 	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_2, MossdeepCity_Gym_EventScript_15A675
 	setflag FLAG_MOSSDEEP_GYM_SWITCH_2
-	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_Gym_Movement_15A7F7
+	applymovement LOCALID_PLAYER, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
 	setmetatile 8, 14, METATILE_MossdeepGym_RedArrow_Right, 0
 	setmetatile 8, 10, METATILE_MossdeepGym_Switch_Down, 1
@@ -114,7 +114,7 @@ MossdeepCity_Gym_EventScript_15A646:: @ 815A646
 
 MossdeepCity_Gym_EventScript_15A675:: @ 815A675
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_2
-	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_Gym_Movement_15A7F7
+	applymovement LOCALID_PLAYER, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
 	setmetatile 8, 14, METATILE_MossdeepGym_RedArrow_Down, 0
 	setmetatile 8, 10, METATILE_MossdeepGym_Switch_Up, 1
@@ -125,7 +125,7 @@ MossdeepCity_Gym_EventScript_15A69A:: @ 815A69A
 	lockall
 	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_3, MossdeepCity_Gym_EventScript_15A6C9
 	setflag FLAG_MOSSDEEP_GYM_SWITCH_3
-	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_Gym_Movement_15A7F7
+	applymovement LOCALID_PLAYER, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
 	setmetatile 15, 17, METATILE_MossdeepGym_RedArrow_Left, 0
 	setmetatile 17, 15, METATILE_MossdeepGym_Switch_Down, 1
@@ -134,7 +134,7 @@ MossdeepCity_Gym_EventScript_15A69A:: @ 815A69A
 
 MossdeepCity_Gym_EventScript_15A6C9:: @ 815A6C9
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_3
-	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_Gym_Movement_15A7F7
+	applymovement LOCALID_PLAYER, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
 	setmetatile 15, 17, METATILE_MossdeepGym_RedArrow_Right, 0
 	setmetatile 17, 15, METATILE_MossdeepGym_Switch_Up, 1
@@ -145,7 +145,7 @@ MossdeepCity_Gym_EventScript_15A6EE:: @ 815A6EE
 	lockall
 	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_4, MossdeepCity_Gym_EventScript_15A71D
 	setflag FLAG_MOSSDEEP_GYM_SWITCH_4
-	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_Gym_Movement_15A7F7
+	applymovement LOCALID_PLAYER, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
 	setmetatile 1, 23, METATILE_MossdeepGym_RedArrow_Up, 0
 	setmetatile 5, 24, METATILE_MossdeepGym_Switch_Down, 1
@@ -154,7 +154,7 @@ MossdeepCity_Gym_EventScript_15A6EE:: @ 815A6EE
 
 MossdeepCity_Gym_EventScript_15A71D:: @ 815A71D
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_4
-	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_Gym_Movement_15A7F7
+	applymovement LOCALID_PLAYER, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
 	setmetatile 1, 23, METATILE_MossdeepGym_RedArrow_Right, 0
 	setmetatile 5, 24, METATILE_MossdeepGym_Switch_Up, 1

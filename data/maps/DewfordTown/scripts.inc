@@ -121,25 +121,25 @@ DewfordTown_EventScript_14E151:: @ 814E151
 	applymovement 2, DewfordTown_Movement_14E40E
 	waitmovement 0
 	removeobject 2
-	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_14E402
+	applymovement LOCALID_PLAYER, DewfordTown_Movement_14E402
 	waitmovement 0
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_DEWFORD_TOWN
+	hideobjectat LOCALID_PLAYER, MAP_DEWFORD_TOWN
 	call Common_EventScript_PlayBrineysBoatMusic
 	applymovement 4, DewfordTown_Movement_14E293
-	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_14E293
+	applymovement LOCALID_PLAYER, DewfordTown_Movement_14E293
 	waitmovement 0
-	showobjectat OBJ_EVENT_ID_PLAYER, MAP_ROUTE104
+	showobjectat LOCALID_PLAYER, MAP_ROUTE104
 	call Common_EventScript_StopBrineysBoatMusic
-	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_14E405
+	applymovement LOCALID_PLAYER, DewfordTown_Movement_14E405
 	waitmovement 0
-	showobjectat OBJ_EVENT_ID_PLAYER, MAP_ROUTE104
+	showobjectat LOCALID_PLAYER, MAP_ROUTE104
 	clearflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
 	clearflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
 	clearflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
 	hideobjectat 4, MAP_DEWFORD_TOWN
 	setvar VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 2
-	resetobjectpriority OBJ_EVENT_ID_PLAYER, MAP_DEWFORD_TOWN
+	resetobjectpriority LOCALID_PLAYER, MAP_DEWFORD_TOWN
 	warp MAP_ROUTE104_MR_BRINEYS_HOUSE, 255, 5, 4
 	copyvar VAR_BRINEY_LOCATION, VAR_0x8008
 	waitstate
@@ -153,16 +153,16 @@ DewfordTown_EventScript_14E1D8:: @ 814E1D8
 	applymovement 2, DewfordTown_Movement_14E40E
 	waitmovement 0
 	removeobject 2
-	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_14E402
+	applymovement LOCALID_PLAYER, DewfordTown_Movement_14E402
 	waitmovement 0
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_DEWFORD_TOWN
+	hideobjectat LOCALID_PLAYER, MAP_DEWFORD_TOWN
 	call Common_EventScript_PlayBrineysBoatMusic
 	applymovement 4, DewfordTown_Movement_14E356
-	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_14E356
+	applymovement LOCALID_PLAYER, DewfordTown_Movement_14E356
 	waitmovement 0
 	call Common_EventScript_StopBrineysBoatMusic
-	showobjectat OBJ_EVENT_ID_PLAYER, MAP_ROUTE109
-	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_14E409
+	showobjectat LOCALID_PLAYER, MAP_ROUTE109
+	applymovement LOCALID_PLAYER, DewfordTown_Movement_14E409
 	waitmovement 0
 	setobjectxyperm 2, 21, 26
 	addobject 2
@@ -178,7 +178,7 @@ DewfordTown_EventScript_14E1D8:: @ 814E1D8
 	call_if_set FLAG_DELIVERED_DEVON_GOODS, DewfordTown_EventScript_14E28A
 	closemessage
 	copyvar VAR_BRINEY_LOCATION, VAR_0x8008
-	resetobjectpriority OBJ_EVENT_ID_PLAYER, MAP_DEWFORD_TOWN
+	resetobjectpriority LOCALID_PLAYER, MAP_DEWFORD_TOWN
 	resetobjectpriority 2, MAP_ROUTE109
 	moveobjectoffscreen 2
 	release

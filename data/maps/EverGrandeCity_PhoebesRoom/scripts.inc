@@ -9,7 +9,7 @@ EverGrandeCity_PhoebesRoom_MapScript2_15B5E9:: @ 815B5E9
 	.2byte 0
 
 EverGrandeCity_PhoebesRoom_EventScript_15B5F3:: @ 815B5F3
-	turnobject OBJ_EVENT_ID_PLAYER, 2
+	turnobject LOCALID_PLAYER, 2
 	end
 
 EverGrandeCity_PhoebesRoom_MapScript2_15B5F8:: @ 815B5F8

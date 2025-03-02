@@ -24,7 +24,7 @@ EverGrandeCity_SidneysRoom_MapScript2_15B570:: @ 815B570
 	.2byte 0
 
 EverGrandeCity_SidneysRoom_EventScript_15B57A:: @ 815B57A
-	turnobject OBJ_EVENT_ID_PLAYER, 2
+	turnobject LOCALID_PLAYER, 2
 	end
 
 EverGrandeCity_SidneysRoom_MapScript2_15B57F:: @ 815B57F

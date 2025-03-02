@@ -38,6 +38,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_CONTESTANT_1",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 4,
       "y": 7,
@@ -51,6 +52,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_CONTESTANT_2",
       "graphics_id": "OBJ_EVENT_GFX_VAR_1",
       "x": 6,
       "y": 7,
@@ -64,6 +66,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_CONTESTANT_3",
       "graphics_id": "OBJ_EVENT_GFX_VAR_2",
       "x": 8,
       "y": 7,

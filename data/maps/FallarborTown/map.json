@@ -178,12 +178,5 @@
       "item": "ITEM_NUGGET",
       "flag": "FLAG_HIDDEN_ITEM_1C"
     }
-  ],
-  "heal_locations": [
-    {
-      "id": "HEAL_LOCATION_FALLARBOR_TOWN",
-      "x": 14,
-      "y": 8
-    }
   ]
 }

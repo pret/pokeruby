@@ -29,7 +29,7 @@ PetalburgCity_EventScript_14B747:: @ 814B747
 	special SavePlayerParty
 	special PutZigzagoonInPlayerParty
 	applymovement 2, PetalburgCity_Movement_14B7ED
-	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_14B7CC
+	applymovement LOCALID_PLAYER, PetalburgCity_Movement_14B7CC
 	waitmovement 0
 	msgbox PetalburgCity_Text_16D361, MSGBOX_DEFAULT
 	special ScrSpecial_StartWallyTutorialBattle
@@ -208,7 +208,7 @@ PetalburgCity_EventScript_14B866:: @ 814B866
 	call_if_eq PetalburgCity_EventScript_14B99B
 	msgbox PetalburgCity_Text_164426, MSGBOX_DEFAULT
 	applymovement 9, Common_Movement_WalkInPlaceFastestRight
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox PetalburgCity_Text_164449, MSGBOX_DEFAULT
 	closemessage
@@ -221,7 +221,7 @@ PetalburgCity_EventScript_14B866:: @ 814B866
 PetalburgCity_EventScript_14B91B:: @ 814B91B
 	applymovement 9, PetalburgCity_Movement_14B9B1
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
@@ -233,38 +233,38 @@ PetalburgCity_EventScript_14B930:: @ 814B930
 PetalburgCity_EventScript_14B93B:: @ 814B93B
 	applymovement 9, PetalburgCity_Movement_14B9B9
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_14B950:: @ 814B950
 	applymovement 9, PetalburgCity_Movement_14B9BE
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_14B965:: @ 814B965
 	applymovement 9, PetalburgCity_Movement_14B9C4
-	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_14BA01
+	applymovement LOCALID_PLAYER, PetalburgCity_Movement_14BA01
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_14B977:: @ 814B977
 	applymovement 9, PetalburgCity_Movement_14B9CF
-	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_14BA0B
+	applymovement LOCALID_PLAYER, PetalburgCity_Movement_14BA0B
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_14B989:: @ 814B989
 	applymovement 9, PetalburgCity_Movement_14B9DD
-	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_14BA18
+	applymovement LOCALID_PLAYER, PetalburgCity_Movement_14BA18
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_14B99B:: @ 814B99B
 	applymovement 9, PetalburgCity_Movement_14B9E8
-	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_14BA22
+	applymovement LOCALID_PLAYER, PetalburgCity_Movement_14BA22
 	waitmovement 0
 	return
 
