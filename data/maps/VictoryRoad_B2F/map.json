@@ -21,7 +21,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "VictoryRoad_B2F_EventScript_15DFFB",
+      "script": "VictoryRoad_B2F_EventScript_Vito",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "VictoryRoad_B2F_EventScript_15E012",
+      "script": "VictoryRoad_B2F_EventScript_Owen",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "VictoryRoad_B2F_EventScript_15E029",
+      "script": "VictoryRoad_B2F_EventScript_Caroline",
       "flag": "0"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "VictoryRoad_B2F_EventScript_15E040",
+      "script": "VictoryRoad_B2F_EventScript_Julie",
       "flag": "0"
     },
     {
