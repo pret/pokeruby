@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordTown_Gym_EventScript_153152",
+      "script": "DewfordTown_Gym_EventScript_Brawly",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "DewfordTown_Gym_EventScript_1531D9",
+      "script": "DewfordTown_Gym_EventScript_Hideki",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "DewfordTown_Gym_EventScript_1531FB",
+      "script": "DewfordTown_Gym_EventScript_Tessa",
       "flag": "0"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "DewfordTown_Gym_EventScript_15321D",
+      "script": "DewfordTown_Gym_EventScript_Laura",
       "flag": "0"
     },
     {
@@ -73,7 +73,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordTown_Gym_EventScript_15323F",
+      "script": "DewfordTown_Gym_EventScript_GymGuide",
       "flag": "0"
     }
   ],
@@ -101,7 +101,7 @@
       "y": 21,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "DewfordTown_Gym_EventScript_15325E"
+      "script": "DewfordTown_Gym_EventScript_LeftGymStatue"
     },
     {
       "type": "sign",
@@ -109,7 +109,7 @@
       "y": 21,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "DewfordTown_Gym_EventScript_15326E"
+      "script": "DewfordTown_Gym_EventScript_RightGymStatue"
     },
     {
       "type": "sign",
@@ -117,7 +117,7 @@
       "y": 24,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "DewfordTown_Gym_EventScript_15325E"
+      "script": "DewfordTown_Gym_EventScript_LeftGymStatue"
     },
     {
       "type": "sign",
@@ -125,7 +125,7 @@
       "y": 24,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "DewfordTown_Gym_EventScript_15326E"
+      "script": "DewfordTown_Gym_EventScript_RightGymStatue"
     }
   ]
 }

@@ -209,7 +209,7 @@ void BufferTrendyPhraseString(void)
     ConvertEasyChatWordsToString(gStringVar1, s->words, 2, 1);
 }
 
-void TrendyPhraseIsOld(void)
+void IsTrendyPhraseBoring(void)
 {
     u16 result = 0;
 

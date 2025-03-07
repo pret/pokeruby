@@ -1,9 +1,9 @@
-DewfordTown_House1_Text_174BA5:: @ 8174BA5
+DewfordTown_House1_Text_LotToBeSaidForLivingOnIsland:: @ 8174BA5
 	.string "Über das harmonische Leben mit den\n"
 	.string "POKéMON und der Familie auf diesem\l"
 	.string "kleinen Eiland ließe sich viel erzählen.$"
 
-DewfordTown_House1_Text_174C0D:: @ 8174C0D
+DewfordTown_House1_Text_LifeGoesSlowlyOnIsland:: @ 8174C0D
 	.string "Bevor ich meinen Mann geheiratet habe,\n"
 	.string "lebte ich in der großen Hafenstadt\l"
 	.string "GRAPHITPORT CITY.\p"
@@ -11,5 +11,5 @@ DewfordTown_House1_Text_174C0D:: @ 8174C0D
 	.string "geruhsamer. Vom wunderbaren Meer um-\l"
 	.string "geben - das ist die pure Glückseligkeit!$"
 
-DewfordTown_House1_Text_174CC8:: @ 8174CC8
+DewfordTown_House1_Text_Zigzagoon:: @ 8174CC8
 	.string "ZIGZACHS: Guguuh!$"

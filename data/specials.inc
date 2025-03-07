@@ -135,7 +135,7 @@ gSpecials::
 	def_special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	def_special TV_CheckMonOTIDEqualsPlayerID
 	def_special BufferTrendyPhraseString
-	def_special TrendyPhraseIsOld
+	def_special IsTrendyPhraseBoring
 	def_special BufferRandomHobbyOrLifestyleString
 	def_special GetDewfordHallPaintingNameIndex
 	def_special SwapRegisteredBike

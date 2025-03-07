@@ -118,7 +118,7 @@
 #define FLAG_SMART_PAINTING_MADE            0xA3
 #define FLAG_TOUGH_PAINTING_MADE            0xA4
 #define FLAG_RECEIVED_TM39                  0xA5
-#define FLAG_RECEIVED_TM08                  0xA6
+#define FLAG_RECEIVED_TM_BULK_UP                  0xA6
 #define FLAG_RECEIVED_TM34                  0xA7
 #define FLAG_RECEIVED_TM50                  0xA8
 #define FLAG_RECEIVED_TM42                  0xA9
@@ -181,7 +181,7 @@
 #define FLAG_RECEIVED_GOOD_ROD              0xE3
 #define FLAG_REGI_DOORS_OPENED              0xE4
 #define FLAG_RECEIVED_TM27                  0xE5
-#define FLAG_RECEIVED_TM36                  0xE6
+#define FLAG_RECEIVED_TM_SLUDGE_BOMB                  0xE6
 #define FLAG_RECEIVED_TM05                  0xE7
 #define FLAG_RECEIVED_TM19                  0xE8
 
