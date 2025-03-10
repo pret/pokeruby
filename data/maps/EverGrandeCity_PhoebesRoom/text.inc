@@ -1,4 +1,4 @@
-EverGrandeCity_PhoebesRoom_Text_1908F5:: @ 81908F5
+EverGrandeCity_PhoebesRoom_Text_IntroSpeech:: @ 81908F5
 	.string "Ahahaha!\p"
 	.string "I'm PHOEBE of the ELITE FOUR.\n"
 	.string "I did my training on MT. PYRE.\p"
@@ -9,11 +9,11 @@ EverGrandeCity_PhoebesRoom_Text_1908F5:: @ 81908F5
 	.string "So, come on, just try and see if you can\n"
 	.string "even inflict damage on my POKéMON!$"
 
-EverGrandeCity_PhoebesRoom_Text_190A0C:: @ 8190A0C
+EverGrandeCity_PhoebesRoom_Text_Defeat:: @ 8190A0C
 	.string "Oh, darn.\n"
 	.string "I've gone and lost.$"
 
-EverGrandeCity_PhoebesRoom_Text_190A2A:: @ 8190A2A
+EverGrandeCity_PhoebesRoom_Text_PostBattleSpeech:: @ 8190A2A
 	.string "There's a definite bond between you\n"
 	.string "and your POKéMON, too.\p"
 	.string "I didn't recognize it, so it's only\n"

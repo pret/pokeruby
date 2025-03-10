@@ -18,7 +18,7 @@ EverGrandeCity_SidneysRoom_EventScript_15B56A:: @ 815B56A
 	call PokemonLeague_EliteFour_EventScript_CloseDoor
 	return
 
-EverGrandeCity_DrakesRoom_MapScript2_15B570:: @ 815B570
+EverGrandeCity_SidneysRoom_OnWarp:: @ 815B570
 EverGrandeCity_SidneysRoom_MapScript2_15B570:: @ 815B570
 	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_SidneysRoom_EventScript_15B57A
 	.2byte 0

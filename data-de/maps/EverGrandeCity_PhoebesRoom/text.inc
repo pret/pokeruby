@@ -1,4 +1,4 @@
-EverGrandeCity_PhoebesRoom_Text_1908F5:: @ 81908F5
+EverGrandeCity_PhoebesRoom_Text_IntroSpeech:: @ 81908F5
 	.string "Ahahahahaha!\p"
 	.string "Ich bin ANTONIA von den TOP VIER.\n"
 	.string "Ich habe am PYROBERG trainiert.\p"
@@ -10,11 +10,11 @@ EverGrandeCity_PhoebesRoom_Text_1908F5:: @ 81908F5
 	.string "Komm und schau, ob du irgendetwas\n"
 	.string "gegen meine POKéMON ausrichten kannst.$"
 
-EverGrandeCity_PhoebesRoom_Text_190A0C:: @ 8190A0C
+EverGrandeCity_PhoebesRoom_Text_Defeat:: @ 8190A0C
 	.string "Oh, verdammt.\n"
 	.string "Aus und vorbei. Verloren.$"
 
-EverGrandeCity_PhoebesRoom_Text_190A2A:: @ 8190A2A
+EverGrandeCity_PhoebesRoom_Text_PostBattleSpeech:: @ 8190A2A
 	.string "Das Band zwischen dir und deinen\n"
 	.string "POKéMON ist ebenfalls sehr stark.\p"
 	.string "Das habe ich gar nicht bemerkt, daher\n"

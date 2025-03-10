@@ -1,4 +1,4 @@
-EverGrandeCity_DrakesRoom_Text_190CEB:: @ 8190CEB
+EverGrandeCity_DrakesRoom_Text_IntroSpeech:: @ 8190CEB
 	.string "Ich bin der letzte der TOP VIER in der\n"
 	.string "POKéMON LIGA, DRAGAN der\l"
 	.string "DRACHEN-Meister!\p"
@@ -13,10 +13,10 @@ EverGrandeCity_DrakesRoom_Text_190CEB:: @ 8190CEB
 	.string "Wenn du das nicht weißt, wirst du\n"
 	.string "hier an dieser Stelle scheitern!$"
 
-EverGrandeCity_DrakesRoom_Text_190E42:: @ 8190E42
+EverGrandeCity_DrakesRoom_Text_Defeat:: @ 8190E42
 	.string "Hervorragend! Das muss man sagen.$"
 
-EverGrandeCity_DrakesRoom_Text_190E5D:: @ 8190E5D
+EverGrandeCity_DrakesRoom_Text_PostBattleSpeech:: @ 8190E5D
 	.string "Dir gebührt wahre Ehre, da du als\n"
 	.string "TRAINER der POKéMON so weit\l"
 	.string "gekommen bist.\p"

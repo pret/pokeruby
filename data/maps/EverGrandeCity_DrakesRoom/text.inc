@@ -1,4 +1,4 @@
-EverGrandeCity_DrakesRoom_Text_190CEB:: @ 8190CEB
+EverGrandeCity_DrakesRoom_Text_IntroSpeech:: @ 8190CEB
 	.string "I am the last of the POKéMON LEAGUE\n"
 	.string "ELITE FOUR, DRAKE the DRAGON master!\p"
 	.string "In their natural state, POKéMON are\n"
@@ -11,10 +11,10 @@ EverGrandeCity_DrakesRoom_Text_190CEB:: @ 8190CEB
 	.string "If you don't, then you will never\n"
 	.string "prevail over me!$"
 
-EverGrandeCity_DrakesRoom_Text_190E42:: @ 8190E42
+EverGrandeCity_DrakesRoom_Text_Defeat:: @ 8190E42
 	.string "Superb, it should be said.$"
 
-EverGrandeCity_DrakesRoom_Text_190E5D:: @ 8190E5D
+EverGrandeCity_DrakesRoom_Text_PostBattleSpeech:: @ 8190E5D
 	.string "You deserve every credit for coming\n"
 	.string "this far as a TRAINER of POKéMON.\p"
 	.string "You do seem to know what is needed.\p"
