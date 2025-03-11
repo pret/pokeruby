@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_Mart_EventScript_153967",
+      "script": "FallarborTown_Mart_EventScript_Clerk",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_Mart_EventScript_15399C",
+      "script": "FallarborTown_Mart_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_Mart_EventScript_1539A5",
+      "script": "FallarborTown_Mart_EventScript_PokefanM",
       "flag": "0"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_Mart_EventScript_1539AE",
+      "script": "FallarborTown_Mart_EventScript_Skitty",
       "flag": "0"
     }
   ],

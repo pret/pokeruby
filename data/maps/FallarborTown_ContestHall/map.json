@@ -21,7 +21,7 @@
       "movement_range_y": 2,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_ContestHall_EventScript_153ACF",
+      "script": "FallarborTown_ContestHall_EventScript_DoAllRightInPreliminary",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 3,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_ContestHall_EventScript_153AD8",
+      "script": "FallarborTown_ContestHall_EventScript_MonAllTheseRibbons",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 3,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_ContestHall_EventScript_153AE1",
+      "script": "FallarborTown_ContestHall_EventScript_CantWinEverywhere",
       "flag": "0"
     }
   ],
@@ -75,7 +75,7 @@
       "y": 14,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "FallarborTown_ContestHall_EventScript_153AEA"
+      "script": "FallarborTown_ContestHall_EventScript_SuperRankStage"
     },
     {
       "type": "sign",
@@ -83,7 +83,7 @@
       "y": 14,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "FallarborTown_ContestHall_EventScript_153AEA"
+      "script": "FallarborTown_ContestHall_EventScript_SuperRankStage"
     }
   ]
 }

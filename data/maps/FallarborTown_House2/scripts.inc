@@ -1,62 +1,62 @@
 FallarborTown_House2_MapScripts:: @ 8153C90
 	.byte 0
 
-FallarborTown_House2_EventScript_153C91:: @ 8153C91
+FallarborTown_MoveRelearnersHouse_EventScript_MoveRelearner:: @ 8153C91
 	lockall
 	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
-	goto_if_set FLAG_TEMP_1, FallarborTown_House2_EventScript_153CB6
-	msgbox FallarborTown_House2_Text_177AF4, MSGBOX_DEFAULT
+	goto_if_set FLAG_TEMP_1, FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove
+	msgbox FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_1
-	goto FallarborTown_House2_EventScript_153CB6
+	goto FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove
 	end
 
-FallarborTown_House2_EventScript_153CB6:: @ 8153CB6
+FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove:: @ 8153CB6
 	checkitem ITEM_HEART_SCALE, 1
 	compare VAR_RESULT, 0
-	goto_if_eq FallarborTown_House2_EventScript_153D60
-	msgbox FallarborTown_House2_Text_177BDB, MSGBOX_YESNO
+	goto_if_eq FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
+	msgbox FallarborTown_MoveRelearnersHouse_Text_ThatsAHeartScaleWantMeToTeachMove, MSGBOX_YESNO
 	switch VAR_RESULT
-	case NO, FallarborTown_House2_EventScript_153D60
-	goto FallarborTown_House2_EventScript_153CE4
+	case NO, FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
+	goto FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
 	end
 
-FallarborTown_House2_EventScript_153CE4:: @ 8153CE4
-	msgbox FallarborTown_House2_Text_177C3F, MSGBOX_DEFAULT
+FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon:: @ 8153CE4
+	msgbox FallarborTown_MoveRelearnersHouse_Text_TutorWhichMon, MSGBOX_DEFAULT
 	special SelectMoveTutorMon
 	waitstate
 	compare VAR_0x8004, 255
-	goto_if_eq FallarborTown_House2_EventScript_153D60
+	goto_if_eq FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
 	special IsSelectedMonEgg
 	compare VAR_RESULT, 1
-	goto_if_eq FallarborTown_House2_EventScript_153D52
+	goto_if_eq FallarborTown_MoveRelearnersHouse_EventScript_CantTeachEgg
 	compare VAR_0x8005, 0
-	goto_if_eq FallarborTown_House2_EventScript_153D44
-	goto FallarborTown_House2_EventScript_153D1A
+	goto_if_eq FallarborTown_MoveRelearnersHouse_EventScript_NoMoveToTeachMon
+	goto FallarborTown_MoveRelearnersHouse_EventScript_ChooseMove
 	end
 
-FallarborTown_House2_EventScript_153D1A:: @ 8153D1A
-	msgbox FallarborTown_House2_Text_177C5D, MSGBOX_DEFAULT
+FallarborTown_MoveRelearnersHouse_EventScript_ChooseMove:: @ 8153D1A
+	msgbox FallarborTown_MoveRelearnersHouse_Text_TeachWhichMove, MSGBOX_DEFAULT
 	special DisplayMoveTutorMenu
 	waitstate
 	compare VAR_0x8004, 0
-	goto_if_eq FallarborTown_House2_EventScript_153CE4
-	msgbox FallarborTown_House2_Text_177CC3, MSGBOX_DEFAULT
+	goto_if_eq FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
+	msgbox FallarborTown_MoveRelearnersHouse_Text_HandedOverHeartScale, MSGBOX_DEFAULT
 	removeitem ITEM_HEART_SCALE
-	goto FallarborTown_House2_EventScript_153D60
+	goto FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
 	end
 
-FallarborTown_House2_EventScript_153D44:: @ 8153D44
-	msgbox FallarborTown_House2_Text_177C78, MSGBOX_DEFAULT
-	goto FallarborTown_House2_EventScript_153CE4
+FallarborTown_MoveRelearnersHouse_EventScript_NoMoveToTeachMon:: @ 8153D44
+	msgbox FallarborTown_MoveRelearnersHouse_Text_DontHaveMoveToTeachPokemon, MSGBOX_DEFAULT
+	goto FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
 	end
 
-FallarborTown_House2_EventScript_153D52:: @ 8153D52
-	msgbox FallarborTown_House2_Text_177D33, MSGBOX_DEFAULT
-	goto FallarborTown_House2_EventScript_153CE4
+FallarborTown_MoveRelearnersHouse_EventScript_CantTeachEgg:: @ 8153D52
+	msgbox FallarborTown_MoveRelearnersHouse_Text_CantTeachEgg, MSGBOX_DEFAULT
+	goto FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
 	end
 
-FallarborTown_House2_EventScript_153D60:: @ 8153D60
-	msgbox FallarborTown_House2_Text_177CEF, MSGBOX_DEFAULT
+FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale:: @ 8153D60
+	msgbox FallarborTown_MoveRelearnersHouse_Text_ComeBackWithHeartScale, MSGBOX_DEFAULT
 	releaseall
 	end

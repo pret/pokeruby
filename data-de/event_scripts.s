@@ -1369,7 +1369,7 @@ SlateportCity_PokemonFanClub_EventScript_1AE0AC:: @ 81AE0AC
 	release
 	end
 
-FallarborTown_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
+FallarborTown_ContestLobby_EventScript_Reporter:: @ 81AE0B6
 LilycoveCity_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
 SlateportCity_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
 VerdanturfTown_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6

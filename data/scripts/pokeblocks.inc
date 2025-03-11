@@ -1,4 +1,4 @@
-FallarborTown_ContestLobby_EventScript_1B7604:: @ 81B7604
+FallarborTown_ContestLobby_EventScript_BerryBlender2:: @ 81B7604
 	setvar VAR_0x8008, 4
 	setvar VAR_0x8009, 1
 	applymovement VAR_0x8008, FallarborTown_ContestLobby_Movement_1B7821
@@ -120,30 +120,27 @@ FallarborTown_ContestLobby_EventScript_1B7780:: @ 81B7780
 	releaseall
 	end
 
-FallarborTown_ContestLobby_EventScript_1B778A:: @ 81B778A
+FallarborTown_ContestLobby_EventScript_BerryBlenderMan:: @ 81B778A
 	setvar VAR_0x8008, 4
-	goto FallarborTown_ContestLobby_EventScript_1B77B6
+	goto VerdanturfTown_ContestLobby_EventScript_BerryBlendWithNPC
 	end
 
 SlateportCity_ContestLobby_EventScript_1B7795:: @ 81B7795
 	setvar VAR_0x8008, 2
-	goto SlateportCity_ContestLobby_EventScript_1B77B6
+	goto VerdanturfTown_ContestLobby_EventScript_BerryBlendWithNPC
 	end
 
 VerdanturfTown_ContestLobby_EventScript_1B77A0:: @ 81B77A0
 	setvar VAR_0x8008, 2
-	goto VerdanturfTown_ContestLobby_EventScript_1B77B6
+	goto VerdanturfTown_ContestLobby_EventScript_BerryBlendWithNPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_1B77AB:: @ 81B77AB
 	setvar VAR_0x8008, 3
-	goto LilycoveCity_ContestLobby_EventScript_1B77B6
+	goto VerdanturfTown_ContestLobby_EventScript_BerryBlendWithNPC
 	end
 
-FallarborTown_ContestLobby_EventScript_1B77B6:: @ 81B77B6
-LilycoveCity_ContestLobby_EventScript_1B77B6:: @ 81B77B6
-SlateportCity_ContestLobby_EventScript_1B77B6:: @ 81B77B6
-VerdanturfTown_ContestLobby_EventScript_1B77B6:: @ 81B77B6
+VerdanturfTown_ContestLobby_EventScript_BerryBlendWithNPC:: @ 81B77B6
 	lock
 	faceplayer
 	msgbox FallarborTown_ContestLobby_Text_1B742F, MSGBOX_DEFAULT
@@ -185,7 +182,7 @@ VerdanturfTown_ContestLobby_Movement_1B7821:: @ 81B7821
 	walk_in_place_fastest_right
 	step_end
 
-FallarborTown_ContestLobby_EventScript_1B7823:: @ 81B7823
+FallarborTown_ContestLobby_EventScript_BerryBlender1:: @ 81B7823
 	goto FallarborTown_ContestLobby_EventScript_1B783B
 	end
 
