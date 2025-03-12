@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_House3_EventScript_15816C",
+      "script": "FortreeCity_House3_EventScript_Maniac",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_House3_EventScript_158175",
+      "script": "FortreeCity_House3_EventScript_SchoolKidM",
       "flag": "0"
     }
   ],

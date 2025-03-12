@@ -21,7 +21,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_DecorationShop_EventScript_158258",
+      "script": "FortreeCity_DecorationShop_EventScript_PokefanM",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_DecorationShop_EventScript_158261",
+      "script": "FortreeCity_DecorationShop_EventScript_Girl",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_DecorationShop_EventScript_15826A",
+      "script": "FortreeCity_DecorationShop_EventScript_ClerkDesks",
       "flag": "0"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_DecorationShop_EventScript_158298",
+      "script": "FortreeCity_DecorationShop_EventScript_ClerkChairs",
       "flag": "0"
     }
   ],

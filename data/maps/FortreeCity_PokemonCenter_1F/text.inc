@@ -1,10 +1,10 @@
-FortreeCity_PokemonCenter_1F_Text_186027:: @ 8186027
+FortreeCity_PokemonCenter_1F_Text_GoToSafariZone:: @ 8186027
 	.string "Listen, kid, are you working\n"
 	.string "on a POKéDEX?\p"
 	.string "Hmm... Go to the SAFARI ZONE.\n"
 	.string "That's my suggestion.$"
 
-FortreeCity_PokemonCenter_1F_Text_186086:: @ 8186086
+FortreeCity_PokemonCenter_1F_Text_RecordCornerIsNeat:: @ 8186086
 	.string "Have you done anything at the\n"
 	.string "RECORD CORNER?\p"
 	.string "It's pretty neat. It mixes and matches\n"
@@ -12,7 +12,7 @@ FortreeCity_PokemonCenter_1F_Text_186086:: @ 8186086
 	.string "I don't know quite how it works,\n"
 	.string "but it's cool. It's exciting, even!$"
 
-FortreeCity_PokemonCenter_1F_Text_186138:: @ 8186138
+FortreeCity_PokemonCenter_1F_Text_DoYouKnowAboutPokenav:: @ 8186138
 	.string "Hey, you've got a POKéNAV!\n"
 	.string "It's the same as mine.\p"
 	.string "Check out the TRAINER'S EYES on it.\p"
