@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_1F_EventScript_159D55",
+      "script": "LilycoveCity_DepartmentStore_1F_EventScript_Greeter",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_1F_EventScript_159D5E",
+      "script": "LilycoveCity_DepartmentStore_1F_EventScript_LotteryClerk",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_1F_EventScript_159ED7",
+      "script": "LilycoveCity_DepartmentStore_1F_EventScript_PokefanF",
       "flag": "0"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_1F_EventScript_159EE0",
+      "script": "LilycoveCity_DepartmentStore_1F_EventScript_LittleGirl",
       "flag": "0"
     },
     {
@@ -73,7 +73,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_1F_EventScript_159EE9",
+      "script": "LilycoveCity_DepartmentStore_1F_EventScript_PokefanM",
       "flag": "0"
     },
     {
@@ -86,7 +86,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_1F_EventScript_159EF2",
+      "script": "LilycoveCity_DepartmentStore_1F_EventScript_Azumarill",
       "flag": "0"
     }
   ],
@@ -128,7 +128,7 @@
       "y": 8,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "LilycoveCity_DepartmentStore_1F_EventScript_159F05"
+      "script": "LilycoveCity_DepartmentStore_1F_EventScript_FloorNamesSign"
     }
   ]
 }

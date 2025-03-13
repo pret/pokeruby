@@ -1,18 +1,18 @@
 LilycoveCity_DepartmentStore_5F_MapScripts:: @ 815A060
 	.byte 0
 
-LilycoveCity_DepartmentStore_5F_EventScript_15A061:: @ 815A061
+LilycoveCity_DepartmentStore_5F_EventScript_ClerkFarLeft:: @ 815A061
 	lock
 	faceplayer
 	message Text_HowMayIServeYou
 	waitmessage
-	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Items1
+	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Pokemart_StatBoostersAndStones
 	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-LilycoveCity_DepartmentStore_5F_Items1:: @ 815A078
+LilycoveCity_DepartmentStore_5F_Pokemart_StatBoostersAndStones:: @ 815A078
 	.2byte ITEM_X_DEFEND
 	.2byte ITEM_X_SPEED
 	.2byte ITEM_X_ACCURACY
@@ -29,18 +29,18 @@ LilycoveCity_DepartmentStore_5F_Items1:: @ 815A078
 	release
 	end
 
-LilycoveCity_DepartmentStore_5F_EventScript_15A094:: @ 815A094
+LilycoveCity_DepartmentStore_5F_EventScript_ClerkMidLeft:: @ 815A094
 	lock
 	faceplayer
 	message Text_HowMayIServeYou
 	waitmessage
-	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Items2
+	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Pokemart_Treasures
 	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-LilycoveCity_DepartmentStore_5F_Items2:: @ 815A0AC
+LilycoveCity_DepartmentStore_5F_Pokemart_Treasures:: @ 815A0AC
 	.2byte 101
 	.2byte 102
 	.2byte ITEM_BIG_MUSHROOM
@@ -54,18 +54,18 @@ LilycoveCity_DepartmentStore_5F_Items2:: @ 815A0AC
 	release
 	end
 
-LilycoveCity_DepartmentStore_5F_EventScript_15A0C2:: @ 815A0C2
+LilycoveCity_DepartmentStore_5F_EventScript_ClerkMidRight:: @ 815A0C2
 	lock
 	faceplayer
 	message Text_HowMayIServeYou
 	waitmessage
-	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Items3
+	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Pokemart_Vitamins
 	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-LilycoveCity_DepartmentStore_5F_Items3:: @ 815A0DC
+LilycoveCity_DepartmentStore_5F_Pokemart_Vitamins:: @ 815A0DC
 	.2byte ITEM_CARBOS
 	.2byte ITEM_CALCIUM
 	.2byte ITEM_RARE_CANDY
@@ -79,18 +79,18 @@ LilycoveCity_DepartmentStore_5F_Items3:: @ 815A0DC
 	release
 	end
 
-LilycoveCity_DepartmentStore_5F_EventScript_15A0F2:: @ 815A0F2
+LilycoveCity_DepartmentStore_5F_EventScript_ClerkFarRight:: @ 815A0F2
 	lock
 	faceplayer
 	message Text_HowMayIServeYou
 	waitmessage
-	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Items4
+	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Pokemart_VitaminsAndShards
 	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-LilycoveCity_DepartmentStore_5F_Items4:: @ 815A10C
+LilycoveCity_DepartmentStore_5F_Pokemart_VitaminsAndShards:: @ 815A10C
 	.2byte 59
 	.2byte 60
 	.2byte 61
@@ -105,14 +105,14 @@ LilycoveCity_DepartmentStore_5F_Items4:: @ 815A10C
 	release
 	end
 
-LilycoveCity_DepartmentStore_5F_EventScript_15A124:: @ 815A124
-	msgbox LilycoveCity_DepartmentStore_5F_Text_18C4F9, MSGBOX_NPC
+LilycoveCity_DepartmentStore_5F_EventScript_PokefanF:: @ 815A124
+	msgbox LilycoveCity_DepartmentStore_5F_Text_PlaceFullOfCuteDolls, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_5F_EventScript_15A12D:: @ 815A12D
-	msgbox LilycoveCity_DepartmentStore_5F_Text_18C59F, MSGBOX_NPC
+LilycoveCity_DepartmentStore_5F_EventScript_WomanNormal:: @ 815A12D
+	msgbox LilycoveCity_DepartmentStore_5F_Text_SellManyCuteMatsHere, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_5F_EventScript_15A136:: @ 815A136
-	msgbox LilycoveCity_DepartmentStore_5F_Text_18C556, MSGBOX_NPC
+LilycoveCity_DepartmentStore_5F_EventScript_LittleGirl:: @ 815A136
+	msgbox LilycoveCity_DepartmentStore_5F_Text_GettingDollInsteadOfPokemon, MSGBOX_NPC
 	end

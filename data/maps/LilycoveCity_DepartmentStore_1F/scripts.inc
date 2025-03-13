@@ -1,27 +1,27 @@
 LilycoveCity_DepartmentStore_1F_MapScripts:: @ 8159D54
 	.byte 0
 
-LilycoveCity_DepartmentStore_1F_EventScript_159D55:: @ 8159D55
-	msgbox LilycoveCity_DepartmentStore_1F_Text_18BFB5, MSGBOX_NPC
+LilycoveCity_DepartmentStore_1F_EventScript_Greeter:: @ 8159D55
+	msgbox LilycoveCity_DepartmentStore_1F_Text_WelcomeToDeptStore, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
+LilycoveCity_DepartmentStore_1F_EventScript_LotteryClerk:: @ 8159D5E
 	lock
 	faceplayer
 	dotimebasedevents
 	compare VAR_LOTTERY_PRIZE, 0
-	goto_if_ne LilycoveCity_DepartmentStore_1F_EventScript_159EB1
-	goto_if_set FLAG_DAILY_PICKED_LOTTO_TICKET, LilycoveCity_DepartmentStore_1F_EventScript_159E4C
-	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4B5E, MSGBOX_YESNO
+	goto_if_ne LilycoveCity_DepartmentStore_1F_EventScript_GivePrizeFromEarlier
+	goto_if_set FLAG_DAILY_PICKED_LOTTO_TICKET, LilycoveCity_DepartmentStore_1F_EventScript_ComeBackTomorrow
+	msgbox LilycoveCity_DepartmentStore_1F_Text_LotteryCornerDrawTicket, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E56
+	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain
 	setflag FLAG_DAILY_PICKED_LOTTO_TICKET
-	message LilycoveCity_DepartmentStore_1F_Text_1C4CC6
+	message LilycoveCity_DepartmentStore_1F_Text_PleasePickTicket
 	waitmessage
 	special RetrieveLotteryNumber
 	copyvar VAR_0x8008, VAR_RESULT
 	special BufferLottoTicketNumber
-	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4CF6, MSGBOX_DEFAULT
+	msgbox LilycoveCity_DepartmentStore_1F_Text_TicketNumberIsXPleaseWait, MSGBOX_DEFAULT
 	applymovement 2, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	playse SE_PC_ON
@@ -33,112 +33,112 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	applymovement 2, Common_Movement_FacePlayer
 	waitmovement 0
 	compare VAR_0x8004, 0
-	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E60
+	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_NoMatch
 	incrementgamestat GAME_STAT_WON_POKEMON_LOTTERY
 	compare VAR_0x8006, 0
-	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E3A
+	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPartyMon
 	compare VAR_0x8006, 1
-	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E43
+	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPCMon
 	bufferitemname 0, VAR_0x8005
 	compare VAR_0x8004, 1
-	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E78
+	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_TwoDigitMatch
 	compare VAR_0x8004, 2
-	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E81
+	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_ThreeDigitMatch
 	compare VAR_0x8004, 3
-	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E8A
+	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_FourDigitMatch
 	compare VAR_0x8004, 4
-	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E93
+	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_FullMatch
 	giveitem VAR_0x8005
 	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E9C
-	goto LilycoveCity_DepartmentStore_1F_EventScript_159E6E
+	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_RecordPrizeNoRoom
+	goto LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain2
 	end
 
-LilycoveCity_DepartmentStore_1F_EventScript_159E3A:: @ 8159E3A
-	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4D7D, MSGBOX_DEFAULT
+LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPartyMon:: @ 8159E3A
+	msgbox LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPartyMon, MSGBOX_DEFAULT
 	return
 
-LilycoveCity_DepartmentStore_1F_EventScript_159E43:: @ 8159E43
-	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4DD1, MSGBOX_DEFAULT
+LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPCMon:: @ 8159E43
+	msgbox LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPCMon, MSGBOX_DEFAULT
 	return
 
-LilycoveCity_DepartmentStore_1F_EventScript_159E4C:: @ 8159E4C
-	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4C6A, MSGBOX_DEFAULT
+LilycoveCity_DepartmentStore_1F_EventScript_ComeBackTomorrow:: @ 8159E4C
+	msgbox LilycoveCity_DepartmentStore_1F_Text_ComeBackTomorrow, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_DepartmentStore_1F_EventScript_159E56:: @ 8159E56
-	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4C85, MSGBOX_DEFAULT
+LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain:: @ 8159E56
+	msgbox LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_DepartmentStore_1F_EventScript_159E60:: @ 8159E60
-	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4E27, MSGBOX_DEFAULT
-	goto LilycoveCity_DepartmentStore_1F_EventScript_159E6E
+LilycoveCity_DepartmentStore_1F_EventScript_NoMatch:: @ 8159E60
+	msgbox LilycoveCity_DepartmentStore_1F_Text_NoNumbersMatched, MSGBOX_DEFAULT
+	goto LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain2
 	end
 
-LilycoveCity_DepartmentStore_1F_EventScript_159E6E:: @ 8159E6E
-	msgbox LilycoveCity_DepartmentStore_1F_Text_1C501C, MSGBOX_DEFAULT
+LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain2:: @ 8159E6E
+	msgbox LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain2, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_DepartmentStore_1F_EventScript_159E78:: @ 8159E78
-	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4E4F, MSGBOX_DEFAULT
+LilycoveCity_DepartmentStore_1F_EventScript_TwoDigitMatch:: @ 8159E78
+	msgbox LilycoveCity_DepartmentStore_1F_Text_TwoDigitsMatched, MSGBOX_DEFAULT
 	return
 
-LilycoveCity_DepartmentStore_1F_EventScript_159E81:: @ 8159E81
-	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4E92, MSGBOX_DEFAULT
+LilycoveCity_DepartmentStore_1F_EventScript_ThreeDigitMatch:: @ 8159E81
+	msgbox LilycoveCity_DepartmentStore_1F_Text_ThreeDigitsMatched, MSGBOX_DEFAULT
 	return
 
-LilycoveCity_DepartmentStore_1F_EventScript_159E8A:: @ 8159E8A
-	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4ED8, MSGBOX_DEFAULT
+LilycoveCity_DepartmentStore_1F_EventScript_FourDigitMatch:: @ 8159E8A
+	msgbox LilycoveCity_DepartmentStore_1F_Text_FourDigitsMatched, MSGBOX_DEFAULT
 	return
 
-LilycoveCity_DepartmentStore_1F_EventScript_159E93:: @ 8159E93
-	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4F1C, MSGBOX_DEFAULT
+LilycoveCity_DepartmentStore_1F_EventScript_FullMatch:: @ 8159E93
+	msgbox LilycoveCity_DepartmentStore_1F_Text_AllFiveDigitsMatched, MSGBOX_DEFAULT
 	return
 
-LilycoveCity_DepartmentStore_1F_EventScript_159E9C:: @ 8159E9C
+LilycoveCity_DepartmentStore_1F_EventScript_RecordPrizeNoRoom:: @ 8159E9C
 	copyvar VAR_LOTTERY_PRIZE, VAR_0x8005
-	goto LilycoveCity_DepartmentStore_1F_EventScript_159EA7
+	goto LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize
 	end
 
-LilycoveCity_DepartmentStore_1F_EventScript_159EA7:: @ 8159EA7
-	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4F77, MSGBOX_DEFAULT
+LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize:: @ 8159EA7
+	msgbox LilycoveCity_DepartmentStore_1F_Text_NoRoomForThis, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_DepartmentStore_1F_EventScript_159EB1:: @ 8159EB1
-	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4FCC, MSGBOX_DEFAULT
+LilycoveCity_DepartmentStore_1F_EventScript_GivePrizeFromEarlier:: @ 8159EB1
+	msgbox LilycoveCity_DepartmentStore_1F_Text_PrizeWeveBeenHolding, MSGBOX_DEFAULT
 	giveitem VAR_LOTTERY_PRIZE
 	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159EA7
+	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize
 	setvar VAR_LOTTERY_PRIZE, 0
 	release
 	end
 
-LilycoveCity_DepartmentStore_1F_EventScript_159ED7:: @ 8159ED7
-	msgbox LilycoveCity_DepartmentStore_1F_Text_18BFDB, MSGBOX_NPC
+LilycoveCity_DepartmentStore_1F_EventScript_PokefanF:: @ 8159ED7
+	msgbox LilycoveCity_DepartmentStore_1F_Text_IBuyAllSortsOfThings, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_1F_EventScript_159EE0:: @ 8159EE0
-	msgbox LilycoveCity_DepartmentStore_1F_Text_18C044, MSGBOX_NPC
+LilycoveCity_DepartmentStore_1F_EventScript_LittleGirl:: @ 8159EE0
+	msgbox LilycoveCity_DepartmentStore_1F_Text_MomBuyingMeFurniture, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_1F_EventScript_159EE9:: @ 8159EE9
-	msgbox LilycoveCity_DepartmentStore_1F_Text_18C07A, MSGBOX_NPC
+LilycoveCity_DepartmentStore_1F_EventScript_PokefanM:: @ 8159EE9
+	msgbox LilycoveCity_DepartmentStore_1F_Text_BuyingSomethingForAzumarill, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_1F_EventScript_159EF2:: @ 8159EF2
+LilycoveCity_DepartmentStore_1F_EventScript_Azumarill:: @ 8159EF2
 	lock
 	faceplayer
 	waitse
 	playmoncry SPECIES_AZUMARILL, 0
-	msgbox LilycoveCity_DepartmentStore_1F_Text_18C0C3, MSGBOX_DEFAULT
+	msgbox LilycoveCity_DepartmentStore_1F_Text_Azumarill, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
 
-LilycoveCity_DepartmentStore_1F_EventScript_159F05:: @ 8159F05
-	msgbox LilycoveCity_DepartmentStore_1F_Text_18C0D9, MSGBOX_SIGN
+LilycoveCity_DepartmentStore_1F_EventScript_FloorNamesSign:: @ 8159F05
+	msgbox LilycoveCity_DepartmentStore_1F_Text_FloorNamesSign, MSGBOX_SIGN
 	end

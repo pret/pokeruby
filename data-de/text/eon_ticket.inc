@@ -8,12 +8,12 @@ UnknownString_81C5070: @ 81C5070
 	.string "In SEEGRASULB CITY kann dir bestimmt\n"
 	.string "jemand mehr dazu sagen.$"
 
-LilycoveCity_Harbor_Text_1C50F2:: @ 81C50F2
+EventTicket_Text_ThatPass:: @ 81C50F2
 	.string "Die Fähre nach GRAPHITPORT CITY ist...\p"
 	.string "Oh!\n"
 	.string "Der FAHRSCHEIN...$"
 
-LilycoveCity_Harbor_Text_1C5120:: @ 81C5120
+EventTicket_Text_ShowEonTicket:: @ 81C5120
 	.string "Aye, Maat, hast du den alten FAHRSCHEIN\n"
 	.string "mitgebracht?\p"
 	.string "Ich sage dir, du bist auf dem Weg zu\n"

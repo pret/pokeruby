@@ -1,4 +1,4 @@
-LilycoveCity_CoveLilyMotel_2F_Text_186FE7:: @ 8186FE7
+LilycoveCity_CoveLilyMotel_2F_Text_ShowMeCompletedDex:: @ 8186FE7
 	.string "Ich bin der GAME DESIGNER.\p"
 	.string "Oh, wirklich?\n"
 	.string "Du arbeitest an einem POKéDEX?\p"
@@ -7,7 +7,7 @@ LilycoveCity_CoveLilyMotel_2F_Text_186FE7:: @ 8186FE7
 	.string "Sobald du ihn vervollständigt hast,\n"
 	.string "komm mich wieder besuchen.$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_18708F:: @ 818708F
+LilycoveCity_CoveLilyMotel_2F_Text_FilledPokedexGiveYouThis:: @ 818708F
 	.string "Wow! Das ist beeindruckend!\n"
 	.string "Wirklich äußerst beeindruckend!\p"
 	.string "Dein POKéDEX ist absolut vollständig!\n"
@@ -16,18 +16,18 @@ LilycoveCity_CoveLilyMotel_2F_Text_18708F:: @ 818708F
 	.string "Ich möchte dir als Zeichen meiner Aner-\n"
 	.string "kennung gerne etwas schenken!$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_187149:: @ 8187149
+LilycoveCity_CoveLilyMotel_2F_Text_ImTheProgrammer:: @ 8187149
 	.string "Ich? Sprichst du mit mir?\n"
 	.string "Ich bin der PROGRAMMIERER.\p"
 	.string "Ich frage mich, wie die EINARMIGEN\n"
 	.string "BANDITEN hier wohl so sind.$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_18719E:: @ 818719E
+LilycoveCity_CoveLilyMotel_2F_Text_ImTheGraphicArtist:: @ 818719E
 	.string "Ich bin der GRAPHIC ARTIST! Sind die\n"
 	.string "POKéMON in der Region von HOENN\l"
 	.string "nicht interessant?$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_1871DF:: @ 81871DF
+LilycoveCity_CoveLilyMotel_2F_Text_GirlsAreCute:: @ 81871DF
 	.string "Die MÄDCHEN mit den SCHWIMMREIFEN\n"
 	.string "sind total niedlich, meinst du nicht?\l"
 	.string "Ein Kampf gegen so niedliche Mädchen...\p"
@@ -36,11 +36,11 @@ LilycoveCity_CoveLilyMotel_2F_Text_1871DF:: @ 81871DF
 	.string "Ein 2-gegen-2 Kampf mit ZWILLINGEN...\p"
 	.string "Huuh, einfach unglaublicher Spaß!$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_18729A:: @ 818729A
+LilycoveCity_CoveLilyMotel_2F_Text_SeaBreezeTicklesHeart:: @ 818729A
 	.string "Die frische Seebrise berührt mein Herz.\n"
 	.string "Es ist einfach wundervoll hier.$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_1872D4:: @ 81872D4
+LilycoveCity_CoveLilyMotel_2F_Text_NeverLeaveWithoutGameBoy:: @ 81872D4
 	.string "Du kannst nie vorhersagen, wann und wo\n"
 	.string "die Leute dich herausfordern.\p"
 	.string "Daher gehe ich niemals ohne meinen GAME\n"

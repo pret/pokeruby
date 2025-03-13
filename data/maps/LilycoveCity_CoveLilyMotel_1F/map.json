@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_CoveLilyMotel_1F_EventScript_1582C5",
+      "script": "LilycoveCity_CoveLilyMotel_1F_EventScript_MotelOwner",
       "flag": "0"
     }
   ],
@@ -56,7 +56,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "LilycoveCity_CoveLilyMotel_1F_EventScript_15834D"
+      "script": "LilycoveCity_CoveLilyMotel_1F_EventScript_BlockingTV"
     }
   ],
   "bg_events": []

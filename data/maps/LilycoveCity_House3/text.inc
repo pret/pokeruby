@@ -1,4 +1,4 @@
-LilycoveCity_House3_Text_18B8CC:: @ 818B8CC
+LilycoveCity_House3_Text_LearnFromMasterOfPokeblocks:: @ 818B8CC
 	.string "Oh, my, my! Are you traveling alone?\n"
 	.string "But you're so young! Good for you!\p"
 	.string "I'm sure my kids could learn a thing\n"
@@ -9,12 +9,12 @@ LilycoveCity_House3_Text_18B8CC:: @ 818B8CC
 	.string "Would you like to learn from me, a\n"
 	.string "master of {POKEBLOCK}S?$"
 
-LilycoveCity_House3_Text_18B9DC:: @ 818B9DC
+LilycoveCity_House3_Text_OhAreYouSure:: @ 818B9DC
 	.string "Oh? Are you sure?\p"
 	.string "You shouldn't always try to do\n"
 	.string "everything by yourself, dear!$"
 
-LilycoveCity_House3_Text_18BA2B:: @ 818BA2B
+LilycoveCity_House3_Text_ExplainPokeblocks:: @ 818BA2B
 	.string "Oh, good! You're a smart soul!\n"
 	.string "This is a bit long, so listen up!\p"
 	.string "Are you ready?\p"
@@ -43,26 +43,26 @@ LilycoveCity_House3_Text_18BA2B:: @ 818BA2B
 	.string "the world would be a happier place.\p"
 	.string "Don't give up, dear!$"
 
-LilycoveCity_House3_Text_18BD64:: @ 818BD64
+LilycoveCity_House3_Text_HappyToHaveQuadruplets:: @ 818BD64
 	.string "When my wife gave birth to quadruplets,\n"
 	.string "you bet I was shocked.\p"
 	.string "But, now, seeing them play together,\n"
 	.string "it makes me happy.$"
 
-LilycoveCity_House3_Text_18BDDB:: @ 818BDDB
+LilycoveCity_House3_Text_GoingToWinMultiBattles:: @ 818BDDB
 	.string "We're having MULTI BATTLES, but I know\n"
 	.string "I'm going to win.$"
 
-LilycoveCity_House3_Text_18BE14:: @ 818BE14
+LilycoveCity_House3_Text_LikeMixingAtRecordCorner:: @ 818BE14
 	.string "We like mixing stuff at the RECORD\n"
 	.string "CORNER.\p"
 	.string "But what gets mixed up?$"
 
-LilycoveCity_House3_Text_18BE57:: @ 818BE57
+LilycoveCity_House3_Text_MakePokeblocksWithBerryBlender:: @ 818BE57
 	.string "We're going to make super {POKEBLOCK}S\n"
 	.string "with a BERRY BLENDER!$"
 
-LilycoveCity_House3_Text_18BE8E:: @ 818BE8E
+LilycoveCity_House3_Text_GoingToEnterContest:: @ 818BE8E
 	.string "I want to brag about how tough my\n"
 	.string "POKéMON is, so we're going to enter a\l"
 	.string "CONTEST together.$"
