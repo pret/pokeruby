@@ -60,7 +60,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LittlerootTown_BrendansHouse_1F_EventScript_1529EB",
+      "script": "RivalsHouse_1F_EventScript_RivalMom",
       "flag": "FLAG_HIDE_BRENDAN_MOM"
     },
     {
@@ -108,7 +108,7 @@
       "elevation": 0,
       "var": "VAR_LITTLEROOT_INTRO_STATE",
       "var_value": "4",
-      "script": "LittlerootTown_BrendansHouse_1F_EventScript_152789"
+      "script": "LittlerootTown_BrendansHouse_1F_EventScript_GoSeeRoom"
     }
   ],
   "bg_events": []

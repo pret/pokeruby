@@ -1,26 +1,26 @@
 LittlerootTown_BrendansHouse_2F_MapScripts:: @ 81527A4
-	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_BrendansHouse_2F_MapScript1_1527AF
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LittlerootTown_BrendansHouse_2F_MapScript2_1527DA
+	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_BrendansHouse_2F_OnTransition
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LittlerootTown_BrendansHouse_2F_OnWarp
 	.byte 0
 
-LittlerootTown_BrendansHouse_2F_MapScript1_1527AF:: @ 81527AF
-	call_if_unset FLAG_DEFEATED_RIVAL_ROUTE103, LittlerootTown_BrendansHouse_2F_EventScript_1527CE
+LittlerootTown_BrendansHouse_2F_OnTransition:: @ 81527AF
+	call_if_unset FLAG_DEFEATED_RIVAL_ROUTE103, LittlerootTown_BrendansHouse_2F_EventScript_RivalCheckingNotebook
 	compare VAR_LITTLEROOT_INTRO_STATE, 4
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1B6950
 	call SecretBase_EventScript_SetDecorationFlags
 	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	end
 
-LittlerootTown_BrendansHouse_2F_EventScript_1527CE:: @ 81527CE
+LittlerootTown_BrendansHouse_2F_EventScript_RivalCheckingNotebook:: @ 81527CE
 	setobjectxyperm 1, 1, 2
 	setobjectmovementtype 1, 7
 	return
 
-LittlerootTown_BrendansHouse_2F_MapScript2_1527DA:: @ 81527DA
-	map_script_2 VAR_SECRET_BASE_INITIALIZED, 0, LittlerootTown_BrendansHouse_2F_EventScript_1527E4
+LittlerootTown_BrendansHouse_2F_OnWarp:: @ 81527DA
+	map_script_2 VAR_SECRET_BASE_INITIALIZED, 0, LittlerootTown_BrendansHouse_2F_EventScript_CheckInitDecor
 	.2byte 0
 
-LittlerootTown_BrendansHouse_2F_EventScript_1527E4:: @ 81527E4
+LittlerootTown_BrendansHouse_2F_EventScript_CheckInitDecor:: @ 81527E4
 	checkplayergender
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_EventScript_InitDecorations
@@ -47,20 +47,20 @@ LittlerootTown_BrendansHouse_2F_EventScript_152814:: @ 8152814
 
 gUnknown_0815281E:: @ 815281E
 
-LittlerootTown_BrendansHouse_2F_EventScript_15281E:: @ 815281E
+LittlerootTown_BrendansHouse_2F_EventScript_PC:: @ 815281E
 	lockall
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_152837
+	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_CheckPlayersPC
 	compare VAR_RESULT, 1
-	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_15285D
+	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_CheckRivalsPC
 	end
 
-LittlerootTown_BrendansHouse_2F_EventScript_152837:: @ 8152837
+LittlerootTown_BrendansHouse_2F_EventScript_CheckPlayersPC:: @ 8152837
 	setvar VAR_0x8004, 1
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1A10D6, MSGBOX_DEFAULT
+	msgbox gText_PlayerHouseBootPC, MSGBOX_DEFAULT
 	special BedroomPC
 	waitstate
 	releaseall
@@ -73,17 +73,15 @@ gBrendanHouse_TurnPCOff:: @ 8152850
 	releaseall
 	end
 
-LittlerootTown_BrendansHouse_2F_EventScript_15285D:: @ 815285D
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1A100C, MSGBOX_DEFAULT
+LittlerootTown_BrendansHouse_2F_EventScript_CheckRivalsPC:: @ 815285D
+	msgbox gText_PokemonTrainerSchoolEmail, MSGBOX_DEFAULT
 	releaseall
 	end
 
-LittlerootTown_BrendansHouse_2F_EventScript_152867:: @ 8152867
-LittlerootTown_MaysHouse_2F_EventScript_152867:: @ 8152867
-	msgbox LittlerootTown_BrendansHouse_2F_Text_172F9A, MSGBOX_SIGN
+PlayersHouse_2F_EventScript_Notebook:: @ 8152867
+	msgbox PlayersHouse_2F_Text_Notebook, MSGBOX_SIGN
 	end
 
-LittlerootTown_BrendansHouse_2F_EventScript_152870:: @ 8152870
-LittlerootTown_MaysHouse_2F_EventScript_152870:: @ 8152870
-	msgbox LittlerootTown_BrendansHouse_2F_Text_17306C, MSGBOX_SIGN
+PlayersHouse_2F_EventScript_GameCube:: @ 8152870
+	msgbox PlayersHouse_2F_Text_ItsAGameCube, MSGBOX_SIGN
 	end

@@ -881,7 +881,7 @@ Common_EventScript_OutOfCenterPartyHeal:: @ 81A02CA
 
 EventScript_RegionMap:: @ 81A02D6
 	lockall
-	msgbox Text_LookCloserAtMap, MSGBOX_DEFAULT
+	msgbox Common_Text_LookCloserAtMap, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
 	special FieldShowRegionMap
 	waitstate
@@ -1059,8 +1059,7 @@ Text_NoRegisteredItem: @ 81A0FCC
 	.string "An item in the BAG can be registered\n"
 	.string "on SELECT for convenience.$"
 
-LittlerootTown_BrendansHouse_2F_Text_1A100C:: @ 81A100C
-LittlerootTown_MaysHouse_2F_Text_1A100C:: @ 81A100C
+gText_PokemonTrainerSchoolEmail:: @ 81A100C
 	.string "There's an e-mail from POKéMON TRAINER\n"
 	.string "SCHOOL.\p"
 	.string "... ... ... ... ... ...\p"
@@ -1069,8 +1068,7 @@ LittlerootTown_MaysHouse_2F_Text_1A100C:: @ 81A100C
 	.string "move sets chosen for POKéMON.\p"
 	.string "... ... ... ... ... ...$"
 
-LittlerootTown_BrendansHouse_2F_Text_1A10D6:: @ 81A10D6
-LittlerootTown_MaysHouse_2F_Text_1A10D6:: @ 81A10D6
+gText_PlayerHouseBootPC:: @ 81A10D6
 	.string "{PLAYER} booted up the PC.$"
 
 FallarborTown_ContestLobby_Text_1A10EB:: @ 81A10EB
