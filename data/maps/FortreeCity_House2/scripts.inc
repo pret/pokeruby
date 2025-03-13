@@ -1,7 +1,7 @@
 FortreeCity_House2_MapScripts:: @ 81580B3
 	.byte 0
 
-FortreeCity_House2_EventScript_1580B4:: @ 81580B4
+FortreeCity_House2_EventScript_HiddenPowerGiver:: @ 81580B4
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM10, FortreeCity_House2_EventScript_ExplainHiddenPower

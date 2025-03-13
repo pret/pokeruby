@@ -1,61 +1,60 @@
 EverGrandeCity_SidneysRoom_MapScripts:: @ 815B53F
-	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_SidneysRoom_MapScript1_15B54F
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_SidneysRoom_MapScript2_15B570
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_SidneysRoom_MapScript2_15B57F
+	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_SidneysRoom_OnLoad
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_SidneysRoom_OnWarp
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_SidneysRoom_OnFrame
 	.byte 0
 
-EverGrandeCity_SidneysRoom_MapScript1_15B54F:: @ 815B54F
-	call_if_set FLAG_DEFEATED_ELITE_4_SYDNEY, EverGrandeCity_SidneysRoom_EventScript_15B564
+EverGrandeCity_SidneysRoom_OnLoad:: @ 815B54F
+	call_if_set FLAG_DEFEATED_ELITE_4_SYDNEY, EverGrandeCity_SidneysRoom_EventScript_ResetAdvanceToNextRoom
 	compare VAR_ELITE_4_STATE, 1
-	call_if_eq EverGrandeCity_SidneysRoom_EventScript_15B56A
+	call_if_eq EverGrandeCity_SidneysRoom_EventScript_CloseDoor
 	end
 
-EverGrandeCity_SidneysRoom_EventScript_15B564:: @ 815B564
+EverGrandeCity_SidneysRoom_EventScript_ResetAdvanceToNextRoom:: @ 815B564
 	call PokemonLeague_EliteFour_EventScript_ResetAdvanceToNextRoom
 	return
 
-EverGrandeCity_SidneysRoom_EventScript_15B56A:: @ 815B56A
+EverGrandeCity_SidneysRoom_EventScript_CloseDoor:: @ 815B56A
 	call PokemonLeague_EliteFour_EventScript_CloseDoor
 	return
 
 EverGrandeCity_SidneysRoom_OnWarp:: @ 815B570
-EverGrandeCity_SidneysRoom_MapScript2_15B570:: @ 815B570
-	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_SidneysRoom_EventScript_15B57A
+	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_SidneysRoom_EventScript_PlayerTurnNorth
 	.2byte 0
 
-EverGrandeCity_SidneysRoom_EventScript_15B57A:: @ 815B57A
+EverGrandeCity_SidneysRoom_EventScript_PlayerTurnNorth:: @ 815B57A
 	turnobject OBJ_EVENT_ID_PLAYER, 2
 	end
 
-EverGrandeCity_SidneysRoom_MapScript2_15B57F:: @ 815B57F
-	map_script_2 VAR_ELITE_4_STATE, 0, EverGrandeCity_SidneysRoom_EventScript_15B589
+EverGrandeCity_SidneysRoom_OnFrame:: @ 815B57F
+	map_script_2 VAR_ELITE_4_STATE, 0, EverGrandeCity_SidneysRoom_EventScript_WalkInCloseDoor
 	.2byte 0
 
-EverGrandeCity_SidneysRoom_EventScript_15B589:: @ 815B589
+EverGrandeCity_SidneysRoom_EventScript_WalkInCloseDoor:: @ 815B589
 	lockall
 	call PokemonLeague_EliteFour_EventScript_WalkInCloseDoor
 	setvar VAR_ELITE_4_STATE, 1
 	releaseall
 	end
 
-EverGrandeCity_SidneysRoom_EventScript_15B596:: @ 815B596
+EverGrandeCity_SidneysRoom_EventScript_Sidney:: @ 815B596
 	lock
 	faceplayer
-	goto_if_set FLAG_DEFEATED_ELITE_4_SYDNEY, EverGrandeCity_SidneysRoom_EventScript_15B5BD
+	goto_if_set FLAG_DEFEATED_ELITE_4_SYDNEY, EverGrandeCity_SidneysRoom_EventScript_PostBattleSpeech
 	playbgm MUS_ENCOUNTER_ELITE_FOUR, FALSE
 	msgbox EverGrandeCity_SidneysRoom_Text_190728, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_SIDNEY, EverGrandeCity_SidneysRoom_Text_190823
-	goto EverGrandeCity_SidneysRoom_EventScript_15B5C7
+	trainerbattle_no_intro TRAINER_SIDNEY, EverGrandeCity_SidneysRoom_Text_Defeat
+	goto EverGrandeCity_SidneysRoom_EventScript_Defeated
 	end
 
-EverGrandeCity_SidneysRoom_EventScript_15B5BD:: @ 815B5BD
-	msgbox EverGrandeCity_SidneysRoom_Text_19086D, MSGBOX_DEFAULT
+EverGrandeCity_SidneysRoom_EventScript_PostBattleSpeech:: @ 815B5BD
+	msgbox EverGrandeCity_SidneysRoom_Text_PostBattleSpeech, MSGBOX_DEFAULT
 	release
 	end
 
-EverGrandeCity_SidneysRoom_EventScript_15B5C7:: @ 815B5C7
+EverGrandeCity_SidneysRoom_EventScript_Defeated:: @ 815B5C7
 	setflag FLAG_DEFEATED_ELITE_4_SYDNEY
 	call PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles
-	msgbox EverGrandeCity_SidneysRoom_Text_19086D, MSGBOX_DEFAULT
+	msgbox EverGrandeCity_SidneysRoom_Text_PostBattleSpeech, MSGBOX_DEFAULT
 	release
 	end

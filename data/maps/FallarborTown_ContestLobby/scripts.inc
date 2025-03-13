@@ -100,7 +100,7 @@ FallarborTown_ContestLobby_EventScript_153AA9:: @ 8153AA9
 	msgbox FallarborTown_ContestLobby_Text_YourSketchIsUp, MSGBOX_NPC
 	end
 
-FallarborTown_ContestLobby_EventScript_Girl:: @ 8153AB2
+FallarborTown_ContestLobby_EventScript_Lass:: @ 8153AB2
 	msgbox FallarborTown_ContestLobby_Text_AreYouMakingPokeblock, MSGBOX_NPC
 	end
 

@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_Gym_EventScript_157EF0",
+      "script": "FortreeCity_Gym_EventScript_Winona",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "FortreeCity_Gym_EventScript_157F62",
+      "script": "FortreeCity_Gym_EventScript_Jared",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "FortreeCity_Gym_EventScript_157F90",
+      "script": "FortreeCity_Gym_EventScript_Terrell",
       "flag": "0"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "FortreeCity_Gym_EventScript_157FA7",
+      "script": "FortreeCity_Gym_EventScript_Kylee",
       "flag": "0"
     },
     {
@@ -73,7 +73,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "FortreeCity_Gym_EventScript_157F79",
+      "script": "FortreeCity_Gym_EventScript_Will",
       "flag": "0"
     },
     {
@@ -86,7 +86,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_Gym_EventScript_157FBE",
+      "script": "FortreeCity_Gym_EventScript_GymGuide",
       "flag": "0"
     }
   ],
@@ -114,7 +114,7 @@
       "y": 21,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "FortreeCity_Gym_EventScript_157FDD"
+      "script": "FortreeCity_Gym_EventScript_LeftGymStatue"
     },
     {
       "type": "sign",
@@ -122,7 +122,7 @@
       "y": 21,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "FortreeCity_Gym_EventScript_157FED"
+      "script": "FortreeCity_Gym_EventScript_RightGymStatue"
     }
   ]
 }

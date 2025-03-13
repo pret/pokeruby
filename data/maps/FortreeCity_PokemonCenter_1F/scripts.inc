@@ -6,7 +6,7 @@ FortreeCity_PokemonCenter_1F_OnTransition:: @ 8158017
 	setrespawn HEAL_LOCATION_FORTREE_CITY
 	end
 
-FortreeCity_PokemonCenter_1F_EventScript_15801B:: @ 815801B
+FortreeCity_PokemonCenter_1F_EventScript_Nurse:: @ 815801B
 	setvar VAR_0x800B, 1
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage

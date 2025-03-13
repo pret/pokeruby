@@ -1,7 +1,7 @@
 DewfordTown_Hall_MapScripts:: @ 8153292
 	.byte 0
 
-DewfordTown_Hall_EventScript_153293:: @ 8153293
+DewfordTown_Hall_EventScript_Girl:: @ 8153293
 	lock
 	faceplayer
 	call Common_EventScript_BufferTrendyPhrase

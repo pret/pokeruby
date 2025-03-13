@@ -5,7 +5,7 @@ FallarborTown_House1_MapScripts:: @ 8153BAE
 FallarborTown_House1_OnTransition:: @ 8153BB4
 	end
 
-FallarborTown_House1_EventScript_153BB5:: @ 8153BB5
+FallarborTown_CozmosHouse_EventScript_ProfCozmo:: @ 8153BB5
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM_RETURN, FallarborTown_CozmosHouse_EventScript_GaveMeteorite

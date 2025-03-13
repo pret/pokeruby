@@ -1,30 +1,30 @@
 LilycoveCity_DepartmentStore_2F_MapScripts:: @ 8159F0E
 	.byte 0
 
-LilycoveCity_DepartmentStore_2F_EventScript_159F0F:: @ 8159F0F
+LilycoveCity_DepartmentStore_2F_EventScript_Cook:: @ 8159F0F
 	msgbox LilycoveCity_DepartmentStore_2F_Text_LearnToUseItemsProperly, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_2F_EventScript_159F18:: @ 8159F18
+LilycoveCity_DepartmentStore_2F_EventScript_PokefanF:: @ 8159F18
 	msgbox LilycoveCity_DepartmentStore_2F_Text_GoodGiftForHusband, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_2F_EventScript_159F21:: @ 8159F21
+LilycoveCity_DepartmentStore_2F_EventScript_Sailor:: @ 8159F21
 	msgbox LilycoveCity_DepartmentStore_2F_Text_StockUpOnItems, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_2F_EventScript_159F2A:: @ 8159F2A
+LilycoveCity_DepartmentStore_2F_EventScript_ClerkLeft:: @ 8159F2A
 	lock
 	faceplayer
 	message Text_HowMayIServeYou
 	waitmessage
-	pokemart LilycoveCity_DepartmentStore_2F_Items1
+	pokemart LilycoveCity_DepartmentStore_2F_Pokemart1
 	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-LilycoveCity_DepartmentStore_2F_Items1:: @ 8159F44
+LilycoveCity_DepartmentStore_2F_Pokemart1:: @ 8159F44
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_ULTRA_BALL
@@ -40,18 +40,18 @@ LilycoveCity_DepartmentStore_2F_Items1:: @ 8159F44
 	release
 	end
 
-LilycoveCity_DepartmentStore_2F_EventScript_159F5E:: @ 8159F5E
+LilycoveCity_DepartmentStore_2F_EventScript_ClerkRight:: @ 8159F5E
 	lock
 	faceplayer
 	message Text_HowMayIServeYou
 	waitmessage
-	pokemart LilycoveCity_DepartmentStore_2F_Items2
+	pokemart LilycoveCity_DepartmentStore_2F_Pokemart2
 	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-LilycoveCity_DepartmentStore_2F_Items2:: @ 8159F78
+LilycoveCity_DepartmentStore_2F_Pokemart2:: @ 8159F78
 	.2byte ITEM_POTION
 	.2byte ITEM_SUPER_POTION
 	.2byte ITEM_HYPER_POTION

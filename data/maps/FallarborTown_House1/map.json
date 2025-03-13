@@ -21,7 +21,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_House1_EventScript_153BB5",
+      "script": "FallarborTown_CozmosHouse_EventScript_ProfCozmo",
       "flag": "FLAG_HIDE_PROF_COSMO_FALLARBOR"
     },
     {
