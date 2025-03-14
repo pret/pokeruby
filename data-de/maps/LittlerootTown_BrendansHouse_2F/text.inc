@@ -1,8 +1,8 @@
-LittlerootTown_BrendansHouse_2F_Text_172E18:: @ 8172E18
+PlayersHouse_2F_Text_ClockIsStopped:: @ 8172E18
 	.string "Die Uhr ist stehen geblieben...\p"
 	.string "Stelle sie besser ein und ziehe sie auf.$"
 
-LittlerootTown_BrendansHouse_2F_Text_172E4C:: @ 8172E4C
+PlayersHouse_2F_Text_HowDoYouLikeYourRoom:: @ 8172E4C
 	.string "MUTTER: {PLAYER}, wie gefällt dir dein\n"
 	.string "neues Zimmer?\p"
 	.string "Gut! Alles ist wunderbar aufgeräumt!\p"
@@ -21,7 +21,7 @@ UnknownString_8172F31: @ 8172F31
 UnknownString_8172F85: @ 8172F85
 	.string "{PLAYER} schaltet den PC ein.$"
 
-LittlerootTown_BrendansHouse_2F_Text_172F9A:: @ 8172F9A
+PlayersHouse_2F_Text_Notebook:: @ 8172F9A
 	.string "{PLAYER} schlägt das Notizbuch auf.\p"
 	.string "REGEL NR. 1 FÜR ABENTEURER\n"
 	.string "Öffne das MENÜ mit START.\p"
@@ -29,11 +29,11 @@ LittlerootTown_BrendansHouse_2F_Text_172F9A:: @ 8172F9A
 	.string "Speichere den Fortschritt mit SICHERN.\p"
 	.string "Die übrigen Seiten sind leer.$"
 
-Text_LookCloserAtMap: @ 817303D
+Common_Text_LookCloserAtMap: @ 817303D
 	.string "{PLAYER} schaut sich die Karte der\n"
 	.string "HOENN-Region genauer an.$"
 
-LittlerootTown_BrendansHouse_2F_Text_17306C:: @ 817306C
+PlayersHouse_2F_Text_ItsAGameCube:: @ 817306C
 	.string "Das ist ein Nintendo GameCube.\p"
 	.string "Ein Game Boy Advance ist angeschlossen\n"
 	.string "und dient als Controller.$"

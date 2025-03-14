@@ -1,4 +1,4 @@
-LilycoveCity_House3_Text_18B8CC:: @ 818B8CC
+LilycoveCity_House3_Text_LearnFromMasterOfPokeblocks:: @ 818B8CC
 	.string "Ach, du liebes bisschen! Reist du ganz\n"
 	.string "alleine? Aber du bist so jung! Gut!\p"
 	.string "Ich bin sicher, meine Kinder könnten\n"
@@ -9,12 +9,12 @@ LilycoveCity_House3_Text_18B8CC:: @ 818B8CC
 	.string "Möchtest du das von mir, der Expertin\n"
 	.string "der {POKEBLOCK}, lernen?$"
 
-LilycoveCity_House3_Text_18B9DC:: @ 818B9DC
+LilycoveCity_House3_Text_OhAreYouSure:: @ 818B9DC
 	.string "Oh? Ganz sicher?\p"
 	.string "Du solltest nicht immer versuchen, alles\n"
 	.string "alleine zu meistern, mein Kind.$"
 
-LilycoveCity_House3_Text_18BA2B:: @ 818BA2B
+LilycoveCity_House3_Text_ExplainPokeblocks:: @ 818BA2B
 	.string "Oh, schön! Du bist clever! Das\n"
 	.string "wird eine lange Erklärung. Hör gut zu.\p"
 	.string "Bist du bereit?\p"
@@ -46,27 +46,27 @@ LilycoveCity_House3_Text_18BA2B:: @ 818BA2B
 	.string "besser aus.\p"
 	.string "Lass dich nicht unterkriegen, Schatz!$"
 
-LilycoveCity_House3_Text_18BD64:: @ 818BD64
+LilycoveCity_House3_Text_HappyToHaveQuadruplets:: @ 818BD64
 	.string "Als meine Frau Vierlinge zur Welt\n"
 	.string "brachte, war ich zuerst geschockt.\p"
 	.string "Aber wenn ich sie jetzt zusammen\n"
 	.string "spielen sehe, bin ich richtig glücklich.$"
 
-LilycoveCity_House3_Text_18BDDB:: @ 818BDDB
+LilycoveCity_House3_Text_GoingToWinMultiBattles:: @ 818BDDB
 	.string "Wir üben MULTIKÄMPFE aus, aber ich\n"
 	.string "weiß, dass ich gewinnen werde.$"
 
-LilycoveCity_House3_Text_18BE14:: @ 818BE14
+LilycoveCity_House3_Text_LikeMixingAtRecordCorner:: @ 818BE14
 	.string "Wir lieben es, Sachen beim STATISTIK-\n"
 	.string "TAUSCH durcheinander zu würfeln.\p"
 	.string "Aber, was kann man durcheinander\n"
 	.string "würfeln?$"
 
-LilycoveCity_House3_Text_18BE57:: @ 818BE57
+LilycoveCity_House3_Text_MakePokeblocksWithBerryBlender:: @ 818BE57
 	.string "Wir wollen super {POKEBLOCK}\n"
 	.string "im BEERENMIXER machen!$"
 
-LilycoveCity_House3_Text_18BE8E:: @ 818BE8E
+LilycoveCity_House3_Text_GoingToEnterContest:: @ 818BE8E
 	.string "Ich möchte damit angeben, wie stark\n"
 	.string "mein POKéMON ist, daher werden wir\l"
 	.string "an einem WETTBEWERB teilnehmen.$"

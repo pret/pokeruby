@@ -21,7 +21,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_House4_EventScript_15817F",
+      "script": "FortreeCity_House4_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_House4_EventScript_158188",
+      "script": "FortreeCity_House4_EventScript_Boy",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_House4_EventScript_15821E",
+      "script": "FortreeCity_House4_EventScript_Wingull",
       "flag": "FLAG_HIDE_WINGULL_FORTREE_HOUSE"
     }
   ],

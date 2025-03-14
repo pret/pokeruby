@@ -1,26 +1,26 @@
 FortreeCity_DecorationShop_MapScripts:: @ 8158257
 	.byte 0
 
-FortreeCity_DecorationShop_EventScript_158258:: @ 8158258
-	msgbox FortreeCity_DecorationShop_Text_186A61, MSGBOX_NPC
+FortreeCity_DecorationShop_EventScript_PokefanM:: @ 8158258
+	msgbox FortreeCity_DecorationShop_Text_MerchandiseSentToPC, MSGBOX_NPC
 	end
 
-FortreeCity_DecorationShop_EventScript_158261:: @ 8158261
-	msgbox FortreeCity_DecorationShop_Text_186AD6, MSGBOX_NPC
+FortreeCity_DecorationShop_EventScript_Girl:: @ 8158261
+	msgbox FortreeCity_DecorationShop_Text_BuyingDeskForDolls, MSGBOX_NPC
 	end
 
-FortreeCity_DecorationShop_EventScript_15826A:: @ 815826A
+FortreeCity_DecorationShop_EventScript_ClerkDesks:: @ 815826A
 	lock
 	faceplayer
 	message Text_HowMayIServeYou
 	waitmessage
-	pokemartdecoration FortreeCity_DecorationShop_Decorations1
+	pokemartdecoration FortreeCity_DecorationShop_PokemartDecor_Desks
 	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-FortreeCity_DecorationShop_Decorations1:: @ 8158284
+FortreeCity_DecorationShop_PokemartDecor_Desks:: @ 8158284
 	.2byte DECOR_SMALL_DESK
 	.2byte DECOR_POKEMON_DESK
 	.2byte DECOR_HEAVY_DESK
@@ -33,18 +33,18 @@ FortreeCity_DecorationShop_Decorations1:: @ 8158284
 	release
 	end
 
-FortreeCity_DecorationShop_EventScript_158298:: @ 8158298
+FortreeCity_DecorationShop_EventScript_ClerkChairs:: @ 8158298
 	lock
 	faceplayer
 	message Text_HowMayIServeYou
 	waitmessage
-	pokemartdecoration FortreeCity_DecorationShop_Decorations2
+	pokemartdecoration FortreeCity_DecorationShop_PokemartDecor_Chairs
 	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-FortreeCity_DecorationShop_Decorations2:: @ 81582B0
+FortreeCity_DecorationShop_PokemartDecor_Chairs:: @ 81582B0
 	.2byte DECOR_SMALL_CHAIR
 	.2byte DECOR_POKEMON_CHAIR
 	.2byte DECOR_HEAVY_CHAIR

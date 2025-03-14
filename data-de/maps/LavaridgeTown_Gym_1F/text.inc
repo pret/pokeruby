@@ -1,4 +1,4 @@
-LavaridgeTown_Gym_1F_Text_176312:: @ 8176312
+LavaridgeTown_Gym_1F_Text_GymGuideAdvice:: @ 8176312
 	.string "Na, wie sieht es aus, auf dem Weg zum\n"
 	.string "CHAMP, {PLAYER}?\p"
 	.string "Die ARENALEITERIN von BAD LAVA-\n"
@@ -10,35 +10,35 @@ LavaridgeTown_Gym_1F_Text_176312:: @ 8176312
 	.string "dich! Lösche die Glut mit Wasser und\l"
 	.string "dann besiege sie!$"
 
-LavaridgeTown_Gym_1F_Text_17640C:: @ 817640C
+LavaridgeTown_Gym_1F_Text_GymGuidePostVictory:: @ 817640C
 	.string "Hui! Das war ein glühend heißer Kampf!$"
 
-LavaridgeTown_Gym_1F_Text_176432:: @ 8176432
+LavaridgeTown_Gym_1F_Text_ColeIntro:: @ 8176432
 	.string "Auauauauau!\n"
 	.string "Hach, ist das heiß!$"
 
-LavaridgeTown_Gym_1F_Text_17644F:: @ 817644F
+LavaridgeTown_Gym_1F_Text_ColeDefeat:: @ 817644F
 	.string "Der Schweiß lief mir in die Augen...$"
 
-LavaridgeTown_Gym_1F_Text_176472:: @ 8176472
+LavaridgeTown_Gym_1F_Text_ColePostBattle:: @ 8176472
 	.string "Ein Bad im heißen Sand regt den\n"
 	.string "Kreislauf an.\p"
 	.string "Auch Gelenkschmerzen lassen sich damit\n"
 	.string "kurieren.$"
 
-LavaridgeTown_Gym_1F_Text_1764D1:: @ 81764D1
+LavaridgeTown_Gym_1F_Text_AxleIntro:: @ 81764D1
 	.string "Ich versuche, Stress abzubauen.\n"
 	.string "Komm her. Ich will mich abreagieren.$"
 
-LavaridgeTown_Gym_1F_Text_176516:: @ 8176516
+LavaridgeTown_Gym_1F_Text_AxleDefeat:: @ 8176516
 	.string "Ich hoffe, FLAVIA wird dich rösten!$"
 
-LavaridgeTown_Gym_1F_Text_176537:: @ 8176537
+LavaridgeTown_Gym_1F_Text_AxlePostBattle:: @ 8176537
 	.string "Haaah... Huuuuh...\p"
 	.string "Bleibt man zu lange im heißen Sand,\n"
 	.string "macht einen das ganz schön fertig.$"
 
-LavaridgeTown_Gym_1F_Text_17658D:: @ 817658D
+LavaridgeTown_Gym_B1F_Text_AndyIntro:: @ 817658D
 	.string "Du musst ganz schön müde sein.\n"
 	.string "Willst du dich nicht hier im heißen\l"
 	.string "Sand ausruhen?\p"
@@ -46,39 +46,39 @@ LavaridgeTown_Gym_1F_Text_17658D:: @ 817658D
 	.string "Willenskraft ganz wichtig für einen\l"
 	.string "TRAINER ist.$"
 
-LavaridgeTown_Gym_1F_Text_17663F:: @ 817663F
+LavaridgeTown_Gym_B1F_Text_AndyDefeat:: @ 817663F
 	.string "Spiele mit Feuer und du verbrennst dich.$"
 
-LavaridgeTown_Gym_1F_Text_176660:: @ 8176660
+LavaridgeTown_Gym_B1F_Text_AndyPostBattle:: @ 8176660
 	.string "Dein Können ist gut... Aber unsere\n"
 	.string "LEITERIN FLAVIA ist stark.\p"
 	.string "Wenn du nicht aufpasst, verbrennst\n"
 	.string "du dich ernsthaft.$"
 
-LavaridgeTown_Gym_1F_Text_1766D2:: @ 81766D2
+LavaridgeTown_Gym_1F_Text_ZaneIntro:: @ 81766D2
 	.string "Kann dein POKéMON 200 Grad aushalten?$"
 
-LavaridgeTown_Gym_1F_Text_1766FE:: @ 81766FE
+LavaridgeTown_Gym_1F_Text_ZaneDefeat:: @ 81766FE
 	.string "Die Hitze war nicht stark genug...$"
 
-LavaridgeTown_Gym_1F_Text_17671D:: @ 817671D
+LavaridgeTown_Gym_1F_Text_ZanePostBattle:: @ 817671D
 	.string "Die Temperatur von Magma beträgt\n"
 	.string "über 200 Grad.\p"
 	.string "Deine POKéMON haben mich besiegt, sie\n"
 	.string "sollten auch in Magma überleben können.$"
 
-LavaridgeTown_Gym_1F_Text_176784:: @ 8176784
+LavaridgeTown_Gym_1F_Text_SadieIntro:: @ 8176784
 	.string "Ähm...\n"
 	.string "Okay, ich kämpfe mit dir.$"
 
-LavaridgeTown_Gym_1F_Text_1767A6:: @ 81767A6
+LavaridgeTown_Gym_1F_Text_SadieDefeat:: @ 81767A6
 	.string "Oh, du bist zu stark.$"
 
-LavaridgeTown_Gym_1F_Text_1767C1:: @ 81767C1
+LavaridgeTown_Gym_1F_Text_SadiePostBattle:: @ 81767C1
 	.string "Ich will einmal so eine starke TRAINERIN\n"
 	.string "werden wie FLAVIA.$"
 
-LavaridgeTown_Gym_1F_Text_176801:: @ 8176801
+LavaridgeTown_Gym_1F_Text_FlanneryIntro:: @ 8176801
 	.string "Willkommen... Halt, warte!\p"
 	.string "Hallo, du Winzling von TRAINER, wie\n"
 	.string "schön, dich hier zu sehen!\p"
@@ -94,7 +94,7 @@ LavaridgeTown_Gym_1F_Text_176801:: @ 8176801
 	.string "heißen Attacken zeigen, die wir hier\l"
 	.string "entwickelt haben!$"
 
-LavaridgeTown_Gym_1F_Text_176960:: @ 8176960
+LavaridgeTown_Gym_1F_Text_FlanneryDefeat:: @ 8176960
 	.string "Äh...\n"
 	.string "Ich glaube, ich habe es übertrieben...\p"
 	.string "Ich... Ich bin ja auch noch nicht lange\n"
@@ -107,11 +107,11 @@ LavaridgeTown_Gym_1F_Text_176960:: @ 8176960
 	.string "Danke, dass du mich das gelehrt hast!\n"
 	.string "Du hast dir das hier wohl verdient!$"
 
-LavaridgeTown_Gym_1F_Text_176A62:: @ 8176A62
+LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge:: @ 8176A62
 	.string "{PLAYER} erhält den HITZEORDEN\n"
 	.string "von FLAVIA.$"
 
-LavaridgeTown_Gym_1F_Text_176A8C:: @ 8176A8C
+LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis:: @ 8176A8C
 	.string "Mit dem HITZEORDEN gehorchen dir alle\n"
 	.string "POKéMON bis Level 50, auch die, die du\l"
 	.string "durch Tausch erhalten hast.\p"
@@ -120,7 +120,7 @@ LavaridgeTown_Gym_1F_Text_176A8C:: @ 8176A8C
 	.string "Dies ist das Zeichen meiner\n"
 	.string "Anerkennung. Nimm es ruhig an!$"
 
-LavaridgeTown_Gym_1F_Text_176B8F:: @ 8176B8F
+LavaridgeTown_Gym_1F_Text_ExplainOverheat:: @ 8176B8F
 	.string "Die TM50 enthält HITZEKOLLER.\p"
 	.string "Diese Attacke richtet beim Gegner\n"
 	.string "großen Schaden an.\p"
@@ -129,16 +129,16 @@ LavaridgeTown_Gym_1F_Text_176B8F:: @ 8176B8F
 	.string "anwendet, herabgesetzt. Für längere\n"
 	.string "Kämpfe ist sie daher nicht geeignet.$"
 
-LavaridgeTown_Gym_1F_Text_176C4A:: @ 8176C4A
+LavaridgeTown_Gym_1F_Text_FlanneryPostBattle:: @ 8176C4A
 	.string "Deine Stärke erinnert mich an\n"
 	.string "jemanden...\p"
 	.string "Jetzt weiß ich's! Du kämpfst wie NORMAN,\n"
 	.string "der ARENALEITER von BLÜTENBURG CITY.$"
 
-LavaridgeTown_Gym_1F_Text_176CAF:: @ 8176CAF
+LavaridgeTown_Gym_1F_Text_GymStatue:: @ 8176CAF
 	.string "POKéMON ARENA von BAD LAVASTADT$"
 
-LavaridgeTown_Gym_1F_Text_176CCA:: @ 8176CCA
+LavaridgeTown_Gym_1F_Text_GymStatueCertified:: @ 8176CCA
 	.string "POKéMON ARENA von BAD LAVASTADT\p"
 	.string "FLAVIAS ANERKANNTE TRAINER:\n"
 	.string "{PLAYER}$"

@@ -21,7 +21,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_House4_EventScript_159D42",
+      "script": "LilycoveCity_House4_EventScript_Man1",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_House4_EventScript_159D4B",
+      "script": "LilycoveCity_House4_EventScript_Man2",
       "flag": "0"
     }
   ],

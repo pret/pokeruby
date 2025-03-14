@@ -882,7 +882,7 @@ Common_EventScript_OutOfCenterPartyHeal:: @ 81A02CA
 
 EventScript_RegionMap:: @ 81A02D6
 	lockall
-	msgbox Text_LookCloserAtMap, MSGBOX_DEFAULT
+	msgbox Common_Text_LookCloserAtMap, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
 	special FieldShowRegionMap
 	waitstate
@@ -1036,7 +1036,7 @@ UnknownString_81A0E68: @ 81A0E68
 UnknownString_81A0ED6: @ 81A0ED6
 	.string "Womit soll ich mir die Zeit vertreiben?$"
 
-LilycoveCity_DepartmentStoreElevator_Text_1A0EF6:: @ 81A0EF6
+LilycoveCity_DepartmentStoreElevator_Text_WhichFloorWouldYouLike:: @ 81A0EF6
 	.string "Willkommen im SEEGRASULB CITY\n"
 	.string "EINKAUFSZENTRUM.\p"
 	.string "In welches Stockwerk möchtest du?$"
@@ -1061,8 +1061,8 @@ Text_NoRegisteredItem: @ 81A0FCC
 	.string "Ein Basis-Item aus dem BEUTEL kann auf\n"
 	.string "SELECT gelegt werden. Sehr praktisch!$"
 
-LittlerootTown_BrendansHouse_2F_Text_1A100C:: @ 81A100C
-LittlerootTown_MaysHouse_2F_Text_1A100C:: @ 81A100C
+gText_PokemonTrainerSchoolEmail:: @ 81A100C
+gText_PokemonTrainerSchoolEmail:: @ 81A100C
 	.string "Da ist eine E-Mail von der POKéMON\n"
 	.string "TRAINERSCHULE.\p"
 	.string "... ... ... ... ... ...\p"
@@ -1073,8 +1073,8 @@ LittlerootTown_MaysHouse_2F_Text_1A100C:: @ 81A100C
 	.string "POKéMON beibringt, erprobt.\p"
 	.string "... ... ... ... ... ...$"
 
-LittlerootTown_BrendansHouse_2F_Text_1A10D6:: @ 81A10D6
-LittlerootTown_MaysHouse_2F_Text_1A10D6:: @ 81A10D6
+gText_PlayerHouseBootPC:: @ 81A10D6
+gText_PlayerHouseBootPC:: @ 81A10D6
 	.string "{PLAYER} schaltet den PC ein.$"
 
 FallarborTown_ContestLobby_Text_1A10EB:: @ 81A10EB
@@ -1369,7 +1369,7 @@ SlateportCity_PokemonFanClub_EventScript_1AE0AC:: @ 81AE0AC
 	release
 	end
 
-FallarborTown_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
+FallarborTown_ContestLobby_EventScript_Reporter:: @ 81AE0B6
 LilycoveCity_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
 SlateportCity_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
 VerdanturfTown_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6

@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_PokemonCenter_1F_EventScript_153B02",
+      "script": "FallarborTown_PokemonCenter_1F_EventScript_Nurse",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_PokemonCenter_1F_EventScript_153B10",
+      "script": "FallarborTown_PokemonCenter_1F_EventScript_Girl",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_PokemonCenter_1F_EventScript_153B19",
+      "script": "FallarborTown_PokemonCenter_1F_EventScript_ExpertM",
       "flag": "0"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_PokemonCenter_1F_EventScript_153B22",
+      "script": "FallarborTown_PokemonCenter_1F_EventScript_Lanette",
       "flag": "FLAG_HIDE_LANETTE_FALLARBOR"
     }
   ],

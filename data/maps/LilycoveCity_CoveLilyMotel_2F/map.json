@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_CoveLilyMotel_2F_EventScript_1583A1",
+      "script": "LilycoveCity_CoveLilyMotel_2F_EventScript_GameDesigner",
       "flag": "FLAG_HIDE_LILYCOVE_MOTEL_PEOPLE"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_CoveLilyMotel_2F_EventScript_1583F7",
+      "script": "LilycoveCity_CoveLilyMotel_2F_EventScript_GraphicArtist",
       "flag": "FLAG_HIDE_LILYCOVE_MOTEL_PEOPLE"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_CoveLilyMotel_2F_EventScript_158400",
+      "script": "LilycoveCity_CoveLilyMotel_2F_EventScript_FatMan",
       "flag": "FLAG_HIDE_LILYCOVE_MOTEL_PEOPLE"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_CoveLilyMotel_2F_EventScript_1583EE",
+      "script": "LilycoveCity_CoveLilyMotel_2F_EventScript_Programmer",
       "flag": "FLAG_HIDE_LILYCOVE_MOTEL_PEOPLE"
     },
     {
@@ -73,7 +73,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_CoveLilyMotel_2F_EventScript_158412",
+      "script": "LilycoveCity_CoveLilyMotel_2F_EventScript_GameBoyKid",
       "flag": "FLAG_HIDE_LILYCOVE_MOTEL_PEOPLE"
     },
     {
@@ -86,7 +86,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_CoveLilyMotel_2F_EventScript_158409",
+      "script": "LilycoveCity_CoveLilyMotel_2F_EventScript_Woman",
       "flag": "FLAG_HIDE_LILYCOVE_MOTEL_PEOPLE"
     }
   ],

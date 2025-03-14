@@ -118,11 +118,11 @@
 #define FLAG_SMART_PAINTING_MADE            0xA3
 #define FLAG_TOUGH_PAINTING_MADE            0xA4
 #define FLAG_RECEIVED_TM39                  0xA5
-#define FLAG_RECEIVED_TM08                  0xA6
+#define FLAG_RECEIVED_TM_BULK_UP                  0xA6
 #define FLAG_RECEIVED_TM34                  0xA7
-#define FLAG_RECEIVED_TM50                  0xA8
+#define FLAG_RECEIVED_TM_OVERHEAT                  0xA8
 #define FLAG_RECEIVED_TM42                  0xA9
-#define FLAG_RECEIVED_TM40                  0xAA
+#define FLAG_RECEIVED_TM_AERIAL_ACE                  0xAA
 #define FLAG_RECEIVED_TM04                  0xAB
 #define FLAG_RECEIVED_TM03                  0xAC
 #define FLAG_DECORATION_1                   0xAD
@@ -180,8 +180,8 @@
 #define FLAG_RECEIVED_STARTER_DOLL          0xE2
 #define FLAG_RECEIVED_GOOD_ROD              0xE3
 #define FLAG_REGI_DOORS_OPENED              0xE4
-#define FLAG_RECEIVED_TM27                  0xE5
-#define FLAG_RECEIVED_TM36                  0xE6
+#define FLAG_RECEIVED_TM_RETURN                  0xE5
+#define FLAG_RECEIVED_TM_SLUDGE_BOMB                  0xE6
 #define FLAG_RECEIVED_TM05                  0xE7
 #define FLAG_RECEIVED_TM19                  0xE8
 
@@ -409,11 +409,11 @@
 #define FLAG_HIDE_RAYQUAZA                  0x305
 #define FLAG_HIDE_LILYCOVE_CONTEST_ATTENDENT_1 0x306
 #define FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR   0x307
-#define FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_LADY 0x308
-#define FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_GIRL 0x309
-#define FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_MAN 0x30A
-#define FLAG_HIDE_LILYCOVE_MUSEUM_PAINTER   0x30B
-#define FLAG_HIDE_LILYCOVE_MUSEUM_VISITORS  0x30C
+#define FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_1 0x308
+#define FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_2 0x309
+#define FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_3 0x30A
+#define FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_4   0x30B
+#define FLAG_HIDE_LILYCOVE_MUSEUM_TOURISTS  0x30C
 #define FLAG_HIDE_PETALBURG_GYM_GUIDE       0x30D
 #define FLAG_UNKNOWN_30E                    0x30E
 #define FLAG_UNKNOWN_30F                    0x30F

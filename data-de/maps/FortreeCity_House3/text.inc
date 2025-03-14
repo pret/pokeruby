@@ -1,4 +1,4 @@
-FortreeCity_House3_Text_186624:: @ 8186624
+FortreeCity_House3_Text_MetStevenHadAmazingPokemon:: @ 8186624
 	.string "Da wir gerade vom POKéDEX reden... Ich\n"
 	.string "erinnere mich...\p"
 	.string "Ich habe diesen TRAINER, TROY,\n"
@@ -11,7 +11,7 @@ FortreeCity_House3_Text_186624:: @ 8186624
 	.string "Er ist bestimmt stärker als die ARENA-\n"
 	.string "LEITERIN in diesem Ort...$"
 
-FortreeCity_House3_Text_186745:: @ 8186745
+FortreeCity_House3_Text_OhYouHavePokedex:: @ 8186745
 	.string "Was ist das da? Was hast du da?\p"
 	.string "... ... ... ... ... ...\p"
 	.string "Oh, das ist also ein POKéDEX?\n"

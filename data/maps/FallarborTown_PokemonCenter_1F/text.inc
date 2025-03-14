@@ -1,4 +1,4 @@
-FallarborTown_PokemonCenter_1F_Text_1774D4:: @ 81774D4
+FallarborTown_PokemonCenter_1F_Text_LanetteGreeting:: @ 81774D4
 	.string "Oh, hello.\n"
 	.string "You are?\p"
 	.string "Okay, your name's {PLAYER}{KUN}.\n"
@@ -15,13 +15,13 @@ FallarborTown_PokemonCenter_1F_Text_1774D4:: @ 81774D4
 	.string "If you could, please visit me at home.\n"
 	.string "My house is on ROUTE 114.$"
 
-FallarborTown_PokemonCenter_1F_Text_17768C:: @ 817768C
+FallarborTown_PokemonCenter_1F_Text_FossilManiacEdgeOfTown:: @ 817768C
 	.string "I wonder what POKéMON looked like\n"
 	.string "long, long ago?\p"
 	.string "Maybe the FOSSIL MANIAC at the edge\n"
 	.string "of town will know.$"
 
-FallarborTown_PokemonCenter_1F_Text_1776F5:: @ 81776F5
+FallarborTown_PokemonCenter_1F_Text_PlantHardyTrees:: @ 81776F5
 	.string "In the fields of FALLARBOR, we plant\n"
 	.string "seedlings of hardy trees that thrive\l"
 	.string "even in volcanic ash.$"

@@ -1,11 +1,11 @@
-FortreeCity_PokemonCenter_1F_Text_186027:: @ 8186027
+FortreeCity_PokemonCenter_1F_Text_GoToSafariZone:: @ 8186027
 	.string "Na, Kindchen, arbeitest du an einem\n"
 	.string "POKéDEX?\p"
 	.string "Hmm... Ich an deiner Stelle würde mal\n"
 	.string "die SAFARI-ZONE auf der ROUTE 121\l"
 	.string "besuchen.$"
 
-FortreeCity_PokemonCenter_1F_Text_186086:: @ 8186086
+FortreeCity_PokemonCenter_1F_Text_RecordCornerIsNeat:: @ 8186086
 	.string "Hast du schon mal eine\n"
 	.string "STATISTIK GETAUSCHT?\p"
 	.string "Sehr nützliche Einrichtung! Die Erfolge\n"
@@ -14,7 +14,7 @@ FortreeCity_PokemonCenter_1F_Text_186086:: @ 8186086
 	.string "Ich weiß zwar nicht, wie das passiert,\n"
 	.string "aber es ist einfach irre. Und aufregend!$"
 
-FortreeCity_PokemonCenter_1F_Text_186138:: @ 8186138
+FortreeCity_PokemonCenter_1F_Text_DoYouKnowAboutPokenav:: @ 8186138
 	.string "Hey, du hast einen POKéNAV!\n"
 	.string "Ich habe auch so einen.\p"
 	.string "Schau dir mal die TRAINER an.\p"

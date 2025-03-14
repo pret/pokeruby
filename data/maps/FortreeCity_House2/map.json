@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_House2_EventScript_1580B4",
+      "script": "FortreeCity_House2_EventScript_HiddenPowerGiver",
       "flag": "0"
     }
   ],

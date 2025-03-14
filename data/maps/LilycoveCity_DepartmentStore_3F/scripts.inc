@@ -1,18 +1,18 @@
 LilycoveCity_DepartmentStore_3F_MapScripts:: @ 8159F90
 	.byte 0
 
-LilycoveCity_DepartmentStore_3F_EventScript_159F91:: @ 8159F91
+LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft:: @ 8159F91
 	lock
 	faceplayer
 	message Text_HowMayIServeYou
 	waitmessage
-	pokemart LilycoveCity_DepartmentStore_3F_Items1
+	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins
 	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-LilycoveCity_DepartmentStore_3F_Items1:: @ 8159FA8
+LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins:: @ 8159FA8
 	.2byte ITEM_PROTEIN
 	.2byte ITEM_CALCIUM
 	.2byte ITEM_IRON
@@ -23,19 +23,19 @@ LilycoveCity_DepartmentStore_3F_Items1:: @ 8159FA8
 	release
 	end
 
-LilycoveCity_DepartmentStore_3F_EventScript_159FB8:: @ 8159FB8
+LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight:: @ 8159FB8
 	lock
 	faceplayer
 	message Text_HowMayIServeYou
 	waitmessage
-	pokemart LilycoveCity_DepartmentStore_3F_Items2
+	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters
 	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 
 	.align 2
-LilycoveCity_DepartmentStore_3F_Items2:: @ 8159FD0
+LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters:: @ 8159FD0
 	.2byte ITEM_X_SPEED
 	.2byte ITEM_X_SPECIAL
 	.2byte ITEM_X_ATTACK
@@ -47,14 +47,14 @@ LilycoveCity_DepartmentStore_3F_Items2:: @ 8159FD0
 	release
 	end
 
-LilycoveCity_DepartmentStore_3F_EventScript_159FE2:: @ 8159FE2
-	msgbox LilycoveCity_DepartmentStore_3F_Text_18C24B, MSGBOX_NPC
+LilycoveCity_DepartmentStore_3F_EventScript_TriathleteM:: @ 8159FE2
+	msgbox LilycoveCity_DepartmentStore_3F_Text_ItemsBestForTougheningPokemon, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_3F_EventScript_159FEB:: @ 8159FEB
-	msgbox LilycoveCity_DepartmentStore_3F_Text_18C2B5, MSGBOX_NPC
+LilycoveCity_DepartmentStore_3F_EventScript_PokefanM:: @ 8159FEB
+	msgbox LilycoveCity_DepartmentStore_3F_Text_WantMoreEndurance, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_3F_EventScript_159FF4:: @ 8159FF4
-	msgbox LilycoveCity_DepartmentStore_3F_Text_18C32E, MSGBOX_NPC
+LilycoveCity_DepartmentStore_3F_EventScript_Woman:: @ 8159FF4
+	msgbox LilycoveCity_DepartmentStore_3F_Text_GaveCarbosToSpeedUpMon, MSGBOX_NPC
 	end

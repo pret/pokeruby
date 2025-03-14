@@ -1,8 +1,8 @@
-LittlerootTown_BrendansHouse_2F_Text_17337E:: @ 817337E
+RivalsHouse_2F_Text_MayGettingReady:: @ 817337E
 	.string "POKéMON fully restored!\n"
 	.string "Items ready, and... Huh?$"
 
-LittlerootTown_BrendansHouse_2F_Text_1733AF:: @ 81733AF
+RivalsHouse_2F_Text_MayWhoAreYou:: @ 81733AF
 	.string "Huh?\n"
 	.string "Who... Who are you?\p"
 	.string "... ... ... ... ... ... ... ...\n"
@@ -26,11 +26,11 @@ LittlerootTown_BrendansHouse_2F_Text_1733AF:: @ 81733AF
 	.string "some wild POKéMON!\p"
 	.string "{PLAYER}{KUN}, I'll catch you later!$"
 
-LittlerootTown_BrendansHouse_2F_Text_1735C9:: @ 81735C9
+RivalsHouse_2F_Text_BrendanGettingReady:: @ 81735C9
 	.string "POKéMON fully restored...\n"
 	.string "Items all packed, and...$"
 
-LittlerootTown_BrendansHouse_2F_Text_1735FC:: @ 81735FC
+RivalsHouse_2F_Text_BrendanWhoAreYou:: @ 81735FC
 	.string "Hey!\n"
 	.string "You...\p"
 	.string "Who are you?\p"
@@ -50,7 +50,7 @@ LittlerootTown_BrendansHouse_2F_Text_1735FC:: @ 81735FC
 	.string "some wild POKéMON.\p"
 	.string "Some other time, okay?$"
 
-LittlerootTown_BrendansHouse_2F_Text_1737AE:: @ 81737AE
+RivalsHouse_2F_Text_MayJustCheckingMyPokedex:: @ 81737AE
 	.string "MAY: {PLAYER}{KUN}!\p"
 	.string "I was just checking my POKéDEX.\p"
 	.string "There's still a lot of POKéMON that\n"
@@ -60,13 +60,13 @@ LittlerootTown_BrendansHouse_2F_Text_1737AE:: @ 81737AE
 	.string "I wonder where I should go catch\n"
 	.string "some POKéMON next?$"
 
-LittlerootTown_BrendansHouse_2F_Text_173883:: @ 8173883
+RivalsHouse_2F_Text_MayWhereShouldIGoNext:: @ 8173883
 	.string "MAY: I wonder where I should go catch\n"
 	.string "some POKéMON next?\p"
 	.string "Wouldn't it be funny if we ran into each\n"
 	.string "other, {PLAYER}{KUN}?$"
 
-LittlerootTown_BrendansHouse_2F_Text_1738F2:: @ 81738F2
+RivalsHouse_2F_Text_BrendanJustCheckingMyPokedex:: @ 81738F2
 	.string "BRENDAN: Hey, it's {PLAYER}.\p"
 	.string "I was just checking out my POKéDEX.\p"
 	.string "There are still many POKéMON that\n"
@@ -75,7 +75,7 @@ LittlerootTown_BrendansHouse_2F_Text_1738F2:: @ 81738F2
 	.string "Checking this POKéDEX out gives me\n"
 	.string "the urge to hit the road again.$"
 
-LittlerootTown_BrendansHouse_2F_Text_1739CC:: @ 81739CC
+RivalsHouse_2F_Text_BrendanWhereShouldIGoNext:: @ 81739CC
 	.string "BRENDAN: I'm having a hard time deciding\n"
 	.string "where I should catch POKéMON next.\p"
 	.string "Hey, {PLAYER}, if I see you while I'm out\n"

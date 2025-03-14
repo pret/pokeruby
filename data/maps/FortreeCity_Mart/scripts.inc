@@ -1,7 +1,7 @@
 FortreeCity_Mart_MapScripts:: @ 8158066
 	.byte 0
 
-FortreeCity_Mart_EventScript_158067:: @ 8158067
+FortreeCity_Mart_EventScript_Clerk:: @ 8158067
 	lock
 	faceplayer
 	message Text_HowMayIServeYou
@@ -27,14 +27,14 @@ FortreeCity_Mart_Items:: @ 8158080
 	release
 	end
 
-FortreeCity_Mart_EventScript_158098:: @ 8158098
-	msgbox FortreeCity_Mart_Text_1861EF, MSGBOX_NPC
+FortreeCity_Mart_EventScript_Woman:: @ 8158098
+	msgbox FortreeCity_Mart_Text_SuperRepelBetter, MSGBOX_NPC
 	end
 
-FortreeCity_Mart_EventScript_1580A1:: @ 81580A1
-	msgbox FortreeCity_Mart_Text_186251, MSGBOX_NPC
+FortreeCity_Mart_EventScript_Girl:: @ 81580A1
+	msgbox FortreeCity_Mart_Text_StockUpOnItems, MSGBOX_NPC
 	end
 
-FortreeCity_Mart_EventScript_1580AA:: @ 81580AA
-	msgbox FortreeCity_Mart_Text_1862CA, MSGBOX_NPC
+FortreeCity_Mart_EventScript_Boy:: @ 81580AA
+	msgbox FortreeCity_Mart_Text_RareCandyMakesMonGrow, MSGBOX_NPC
 	end

@@ -1,12 +1,12 @@
 FallarborTown_ContestLobby_MapScripts:: @ 81539C1
-	map_script MAP_SCRIPT_ON_TRANSITION, FallarborTown_ContestLobby_MapScript1_1539C7
+	map_script MAP_SCRIPT_ON_TRANSITION, FallarborTown_ContestLobby_OnTransition
 	.byte 0
 
-FallarborTown_ContestLobby_MapScript1_1539C7:: @ 81539C7
+FallarborTown_ContestLobby_OnTransition:: @ 81539C7
 	call FallarborTown_ContestLobby_EventScript_1AE188
 	end
 
-FallarborTown_ContestLobby_EventScript_1539CD:: @ 81539CD
+FallarborTown_ContestLobby_EventScript_ContestReceptionist:: @ 81539CD
 	setvar VAR_0x800B, 6
 	setvar VAR_CONTEST_RANK, 1
 	call FallarborTown_ContestLobby_EventScript_1A4E92
@@ -87,31 +87,31 @@ FallarborTown_ContestLobby_Movement_153A8C:: @ 8153A8C
 	walk_in_place_fastest_right
 	step_end
 
-FallarborTown_ContestLobby_EventScript_153A8E:: @ 8153A8E
-	msgbox FallarborTown_ContestLobby_Text_177141, MSGBOX_NPC
+FallarborTown_ContestLobby_EventScript_Boy:: @ 8153A8E
+	msgbox FallarborTown_ContestLobby_Text_UsedToHaveSketch, MSGBOX_NPC
 	end
 
-FallarborTown_ContestLobby_EventScript_153A97:: @ 8153A97
+FallarborTown_ContestLobby_EventScript_SketchArtist:: @ 8153A97
 	goto_if_set FLAG_CONTEST_SKETCH_CREATED, FallarborTown_ContestLobby_EventScript_153AA9
-	msgbox FallarborTown_ContestLobby_Text_177246, MSGBOX_NPC
+	msgbox FallarborTown_ContestLobby_Text_ICreateSketches, MSGBOX_NPC
 	end
 
 FallarborTown_ContestLobby_EventScript_153AA9:: @ 8153AA9
-	msgbox FallarborTown_ContestLobby_Text_1772D8, MSGBOX_NPC
+	msgbox FallarborTown_ContestLobby_Text_YourSketchIsUp, MSGBOX_NPC
 	end
 
-FallarborTown_ContestLobby_EventScript_153AB2:: @ 8153AB2
-	msgbox FallarborTown_ContestLobby_Text_1771F2, MSGBOX_NPC
+FallarborTown_ContestLobby_EventScript_Lass:: @ 8153AB2
+	msgbox FallarborTown_ContestLobby_Text_AreYouMakingPokeblock, MSGBOX_NPC
 	end
 
-FallarborTown_ContestLobby_EventScript_153ABB:: @ 8153ABB
+FallarborTown_ContestLobby_EventScript_ContestWinner1:: @ 8153ABB
 	lockall
 	fadescreen FADE_TO_BLACK
 	showcontestwinner 2
 	releaseall
 	end
 
-FallarborTown_ContestLobby_EventScript_153AC2:: @ 8153AC2
+FallarborTown_ContestLobby_EventScript_ContestWinner2:: @ 8153AC2
 	lockall
 	special ShowBerryBlenderRecordWindow
 	waitbuttonpress
