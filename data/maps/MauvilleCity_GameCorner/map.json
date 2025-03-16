@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_GameCorner_EventScript_156F84",
+      "script": "MauvilleCity_GameCorner_EventScript_Woman2",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_GameCorner_EventScript_156F8D",
+      "script": "MauvilleCity_GameCorner_EventScript_Gentleman",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_GameCorner_EventScript_156A34",
+      "script": "MauvilleCity_GameCorner_EventScript_CoinsClerk",
       "flag": "0"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_GameCorner_EventScript_156B6C",
+      "script": "MauvilleCity_GameCorner_EventScript_PrizeCornerDolls",
       "flag": "0"
     },
     {
@@ -73,7 +73,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_GameCorner_EventScript_156F96",
+      "script": "MauvilleCity_GameCorner_EventScript_Girl",
       "flag": "0"
     },
     {
@@ -86,7 +86,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_GameCorner_EventScript_15707C",
+      "script": "MauvilleCity_GameCorner_EventScript_PokefanM",
       "flag": "0"
     },
     {
@@ -99,7 +99,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_GameCorner_EventScript_1570D8",
+      "script": "MauvilleCity_GameCorner_EventScript_OldMan",
       "flag": "0"
     },
     {
@@ -112,7 +112,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_GameCorner_EventScript_1570E8",
+      "script": "MauvilleCity_GameCorner_EventScript_Cook",
       "flag": "0"
     },
     {
@@ -125,7 +125,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_GameCorner_EventScript_156D1A",
+      "script": "MauvilleCity_GameCorner_EventScript_PrizeCornerTMs",
       "flag": "0"
     },
     {
@@ -138,7 +138,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_GameCorner_EventScript_1570F8",
+      "script": "MauvilleCity_GameCorner_EventScript_Man",
       "flag": "0"
     },
     {
@@ -151,7 +151,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_GameCorner_EventScript_157115",
+      "script": "MauvilleCity_GameCorner_EventScript_Maniac",
       "flag": "0"
     },
     {
@@ -164,7 +164,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_GameCorner_EventScript_157125",
+      "script": "MauvilleCity_GameCorner_EventScript_Woman",
       "flag": "0"
     }
   ],
@@ -192,7 +192,7 @@
       "y": 6,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_EAST",
-      "script": "MauvilleCity_GameCorner_EventScript_157135"
+      "script": "MauvilleCity_GameCorner_EventScript_SlotMachine0"
     },
     {
       "type": "sign",
@@ -200,7 +200,7 @@
       "y": 8,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_EAST",
-      "script": "MauvilleCity_GameCorner_EventScript_157155"
+      "script": "MauvilleCity_GameCorner_EventScript_SlotMachine1"
     },
     {
       "type": "sign",
@@ -208,7 +208,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_EAST",
-      "script": "MauvilleCity_GameCorner_EventScript_157175"
+      "script": "MauvilleCity_GameCorner_EventScript_SlotMachine2"
     },
     {
       "type": "sign",
@@ -216,7 +216,7 @@
       "y": 7,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_WEST",
-      "script": "MauvilleCity_GameCorner_EventScript_157195"
+      "script": "MauvilleCity_GameCorner_EventScript_SlotMachine3"
     },
     {
       "type": "sign",
@@ -224,7 +224,7 @@
       "y": 8,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_WEST",
-      "script": "MauvilleCity_GameCorner_EventScript_1571B5"
+      "script": "MauvilleCity_GameCorner_EventScript_SlotMachine4"
     },
     {
       "type": "sign",
@@ -232,7 +232,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_WEST",
-      "script": "MauvilleCity_GameCorner_EventScript_1571D5"
+      "script": "MauvilleCity_GameCorner_EventScript_SlotMachine5"
     },
     {
       "type": "sign",
@@ -240,7 +240,7 @@
       "y": 6,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_EAST",
-      "script": "MauvilleCity_GameCorner_EventScript_1571F5"
+      "script": "MauvilleCity_GameCorner_EventScript_SlotMachine6"
     },
     {
       "type": "sign",
@@ -248,7 +248,7 @@
       "y": 7,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_EAST",
-      "script": "MauvilleCity_GameCorner_EventScript_157215"
+      "script": "MauvilleCity_GameCorner_EventScript_SlotMachine7"
     },
     {
       "type": "sign",
@@ -256,7 +256,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_EAST",
-      "script": "MauvilleCity_GameCorner_EventScript_157235"
+      "script": "MauvilleCity_GameCorner_EventScript_SlotMachine8"
     },
     {
       "type": "sign",
@@ -264,7 +264,7 @@
       "y": 6,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_WEST",
-      "script": "MauvilleCity_GameCorner_EventScript_157255"
+      "script": "MauvilleCity_GameCorner_EventScript_SlotMachine9"
     },
     {
       "type": "sign",
@@ -272,7 +272,7 @@
       "y": 7,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_WEST",
-      "script": "MauvilleCity_GameCorner_EventScript_157275"
+      "script": "MauvilleCity_GameCorner_EventScript_SlotMachine10"
     },
     {
       "type": "sign",
@@ -280,7 +280,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_WEST",
-      "script": "MauvilleCity_GameCorner_EventScript_157295"
+      "script": "MauvilleCity_GameCorner_EventScript_SlotMachine11"
     },
     {
       "type": "sign",

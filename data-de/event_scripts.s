@@ -1606,7 +1606,7 @@ Text_RepelWoreOff: @ 81C33EF
 MauvilleCity_GameCorner_EventScript_1C407E:: @ 81C407E
 	checkitem ITEM_COIN_CASE, 1
 	compare VAR_RESULT, 0
-	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
+	goto_if_eq MauvilleCity_GameCorner_EventScript_NoCoinCase
 	setvar VAR_0x8004, 0
 	getpricereduction 2
 	compare VAR_RESULT, 0
@@ -1618,7 +1618,7 @@ MauvilleCity_GameCorner_EventScript_1C407E:: @ 81C407E
 MauvilleCity_GameCorner_EventScript_1C40AC:: @ 81C40AC
 	checkitem ITEM_COIN_CASE, 1
 	compare VAR_RESULT, 0
-	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
+	goto_if_eq MauvilleCity_GameCorner_EventScript_NoCoinCase
 	setvar VAR_0x8004, 1
 	getpricereduction 2
 	compare VAR_RESULT, 0

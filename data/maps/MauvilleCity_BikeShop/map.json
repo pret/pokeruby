@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_BikeShop_EventScript_156796",
+      "script": "MauvilleCity_BikeShop_EventScript_Rydel",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_BikeShop_EventScript_15690B",
+      "script": "MauvilleCity_BikeShop_EventScript_Assistant",
       "flag": "0"
     }
   ],
@@ -62,7 +62,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "MauvilleCity_BikeShop_EventScript_156914"
+      "script": "MauvilleCity_BikeShop_EventScript_MachBikeHandbook"
     },
     {
       "type": "sign",
@@ -70,7 +70,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "MauvilleCity_BikeShop_EventScript_156988"
+      "script": "MauvilleCity_BikeShop_EventScript_AcroBikeHandbook"
     }
   ]
 }

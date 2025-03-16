@@ -119,7 +119,7 @@
 #define FLAG_TOUGH_PAINTING_MADE            0xA4
 #define FLAG_RECEIVED_TM39                  0xA5
 #define FLAG_RECEIVED_TM_BULK_UP                  0xA6
-#define FLAG_RECEIVED_TM34                  0xA7
+#define FLAG_RECEIVED_TM_SHOCK_WAVE                  0xA7
 #define FLAG_RECEIVED_TM_OVERHEAT                  0xA8
 #define FLAG_RECEIVED_TM42                  0xA9
 #define FLAG_RECEIVED_TM_AERIAL_ACE                  0xAA

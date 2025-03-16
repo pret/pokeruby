@@ -1,21 +1,21 @@
 MauvilleCity_Gym_MapScripts:: @ 8156450
-	map_script MAP_SCRIPT_ON_LOAD, MauvilleCity_Gym_MapScript1_156456
+	map_script MAP_SCRIPT_ON_LOAD, MauvilleCity_Gym_OnLoad
 	.byte 0
 
-MauvilleCity_Gym_MapScript1_156456:: @ 8156456
-	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_1565A7
+MauvilleCity_Gym_OnLoad:: @ 8156456
+	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_DeactivatePuzzle
 	switch VAR_MAUVILLE_GYM_STATE
-	case 0, MauvilleCity_Gym_EventScript_156491
-	case 1, MauvilleCity_Gym_EventScript_15657D
-	case 2, MauvilleCity_Gym_EventScript_15658B
-	case 3, MauvilleCity_Gym_EventScript_156599
+	case 0, MauvilleCity_Gym_EventScript_UpdateBarriers
+	case 1, MauvilleCity_Gym_EventScript_Switch1Pressed
+	case 2, MauvilleCity_Gym_EventScript_Switch2Pressed
+	case 3, MauvilleCity_Gym_EventScript_Switch3Pressed
 	end
 
-MauvilleCity_Gym_EventScript_156491:: @ 8156491
-	goto_if_set FLAG_MAUVILLE_GYM_BARRIERS_STATE, MauvilleCity_Gym_EventScript_15649B
+MauvilleCity_Gym_EventScript_UpdateBarriers:: @ 8156491
+	goto_if_set FLAG_MAUVILLE_GYM_BARRIERS_STATE, MauvilleCity_Gym_EventScript_SetAltBarriers
 	end
 
-MauvilleCity_Gym_EventScript_15649B:: @ 815649B
+MauvilleCity_Gym_EventScript_SetAltBarriers:: @ 815649B
 	setmetatile 4, 7, METATILE_MauvilleGym_GreenBeamH1_Off, 0
 	setmetatile 4, 8, METATILE_MauvilleGym_GreenBeamH3_Off, 0
 	setmetatile 5, 7, METATILE_MauvilleGym_GreenBeamH2_Off, 0
@@ -43,42 +43,42 @@ MauvilleCity_Gym_EventScript_15649B:: @ 815649B
 	setmetatile 5, 14, METATILE_MauvilleGym_GreenBeamH4_Off, 0
 	end
 
-MauvilleCity_Gym_EventScript_15657D:: @ 815657D
+MauvilleCity_Gym_EventScript_Switch1Pressed:: @ 815657D
 	setvar VAR_0x8004, 0
 	special MauvilleGymSpecial1
-	goto MauvilleCity_Gym_EventScript_156491
+	goto MauvilleCity_Gym_EventScript_UpdateBarriers
 	end
 
-MauvilleCity_Gym_EventScript_15658B:: @ 815658B
+MauvilleCity_Gym_EventScript_Switch2Pressed:: @ 815658B
 	setvar VAR_0x8004, 1
 	special MauvilleGymSpecial1
-	goto MauvilleCity_Gym_EventScript_156491
+	goto MauvilleCity_Gym_EventScript_UpdateBarriers
 	end
 
-MauvilleCity_Gym_EventScript_156599:: @ 8156599
+MauvilleCity_Gym_EventScript_Switch3Pressed:: @ 8156599
 	setvar VAR_0x8004, 2
 	special MauvilleGymSpecial1
-	goto MauvilleCity_Gym_EventScript_156491
+	goto MauvilleCity_Gym_EventScript_UpdateBarriers
 	end
 
-MauvilleCity_Gym_EventScript_1565A7:: @ 81565A7
+MauvilleCity_Gym_EventScript_DeactivatePuzzle:: @ 81565A7
 	special MauvilleGymSpecial3
 	end
 
-MauvilleCity_Gym_EventScript_1565AB:: @ 81565AB
-	trainerbattle_single TRAINER_WATTSON, MauvilleCity_Gym_Text_180C32, MauvilleCity_Gym_Text_180D64, MauvilleCity_Gym_EventScript_1565DB, NO_MUSIC
-	goto_if_unset FLAG_RECEIVED_TM34, MauvilleCity_Gym_EventScript_15661D
+MauvilleCity_Gym_EventScript_Wattson:: @ 81565AB
+	trainerbattle_single TRAINER_WATTSON, MauvilleCity_Gym_Text_WattsonIntro, MauvilleCity_Gym_Text_WattsonDefeat, MauvilleCity_Gym_EventScript_WattsonDefeated, NO_MUSIC
+	goto_if_unset FLAG_RECEIVED_TM_SHOCK_WAVE, MauvilleCity_Gym_EventScript_GiveShockWave
 	compare VAR_NEW_MAUVILLE_STATE, 2
-	goto_if_eq MauvilleCity_Gym_EventScript_156641
-	msgbox MauvilleCity_Gym_Text_180EDB, MSGBOX_DEFAULT
+	goto_if_eq MauvilleCity_Gym_EventScript_CompletedNewMauville
+	msgbox MauvilleCity_Gym_Text_WattsonPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
-	message MauvilleCity_Gym_Text_180DAF
+MauvilleCity_Gym_EventScript_WattsonDefeated:: @ 81565DB
+	message MauvilleCity_Gym_Text_ReceivedDynamoBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
-	msgbox MauvilleCity_Gym_Text_180DDA, MSGBOX_DEFAULT
+	msgbox MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_MAUVILLE_GYM
 	setflag FLAG_BADGE03_GET
 	addvar VAR_PETALBURG_GYM_STATE, 1
@@ -89,128 +89,128 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 	special MauvilleGymSpecial3
 	special DrawWholeMapView
 	playse SE_UNLOCK
-	goto MauvilleCity_Gym_EventScript_15661D
+	goto MauvilleCity_Gym_EventScript_GiveShockWave
 	end
 
-MauvilleCity_Gym_EventScript_15661D:: @ 815661D
+MauvilleCity_Gym_EventScript_GiveShockWave:: @ 815661D
 	giveitem ITEM_TM34_SHOCK_WAVE
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	msgbox MauvilleCity_Gym_Text_180E76, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM34
+	msgbox MauvilleCity_Gym_Text_ExplainShockWave, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM_SHOCK_WAVE
 	release
 	end
 
-MauvilleCity_Gym_EventScript_156641:: @ 8156641
-	msgbox MauvilleCity_Gym_Text_180F1D, MSGBOX_DEFAULT
+MauvilleCity_Gym_EventScript_CompletedNewMauville:: @ 8156641
+	msgbox MauvilleCity_Gym_Text_WattsonGoForthAndEndeavor, MSGBOX_DEFAULT
 	release
 	end
 
-MauvilleCity_Gym_EventScript_15664B:: @ 815664B
+MauvilleCity_Gym_EventScript_Switch1:: @ 815664B
 	lockall
-	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_1566DA
+	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_SwitchDoNothing
 	compare VAR_MAUVILLE_GYM_STATE, 1
-	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
+	goto_if_eq MauvilleCity_Gym_EventScript_SwitchDoNothing
 	setvar VAR_MAUVILLE_GYM_STATE, 1
 	setvar VAR_0x8004, 0
-	goto MauvilleCity_Gym_EventScript_1566BA
+	goto MauvilleCity_Gym_EventScript_PressFloorSwitch
 	end
 
-MauvilleCity_Gym_EventScript_156670:: @ 8156670
+MauvilleCity_Gym_EventScript_Switch2:: @ 8156670
 	lockall
-	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_1566DA
+	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_SwitchDoNothing
 	compare VAR_MAUVILLE_GYM_STATE, 2
-	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
+	goto_if_eq MauvilleCity_Gym_EventScript_SwitchDoNothing
 	setvar VAR_MAUVILLE_GYM_STATE, 2
 	setvar VAR_0x8004, 1
-	goto MauvilleCity_Gym_EventScript_1566BA
+	goto MauvilleCity_Gym_EventScript_PressFloorSwitch
 	end
 
-MauvilleCity_Gym_EventScript_156695:: @ 8156695
+MauvilleCity_Gym_EventScript_Switch3:: @ 8156695
 	lockall
-	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_1566DA
+	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_SwitchDoNothing
 	compare VAR_MAUVILLE_GYM_STATE, 3
-	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
+	goto_if_eq MauvilleCity_Gym_EventScript_SwitchDoNothing
 	setvar VAR_MAUVILLE_GYM_STATE, 3
 	setvar VAR_0x8004, 2
-	goto MauvilleCity_Gym_EventScript_1566BA
+	goto MauvilleCity_Gym_EventScript_PressFloorSwitch
 	end
 
-MauvilleCity_Gym_EventScript_1566BA:: @ 81566BA
+MauvilleCity_Gym_EventScript_PressFloorSwitch:: @ 81566BA
 	special MauvilleGymSpecial2
 	special MauvilleGymSpecial1
 	special DrawWholeMapView
 	playse SE_UNLOCK
-	goto_if_set FLAG_MAUVILLE_GYM_BARRIERS_STATE, MauvilleCity_Gym_EventScript_1566E1
-	goto_if_unset FLAG_MAUVILLE_GYM_BARRIERS_STATE, MauvilleCity_Gym_EventScript_1566DC
+	goto_if_set FLAG_MAUVILLE_GYM_BARRIERS_STATE, MauvilleCity_Gym_EventScript_ClearBarriersAltState
+	goto_if_unset FLAG_MAUVILLE_GYM_BARRIERS_STATE, MauvilleCity_Gym_EventScript_SetBarriersAltState
 	releaseall
 	end
 
-MauvilleCity_Gym_EventScript_1566DA:: @ 81566DA
+MauvilleCity_Gym_EventScript_SwitchDoNothing:: @ 81566DA
 	releaseall
 	end
 
-MauvilleCity_Gym_EventScript_1566DC:: @ 81566DC
+MauvilleCity_Gym_EventScript_SetBarriersAltState:: @ 81566DC
 	setflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	releaseall
 	end
 
-MauvilleCity_Gym_EventScript_1566E1:: @ 81566E1
+MauvilleCity_Gym_EventScript_ClearBarriersAltState:: @ 81566E1
 	clearflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	releaseall
 	end
 
-MauvilleCity_Gym_EventScript_1566E6:: @ 81566E6
-	trainerbattle_single TRAINER_KIRK, MauvilleCity_Gym_Text_180956, MauvilleCity_Gym_Text_180997
-	msgbox MauvilleCity_Gym_Text_1809D1, MSGBOX_AUTOCLOSE
+MauvilleCity_Gym_EventScript_Kirk:: @ 81566E6
+	trainerbattle_single TRAINER_KIRK, MauvilleCity_Gym_Text_KirkIntro, MauvilleCity_Gym_Text_KirkDefeat
+	msgbox MauvilleCity_Gym_Text_KirkPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MauvilleCity_Gym_EventScript_1566FD:: @ 81566FD
-	trainerbattle_single TRAINER_SHAWN, MauvilleCity_Gym_Text_180A05, MauvilleCity_Gym_Text_180A42
-	msgbox MauvilleCity_Gym_Text_180A5E, MSGBOX_AUTOCLOSE
+MauvilleCity_Gym_EventScript_Shawn:: @ 81566FD
+	trainerbattle_single TRAINER_SHAWN, MauvilleCity_Gym_Text_ShawnIntro, MauvilleCity_Gym_Text_ShawnDefeat
+	msgbox MauvilleCity_Gym_Text_ShawnPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MauvilleCity_Gym_EventScript_156714:: @ 8156714
-	trainerbattle_single TRAINER_BEN, MauvilleCity_Gym_Text_180AE0, MauvilleCity_Gym_Text_180B06
-	msgbox MauvilleCity_Gym_Text_180B1D, MSGBOX_AUTOCLOSE
+MauvilleCity_Gym_EventScript_Ben:: @ 8156714
+	trainerbattle_single TRAINER_BEN, MauvilleCity_Gym_Text_BenIntro, MauvilleCity_Gym_Text_BenDefeat
+	msgbox MauvilleCity_Gym_Text_BenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MauvilleCity_Gym_EventScript_15672B:: @ 815672B
-	trainerbattle_single TRAINER_VIVIAN, MauvilleCity_Gym_Text_180B5A, MauvilleCity_Gym_Text_180B93
-	msgbox MauvilleCity_Gym_Text_180BAE, MSGBOX_AUTOCLOSE
+MauvilleCity_Gym_EventScript_Vivian:: @ 815672B
+	trainerbattle_single TRAINER_VIVIAN, MauvilleCity_Gym_Text_VivianIntro, MauvilleCity_Gym_Text_VivianDefeat
+	msgbox MauvilleCity_Gym_Text_VivianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MauvilleCity_Gym_EventScript_156742:: @ 8156742
+MauvilleCity_Gym_EventScript_GymGuide:: @ 8156742
 	lock
 	faceplayer
-	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_156757
-	msgbox MauvilleCity_Gym_Text_180815, MSGBOX_DEFAULT
+	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_GymGuidePostVictory
+	msgbox MauvilleCity_Gym_Text_GymGuideAdvice, MSGBOX_DEFAULT
 	release
 	end
 
-MauvilleCity_Gym_EventScript_156757:: @ 8156757
-	msgbox MauvilleCity_Gym_Text_18091D, MSGBOX_DEFAULT
+MauvilleCity_Gym_EventScript_GymGuidePostVictory:: @ 8156757
+	msgbox MauvilleCity_Gym_Text_GymGuidePostVictory, MSGBOX_DEFAULT
 	release
 	end
 
-MauvilleCity_Gym_EventScript_156761:: @ 8156761
+MauvilleCity_Gym_EventScript_LeftGymStatue:: @ 8156761
 	lockall
-	goto_if_set FLAG_BADGE03_GET, MauvilleCity_Gym_EventScript_156781
-	goto MauvilleCity_Gym_EventScript_15678B
+	goto_if_set FLAG_BADGE03_GET, MauvilleCity_Gym_EventScript_GymStatueCertified
+	goto MauvilleCity_Gym_EventScript_GymStatue
 	end
 
-MauvilleCity_Gym_EventScript_156771:: @ 8156771
+MauvilleCity_Gym_EventScript_RightGymStatue:: @ 8156771
 	lockall
-	goto_if_set FLAG_BADGE03_GET, MauvilleCity_Gym_EventScript_156781
-	goto MauvilleCity_Gym_EventScript_15678B
+	goto_if_set FLAG_BADGE03_GET, MauvilleCity_Gym_EventScript_GymStatueCertified
+	goto MauvilleCity_Gym_EventScript_GymStatue
 	end
 
-MauvilleCity_Gym_EventScript_156781:: @ 8156781
-	msgbox MauvilleCity_Gym_Text_180F64, MSGBOX_DEFAULT
+MauvilleCity_Gym_EventScript_GymStatueCertified:: @ 8156781
+	msgbox MauvilleCity_Gym_Text_GymStatueCertified, MSGBOX_DEFAULT
 	releaseall
 	end
 
-MauvilleCity_Gym_EventScript_15678B:: @ 815678B
-	msgbox MauvilleCity_Gym_Text_180F4A, MSGBOX_DEFAULT
+MauvilleCity_Gym_EventScript_GymStatue:: @ 815678B
+	msgbox MauvilleCity_Gym_Text_GymStatue, MSGBOX_DEFAULT
 	releaseall
 	end

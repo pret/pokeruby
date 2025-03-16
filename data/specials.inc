@@ -112,7 +112,7 @@ gSpecials::
 	def_special ScrSpecial_SetHipsterSpokenFlag
 	def_special ScrSpecial_HipsterTeachWord
 	def_special ScrSpecial_PlayBardSong
-	def_special sub_80F83D0
+	def_special SetMauvilleOldManObjEventGfx
 	def_special ScrSpecial_GenerateGiddyLine
 	def_special ScrSpecial_GiddyShouldTellAnotherTale
 	def_special ScrSpecial_StorytellerGetFreeStorySlot
