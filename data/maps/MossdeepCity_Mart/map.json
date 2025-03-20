@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MossdeepCity_Mart_EventScript_15A926",
+      "script": "MossdeepCity_Mart_EventScript_Clerk",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MossdeepCity_Mart_EventScript_15A956",
+      "script": "MossdeepCity_Mart_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MossdeepCity_Mart_EventScript_15A95F",
+      "script": "MossdeepCity_Mart_EventScript_Boy",
       "flag": "0"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MossdeepCity_Mart_EventScript_15A968",
+      "script": "MossdeepCity_Mart_EventScript_Sailor",
       "flag": "0"
     }
   ],

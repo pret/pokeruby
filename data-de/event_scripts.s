@@ -1080,8 +1080,8 @@ gText_PlayerHouseBootPC:: @ 81A10D6
 FallarborTown_ContestLobby_Text_1A10EB:: @ 81A10EB
 	.string "Die Verbindung wurde abgebrochen.$"
 
-MossdeepCity_StevensHouse_Text_1A1102:: @ 81A1102
-RustboroCity_DevonCorp_2F_Text_1A1102:: @ 81A1102
+gText_NicknameReceivedPokemon:: @ 81A1102
+gText_NicknameReceivedPokemon:: @ 81A1102
 	.string "Möchtest du {STR_VAR_2} einen\n"
 	.string "Kosenamen geben?$"
 

@@ -1074,8 +1074,7 @@ gText_PlayerHouseBootPC:: @ 81A10D6
 FallarborTown_ContestLobby_Text_1A10EB:: @ 81A10EB
 	.string "The link was canceled.$"
 
-MossdeepCity_StevensHouse_Text_1A1102:: @ 81A1102
-RustboroCity_DevonCorp_2F_Text_1A1102:: @ 81A1102
+gText_NicknameReceivedPokemon:: @ 81A1102
 	.string "Want to give a nickname to the\n"
 	.string "{STR_VAR_2} you received?$"
 
