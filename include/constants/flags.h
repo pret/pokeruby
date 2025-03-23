@@ -78,7 +78,7 @@
 #define FLAG_MET_HIDDEN_POWER_GIVER         0x76
 
 #define FLAG_RECEIVED_TM31                  0x79
-#define FLAG_RECEIVED_HM03                  0x7A
+#define FLAG_RECEIVED_HM_SURF                  0x7A
 #define FLAG_RECEIVED_HM08                  0x7B
 
 #define FLAG_DEFEATED_WALLY_VICTORY_ROAD    0x7E

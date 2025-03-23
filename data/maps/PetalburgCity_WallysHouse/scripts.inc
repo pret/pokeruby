@@ -1,61 +1,61 @@
 PetalburgCity_WallysHouse_MapScripts:: @ 81543C3
 	.byte 0
 
-PetalburgCity_WallysHouse_EventScript_1543C4:: @ 81543C4
+PetalburgCity_WallysHouse_EventScript_WallysDad:: @ 81543C4
 	lock
 	faceplayer
-	goto_if_set FLAG_DEFEATED_WALLY_VICTORY_ROAD, PetalburgCity_WallysHouse_EventScript_1543F7
-	goto_if_set FLAG_RECEIVED_HM03, PetalburgCity_WallysHouse_EventScript_154427
-	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_WallysHouse_EventScript_154406
-	goto_if_set FLAG_THANKED_FOR_PLAYING_WITH_WALLY, PetalburgCity_WallysHouse_EventScript_15443B
-	msgbox PetalburgCity_WallysHouse_Text_179805, MSGBOX_DEFAULT
+	goto_if_set FLAG_DEFEATED_WALLY_VICTORY_ROAD, PetalburgCity_WallysHouse_EventScript_GiveHMSurfAfterVictoryRoad
+	goto_if_set FLAG_RECEIVED_HM_SURF, PetalburgCity_WallysHouse_EventScript_ReceievedHMSurf
+	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_WallysHouse_EventScript_GiveHMSurf
+	goto_if_set FLAG_THANKED_FOR_PLAYING_WITH_WALLY, PetalburgCity_WallysHouse_EventScript_PlayedWithWally
+	msgbox PetalburgCity_WallysHouse_Text_ThanksForPlayingWithWally, MSGBOX_DEFAULT
 	setflag FLAG_THANKED_FOR_PLAYING_WITH_WALLY
 	release
 	end
 
-PetalburgCity_WallysHouse_EventScript_1543F7:: @ 81543F7
-	goto_if_set FLAG_RECEIVED_HM03, PetalburgCity_WallysHouse_EventScript_154431
-	goto PetalburgCity_WallysHouse_EventScript_154406
+PetalburgCity_WallysHouse_EventScript_GiveHMSurfAfterVictoryRoad:: @ 81543F7
+	goto_if_set FLAG_RECEIVED_HM_SURF, PetalburgCity_WallysHouse_EventScript_DefeatedWallyInVictoryRoad
+	goto PetalburgCity_WallysHouse_EventScript_GiveHMSurf
 	end
 
-PetalburgCity_WallysHouse_EventScript_154406:: @ 8154406
-	msgbox PetalburgCity_WallysHouse_Text_179996, MSGBOX_DEFAULT
+PetalburgCity_WallysHouse_EventScript_GiveHMSurf:: @ 8154406
+	msgbox PetalburgCity_WallysHouse_Text_WallyHasBecomeHealthy, MSGBOX_DEFAULT
 	giveitem ITEM_HM03_SURF
-	setflag FLAG_RECEIVED_HM03
-	msgbox PetalburgCity_WallysHouse_Text_179B14, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_HM_SURF
+	msgbox PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces, MSGBOX_DEFAULT
 	release
 	end
 
-PetalburgCity_WallysHouse_EventScript_154427:: @ 8154427
-	msgbox PetalburgCity_WallysHouse_Text_179B5B, MSGBOX_DEFAULT
+PetalburgCity_WallysHouse_EventScript_ReceievedHMSurf:: @ 8154427
+	msgbox PetalburgCity_WallysHouse_Text_WallyIsComingHomeSoon, MSGBOX_DEFAULT
 	release
 	end
 
-PetalburgCity_WallysHouse_EventScript_154431:: @ 8154431
-	msgbox PetalburgCity_WallysHouse_Text_179B92, MSGBOX_DEFAULT
+PetalburgCity_WallysHouse_EventScript_DefeatedWallyInVictoryRoad:: @ 8154431
+	msgbox PetalburgCity_WallysHouse_Text_YouMetWallyInEverGrandeCity, MSGBOX_DEFAULT
 	release
 	end
 
-PetalburgCity_WallysHouse_EventScript_15443B:: @ 815443B
-	msgbox PetalburgCity_WallysHouse_Text_179975, MSGBOX_DEFAULT
+PetalburgCity_WallysHouse_EventScript_PlayedWithWally:: @ 815443B
+	msgbox PetalburgCity_WallysHouse_Text_WonderHowWallyIsDoing, MSGBOX_DEFAULT
 	release
 	end
 
-PetalburgCity_WallysHouse_EventScript_154445:: @ 8154445
+PetalburgCity_WallysHouse_EventScript_WallysMom:: @ 8154445
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_HM03, PetalburgCity_WallysHouse_EventScript_15446D
-	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_WallysHouse_EventScript_154463
-	msgbox PetalburgCity_WallysHouse_Text_179C2C, MSGBOX_DEFAULT
+	goto_if_set FLAG_RECEIVED_HM_SURF, PetalburgCity_WallysHouse_EventScript_ReceivedHMSurf
+	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_WallysHouse_EventScript_HusbandHasGiftForYou
+	msgbox PetalburgCity_WallysHouse_Text_WallyWasReallyHappy, MSGBOX_DEFAULT
 	release
 	end
 
-PetalburgCity_WallysHouse_EventScript_154463:: @ 8154463
-	msgbox PetalburgCity_WallysHouse_Text_179CA1, MSGBOX_DEFAULT
+PetalburgCity_WallysHouse_EventScript_HusbandHasGiftForYou:: @ 8154463
+	msgbox PetalburgCity_WallysHouse_Text_HusbandHasGiftForYou, MSGBOX_DEFAULT
 	release
 	end
 
-PetalburgCity_WallysHouse_EventScript_15446D:: @ 815446D
-	msgbox PetalburgCity_WallysHouse_Text_179D12, MSGBOX_DEFAULT
+PetalburgCity_WallysHouse_EventScript_ReceivedHMSurf:: @ 815446D
+	msgbox PetalburgCity_WallysHouse_Text_WallyLeftWithoutTelling, MSGBOX_DEFAULT
 	release
 	end
