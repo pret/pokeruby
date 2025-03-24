@@ -1,4 +1,4 @@
-RustboroCity_PokemonCenter_1F_Text_184B37:: @ 8184B37
+RustboroCity_PokemonCenter_1F_Text_PokemonHavePersonalities:: @ 8184B37
 	.string "Mein POKéMON hat ein NAIVES\n"
 	.string "Wesen und das meines Freundes ein\l"
 	.string "FRÖHLICHES.\p"
@@ -6,12 +6,12 @@ RustboroCity_PokemonCenter_1F_Text_184B37:: @ 8184B37
 	.string "unterschiedliche Persönlichkeiten\l"
 	.string "haben.$"
 
-RustboroCity_PokemonCenter_1F_Text_184BAB:: @ 8184BAB
+RustboroCity_PokemonCenter_1F_Text_MaleAndFemalePokemon:: @ 8184BAB
 	.string "Es gibt männliche und weibliche POKéMON.\p"
 	.string "Aber niemand kann sagen, worin der\n"
 	.string "eigentliche Unterschied liegt.$"
 
-RustboroCity_PokemonCenter_1F_Text_184C19:: @ 8184C19
+RustboroCity_PokemonCenter_1F_Text_HMCutNextDoor:: @ 8184C19
 	.string "Der Mann nebenan hat mir eine VM\n"
 	.string "gegeben!\p"
 	.string "Ich habe meinem POKéMON beigebracht,\n"

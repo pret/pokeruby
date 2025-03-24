@@ -1,4 +1,4 @@
-RustboroCity_CuttersHouse_Text_18509C:: @ 818509C
+RustboroCity_CuttersHouse_Text_YouCanPutThisHMToGoodUse:: @ 818509C
 	.string "That determined expression...\n"
 	.string "That limber way you move...\l"
 	.string "And your well-trained POKéMON...\p"
@@ -10,7 +10,7 @@ RustboroCity_CuttersHouse_Text_18509C:: @ 818509C
 	.string "No need to be modest or shy.\n"
 	.string "Go on, take it!$"
 
-RustboroCity_CuttersHouse_Text_1851C9:: @ 81851C9
+RustboroCity_CuttersHouse_Text_ExplainCut:: @ 81851C9
 	.string "That HM, it's CUT.\p"
 	.string "An HM move is one that can be used\n"
 	.string "by POKéMON out of a battle.\p"
@@ -20,7 +20,7 @@ RustboroCity_CuttersHouse_Text_1851C9:: @ 81851C9
 	.string "And, unlike a TM, an HM doesn't break\n"
 	.string "after one use.$"
 
-RustboroCity_CuttersHouse_Text_1852B3:: @ 81852B3
+RustboroCity_CuttersHouse_Text_DadHelpedClearLandOfTrees:: @ 81852B3
 	.string "When they were expanding the city of\n"
 	.string "RUSTBORO, my dad helped out.\p"
 	.string "He made his POKéMON use CUT to clear\n"

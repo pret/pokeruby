@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RustboroCity_PokemonCenter_1F_EventScript_157B88",
+      "script": "RustboroCity_PokemonCenter_1F_EventScript_Nurse",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RustboroCity_PokemonCenter_1F_EventScript_157B96",
+      "script": "RustboroCity_PokemonCenter_1F_EventScript_Man",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RustboroCity_PokemonCenter_1F_EventScript_157B9F",
+      "script": "RustboroCity_PokemonCenter_1F_EventScript_Boy",
       "flag": "0"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RustboroCity_PokemonCenter_1F_EventScript_157BA8",
+      "script": "RustboroCity_PokemonCenter_1F_EventScript_Girl",
       "flag": "0"
     }
   ],
