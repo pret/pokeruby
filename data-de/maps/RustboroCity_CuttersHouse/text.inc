@@ -1,4 +1,4 @@
-RustboroCity_CuttersHouse_Text_18509C:: @ 818509C
+RustboroCity_CuttersHouse_Text_YouCanPutThisHMToGoodUse:: @ 818509C
 	.string "Diese Entschlossenheit...\n"
 	.string "Deine Beweglichkeit...\l"
 	.string "Deine Hingabe für POKéMON...\p"
@@ -11,7 +11,7 @@ RustboroCity_CuttersHouse_Text_18509C:: @ 818509C
 	.string "Kein Grund, so schüchtern zu sein.\n"
 	.string "Hier, nimm sie!$"
 
-RustboroCity_CuttersHouse_Text_1851C9:: @ 81851C9
+RustboroCity_CuttersHouse_Text_ExplainCut:: @ 81851C9
 	.string "Diese VM, sie enthält ZERSCHNEIDER.\p"
 	.string "Eine VM ist eine Attacke, die auch\n"
 	.string "außerhalb des Kampfes von einem\l"
@@ -23,7 +23,7 @@ RustboroCity_CuttersHouse_Text_1851C9:: @ 81851C9
 	.string "Und, im Gegensatz zur TM, kann eine VM\n"
 	.string "mehrfach gelehrt werden.$"
 
-RustboroCity_CuttersHouse_Text_1852B3:: @ 81852B3
+RustboroCity_CuttersHouse_Text_DadHelpedClearLandOfTrees:: @ 81852B3
 	.string "Als sie die Stadt METAROST CITY\n"
 	.string "vergrößert haben, hat mein Vater ihnen\l"
 	.string "geholfen.\p"
