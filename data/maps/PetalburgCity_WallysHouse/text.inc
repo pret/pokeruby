@@ -55,7 +55,7 @@ PetalburgCity_WallysHouse_Text_WallyWasReallyHappy:: @ 8179C2C
 	.string "It's been ages since I've seen him\n"
 	.string "smile like that.$"
 
-PetalburgCity_WallysHouse_Text_HusbandHasGiftForYou:: @ 8179CA1
+PetalburgCity_WallysHouse_Text_HusbandHasSomethingForYou:: @ 8179CA1
 	.string "Oh, hello, {PLAYER}! We've got\n"
 	.string "something we want you to have.\p"
 	.string "My husband has it, so please have a\n"

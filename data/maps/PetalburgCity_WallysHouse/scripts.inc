@@ -51,7 +51,7 @@ PetalburgCity_WallysHouse_EventScript_WallysMom:: @ 8154445
 	end
 
 PetalburgCity_WallysHouse_EventScript_HusbandHasGiftForYou:: @ 8154463
-	msgbox PetalburgCity_WallysHouse_Text_HusbandHasGiftForYou, MSGBOX_DEFAULT
+	msgbox PetalburgCity_WallysHouse_Text_HusbandHasSomethingForYou, MSGBOX_DEFAULT
 	release
 	end
 
