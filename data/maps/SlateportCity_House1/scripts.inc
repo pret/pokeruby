@@ -1,72 +1,72 @@
 SlateportCity_House1_MapScripts:: @ 815567A
 	.byte 0
 
-SlateportCity_House1_EventScript_15567B:: @ 815567B
+SlateportCity_NameRatersHouse_EventScript_NameRater:: @ 815567B
 	lock
 	faceplayer
-	msgbox SlateportCity_House1_Text_17D46A, MSGBOX_YESNO
+	msgbox SlateportCity_NameRatersHouse_Text_PleasedToRateMonNickname, MSGBOX_YESNO
 	compare VAR_RESULT, YES
-	goto_if_eq SlateportCity_House1_EventScript_15569C
+	goto_if_eq SlateportCity_NameRatersHouse_EventScript_ChooseMonToRate
 	compare VAR_RESULT, NO
-	goto_if_eq SlateportCity_House1_EventScript_1556BF
+	goto_if_eq SlateportCity_NameRatersHouse_EventScript_DeclineNameRate
 	end
 
-SlateportCity_House1_EventScript_15569C:: @ 815569C
-	msgbox SlateportCity_House1_Text_17D4DB, MSGBOX_DEFAULT
+SlateportCity_NameRatersHouse_EventScript_ChooseMonToRate:: @ 815569C
+	msgbox SlateportCity_NameRatersHouse_Text_CritiqueWhichMonNickname, MSGBOX_DEFAULT
 	special SelectMonForNPCTrade
 	waitstate
 	compare VAR_0x8004, 255
-	goto_if_ne SlateportCity_House1_EventScript_1556C9
+	goto_if_ne SlateportCity_NameRatersHouse_EventScript_RateMonNickname
 	compare VAR_0x8004, 255
-	goto_if_eq SlateportCity_House1_EventScript_1556BF
+	goto_if_eq SlateportCity_NameRatersHouse_EventScript_DeclineNameRate
 	end
 
-SlateportCity_House1_EventScript_1556BF:: @ 81556BF
-	msgbox SlateportCity_House1_Text_17D61E, MSGBOX_DEFAULT
+SlateportCity_NameRatersHouse_EventScript_DeclineNameRate:: @ 81556BF
+	msgbox SlateportCity_NameRatersHouse_Text_DoVisitAgain, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_House1_EventScript_1556C9:: @ 81556C9
+SlateportCity_NameRatersHouse_EventScript_RateMonNickname:: @ 81556C9
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
 	compare VAR_RESULT, SPECIES_EGG
-	goto_if_eq SlateportCity_House1_EventScript_15571C
+	goto_if_eq SlateportCity_NameRatersHouse_EventScript_CantRateEgg
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	special TV_CheckMonOTIDEqualsPlayerID
 	compare VAR_RESULT, 1
-	goto_if_eq SlateportCity_House1_EventScript_155726
+	goto_if_eq SlateportCity_NameRatersHouse_EventScript_PlayerNotMonsOT
 	specialvar VAR_RESULT, MonOTNameMatchesPlayer
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	compare VAR_RESULT, 1
-	goto_if_eq SlateportCity_House1_EventScript_155726
-	msgbox SlateportCity_House1_Text_17D505, MSGBOX_YESNO
+	goto_if_eq SlateportCity_NameRatersHouse_EventScript_PlayerNotMonsOT
+	msgbox SlateportCity_NameRatersHouse_Text_FineNameSuggestBetterOne, MSGBOX_YESNO
 	compare VAR_RESULT, YES
-	goto_if_eq SlateportCity_House1_EventScript_155730
+	goto_if_eq SlateportCity_NameRatersHouse_EventScript_ChangeNickname
 	compare VAR_RESULT, NO
-	goto_if_eq SlateportCity_House1_EventScript_1556BF
+	goto_if_eq SlateportCity_NameRatersHouse_EventScript_DeclineNameRate
 	end
 
-SlateportCity_House1_EventScript_15571C:: @ 815571C
-	msgbox SlateportCity_House1_Text_17D752, MSGBOX_DEFAULT
+SlateportCity_NameRatersHouse_EventScript_CantRateEgg:: @ 815571C
+	msgbox SlateportCity_NameRatersHouse_Text_ThatIsMerelyAnEgg, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_House1_EventScript_155726:: @ 8155726
-	msgbox SlateportCity_House1_Text_17D6CC, MSGBOX_DEFAULT
+SlateportCity_NameRatersHouse_EventScript_PlayerNotMonsOT:: @ 8155726
+	msgbox SlateportCity_NameRatersHouse_Text_MagnificentName, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_House1_EventScript_155730:: @ 8155730
-	msgbox SlateportCity_House1_Text_17D580, MSGBOX_DEFAULT
+SlateportCity_NameRatersHouse_EventScript_ChangeNickname:: @ 8155730
+	msgbox SlateportCity_NameRatersHouse_Text_WhatShallNewNameBe, MSGBOX_DEFAULT
 	call Common_EventScript_NameReceivedPartyMon
 	specialvar VAR_RESULT, TV_PutNameRaterShowOnTheAirIfNicnkameChanged
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	compare VAR_RESULT, 1
-	goto_if_eq SlateportCity_House1_EventScript_15575A
-	msgbox SlateportCity_House1_Text_17D63A, MSGBOX_DEFAULT
+	goto_if_eq SlateportCity_NameRatersHouse_EventScript_NewNameDifferent
+	msgbox SlateportCity_NameRatersHouse_Text_NameNoDifferentYetSuperior, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_House1_EventScript_15575A:: @ 815575A
-	msgbox SlateportCity_House1_Text_17D5B0, MSGBOX_DEFAULT
+SlateportCity_NameRatersHouse_EventScript_NewNameDifferent:: @ 815575A
+	msgbox SlateportCity_NameRatersHouse_Text_MonShallBeKnownAsName, MSGBOX_DEFAULT
 	release
 	end

@@ -1,18 +1,18 @@
 SlateportCity_Mart_MapScripts:: @ 8156410
 	.byte 0
 
-SlateportCity_Mart_EventScript_156411:: @ 8156411
+SlateportCity_Mart_EventScript_Clerk:: @ 8156411
 	lock
 	faceplayer
 	message Text_HowMayIServeYou
 	waitmessage
-	pokemart SlateportCity_Mart_Items
+	pokemart SlateportCity_Mart_Pokemart
 	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-SlateportCity_Mart_Items:: @ 8156428
+SlateportCity_Mart_Pokemart:: @ 8156428
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_POTION
@@ -26,10 +26,10 @@ SlateportCity_Mart_Items:: @ 8156428
 	release
 	end
 
-SlateportCity_Mart_EventScript_15643E:: @ 815643E
-	msgbox SlateportCity_Mart_Text_180730, MSGBOX_NPC
+SlateportCity_Mart_EventScript_BlackBelt:: @ 815643E
+	msgbox SlateportCity_Mart_Text_SomeItemsOnlyAtMart, MSGBOX_NPC
 	end
 
-SlateportCity_Mart_EventScript_156447:: @ 8156447
-	msgbox SlateportCity_Mart_Text_18079D, MSGBOX_NPC
+SlateportCity_Mart_EventScript_Man:: @ 8156447
+	msgbox SlateportCity_Mart_Text_GreatBallIsBetter, MSGBOX_NPC
 	end

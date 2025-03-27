@@ -749,7 +749,7 @@ LilycoveCity_ContestLobby_EventScript_159074:: @ 8159074
 	end
 
 LilycoveCity_ContestLobby_EventScript_15907B:: @ 815907B
-	msgbox LilycoveCity_ContestLobby_Text_1B7225, MSGBOX_NPC
+	msgbox SlateportCity_ContestLobby_Text_LetsGetBlendingAlready, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_159084:: @ 8159084

@@ -1,12 +1,12 @@
 SlateportCity_ContestLobby_MapScripts:: @ 8155411
-	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_ContestLobby_MapScript1_155417
+	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_ContestLobby_MapScript1_OnTransition
 	.byte 0
 
-SlateportCity_ContestLobby_MapScript1_155417:: @ 8155417
+SlateportCity_ContestLobby_MapScript1_OnTransition:: @ 8155417
 	call SlateportCity_ContestLobby_EventScript_1AE188
 	end
 
-SlateportCity_ContestLobby_EventScript_15541D:: @ 815541D
+SlateportCity_ContestLobby_EventScript_Receptionist:: @ 815541D
 	setvar VAR_0x800B, 7
 	setvar VAR_CONTEST_RANK, 2
 	call SlateportCity_ContestLobby_EventScript_1A4E92
@@ -88,30 +88,30 @@ SlateportCity_ContestLobby_Movement_1554DC:: @ 81554DC
 	step_end
 
 SlateportCity_ContestLobby_EventScript_1554DE:: @ 81554DE
-	msgbox SlateportCity_ContestLobby_Text_17C937, MSGBOX_NPC
+	msgbox SlateportCity_ContestLobby_Text_WantToRaiseUltimateMon, MSGBOX_NPC
 	end
 
-SlateportCity_ContestLobby_EventScript_1554E7:: @ 81554E7
-	msgbox SlateportCity_ContestLobby_Text_17C9D5, MSGBOX_NPC
+SlateportCity_ContestLobby_EventScript_Girl:: @ 81554E7
+	msgbox SlateportCity_ContestLobby_Text_DoYourFriendsHaveBerries, MSGBOX_NPC
 	end
 
-SlateportCity_ContestLobby_EventScript_1554F0:: @ 81554F0
-	msgbox SlateportCity_ContestLobby_Text_17CAEC, MSGBOX_NPC
+SlateportCity_ContestLobby_EventScript_Woman:: @ 81554F0
+	msgbox SlateportCity_ContestLobby_Text_ContestWinnerPostersOnWall, MSGBOX_NPC
 	end
 
-SlateportCity_ContestLobby_EventScript_1554F9:: @ 81554F9
+SlateportCity_ContestLobby_EventScript_LittleGirl:: @ 81554F9
 	lockall
-	goto_if_set FLAG_RECEIVED_POKEBLOCK_CASE, SlateportCity_ContestLobby_EventScript_155526
+	goto_if_set FLAG_RECEIVED_POKEBLOCK_CASE, SlateportCity_ContestLobby_EventScript_HavePokeblockCase
 	applymovement 7, Common_Movement_FacePlayer
 	waitmovement 0
-	msgbox SlateportCity_ContestLobby_Text_17CA67, MSGBOX_DEFAULT
+	msgbox SlateportCity_ContestLobby_Text_YouCanHavePokeblockCase, MSGBOX_DEFAULT
 	giveitem ITEM_POKEBLOCK_CASE
 	setflag FLAG_RECEIVED_POKEBLOCK_CASE
 	releaseall
 	end
 
-SlateportCity_ContestLobby_EventScript_155526:: @ 8155526
-	msgbox SlateportCity_ContestLobby_Text_17CA88, MSGBOX_NPC
+SlateportCity_ContestLobby_EventScript_HavePokeblockCase:: @ 8155526
+	msgbox SlateportCity_ContestLobby_Text_PutPokeblocksInThere, MSGBOX_NPC
 	end
 
 SlateportCity_ContestLobby_EventScript_15552F:: @ 815552F
@@ -121,8 +121,8 @@ SlateportCity_ContestLobby_EventScript_15552F:: @ 815552F
 	releaseall
 	end
 
-SlateportCity_ContestLobby_EventScript_155536:: @ 8155536
-	msgbox SlateportCity_ContestLobby_Text_1B7225, MSGBOX_NPC
+SlateportCity_ContestLobby_EventScript_Boy:: @ 8155536
+	msgbox SlateportCity_ContestLobby_Text_LetsGetBlendingAlready, MSGBOX_NPC
 	end
 
 @ 815553F

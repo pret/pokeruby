@@ -1,21 +1,21 @@
 SlateportCity_House2_MapScripts:: @ 815638F
 	.byte 0
 
-SlateportCity_House2_EventScript_156390:: @ 8156390
-	msgbox SlateportCity_House2_Text_1804CF, MSGBOX_NPC
+SlateportCity_House_EventScript_PokefanM:: @ 8156390
+	msgbox SlateportCity_House_Text_NatureToDoWithStatGains, MSGBOX_NPC
 	end
 
-SlateportCity_House2_EventScript_156399:: @ 8156399
+SlateportCity_House_EventScript_Girl:: @ 8156399
 	lock
 	faceplayer
 	checkitem ITEM_CONTEST_PASS, 1
 	compare VAR_RESULT, 1
-	goto_if_eq SlateportCity_House2_EventScript_1563B5
-	msgbox SlateportCity_House2_Text_180567, MSGBOX_DEFAULT
+	goto_if_eq SlateportCity_House_EventScript_HaveContestPass
+	msgbox SlateportCity_House_Text_NeedContestPass, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_House2_EventScript_1563B5:: @ 81563B5
-	msgbox SlateportCity_House2_Text_1805CD, MSGBOX_DEFAULT
+SlateportCity_House_EventScript_HaveContestPass:: @ 81563B5
+	msgbox SlateportCity_House_Text_HaveContestPass, MSGBOX_DEFAULT
 	release
 	end

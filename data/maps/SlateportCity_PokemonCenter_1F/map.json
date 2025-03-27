@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_PokemonCenter_1F_EventScript_1563CE",
+      "script": "SlateportCity_PokemonCenter_1F_EventScript_Nurse",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_PokemonCenter_1F_EventScript_1563DC",
+      "script": "SlateportCity_PokemonCenter_1F_EventScript_Sailor",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_PokemonCenter_1F_EventScript_1563E5",
+      "script": "SlateportCity_PokemonCenter_1F_EventScript_Woman",
       "flag": "0"
     }
   ],

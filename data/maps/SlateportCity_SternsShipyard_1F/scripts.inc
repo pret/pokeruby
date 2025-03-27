@@ -1,16 +1,16 @@
 SlateportCity_SternsShipyard_1F_MapScripts:: @ 8155335
 	.byte 0
 
-SlateportCity_SternsShipyard_1F_EventScript_155336:: @ 8155336
+SlateportCity_SternsShipyard_1F_EventScript_Dock:: @ 8155336
 	lockall
-	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_SternsShipyard_1F_EventScript_155388
-	goto_if_set FLAG_BADGE07_GET, SlateportCity_SternsShipyard_1F_EventScript_15539C
-	goto_if_set FLAG_DELIVERED_DEVON_GOODS, SlateportCity_SternsShipyard_1F_EventScript_1553CF
-	goto_if_set FLAG_DOCK_REJECTED_DEVON_GOODS, SlateportCity_SternsShipyard_1F_EventScript_1553B0
-	msgbox SlateportCity_SternsShipyard_1F_Text_17C14B, MSGBOX_DEFAULT
+	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_SternsShipyard_1F_EventScript_FerryReady
+	goto_if_set FLAG_BADGE07_GET, SlateportCity_SternsShipyard_1F_EventScript_BrineyJoined
+	goto_if_set FLAG_DELIVERED_DEVON_GOODS, SlateportCity_SternsShipyard_1F_EventScript_NeedVeteran
+	goto_if_set FLAG_DOCK_REJECTED_DEVON_GOODS, SlateportCity_SternsShipyard_1F_EventScript_GoFindStern
+	msgbox SlateportCity_SternsShipyard_1F_Text_CantMakeHeadsOrTails, MSGBOX_DEFAULT
 	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
-	msgbox SlateportCity_SternsShipyard_1F_Text_17C1EC, MSGBOX_DEFAULT
+	msgbox SlateportCity_SternsShipyard_1F_Text_MeetDockDeliverToStern, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
@@ -19,45 +19,45 @@ SlateportCity_SternsShipyard_1F_EventScript_155336:: @ 8155336
 	releaseall
 	end
 
-SlateportCity_SternsShipyard_1F_EventScript_155388:: @ 8155388
+SlateportCity_SternsShipyard_1F_EventScript_FerryReady:: @ 8155388
 	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
-	msgbox SlateportCity_SternsShipyard_1F_Text_17C472, MSGBOX_DEFAULT
+	msgbox SlateportCity_SternsShipyard_1F_Text_FerryIsReady, MSGBOX_DEFAULT
 	releaseall
 	end
 
-SlateportCity_SternsShipyard_1F_EventScript_15539C:: @ 815539C
+SlateportCity_SternsShipyard_1F_EventScript_BrineyJoined:: @ 815539C
 	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
-	msgbox SlateportCity_SternsShipyard_1F_Text_17C3F7, MSGBOX_DEFAULT
+	msgbox SlateportCity_SternsShipyard_1F_Text_BrineyJoinedUs, MSGBOX_DEFAULT
 	releaseall
 	end
 
-SlateportCity_SternsShipyard_1F_EventScript_1553B0:: @ 81553B0
+SlateportCity_SternsShipyard_1F_EventScript_GoFindStern:: @ 81553B0
 	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
-	msgbox SlateportCity_SternsShipyard_1F_Text_17C2F2, MSGBOX_DEFAULT
+	msgbox SlateportCity_SternsShipyard_1F_Text_CouldYouFindStern, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
 
-SlateportCity_SternsShipyard_1F_EventScript_1553CF:: @ 81553CF
+SlateportCity_SternsShipyard_1F_EventScript_NeedVeteran:: @ 81553CF
 	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
-	msgbox SlateportCity_SternsShipyard_1F_Text_17C360, MSGBOX_DEFAULT
+	msgbox SlateportCity_SternsShipyard_1F_Text_CouldUseAdviceFromVeteran, MSGBOX_DEFAULT
 	releaseall
 	end
 
-SlateportCity_SternsShipyard_1F_EventScript_1553E3:: @ 81553E3
-	msgbox SlateportCity_SternsShipyard_1F_Text_17C6BB, MSGBOX_NPC
+SlateportCity_SternsShipyard_1F_EventScript_Scientist1:: @ 81553E3
+	msgbox SlateportCity_SternsShipyard_1F_Text_SeaIsLikeLivingThing, MSGBOX_NPC
 	end
 
-SlateportCity_SternsShipyard_1F_EventScript_1553EC:: @ 81553EC
-	msgbox SlateportCity_SternsShipyard_1F_Text_17C764, MSGBOX_NPC
+SlateportCity_SternsShipyard_1F_EventScript_Scientist2:: @ 81553EC
+	msgbox SlateportCity_SternsShipyard_1F_Text_GetSeasickEasily, MSGBOX_NPC
 	end
 
-SlateportCity_SternsShipyard_1F_EventScript_1553F5:: @ 81553F5
-	msgbox SlateportCity_SternsShipyard_1F_Text_17C53D, MSGBOX_NPC
+SlateportCity_SternsShipyard_1F_EventScript_Briney:: @ 81553F5
+	msgbox SlateportCity_SternsShipyard_1F_Text_DecidedToHelpDock, MSGBOX_NPC
 	end

@@ -53,8 +53,8 @@ FallarborTown_ContestLobby_Text_1B71D2:: @ 81B71D2
 	.string "Besorg dir eine {POKEBLOCK}BOX und\n"
 	.string "komm dann wieder.$"
 
-LilycoveCity_ContestLobby_Text_1B7225:: @ 81B7225
-SlateportCity_ContestLobby_Text_1B7225:: @ 81B7225
+SlateportCity_ContestLobby_Text_LetsGetBlendingAlready:: @ 81B7225
+SlateportCity_ContestLobby_Text_LetsGetBlendingAlready:: @ 81B7225
 	.string "Dann lass uns mal mixen.$"
 
 LilycoveCity_ContestLobby_Text_1B7241:: @ 81B7241

@@ -53,8 +53,7 @@ FallarborTown_ContestLobby_Text_1B71D2:: @ 81B71D2
 	.string "You should get a {POKEBLOCK} CASE and then\n"
 	.string "come see me.$"
 
-LilycoveCity_ContestLobby_Text_1B7225:: @ 81B7225
-SlateportCity_ContestLobby_Text_1B7225:: @ 81B7225
+SlateportCity_ContestLobby_Text_LetsGetBlendingAlready:: @ 81B7225
 	.string "Let's get blending already!$"
 
 LilycoveCity_ContestLobby_Text_1B7241:: @ 81B7241

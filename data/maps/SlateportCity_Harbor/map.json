@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_Harbor_EventScript_1560C4",
+      "script": "SlateportCity_Harbor_EventScript_FerryAttendant",
       "flag": "FLAG_HIDE_WORKERS_SLATEPORT_HARBOR"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_Harbor_EventScript_1561FF",
+      "script": "SlateportCity_Harbor_EventScript_Sailor",
       "flag": "FLAG_HIDE_WORKERS_SLATEPORT_HARBOR"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_Harbor_EventScript_156208",
+      "script": "SlateportCity_Harbor_EventScript_FatMan",
       "flag": "FLAG_HIDE_WORKERS_SLATEPORT_HARBOR"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_Harbor_EventScript_156211",
+      "script": "SlateportCity_Harbor_EventScript_CaptStern",
       "flag": "FLAG_HIDE_STERN_SLATEPORT_HARBOR"
     },
     {
@@ -154,7 +154,7 @@
       "elevation": 3,
       "var": "VAR_SLATEPORT_HARBOR_STATE",
       "var_value": "1",
-      "script": "SlateportCity_Harbor_EventScript_155F9B"
+      "script": "SlateportCity_Harbor_EventScript_EvilTeamEscapeTrigger0"
     },
     {
       "type": "trigger",
@@ -163,7 +163,7 @@
       "elevation": 3,
       "var": "VAR_SLATEPORT_HARBOR_STATE",
       "var_value": "1",
-      "script": "SlateportCity_Harbor_EventScript_155FA7"
+      "script": "SlateportCity_Harbor_EventScript_EvilTeamEscapeTrigger1"
     },
     {
       "type": "trigger",
@@ -172,7 +172,7 @@
       "elevation": 3,
       "var": "VAR_SLATEPORT_HARBOR_STATE",
       "var_value": "1",
-      "script": "SlateportCity_Harbor_EventScript_155FB3"
+      "script": "SlateportCity_Harbor_EventScript_EvilTeamEscapeTrigger2"
     },
     {
       "type": "trigger",
@@ -181,7 +181,7 @@
       "elevation": 3,
       "var": "VAR_SLATEPORT_HARBOR_STATE",
       "var_value": "1",
-      "script": "SlateportCity_Harbor_EventScript_155FBF"
+      "script": "SlateportCity_Harbor_EventScript_EvilTeamEscapeTrigger3"
     }
   ],
   "bg_events": []
