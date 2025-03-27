@@ -125,7 +125,7 @@ FallarborTown_ContestLobby_EventScript_BerryBlenderMan:: @ 81B778A
 	goto VerdanturfTown_ContestLobby_EventScript_BerryBlendWithNPC
 	end
 
-SlateportCity_ContestLobby_EventScript_OldMan:: @ 81B7795
+SlateportCity_ContestLobby_EventScript_MasterM:: @ 81B7795
 	setvar VAR_0x8008, 2
 	goto VerdanturfTown_ContestLobby_EventScript_BerryBlendWithNPC
 	end

@@ -6,7 +6,7 @@ SlateportCity_ContestLobby_MapScript1_OnTransition:: @ 8155417
 	call SlateportCity_ContestLobby_EventScript_1AE188
 	end
 
-SlateportCity_ContestLobby_EventScript_Receptionist:: @ 815541D
+SlateportCity_ContestLobby_EventScript_ContestReceptionist:: @ 815541D
 	setvar VAR_0x800B, 7
 	setvar VAR_CONTEST_RANK, 2
 	call SlateportCity_ContestLobby_EventScript_1A4E92
@@ -87,7 +87,7 @@ SlateportCity_ContestLobby_Movement_1554DC:: @ 81554DC
 	walk_in_place_fastest_right
 	step_end
 
-SlateportCity_ContestLobby_EventScript_1554DE:: @ 81554DE
+SlateportCity_ContestLobby_EventScript_Man:: @ 81554DE
 	msgbox SlateportCity_ContestLobby_Text_WantToRaiseUltimateMon, MSGBOX_NPC
 	end
 

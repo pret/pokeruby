@@ -268,7 +268,7 @@ SlateportCity_Harbor_EventScript_CaptStern:: @ 8156211
 	faceplayer
 	goto_if_set FLAG_BADGE07_GET, SlateportCity_Harbor_EventScript_CaptSternFerryOrScannerComment
 	goto_if_set FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE, SlateportCity_Harbor_EventScript_NeedDive
-	goto_if_set FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE, SlateportCity_Harbor_EventScript_TeamAquaLeftNeedDive
+	goto_if_set FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE, SlateportCity_Harbor_EventScript_EvilTeamLeftNeedDive
 	compare VAR_SLATEPORT_HARBOR_STATE, 2
 	goto_if_eq SlateportCity_Harbor_EventScript_WhyStealSubmarine
 	msgbox SlateportCity_Harbor_Text_SameThugsTriedToRobAtMuseum, MSGBOX_DEFAULT
@@ -283,7 +283,7 @@ SlateportCity_Harbor_EventScript_WhyStealSubmarine:: @ 815624E
 	release
 	end
 
-SlateportCity_Harbor_EventScript_TeamAquaLeftNeedDive:: @ 8156258
+SlateportCity_Harbor_EventScript_EvilTeamLeftNeedDive:: @ 8156258
 	setflag FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE
 	msgbox SlateportCity_Harbor_Text_EvilTeamLeftNeedDive, MSGBOX_DEFAULT
 	release

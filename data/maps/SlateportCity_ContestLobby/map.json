@@ -21,7 +21,7 @@
       "movement_range_y": 3,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_ContestLobby_EventScript_Receptionist",
+      "script": "SlateportCity_ContestLobby_EventScript_ContestReceptionist",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_ContestLobby_EventScript_OldMan",
+      "script": "SlateportCity_ContestLobby_EventScript_MasterM",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_ContestLobby_EventScript_1554DE",
+      "script": "SlateportCity_ContestLobby_EventScript_Man",
       "flag": "0"
     },
     {
