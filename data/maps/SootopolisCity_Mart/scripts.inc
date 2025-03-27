@@ -1,18 +1,18 @@
 SootopolisCity_Mart_MapScripts:: @ 815B21A
 	.byte 0
 
-SootopolisCity_Mart_EventScript_15B21B:: @ 815B21B
+SootopolisCity_Mart_EventScript_Clerk:: @ 815B21B
 	lock
 	faceplayer
 	message Text_HowMayIServeYou
 	waitmessage
-	pokemart SootopolisCity_Mart_Items
+	pokemart SootopolisCity_Mart_Pokemart
 	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-SootopolisCity_Mart_Items:: @ 815B234
+SootopolisCity_Mart_Pokemart:: @ 815B234
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_HYPER_POTION
 	.2byte ITEM_MAX_POTION
@@ -26,30 +26,30 @@ SootopolisCity_Mart_Items:: @ 815B234
 	release
 	end
 
-SootopolisCity_Mart_EventScript_15B24A:: @ 815B24A
+SootopolisCity_Mart_EventScript_FatMan:: @ 815B24A
 	lock
 	faceplayer
-	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_Mart_EventScript_15B268
-	goto_if_unset FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_Mart_EventScript_15B268
-	msgbox SootopolisCity_Mart_Text_18F8D7, MSGBOX_DEFAULT
+	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_Mart_EventScript_FatManNoLegendary
+	goto_if_unset FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_Mart_EventScript_FatManNoLegendary
+	msgbox SootopolisCity_Mart_Text_TooScaryOutside, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_Mart_EventScript_15B268:: @ 815B268
-	msgbox SootopolisCity_Mart_Text_18F890, MSGBOX_DEFAULT
+SootopolisCity_Mart_EventScript_FatManNoLegendary:: @ 815B268
+	msgbox SootopolisCity_Mart_Text_PPUpIsGreat, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_Mart_EventScript_15B272:: @ 815B272
+SootopolisCity_Mart_EventScript_Gentleman:: @ 815B272
 	lock
 	faceplayer
-	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_Mart_EventScript_15B290
-	goto_if_unset FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_Mart_EventScript_15B290
-	msgbox SootopolisCity_Mart_Text_18F96B, MSGBOX_DEFAULT
+	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_Mart_EventScript_GentlemanNoLegendary
+	goto_if_unset FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_Mart_EventScript_GentlemanNoLegendary
+	msgbox SootopolisCity_Mart_Text_DidSomethingAwaken, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_Mart_EventScript_15B290:: @ 815B290
-	msgbox SootopolisCity_Mart_Text_18F8F2, MSGBOX_DEFAULT
+SootopolisCity_Mart_EventScript_GentlemanNoLegendary:: @ 815B290
+	msgbox SootopolisCity_Mart_Text_FullRestoreItemOfDreams, MSGBOX_DEFAULT
 	release
 	end

@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_Mart_EventScript_15B21B",
+      "script": "SootopolisCity_Mart_EventScript_Clerk",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_Mart_EventScript_15B24A",
+      "script": "SootopolisCity_Mart_EventScript_FatMan",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_Mart_EventScript_15B272",
+      "script": "SootopolisCity_Mart_EventScript_Gentleman",
       "flag": "0"
     }
   ],

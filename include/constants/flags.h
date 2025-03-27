@@ -124,7 +124,7 @@
 #define FLAG_RECEIVED_TM42                  0xA9
 #define FLAG_RECEIVED_TM_AERIAL_ACE                  0xAA
 #define FLAG_RECEIVED_TM_CALM_MIND                  0xAB
-#define FLAG_RECEIVED_TM03                  0xAC
+#define FLAG_RECEIVED_TM_WATER_PULSE                  0xAC
 #define FLAG_DECORATION_1                   0xAD
 #define FLAG_DECORATION_2                   0xAE
 #define FLAG_DECORATION_3                   0xAF
