@@ -16,5 +16,5 @@ MossdeepCity_House4_Text_MakeSecretBase:: @ 818E1A7
 	.string "BASIS einrichten, werde ich sie sicher\l"
 	.string "finden.$"
 
-MossdeepCity_House4_Text_Skitty:: @ 818E1E1
+MossdeepCity_House4_Text_Delcatty:: @ 818E1E1
 	.string "ENEKORO: Miyaan?$"
