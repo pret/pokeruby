@@ -4,7 +4,7 @@ SootopolisCity_House3_MapScripts:: @ 815B319
 SootopolisCity_House3_EventScript_Woman:: @ 815B31A
 	lock
 	faceplayer
-	msgbox SootopolisCity_House3_Text_JuanHasManyFansDoYou, MSGBOX_YESNO
+	msgbox SootopolisCity_House3_Text_WallaceHasManyFansDoYou, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq SootopolisCity_House3_EventScript_HaveFans
 	msgbox SootopolisCity_House3_Text_LonesomeTryWorkingHarder, MSGBOX_DEFAULT

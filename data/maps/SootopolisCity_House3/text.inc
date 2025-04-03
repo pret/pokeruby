@@ -1,4 +1,4 @@
-SootopolisCity_House3_Text_JuanHasManyFansDoYou:: @ 818FB36
+SootopolisCity_House3_Text_WallaceHasManyFansDoYou:: @ 818FB36
 	.string "You're a POKéMON TRAINER, aren't you?\p"
 	.string "SOOTOPOLIS's GYM LEADER WALLACE has\n"
 	.string "many fans.\l"
