@@ -15,7 +15,7 @@ SlateportCity_OceanicMuseum_2F_Text_SternWhoAreYou:: @ 817EDD7
 	.string "KAPT. BRIGG: W... Was?\n"
 	.string "Wer seid ihr?$"
 
-SlateportCity_OceanicMuseum_2F_Text_WereTeamEvilTeam:: @ 817EE01
+SlateportCity_OceanicMuseum_2F_Text_WereEvilTeam:: @ 817EE01
 	.string "Wir sind TEAM {EVIL_TEAM}!\p"
 	.string "Unser BOSS will diese Dinge haben!\n"
 	.string "Also hört auf zu labern und lasst die\l"

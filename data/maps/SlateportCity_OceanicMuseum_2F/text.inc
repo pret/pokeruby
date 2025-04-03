@@ -14,7 +14,7 @@ SlateportCity_OceanicMuseum_2F_Text_SternWhoAreYou:: @ 817EDD7
 	.string "CAPT. STERN: Wh-what?\n"
 	.string "Who are you people?$"
 
-SlateportCity_OceanicMuseum_2F_Text_WereTeamEvilTeam:: @ 817EE01
+SlateportCity_OceanicMuseum_2F_Text_WereEvilTeam:: @ 817EE01
 	.string "We're TEAM {EVIL_TEAM}!\p"
 	.string "Our BOSS wants those parts!\n"
 	.string "Shut your yap and fork them over!$"

@@ -29,7 +29,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern:: @ 8155CE6
 	compare VAR_FACING, 4
 	call_if_ne SlateportCity_OceanicMuseum_2F_EventScript_SternFaceGrunts
 	msgbox SlateportCity_OceanicMuseum_2F_Text_SternWhoAreYou, MSGBOX_DEFAULT
-	msgbox SlateportCity_OceanicMuseum_2F_Text_WereTeamEvilTeam, MSGBOX_DEFAULT
+	msgbox SlateportCity_OceanicMuseum_2F_Text_WereEvilTeam, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_GruntApproachToBattle
 	waitmovement 0

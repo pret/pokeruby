@@ -6,7 +6,7 @@ SlateportCity_Harbor_OnTransition:: @ 8155F63
 	setescapewarp MAP_SLATEPORT_CITY, 255, 28, 13
 	setvar VAR_TEMP_1, 0
 	compare VAR_SLATEPORT_HARBOR_STATE, 1
-	call_if_eq SlateportCity_Harbor_EventScript_ReadyAquaEscapeScene
+	call_if_eq SlateportCity_Harbor_EventScript_ReadyEvilTeamEscapeScene
 	call_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_ShowSSTidal
 	end
 
@@ -14,7 +14,7 @@ SlateportCity_Harbor_EventScript_ShowSSTidal:: @ 8155F85
 	clearflag FLAG_HIDE_SS_TIDAL_SLATEPORT_HARBOR
 	return
 
-SlateportCity_Harbor_EventScript_ReadyAquaEscapeScene:: @ 8155F89
+SlateportCity_Harbor_EventScript_ReadyEvilTeamEscapeScene:: @ 8155F89
 	savebgm MUS_EVIL_TEAM
 	setobjectxyperm 4, 12, 13
 	setobjectmovementtype 4, 9
