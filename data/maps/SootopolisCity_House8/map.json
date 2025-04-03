@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_LotadAndSeedotHouse_EventScript_BarboachBrother",
+      "script": "SootopolisCity_MonSizeRecordHouse_EventScript_BarboachBrother",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_LotadAndSeedotHouse_EventScript_ShroomishBrother",
+      "script": "SootopolisCity_MonSizeRecordHouse_EventScript_ShroomishBrother",
       "flag": "0"
     }
   ],
@@ -62,7 +62,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SootopolisCity_LotadAndSeedotHouse_EventScript_ShroomishSizeRecord"
+      "script": "SootopolisCity_MonSizeRecordHouse_EventScript_ShroomishSizeRecord"
     },
     {
       "type": "sign",
@@ -70,7 +70,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SootopolisCity_LotadAndSeedotHouse_EventScript_BarboachSizeRecord"
+      "script": "SootopolisCity_MonSizeRecordHouse_EventScript_BarboachSizeRecord"
     }
   ]
 }
