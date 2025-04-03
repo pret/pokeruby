@@ -1,4 +1,4 @@
-MauvilleCity_House1_Text_ImRockSmashDudeTakeThis:: @ 8181B1A
+MauvilleCity_House1_Text_RockSmashHMMan:: @ 8181B1A
 	.string "Woohoo, deine POKéMON sehen wirklich\n"
 	.string "sehr stark aus.\p"
 	.string "Das sehe ich gerne!\n"
