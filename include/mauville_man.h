@@ -5,7 +5,7 @@
 
 void SetupMauvilleOldMan(void);
 void sub_80F7F30(void);
-void sub_80F83D0(void);
+void SetMauvilleOldManObjEventGfx(void);
 void debug_sub_810B32C(u8);
 u8 GetCurrentMauvilleOldMan(void);
 

@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_PokemonFanClub_EventScript_155A7F",
+      "script": "SlateportCity_PokemonFanClub_EventScript_Man",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_PokemonFanClub_EventScript_155A88",
+      "script": "SlateportCity_PokemonFanClub_EventScript_Twin",
       "flag": "0"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_PokemonFanClub_EventScript_155A15",
+      "script": "SlateportCity_PokemonFanClub_EventScript_SootheBellWoman",
       "flag": "0"
     },
     {
@@ -73,7 +73,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_PokemonFanClub_EventScript_15576B",
+      "script": "SlateportCity_PokemonFanClub_EventScript_Chairman",
       "flag": "0"
     },
     {
@@ -86,7 +86,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_PokemonFanClub_EventScript_155AA4",
+      "script": "SlateportCity_PokemonFanClub_EventScript_Zigzagoon",
       "flag": "0"
     },
     {
@@ -99,7 +99,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_PokemonFanClub_EventScript_155A91",
+      "script": "SlateportCity_PokemonFanClub_EventScript_Skitty",
       "flag": "0"
     },
     {
@@ -112,7 +112,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_PokemonFanClub_EventScript_155AB7",
+      "script": "SlateportCity_PokemonFanClub_EventScript_Azumarill",
       "flag": "0"
     }
   ],

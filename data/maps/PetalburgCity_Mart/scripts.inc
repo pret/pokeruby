@@ -1,19 +1,19 @@
 PetalburgCity_Mart_MapScripts:: @ 81552AF
 	.byte 0
 
-PetalburgCity_Mart_EventScript_1552B0:: @ 81552B0
+PetalburgCity_Mart_EventScript_Clerk:: @ 81552B0
 	lock
 	faceplayer
 	message Text_HowMayIServeYou
 	waitmessage
-	goto_if_set FLAG_PETALBURG_MART_EXPANDED_ITEMS, PetalburgCity_Mart_EventScript_1552EA
-	pokemart PetalburgCity_Mart_Items1
+	goto_if_set FLAG_PETALBURG_MART_EXPANDED_ITEMS, PetalburgCity_Mart_EventScript_ExpandedItems
+	pokemart PetalburgCity_Mart_Pokemart_Basic
 	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-PetalburgCity_Mart_Items1:: @ 81552D0
+PetalburgCity_Mart_Pokemart_Basic:: @ 81552D0
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_POTION
 	.2byte ITEM_ANTIDOTE
@@ -29,14 +29,14 @@ PetalburgCity_Mart_Items1:: @ 81552D0
 	release
 	end
 
-PetalburgCity_Mart_EventScript_1552EA:: @ 81552EA
-	pokemart PetalburgCity_Mart_Items2
+PetalburgCity_Mart_EventScript_ExpandedItems:: @ 81552EA
+	pokemart PetalburgCity_Mart_Pokemart_Expanded
 	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-PetalburgCity_Mart_Items2:: @ 81552FC
+PetalburgCity_Mart_Pokemart_Expanded:: @ 81552FC
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_POTION
@@ -54,14 +54,14 @@ PetalburgCity_Mart_Items2:: @ 81552FC
 	release
 	end
 
-PetalburgCity_Mart_EventScript_15531A:: @ 815531A
-	msgbox PetalburgCity_Mart_Text_17BFFD, MSGBOX_NPC
+PetalburgCity_Mart_EventScript_Woman:: @ 815531A
+	msgbox PetalburgCity_Mart_Text_WeakWillGrowStronger, MSGBOX_NPC
 	end
 
-PetalburgCity_Mart_EventScript_155323:: @ 8155323
-	msgbox PetalburgCity_Mart_Text_17C06C, MSGBOX_NPC
+PetalburgCity_Mart_EventScript_Boy:: @ 8155323
+	msgbox PetalburgCity_Mart_Text_RepelIsUseful, MSGBOX_NPC
 	end
 
-PetalburgCity_Mart_EventScript_15532C:: @ 815532C
-	msgbox PetalburgCity_Mart_Text_17C0BC, MSGBOX_NPC
+PetalburgCity_Mart_EventScript_Man:: @ 815532C
+	msgbox PetalburgCity_Mart_Text_TakeSomeAntidotesWithYou, MSGBOX_NPC
 	end

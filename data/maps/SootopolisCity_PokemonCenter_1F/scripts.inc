@@ -1,8 +1,8 @@
 SootopolisCity_PokemonCenter_1F_MapScripts:: @ 815B190
-	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_PokemonCenter_1F_MapScript1_15B196
+	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_PokemonCenter_1F_OnTransition
 	.byte 0
 
-SootopolisCity_PokemonCenter_1F_MapScript1_15B196:: @ 815B196
+SootopolisCity_PokemonCenter_1F_OnTransition:: @ 815B196
 	setrespawn HEAL_LOCATION_SOOTOPOLIS_CITY
 	end
 
@@ -14,30 +14,30 @@ SootopolisCity_PokemonCenter_1F_MapScript1_15B196:: @ 815B196
 	release
 	end
 
-SootopolisCity_PokemonCenter_1F_EventScript_15B1A8:: @ 815B1A8
+SootopolisCity_PokemonCenter_1F_EventScript_Gentleman:: @ 815B1A8
 	lock
 	faceplayer
-	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_PokemonCenter_1F_EventScript_15B1C6
-	goto_if_unset FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_PokemonCenter_1F_EventScript_15B1C6
-	msgbox SootopolisCity_PokemonCenter_1F_Text_18F770, MSGBOX_DEFAULT
+	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_PokemonCenter_1F_EventScript_GentlemanNoLegendary
+	goto_if_unset FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_PokemonCenter_1F_EventScript_GentlemanNoLegendary
+	msgbox SootopolisCity_PokemonCenter_1F_Text_EveryoneTakenRefuge, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_PokemonCenter_1F_EventScript_15B1C6:: @ 815B1C6
-	msgbox SootopolisCity_PokemonCenter_1F_Text_18F6A2, MSGBOX_DEFAULT
+SootopolisCity_PokemonCenter_1F_EventScript_GentlemanNoLegendary:: @ 815B1C6
+	msgbox SootopolisCity_PokemonCenter_1F_Text_WallaceToughestInHoenn, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_PokemonCenter_1F_EventScript_15B1D0:: @ 815B1D0
+SootopolisCity_PokemonCenter_1F_EventScript_Woman:: @ 815B1D0
 	lock
 	faceplayer
-	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_PokemonCenter_1F_EventScript_15B1EE
-	goto_if_unset FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_PokemonCenter_1F_EventScript_15B1EE
-	msgbox SootopolisCity_PokemonCenter_1F_Text_18F860, MSGBOX_DEFAULT
+	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_PokemonCenter_1F_EventScript_WomanNoLegendary
+	goto_if_unset FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_PokemonCenter_1F_EventScript_WomanNoLegendary
+	msgbox SootopolisCity_PokemonCenter_1F_Text_ImReallyScared, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_PokemonCenter_1F_EventScript_15B1EE:: @ 815B1EE
-	msgbox SootopolisCity_PokemonCenter_1F_Text_18F7EA, MSGBOX_DEFAULT
+SootopolisCity_PokemonCenter_1F_EventScript_WomanNoLegendary:: @ 815B1EE
+	msgbox SootopolisCity_PokemonCenter_1F_Text_AlwaysBeFriendsWithPokemon, MSGBOX_DEFAULT
 	release
 	end

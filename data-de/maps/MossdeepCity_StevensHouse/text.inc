@@ -1,4 +1,4 @@
-MossdeepCity_StevensHouse_Text_18DA77:: @ 818DA77
+MossdeepCity_StevensHouse_Text_YouveEarnedHMDive:: @ 818DA77
 	.string "TROY: {PLAYER}{KUN}?\p"
 	.string "Ja, das ist mein Zuhause. Peinlich, wie\n"
 	.string "kahl die Räume hier sind.\p"
@@ -6,7 +6,7 @@ MossdeepCity_StevensHouse_Text_18DA77:: @ 818DA77
 	.string "Sie enthält TAUCHER. Ich habe das\n"
 	.string "meinen POKéMON schon beigebracht.$"
 
-MossdeepCity_StevensHouse_Text_18DB22:: @ 818DB22
+MossdeepCity_StevensHouse_Text_ExplainDive:: @ 818DB22
 	.string "TROY: Wenn du SURFER einsetzt und\n"
 	.string "über das Meer gleitest, wirst du dunkle\l"
 	.string "Stellen im Wasser bemerken können.\p"
@@ -17,7 +17,7 @@ MossdeepCity_StevensHouse_Text_18DB22:: @ 818DB22
 	.string "An manchen Stellen ist das Auftauchen\n"
 	.string "allerdings nicht möglich.$"
 
-MossdeepCity_StevensHouse_Text_18DC25:: @ 818DC25
+MossdeepCity_StevensHouse_Text_UnderwateCavernBetweenMossdeepSootopolis:: @ 818DC25
 	.string "TROY: Zwischen MOOSBACH CITY und\n"
 	.string "XENEROVILLE gibt es eine Unterwasser-\l"
 	.string "höhle.\p"
@@ -28,23 +28,23 @@ MossdeepCity_StevensHouse_Text_18DC25:: @ 818DC25
 	.string "Steine zu finden... Ich sollte auch\l"
 	.string "einmal TAUCHER einsetzen...$"
 
-MossdeepCity_StevensHouse_Text_18DD12:: @ 818DD12
+MossdeepCity_StevensHouse_Text_TakeBallContainingBeldum:: @ 818DD12
 	.string "{PLAYER} überprüft den POKéBALL.\p"
 	.string "Er enthält das POKéMON\n"
 	.string "TANHEL.\p"
 	.string "Den POKéBALL nehmen?$"
 
-MossdeepCity_StevensHouse_Text_18DD61:: @ 818DD61
+MossdeepCity_StevensHouse_Text_ObtainedBeldum:: @ 818DD61
 	.string "{PLAYER} hat TANHEL erhalten.$"
 
-MossdeepCity_StevensHouse_Text_18DD77:: @ 818DD77
+MossdeepCity_StevensHouse_Text_NoSpaceForAnotherMon:: @ 818DD77
 	.string "Es ist nicht genug Platz vorhanden für\n"
 	.string "ein weiteres POKéMON.$"
 
-MossdeepCity_StevensHouse_Text_18DD9E:: @ 818DD9E
+MossdeepCity_StevensHouse_Text_LeftPokeBallWhereItWas:: @ 818DD9E
 	.string "{PLAYER} legt den POKéBALL zurück.$"
 
-MossdeepCity_StevensHouse_Text_18DDC2:: @ 818DDC2
+MossdeepCity_StevensHouse_Text_LetterFromSteven:: @ 818DDC2
 	.string "Das ist ein Brief.\p"
 	.string "\n"
 	.string "... ... ... ... ... ...\p"
@@ -64,7 +64,7 @@ MossdeepCity_StevensHouse_Text_18DDC2:: @ 818DDC2
 	.string "Mögen wir uns eines Tages wieder sehen.\p"
 	.string "TROY TRUMM$"
 
-MossdeepCity_StevensHouse_Text_18DF1A:: @ 818DF1A
+MossdeepCity_StevensHouse_Text_LetterFromStevenWithDive:: @ 818DF1A
 	.string "Das ist ein Brief.\p"
 	.string "\n"
 	.string "... ... ... ... ... ...\p"
@@ -86,6 +86,6 @@ MossdeepCity_StevensHouse_Text_18DF1A:: @ 818DF1A
 	.string "Mögen wir uns eines Tages wieder sehen.\p"
 	.string "TROY TRUMM$"
 
-MossdeepCity_StevensHouse_Text_18E0A3:: @ 818E0A3
+MossdeepCity_StevensHouse_Text_CollectionOfRareRocks:: @ 818E0A3
 	.string "Eine Kollektion seltener Steine,\n"
 	.string "zusammengetragen von TROY.$"

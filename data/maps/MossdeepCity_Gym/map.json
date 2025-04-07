@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MossdeepCity_Gym_EventScript_15A56B",
+      "script": "MossdeepCity_Gym_EventScript_TateAndLiza",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "MossdeepCity_Gym_EventScript_15A74E",
+      "script": "MossdeepCity_Gym_EventScript_Preston",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "MossdeepCity_Gym_EventScript_15A77C",
+      "script": "MossdeepCity_Gym_EventScript_Fritz",
       "flag": "0"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "MossdeepCity_Gym_EventScript_15A7C1",
+      "script": "MossdeepCity_Gym_EventScript_Maura",
       "flag": "0"
     },
     {
@@ -73,7 +73,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "MossdeepCity_Gym_EventScript_15A7AA",
+      "script": "MossdeepCity_Gym_EventScript_Samantha",
       "flag": "0"
     },
     {
@@ -86,7 +86,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "MossdeepCity_Gym_EventScript_15A765",
+      "script": "MossdeepCity_Gym_EventScript_Virgil",
       "flag": "0"
     },
     {
@@ -99,7 +99,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "MossdeepCity_Gym_EventScript_15A793",
+      "script": "MossdeepCity_Gym_EventScript_Hannah",
       "flag": "0"
     },
     {
@@ -112,7 +112,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MossdeepCity_Gym_EventScript_15A7D8",
+      "script": "MossdeepCity_Gym_EventScript_GymGuide",
       "flag": "0"
     },
     {
@@ -125,7 +125,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MossdeepCity_Gym_EventScript_15A56B",
+      "script": "MossdeepCity_Gym_EventScript_TateAndLiza",
       "flag": "0"
     }
   ],
@@ -153,7 +153,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "MossdeepCity_Gym_EventScript_15A742"
+      "script": "MossdeepCity_Gym_EventScript_WarpToEntrance"
     }
   ],
   "bg_events": [
@@ -163,7 +163,7 @@
       "y": 7,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "MossdeepCity_Gym_EventScript_15A5EA"
+      "script": "MossdeepCity_Gym_EventScript_Switch1"
     },
     {
       "type": "sign",
@@ -171,7 +171,7 @@
       "y": 10,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "MossdeepCity_Gym_EventScript_15A646"
+      "script": "MossdeepCity_Gym_EventScript_Switch2"
     },
     {
       "type": "sign",
@@ -179,7 +179,7 @@
       "y": 15,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "MossdeepCity_Gym_EventScript_15A69A"
+      "script": "MossdeepCity_Gym_EventScript_Switch3"
     },
     {
       "type": "sign",
@@ -187,7 +187,7 @@
       "y": 24,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "MossdeepCity_Gym_EventScript_15A6EE"
+      "script": "MossdeepCity_Gym_EventScript_Switch4"
     },
     {
       "type": "sign",
@@ -195,7 +195,7 @@
       "y": 27,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "MossdeepCity_Gym_EventScript_15A7FA"
+      "script": "MossdeepCity_Gym_EventScript_LeftGymStatue"
     },
     {
       "type": "sign",
@@ -203,7 +203,7 @@
       "y": 27,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "MossdeepCity_Gym_EventScript_15A80A"
+      "script": "MossdeepCity_Gym_EventScript_RightGymStatue"
     }
   ]
 }

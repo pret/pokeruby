@@ -1,4 +1,4 @@
-SootopolisCity_House8_Text_1900F7:: @ 81900F7
+SootopolisCity_MonSizeRecordHouse_Text_PleaseShowMeBigShroomish:: @ 81900F7
 	.string "Do you know the POKéMON SHROOMISH?\n"
 	.string "It's hardly ever seen in SOOTOPOLIS.\p"
 	.string "Anyway, I love big SHROOMISH.\n"
@@ -10,7 +10,7 @@ SootopolisCity_House8_Text_1900F7:: @ 81900F7
 	.string "Huh? Do you have a SHROOMISH with you?\n"
 	.string "P-p-please, show me!$"
 
-SootopolisCity_House8_Text_19021D:: @ 819021D
+SootopolisCity_MonSizeRecordHouse_Text_GoshMightBeBiggerThanBarboach:: @ 819021D
 	.string "{STR_VAR_2} inches!\n"
 	.string "Oh, my gosh, this is a big one!\p"
 	.string "It might even beat the big BARBOACH\n"
@@ -21,32 +21,32 @@ SootopolisCity_House8_Text_19021D:: @ 819021D
 UnknownString_81902AE: @ 81902AE
 	.string "{PLAYER} received a POTION.$"
 
-SootopolisCity_House8_Text_1902C4:: @ 81902C4
+SootopolisCity_MonSizeRecordHouse_Text_BagCrammedFull1:: @ 81902C4
 	.string "Hunh?\n"
 	.string "Your BAG is crammed full.$"
 
-SootopolisCity_House8_Text_1902E4:: @ 81902E4
+SootopolisCity_MonSizeRecordHouse_Text_SeenBiggerShroomish:: @ 81902E4
 	.string "{STR_VAR_2} inches, is it?\p"
 	.string "Hmm... I've seen a bigger SHROOMISH\n"
 	.string "than this one.$"
 
-SootopolisCity_House8_Text_190329:: @ 8190329
+SootopolisCity_MonSizeRecordHouse_Text_ThatsNotShroomish:: @ 8190329
 	.string "Oh, now this is quite something...\n"
 	.string "But it's not a SHROOMISH!$"
 
-SootopolisCity_House8_Text_190366:: @ 8190366
+SootopolisCity_MonSizeRecordHouse_Text_DontHaveBigShroomish:: @ 8190366
 	.string "You don't have a big SHROOMISH?\n"
 	.string "That's too bad...\p"
 	.string "If you get a big SHROOMISH, please\n"
 	.string "come show me.$"
 
-SootopolisCity_House8_Text_1903C9:: @ 81903C9
+SootopolisCity_MonSizeRecordHouse_Text_BiggestShroomishInHistory:: @ 81903C9
 	.string "The biggest SHROOMISH in history!\n"
 	.string "{STR_VAR_2}'s {STR_VAR_3}-inch giant!\p"
 	.string "A SHROOMISH bigger than a BARBOACH\n"
 	.string "always wanted!$"
 
-SootopolisCity_House8_Text_190431:: @ 8190431
+SootopolisCity_MonSizeRecordHouse_Text_PleaseShowMeBigBarboach:: @ 8190431
 	.string "Do you know the POKéMON BARBOACH?\n"
 	.string "It's rarely seen in SOOTOPOLIS.\p"
 	.string "I love, I mean love, big BARBOACH!\p"
@@ -57,7 +57,7 @@ SootopolisCity_House8_Text_190431:: @ 8190431
 	.string "Hunh? Do you have a BARBOACH?\n"
 	.string "P-p-please show me!$"
 
-SootopolisCity_House8_Text_190536:: @ 8190536
+SootopolisCity_MonSizeRecordHouse_Text_WowMightBeBiggerThanBarboach:: @ 8190536
 	.string "{STR_VAR_2} inches!\n"
 	.string "Wow, that is big!\p"
 	.string "It might be even bigger than the huge\n"
@@ -65,25 +65,25 @@ SootopolisCity_House8_Text_190536:: @ 8190536
 	.string "Thanks for showing me!\n"
 	.string "This is my thanks!$"
 
-SootopolisCity_House8_Text_1905C1:: @ 81905C1
+SootopolisCity_House8_Text_BagIsFull:: @ 81905C1
 	.string "Whoops, looks like your BAG is full.$"
 
-SootopolisCity_House8_Text_1905E6:: @ 81905E6
+SootopolisCity_MonSizeRecordHouse_Text_SeenBiggerBarboach:: @ 81905E6
 	.string "{STR_VAR_2} inches?\p"
 	.string "Hmm... I've seen a bigger BARBOACH\n"
 	.string "than this one here.$"
 
-SootopolisCity_House8_Text_190628:: @ 8190628
+SootopolisCity_MonSizeRecordHouse_Text_ThatsNotBarboach:: @ 8190628
 	.string "Well, isn't this something!\n"
 	.string "But it's no BARBOACH!$"
 
-SootopolisCity_House8_Text_19065A:: @ 819065A
+SootopolisCity_MonSizeRecordHouse_Text_DontHaveBigBarboach:: @ 819065A
 	.string "Don't you have a big BARBOACH?\n"
 	.string "How disappointing...\p"
 	.string "If you get a big BARBOACH, please\n"
 	.string "come show me!$"
 
-SootopolisCity_House8_Text_1906BE:: @ 81906BE
+SootopolisCity_MonSizeRecordHouse_Text_BiggestBarboachInHistory:: @ 81906BE
 	.string "The biggest BARBOACH in history!\n"
 	.string "{STR_VAR_2}'s {STR_VAR_3}-inch colossus!\p"
 	.string "A BARBOACH bigger than a SHROOMISH\n"

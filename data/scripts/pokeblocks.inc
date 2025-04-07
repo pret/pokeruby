@@ -6,7 +6,7 @@ FallarborTown_ContestLobby_EventScript_BerryBlender2:: @ 81B7604
 	goto FallarborTown_ContestLobby_EventScript_1B7681
 	end
 
-SlateportCity_ContestLobby_EventScript_1B761E:: @ 81B761E
+SlateportCity_ContestLobby_EventScript_BerryBlender1:: @ 81B761E
 	setvar VAR_0x8008, 2
 	setvar VAR_0x8009, 2
 	applymovement 6, Common_Movement_FaceOriginalDirection
@@ -125,7 +125,7 @@ FallarborTown_ContestLobby_EventScript_BerryBlenderMan:: @ 81B778A
 	goto VerdanturfTown_ContestLobby_EventScript_BerryBlendWithNPC
 	end
 
-SlateportCity_ContestLobby_EventScript_1B7795:: @ 81B7795
+SlateportCity_ContestLobby_EventScript_MasterM:: @ 81B7795
 	setvar VAR_0x8008, 2
 	goto VerdanturfTown_ContestLobby_EventScript_BerryBlendWithNPC
 	end
@@ -186,7 +186,7 @@ FallarborTown_ContestLobby_EventScript_BerryBlender1:: @ 81B7823
 	goto FallarborTown_ContestLobby_EventScript_1B783B
 	end
 
-SlateportCity_ContestLobby_EventScript_1B7829:: @ 81B7829
+SlateportCity_ContestLobby_EventScript_BerryBlender0:: @ 81B7829
 	goto SlateportCity_ContestLobby_EventScript_1B783B
 	end
 

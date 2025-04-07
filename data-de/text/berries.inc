@@ -1,4 +1,4 @@
-PetalburgCity_Gym_Text_1C5570:: @ 81C5570
+PetalburgCity_Gym_Text_GiveEnigmaBerry:: @ 81C5570
 	.string "VATER: Hallo, {PLAYER}!\p"
 	.string "Ich habe gerade eine sehr seltene\n"
 	.string "BEERE erhalten. Die schenke ich dir.$"

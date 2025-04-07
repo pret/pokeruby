@@ -247,7 +247,7 @@ void SetupMauvilleOldMan(void)
         SetupGiddy();
         break;
     }
-    sub_80F83D0();
+    SetMauvilleOldManObjEventGfx();
 }
 
 #if DEBUG
@@ -278,7 +278,7 @@ void debug_sub_810B32C(u8 a)
         SetupGiddy();
         break;
     }
-    sub_80F83D0();
+    SetMauvilleOldManObjEventGfx();
 }
 #endif
 
@@ -562,7 +562,7 @@ void sub_80F7F30(void)
     case MAUVILLE_MAN_GIDDY:
         break;
     }
-    sub_80F83D0();
+    SetMauvilleOldManObjEventGfx();
 }
 
 #define tState data[0]
@@ -804,7 +804,7 @@ static void Task_BardSong(u8 taskId)
     }
 }
 
-void sub_80F83D0(void)
+void SetMauvilleOldManObjEventGfx(void)
 {
     VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_BARD + GetCurrentMauvilleOldMan());
 }

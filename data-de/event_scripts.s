@@ -1080,8 +1080,8 @@ gText_PlayerHouseBootPC:: @ 81A10D6
 FallarborTown_ContestLobby_Text_1A10EB:: @ 81A10EB
 	.string "Die Verbindung wurde abgebrochen.$"
 
-MossdeepCity_StevensHouse_Text_1A1102:: @ 81A1102
-RustboroCity_DevonCorp_2F_Text_1A1102:: @ 81A1102
+gText_NicknameReceivedPokemon:: @ 81A1102
+gText_NicknameReceivedPokemon:: @ 81A1102
 	.string "Möchtest du {STR_VAR_2} einen\n"
 	.string "Kosenamen geben?$"
 
@@ -1371,7 +1371,7 @@ SlateportCity_PokemonFanClub_EventScript_1AE0AC:: @ 81AE0AC
 
 FallarborTown_ContestLobby_EventScript_Reporter:: @ 81AE0B6
 LilycoveCity_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
-SlateportCity_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
+SlateportCity_ContestLobby_EventScript_Reporter:: @ 81AE0B6
 VerdanturfTown_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
 	lock
 	faceplayer
@@ -1606,7 +1606,7 @@ Text_RepelWoreOff: @ 81C33EF
 MauvilleCity_GameCorner_EventScript_1C407E:: @ 81C407E
 	checkitem ITEM_COIN_CASE, 1
 	compare VAR_RESULT, 0
-	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
+	goto_if_eq MauvilleCity_GameCorner_EventScript_NoCoinCase
 	setvar VAR_0x8004, 0
 	getpricereduction 2
 	compare VAR_RESULT, 0
@@ -1618,7 +1618,7 @@ MauvilleCity_GameCorner_EventScript_1C407E:: @ 81C407E
 MauvilleCity_GameCorner_EventScript_1C40AC:: @ 81C40AC
 	checkitem ITEM_COIN_CASE, 1
 	compare VAR_RESULT, 0
-	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
+	goto_if_eq MauvilleCity_GameCorner_EventScript_NoCoinCase
 	setvar VAR_0x8004, 1
 	getpricereduction 2
 	compare VAR_RESULT, 0

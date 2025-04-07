@@ -1,114 +1,114 @@
 SootopolisCity_House8_MapScripts:: @ 815B400
 	.byte 0
 
-SootopolisCity_House8_EventScript_15B401:: @ 815B401
+SootopolisCity_MonSizeRecordHouse_EventScript_ShroomishBrother:: @ 815B401
 	special GetShroomishSizeRecordInfo
 	lock
 	faceplayer
-	msgbox SootopolisCity_House8_Text_1900F7, MSGBOX_DEFAULT
+	msgbox SootopolisCity_MonSizeRecordHouse_Text_PleaseShowMeBigShroomish, MSGBOX_DEFAULT
 	special SelectMonForNPCTrade
 	waitstate
 	copyvar VAR_RESULT, VAR_0x8004
 	compare VAR_RESULT, 255
-	goto_if_eq SootopolisCity_House8_EventScript_15B448
+	goto_if_eq SootopolisCity_MonSizeRecordHouse_EventScript_CancelShowShroomish
 	special CompareShroomishSize
 	compare VAR_RESULT, 1
-	goto_if_eq SootopolisCity_House8_EventScript_15B452
+	goto_if_eq SootopolisCity_MonSizeRecordHouse_EventScript_NotShroomish
 	compare VAR_RESULT, 2
-	goto_if_eq SootopolisCity_House8_EventScript_15B45C
+	goto_if_eq SootopolisCity_MonSizeRecordHouse_EventScript_SmallShroomish
 	compare VAR_RESULT, 3
-	goto_if_eq SootopolisCity_House8_EventScript_15B466
+	goto_if_eq SootopolisCity_MonSizeRecordHouse_EventScript_BigShroomish
 	release
 	end
 
-SootopolisCity_House8_EventScript_15B448:: @ 815B448
-	msgbox SootopolisCity_House8_Text_190366, MSGBOX_DEFAULT
+SootopolisCity_MonSizeRecordHouse_EventScript_CancelShowShroomish:: @ 815B448
+	msgbox SootopolisCity_MonSizeRecordHouse_Text_DontHaveBigShroomish, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_House8_EventScript_15B452:: @ 815B452
-	msgbox SootopolisCity_House8_Text_190329, MSGBOX_DEFAULT
+SootopolisCity_MonSizeRecordHouse_EventScript_NotShroomish:: @ 815B452
+	msgbox SootopolisCity_MonSizeRecordHouse_Text_ThatsNotShroomish, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_House8_EventScript_15B45C:: @ 815B45C
-	msgbox SootopolisCity_House8_Text_1902E4, MSGBOX_DEFAULT
+SootopolisCity_MonSizeRecordHouse_EventScript_SmallShroomish:: @ 815B45C
+	msgbox SootopolisCity_MonSizeRecordHouse_Text_SeenBiggerShroomish, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_House8_EventScript_15B466:: @ 815B466
-	msgbox SootopolisCity_House8_Text_19021D, MSGBOX_DEFAULT
+SootopolisCity_MonSizeRecordHouse_EventScript_BigShroomish:: @ 815B466
+	msgbox SootopolisCity_MonSizeRecordHouse_Text_GoshMightBeBiggerThanBarboach, MSGBOX_DEFAULT
 	giveitem ITEM_ELIXIR
 	compare VAR_RESULT, 0
-	goto_if_eq SootopolisCity_House8_EventScript_15B488
+	goto_if_eq SootopolisCity_MonSizeRecordHouse_EventScript_NoRoomForElixir1
 	closemessage
 	release
 	end
 
-SootopolisCity_House8_EventScript_15B488:: @ 815B488
-	msgbox SootopolisCity_House8_Text_1902C4, MSGBOX_DEFAULT
+SootopolisCity_MonSizeRecordHouse_EventScript_NoRoomForElixir1:: @ 815B488
+	msgbox SootopolisCity_MonSizeRecordHouse_Text_BagCrammedFull1, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_House8_EventScript_15B492:: @ 815B492
+SootopolisCity_MonSizeRecordHouse_EventScript_BarboachBrother:: @ 815B492
 	special GetBarboachSizeRecordInfo
 	lock
 	faceplayer
-	msgbox SootopolisCity_House8_Text_190431, MSGBOX_DEFAULT
+	msgbox SootopolisCity_MonSizeRecordHouse_Text_PleaseShowMeBigBarboach, MSGBOX_DEFAULT
 	special SelectMonForNPCTrade
 	waitstate
 	copyvar VAR_RESULT, VAR_0x8004
 	compare VAR_RESULT, 255
-	goto_if_eq SootopolisCity_House8_EventScript_15B4D9
+	goto_if_eq SootopolisCity_MonSizeRecordHouse_EventScript_CancelShowBarboach
 	special CompareBarboachSize
 	compare VAR_RESULT, 1
-	goto_if_eq SootopolisCity_House8_EventScript_15B4E3
+	goto_if_eq SootopolisCity_MonSizeRecordHouse_EventScript_NotBarboach
 	compare VAR_RESULT, 2
-	goto_if_eq SootopolisCity_House8_EventScript_15B4ED
+	goto_if_eq SootopolisCity_MonSizeRecordHouse_EventScript_SmallBarboach
 	compare VAR_RESULT, 3
-	goto_if_eq SootopolisCity_House8_EventScript_15B4F7
+	goto_if_eq SootopolisCity_MonSizeRecordHouse_EventScript_BigBarboach
 	release
 	end
 
-SootopolisCity_House8_EventScript_15B4D9:: @ 815B4D9
-	msgbox SootopolisCity_House8_Text_19065A, MSGBOX_DEFAULT
+SootopolisCity_MonSizeRecordHouse_EventScript_CancelShowBarboach:: @ 815B4D9
+	msgbox SootopolisCity_MonSizeRecordHouse_Text_DontHaveBigBarboach, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_House8_EventScript_15B4E3:: @ 815B4E3
-	msgbox SootopolisCity_House8_Text_190628, MSGBOX_DEFAULT
+SootopolisCity_MonSizeRecordHouse_EventScript_NotBarboach:: @ 815B4E3
+	msgbox SootopolisCity_MonSizeRecordHouse_Text_ThatsNotBarboach, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_House8_EventScript_15B4ED:: @ 815B4ED
-	msgbox SootopolisCity_House8_Text_1905E6, MSGBOX_DEFAULT
+SootopolisCity_MonSizeRecordHouse_EventScript_SmallBarboach:: @ 815B4ED
+	msgbox SootopolisCity_MonSizeRecordHouse_Text_SeenBiggerBarboach, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_House8_EventScript_15B4F7:: @ 815B4F7
-	msgbox SootopolisCity_House8_Text_190536, MSGBOX_DEFAULT
+SootopolisCity_MonSizeRecordHouse_EventScript_BigBarboach:: @ 815B4F7
+	msgbox SootopolisCity_MonSizeRecordHouse_Text_WowMightBeBiggerThanBarboach, MSGBOX_DEFAULT
 	giveitem ITEM_ELIXIR
 	compare VAR_RESULT, 0
-	goto_if_eq SootopolisCity_House8_EventScript_15B519
+	goto_if_eq SootopolisCity_MonSizeRecordHouse_EventScript_NoRoomForElixir2
 	closemessage
 	release
 	end
 
-SootopolisCity_House8_EventScript_15B519:: @ 815B519
-	msgbox SootopolisCity_House8_Text_1905C1, MSGBOX_DEFAULT
+SootopolisCity_MonSizeRecordHouse_EventScript_NoRoomForElixir2:: @ 815B519
+	msgbox SootopolisCity_House8_Text_BagIsFull, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_House8_EventScript_15B523:: @ 815B523
+SootopolisCity_MonSizeRecordHouse_EventScript_ShroomishSizeRecord:: @ 815B523
 	special GetShroomishSizeRecordInfo
 	lockall
-	msgbox SootopolisCity_House8_Text_1903C9, MSGBOX_DEFAULT
+	msgbox SootopolisCity_MonSizeRecordHouse_Text_BiggestShroomishInHistory, MSGBOX_DEFAULT
 	releaseall
 	end
 
-SootopolisCity_House8_EventScript_15B531:: @ 815B531
+SootopolisCity_MonSizeRecordHouse_EventScript_BarboachSizeRecord:: @ 815B531
 	special GetBarboachSizeRecordInfo
 	lockall
-	msgbox SootopolisCity_House8_Text_1906BE, MSGBOX_DEFAULT
+	msgbox SootopolisCity_MonSizeRecordHouse_Text_BiggestBarboachInHistory, MSGBOX_DEFAULT
 	releaseall
 	end

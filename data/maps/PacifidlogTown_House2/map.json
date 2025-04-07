@@ -21,7 +21,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PacifidlogTown_House2_EventScript_154168",
+      "script": "PacifidlogTown_House2_EventScript_FanClubYoungerBrother",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PacifidlogTown_House2_EventScript_154267",
+      "script": "PacifidlogTown_House2_EventScript_HappyAzurill",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PacifidlogTown_House2_EventScript_154282",
+      "script": "PacifidlogTown_House2_EventScript_UnhappyAzurill",
       "flag": "0"
     }
   ],

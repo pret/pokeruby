@@ -1,18 +1,18 @@
 MauvilleCity_Mart_MapScripts:: @ 81573BD
 	.byte 0
 
-MauvilleCity_Mart_EventScript_1573BE:: @ 81573BE
+MauvilleCity_Mart_EventScript_Clerk:: @ 81573BE
 	lock
 	faceplayer
 	message Text_HowMayIServeYou
 	waitmessage
-	pokemart MauvilleCity_Mart_Items
+	pokemart MauvilleCity_Mart_Pokemart
 	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-MauvilleCity_Mart_Items:: @ 81573D8
+MauvilleCity_Mart_Pokemart:: @ 81573D8
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_SUPER_POTION
@@ -29,10 +29,10 @@ MauvilleCity_Mart_Items:: @ 81573D8
 	release
 	end
 
-MauvilleCity_Mart_EventScript_1573F4:: @ 81573F4
-	msgbox MauvilleCity_Mart_Text_1827D3, MSGBOX_NPC
+MauvilleCity_Mart_EventScript_ExpertM:: @ 81573F4
+	msgbox MauvilleCity_Mart_Text_ItemsToTemporarilyElevateStats, MSGBOX_NPC
 	end
 
-MauvilleCity_Mart_EventScript_1573FD:: @ 81573FD
-	msgbox MauvilleCity_Mart_Text_18287F, MSGBOX_NPC
+MauvilleCity_Mart_EventScript_Man:: @ 81573FD
+	msgbox MauvilleCity_Mart_Text_DecisionsDetermineBattle, MSGBOX_NPC
 	end

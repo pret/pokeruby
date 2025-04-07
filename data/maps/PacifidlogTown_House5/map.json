@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PacifidlogTown_House5_EventScript_154394",
+      "script": "PacifidlogTown_House5_EventScript_MirageIslandWatcher",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PacifidlogTown_House5_EventScript_1543BA",
+      "script": "PacifidlogTown_House5_EventScript_Gentleman",
       "flag": "0"
     }
   ],

@@ -1,4 +1,4 @@
-PetalburgCity_WallysHouse_Text_179805:: @ 8179805
+PetalburgCity_WallysHouse_Text_ThanksForPlayingWithWally:: @ 8179805
 	.string "You're...\n"
 	.string "Ah, you must be {PLAYER}{KUN}, right?\p"
 	.string "Thank you for playing with WALLY a\n"
@@ -14,10 +14,10 @@ PetalburgCity_WallysHouse_Text_179805:: @ 8179805
 	.string "I wonder where he could have\n"
 	.string "gotten by now?$"
 
-PetalburgCity_WallysHouse_Text_179975:: @ 8179975
+PetalburgCity_WallysHouse_Text_WonderHowWallyIsDoing:: @ 8179975
 	.string "I wonder how our WALLY is doing?$"
 
-PetalburgCity_WallysHouse_Text_179996:: @ 8179996
+PetalburgCity_WallysHouse_Text_WallyHasBecomeHealthy:: @ 8179996
 	.string "Hi there, {PLAYER}{KUN}!\p"
 	.string "Our WALLY's become very healthy\n"
 	.string "since he went to VERDANTURF TOWN.\p"
@@ -33,15 +33,15 @@ PetalburgCity_WallysHouse_Text_179996:: @ 8179996
 	.string "This isn't a bribe or anything, but\n"
 	.string "I'd really like you to have this.$"
 
-PetalburgCity_WallysHouse_Text_179B14:: @ 8179B14
+PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces:: @ 8179B14
 	.string "If your POKéMON can SURF, you'll be\n"
 	.string "able to go to all sorts of places.$"
 
-PetalburgCity_WallysHouse_Text_179B5B:: @ 8179B5B
+PetalburgCity_WallysHouse_Text_WallyIsComingHomeSoon:: @ 8179B5B
 	.string "WALLY's coming home soon.\n"
 	.string "I'm looking forward to that.$"
 
-PetalburgCity_WallysHouse_Text_179B92:: @ 8179B92
+PetalburgCity_WallysHouse_Text_YouMetWallyInEverGrandeCity:: @ 8179B92
 	.string "Oh? You met WALLY in EVER GRANDE\n"
 	.string "CITY?\p"
 	.string "Oh, {PLAYER}{KUN}, don't be silly.\p"
@@ -49,19 +49,19 @@ PetalburgCity_WallysHouse_Text_179B92:: @ 8179B92
 	.string "can't go somewhere far away like\l"
 	.string "that all by himself.$"
 
-PetalburgCity_WallysHouse_Text_179C2C:: @ 8179C2C
+PetalburgCity_WallysHouse_Text_WallyWasReallyHappy:: @ 8179C2C
 	.string "WALLY was really happy when he told\n"
 	.string "us that he caught a POKéMON.\p"
 	.string "It's been ages since I've seen him\n"
 	.string "smile like that.$"
 
-PetalburgCity_WallysHouse_Text_179CA1:: @ 8179CA1
+PetalburgCity_WallysHouse_Text_HusbandHasSomethingForYou:: @ 8179CA1
 	.string "Oh, hello, {PLAYER}! We've got\n"
 	.string "something we want you to have.\p"
 	.string "My husband has it, so please have a\n"
 	.string "word with him, dear.$"
 
-PetalburgCity_WallysHouse_Text_179D12:: @ 8179D12
+PetalburgCity_WallysHouse_Text_WallyLeftWithoutTelling:: @ 8179D12
 	.string "I want you to keep this a secret\n"
 	.string "from my husband...\p"
 	.string "But our WALLY left VERDANTURF TOWN\n"

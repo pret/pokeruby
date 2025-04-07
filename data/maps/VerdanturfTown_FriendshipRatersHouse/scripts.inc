@@ -1,63 +1,63 @@
 VerdanturfTown_FriendshipRatersHouse_MapScripts:: @ 815402F
 	.byte 0
 
-VerdanturfTown_FriendshipRatersHouse_EventScript_154030:: @ 8154030
+VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater:: @ 8154030
 	lock
 	faceplayer
-	msgbox VerdanturfTown_FriendshipRatersHouse_Text_178A9C, MSGBOX_DEFAULT
+	msgbox VerdanturfTown_FriendshipRatersHouse_Text_SeeHowMuchPokemonLikesYou, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, GetLeadMonFriendshipScore
 	switch VAR_RESULT
-	case 0, VerdanturfTown_FriendshipRatersHouse_EventScript_154093
-	case 1, VerdanturfTown_FriendshipRatersHouse_EventScript_15409D
-	case 2, VerdanturfTown_FriendshipRatersHouse_EventScript_1540A7
-	case 3, VerdanturfTown_FriendshipRatersHouse_EventScript_1540B1
-	case 4, VerdanturfTown_FriendshipRatersHouse_EventScript_1540BB
-	case 5, VerdanturfTown_FriendshipRatersHouse_EventScript_1540C5
-	case 6, VerdanturfTown_FriendshipRatersHouse_EventScript_1540CF
+	case 0, VerdanturfTown_FriendshipRatersHouse_EventScript_DetestsYou
+	case 1, VerdanturfTown_FriendshipRatersHouse_EventScript_VeryWary
+	case 2, VerdanturfTown_FriendshipRatersHouse_EventScript_NotUsedToYou
+	case 3, VerdanturfTown_FriendshipRatersHouse_EventScript_GettingUsedToYou
+	case 4, VerdanturfTown_FriendshipRatersHouse_EventScript_LikesYouQuiteALot
+	case 5, VerdanturfTown_FriendshipRatersHouse_EventScript_VeryHappy
+	case 6, VerdanturfTown_FriendshipRatersHouse_EventScript_AdoresYou
 	release
 	end
 
-VerdanturfTown_FriendshipRatersHouse_EventScript_154093:: @ 8154093
-	msgbox VerdanturfTown_FriendshipRatersHouse_Text_178C90, MSGBOX_DEFAULT
+VerdanturfTown_FriendshipRatersHouse_EventScript_DetestsYou:: @ 8154093
+	msgbox VerdanturfTown_FriendshipRatersHouse_Text_DetestsYou, MSGBOX_DEFAULT
 	release
 	end
 
-VerdanturfTown_FriendshipRatersHouse_EventScript_15409D:: @ 815409D
-	msgbox VerdanturfTown_FriendshipRatersHouse_Text_178C39, MSGBOX_DEFAULT
+VerdanturfTown_FriendshipRatersHouse_EventScript_VeryWary:: @ 815409D
+	msgbox VerdanturfTown_FriendshipRatersHouse_Text_VeryWary, MSGBOX_DEFAULT
 	release
 	end
 
-VerdanturfTown_FriendshipRatersHouse_EventScript_1540A7:: @ 81540A7
-	msgbox VerdanturfTown_FriendshipRatersHouse_Text_178BFA, MSGBOX_DEFAULT
+VerdanturfTown_FriendshipRatersHouse_EventScript_NotUsedToYou:: @ 81540A7
+	msgbox VerdanturfTown_FriendshipRatersHouse_Text_NotUsedToYou, MSGBOX_DEFAULT
 	release
 	end
 
-VerdanturfTown_FriendshipRatersHouse_EventScript_1540B1:: @ 81540B1
-	msgbox VerdanturfTown_FriendshipRatersHouse_Text_178BC4, MSGBOX_DEFAULT
+VerdanturfTown_FriendshipRatersHouse_EventScript_GettingUsedToYou:: @ 81540B1
+	msgbox VerdanturfTown_FriendshipRatersHouse_Text_GettingUsedToYou, MSGBOX_DEFAULT
 	release
 	end
 
-VerdanturfTown_FriendshipRatersHouse_EventScript_1540BB:: @ 81540BB
-	msgbox VerdanturfTown_FriendshipRatersHouse_Text_178B82, MSGBOX_DEFAULT
+VerdanturfTown_FriendshipRatersHouse_EventScript_LikesYouQuiteALot:: @ 81540BB
+	msgbox VerdanturfTown_FriendshipRatersHouse_Text_LikesYouQuiteALot, MSGBOX_DEFAULT
 	release
 	end
 
-VerdanturfTown_FriendshipRatersHouse_EventScript_1540C5:: @ 81540C5
-	msgbox VerdanturfTown_FriendshipRatersHouse_Text_178B43, MSGBOX_DEFAULT
+VerdanturfTown_FriendshipRatersHouse_EventScript_VeryHappy:: @ 81540C5
+	msgbox VerdanturfTown_FriendshipRatersHouse_Text_VeryHappy, MSGBOX_DEFAULT
 	release
 	end
 
-VerdanturfTown_FriendshipRatersHouse_EventScript_1540CF:: @ 81540CF
-	msgbox VerdanturfTown_FriendshipRatersHouse_Text_178AF2, MSGBOX_DEFAULT
+VerdanturfTown_FriendshipRatersHouse_EventScript_AdoresYou:: @ 81540CF
+	msgbox VerdanturfTown_FriendshipRatersHouse_Text_AdoresYou, MSGBOX_DEFAULT
 	release
 	end
 
-VerdanturfTown_FriendshipRatersHouse_EventScript_1540D9:: @ 81540D9
+VerdanturfTown_FriendshipRatersHouse_EventScript_Pikachu:: @ 81540D9
 	lock
 	faceplayer
 	waitse
 	playmoncry SPECIES_PIKACHU, 0
-	msgbox VerdanturfTown_FriendshipRatersHouse_Text_178CFD, MSGBOX_DEFAULT
+	msgbox VerdanturfTown_FriendshipRatersHouse_Text_Pikachu, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end

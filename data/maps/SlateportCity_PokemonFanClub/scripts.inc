@@ -1,206 +1,206 @@
 SlateportCity_PokemonFanClub_MapScripts:: @ 8155764
-	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_PokemonFanClub_MapScript1_15576A
+	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_PokemonFanClub_EventScript_OnTransition
 	.byte 0
 
-SlateportCity_PokemonFanClub_MapScript1_15576A:: @ 815576A
+SlateportCity_PokemonFanClub_EventScript_OnTransition:: @ 815576A
 	end
 
-SlateportCity_PokemonFanClub_EventScript_15576B:: @ 815576B
+SlateportCity_PokemonFanClub_EventScript_Chairman:: @ 815576B
 	lock
 	faceplayer
 	switch VAR_SLATEPORT_FAN_CLUB_STATE
-	case 0, SlateportCity_PokemonFanClub_EventScript_155795
-	case 1, SlateportCity_PokemonFanClub_EventScript_1557A8
-	case 2, SlateportCity_PokemonFanClub_EventScript_1557FE
+	case 0, SlateportCity_PokemonFanClub_EventScript_ChairmanFirstAssessment
+	case 1, SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon
+	case 2, SlateportCity_PokemonFanClub_EventScript_NoMoreScarves
 	release
 	end
 
-SlateportCity_PokemonFanClub_EventScript_155795:: @ 8155795
+SlateportCity_PokemonFanClub_EventScript_ChairmanFirstAssessment:: @ 8155795
 	setvar VAR_SLATEPORT_FAN_CLUB_STATE, 1
-	msgbox SlateportCity_PokemonFanClub_Text_17D773, MSGBOX_DEFAULT
-	goto SlateportCity_PokemonFanClub_EventScript_155808
+	msgbox SlateportCity_PokemonFanClub_Text_MeetChairman, MSGBOX_DEFAULT
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon
 	end
 
-SlateportCity_PokemonFanClub_EventScript_1557A8:: @ 81557A8
+SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon:: @ 81557A8
 	setvar VAR_TEMP_2, 0
-	call_if_set FLAG_RECEIVED_YELLOW_SCARF, SlateportCity_PokemonFanClub_EventScript_155893
-	call_if_set FLAG_RECEIVED_GREEN_SCARF, SlateportCity_PokemonFanClub_EventScript_155893
-	call_if_set FLAG_RECEIVED_PINK_SCARF, SlateportCity_PokemonFanClub_EventScript_155893
-	call_if_set FLAG_RECEIVED_BLUE_SCARF, SlateportCity_PokemonFanClub_EventScript_155893
-	call_if_set FLAG_RECEIVED_RED_SCARF, SlateportCity_PokemonFanClub_EventScript_155893
+	call_if_set FLAG_RECEIVED_YELLOW_SCARF, SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf
+	call_if_set FLAG_RECEIVED_GREEN_SCARF, SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf
+	call_if_set FLAG_RECEIVED_PINK_SCARF, SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf
+	call_if_set FLAG_RECEIVED_BLUE_SCARF, SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf
+	call_if_set FLAG_RECEIVED_RED_SCARF, SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf
 	compare VAR_TEMP_2, 5
-	call_if_eq SlateportCity_PokemonFanClub_EventScript_15588D
+	call_if_eq SlateportCity_PokemonFanClub_EventScript_ReceivedAllScarves
 	compare VAR_SLATEPORT_FAN_CLUB_STATE, 2
-	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1557FE
-	msgbox SlateportCity_PokemonFanClub_Text_17DA14, MSGBOX_DEFAULT
-	goto SlateportCity_PokemonFanClub_EventScript_155808
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoMoreScarves
+	msgbox SlateportCity_PokemonFanClub_Text_HowIsYourPokemonGrowing, MSGBOX_DEFAULT
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon
 	end
 
-SlateportCity_PokemonFanClub_EventScript_1557FE:: @ 81557FE
-	msgbox SlateportCity_PokemonFanClub_Text_17DDD5, MSGBOX_DEFAULT
+SlateportCity_PokemonFanClub_EventScript_NoMoreScarves:: @ 81557FE
+	msgbox SlateportCity_PokemonFanClub_Text_NothingElseToGiveYou, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_PokemonFanClub_EventScript_155808:: @ 8155808
-	msgbox SlateportCity_PokemonFanClub_Text_17DA49, MSGBOX_DEFAULT
+SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon:: @ 8155808
+	msgbox SlateportCity_PokemonFanClub_Text_HmHmISee, MSGBOX_DEFAULT
 	setvar VAR_TEMP_1, 0
-	call_if_unset FLAG_RECEIVED_YELLOW_SCARF, SlateportCity_PokemonFanClub_EventScript_1559FE
-	call_if_unset FLAG_RECEIVED_GREEN_SCARF, SlateportCity_PokemonFanClub_EventScript_1559E7
-	call_if_unset FLAG_RECEIVED_PINK_SCARF, SlateportCity_PokemonFanClub_EventScript_1559D0
-	call_if_unset FLAG_RECEIVED_BLUE_SCARF, SlateportCity_PokemonFanClub_EventScript_1559B9
-	call_if_unset FLAG_RECEIVED_RED_SCARF, SlateportCity_PokemonFanClub_EventScript_1559A2
+	call_if_unset FLAG_RECEIVED_YELLOW_SCARF, SlateportCity_PokemonFanClub_EventScript_CheckMonTough
+	call_if_unset FLAG_RECEIVED_GREEN_SCARF, SlateportCity_PokemonFanClub_EventScript_CheckMonSmart
+	call_if_unset FLAG_RECEIVED_PINK_SCARF, SlateportCity_PokemonFanClub_EventScript_CheckMonCute
+	call_if_unset FLAG_RECEIVED_BLUE_SCARF, SlateportCity_PokemonFanClub_EventScript_CheckMonBeauty
+	call_if_unset FLAG_RECEIVED_RED_SCARF, SlateportCity_PokemonFanClub_EventScript_CheckMonCool
 	bufferleadmonspeciesname 0
 	switch VAR_TEMP_1
-	case 0, SlateportCity_PokemonFanClub_EventScript_155899
-	case 1, SlateportCity_PokemonFanClub_EventScript_1558A3
-	case 2, SlateportCity_PokemonFanClub_EventScript_1558D4
-	case 3, SlateportCity_PokemonFanClub_EventScript_155905
-	case 4, SlateportCity_PokemonFanClub_EventScript_155936
-	case 5, SlateportCity_PokemonFanClub_EventScript_155967
+	case 0, SlateportCity_PokemonFanClub_EventScript_NoHighConditions
+	case 1, SlateportCity_PokemonFanClub_EventScript_GiveRedScarf
+	case 2, SlateportCity_PokemonFanClub_EventScript_GiveBlueScarf
+	case 3, SlateportCity_PokemonFanClub_EventScript_GivePinkScarf
+	case 4, SlateportCity_PokemonFanClub_EventScript_GiveGreenScarf
+	case 5, SlateportCity_PokemonFanClub_EventScript_GiveYellowScarf
 	release
 	end
 
-SlateportCity_PokemonFanClub_EventScript_15588D:: @ 815588D
+SlateportCity_PokemonFanClub_EventScript_ReceivedAllScarves:: @ 815588D
 	setvar VAR_SLATEPORT_FAN_CLUB_STATE, 2
 	return
 
-SlateportCity_PokemonFanClub_EventScript_155893:: @ 8155893
+SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf:: @ 8155893
 	addvar VAR_TEMP_2, 1
 	return
 
-SlateportCity_PokemonFanClub_EventScript_155899:: @ 8155899
-	msgbox SlateportCity_PokemonFanClub_Text_17DA5C, MSGBOX_DEFAULT
+SlateportCity_PokemonFanClub_EventScript_NoHighConditions:: @ 8155899
+	msgbox SlateportCity_PokemonFanClub_Text_GiveMonMorePokeblocks, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_PokemonFanClub_EventScript_1558A3:: @ 81558A3
+SlateportCity_PokemonFanClub_EventScript_GiveRedScarf:: @ 81558A3
 	checkitemspace ITEM_RED_SCARF, 1
 	compare VAR_RESULT, 0
-	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155998
-	msgbox SlateportCity_PokemonFanClub_Text_17DB89, MSGBOX_DEFAULT
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
+	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_RED_SCARF
 	giveitem ITEM_RED_SCARF
-	msgbox SlateportCity_PokemonFanClub_Text_17DC1B, MSGBOX_DEFAULT
+	msgbox SlateportCity_PokemonFanClub_Text_ExplainRedScarf, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_PokemonFanClub_EventScript_1558D4:: @ 81558D4
+SlateportCity_PokemonFanClub_EventScript_GiveBlueScarf:: @ 81558D4
 	checkitemspace ITEM_BLUE_SCARF, 1
 	compare VAR_RESULT, 0
-	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155998
-	msgbox SlateportCity_PokemonFanClub_Text_17DB89, MSGBOX_DEFAULT
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
+	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_BLUE_SCARF
 	giveitem ITEM_BLUE_SCARF
-	msgbox SlateportCity_PokemonFanClub_Text_17DC74, MSGBOX_DEFAULT
+	msgbox SlateportCity_PokemonFanClub_Text_ExplainBlueScarf, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_PokemonFanClub_EventScript_155905:: @ 8155905
+SlateportCity_PokemonFanClub_EventScript_GivePinkScarf:: @ 8155905
 	checkitemspace ITEM_PINK_SCARF, 1
 	compare VAR_RESULT, 0
-	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155998
-	msgbox SlateportCity_PokemonFanClub_Text_17DB89, MSGBOX_DEFAULT
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
+	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_PINK_SCARF
 	giveitem ITEM_PINK_SCARF
-	msgbox SlateportCity_PokemonFanClub_Text_17DCCB, MSGBOX_DEFAULT
+	msgbox SlateportCity_PokemonFanClub_Text_ExplainPinkScarf, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_PokemonFanClub_EventScript_155936:: @ 8155936
+SlateportCity_PokemonFanClub_EventScript_GiveGreenScarf:: @ 8155936
 	checkitemspace ITEM_GREEN_SCARF, 1
 	compare VAR_RESULT, 0
-	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155998
-	msgbox SlateportCity_PokemonFanClub_Text_17DB89, MSGBOX_DEFAULT
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
+	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_GREEN_SCARF
 	giveitem ITEM_GREEN_SCARF
-	msgbox SlateportCity_PokemonFanClub_Text_17DD27, MSGBOX_DEFAULT
+	msgbox SlateportCity_PokemonFanClub_Text_ExplainGreenScarf, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_PokemonFanClub_EventScript_155967:: @ 8155967
+SlateportCity_PokemonFanClub_EventScript_GiveYellowScarf:: @ 8155967
 	checkitemspace ITEM_YELLOW_SCARF, 1
 	compare VAR_RESULT, 0
-	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155998
-	msgbox SlateportCity_PokemonFanClub_Text_17DB89, MSGBOX_DEFAULT
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
+	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_YELLOW_SCARF
 	giveitem ITEM_YELLOW_SCARF
-	msgbox SlateportCity_PokemonFanClub_Text_17DD78, MSGBOX_DEFAULT
+	msgbox SlateportCity_PokemonFanClub_Text_ExplainYellowScarf, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_PokemonFanClub_EventScript_155998:: @ 8155998
-	msgbox SlateportCity_PokemonFanClub_Text_17DB0B, MSGBOX_DEFAULT
+SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf:: @ 8155998
+	msgbox SlateportCity_PokemonFanClub_Text_NoSpaceForReward, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_PokemonFanClub_EventScript_1559A2:: @ 81559A2
+SlateportCity_PokemonFanClub_EventScript_CheckMonCool:: @ 81559A2
 	specialvar VAR_RESULT, CheckLeadMonCool
 	compare VAR_RESULT, 1
-	call_if_eq SlateportCity_PokemonFanClub_EventScript_1559B3
+	call_if_eq SlateportCity_PokemonFanClub_EventScript_SetMonCool
 	return
 
-SlateportCity_PokemonFanClub_EventScript_1559B3:: @ 81559B3
+SlateportCity_PokemonFanClub_EventScript_SetMonCool:: @ 81559B3
 	setvar VAR_TEMP_1, 1
 	return
 
-SlateportCity_PokemonFanClub_EventScript_1559B9:: @ 81559B9
+SlateportCity_PokemonFanClub_EventScript_CheckMonBeauty:: @ 81559B9
 	specialvar VAR_RESULT, CheckLeadMonBeauty
 	compare VAR_RESULT, 1
-	call_if_eq SlateportCity_PokemonFanClub_EventScript_1559CA
+	call_if_eq SlateportCity_PokemonFanClub_EventScript_SetMonBeauty
 	return
 
-SlateportCity_PokemonFanClub_EventScript_1559CA:: @ 81559CA
+SlateportCity_PokemonFanClub_EventScript_SetMonBeauty:: @ 81559CA
 	setvar VAR_TEMP_1, 2
 	return
 
-SlateportCity_PokemonFanClub_EventScript_1559D0:: @ 81559D0
+SlateportCity_PokemonFanClub_EventScript_CheckMonCute:: @ 81559D0
 	specialvar VAR_RESULT, CheckLeadMonCute
 	compare VAR_RESULT, 1
-	call_if_eq SlateportCity_PokemonFanClub_EventScript_1559E1
+	call_if_eq SlateportCity_PokemonFanClub_EventScript_SetMonCute
 	return
 
-SlateportCity_PokemonFanClub_EventScript_1559E1:: @ 81559E1
+SlateportCity_PokemonFanClub_EventScript_SetMonCute:: @ 81559E1
 	setvar VAR_TEMP_1, 3
 	return
 
-SlateportCity_PokemonFanClub_EventScript_1559E7:: @ 81559E7
+SlateportCity_PokemonFanClub_EventScript_CheckMonSmart:: @ 81559E7
 	specialvar VAR_RESULT, CheckLeadMonSmart
 	compare VAR_RESULT, 1
-	call_if_eq SlateportCity_PokemonFanClub_EventScript_1559F8
+	call_if_eq SlateportCity_PokemonFanClub_EventScript_SetMonSmart
 	return
 
-SlateportCity_PokemonFanClub_EventScript_1559F8:: @ 81559F8
+SlateportCity_PokemonFanClub_EventScript_SetMonSmart:: @ 81559F8
 	setvar VAR_TEMP_1, 4
 	return
 
-SlateportCity_PokemonFanClub_EventScript_1559FE:: @ 81559FE
+SlateportCity_PokemonFanClub_EventScript_CheckMonTough:: @ 81559FE
 	specialvar VAR_RESULT, CheckLeadMonTough
 	compare VAR_RESULT, 1
-	call_if_eq SlateportCity_PokemonFanClub_EventScript_155A0F
+	call_if_eq SlateportCity_PokemonFanClub_EventScript_SetMonTough
 	return
 
-SlateportCity_PokemonFanClub_EventScript_155A0F:: @ 8155A0F
+SlateportCity_PokemonFanClub_EventScript_SetMonTough:: @ 8155A0F
 	setvar VAR_TEMP_1, 5
 	return
 
-SlateportCity_PokemonFanClub_EventScript_155A15:: @ 8155A15
+SlateportCity_PokemonFanClub_EventScript_SootheBellWoman:: @ 8155A15
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_SOOTHE_BELL, SlateportCity_PokemonFanClub_EventScript_155A75
-	msgbox SlateportCity_PokemonFanClub_Text_17DE6B, MSGBOX_DEFAULT
+	goto_if_set FLAG_RECEIVED_SOOTHE_BELL, SlateportCity_PokemonFanClub_EventScript_ReceivedSootheBell
+	msgbox SlateportCity_PokemonFanClub_Text_ShowMePokemonThatLoveYou, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, GetLeadMonFriendshipScore
 	compare VAR_RESULT, 4
-	goto_if_ge SlateportCity_PokemonFanClub_EventScript_155A3A
+	goto_if_ge SlateportCity_PokemonFanClub_EventScript_GiveSootheBell
 	release
 	end
 
-SlateportCity_PokemonFanClub_EventScript_155A3A:: @ 8155A3A
+SlateportCity_PokemonFanClub_EventScript_GiveSootheBell:: @ 8155A3A
 	playse SE_PIN
 	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement VAR_LAST_TALKED, Common_Movement_Delay48
 	waitmovement 0
-	msgbox SlateportCity_PokemonFanClub_Text_17DF57, MSGBOX_DEFAULT
+	msgbox SlateportCity_PokemonFanClub_Text_PokemonAdoresYou, MSGBOX_DEFAULT
 	giveitem ITEM_SOOTHE_BELL
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
@@ -208,45 +208,45 @@ SlateportCity_PokemonFanClub_EventScript_155A3A:: @ 8155A3A
 	release
 	end
 
-SlateportCity_PokemonFanClub_EventScript_155A75:: @ 8155A75
-	msgbox SlateportCity_PokemonFanClub_Text_17DFB8, MSGBOX_DEFAULT
+SlateportCity_PokemonFanClub_EventScript_ReceivedSootheBell:: @ 8155A75
+	msgbox SlateportCity_PokemonFanClub_Text_TreatPokemonWithLove, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_PokemonFanClub_EventScript_155A7F:: @ 8155A7F
-	msgbox SlateportCity_PokemonFanClub_Text_17E03B, MSGBOX_NPC
+SlateportCity_PokemonFanClub_EventScript_Man:: @ 8155A7F
+	msgbox SlateportCity_PokemonFanClub_Text_PokemonDontLikeFainting, MSGBOX_NPC
 	end
 
-SlateportCity_PokemonFanClub_EventScript_155A88:: @ 8155A88
-	msgbox SlateportCity_PokemonFanClub_Text_17E0ED, MSGBOX_NPC
+SlateportCity_PokemonFanClub_EventScript_Twin:: @ 8155A88
+	msgbox SlateportCity_PokemonFanClub_Text_MonEnjoyedProtein, MSGBOX_NPC
 	end
 
-SlateportCity_PokemonFanClub_EventScript_155A91:: @ 8155A91
+SlateportCity_PokemonFanClub_EventScript_Skitty:: @ 8155A91
 	lock
 	faceplayer
 	waitse
 	playmoncry SPECIES_SKITTY, 0
-	msgbox SlateportCity_PokemonFanClub_Text_17E14E, MSGBOX_DEFAULT
+	msgbox SlateportCity_PokemonFanClub_Text_Skitty, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
 
-SlateportCity_PokemonFanClub_EventScript_155AA4:: @ 8155AA4
+SlateportCity_PokemonFanClub_EventScript_Zigzagoon:: @ 8155AA4
 	lock
 	faceplayer
 	waitse
 	playmoncry SPECIES_ZIGZAGOON, 0
-	msgbox SlateportCity_PokemonFanClub_Text_17E164, MSGBOX_DEFAULT
+	msgbox SlateportCity_PokemonFanClub_Text_Zigzagoon, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
 
-SlateportCity_PokemonFanClub_EventScript_155AB7:: @ 8155AB7
+SlateportCity_PokemonFanClub_EventScript_Azumarill:: @ 8155AB7
 	lock
 	faceplayer
 	waitse
 	playmoncry SPECIES_AZUMARILL, 0
-	msgbox SlateportCity_PokemonFanClub_Text_17E178, MSGBOX_DEFAULT
+	msgbox SlateportCity_PokemonFanClub_Text_Azumarill, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end

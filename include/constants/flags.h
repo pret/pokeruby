@@ -78,7 +78,7 @@
 #define FLAG_MET_HIDDEN_POWER_GIVER         0x76
 
 #define FLAG_RECEIVED_TM31                  0x79
-#define FLAG_RECEIVED_HM03                  0x7A
+#define FLAG_RECEIVED_HM_SURF                  0x7A
 #define FLAG_RECEIVED_HM08                  0x7B
 
 #define FLAG_DEFEATED_WALLY_VICTORY_ROAD    0x7E
@@ -117,14 +117,14 @@
 #define FLAG_CUTE_PAINTING_MADE             0xA2
 #define FLAG_SMART_PAINTING_MADE            0xA3
 #define FLAG_TOUGH_PAINTING_MADE            0xA4
-#define FLAG_RECEIVED_TM39                  0xA5
+#define FLAG_RECEIVED_TM_ROCK_TOMB                  0xA5
 #define FLAG_RECEIVED_TM_BULK_UP                  0xA6
-#define FLAG_RECEIVED_TM34                  0xA7
+#define FLAG_RECEIVED_TM_SHOCK_WAVE                  0xA7
 #define FLAG_RECEIVED_TM_OVERHEAT                  0xA8
 #define FLAG_RECEIVED_TM42                  0xA9
 #define FLAG_RECEIVED_TM_AERIAL_ACE                  0xAA
-#define FLAG_RECEIVED_TM04                  0xAB
-#define FLAG_RECEIVED_TM03                  0xAC
+#define FLAG_RECEIVED_TM_CALM_MIND                  0xAB
+#define FLAG_RECEIVED_TM_WATER_PULSE                  0xAC
 #define FLAG_DECORATION_1                   0xAD
 #define FLAG_DECORATION_2                   0xAE
 #define FLAG_DECORATION_3                   0xAF
