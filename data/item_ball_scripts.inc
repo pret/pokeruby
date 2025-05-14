@@ -218,7 +218,7 @@ Route133_EventScript_1B16F7:: @ 81B16F7
 	finditem ITEM_STAR_PIECE
 	end
 
-PetalburgCity_EventScript_1B1704:: @ 81B1704
+PetalburgCity_EventScript_ItemMaxRevive:: @ 81B1704
 	finditem ITEM_MAX_REVIVE
 	end
 
@@ -226,11 +226,11 @@ PetalburgCity_EventScript_1B1711:: @ 81B1711
 	finditem ITEM_ETHER
 	end
 
-MauvilleCity_EventScript_1B171E:: @ 81B171E
+MauvilleCity_EventScript_ItemXSpeed:: @ 81B171E
 	finditem ITEM_X_SPEED
 	end
 
-RustboroCity_EventScript_1B172B:: @ 81B172B
+RustboroCity_EventScript_ItemXDefend:: @ 81B172B
 	finditem ITEM_X_DEFEND
 	end
 
@@ -334,43 +334,43 @@ NewMauville_Inside_EventScript_1B1870:: @ 81B1870
 	finditem ITEM_PARALYZE_HEAL
 	end
 
-AbandonedShip_Rooms_1F_EventScript_1B187D:: @ 81B187D
+AbandonedShip_Rooms_1F_EventScript_ItemHarborMail:: @ 81B187D
 	finditem ITEM_HARBOR_MAIL
 	end
 
-AbandonedShip_Rooms_B1F_EventScript_1B188A:: @ 81B188A
+AbandonedShip_Rooms_B1F_EventScript_ItemEscapeRope:: @ 81B188A
 	finditem ITEM_ESCAPE_ROPE
 	end
 
-AbandonedShip_Rooms2_B1F_EventScript_1B1897:: @ 81B1897
+AbandonedShip_Rooms2_B1F_EventScript_ItemDiveBall:: @ 81B1897
 	finditem ITEM_DIVE_BALL
 	end
 
-AbandonedShip_Room_B1F_EventScript_1B18A4:: @ 81B18A4
+AbandonedShip_Room_B1F_EventScript_ItemTMIceBeam:: @ 81B18A4
 	finditem ITEM_TM13_ICE_BEAM
 	end
 
-AbandonedShip_Rooms2_1F_EventScript_1B18B1:: @ 81B18B1
+AbandonedShip_Rooms2_1F_EventScript_ItemRevive:: @ 81B18B1
 	finditem ITEM_REVIVE
 	end
 
-AbandonedShip_CaptainsOffice_EventScript_1B18BE:: @ 81B18BE
+AbandonedShip_CaptainsOffice_EventScript_ItemStorageKey:: @ 81B18BE
 	finditem ITEM_STORAGE_KEY
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_1B18CB:: @ 81B18CB
+AbandonedShip_HiddenFloorRooms_EventScript_ItemLuxuryBall:: @ 81B18CB
 	finditem ITEM_LUXURY_BALL
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_1B18D8:: @ 81B18D8
+AbandonedShip_HiddenFloorRooms_EventScript_ItemScanner:: @ 81B18D8
 	finditem ITEM_SCANNER
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_1B18E5:: @ 81B18E5
+AbandonedShip_HiddenFloorRooms_EventScript_ItemWaterStone:: @ 81B18E5
 	finditem ITEM_WATER_STONE
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_1B18F2:: @ 81B18F2
+AbandonedShip_HiddenFloorRooms_EventScript_ItemTMRainDance:: @ 81B18F2
 	finditem ITEM_TM18_RAIN_DANCE
 	end
 
@@ -478,39 +478,39 @@ CaveOfOrigin_B3F_EventScript_1B1A44:: @ 81B1A44
 	finditem ITEM_HM07_WATERFALL
 	end
 
-Route110_TrickHousePuzzle1_EventScript_1B1A51:: @ 81B1A51
+Route110_TrickHousePuzzle1_EventScript_ItemOrangeMail:: @ 81B1A51
 	finditem ITEM_ORANGE_MAIL
 	end
 
-Route110_TrickHousePuzzle2_EventScript_1B1A5E:: @ 81B1A5E
+Route110_TrickHousePuzzle2_EventScript_ItemHarborMail:: @ 81B1A5E
 	finditem ITEM_HARBOR_MAIL
 	end
 
-Route110_TrickHousePuzzle2_EventScript_1B1A6B:: @ 81B1A6B
+Route110_TrickHousePuzzle2_EventScript_ItemWaveMail:: @ 81B1A6B
 	finditem ITEM_WAVE_MAIL
 	end
 
-Route110_TrickHousePuzzle3_EventScript_1B1A78:: @ 81B1A78
+Route110_TrickHousePuzzle3_EventScript_ItemShadowMail:: @ 81B1A78
 	finditem ITEM_SHADOW_MAIL
 	end
 
-Route110_TrickHousePuzzle3_EventScript_1B1A85:: @ 81B1A85
+Route110_TrickHousePuzzle3_EventScript_ItemWoodMail:: @ 81B1A85
 	finditem ITEM_WOOD_MAIL
 	end
 
-Route110_TrickHousePuzzle4_EventScript_1B1A92:: @ 81B1A92
+Route110_TrickHousePuzzle4_EventScript_ItemMechMail:: @ 81B1A92
 	finditem ITEM_MECH_MAIL
 	end
 
-Route110_TrickHousePuzzle6_EventScript_1B1A9F:: @ 81B1A9F
+Route110_TrickHousePuzzle6_EventScript_ItemGlitterMail:: @ 81B1A9F
 	finditem ITEM_GLITTER_MAIL
 	end
 
-Route110_TrickHousePuzzle7_EventScript_1B1AAC:: @ 81B1AAC
+Route110_TrickHousePuzzle7_EventScript_ItemTropicMail:: @ 81B1AAC
 	finditem ITEM_TROPIC_MAIL
 	end
 
-Route110_TrickHousePuzzle8_EventScript_1B1AB9:: @ 81B1AB9
+Route110_TrickHousePuzzle8_EventScript_ItemBeadMail:: @ 81B1AB9
 	finditem ITEM_BEAD_MAIL
 	end
 

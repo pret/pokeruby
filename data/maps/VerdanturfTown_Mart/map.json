@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "VerdanturfTown_Mart_EventScript_153EBC",
+      "script": "VerdanturfTown_Mart_EventScript_Clerk",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "VerdanturfTown_Mart_EventScript_153EEE",
+      "script": "VerdanturfTown_Mart_EventScript_Boy",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "VerdanturfTown_Mart_EventScript_153EF7",
+      "script": "VerdanturfTown_Mart_EventScript_ExpertF",
       "flag": "0"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "VerdanturfTown_Mart_EventScript_153F00",
+      "script": "VerdanturfTown_Mart_EventScript_Lass",
       "flag": "0"
     }
   ],

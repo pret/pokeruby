@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_14D18D",
+      "script": "SootopolisCity_EventScript_CaveEntranceWoman1",
       "flag": "FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_1"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_14D196",
+      "script": "SootopolisCity_EventScript_CaveEntranceWoman2",
       "flag": "FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_2"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_14D16E",
+      "script": "SootopolisCity_EventScript_CaveOfOriginExpert",
       "flag": "FLAG_HIDE_SOOTOPOLIS_RESIDENTS"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_14D268",
+      "script": "SootopolisCity_EventScript_Woman2",
       "flag": "FLAG_HIDE_SOOTOPOLIS_RESIDENTS"
     },
     {
@@ -73,7 +73,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_14D48F",
+      "script": "SootopolisCity_EventScript_YouMustGoWithOrb",
       "flag": "FLAG_HIDE_WALLACE_SOOTOPOLIS"
     },
     {
@@ -86,7 +86,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_14D19F",
+      "script": "SootopolisCity_EventScript_KiriGiveBerry",
       "flag": "FLAG_HIDE_SOOTOPOLIS_RESIDENTS"
     },
     {
@@ -99,7 +99,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_14D2C5",
+      "script": "SootopolisCity_EventScript_Boy1",
       "flag": "FLAG_HIDE_SOOTOPOLIS_RESIDENTS"
     },
     {
@@ -112,7 +112,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_14D2E4",
+      "script": "SootopolisCity_EventScript_Boy1Normal",
       "flag": "FLAG_HIDE_SOOTOPOLIS_RESIDENTS"
     },
     {
@@ -125,7 +125,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_14D287",
+      "script": "SootopolisCity_EventScript_Man1",
       "flag": "FLAG_HIDE_SOOTOPOLIS_RESIDENTS"
     },
     {
@@ -138,7 +138,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_14D498",
+      "script": "SootopolisCity_EventScript_YoullBeOkay",
       "flag": "FLAG_HIDE_STEVEN_SOOTOPOLIS"
     },
     {
@@ -151,7 +151,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_14D2A6",
+      "script": "SootopolisCity_EventScript_Woman1",
       "flag": "FLAG_HIDE_SOOTOPOLIS_RESIDENTS"
     }
   ],
@@ -249,7 +249,7 @@
       "elevation": 3,
       "var": "VAR_SOOTOPOLIS_STATE",
       "var_value": "1",
-      "script": "SootopolisCity_EventScript_14D308"
+      "script": "SootopolisCity_EventScript_LeadPlayerCaveOfOrigin"
     }
   ],
   "bg_events": [
@@ -259,7 +259,7 @@
       "y": 34,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SootopolisCity_EventScript_14D2ED"
+      "script": "SootopolisCity_EventScript_GymSign"
     },
     {
       "type": "sign",
@@ -299,7 +299,7 @@
       "y": 37,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SootopolisCity_EventScript_14D2F6"
+      "script": "SootopolisCity_EventScript_CitySign"
     }
   ]
 }

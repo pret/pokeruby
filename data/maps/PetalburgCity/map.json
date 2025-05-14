@@ -32,7 +32,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PetalburgCity_EventScript_14B7C3",
+      "script": "PetalburgCity_EventScript_WallysMom",
       "flag": "FLAG_HIDE_WALLY_MOM_PETALBURG_1"
     },
     {
@@ -58,7 +58,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PetalburgCity_EventScript_14B7AC",
+      "script": "PetalburgCity_EventScript_Boy",
       "flag": "0"
     },
     {
@@ -71,7 +71,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PetalburgCity_EventScript_14B824",
+      "script": "PetalburgCity_EventScript_Gentleman",
       "flag": "0"
     },
     {
@@ -110,8 +110,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PetalburgCity_EventScript_1B1704",
-      "flag": "FLAG_ITEM_PETALBURG_1"
+      "script": "PetalburgCity_EventScript_ItemMaxRevive",
+      "flag": "FLAG_ITEM_PETALBURG_CITY_MAX_REVIVE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -136,7 +136,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PetalburgCity_EventScript_14BA2D",
+      "script": "PetalburgCity_EventScript_GymBoy",
       "flag": "0"
     }
   ],
@@ -192,7 +192,7 @@
       "elevation": 3,
       "var": "VAR_PETALBURG_STATE",
       "var_value": "0",
-      "script": "PetalburgCity_EventScript_14B836"
+      "script": "PetalburgCity_EventScript_ShowGymToPlayer0"
     },
     {
       "type": "trigger",
@@ -201,7 +201,7 @@
       "elevation": 3,
       "var": "VAR_PETALBURG_STATE",
       "var_value": "0",
-      "script": "PetalburgCity_EventScript_14B842"
+      "script": "PetalburgCity_EventScript_ShowGymToPlayer1"
     },
     {
       "type": "trigger",
@@ -210,7 +210,7 @@
       "elevation": 3,
       "var": "VAR_PETALBURG_STATE",
       "var_value": "0",
-      "script": "PetalburgCity_EventScript_14B84E"
+      "script": "PetalburgCity_EventScript_ShowGymToPlayer2"
     },
     {
       "type": "trigger",
@@ -219,7 +219,7 @@
       "elevation": 3,
       "var": "VAR_PETALBURG_STATE",
       "var_value": "0",
-      "script": "PetalburgCity_EventScript_14B85A"
+      "script": "PetalburgCity_EventScript_ShowGymToPlayer3"
     }
   ],
   "bg_events": [
@@ -229,7 +229,7 @@
       "y": 10,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "PetalburgCity_EventScript_14B812"
+      "script": "PetalburgCity_EventScript_GymSign"
     },
     {
       "type": "sign",
@@ -253,7 +253,7 @@
       "y": 16,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "PetalburgCity_EventScript_14B81B"
+      "script": "PetalburgCity_EventScript_CitySign"
     },
     {
       "type": "sign",
@@ -277,7 +277,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "PetalburgCity_EventScript_14B82D"
+      "script": "PetalburgCity_EventScript_WallyHouseSign"
     },
     {
       "type": "hidden_item",

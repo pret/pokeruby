@@ -1,9 +1,9 @@
-PetalburgCity_House1_Text_17BAFB:: @ 817BAFB
+PetalburgCity_House1_Text_TravelingIsWonderful:: @ 817BAFB
 	.string "Traveling is wonderful!\p"
 	.string "When I was young, I roamed the seas\n"
 	.string "and the mountains!$"
 
-PetalburgCity_House1_Text_17BB4A:: @ 817BB4A
+PetalburgCity_House1_Text_GoOnAdventure:: @ 817BB4A
 	.string "Sigh...\p"
 	.string "I wish I could go on an adventure\n"
 	.string "with some POKéMON...\p"

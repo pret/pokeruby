@@ -21,7 +21,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_5F_EventScript_15A136",
+      "script": "LilycoveCity_DepartmentStore_5F_EventScript_LittleGirl",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_5F_EventScript_15A124",
+      "script": "LilycoveCity_DepartmentStore_5F_EventScript_PokefanF",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_5F_EventScript_15A061",
+      "script": "LilycoveCity_DepartmentStore_5F_EventScript_ClerkFarLeft",
       "flag": "0"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_5F_EventScript_15A094",
+      "script": "LilycoveCity_DepartmentStore_5F_EventScript_ClerkMidLeft",
       "flag": "0"
     },
     {
@@ -73,7 +73,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_5F_EventScript_15A0C2",
+      "script": "LilycoveCity_DepartmentStore_5F_EventScript_ClerkMidRight",
       "flag": "0"
     },
     {
@@ -86,7 +86,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_5F_EventScript_15A0F2",
+      "script": "LilycoveCity_DepartmentStore_5F_EventScript_ClerkFarRight",
       "flag": "0"
     },
     {
@@ -99,7 +99,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_5F_EventScript_15A12D",
+      "script": "LilycoveCity_DepartmentStore_5F_EventScript_WomanNormal",
       "flag": "0"
     }
   ],

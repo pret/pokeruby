@@ -1,7 +1,7 @@
 ClosedSootopolisDoorText: @ 8169690
 	.string "Die Tür ist zu.$"
 
-SootopolisCity_Text_1696A4:: @ 81696A4
+SootopolisCity_Text_CaveOfOriginPleaseLeave:: @ 81696A4
 	.string "Wer bist du denn wohl?\p"
 	.string "Dies ist die URZEITHÖHLE.\p"
 	.string "Die Geister der POKéMON, zur Ruhe\n"
@@ -9,26 +9,26 @@ SootopolisCity_Text_1696A4:: @ 81696A4
 	.string "hier zum Leben, sagt man.\p"
 	.string "Bitte verlasse diesen Ort.$"
 
-SootopolisCity_Text_16972B:: @ 816972B
+SootopolisCity_Text_PhysicallyFitLivingHere:: @ 816972B
 	.string "Im Meer tauchen. Treppenstufen auf und\n"
 	.string "ab rennen...\p"
 	.string "Wenn du in diesem Ort lebst, wirst du\n"
 	.string "körperlich fit.$"
 
-SootopolisCity_Text_1697A7:: @ 81697A7
+SootopolisCity_Text_WonderWhatWorldIsLike:: @ 81697A7
 	.string "Ich... Ich war noch nie außerhalb der\n"
 	.string "Stadt.\p"
 	.string "Ich frage mich, wie die Welt hinter\n"
 	.string "diesem Horizont aussieht?$"
 
-SootopolisCity_Text_169813:: @ 8169813
+SootopolisCity_Text_NoOrdinaryTourist1:: @ 8169813
 	.string "Hm! Du bist den ganzen Weg nach\n"
 	.string "XENEROVILLE gekommen? Du bist\l"
 	.string "kein normaler Tourist.\p"
 	.string "Aber das macht dich auch nicht zu einem\n"
 	.string "außergewöhnlichen Touristen.$"
 
-SootopolisCity_Text_1698A0:: @ 81698A0
+SootopolisCity_Text_SootopolisSkyBeautiful:: @ 81698A0
 	.string "XENEROVILLE entwickelte sich im Krater\n"
 	.string "eines Vulkans.\p"
 	.string "Wenn du in den Himmel schaust, kannst\n"
@@ -37,13 +37,13 @@ SootopolisCity_Text_1698A0:: @ 81698A0
 	.string "Aber das macht den Himmel über\n"
 	.string "XENEROVILLE zum schönsten Himmel.$"
 
-SootopolisCity_Text_169988:: @ 8169988
+SootopolisCity_Text_YouCameInRainstorm:: @ 8169988
 	.string "TROY: {PLAYER}{KUN}, du bist auch hier?\n"
 	.string "Bei diesem schrecklichen Regen...\p"
 	.string "Oh, ja, kannst du verstehen, was mein\n"
 	.string "Freund gerade sagt?$"
 
-SootopolisCity_Text_1699FD:: @ 81699FD
+SootopolisCity_Text_MyNameIsWallaceDownpour:: @ 81699FD
 	.string "Mein Name ist WASSILI.\n"
 	.string "Ich bin der hiesige ARENALEITER.\p"
 	.string "Ich bin auch damit beauftragt, die\n"
@@ -51,12 +51,12 @@ SootopolisCity_Text_1699FD:: @ 81699FD
 	.string "Diese Regenschauer werden durch eine\n"
 	.string "Kraft in der Höhle verursacht.$"
 
-SootopolisCity_Text_169AB7:: @ 8169AB7
+SootopolisCity_Text_ThatIsTheBlueOrb:: @ 8169AB7
 	.string "Das... Das ist die BLAUE KUGEL.\p"
 	.string "Ich verstehe.\n"
 	.string "Folge mir.$"
 
-SootopolisCity_Text_169AE7:: @ 8169AE7
+SootopolisCity_Text_PeopleNeedRainToLive:: @ 8169AE7
 	.string "TROY: Dieser Regen...\p"
 	.string "Menschen und POKéMON brauchen\n"
 	.string "Wasser zum Leben...\p"
@@ -66,7 +66,7 @@ SootopolisCity_Text_169AE7:: @ 8169AE7
 	.string "über XENEROVILLE bilden und sich über\l"
 	.string "die ganze HOENN-Region ausbreiten.$"
 
-SootopolisCity_Text_169BC7:: @ 8169BC7
+SootopolisCity_Text_CaveOfOriginWithBlueOrb:: @ 8169BC7
 	.string "WASSILI: Die URZEITHÖHLE ist dort\n"
 	.string "drüben.\p"
 	.string "Niemandem in XENEROVILLE ist es\n"
@@ -76,7 +76,7 @@ SootopolisCity_Text_169BC7:: @ 8169BC7
 	.string "Du musst gehen, egal was dich im Inneren\n"
 	.string "der Höhle erwartet...$"
 
-SootopolisCity_Text_169C99:: @ 8169C99
+SootopolisCity_Text_NeverExpectedHoldingBlueOrb:: @ 8169C99
 	.string "TROY: {PLAYER}{KUN}, ich hätte nie ver-\n"
 	.string "mutet, dass du die BLAUE KUGEL bei dir\l"
 	.string "hast.\p"
@@ -84,25 +84,25 @@ SootopolisCity_Text_169C99:: @ 8169C99
 	.string "POKéMON an deiner Seite schaffst du es.\p"
 	.string "Davon bin ich überzeugt!$"
 
-SootopolisCity_Text_169D37:: @ 8169D37
+SootopolisCity_Text_YouMustGoWithBlueOrb:: @ 8169D37
 	.string "WASSILI: Du musst deine BLAUE KUGEL\n"
 	.string "mitnehmen.\p"
 	.string "Du musst gehen, egal was dich im Inneren\n"
 	.string "der HÖHLE erwartet...$"
 
-SootopolisCity_Text_169DA6:: @ 8169DA6
+SootopolisCity_Text_YoullBeOkaySapphire:: @ 8169DA6
 	.string "TROY: Dir wird nichts passieren.\n"
 	.string "Mit deinen POKéMON an deiner Seite\l"
 	.string "schaffst du es.\p"
 	.string "Davon bin ich überzeugt!$"
 
-SootopolisCity_Text_169E0F:: @ 8169E0F
+SootopolisCity_Text_YouCameInScorchingSun:: @ 8169E0F
 	.string "TROY: {PLAYER}{KUN}, du bist auch hier?\n"
 	.string "Bei diesem heißen Sonnenschein...\p"
 	.string "Oh, ja, kannst du verstehen, was mein\n"
 	.string "Freund gerade sagt?$"
 
-SootopolisCity_Text_169E82:: @ 8169E82
+SootopolisCity_Text_MyNameIsWallaceSunshine:: @ 8169E82
 	.string "Mein Name ist WASSILI.\n"
 	.string "Ich bin der hiesige ARENALEITER.\p"
 	.string "Ich bin auch damit beauftragt, die\n"
@@ -110,12 +110,12 @@ SootopolisCity_Text_169E82:: @ 8169E82
 	.string "Dieser Sonnenschein wird durch eine\n"
 	.string "Kraft in der Höhle verursacht.$"
 
-SootopolisCity_Text_169F3C:: @ 8169F3C
+SootopolisCity_Text_ThatIsTheRedOrb:: @ 8169F3C
 	.string "Das... Das ist die ROTE KUGEL.\p"
 	.string "Ich verstehe.\n"
 	.string "Folge mir.$"
 
-SootopolisCity_Text_169F6B:: @ 8169F6B
+SootopolisCity_Text_PeopleNeedSunlightToLive:: @ 8169F6B
 	.string "TROY: Dieser Sonnenschein...\p"
 	.string "Menschen und POKéMON brauchen\n"
 	.string "Sonnenlicht zum Leben...\p"
@@ -126,7 +126,7 @@ SootopolisCity_Text_169F6B:: @ 8169F6B
 	.string "wird es in ganz HOENN zu heiß.\p"
 	.string "Und wenn das passiert...$"
 
-SootopolisCity_Text_16A06C:: @ 816A06C
+SootopolisCity_Text_CaveOfOriginWithRedOrb:: @ 816A06C
 	.string "WASSILI: Die URZEITHÖHLE ist dort\n"
 	.string "drüben.\p"
 	.string "Niemandem in XENEROVILLE ist es\n"
@@ -136,7 +136,7 @@ SootopolisCity_Text_16A06C:: @ 816A06C
 	.string "Du musst gehen, egal was dich im Inneren\n"
 	.string "der Höhle erwartet...$"
 
-SootopolisCity_Text_16A13E:: @ 816A13E
+SootopolisCity_Text_NeverExpectedHoldingRedOrb:: @ 816A13E
 	.string "TROY: {PLAYER}{KUN}, ich hätte nie ver-\n"
 	.string "mutet, dass du die ROTE KUGEL bei dir\l"
 	.string "hast.\p"
@@ -144,27 +144,27 @@ SootopolisCity_Text_16A13E:: @ 816A13E
 	.string "POKéMON an deiner Seite schaffst du es.\p"
 	.string "Davon bin ich überzeugt!$"
 
-SootopolisCity_Text_16A1DB:: @ 816A1DB
+SootopolisCity_Text_YouMustGoWithRedOrb:: @ 816A1DB
 	.string "WASSILI: Du musst deine ROTE KUGEL\n"
 	.string "mitnehmen.\p"
 	.string "Du musst gehen, egal was dich im Inneren\n"
 	.string "der Höhle erwartet...$"
 
-SootopolisCity_Text_16A249:: @ 816A249
+SootopolisCity_Text_YoullBeOkayRuby:: @ 816A249
 	.string "TROY: Dir wird nichts passieren. Mit\n"
 	.string "deinen POKéMON an deiner Seite\l"
 	.string "schaffst du es.\p"
 	.string "Davon bin ich überzeugt!$"
 
-SootopolisCity_Text_16A2B2:: @ 816A2B2
+SootopolisCity_Text_TheLegendWasTrue:: @ 816A2B2
 	.string "Die Legende, die der alte Mann am PYRO-\n"
 	.string "BERG erzählt hat... war kein Märchen.$"
 
-SootopolisCity_Text_16A2FB:: @ 816A2FB
+SootopolisCity_Text_NaturalBalanceIsShifting:: @ 816A2FB
 	.string "Das natürliche Gleichgewicht von HOENN\n"
 	.string "verändert sich dramatisch...$"
 
-SootopolisCity_Text_16A33E:: @ 816A33E
+SootopolisCity_Text_WeOweItAllToYou:: @ 816A33E
 	.string "TROY: {PLAYER}{KUN}, dir verdanken\n"
 	.string "wir alles.\p"
 	.string "Der Himmel über XENEROVILLE ist\n"
@@ -177,46 +177,46 @@ SootopolisCity_Text_16A33E:: @ 816A33E
 	.string "keine Probleme haben, ihn zu besiegen.\p"
 	.string "Gib dein Bestes.$"
 
-SootopolisCity_Text_16A455:: @ 816A455
+SootopolisCity_Text_AllLifeStartsAtTheCave:: @ 816A455
 	.string "Alles Leben beginnt in der URZEITHÖHLE\n"
 	.string "und endet am PYROBERG...\p"
 	.string "Woher kommen die Menschen und\n"
 	.string "POKéMON? Wohin gehen wir?$"
 
-SootopolisCity_Text_16A4D6:: @ 816A4D6
+SootopolisCity_Text_YoureGoingToChallengeWallace:: @ 816A4D6
 	.string "Lass mich raten! Du wirst WASSILI\n"
 	.string "herausfordern?!?\p"
 	.string "Wirklich?\n"
 	.string "Du bist wirklich mutig!$"
 
-SootopolisCity_Text_16A531:: @ 816A531
+SootopolisCity_Text_BecomeYourFan:: @ 816A531
 	.string "Lass mich raten! Du hast WASSILI\n"
 	.string "besiegt!?! Wirklich!?!\p"
 	.string "Dann werde ich vielleicht dein Fan!$"
 
-SootopolisCity_Text_16A587:: @ 816A587
+SootopolisCity_Text_NoOrdinaryTourist2:: @ 816A587
 	.string "Hm! Du bist den ganzen Weg nach\n"
 	.string "XENEROVILLE gekommen? Du bist\l"
 	.string "kein gewöhnlicher Tourist.\p"
 	.string "Aber das macht dich auch nicht zu einem\n"
 	.string "außergewöhnlichen Touristen.$"
 
-SootopolisCity_Text_16A614:: @ 816A614
+SootopolisCity_Text_NightSkyFavoriteScenery:: @ 816A614
 	.string "Ein Stück des Nachthimmels, umgeben\n"
 	.string "vom Rund des Vulkankraters...\p"
 	.string "Und in diesem runden Stück Himmel\n"
 	.string "strahlen und blinken die Sterne, als\l"
 	.string "wären sie lebendig. Ich liebe das...$"
 
-SootopolisCity_Text_16A6AE:: @ 816A6AE
+SootopolisCity_Text_WhereIsMyHouse:: @ 816A6AE
 	.string "Huch! Wo ist mein Haus?$"
 
-SootopolisCity_Text_16A6C7:: @ 816A6C7
+SootopolisCity_Text_GymSign:: @ 816A6C7
 	.string "POKéMON ARENA von XENEROVILLE\n"
 	.string "LEITER: WASSILI\p"
 	.string "“Künstler und Liebhaber des WASSERS.”$"
 
-SootopolisCity_Text_16A711:: @ 816A711
+SootopolisCity_Text_CitySign:: @ 816A711
 	.string "XENEROVILLE\p"
 	.string "“Die mystische Stadt, in der die\n"
 	.string "Geschichte stillsteht.”$"

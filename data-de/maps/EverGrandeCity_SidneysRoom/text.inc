@@ -8,11 +8,11 @@ EverGrandeCity_SidneysRoom_Text_190728:: @ 8190728
 	.string "erleben, wie man ihn nur hier in der\l"
 	.string "POKéMON LIGA erleben kann!$"
 
-EverGrandeCity_SidneysRoom_Text_190823:: @ 8190823
+EverGrandeCity_SidneysRoom_Text_Defeat:: @ 8190823
 	.string "Ich habe verloren! Ich, ULRICH von den\n"
 	.string "TOP VIER. Macht nichts, es war lustig.$"
 
-EverGrandeCity_SidneysRoom_Text_19086D:: @ 819086D
+EverGrandeCity_SidneysRoom_Text_PostBattleSpeech:: @ 819086D
 	.string "Nun, hör dir an, was dieser Verlierer\n"
 	.string "zu sagen hat.\p"
 	.string "Du bist bestens ausgerüstet.\n"

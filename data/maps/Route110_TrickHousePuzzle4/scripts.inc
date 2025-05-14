@@ -1,29 +1,29 @@
 Route110_TrickHousePuzzle4_MapScripts:: @ 816274D
 	.byte 0
 
-Route110_TrickHousePuzzle4_EventScript_16274E:: @ 816274E
+Route110_TrickHousePuzzle4_EventScript_Scroll:: @ 816274E
 	lockall
 	compare VAR_TRICK_HOUSE_PUZZLE_4_STATE, 0
-	goto_if_eq Route110_TrickHousePuzzle4_EventScript_162760
-	goto Route110_TrickHousePuzzle4_EventScript_161892
+	goto_if_eq Route110_TrickHousePuzzle4_EventScript_ReadScroll
+	goto Route110_TrickHousePuzzle4_EventScript_ReadScrollAgain
 	end
 
-Route110_TrickHousePuzzle4_EventScript_162760:: @ 8162760
+Route110_TrickHousePuzzle4_EventScript_ReadScroll:: @ 8162760
 	setvar VAR_TRICK_HOUSE_PUZZLE_4_STATE, 1
-	goto Route110_TrickHousePuzzle4_EventScript_16189C
+	goto Route110_TrickHousePuzzle4_EventScript_FoundScroll
 	end
 
-Route110_TrickHousePuzzle4_EventScript_16276B:: @ 816276B
-	trainerbattle_single TRAINER_CORA, Route110_TrickHousePuzzle4_Text_19D1DE, Route110_TrickHousePuzzle4_Text_19D21F
-	msgbox Route110_TrickHousePuzzle4_Text_19D253, MSGBOX_AUTOCLOSE
+Route110_TrickHousePuzzle4_EventScript_Cora:: @ 816276B
+	trainerbattle_single TRAINER_CORA, Route110_TrickHousePuzzle4_Text_CoraIntro, Route110_TrickHousePuzzle4_Text_CoraDefeat
+	msgbox Route110_TrickHousePuzzle4_Text_CoraPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route110_TrickHousePuzzle4_EventScript_162782:: @ 8162782
-	trainerbattle_single TRAINER_YUJI, Route110_TrickHousePuzzle4_Text_19D295, Route110_TrickHousePuzzle4_Text_19D2D1
-	msgbox Route110_TrickHousePuzzle4_Text_19D306, MSGBOX_AUTOCLOSE
+Route110_TrickHousePuzzle4_EventScript_Yuji:: @ 8162782
+	trainerbattle_single TRAINER_YUJI, Route110_TrickHousePuzzle4_Text_YujiIntro, Route110_TrickHousePuzzle4_Text_YujiDefeat
+	msgbox Route110_TrickHousePuzzle4_Text_YujiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route110_TrickHousePuzzle4_EventScript_162799:: @ 8162799
-	trainerbattle_single TRAINER_JILL, Route110_TrickHousePuzzle4_Text_19D351, Route110_TrickHousePuzzle4_Text_19D380
-	msgbox Route110_TrickHousePuzzle4_Text_19D386, MSGBOX_AUTOCLOSE
+Route110_TrickHousePuzzle4_EventScript_Jill:: @ 8162799
+	trainerbattle_single TRAINER_JILL, Route110_TrickHousePuzzle4_Text_JillIntro, Route110_TrickHousePuzzle4_Text_JillDefeat
+	msgbox Route110_TrickHousePuzzle4_Text_JillPostBattle, MSGBOX_AUTOCLOSE
 	end

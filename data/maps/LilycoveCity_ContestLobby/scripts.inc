@@ -96,23 +96,23 @@ LilycoveCity_ContestLobby_EventScript_158994:: @ 8158994
 	return
 
 LilycoveCity_ContestLobby_EventScript_1589D6:: @ 81589D6
-	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_LADY
+	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_1
 	return
 
 LilycoveCity_ContestLobby_EventScript_1589DA:: @ 81589DA
-	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_GIRL
+	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_2
 	return
 
 LilycoveCity_ContestLobby_EventScript_1589DE:: @ 81589DE
-	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_MAN
+	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_3
 	return
 
 LilycoveCity_ContestLobby_EventScript_1589E2:: @ 81589E2
-	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_PAINTER
+	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_4
 	return
 
 LilycoveCity_ContestLobby_EventScript_1589E6:: @ 81589E6
-	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_VISITORS
+	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_TOURISTS
 	return
 
 LilycoveCity_ContestLobby_EventScript_1589EA:: @ 81589EA
@@ -749,7 +749,7 @@ LilycoveCity_ContestLobby_EventScript_159074:: @ 8159074
 	end
 
 LilycoveCity_ContestLobby_EventScript_15907B:: @ 815907B
-	msgbox LilycoveCity_ContestLobby_Text_1B7225, MSGBOX_NPC
+	msgbox SlateportCity_ContestLobby_Text_LetsGetBlendingAlready, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_159084:: @ 8159084

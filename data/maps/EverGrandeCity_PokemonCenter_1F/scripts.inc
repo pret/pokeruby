@@ -1,13 +1,12 @@
 EverGrandeCity_PokemonCenter_1F_MapScripts:: @ 815BC66
-	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_PokemonCenter_1F_MapScript1_15BC6C
+	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_PokemonCenter_1F_OnTransition
 	.byte 0
 
-EverGrandeCity_PokemonCenter_1F_MapScript1_15BC6C:: @ 815BC6C
+EverGrandeCity_PokemonCenter_1F_OnTransition:: @ 815BC6C
 	setrespawn HEAL_LOCATION_EVER_GRANDE_CITY
 	end
 
-EverGrandeCity_PokemonCenter_1F_EventScript_15BC70:: @ 815BC70
-SootopolisCity_PokemonCenter_1F_EventScript_15BC70:: @ 815BC70
+EverGrandeCity_PokemonCenter_1F_EventScript_Nurse:: @ 815BC70
 	setvar VAR_0x800B, 1
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
@@ -15,10 +14,10 @@ SootopolisCity_PokemonCenter_1F_EventScript_15BC70:: @ 815BC70
 	release
 	end
 
-EverGrandeCity_PokemonCenter_1F_EventScript_15BC7E:: @ 815BC7E
-	msgbox EverGrandeCity_PokemonCenter_1F_Text_191967, MSGBOX_NPC
+EverGrandeCity_PokemonCenter_1F_EventScript_Woman:: @ 815BC7E
+	msgbox EverGrandeCity_PokemonCenter_1F_Text_LeagueAfterVictoryRoad, MSGBOX_NPC
 	end
 
-EverGrandeCity_PokemonCenter_1F_EventScript_15BC87:: @ 815BC87
-	msgbox EverGrandeCity_PokemonCenter_1F_Text_1919EF, MSGBOX_NPC
+EverGrandeCity_PokemonCenter_1F_EventScript_ExpertM:: @ 815BC87
+	msgbox EverGrandeCity_PokemonCenter_1F_Text_BelieveInYourPokemon, MSGBOX_NPC
 	end

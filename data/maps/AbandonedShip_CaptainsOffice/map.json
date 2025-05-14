@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_CaptainsOffice_EventScript_15EAF5",
+      "script": "AbandonedShip_CaptainsOffice_EventScript_CaptSternAide",
       "flag": "0"
     },
     {
@@ -34,8 +34,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_CaptainsOffice_EventScript_1B18BE",
-      "flag": "FLAG_ITEM_ABANDONED_SHIP_CAPTAINS_OFFICE_1"
+      "script": "AbandonedShip_CaptainsOffice_EventScript_ItemStorageKey",
+      "flag": "FLAG_ITEM_ABANDONED_SHIP_CAPTAINS_OFFICE_STORAGE_KEY"
     }
   ],
   "warp_events": [

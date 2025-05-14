@@ -681,17 +681,17 @@ gStdScripts_End::
 	.include "data/maps/Route109_SeashoreHouse/text.inc"
 	.include "data/maps/Route110_TrickHouseEntrance/text.inc"
 
-Route110_TrickHousePuzzle1_Text_19C1B8:: @ 819C1B8
+Route110_TrickHousePuzzle1_Text_FoundAScroll:: @ 819C1B8
 	.string "{PLAYER} found a scroll.$"
 
-Route110_TrickHousePuzzle1_Text_19C1CB:: @ 819C1CB
+Route110_TrickHousePuzzle1_Text_MemorizedTheCode:: @ 819C1CB
 	.string "{PLAYER} memorized the secret code\n"
 	.string "written on the scroll.$"
 
-Route110_TrickHousePuzzle1_Text_19C1FF:: @ 819C1FF
+Route110_TrickHousePuzzle1_Text_SecretCodeOnIt:: @ 819C1FF
 	.string "A secret code is written on it.$"
 
-UnknownString_819C21F: @ 819C21F
+Route110_TrickHousePuzzle_Text_DoorLockedWriteSecretCodeHere: @ 819C21F
 	.string "The door is locked.\p"
 	.string "...On closer inspection, this is written\n"
 	.string "on it: “Write the secret code here.”$"
@@ -881,7 +881,7 @@ Common_EventScript_OutOfCenterPartyHeal:: @ 81A02CA
 
 EventScript_RegionMap:: @ 81A02D6
 	lockall
-	msgbox Text_LookCloserAtMap, MSGBOX_DEFAULT
+	msgbox Common_Text_LookCloserAtMap, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
 	special FieldShowRegionMap
 	waitstate
@@ -1035,7 +1035,7 @@ UnknownString_81A0E68: @ 81A0E68
 UnknownString_81A0ED6: @ 81A0ED6
 	.string "What should I do for fun today?$"
 
-LilycoveCity_DepartmentStoreElevator_Text_1A0EF6:: @ 81A0EF6
+LilycoveCity_DepartmentStoreElevator_Text_WhichFloorWouldYouLike:: @ 81A0EF6
 	.string "Welcome to LILYCOVE DEPARTMENT STORE.\p"
 	.string "Which floor would you like?$"
 
@@ -1059,8 +1059,7 @@ Text_NoRegisteredItem: @ 81A0FCC
 	.string "An item in the BAG can be registered\n"
 	.string "on SELECT for convenience.$"
 
-LittlerootTown_BrendansHouse_2F_Text_1A100C:: @ 81A100C
-LittlerootTown_MaysHouse_2F_Text_1A100C:: @ 81A100C
+gText_PokemonTrainerSchoolEmail:: @ 81A100C
 	.string "There's an e-mail from POKéMON TRAINER\n"
 	.string "SCHOOL.\p"
 	.string "... ... ... ... ... ...\p"
@@ -1069,15 +1068,13 @@ LittlerootTown_MaysHouse_2F_Text_1A100C:: @ 81A100C
 	.string "move sets chosen for POKéMON.\p"
 	.string "... ... ... ... ... ...$"
 
-LittlerootTown_BrendansHouse_2F_Text_1A10D6:: @ 81A10D6
-LittlerootTown_MaysHouse_2F_Text_1A10D6:: @ 81A10D6
+gText_PlayerHouseBootPC:: @ 81A10D6
 	.string "{PLAYER} booted up the PC.$"
 
 FallarborTown_ContestLobby_Text_1A10EB:: @ 81A10EB
 	.string "The link was canceled.$"
 
-MossdeepCity_StevensHouse_Text_1A1102:: @ 81A1102
-RustboroCity_DevonCorp_2F_Text_1A1102:: @ 81A1102
+gText_NicknameReceivedPokemon:: @ 81A1102
 	.string "Want to give a nickname to the\n"
 	.string "{STR_VAR_2} you received?$"
 
@@ -1088,7 +1085,7 @@ UnknownString_81A1141: @ 81A1141
 	.string "{PLAYER} is out of useable POKéMON!\p"
 	.string "{PLAYER} whited out!$"
 
-SlateportCity_Text_1A116E:: @ 81A116E
+gText_ComeBackWithSecretPower:: @ 81A116E
 	.string "Do you know the TM SECRET POWER?\p"
 	.string "Our group, we love the TM SECRET\n"
 	.string "POWER.\p"
@@ -1362,9 +1359,9 @@ SlateportCity_PokemonFanClub_EventScript_1AE0AC:: @ 81AE0AC
 	release
 	end
 
-FallarborTown_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
+FallarborTown_ContestLobby_EventScript_Reporter:: @ 81AE0B6
 LilycoveCity_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
-SlateportCity_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
+SlateportCity_ContestLobby_EventScript_Reporter:: @ 81AE0B6
 VerdanturfTown_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
 	lock
 	faceplayer
@@ -1599,7 +1596,7 @@ Text_RepelWoreOff: @ 81C33EF
 MauvilleCity_GameCorner_EventScript_1C407E:: @ 81C407E
 	checkitem ITEM_COIN_CASE, 1
 	compare VAR_RESULT, 0
-	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
+	goto_if_eq MauvilleCity_GameCorner_EventScript_NoCoinCase
 	setvar VAR_0x8004, 0
 	getpricereduction 2
 	compare VAR_RESULT, 0
@@ -1611,7 +1608,7 @@ MauvilleCity_GameCorner_EventScript_1C407E:: @ 81C407E
 MauvilleCity_GameCorner_EventScript_1C40AC:: @ 81C40AC
 	checkitem ITEM_COIN_CASE, 1
 	compare VAR_RESULT, 0
-	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
+	goto_if_eq MauvilleCity_GameCorner_EventScript_NoCoinCase
 	setvar VAR_0x8004, 1
 	getpricereduction 2
 	compare VAR_RESULT, 0

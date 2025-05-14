@@ -60,7 +60,7 @@ extern u8 Event_TV[];
 extern u8 ClosedSootopolisDoorScript[];
 extern u8 gUnknown_081A4363[];
 extern u8 gUnknown_081C346A[];
-extern u8 gUnknown_081616E1[];
+extern u8 Route110_TrickHousePuzzle_EventScript_Door[];
 extern u8 EventScript_RegionMap[];
 extern u8 S_RunningShoesManual[];
 extern u8 EventScript_PictureBookshelf[];
@@ -465,7 +465,7 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
     if (MetatileBehavior_IsPokeblockFeeder(metatileBehavior) == TRUE)
         return gUnknown_081C346A;
     if (MetatileBehavior_IsTrickHousePuzzleDoor(metatileBehavior) == TRUE)
-        return gUnknown_081616E1;
+        return Route110_TrickHousePuzzle_EventScript_Door;
     if (MetatileBehavior_IsRegionMap(metatileBehavior) == TRUE)
         return EventScript_RegionMap;
     if (MetatileBehavior_IsRunningShoesManual(metatileBehavior) == TRUE)

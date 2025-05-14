@@ -1,5 +1,4 @@
-LittlerootTown_BrendansHouse_1F_Text_1730C2:: @ 81730C2
-LittlerootTown_MaysHouse_1F_Text_1730C2:: @ 81730C2
+RivalsHouse_1F_Text_OhYoureTheNewNeighbor:: @ 81730C2
 	.string "Oh, hello. And you are?\p"
 	.string "... ... ... ... ... ... ... ... ...\n"
 	.string "... ... ... ... ... ... ... ... ...\p"
@@ -11,21 +10,21 @@ LittlerootTown_MaysHouse_1F_Text_1730C2:: @ 81730C2
 	.string "a new friend.\p"
 	.string "Our {STR_VAR_1} is upstairs, I think.$"
 
-LittlerootTown_BrendansHouse_1F_Text_1731C6:: @ 81731C6
+RivalsHouse_1F_Text_RivalIsUpstairsIThink:: @ 81731C6
 	.string "Our {STR_VAR_1} is upstairs, I think.$"
 
-LittlerootTown_BrendansHouse_1F_Text_1731E3:: @ 81731E3
+RivalsHouse_1F_Text_WhereHasHusbandGone:: @ 81731E3
 	.string "Where has my husband gone?\n"
 	.string "Just when {PLAYER}{KUN} is visiting, too...\p"
 	.string "That man can never sit still for long...\n"
 	.string "He might be at his LAB.$"
 
-LittlerootTown_BrendansHouse_1F_Text_173262:: @ 8173262
+RivalsHouse_1F_Text_WentOutSomewhere:: @ 8173262
 	.string "Oh, {RIVAL} has gone out somewhere.\p"
 	.string "Like father, like child.\n"
 	.string "{RIVAL} can't stay quietly at home.$"
 
-LittlerootTown_BrendansHouse_1F_Text_1732B9:: @ 81732B9
+RivalsHouse_1F_Text_ShouldGoHomeEverySoOften:: @ 81732B9
 	.string "I think it's wonderful for people to\n"
 	.string "travel with POKéMON.\p"
 	.string "But you should go home every so often\n"

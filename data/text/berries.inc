@@ -1,4 +1,4 @@
-PetalburgCity_Gym_Text_1C5570:: @ 81C5570
+PetalburgCity_Gym_Text_GiveEnigmaBerry:: @ 81C5570
 	.string "DAD: Hi, {PLAYER}!\p"
 	.string "I just received a very rare BERRY.\n"
 	.string "I'd like you to have it.$"
@@ -74,18 +74,18 @@ Route120_Text_1C5A4D:: @ 81C5A4D
 	.string "I'll get more BERRIES from the\n"
 	.string "BERRY MASTER.$"
 
-LilycoveCity_Text_1C5A7A:: @ 81C5A7A
+LilycoveCity_Text_BerrySuitsYou:: @ 81C5A7A
 	.string "When it gets right down to it...\p"
 	.string "The same way suits suit me perfectly,\n"
 	.string "a crisp breeze suits the sea.\p"
 	.string "And you, a BERRY suits you to a “T”...\p"
 	.string "Why should that be so?$"
 
-LilycoveCity_Text_1C5B1D:: @ 81C5B1D
+LilycoveCity_Text_BecauseYoureTrainer:: @ 81C5B1D
 	.string "When it gets right down to it...\p"
 	.string "It's because you're a TRAINER!$"
 
-LilycoveCity_Text_1C5B5D:: @ 81C5B5D
+LilycoveCity_Text_PokeblocksSuitPokemon:: @ 81C5B5D
 	.string "When it gets right down to it...\p"
 	.string "The way dignified simplicity suits me,\n"
 	.string "{POKEBLOCK}S perfectly suit POKéMON.$"
@@ -200,7 +200,7 @@ Route104_PrettyPetalFlowerShop_Text_1C6335:: @ 81C6335
 	.string "for POKéMON.\p"
 	.string "I want some candy, too.$"
 
-SootopolisCity_Text_1C63F2:: @ 81C63F2
+SootopolisCity_Text_NameIsKiriHaveOneOfThese:: @ 81C63F2
 	.string "Hi, what's your name?\p"
 	.string "... ... ...  ... ... ...  ... ... ...\n"
 	.string "Okay. That's nice!\p"
@@ -210,26 +210,26 @@ SootopolisCity_Text_1C63F2:: @ 81C63F2
 	.string "That's what they wished.\p"
 	.string "You can have one of these.$"
 
-SootopolisCity_Text_1C64D0:: @ 81C64D0
+SootopolisCity_Text_GiveYouThisBerryToo:: @ 81C64D0
 	.string "KIRI will give you this BERRY, too!\n"
 	.string "I really like it lots!$"
 
-SootopolisCity_Text_1C650B:: @ 81C650B
+SootopolisCity_Text_WhatKindOfWishInYourName:: @ 81C650B
 	.string "I wonder what kind of wish is included\n"
 	.string "in your name.$"
 
-SootopolisCity_Text_1C6540:: @ 81C6540
+SootopolisCity_Text_KiriBornInSeasons:: @ 81C6540
 	.string "Spring, summer, autumn, and winter.\p"
 	.string "If you're born in springtime, do you like\n"
 	.string "the spring, and if you're born in the\l"
 	.string "summer, do you like the summer?$"
 
-SootopolisCity_Text_1C65D4:: @ 81C65D4
+SootopolisCity_Text_ThenILoveAutumn:: @ 81C65D4
 	.string "Then KIRI was born in the autumn,\n"
 	.string "so I love the autumn!\p"
 	.string "Which season do you like?$"
 
-SootopolisCity_Text_1C6626:: @ 81C6626
+SootopolisCity_Text_OhDoesntMatter:: @ 81C6626
 	.string "Oh...\n"
 	.string "It doesn't matter...\p"
 	.string "There's so much that I want to know...$"

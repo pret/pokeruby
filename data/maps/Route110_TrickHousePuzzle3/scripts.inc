@@ -1,17 +1,17 @@
 Route110_TrickHousePuzzle3_MapScripts:: @ 8161EBD
-	map_script MAP_SCRIPT_ON_RESUME, Route110_TrickHousePuzzle3_MapScript1_161EC8
-	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle3_MapScript1_161EE4
+	map_script MAP_SCRIPT_ON_RESUME, Route110_TrickHousePuzzle3_OnResume
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle3_OnTransition
 	.byte 0
 
-Route110_TrickHousePuzzle3_MapScript1_161EC8:: @ 8161EC8
-	call Route110_TrickHousePuzzle3_EventScript_161F12
+Route110_TrickHousePuzzle3_OnResume:: @ 8161EC8
+	call Route110_TrickHousePuzzle3_EventScript_UpdateButtonMetatiles
 	compare VAR_TEMP_9, 0
-	call_if_eq Route110_TrickHousePuzzle3_EventScript_161FE5
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_SetDoorsState0
 	compare VAR_TEMP_9, 1
-	call_if_eq Route110_TrickHousePuzzle3_EventScript_1622C8
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_SetDoorsState1
 	end
 
-Route110_TrickHousePuzzle3_MapScript1_161EE4:: @ 8161EE4
+Route110_TrickHousePuzzle3_OnTransition:: @ 8161EE4
 	setvar VAR_TEMP_1, 0
 	setvar VAR_TEMP_2, 0
 	setvar VAR_TEMP_3, 0
@@ -23,7 +23,7 @@ Route110_TrickHousePuzzle3_MapScript1_161EE4:: @ 8161EE4
 	setvar VAR_TEMP_9, 0
 	end
 
-Route110_TrickHousePuzzle3_EventScript_161F12:: @ 8161F12
+Route110_TrickHousePuzzle3_EventScript_UpdateButtonMetatiles:: @ 8161F12
 	setmetatile 5, 20, METATILE_TrickHousePuzzle_Button_Up, 0
 	setmetatile 4, 12, METATILE_TrickHousePuzzle_Button_Up, 0
 	setmetatile 11, 10, METATILE_TrickHousePuzzle_Button_Up, 0
@@ -32,50 +32,50 @@ Route110_TrickHousePuzzle3_EventScript_161F12:: @ 8161F12
 	setmetatile 1, 3, METATILE_TrickHousePuzzle_Button_Up, 0
 	setmetatile 10, 2, METATILE_TrickHousePuzzle_Button_Up, 0
 	compare VAR_TEMP_8, 1
-	call_if_eq Route110_TrickHousePuzzle3_EventScript_161F9F
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_PressedButton1Metatile
 	compare VAR_TEMP_8, 2
-	call_if_eq Route110_TrickHousePuzzle3_EventScript_161FA9
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_PressedButton2Metatile
 	compare VAR_TEMP_8, 3
-	call_if_eq Route110_TrickHousePuzzle3_EventScript_161FB3
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_PressedButton3Metatile
 	compare VAR_TEMP_8, 4
-	call_if_eq Route110_TrickHousePuzzle3_EventScript_161FBD
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_PressedButton4Metatile
 	compare VAR_TEMP_8, 5
-	call_if_eq Route110_TrickHousePuzzle3_EventScript_161FC7
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_PressedButton5Metatile
 	compare VAR_TEMP_8, 6
-	call_if_eq Route110_TrickHousePuzzle3_EventScript_161FD1
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_PressedButton6Metatile
 	compare VAR_TEMP_8, 7
-	call_if_eq Route110_TrickHousePuzzle3_EventScript_161FDB
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_PressedButton7Metatile
 	return
 
-Route110_TrickHousePuzzle3_EventScript_161F9F:: @ 8161F9F
+Route110_TrickHousePuzzle3_EventScript_PressedButton1Metatile:: @ 8161F9F
 	setmetatile 5, 20, METATILE_TrickHousePuzzle_Button_Pressed, 0
 	return
 
-Route110_TrickHousePuzzle3_EventScript_161FA9:: @ 8161FA9
+Route110_TrickHousePuzzle3_EventScript_PressedButton2Metatile:: @ 8161FA9
 	setmetatile 4, 12, METATILE_TrickHousePuzzle_Button_Pressed, 0
 	return
 
-Route110_TrickHousePuzzle3_EventScript_161FB3:: @ 8161FB3
+Route110_TrickHousePuzzle3_EventScript_PressedButton3Metatile:: @ 8161FB3
 	setmetatile 11, 10, METATILE_TrickHousePuzzle_Button_Pressed, 0
 	return
 
-Route110_TrickHousePuzzle3_EventScript_161FBD:: @ 8161FBD
+Route110_TrickHousePuzzle3_EventScript_PressedButton4Metatile:: @ 8161FBD
 	setmetatile 3, 8, METATILE_TrickHousePuzzle_Button_Pressed, 0
 	return
 
-Route110_TrickHousePuzzle3_EventScript_161FC7:: @ 8161FC7
+Route110_TrickHousePuzzle3_EventScript_PressedButton5Metatile:: @ 8161FC7
 	setmetatile 13, 7, METATILE_TrickHousePuzzle_Button_Pressed, 0
 	return
 
-Route110_TrickHousePuzzle3_EventScript_161FD1:: @ 8161FD1
+Route110_TrickHousePuzzle3_EventScript_PressedButton6Metatile:: @ 8161FD1
 	setmetatile 1, 3, METATILE_TrickHousePuzzle_Button_Pressed, 0
 	return
 
-Route110_TrickHousePuzzle3_EventScript_161FDB:: @ 8161FDB
+Route110_TrickHousePuzzle3_EventScript_PressedButton7Metatile:: @ 8161FDB
 	setmetatile 10, 2, METATILE_TrickHousePuzzle_Button_Pressed, 0
 	return
 
-Route110_TrickHousePuzzle3_EventScript_161FE5:: @ 8161FE5
+Route110_TrickHousePuzzle3_EventScript_SetDoorsState0:: @ 8161FE5
 	setmetatile 1, 6, METATILE_TrickHousePuzzle_BlueDoorH_Open_Tile0, 0
 	setmetatile 2, 6, METATILE_TrickHousePuzzle_BlueDoorH_Open_Tile1, 0
 	setmetatile 1, 7, METATILE_TrickHousePuzzle_BlueDoorH_Open_Tile2, 0
@@ -160,7 +160,7 @@ Route110_TrickHousePuzzle3_EventScript_161FE5:: @ 8161FE5
 	setmetatile 12, 17, METATILE_TrickHousePuzzle_RedDoorV_Open1, 1
 	return
 
-Route110_TrickHousePuzzle3_EventScript_1622C8:: @ 81622C8
+Route110_TrickHousePuzzle3_EventScript_SetDoorsState1:: @ 81622C8
 	setmetatile 1, 6, METATILE_TrickHousePuzzle_BlueDoorH_Closed_Tile0, 0
 	setmetatile 2, 6, METATILE_TrickHousePuzzle_BlueDoorH_Closed_Tile1, 0
 	setmetatile 1, 7, METATILE_TrickHousePuzzle_BlueDoorH_Closed_Tile2, 1
@@ -245,56 +245,56 @@ Route110_TrickHousePuzzle3_EventScript_1622C8:: @ 81622C8
 	setmetatile 12, 17, METATILE_TrickHousePuzzle_Floor_ShadowTop_Alt, 0
 	return
 
-Route110_TrickHousePuzzle3_EventScript_1625AB:: @ 81625AB
+Route110_TrickHousePuzzle3_EventScript_Button1:: @ 81625AB
 	lockall
 	setvar VAR_TEMP_8, 1
-	goto Route110_TrickHousePuzzle3_EventScript_1625FF
+	goto Route110_TrickHousePuzzle3_EventScript_PressButton
 	end
 
-Route110_TrickHousePuzzle3_EventScript_1625B7:: @ 81625B7
+Route110_TrickHousePuzzle3_EventScript_Button2:: @ 81625B7
 	lockall
 	setvar VAR_TEMP_8, 2
-	goto Route110_TrickHousePuzzle3_EventScript_1625FF
+	goto Route110_TrickHousePuzzle3_EventScript_PressButton
 	end
 
-Route110_TrickHousePuzzle3_EventScript_1625C3:: @ 81625C3
+Route110_TrickHousePuzzle3_EventScript_Button3:: @ 81625C3
 	lockall
 	setvar VAR_TEMP_8, 3
-	goto Route110_TrickHousePuzzle3_EventScript_1625FF
+	goto Route110_TrickHousePuzzle3_EventScript_PressButton
 	end
 
-Route110_TrickHousePuzzle3_EventScript_1625CF:: @ 81625CF
+Route110_TrickHousePuzzle3_EventScript_Button4:: @ 81625CF
 	lockall
 	setvar VAR_TEMP_8, 4
-	goto Route110_TrickHousePuzzle3_EventScript_1625FF
+	goto Route110_TrickHousePuzzle3_EventScript_PressButton
 	end
 
-Route110_TrickHousePuzzle3_EventScript_1625DB:: @ 81625DB
+Route110_TrickHousePuzzle3_EventScript_Button5:: @ 81625DB
 	lockall
 	setvar VAR_TEMP_8, 5
-	goto Route110_TrickHousePuzzle3_EventScript_1625FF
+	goto Route110_TrickHousePuzzle3_EventScript_PressButton
 	end
 
-Route110_TrickHousePuzzle3_EventScript_1625E7:: @ 81625E7
+Route110_TrickHousePuzzle3_EventScript_Button6:: @ 81625E7
 	lockall
 	setvar VAR_TEMP_8, 6
-	goto Route110_TrickHousePuzzle3_EventScript_1625FF
+	goto Route110_TrickHousePuzzle3_EventScript_PressButton
 	end
 
-Route110_TrickHousePuzzle3_EventScript_1625F3:: @ 81625F3
+Route110_TrickHousePuzzle3_EventScript_Button7:: @ 81625F3
 	lockall
 	setvar VAR_TEMP_8, 7
-	goto Route110_TrickHousePuzzle3_EventScript_1625FF
+	goto Route110_TrickHousePuzzle3_EventScript_PressButton
 	end
 
-Route110_TrickHousePuzzle3_EventScript_1625FF:: @ 81625FF
-	call Route110_TrickHousePuzzle3_EventScript_162612
+Route110_TrickHousePuzzle3_EventScript_PressButton:: @ 81625FF
+	call Route110_TrickHousePuzzle3_EventScript_SetButton
 	playse SE_PIN
-	call Route110_TrickHousePuzzle3_EventScript_161F12
-	goto Route110_TrickHousePuzzle3_EventScript_1626AD
+	call Route110_TrickHousePuzzle3_EventScript_UpdateButtonMetatiles
+	goto Route110_TrickHousePuzzle3_EventScript_AlternateDoors
 	end
 
-Route110_TrickHousePuzzle3_EventScript_162612:: @ 8162612
+Route110_TrickHousePuzzle3_EventScript_SetButton:: @ 8162612
 	setvar VAR_TEMP_1, 0
 	setvar VAR_TEMP_2, 0
 	setvar VAR_TEMP_3, 0
@@ -303,94 +303,94 @@ Route110_TrickHousePuzzle3_EventScript_162612:: @ 8162612
 	setvar VAR_TEMP_6, 0
 	setvar VAR_TEMP_7, 0
 	compare VAR_TEMP_8, 1
-	call_if_eq Route110_TrickHousePuzzle3_EventScript_162683
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_SetButton1
 	compare VAR_TEMP_8, 2
-	call_if_eq Route110_TrickHousePuzzle3_EventScript_162689
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_SetButton2
 	compare VAR_TEMP_8, 3
-	call_if_eq Route110_TrickHousePuzzle3_EventScript_16268F
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_SetButton3
 	compare VAR_TEMP_8, 4
-	call_if_eq Route110_TrickHousePuzzle3_EventScript_162695
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_SetButton4
 	compare VAR_TEMP_8, 5
-	call_if_eq Route110_TrickHousePuzzle3_EventScript_16269B
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_SetButton5
 	compare VAR_TEMP_8, 6
-	call_if_eq Route110_TrickHousePuzzle3_EventScript_1626A1
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_SetButton6
 	compare VAR_TEMP_8, 7
-	call_if_eq Route110_TrickHousePuzzle3_EventScript_1626A7
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_SetButton7
 	return
 
-Route110_TrickHousePuzzle3_EventScript_162683:: @ 8162683
+Route110_TrickHousePuzzle3_EventScript_SetButton1:: @ 8162683
 	setvar VAR_TEMP_1, 1
 	return
 
-Route110_TrickHousePuzzle3_EventScript_162689:: @ 8162689
+Route110_TrickHousePuzzle3_EventScript_SetButton2:: @ 8162689
 	setvar VAR_TEMP_2, 1
 	return
 
-Route110_TrickHousePuzzle3_EventScript_16268F:: @ 816268F
+Route110_TrickHousePuzzle3_EventScript_SetButton3:: @ 816268F
 	setvar VAR_TEMP_3, 1
 	return
 
-Route110_TrickHousePuzzle3_EventScript_162695:: @ 8162695
+Route110_TrickHousePuzzle3_EventScript_SetButton4:: @ 8162695
 	setvar VAR_TEMP_4, 1
 	return
 
-Route110_TrickHousePuzzle3_EventScript_16269B:: @ 816269B
+Route110_TrickHousePuzzle3_EventScript_SetButton5:: @ 816269B
 	setvar VAR_TEMP_5, 1
 	return
 
-Route110_TrickHousePuzzle3_EventScript_1626A1:: @ 81626A1
+Route110_TrickHousePuzzle3_EventScript_SetButton6:: @ 81626A1
 	setvar VAR_TEMP_6, 1
 	return
 
-Route110_TrickHousePuzzle3_EventScript_1626A7:: @ 81626A7
+Route110_TrickHousePuzzle3_EventScript_SetButton7:: @ 81626A7
 	setvar VAR_TEMP_7, 1
 	return
 
-Route110_TrickHousePuzzle3_EventScript_1626AD:: @ 81626AD
+Route110_TrickHousePuzzle3_EventScript_AlternateDoors:: @ 81626AD
 	compare VAR_TEMP_9, 1
-	call_if_eq Route110_TrickHousePuzzle3_EventScript_161FE5
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_SetDoorsState0
 	compare VAR_TEMP_9, 0
-	call_if_eq Route110_TrickHousePuzzle3_EventScript_1622C8
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_SetDoorsState1
 	special DrawWholeMapView
 	compare VAR_TEMP_9, 1
-	goto_if_eq Route110_TrickHousePuzzle3_EventScript_1626DD
+	goto_if_eq Route110_TrickHousePuzzle3_EventScript_ClearAltDoorState
 	compare VAR_TEMP_9, 0
-	goto_if_eq Route110_TrickHousePuzzle3_EventScript_1626E4
+	goto_if_eq Route110_TrickHousePuzzle3_EventScript_SetAltDoorState
 	end
 
-Route110_TrickHousePuzzle3_EventScript_1626DD:: @ 81626DD
+Route110_TrickHousePuzzle3_EventScript_ClearAltDoorState:: @ 81626DD
 	setvar VAR_TEMP_9, 0
 	releaseall
 	end
 
-Route110_TrickHousePuzzle3_EventScript_1626E4:: @ 81626E4
+Route110_TrickHousePuzzle3_EventScript_SetAltDoorState:: @ 81626E4
 	setvar VAR_TEMP_9, 1
 	releaseall
 	end
 
-Route110_TrickHousePuzzle3_EventScript_1626EB:: @ 81626EB
+Route110_TrickHousePuzzle3_EventScript_Scroll:: @ 81626EB
 	lockall
 	compare VAR_TRICK_HOUSE_PUZZLE_3_STATE, 0
-	goto_if_eq Route110_TrickHousePuzzle3_EventScript_1626FD
-	goto Route110_TrickHousePuzzle3_EventScript_161892
+	goto_if_eq Route110_TrickHousePuzzle3_EventScript_ReadScroll
+	goto Route110_TrickHousePuzzle3_EventScript_ReadScrollAgain
 	end
 
-Route110_TrickHousePuzzle3_EventScript_1626FD:: @ 81626FD
+Route110_TrickHousePuzzle3_EventScript_ReadScroll:: @ 81626FD
 	setvar VAR_TRICK_HOUSE_PUZZLE_3_STATE, 1
-	goto Route110_TrickHousePuzzle3_EventScript_16189C
+	goto Route110_TrickHousePuzzle3_EventScript_FoundScroll
 	end
 
-Route110_TrickHousePuzzle3_EventScript_162708:: @ 8162708
-	trainerbattle_single TRAINER_JUSTIN, Route110_TrickHousePuzzle3_Text_19CF76, Route110_TrickHousePuzzle3_Text_19CF9D
-	msgbox Route110_TrickHousePuzzle3_Text_19CFE6, MSGBOX_AUTOCLOSE
+Route110_TrickHousePuzzle3_EventScript_Justin:: @ 8162708
+	trainerbattle_single TRAINER_JUSTIN, Route110_TrickHousePuzzle3_Text_JustinIntro, Route110_TrickHousePuzzle3_Text_JustinDefeat
+	msgbox Route110_TrickHousePuzzle3_Text_JustinPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route110_TrickHousePuzzle3_EventScript_16271F:: @ 816271F
-	trainerbattle_single TRAINER_MARTHA, Route110_TrickHousePuzzle3_Text_19D026, Route110_TrickHousePuzzle3_Text_19D065
-	msgbox Route110_TrickHousePuzzle3_Text_19D07A, MSGBOX_AUTOCLOSE
+Route110_TrickHousePuzzle3_EventScript_Martha:: @ 816271F
+	trainerbattle_single TRAINER_MARTHA, Route110_TrickHousePuzzle3_Text_MarthaIntro, Route110_TrickHousePuzzle3_Text_MarthaDefeat
+	msgbox Route110_TrickHousePuzzle3_Text_MarthaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route110_TrickHousePuzzle3_EventScript_162736:: @ 8162736
-	trainerbattle_single TRAINER_ALAN, Route110_TrickHousePuzzle3_Text_19D0AE, Route110_TrickHousePuzzle3_Text_19D0F0
-	msgbox Route110_TrickHousePuzzle3_Text_19D110, MSGBOX_AUTOCLOSE
+Route110_TrickHousePuzzle3_EventScript_Alan:: @ 8162736
+	trainerbattle_single TRAINER_ALAN, Route110_TrickHousePuzzle3_Text_AlanIntro, Route110_TrickHousePuzzle3_Text_AlanDefeat
+	msgbox Route110_TrickHousePuzzle3_Text_AlanPostBattle, MSGBOX_AUTOCLOSE
 	end

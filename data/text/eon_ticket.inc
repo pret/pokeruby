@@ -8,12 +8,12 @@ UnknownString_81C5070: @ 81C5070
 	.string "You should find out what this is about\n"
 	.string "in LILYCOVE.$"
 
-LilycoveCity_Harbor_Text_1C50F2:: @ 81C50F2
+EventTicket_Text_ThatPass:: @ 81C50F2
 	.string "The ferry to SLATEPORT is...\p"
 	.string "Oh?\n"
 	.string "That PASS...$"
 
-LilycoveCity_Harbor_Text_1C5120:: @ 81C5120
+EventTicket_Text_ShowEonTicket:: @ 81C5120
 	.string "Aye, mate, are you the one who brought\n"
 	.string "that mighty odd PASS?\p"
 	.string "I'll tell you, you're trying to reach a\n"

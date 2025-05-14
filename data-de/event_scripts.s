@@ -681,17 +681,17 @@ gStdScripts_End::
 	.include "data/maps/Route109_SeashoreHouse/text.inc"
 	.include "data/maps/Route110_TrickHouseEntrance/text.inc"
 
-Route110_TrickHousePuzzle1_Text_19C1B8:: @ 819C1B8
+Route110_TrickHousePuzzle1_Text_FoundAScroll:: @ 819C1B8
 	.string "{PLAYER} findet eine Schriftrolle.$"
 
-Route110_TrickHousePuzzle1_Text_19C1CB:: @ 819C1CB
+Route110_TrickHousePuzzle1_Text_MemorizedTheCode:: @ 819C1CB
 	.string "{PLAYER} lernt den geheimen Code, der\n"
 	.string "auf der Schriftrolle steht, auswendig.$"
 
-Route110_TrickHousePuzzle1_Text_19C1FF:: @ 819C1FF
+Route110_TrickHousePuzzle1_Text_SecretCodeOnIt:: @ 819C1FF
 	.string "Dort steht ein geheimer Code.$"
 
-UnknownString_819C21F: @ 819C21F
+Route110_TrickHousePuzzle_Text_DoorLockedWriteSecretCodeHere: @ 819C21F
 	.string "Die Tür ist verschlossen.\p"
 	.string "Bei näherer Betrachtung findet sich\n"
 	.string "ein Hinweis. “Schreibe hier den\l"
@@ -882,7 +882,7 @@ Common_EventScript_OutOfCenterPartyHeal:: @ 81A02CA
 
 EventScript_RegionMap:: @ 81A02D6
 	lockall
-	msgbox Text_LookCloserAtMap, MSGBOX_DEFAULT
+	msgbox Common_Text_LookCloserAtMap, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
 	special FieldShowRegionMap
 	waitstate
@@ -1036,7 +1036,7 @@ UnknownString_81A0E68: @ 81A0E68
 UnknownString_81A0ED6: @ 81A0ED6
 	.string "Womit soll ich mir die Zeit vertreiben?$"
 
-LilycoveCity_DepartmentStoreElevator_Text_1A0EF6:: @ 81A0EF6
+LilycoveCity_DepartmentStoreElevator_Text_WhichFloorWouldYouLike:: @ 81A0EF6
 	.string "Willkommen im SEEGRASULB CITY\n"
 	.string "EINKAUFSZENTRUM.\p"
 	.string "In welches Stockwerk möchtest du?$"
@@ -1061,8 +1061,8 @@ Text_NoRegisteredItem: @ 81A0FCC
 	.string "Ein Basis-Item aus dem BEUTEL kann auf\n"
 	.string "SELECT gelegt werden. Sehr praktisch!$"
 
-LittlerootTown_BrendansHouse_2F_Text_1A100C:: @ 81A100C
-LittlerootTown_MaysHouse_2F_Text_1A100C:: @ 81A100C
+gText_PokemonTrainerSchoolEmail:: @ 81A100C
+gText_PokemonTrainerSchoolEmail:: @ 81A100C
 	.string "Da ist eine E-Mail von der POKéMON\n"
 	.string "TRAINERSCHULE.\p"
 	.string "... ... ... ... ... ...\p"
@@ -1073,15 +1073,15 @@ LittlerootTown_MaysHouse_2F_Text_1A100C:: @ 81A100C
 	.string "POKéMON beibringt, erprobt.\p"
 	.string "... ... ... ... ... ...$"
 
-LittlerootTown_BrendansHouse_2F_Text_1A10D6:: @ 81A10D6
-LittlerootTown_MaysHouse_2F_Text_1A10D6:: @ 81A10D6
+gText_PlayerHouseBootPC:: @ 81A10D6
+gText_PlayerHouseBootPC:: @ 81A10D6
 	.string "{PLAYER} schaltet den PC ein.$"
 
 FallarborTown_ContestLobby_Text_1A10EB:: @ 81A10EB
 	.string "Die Verbindung wurde abgebrochen.$"
 
-MossdeepCity_StevensHouse_Text_1A1102:: @ 81A1102
-RustboroCity_DevonCorp_2F_Text_1A1102:: @ 81A1102
+gText_NicknameReceivedPokemon:: @ 81A1102
+gText_NicknameReceivedPokemon:: @ 81A1102
 	.string "Möchtest du {STR_VAR_2} einen\n"
 	.string "Kosenamen geben?$"
 
@@ -1094,7 +1094,7 @@ UnknownString_81A1141: @ 81A1141
 	.string "mehr!\p"
 	.string "{PLAYER} wird ohnmächtig!$"
 
-SlateportCity_Text_1A116E:: @ 81A116E
+gText_ComeBackWithSecretPower:: @ 81A116E
 	.string "Kennst du die TM GEHEIMPOWER?\p"
 	.string "In unserer Gruppe mögen alle die TM\n"
 	.string "GEHEIMPOWER.\p"
@@ -1369,9 +1369,9 @@ SlateportCity_PokemonFanClub_EventScript_1AE0AC:: @ 81AE0AC
 	release
 	end
 
-FallarborTown_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
+FallarborTown_ContestLobby_EventScript_Reporter:: @ 81AE0B6
 LilycoveCity_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
-SlateportCity_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
+SlateportCity_ContestLobby_EventScript_Reporter:: @ 81AE0B6
 VerdanturfTown_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
 	lock
 	faceplayer
@@ -1606,7 +1606,7 @@ Text_RepelWoreOff: @ 81C33EF
 MauvilleCity_GameCorner_EventScript_1C407E:: @ 81C407E
 	checkitem ITEM_COIN_CASE, 1
 	compare VAR_RESULT, 0
-	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
+	goto_if_eq MauvilleCity_GameCorner_EventScript_NoCoinCase
 	setvar VAR_0x8004, 0
 	getpricereduction 2
 	compare VAR_RESULT, 0
@@ -1618,7 +1618,7 @@ MauvilleCity_GameCorner_EventScript_1C407E:: @ 81C407E
 MauvilleCity_GameCorner_EventScript_1C40AC:: @ 81C40AC
 	checkitem ITEM_COIN_CASE, 1
 	compare VAR_RESULT, 0
-	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
+	goto_if_eq MauvilleCity_GameCorner_EventScript_NoCoinCase
 	setvar VAR_0x8004, 1
 	getpricereduction 2
 	compare VAR_RESULT, 0

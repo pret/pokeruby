@@ -1,4 +1,4 @@
-RustboroCity_Gym_Text_183A4B:: @ 8183A4B
+RustboroCity_Gym_Text_GymGuideAdvice:: @ 8183A4B
 	.string "Hi, wie geht's?\p"
 	.string "Hör zu, mein Freund!\n"
 	.string "Würdest du gerne CHAMP werden?\p"
@@ -23,7 +23,7 @@ RustboroCity_Gym_Text_183A4B:: @ 8183A4B
 	.string "LEITERIN besiegt hast.\p"
 	.string "Nun zeig, was du drauf hast!$"
 
-RustboroCity_Gym_Text_183C90:: @ 8183C90
+RustboroCity_Gym_Text_GymGuidePostVictory:: @ 8183C90
 	.string "Hui! Was für ein atemberaubender Sieg!\n"
 	.string "Meine Zurufe müssen gewirkt haben!\p"
 	.string "Großartig!\n"
@@ -35,31 +35,31 @@ RustboroCity_Gym_Text_183C90:: @ 8183C90
 	.string "hinter dir!\p"
 	.string "Ein großartiges Gefühl!$"
 
-RustboroCity_Gym_Text_183D99:: @ 8183D99
+RustboroCity_Gym_Text_JoshIntro:: @ 8183D99
 	.string "Unterschätze die TRAINER einer ARENA\n"
 	.string "nicht! Ich zeige dir, warum wir die\l"
 	.string "Besten sind!$"
 
-RustboroCity_Gym_Text_183DDD:: @ 8183DDD
+RustboroCity_Gym_Text_JoshDefeat:: @ 8183DDD
 	.string "Du warst viel zu gut für mich...$"
 
-RustboroCity_Gym_Text_183DF9:: @ 8183DF9
+RustboroCity_Gym_Text_JoshPostBattle:: @ 8183DF9
 	.string "Du hast noch gar nicht gesehen, was\n"
 	.string "GESTEINS-POKéMON alles können.$"
 
-RustboroCity_Gym_Text_183E38:: @ 8183E38
+RustboroCity_Gym_Text_TommyIntro:: @ 8183E38
 	.string "Wenn du mich nicht besiegen kannst,\n"
 	.string "hast du keine Chance gegen FELIZIA.$"
 
-RustboroCity_Gym_Text_183E78:: @ 8183E78
+RustboroCity_Gym_Text_TommyDefeat:: @ 8183E78
 	.string "Wow! Du hast wirklich Talent!$"
 
-RustboroCity_Gym_Text_183E98:: @ 8183E98
+RustboroCity_Gym_Text_TommyPostBattle:: @ 8183E98
 	.string "FELIZIA ist um ein Vielfaches stärker\n"
 	.string "als ich.\p"
 	.string "Du solltest dich besser wappnen!$"
 
-RustboroCity_Gym_Text_183EE5:: @ 8183EE5
+RustboroCity_Gym_Text_RoxanneIntro:: @ 8183EE5
 	.string "Hallo, ich bin FELIZIA, die LEITERIN der\n"
 	.string "ARENA von METAROST CITY.\p"
 	.string "Ich wurde ARENALEITERIN, um mein\n"
@@ -68,7 +68,7 @@ RustboroCity_Gym_Text_183EE5:: @ 8183EE5
 	.string "Würdest du mir bitte zeigen, wie du\n"
 	.string "kämpfst und mit welchen POKéMON?$"
 
-RustboroCity_Gym_Text_183FC4:: @ 8183FC4
+RustboroCity_Gym_Text_RoxanneDefeat:: @ 8183FC4
 	.string "So...\n"
 	.string "Ich habe verloren...\p"
 	.string "Es scheint, ich muss noch eine ganze\n"
@@ -80,11 +80,11 @@ RustboroCity_Gym_Text_183FC4:: @ 8183FC4
 	.string "Bitte nimm den offiziellen POKéMON LIGA\n"
 	.string "STEINORDEN an!$"
 
-RustboroCity_Gym_Text_1840AB:: @ 81840AB
+RustboroCity_Gym_Text_ReceivedStoneBadge:: @ 81840AB
 	.string "{PLAYER} hat den STEINORDEN von\n"
 	.string "FELIZIA erhalten.$"
 
-RustboroCity_Gym_Text_1840D5:: @ 81840D5
+RustboroCity_Gym_Text_StoneBadgeInfoTakeThis:: @ 81840D5
 	.string "Der STEINORDEN erhöht die Kraft der\n"
 	.string "ATTACKEN deiner POKéMON.\p"
 	.string "Außerdem sind sie nun in der Lage, die\n"
@@ -92,7 +92,7 @@ RustboroCity_Gym_Text_1840D5:: @ 81840D5
 	.string "Kampfes einzusetzen.\p"
 	.string "Dies möchte ich dir auch noch geben.$"
 
-RustboroCity_Gym_Text_184170:: @ 8184170
+RustboroCity_Gym_Text_ExplainRockTomb:: @ 8184170
 	.string "Diese TM39 enthält FELSGRAB.\p"
 	.string "Sie richtet nicht nur durch das Fallen\n"
 	.string "von Steinen Schaden an, sondern\l"
@@ -103,16 +103,16 @@ RustboroCity_Gym_Text_184170:: @ 8184170
 	.string "einmal beigebracht werden kann. Ihr\l"
 	.string "Einsatz will also überlegt sein.$"
 
-RustboroCity_Gym_Text_184252:: @ 8184252
+RustboroCity_Gym_Text_RoxannePostBattle:: @ 8184252
 	.string "Da du so stark bist, solltest du auch die\n"
 	.string "anderen ARENALEITER herausfordern.\p"
 	.string "Du lernst wertvolle Dinge dazu, wenn du\n"
 	.string "gegen viele TRAINER antrittst.$"
 
-RustboroCity_Gym_Text_1842CC:: @ 81842CC
+RustboroCity_Gym_Text_GymStatue:: @ 81842CC
 	.string "POKéMON ARENA von METAROST CITY$"
 
-RustboroCity_Gym_Text_1842E6:: @ 81842E6
+RustboroCity_Gym_Text_GymStatueCertified:: @ 81842E6
 	.string "POKéMON ARENA von METAROST CITY\p"
 	.string "FELIZIAS ANERKANNTE TRAINER:\n"
 	.string "{PLAYER}$"

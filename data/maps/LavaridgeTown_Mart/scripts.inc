@@ -1,18 +1,18 @@
 LavaridgeTown_Mart_MapScripts:: @ 81538CA
 	.byte 0
 
-LavaridgeTown_Mart_EventScript_1538CB:: @ 81538CB
+LavaridgeTown_Mart_EventScript_Clerk:: @ 81538CB
 	lock
 	faceplayer
 	message Text_HowMayIServeYou
 	waitmessage
-	pokemart LavaridgeTown_Mart_Items
+	pokemart LavaridgeTown_Mart_Pokemart
 	msgbox Text_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-LavaridgeTown_Mart_Items:: @ 81538E4
+LavaridgeTown_Mart_Pokemart:: @ 81538E4
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_SUPER_POTION
 	.2byte ITEM_ANTIDOTE
@@ -26,10 +26,10 @@ LavaridgeTown_Mart_Items:: @ 81538E4
 	release
 	end
 
-LavaridgeTown_Mart_EventScript_1538FA:: @ 81538FA
-	msgbox LavaridgeTown_Mart_Text_176DA6, MSGBOX_NPC
+LavaridgeTown_Mart_EventScript_ExpertM:: @ 81538FA
+	msgbox LavaridgeTown_Mart_Text_XSpeedFirstStrike, MSGBOX_NPC
 	end
 
-LavaridgeTown_Mart_EventScript_153903:: @ 8153903
-	msgbox LavaridgeTown_Mart_Text_176E1A, MSGBOX_NPC
+LavaridgeTown_Mart_EventScript_OldWoman:: @ 8153903
+	msgbox LavaridgeTown_Mart_Text_LocalSpecialtyOnMtChimney, MSGBOX_NPC
 	end

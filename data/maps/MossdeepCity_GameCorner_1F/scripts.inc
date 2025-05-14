@@ -1,10 +1,10 @@
 MossdeepCity_GameCorner_1F_MapScripts:: @ 815AC52
-	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_GameCorner_1F_MapScript1_15AC62
-	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_GameCorner_1F_MapScript1_15AC84
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, MossdeepCity_GameCorner_1F_MapScript2_15ACBB
+	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_GameCorner_1F_MapScript1_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_GameCorner_1F_MapScript1_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, MossdeepCity_GameCorner_1F_MapScript1_OnFrame
 	.byte 0
 
-MossdeepCity_GameCorner_1F_MapScript1_15AC62:: @ 815AC62
+MossdeepCity_GameCorner_1F_MapScript1_OnLoad:: @ 815AC62
 	special ValidateEReaderTrainer
 	compare VAR_RESULT, 1
 	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15AC71
@@ -15,7 +15,7 @@ MossdeepCity_GameCorner_1F_EventScript_15AC71:: @ 815AC71
 	setmetatile 3, 1, METATILE_GenericBuilding_Doorway_ClosedBottom, 1
 	return
 
-MossdeepCity_GameCorner_1F_MapScript1_15AC84:: @ 815AC84
+MossdeepCity_GameCorner_1F_MapScript1_OnTransition:: @ 815AC84
 	special ValidateEReaderTrainer
 	compare VAR_RESULT, 0
 	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15AC9E
@@ -34,7 +34,7 @@ MossdeepCity_GameCorner_1F_EventScript_15ACAF:: @ 815ACAF
 	setobjectmovementtype 1, 10
 	return
 
-MossdeepCity_GameCorner_1F_MapScript2_15ACBB:: @ 815ACBB
+MossdeepCity_GameCorner_1F_MapScript1_OnFrame:: @ 815ACBB
 	map_script_2 VAR_GAME_CORNER_STATE, 1, MossdeepCity_GameCorner_1F_EventScript_15ACD5
 	map_script_2 VAR_GAME_CORNER_STATE, 2, MossdeepCity_GameCorner_1F_EventScript_15ACD5
 	map_script_2 VAR_GAME_CORNER_STATE, 3, MossdeepCity_GameCorner_1F_EventScript_15ACD5
@@ -61,15 +61,15 @@ MossdeepCity_GameCorner_1F_EventScript_15ACD5:: @ 815ACD5
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_15AD22:: @ 815AD22
-	msgbox MossdeepCity_GameCorner_1F_Text_18E80E, MSGBOX_DEFAULT
+	msgbox MossdeepCity_GameCorner_B1F_Text_BattleWon, MSGBOX_DEFAULT
 	return
 
 MossdeepCity_GameCorner_1F_EventScript_15AD2B:: @ 815AD2B
-	msgbox MossdeepCity_GameCorner_1F_Text_18E859, MSGBOX_DEFAULT
+	msgbox MossdeepCity_GameCorner_B1F_Text_BattleLost, MSGBOX_DEFAULT
 	return
 
 MossdeepCity_GameCorner_1F_EventScript_15AD34:: @ 815AD34
-	msgbox MossdeepCity_GameCorner_1F_Text_18E7B1, MSGBOX_DEFAULT
+	msgbox MossdeepCity_GameCorner_B1F_Text_BattleTie, MSGBOX_DEFAULT
 	return
 
 MossdeepCity_GameCorner_1F_Movement_15AD3D:: @ 815AD3D
@@ -86,20 +86,20 @@ MossdeepCity_GameCorner_1F_EventScript_15AD42:: @ 815AD42
 	faceplayer
 	compare VAR_TEMP_1, 1
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_15AD59
-	msgbox MossdeepCity_GameCorner_1F_Text_18E59A, MSGBOX_DEFAULT
+	msgbox MossdeepCity_GameCorner_B1F_Text_OldManGreeting, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_15AD59:: @ 815AD59
 	special SavePlayerParty
 	special BufferEReaderTrainerName
-	msgbox MossdeepCity_GameCorner_1F_Text_18E650, MSGBOX_YESNO
+	msgbox MossdeepCity_GameCorner_B1F_Text_ChallengeVisitingTrainer, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	call MossdeepCity_GameCorner_1F_EventScript_15ADF5
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_15ADE8
-	msgbox MossdeepCity_GameCorner_1F_Text_18E741, MSGBOX_YESNO
+	msgbox MossdeepCity_GameCorner_B1F_Text_SaveYourProgress, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	special LoadPlayerParty
@@ -109,7 +109,7 @@ MossdeepCity_GameCorner_1F_EventScript_15AD59:: @ 815AD59
 	erasebox 0, 0, 15, 10
 	special SavePlayerParty
 	special ReducePlayerPartyToThree
-	msgbox MossdeepCity_GameCorner_1F_Text_18E777, MSGBOX_DEFAULT
+	msgbox MossdeepCity_GameCorner_B1F_Text_HopeToSeeAGoodMatch, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
 	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15AE04
@@ -124,12 +124,12 @@ MossdeepCity_GameCorner_1F_EventScript_15AD59:: @ 815AD59
 
 MossdeepCity_GameCorner_1F_EventScript_15ADE8:: @ 815ADE8
 	special LoadPlayerParty
-	msgbox MossdeepCity_GameCorner_1F_Text_18E698, MSGBOX_DEFAULT
+	msgbox MossdeepCity_GameCorner_B1F_Text_YouWontBattle, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_15ADF5:: @ 815ADF5
-	msgbox MossdeepCity_GameCorner_1F_Text_18E6DA, MSGBOX_DEFAULT
+	msgbox MossdeepCity_GameCorner_B1F_Text_KeepItToA3On3, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
 	special sub_80C5568
 	waitstate
@@ -182,5 +182,5 @@ MossdeepCity_GameCorner_1F_Movement_15AE49:: @ 815AE49
 	step_end
 
 MossdeepCity_GameCorner_1F_EventScript_15AE4C:: @ 815AE4C
-	msgbox MossdeepCity_GameCorner_1F_Text_18E631, MSGBOX_SIGN
+	msgbox MossdeepCity_GameCorner_B1F_Text_DoorIsLocked, MSGBOX_SIGN
 	end

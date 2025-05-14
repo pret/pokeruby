@@ -32,7 +32,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_EventScript_14C955",
+      "script": "FortreeCity_EventScript_Man",
       "flag": "0"
     },
     {
@@ -45,7 +45,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_EventScript_14C97D",
+      "script": "FortreeCity_EventScript_Girl",
       "flag": "0"
     },
     {
@@ -58,7 +58,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_EventScript_14C95E",
+      "script": "FortreeCity_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -71,7 +71,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_EventScript_14C98F",
+      "script": "FortreeCity_EventScript_Boy",
       "flag": "0"
     },
     {
@@ -84,7 +84,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_EventScript_14C986",
+      "script": "FortreeCity_EventScript_OldMan",
       "flag": "0"
     },
     {
@@ -97,7 +97,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_EventScript_14C998",
+      "script": "FortreeCity_EventScript_GameboyKid",
       "flag": "0"
     },
     {
@@ -110,7 +110,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_EventScript_14C9B3",
+      "script": "FortreeCity_EventScript_Kecleon",
       "flag": "FLAG_HIDE_KECLEON_FORTREE"
     }
   ],
@@ -187,7 +187,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "FortreeCity_EventScript_14C9A1"
+      "script": "FortreeCity_EventScript_CitySign"
     },
     {
       "type": "sign",
@@ -211,7 +211,7 @@
       "y": 10,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "FortreeCity_EventScript_14C9AA"
+      "script": "FortreeCity_EventScript_GymSign"
     },
     {
       "type": "sign",

@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStoreRooftop_EventScript_15A1A0",
+      "script": "LilycoveCity_DepartmentStoreRooftop_EventScript_Man",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStoreRooftop_EventScript_15A1C4",
+      "script": "LilycoveCity_DepartmentStoreRooftop_EventScript_ThirstyMan",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStoreRooftop_EventScript_15A167",
+      "script": "LilycoveCity_DepartmentStoreRooftop_EventScript_SaleWoman",
       "flag": "FLAG_HIDE_ROOFTOP_LADY_LILYCOVE_MART"
     }
   ],
@@ -68,7 +68,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "LilycoveCity_DepartmentStoreRooftop_EventScript_15A1CD"
+      "script": "LilycoveCity_DepartmentStoreRooftop_EventScript_VendingMachine"
     },
     {
       "type": "sign",
@@ -76,7 +76,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "LilycoveCity_DepartmentStoreRooftop_EventScript_15A1CD"
+      "script": "LilycoveCity_DepartmentStoreRooftop_EventScript_VendingMachine"
     }
   ]
 }

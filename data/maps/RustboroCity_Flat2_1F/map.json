@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RustboroCity_Flat2_1F_EventScript_157D83",
+      "script": "RustboroCity_Flat2_1F_EventScript_Skitty",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RustboroCity_Flat2_1F_EventScript_157D7A",
+      "script": "RustboroCity_Flat2_1F_EventScript_OldWoman",
       "flag": "0"
     }
   ],

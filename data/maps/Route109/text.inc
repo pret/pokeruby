@@ -1,4 +1,4 @@
-DewfordTown_Text_16E080:: @ 816E080
+DewfordTown_Text_BrineyLandedInSlateportDeliverGoods:: @ 816E080
 	.string "MR. BRINEY: Ahoy!\n"
 	.string "We've made land in SLATEPORT!\p"
 	.string "I suppose you're going to visit CAPT.\n"
@@ -19,7 +19,7 @@ Route109_Text_16E1B1:: @ 816E1B1
 	.string "MR. BRINEY: Then you go on and deliver\n"
 	.string "the DEVON GOODS. I'll be waiting.$"
 
-DewfordTown_Text_16E1FA:: @ 816E1FA
+DewfordTown_Text_BrineyLandedInSlateport:: @ 816E1FA
 	.string "MR. BRINEY: Ahoy! We've made land in\n"
 	.string "SLATEPORT!\p"
 	.string "You just go on and tell me whenever\n"

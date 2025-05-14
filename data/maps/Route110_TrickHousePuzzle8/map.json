@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route110_TrickHousePuzzle8_EventScript_163439",
+      "script": "Route110_TrickHousePuzzle8_EventScript_Vincent",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route110_TrickHousePuzzle8_EventScript_163467",
+      "script": "Route110_TrickHousePuzzle8_EventScript_Leroy",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "Route110_TrickHousePuzzle8_EventScript_163450",
+      "script": "Route110_TrickHousePuzzle8_EventScript_Elaine",
       "flag": "0"
     },
     {
@@ -60,8 +60,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route110_TrickHousePuzzle8_EventScript_1B1AB9",
-      "flag": "FLAG_ITEM_TRICK_HOUSE_PUZZLE_8_1"
+      "script": "Route110_TrickHousePuzzle8_EventScript_ItemBeadMail",
+      "flag": "FLAG_ITEM_TRICK_HOUSE_PUZZLE_8_BEAD_MAIL"
     }
   ],
   "warp_events": [
@@ -95,7 +95,7 @@
       "y": 11,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route110_TrickHousePuzzle8_EventScript_16341C"
+      "script": "Route110_TrickHousePuzzle8_EventScript_Scroll"
     }
   ]
 }

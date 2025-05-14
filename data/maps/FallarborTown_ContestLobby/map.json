@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_ContestLobby_EventScript_1539CD",
+      "script": "FallarborTown_ContestLobby_EventScript_ContestReceptionist",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_ContestLobby_EventScript_153A8E",
+      "script": "FallarborTown_ContestLobby_EventScript_Boy",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_ContestLobby_EventScript_153AB2",
+      "script": "FallarborTown_ContestLobby_EventScript_Lass",
       "flag": "0"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_ContestLobby_EventScript_1B778A",
+      "script": "FallarborTown_ContestLobby_EventScript_BerryBlenderMan",
       "flag": "0"
     },
     {
@@ -73,7 +73,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_ContestLobby_EventScript_1AE0B6",
+      "script": "FallarborTown_ContestLobby_EventScript_Reporter",
       "flag": "FLAG_HIDE_CONTEST_REPORTER_FALLARBOR"
     },
     {
@@ -86,7 +86,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_ContestLobby_EventScript_153A97",
+      "script": "FallarborTown_ContestLobby_EventScript_SketchArtist",
       "flag": "0"
     }
   ],
@@ -121,7 +121,7 @@
       "y": 3,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "FallarborTown_ContestLobby_EventScript_1B7823"
+      "script": "FallarborTown_ContestLobby_EventScript_BerryBlender1"
     },
     {
       "type": "sign",
@@ -129,7 +129,7 @@
       "y": 5,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "FallarborTown_ContestLobby_EventScript_1B7604"
+      "script": "FallarborTown_ContestLobby_EventScript_BerryBlender2"
     },
     {
       "type": "sign",
@@ -137,7 +137,7 @@
       "y": 1,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "FallarborTown_ContestLobby_EventScript_153ABB"
+      "script": "FallarborTown_ContestLobby_EventScript_ContestWinner1"
     },
     {
       "type": "sign",
@@ -145,7 +145,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "FallarborTown_ContestLobby_EventScript_153AC2"
+      "script": "FallarborTown_ContestLobby_EventScript_ContestWinner2"
     }
   ]
 }

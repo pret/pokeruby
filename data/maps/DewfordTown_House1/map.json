@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordTown_House1_EventScript_152FF8",
+      "script": "DewfordTown_House1_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordTown_House1_EventScript_152FEF",
+      "script": "DewfordTown_House1_EventScript_Man",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordTown_House1_EventScript_153001",
+      "script": "DewfordTown_House1_EventScript_Zigzagoon",
       "flag": "0"
     }
   ],

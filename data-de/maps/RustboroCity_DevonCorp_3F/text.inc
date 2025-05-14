@@ -1,4 +1,4 @@
-RustboroCity_DevonCorp_3F_Text_18320B:: @ 818320B
+RustboroCity_DevonCorp_3F_Text_MrStoneIHaveFavor:: @ 818320B
 	.string "Ich bin MR. TRUMM, der PRÄSIDENT der\n"
 	.string "DEVON CORPORATION.\p"
 	.string "Ich muss etwas mit dir besprechen!\p"
@@ -15,7 +15,7 @@ RustboroCity_DevonCorp_3F_Text_18320B:: @ 818320B
 	.string "Und TROY in FAUSTAUHAVEN einen BRIEF\n"
 	.string "von mir überbringen?$"
 
-RustboroCity_DevonCorp_3F_Text_18337E:: @ 818337E
+RustboroCity_DevonCorp_3F_Text_MrStoneWantYouToHaveThis:: @ 818337E
 	.string "MR. TRUMM: Nun, du sollst wissen, dass\n"
 	.string "ich ein einflussreicher PRÄSIDENT bin.\p"
 	.string "Und daher würde ich dich nie um einen\n"
@@ -23,10 +23,10 @@ RustboroCity_DevonCorp_3F_Text_18337E:: @ 818337E
 	.string "Gegenleistung zu erbringen!\p"
 	.string "Deshalb möchte ich dir dies hier geben.$"
 
-RustboroCity_DevonCorp_3F_Text_183422:: @ 8183422
+RustboroCity_DevonCorp_3F_Text_ReceivedPokenav:: @ 8183422
 	.string "{PLAYER} erhält den POKéNAV.$"
 
-RustboroCity_DevonCorp_3F_Text_183439:: @ 8183439
+RustboroCity_DevonCorp_3F_Text_MrStoneExplainPokenav:: @ 8183439
 	.string "MR. TRUMM: Dieses Gerät...\p"
 	.string "Es ist ein POKéMON NAVIGATOR - oder\n"
 	.string "kurz ein POKéNAV.\p"
@@ -37,16 +37,16 @@ RustboroCity_DevonCorp_3F_Text_183439:: @ 8183439
 	.string "wo die Orte FAUSTAUHAVEN und\l"
 	.string "GRAPHITPORT CITY liegen.$"
 
-RustboroCity_DevonCorp_3F_Text_18351E:: @ 818351E
+RustboroCity_DevonCorp_3F_Text_CountingOnYou:: @ 818351E
 	.string "MR. TRUMM: Ich verlasse mich auf dich!$"
 
-RustboroCity_DevonCorp_3F_Text_18353E:: @ 818353E
+RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter:: @ 818353E
 	.string "MR. TRUMM: Du hast meinen BRIEF\n"
 	.string "überbracht? Herzlichen Dank!\p"
 	.string "Dies ist ein Dankeschön von mir.\n"
 	.string "Es wird dir als TRAINER sicher helfen.$"
 
-RustboroCity_DevonCorp_3F_Text_1835B3:: @ 81835B3
+RustboroCity_DevonCorp_3F_Text_ExplainExpShare:: @ 81835B3
 	.string "MR. TRUMM: Trägt ein POKéMON den EP-\n"
 	.string "TEILER, so erhält es in jedem Kampf\l"
 	.string "Erfahrungspunkte.\p"
@@ -56,7 +56,7 @@ RustboroCity_DevonCorp_3F_Text_1835B3:: @ 81835B3
 	.string "nützlich, um schwache POKéMON aufzu-\l"
 	.string "ziehen.$"
 
-RustboroCity_DevonCorp_3F_Text_18368D:: @ 818368D
+RustboroCity_DevonCorp_3F_Text_NotFamiliarWithTrends:: @ 818368D
 	.string "MR. TRUMM: Schon in meiner Jugend habe\n"
 	.string "ich mich voll auf die Arbeit\l"
 	.string "konzentriert.\p"
@@ -65,7 +65,7 @@ RustboroCity_DevonCorp_3F_Text_18368D:: @ 818368D
 	.string "Wollen alle jungen Leute TRAINER in der\n"
 	.string "POKéMON LIGA werden?$"
 
-RustboroCity_DevonCorp_3F_Text_18374C:: @ 818374C
+RustboroCity_DevonCorp_3F_Text_ThisIs3rdFloorWaitHere:: @ 818374C
 	.string "Dies ist die zweite Etage der DEVON\n"
 	.string "CORPORATION.\p"
 	.string "Hier befindet sich das BÜRO des\n"
@@ -83,24 +83,24 @@ RustboroCity_DevonCorp_3F_Text_18374C:: @ 818374C
 	.string "Ach, da fällt mir ein... Würdest du mich\n"
 	.string "einen Moment entschuldigen?$"
 
-RustboroCity_DevonCorp_3F_Text_183903:: @ 8183903
+RustboroCity_DevonCorp_3F_Text_WordWithPresidentComeWithMe:: @ 8183903
 	.string "Unser PRÄSIDENT würde gerne kurz mit\n"
 	.string "dir sprechen.\p"
 	.string "Komm bitte mit mir.$"
 
-RustboroCity_DevonCorp_3F_Text_18394A:: @ 818394A
+RustboroCity_DevonCorp_3F_Text_PleaseGoAhead:: @ 818394A
 	.string "Bitte, hier entlang.$"
 
-RustboroCity_DevonCorp_3F_Text_18395C:: @ 818395C
+RustboroCity_DevonCorp_3F_Text_VisitCaptSternShipyard:: @ 818395C
 	.string "Wenn du die WERFT in GRAPHITPORT CITY\n"
 	.string "besuchst, solltest du mit KAPT. BRIGG\l"
 	.string "sprechen.$"
 
-RustboroCity_DevonCorp_3F_Text_1839A3:: @ 81839A3
+RustboroCity_DevonCorp_3F_Text_RepeatAndTimerHugelyPopular:: @ 81839A3
 	.string "DEVONS neue Produkte, der WIEDERBALL\n"
 	.string "und der TIMERBALL, sind mittlerweile\l"
 	.string "sehr populär unter den TRAINERN.$"
 
-RustboroCity_DevonCorp_3F_Text_183A04:: @ 8183A04
+RustboroCity_DevonCorp_3F_Text_RareRocksDisplay:: @ 8183A04
 	.string "Eine Kollektion seltener Steine und\n"
 	.string "Mineralien - gesammelt vom PRÄSIDENTEN.$"

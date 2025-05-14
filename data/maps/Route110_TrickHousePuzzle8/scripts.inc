@@ -1,29 +1,29 @@
 Route110_TrickHousePuzzle8_MapScripts:: @ 816341B
 	.byte 0
 
-Route110_TrickHousePuzzle8_EventScript_16341C:: @ 816341C
+Route110_TrickHousePuzzle8_EventScript_Scroll:: @ 816341C
 	lockall
 	compare VAR_TRICK_HOUSE_PUZZLE_8_STATE, 0
 	goto_if_eq Route110_TrickHousePuzzle8_EventScript_16342E
-	goto Route110_TrickHousePuzzle8_EventScript_161892
+	goto Route110_TrickHousePuzzle8_EventScript_ReadScrollAgain
 	end
 
 Route110_TrickHousePuzzle8_EventScript_16342E:: @ 816342E
 	setvar VAR_TRICK_HOUSE_PUZZLE_8_STATE, 1
-	goto Route110_TrickHousePuzzle8_EventScript_16189C
+	goto Route110_TrickHousePuzzle8_EventScript_FoundScroll
 	end
 
-Route110_TrickHousePuzzle8_EventScript_163439:: @ 8163439
-	trainerbattle_single TRAINER_VINCENT, Route110_TrickHousePuzzle8_Text_19E178, Route110_TrickHousePuzzle8_Text_19E1A1
-	msgbox Route110_TrickHousePuzzle8_Text_19E1C5, MSGBOX_AUTOCLOSE
+Route110_TrickHousePuzzle8_EventScript_Vincent:: @ 8163439
+	trainerbattle_single TRAINER_VINCENT, Route110_TrickHousePuzzle8_Text_VincentIntro, Route110_TrickHousePuzzle8_Text_VincentDefeat
+	msgbox Route110_TrickHousePuzzle8_Text_VincentPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route110_TrickHousePuzzle8_EventScript_163450:: @ 8163450
-	trainerbattle_single TRAINER_ELAINE, Route110_TrickHousePuzzle8_Text_19E201, Route110_TrickHousePuzzle8_Text_19E22C
-	msgbox Route110_TrickHousePuzzle8_Text_19E24C, MSGBOX_AUTOCLOSE
+Route110_TrickHousePuzzle8_EventScript_Elaine:: @ 8163450
+	trainerbattle_single TRAINER_ELAINE, Route110_TrickHousePuzzle8_Text_ElaineIntro, Route110_TrickHousePuzzle8_Text_ElaineDefeat
+	msgbox Route110_TrickHousePuzzle8_Text_ElainePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route110_TrickHousePuzzle8_EventScript_163467:: @ 8163467
-	trainerbattle_single TRAINER_LEROY, Route110_TrickHousePuzzle8_Text_19E284, Route110_TrickHousePuzzle8_Text_19E2C1
-	msgbox Route110_TrickHousePuzzle8_Text_19E2EE, MSGBOX_AUTOCLOSE
+Route110_TrickHousePuzzle8_EventScript_Leroy:: @ 8163467
+	trainerbattle_single TRAINER_LEROY, Route110_TrickHousePuzzle8_Text_LeroyIntro, Route110_TrickHousePuzzle8_Text_LeroyDefeat
+	msgbox Route110_TrickHousePuzzle8_Text_LeroyPostBattle, MSGBOX_AUTOCLOSE
 	end

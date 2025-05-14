@@ -1,4 +1,4 @@
-LittlerootTown_Text_16A7C9:: @ 816A7C9
+LittlerootTown_Text_OurNewHomeLetsGoInside:: @ 816A7C9
 	.string "MUTTER: {PLAYER}, wir sind da, Schatz!\p"
 	.string "Die Fahrt im Umzugswagen zwischen all\n"
 	.string "unseren Sachen war bestimmt ermüdend.\p"
@@ -10,10 +10,10 @@ LittlerootTown_Text_16A7C9:: @ 816A7C9
 	.string "Und... Du bekommst dein eigenes\n"
 	.string "Zimmer, {PLAYER}! Lass uns hineingehen!$"
 
-LittlerootTown_Text_16A8EE:: @ 816A8EE
+LittlerootTown_Text_WaitPlayer:: @ 816A8EE
 	.string "MUTTER: Warte, {PLAYER}!$"
 
-LittlerootTown_Text_16A8FD:: @ 816A8FD
+LittlerootTown_Text_WearTheseRunningShoes:: @ 816A8FD
 	.string "MUTTER: {PLAYER}! Hast du dich schon\n"
 	.string "PROF. BIRK vorgestellt?\p"
 	.string "Oh! Was für ein hübsches POKéMON! Du\n"
@@ -26,10 +26,10 @@ LittlerootTown_Text_16A8FD:: @ 816A8FD
 	.string "Sie werden deinen Schritt\n"
 	.string "beschleunigen!$"
 
-LittlerootTown_Text_16AA32:: @ 816AA32
+LittlerootTown_Text_SwitchShoesWithRunningShoes:: @ 816AA32
 	.string "{PLAYER} zieht die TURBOTRETER an.$"
 
-LittlerootTown_Text_16AA5C:: @ 816AA5C
+LittlerootTown_Text_ExplainRunningShoes:: @ 816AA5C
 	.string "MUTTER: {PLAYER}, für diese Schuhe gibt\n"
 	.string "es eine Bedienungsanleitung.\p"
 	.string "“Halte den B-Knopf gedrückt,\n"
@@ -38,7 +38,7 @@ LittlerootTown_Text_16AA5C:: @ 816AA5C
 	.string "Schlüpf in diese TURBOTRETER und\n"
 	.string "erobere die Welt da draußen!”$"
 
-LittlerootTown_Text_16AB10:: @ 816AB10
+LittlerootTown_Text_ComeHomeIfAnythingHappens:: @ 816AB10
 	.string "... ... ... ... ... ... ... ...\n"
 	.string "... ... ... ... ... ... ... ...\p"
 	.string "Sich vorzustellen, dass du nun dein\n"
@@ -49,13 +49,13 @@ LittlerootTown_Text_16AB10:: @ 816AB10
 	.string "nach Hause.\p"
 	.string "Lauf, schnapp' sie dir alle, Schatz!$"
 
-LittlerootTown_Text_16AC00:: @ 816AC00
+LittlerootTown_Text_CanUsePCToStoreItems:: @ 816AC00
 	.string "Wenn du einen PC benutzt, kannst du\n"
 	.string "dort Items und POKéMON lagern.\p"
 	.string "Die Kraft der Wissenschaft ist\n"
 	.string "atemberaubend!$"
 
-LittlerootTown_Text_16AC56:: @ 816AC56
+LittlerootTown_Text_BirchSpendsDaysInLab:: @ 816AC56
 	.string "PROF. BIRK verbringt seine Tage in\n"
 	.string "seinem LABOR, dann rennt er plötzlich\l"
 	.string "nach draußen in die Wildnis, um zu\l"
@@ -63,38 +63,38 @@ LittlerootTown_Text_16AC56:: @ 816AC56
 	.string "Wann ist PROF. BIRK eigentlich mal\n"
 	.string "zu Hause?$"
 
-LittlerootTown_Text_16ACEB:: @ 816ACEB
+LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut:: @ 816ACEB
 	.string "Wenn du in das hohe Gras am Seitenrand\n"
 	.string "der Pfade gehst, triffst du auf\l"
 	.string "wilde POKéMON.$"
 
-LittlerootTown_Text_16AD3C:: @ 816AD3C
+LittlerootTown_Text_DangerousIfYouDontHavePokemon:: @ 816AD3C
 	.string "Hast du keine POKéMON dabei, ist es\n"
 	.string "dort sehr gefährlich.$"
 
-LittlerootTown_Text_16AD82:: @ 816AD82
+LittlerootTown_Text_CanYouGoSeeWhatsHappening:: @ 816AD82
 	.string "Ich kann am Ende dieser Straße\n"
 	.string "jemanden schreien hören.\p"
 	.string "Was soll ich tun? Was sollen wir tun?\n"
 	.string "Jemand muss doch helfen...$"
 
-LittlerootTown_Text_16ADF2:: @ 816ADF2
+LittlerootTown_Text_YouSavedBirch:: @ 816ADF2
 	.string "Junge, bin ich froh, dass du den\n"
 	.string "PROFESSOR gerettet hast!$"
 
-LittlerootTown_Text_16AE25:: @ 816AE25
+LittlerootTown_Text_GoodLuckCatchingPokemon:: @ 816AE25
 	.string "Gehst du POKéMON fangen?\n"
 	.string "Viel Glück!$"
 
-LittlerootTown_Text_16AE50:: @ 816AE50
+LittlerootTown_Text_TownSign:: @ 816AE50
 	.string "WURZELHEIM\n"
 	.string "“Ein Ort, wie es ihn nur einmal gibt.”$"
 
-LittlerootTown_Text_16AE87:: @ 816AE87
+LittlerootTown_Text_ProfBirchsLab:: @ 816AE87
 	.string "PROF. BIRKS POKéMON-LABOR$"
 
-LittlerootTown_Text_16AEA1:: @ 816AEA1
+LittlerootTown_Text_PlayersHouse:: @ 816AEA1
 	.string "HAUS von {PLAYER}$"
 
-LittlerootTown_Text_16AEAC:: @ 816AEAC
+LittlerootTown_Text_ProfBirchsHouse:: @ 816AEAC
 	.string "PROF. BIRKS HAUS$"

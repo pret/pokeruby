@@ -36,7 +36,7 @@ EventScript_1A6EF1:
 	end
 
 EventScript_1A6F01:
-	msgbox UnknownString_817288C, MSGBOX_DEFAULT
+	msgbox PlayersHouse_1F_Text_TheresAMovieOnTV, MSGBOX_DEFAULT
 	releaseall
 	end
 

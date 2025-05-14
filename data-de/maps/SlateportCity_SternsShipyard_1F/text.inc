@@ -1,4 +1,4 @@
-SlateportCity_SternsShipyard_1F_Text_17C14B:: @ 817C14B
+SlateportCity_SternsShipyard_1F_Text_CantMakeHeadsOrTails:: @ 817C14B
 	.string "Ähmm... Wenn das hierhin gehört und das\n"
 	.string "dahin...\p"
 	.string "Wo gehört dieses dann hin?\n"
@@ -6,7 +6,7 @@ SlateportCity_SternsShipyard_1F_Text_17C14B:: @ 817C14B
 	.string "Aaargh! Ich werde daraus einfach nicht\n"
 	.string "schlau!$"
 
-SlateportCity_SternsShipyard_1F_Text_17C1EC:: @ 817C1EC
+SlateportCity_SternsShipyard_1F_Text_MeetDockDeliverToStern:: @ 817C1EC
 	.string "Hm?\n"
 	.string "Hallo, ich bin BOOTMAR.\p"
 	.string "KAPT. BRIGG hat mich damit\n"
@@ -21,26 +21,26 @@ SlateportCity_SternsShipyard_1F_Text_17C1EC:: @ 817C1EC
 	.string "Kann ich dich bitten, KAPT. BRIGG zu\n"
 	.string "suchen und ihm das Paket zu bringen?$"
 
-SlateportCity_SternsShipyard_1F_Text_17C2F2:: @ 817C2F2
+SlateportCity_SternsShipyard_1F_Text_CouldYouFindStern:: @ 817C2F2
 	.string "BOOTMAR: Wo könnte KAPT. BRIGG wohl\n"
 	.string "hingegangen sein?\p"
 	.string "Kannst du bitte KAPT. BRIGG suchen und\n"
 	.string "ihm die Waren übergeben?$"
 
-SlateportCity_SternsShipyard_1F_Text_17C360:: @ 817C360
+SlateportCity_SternsShipyard_1F_Text_CouldUseAdviceFromVeteran:: @ 817C360
 	.string "BOOTMAR: Der Schiffsbau ist eine Kunst.\p"
 	.string "Manche Dinge lassen sich auch durch\n"
 	.string "Berechnungen nicht vorhersehen.\p"
 	.string "Jemand, der das Meer kennt wie seine\n"
 	.string "Westentasche, müsste mir helfen...$"
 
-SlateportCity_SternsShipyard_1F_Text_17C3F7:: @ 817C3F7
+SlateportCity_SternsShipyard_1F_Text_BrineyJoinedUs:: @ 817C3F7
 	.string "BOOTMAR: Hallo! MR. BRACK hat sich bereit\n"
 	.string "erklärt, uns zu helfen.\p"
 	.string "Dank dieses erfahrenen Seemannes\n"
 	.string "kommen wir zügig voran.$"
 
-SlateportCity_SternsShipyard_1F_Text_17C472:: @ 817C472
+SlateportCity_SternsShipyard_1F_Text_FerryIsReady:: @ 817C472
 	.string "BOOTMAR: Die Fähre ist bald fertig!\p"
 	.string "Die neue MS TIDE ist ein wahres\n"
 	.string "Technikwunder!\p"
@@ -49,7 +49,7 @@ SlateportCity_SternsShipyard_1F_Text_17C472:: @ 817C472
 	.string "Weißt du, die technische Entwicklung\n"
 	.string "wird niemals abgeschlossen sein.$"
 
-SlateportCity_SternsShipyard_1F_Text_17C53D:: @ 817C53D
+SlateportCity_SternsShipyard_1F_Text_DecidedToHelpDock:: @ 817C53D
 	.string "MR. BRACK: Ah, {PLAYER}{KUN}!\n"
 	.string "Es ist schon lange her!\p"
 	.string "Aye, seit ich dich kennen gelernt habe,\n"
@@ -67,7 +67,7 @@ SlateportCity_SternsShipyard_1F_Text_17C53D:: @ 817C53D
 UnknownString_817C6A6: @ 817C6A6
 	.string "PECKO: Pii piihyoro!$"
 
-SlateportCity_SternsShipyard_1F_Text_17C6BB:: @ 817C6BB
+SlateportCity_SternsShipyard_1F_Text_SeaIsLikeLivingThing:: @ 817C6BB
 	.string "Die Jahreszeit, das Wetter, der Mond,\n"
 	.string "der vom Himmel herabstrahlt...\p"
 	.string "Das sind die Bedingungen, die die See\n"
@@ -75,6 +75,6 @@ SlateportCity_SternsShipyard_1F_Text_17C6BB:: @ 817C6BB
 	.string "Ganz genau!\n"
 	.string "Die See ist wie ein lebendiges Wesen!$"
 
-SlateportCity_SternsShipyard_1F_Text_17C764:: @ 817C764
+SlateportCity_SternsShipyard_1F_Text_GetSeasickEasily:: @ 817C764
 	.string "Ich werde sehr schnell seekrank.\n"
 	.string "Deshalb helfe ich lieber hier aus.$"

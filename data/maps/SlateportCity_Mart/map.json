@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_Mart_EventScript_156411",
+      "script": "SlateportCity_Mart_EventScript_Clerk",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_Mart_EventScript_15643E",
+      "script": "SlateportCity_Mart_EventScript_BlackBelt",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_Mart_EventScript_156447",
+      "script": "SlateportCity_Mart_EventScript_Man",
       "flag": "0"
     }
   ],

@@ -1,4 +1,4 @@
-VerdanturfTown_Text_16CAEB:: @ 816CAEB
+VerdanturfTown_Text_ManTryingToDigTunnel:: @ 816CAEB
 	.string "Mein Papa hat mir das erzählt.\p"
 	.string "Er sagt, der Tunnel sei voller scheuer\n"
 	.string "POKéMON.\p"
@@ -9,14 +9,14 @@ VerdanturfTown_Text_16CAEB:: @ 816CAEB
 	.string "Aber es gibt da einen Mann. Der ver-\n"
 	.string "sucht, den Tunnel alleine zu graben.$"
 
-VerdanturfTown_Text_16CBCE:: @ 816CBCE
+VerdanturfTown_Text_ManDugTunnelForLove:: @ 816CBCE
 	.string "Da war ein Mann, der hat den Tunnel\n"
 	.string "ganz alleine für die Frau seines Herzens\l"
 	.string "gegraben.\p"
 	.string "Ich habe das nie so ganz verstanden.\n"
 	.string "Aber, hey, ich finde es trotzdem klasse.$"
 
-VerdanturfTown_Text_16CC24:: @ 816CC24
+VerdanturfTown_Text_AirCleanHere:: @ 816CC24
 	.string "Der Wind steht immer so günstig, dass\n"
 	.string "die Asche vom Vulkan nie hierher\l"
 	.string "geweht wird.\p"
@@ -24,13 +24,13 @@ VerdanturfTown_Text_16CC24:: @ 816CC24
 	.string "Hier zu leben hilft auch den schwachen\l"
 	.string "und kränklichen Menschen.$"
 
-VerdanturfTown_Text_16CCD0:: @ 816CCD0
+VerdanturfTown_Text_MakeContestDebut:: @ 816CCD0
 	.string "Ich bin doch zufrieden mit der Anmut\n"
 	.string "meiner POKéMON.\p"
 	.string "Ich möchte hier zum ersten Mal an einem\n"
 	.string "WETTBEWERB teilnehmen.$"
 
-VerdanturfTown_Text_16CD4D:: @ 816CD4D
+VerdanturfTown_Text_GuyTryingToBustThroughCave:: @ 816CD4D
 	.string "Siehst du die Höhle neben dem PKMN-\n"
 	.string "SUPERMARKT?\p"
 	.string "Da ist ein Typ drin, der die Felsbrocken\n"
@@ -40,27 +40,27 @@ VerdanturfTown_Text_16CD4D:: @ 816CD4D
 	.string "gehen könnte... Ein Besuch in\l"
 	.string "METAROST CITY wäre dann ganz einfach.$"
 
-VerdanturfTown_Text_16CE30:: @ 816CE30
+VerdanturfTown_Text_EasyToGetToRustboroNow:: @ 816CE30
 	.string "Die Höhle neben dem PKMN-SUPERMARKT\n"
 	.string "ist nun ein Tunnel zur anderen Seite.\p"
 	.string "Das ist toll! Jetzt kommt man ganz\n"
 	.string "einfach nach METAROST CITY, um\l"
 	.string "DEVON-WAREN zu kaufen.$"
 
-VerdanturfTown_Text_16CEC0:: @ 816CEC0
+VerdanturfTown_Text_TownSign:: @ 816CEC0
 	.string "WIESENFLUR\p"
 	.string "“Das vom Wind gestreichelte Hoch-\n"
 	.string "land mit dem süßen Duft des Grases.”$"
 
-VerdanturfTown_Text_16CF0D:: @ 816CF0D
+VerdanturfTown_Text_WandasHouse:: @ 816CF0D
 	.string "HEIKES HAUS$"
 
-VerdanturfTown_Text_16CF1B:: @ 816CF1B
+VerdanturfTown_Text_ContestHallSign:: @ 816CF1B
 	.string "POKéMON WETTBEWERBE\n"
 	.string "NORMAL-KLASSE REGISTRIERUNGEN\p"
 	.string "“Kommt her, all ihr POKéMON-TRAINER!”$"
 
-VerdanturfTown_Text_16CF6D:: @ 816CF6D
+VerdanturfTown_Text_RusturfTunnelSign:: @ 816CF6D
 	.string "METAFLURTUNNEL\n"
 	.string "“Die Verbindung zwischen\l"
 	.string "METAROST CITY und WIESENFLUR.\p"

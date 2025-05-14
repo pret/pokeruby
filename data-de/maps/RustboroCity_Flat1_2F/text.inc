@@ -1,4 +1,4 @@
-RustboroCity_Flat1_2F_Text_184E0D:: @ 8184E0D
+RustboroCity_Flat1_2F_Text_ComingUpWithMealsIsHard:: @ 8184E0D
 	.string "Oh, jeden Tag wird es schwerer...\p"
 	.string "Was so schwer ist?\n"
 	.string "Das fragst du noch?\p"

@@ -55,7 +55,7 @@
       "elevation": 1,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "EverGrandeCity_EventScript_14D500"
+      "script": "EverGrandeCity_EventScript_SetVisitedEverGrande"
     },
     {
       "type": "trigger",
@@ -64,7 +64,7 @@
       "elevation": 1,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "EverGrandeCity_EventScript_14D500"
+      "script": "EverGrandeCity_EventScript_SetVisitedEverGrande"
     },
     {
       "type": "trigger",
@@ -73,7 +73,7 @@
       "elevation": 1,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "EverGrandeCity_EventScript_14D500"
+      "script": "EverGrandeCity_EventScript_SetVisitedEverGrande"
     },
     {
       "type": "trigger",
@@ -82,7 +82,7 @@
       "elevation": 1,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "EverGrandeCity_EventScript_14D500"
+      "script": "EverGrandeCity_EventScript_SetVisitedEverGrande"
     },
     {
       "type": "trigger",
@@ -91,7 +91,7 @@
       "elevation": 1,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "EverGrandeCity_EventScript_14D500"
+      "script": "EverGrandeCity_EventScript_SetVisitedEverGrande"
     },
     {
       "type": "trigger",
@@ -100,7 +100,7 @@
       "elevation": 1,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "EverGrandeCity_EventScript_14D500"
+      "script": "EverGrandeCity_EventScript_SetVisitedEverGrande"
     },
     {
       "type": "trigger",
@@ -109,7 +109,7 @@
       "elevation": 1,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "EverGrandeCity_EventScript_14D500"
+      "script": "EverGrandeCity_EventScript_SetVisitedEverGrande"
     },
     {
       "type": "trigger",
@@ -118,7 +118,7 @@
       "elevation": 1,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "EverGrandeCity_EventScript_14D500"
+      "script": "EverGrandeCity_EventScript_SetVisitedEverGrande"
     },
     {
       "type": "trigger",
@@ -127,7 +127,7 @@
       "elevation": 1,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "EverGrandeCity_EventScript_14D500"
+      "script": "EverGrandeCity_EventScript_SetVisitedEverGrande"
     },
     {
       "type": "trigger",
@@ -136,7 +136,7 @@
       "elevation": 1,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "EverGrandeCity_EventScript_14D500"
+      "script": "EverGrandeCity_EventScript_SetVisitedEverGrande"
     },
     {
       "type": "trigger",
@@ -145,7 +145,7 @@
       "elevation": 1,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "EverGrandeCity_EventScript_14D500"
+      "script": "EverGrandeCity_EventScript_SetVisitedEverGrande"
     }
   ],
   "bg_events": [
@@ -155,7 +155,7 @@
       "y": 43,
       "elevation": 5,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "EverGrandeCity_EventScript_14D4E5"
+      "script": "EverGrandeCity_EventScript_VictoryRoadSign"
     },
     {
       "type": "sign",
@@ -171,7 +171,7 @@
       "y": 52,
       "elevation": 5,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "EverGrandeCity_EventScript_14D4EE"
+      "script": "EverGrandeCity_EventScript_CitySign"
     },
     {
       "type": "sign",
@@ -179,7 +179,7 @@
       "y": 15,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "EverGrandeCity_EventScript_14D4F7"
+      "script": "EverGrandeCity_EventScript_PokemonLeagueSign"
     },
     {
       "type": "sign",

@@ -21,7 +21,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LavaridgeTown_Gym_1F_EventScript_153741",
+      "script": "LavaridgeTown_Gym_1F_EventScript_Flannery",
       "flag": "0"
     },
     {
@@ -34,7 +34,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_BURIED",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "LavaridgeTown_Gym_1F_EventScript_1537CB",
+      "script": "LavaridgeTown_Gym_1F_EventScript_Cole",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_BURIED",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "LavaridgeTown_Gym_1F_EventScript_15383E",
+      "script": "LavaridgeTown_Gym_1F_EventScript_Zane",
       "flag": "0"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_BURIED",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "LavaridgeTown_Gym_1F_EventScript_1537ED",
+      "script": "LavaridgeTown_Gym_1F_EventScript_Axle",
       "flag": "0"
     },
     {
@@ -73,7 +73,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_BURIED",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "LavaridgeTown_Gym_1F_EventScript_153823",
+      "script": "LavaridgeTown_Gym_1F_EventScript_Sadie",
       "flag": "0"
     },
     {
@@ -86,7 +86,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LavaridgeTown_Gym_1F_EventScript_153859",
+      "script": "LavaridgeTown_Gym_1F_EventScript_GymGuide",
       "flag": "0"
     },
     {
@@ -99,7 +99,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_BURIED",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "LavaridgeTown_Gym_1F_EventScript_153808",
+      "script": "LavaridgeTown_Gym_1F_EventScript_Andy",
       "flag": "0"
     }
   ],
@@ -267,7 +267,7 @@
       "y": 17,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "LavaridgeTown_Gym_1F_EventScript_153878"
+      "script": "LavaridgeTown_Gym_1F_EventScript_LeftGymStatue"
     },
     {
       "type": "sign",
@@ -275,7 +275,7 @@
       "y": 17,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "LavaridgeTown_Gym_1F_EventScript_153888"
+      "script": "LavaridgeTown_Gym_1F_EventScript_RightGymStatue"
     }
   ]
 }

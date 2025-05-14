@@ -211,7 +211,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "LittlerootTown_BrendansHouse_2F_EventScript_15281E"
+      "script": "LittlerootTown_BrendansHouse_2F_EventScript_PC"
     },
     {
       "type": "sign",
@@ -219,7 +219,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "LittlerootTown_BrendansHouse_2F_EventScript_152867"
+      "script": "PlayersHouse_2F_EventScript_Notebook"
     },
     {
       "type": "sign",
@@ -235,7 +235,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "LittlerootTown_BrendansHouse_2F_EventScript_152870"
+      "script": "PlayersHouse_2F_EventScript_GameCube"
     }
   ]
 }

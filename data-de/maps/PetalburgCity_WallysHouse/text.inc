@@ -1,4 +1,4 @@
-PetalburgCity_WallysHouse_Text_179805:: @ 8179805
+PetalburgCity_WallysHouse_Text_ThanksForPlayingWithWally:: @ 8179805
 	.string "Du...\n"
 	.string "Ach, du bist bestimmt {PLAYER}{KUN}, richtig?\p"
 	.string "Danke, dass du dich um HEIKO gekümmert\n"
@@ -14,11 +14,11 @@ PetalburgCity_WallysHouse_Text_179805:: @ 8179805
 	.string "Ich frage mich, wo er jetzt wohl sein\n"
 	.string "mag?$"
 
-PetalburgCity_WallysHouse_Text_179975:: @ 8179975
+PetalburgCity_WallysHouse_Text_WonderHowWallyIsDoing:: @ 8179975
 	.string "Ich frage mich, wie es unserem\n"
 	.string "HEIKO geht.$"
 
-PetalburgCity_WallysHouse_Text_179996:: @ 8179996
+PetalburgCity_WallysHouse_Text_WallyHasBecomeHealthy:: @ 8179996
 	.string "Hallo, {PLAYER}{KUN}!\p"
 	.string "Unser HEIKO ist viel robuster ge-\n"
 	.string "worden, seit er in WIESENFLUR ist.\p"
@@ -35,15 +35,15 @@ PetalburgCity_WallysHouse_Text_179996:: @ 8179996
 	.string "Das soll jetzt keine Bestechung sein!\n"
 	.string "Aber ich möchte dir dies schenken.$"
 
-PetalburgCity_WallysHouse_Text_179B14:: @ 8179B14
+PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces:: @ 8179B14
 	.string "Wenn dein POKéMON SURFER beherrscht,\n"
 	.string "kannst du viele neue Orte bereisen.$"
 
-PetalburgCity_WallysHouse_Text_179B5B:: @ 8179B5B
+PetalburgCity_WallysHouse_Text_WallyIsComingHomeSoon:: @ 8179B5B
 	.string "HEIKO wird bald wieder nach Hause\n"
 	.string "kommen. Ich freue mich schon so.$"
 
-PetalburgCity_WallysHouse_Text_179B92:: @ 8179B92
+PetalburgCity_WallysHouse_Text_YouMetWallyInEverGrandeCity:: @ 8179B92
 	.string "Oh! Du hast HEIKO in PRACHTPOLIS CITY\n"
 	.string "getroffen?\p"
 	.string "Ach, {PLAYER}{KUN}, du willst mich auf den Arm\n"
@@ -52,20 +52,20 @@ PetalburgCity_WallysHouse_Text_179B92:: @ 8179B92
 	.string "aber er wird nicht alleine so weit fort-\l"
 	.string "gegangen sein!$"
 
-PetalburgCity_WallysHouse_Text_179C2C:: @ 8179C2C
+PetalburgCity_WallysHouse_Text_WallyWasReallyHappy:: @ 8179C2C
 	.string "HEIKO war richtig glücklich, als er\n"
 	.string "uns erzählte, dass er ein POKéMON\l"
 	.string "gefangen habe.\p"
 	.string "Ich habe ihn schon seit Ewigkeiten\n"
 	.string "nicht mehr so glücklich erlebt!$"
 
-PetalburgCity_WallysHouse_Text_179CA1:: @ 8179CA1
+PetalburgCity_WallysHouse_Text_HusbandHasSomethingForYou:: @ 8179CA1
 	.string "Oh, hallo {PLAYER}! Wir haben hier etwas,\n"
 	.string "das wir dir gerne schenken möchten.\p"
 	.string "Mein Mann hat es. Sprich doch mal mit\n"
 	.string "ihm, Liebes.$"
 
-PetalburgCity_WallysHouse_Text_179D12:: @ 8179D12
+PetalburgCity_WallysHouse_Text_WallyLeftWithoutTelling:: @ 8179D12
 	.string "Ich muss das vor meinem Mann\n"
 	.string "verheimlichen...\p"
 	.string "Aber unser HEIKO hat WIESENFLUR\n"

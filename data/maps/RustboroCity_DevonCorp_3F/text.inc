@@ -1,4 +1,4 @@
-RustboroCity_DevonCorp_3F_Text_18320B:: @ 818320B
+RustboroCity_DevonCorp_3F_Text_MrStoneIHaveFavor:: @ 818320B
 	.string "I'm MR. STONE, the PRESIDENT of\n"
 	.string "the DEVON CORPORATION.\p"
 	.string "I'd just got word about you!\p"
@@ -13,17 +13,17 @@ RustboroCity_DevonCorp_3F_Text_18320B:: @ 818320B
 	.string "I was hoping that you'd deliver a LETTER\n"
 	.string "to STEVEN in DEWFORD.$"
 
-RustboroCity_DevonCorp_3F_Text_18337E:: @ 818337E
+RustboroCity_DevonCorp_3F_Text_MrStoneWantYouToHaveThis:: @ 818337E
 	.string "MR. STONE: Now, you should know that\n"
 	.string "I am a great PRESIDENT.\p"
 	.string "So, I'd never be so cheap as to ask\n"
 	.string "a favor for nothing in return.\p"
 	.string "That's why I want you to have this!$"
 
-RustboroCity_DevonCorp_3F_Text_183422:: @ 8183422
+RustboroCity_DevonCorp_3F_Text_ReceivedPokenav:: @ 8183422
 	.string "{PLAYER} received a POKéNAV.$"
 
-RustboroCity_DevonCorp_3F_Text_183439:: @ 8183439
+RustboroCity_DevonCorp_3F_Text_MrStoneExplainPokenav:: @ 8183439
 	.string "MR. STONE: That device...\p"
 	.string "It's a POKéMON NAVIGATOR, or POKéNAV\n"
 	.string "for short.\p"
@@ -33,16 +33,16 @@ RustboroCity_DevonCorp_3F_Text_183439:: @ 8183439
 	.string "You can check the locations of\n"
 	.string "DEWFORD and SLATEPORT easily!$"
 
-RustboroCity_DevonCorp_3F_Text_18351E:: @ 818351E
+RustboroCity_DevonCorp_3F_Text_CountingOnYou:: @ 818351E
 	.string "MR. STONE: I'm counting on you!$"
 
-RustboroCity_DevonCorp_3F_Text_18353E:: @ 818353E
+RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter:: @ 818353E
 	.string "MR. STONE: You delivered my LETTER?\n"
 	.string "Thank you kindly!\p"
 	.string "This is my way of thanking you.\n"
 	.string "It should help you, a TRAINER.$"
 
-RustboroCity_DevonCorp_3F_Text_1835B3:: @ 81835B3
+RustboroCity_DevonCorp_3F_Text_ExplainExpShare:: @ 81835B3
 	.string "MR. STONE: A POKéMON holding that\n"
 	.string "EXP. SHARE will be given some of the\l"
 	.string "EXP Points from battle.\p"
@@ -51,7 +51,7 @@ RustboroCity_DevonCorp_3F_Text_1835B3:: @ 81835B3
 	.string "I would say EXP. SHARE is quite useful\n"
 	.string "for raising weak POKéMON.$"
 
-RustboroCity_DevonCorp_3F_Text_18368D:: @ 818368D
+RustboroCity_DevonCorp_3F_Text_NotFamiliarWithTrends:: @ 818368D
 	.string "MR. STONE: Since my youth, I've immersed\n"
 	.string "myself in work.\p"
 	.string "Consequently, I'm not familiar with\n"
@@ -59,7 +59,7 @@ RustboroCity_DevonCorp_3F_Text_18368D:: @ 818368D
 	.string "But do young people all want to be\n"
 	.string "TRAINERS in the POKéMON LEAGUE?$"
 
-RustboroCity_DevonCorp_3F_Text_18374C:: @ 818374C
+RustboroCity_DevonCorp_3F_Text_ThisIs3rdFloorWaitHere:: @ 818374C
 	.string "This is the DEVON CORPORATION's\n"
 	.string "third floor.\p"
 	.string "Our PRESIDENT's OFFICE is on this floor.\p"
@@ -76,23 +76,23 @@ RustboroCity_DevonCorp_3F_Text_18374C:: @ 818374C
 	.string "Oh, that's right.\n"
 	.string "Could you wait here a second?$"
 
-RustboroCity_DevonCorp_3F_Text_183903:: @ 8183903
+RustboroCity_DevonCorp_3F_Text_WordWithPresidentComeWithMe:: @ 8183903
 	.string "Our PRESIDENT would like to have\n"
 	.string "a word with you.\p"
 	.string "Please come with me.$"
 
-RustboroCity_DevonCorp_3F_Text_18394A:: @ 818394A
+RustboroCity_DevonCorp_3F_Text_PleaseGoAhead:: @ 818394A
 	.string "Please, go ahead.$"
 
-RustboroCity_DevonCorp_3F_Text_18395C:: @ 818395C
+RustboroCity_DevonCorp_3F_Text_VisitCaptSternShipyard:: @ 818395C
 	.string "If you visit the SHIPYARD in SLATEPORT,\n"
 	.string "you should go see CAPT. STERN.$"
 
-RustboroCity_DevonCorp_3F_Text_1839A3:: @ 81839A3
+RustboroCity_DevonCorp_3F_Text_RepeatAndTimerHugelyPopular:: @ 81839A3
 	.string "DEVON's new products, the REPEAT BALL\n"
 	.string "and TIMER BALL, have become hugely\l"
 	.string "popular among TRAINERS.$"
 
-RustboroCity_DevonCorp_3F_Text_183A04:: @ 8183A04
+RustboroCity_DevonCorp_3F_Text_RareRocksDisplay:: @ 8183A04
 	.string "It's a collection of rare rocks and\n"
 	.string "stones assembled by the PRESIDENT.$"

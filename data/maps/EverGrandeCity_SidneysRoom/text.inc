@@ -8,11 +8,11 @@ EverGrandeCity_SidneysRoom_Text_190728:: @ 8190728
 	.string "battle that can only be staged here\l"
 	.string "in the POKéMON LEAGUE!$"
 
-EverGrandeCity_SidneysRoom_Text_190823:: @ 8190823
+EverGrandeCity_SidneysRoom_Text_Defeat:: @ 8190823
 	.string "Well, how do you like that? I lost!\n"
 	.string "Eh, it was fun, so it doesn't matter.$"
 
-EverGrandeCity_SidneysRoom_Text_19086D:: @ 819086D
+EverGrandeCity_SidneysRoom_Text_PostBattleSpeech:: @ 819086D
 	.string "Well, listen to what this loser has\n"
 	.string "to say.\p"
 	.string "You've got what it takes to go far.\n"

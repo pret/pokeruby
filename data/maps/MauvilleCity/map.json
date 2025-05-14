@@ -42,7 +42,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_EventScript_14C05A",
+      "script": "MauvilleCity_EventScript_Boy",
       "flag": "0"
     },
     {
@@ -55,7 +55,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_EventScript_14C075",
+      "script": "MauvilleCity_EventScript_RichBoy",
       "flag": "0"
     },
     {
@@ -68,7 +68,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_EventScript_14C063",
+      "script": "MauvilleCity_EventScript_Maniac",
       "flag": "0"
     },
     {
@@ -81,7 +81,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_EventScript_14C06C",
+      "script": "MauvilleCity_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -94,7 +94,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_EventScript_14C0A2",
+      "script": "MauvilleCity_EventScript_SchoolKidM",
       "flag": "0"
     },
     {
@@ -107,7 +107,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_EventScript_14C0F9",
+      "script": "MauvilleCity_EventScript_Wally",
       "flag": "FLAG_HIDE_WALLY_MAUVILLE"
     },
     {
@@ -120,7 +120,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_EventScript_14C0C4",
+      "script": "MauvilleCity_EventScript_WallysUncle",
       "flag": "FLAG_HIDE_WALLY_FATHER_MAUVILLE"
     },
     {
@@ -133,7 +133,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_EventScript_14C2F2",
+      "script": "MauvilleCity_EventScript_Wattson",
       "flag": "FLAG_HIDE_WATTSON_MAUVILLE"
     },
     {
@@ -146,8 +146,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_EventScript_1B171E",
-      "flag": "FLAG_ITEM_MAUVILLE_1"
+      "script": "MauvilleCity_EventScript_ItemXSpeed",
+      "flag": "FLAG_ITEM_MAUVILLE_CITY_X_SPEED"
     }
   ],
   "warp_events": [
@@ -217,7 +217,7 @@
       "y": 6,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "MauvilleCity_EventScript_14C087"
+      "script": "MauvilleCity_EventScript_GymSign"
     },
     {
       "type": "sign",
@@ -249,7 +249,7 @@
       "y": 7,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "MauvilleCity_EventScript_14C07E"
+      "script": "MauvilleCity_EventScript_CitySign"
     },
     {
       "type": "sign",
@@ -257,7 +257,7 @@
       "y": 6,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "MauvilleCity_EventScript_14C090"
+      "script": "MauvilleCity_EventScript_BikeShopSign"
     },
     {
       "type": "sign",
@@ -265,7 +265,7 @@
       "y": 15,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "MauvilleCity_EventScript_14C099"
+      "script": "MauvilleCity_EventScript_GameCornerSign"
     }
   ]
 }

@@ -1,8 +1,8 @@
-LittlerootTown_BrendansHouse_2F_Text_17337E:: @ 817337E
+RivalsHouse_2F_Text_MayGettingReady:: @ 817337E
 	.string "POKéMON: Bei guter Gesundheit!\n"
 	.string "Items: Verstaut. Fehlt noch... Was?$"
 
-LittlerootTown_BrendansHouse_2F_Text_1733AF:: @ 81733AF
+RivalsHouse_2F_Text_MayWhoAreYou:: @ 81733AF
 	.string "Was?\n"
 	.string "Wer... Wer bist du denn?\p"
 	.string "... ... ... ... ... ... ... ...\n"
@@ -28,11 +28,11 @@ LittlerootTown_BrendansHouse_2F_Text_1733AF:: @ 81733AF
 	.string "wilde POKéMON zu fangen!\p"
 	.string "{PLAYER}{KUN}, wir treffen uns später!$"
 
-LittlerootTown_BrendansHouse_2F_Text_1735C9:: @ 81735C9
+RivalsHouse_2F_Text_BrendanGettingReady:: @ 81735C9
 	.string "POKéMON: Bei guter Gesundheit!\n"
 	.string "Items: Verstaut. Fehlt noch... Was?$"
 
-LittlerootTown_BrendansHouse_2F_Text_1735FC:: @ 81735FC
+RivalsHouse_2F_Text_BrendanWhoAreYou:: @ 81735FC
 	.string "Hey!\n"
 	.string "Du...\p"
 	.string "Wer bist du denn?\p"
@@ -54,7 +54,7 @@ LittlerootTown_BrendansHouse_2F_Text_1735FC:: @ 81735FC
 	.string "wilde POKéMON zu fangen.\p"
 	.string "Ein anderes Mal, okay?$"
 
-LittlerootTown_BrendansHouse_2F_Text_1737AE:: @ 81737AE
+RivalsHouse_2F_Text_MayJustCheckingMyPokedex:: @ 81737AE
 	.string "MAIKE: {PLAYER}{KUN}!\p"
 	.string "Ich prüfe gerade meinen POKéDEX.\p"
 	.string "Es gibt eine Menge POKéMON, die ich\n"
@@ -64,13 +64,13 @@ LittlerootTown_BrendansHouse_2F_Text_1737AE:: @ 81737AE
 	.string "Jetzt überlege ich, wo ich hingehen soll,\n"
 	.string "um weitere POKéMON zu fangen.$"
 
-LittlerootTown_BrendansHouse_2F_Text_173883:: @ 8173883
+RivalsHouse_2F_Text_MayWhereShouldIGoNext:: @ 8173883
 	.string "MAIKE: Ich überlege, wo ich hingehen\n"
 	.string "soll, um weitere POKéMON zu fangen.\p"
 	.string "Wäre es nicht lustig, wenn wir uns dabei\n"
 	.string "über den Weg laufen würden?$"
 
-LittlerootTown_BrendansHouse_2F_Text_1738F2:: @ 81738F2
+RivalsHouse_2F_Text_BrendanJustCheckingMyPokedex:: @ 81738F2
 	.string "BRIX: Hey, {PLAYER}!\p"
 	.string "Ich prüfe gerade meinen POKéDEX.\p"
 	.string "Es gibt noch viele POKéMON, die ich\n"
@@ -79,7 +79,7 @@ LittlerootTown_BrendansHouse_2F_Text_1738F2:: @ 81738F2
 	.string "Immer wenn ich den POKéDEX betrachte,\n"
 	.string "bekomme ich Lust zum Reisen.$"
 
-LittlerootTown_BrendansHouse_2F_Text_1739CC:: @ 81739CC
+RivalsHouse_2F_Text_BrendanWhereShouldIGoNext:: @ 81739CC
 	.string "BRIX: Ich habe lange überlegt, wo ich\n"
 	.string "hingehen soll, um weitere POKéMON\l"
 	.string "zu fangen.\p"
