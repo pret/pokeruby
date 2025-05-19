@@ -10,7 +10,7 @@ FallarborTown_ContestLobby_Text_1A5E46:: @ 81A5E46
 FallarborTown_ContestLobby_Text_1A5E7C:: @ 81A5E7C
 	.string "Welches Thema möchtest du dir ansehen?$"
 
-FallarborTown_ContestLobby_Text_1A5E98:: @ 81A5E98
+LilycoveCity_ContestLobby_Text_ExplainContests:: @ 81A5E98
 	.string "In einem POKéMON WETTBEWERB zeigen\n"
 	.string "4 TRAINER jeweils eines ihrer POKéMON\l"
 	.string "einer Jury.\p"
@@ -30,14 +30,14 @@ FallarborTown_ContestLobby_Text_1A5E98:: @ 81A5E98
 	.string "Das POKéMON mit dem besten Ergebnis\n"
 	.string "wird zum Gewinner erklärt.$"
 
-FallarborTown_ContestLobby_Text_1A609B:: @ 81A609B
+LilycoveCity_ContestLobby_Text_ExplainContestTypes:: @ 81A609B
 	.string "Es gibt fünf verschiedene WETTBEWERBE.\p"
 	.string "COOLNESS, SCHÖNHEIT, ANMUT, KLUGHEIT\n"
 	.string "und STÄRKE heißen die Kategorien.\p"
 	.string "Wähle einen WETTBEWERB, der deinem\n"
 	.string "POKéMON am besten liegt.$"
 
-FallarborTown_ContestLobby_Text_1A613F:: @ 81A613F
+LilycoveCity_ContestLobby_Text_ExplainContestRanks:: @ 81A613F
 	.string "Die POKéMON WETTBEWERBE sind in vier\n"
 	.string "Klassen aufgeteilt.\p"
 	.string "NORMAL, SUPER, HYPER und MASTER.\p"
@@ -55,7 +55,7 @@ FallarborTown_ContestLobby_Text_1A613F:: @ 81A613F
 	.string "gewonnen hat, kann sooft es sein\l"
 	.string "TRAINER mag, wieder dort antreten.$"
 
-FallarborTown_ContestLobby_Text_1A6319:: @ 81A6319
+FallarborTown_ContestLobby_Text_EnterWhichPokemon1:: @ 81A6319
 	.string "Welches POKéMON soll teilnehmen?$"
 
 FallarborTown_ContestLobby_Text_1A6340:: @ 81A6340
@@ -67,7 +67,7 @@ FallarborTown_ContestLobby_Text_1A6340:: @ 81A6340
 	.string "Bitte hol dir die KARTE dort ab und komm\n"
 	.string "dann wieder.$"
 
-LilycoveCity_ContestLobby_Text_1A63F4:: @ 81A63F4
+LilycoveCity_ContestLobby_Text_RegistrationsFromFourNeedContestPass:: @ 81A63F4
 	.string "Ich akzeptiere nur Anmeldungen von\n"
 	.string "vier Spielern, die via Link verbunden\l"
 	.string "sind und am POKéMON WETTBEWERB\l"
@@ -106,19 +106,19 @@ FallarborTown_ContestLobby_Text_1A6623:: @ 81A6623
 	.string "An welchem WETTBEWERB möchtest du\n"
 	.string "teilnehmen?$"
 
-FallarborTown_ContestLobby_Text_1A664A:: @ 81A664A
-LilycoveCity_ContestLobby_Text_1A664A:: @ 81A664A
+LilycoveCity_ContestLobby_Text_MonNotQualifiedForRank:: @ 81A664A
+LilycoveCity_ContestLobby_Text_MonNotQualifiedForRank:: @ 81A664A
 	.string "Tut mir schrecklich Leid, aber dein\n"
 	.string "POKéMON kann hier noch nicht\l"
 	.string "antreten...$"
 
-FallarborTown_ContestLobby_Text_1A669F:: @ 81A669F
-LilycoveCity_ContestLobby_Text_1A669F:: @ 81A669F
+LilycoveCity_ContestLobby_Text_EggCannotTakePart:: @ 81A669F
+LilycoveCity_ContestLobby_Text_EggCannotTakePart:: @ 81A669F
 	.string "Tut mit Leid, aber ein EI kann nicht an\n"
 	.string "einem WETTBEWERB teilnehmen.$"
 
-FallarborTown_ContestLobby_Text_1A66DC:: @ 81A66DC
-LilycoveCity_ContestLobby_Text_1A66DC:: @ 81A66DC
+LilycoveCity_ContestLobby_Text_MonInNoConditionForContest:: @ 81A66DC
+LilycoveCity_ContestLobby_Text_MonInNoConditionForContest:: @ 81A66DC
 	.string "Dein POKéMON ist nicht in der Lage, an\n"
 	.string "einem WETTBEWERB teilzunehmen...$"
 
@@ -129,8 +129,8 @@ FallarborTown_ContestLobby_Text_1A6724:: @ 81A6724
 	.string "Möchtest du es trotzdem für diesen\n"
 	.string "WETTBEWERB anmelden?$"
 
-FallarborTown_ContestLobby_Text_1A67A3:: @ 81A67A3
-LilycoveCity_ContestLobby_Text_1A67A3:: @ 81A67A3
+LilycoveCity_ContestLobby_Text_ConfirmContestMon:: @ 81A67A3
+LilycoveCity_ContestLobby_Text_ConfirmContestMon:: @ 81A67A3
 	.string "Ist das dein WETTBEWERBS-POKéMON?$"
 
 FallarborTown_ContestLobby_Text_1A67C1:: @ 81A67C1
@@ -139,10 +139,10 @@ FallarborTown_ContestLobby_Text_1A67C1:: @ 81A67C1
 	.string "Dein POKéMON ist die Nummer 4.\n"
 	.string "Der WETTBEWERB wird in Kürze starten.$"
 
-FallarborTown_ContestLobby_Text_1A6832:: @ 81A6832
-LilycoveCity_ContestLobby_Text_1A6832:: @ 81A6832
-SlateportCity_ContestLobby_Text_1A6832:: @ 81A6832
-VerdanturfTown_ContestLobby_Text_1A6832:: @ 81A6832
+LilycoveCity_ContestLobby_Text_ComeThroughHere:: @ 81A6832
+LilycoveCity_ContestLobby_Text_ComeThroughHere:: @ 81A6832
+LilycoveCity_ContestLobby_Text_ComeThroughHere:: @ 81A6832
+LilycoveCity_ContestLobby_Text_ComeThroughHere:: @ 81A6832
 	.string "Bitte folge mir, und viel Glück!$"
 
 FallarborTown_ContestLobby_Text_1A685A:: @ 81A685A

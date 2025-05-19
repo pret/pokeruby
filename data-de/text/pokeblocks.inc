@@ -57,7 +57,7 @@ SlateportCity_ContestLobby_Text_LetsGetBlendingAlready:: @ 81B7225
 SlateportCity_ContestLobby_Text_LetsGetBlendingAlready:: @ 81B7225
 	.string "Dann lass uns mal mixen.$"
 
-LilycoveCity_ContestLobby_Text_1B7241:: @ 81B7241
+BerryBlender_Text_WhatKindOfPokeblockWillIGet:: @ 81B7241
 	.string "Ich bin mal gespannt, welchen {POKEBLOCK}\n"
 	.string "ich bekomme. Das ist ja total aufregend!$"
 

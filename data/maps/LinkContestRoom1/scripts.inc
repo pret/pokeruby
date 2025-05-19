@@ -1,51 +1,51 @@
 LinkContestRoom1_MapScripts:: @ 815F580
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LinkContestRoom1_MapScript2_15F610
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, LinkContestRoom1_MapScript2_15F606
-	map_script MAP_SCRIPT_ON_TRANSITION, LinkContestRoom1_MapScript1_15F595
-	map_script MAP_SCRIPT_ON_RESUME, LinkContestRoom1_MapScript1_15F5F4
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LinkContestRoom1_MapScript2_OnWarp
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LinkContestRoom1_MapScript2_OnFrame
+	map_script MAP_SCRIPT_ON_TRANSITION, LinkContestRoom1_MapScript1_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, LinkContestRoom1_MapScript2_OnResume
 	.byte 0
 
-LinkContestRoom1_MapScript1_15F595:: @ 815F595
-	call LinkContestRoom1_EventScript_15F5A5
+LinkContestRoom1_MapScript1_OnTransition:: @ 815F595
+	call LinkContestRoom1_EventScript_ReadyContestMusic
 	setvar VAR_TEMP_0, 1
-	call LinkContestRoom1_EventScript_15F630
+	call LinkContestRoom1_EventScript_AddRandomAudienceMembers
 	end
 
-LinkContestRoom1_EventScript_15F5A5:: @ 815F5A5
+LinkContestRoom1_EventScript_ReadyContestMusic:: @ 815F5A5
 	special ScriptGetMultiplayerId
 	compare VAR_RESULT, 0
-	call_if_eq LinkContestRoom1_EventScript_15F5E0
+	call_if_eq LinkContestRoom1_EventScript_SaveContestMusicPlayer1
 	compare VAR_RESULT, 1
-	call_if_eq LinkContestRoom1_EventScript_15F5E4
+	call_if_eq LinkContestRoom1_EventScript_SaveContestMusicPlayer2
 	compare VAR_RESULT, 2
-	call_if_eq LinkContestRoom1_EventScript_15F5E8
+	call_if_eq LinkContestRoom1_EventScript_SaveContestMusicPlayer3
 	compare VAR_RESULT, 3
-	call_if_eq LinkContestRoom1_EventScript_15F5EC
+	call_if_eq LinkContestRoom1_EventScript_SaveContestMusicPlayer4
 	compare VAR_RESULT, 4
-	call_if_eq LinkContestRoom1_EventScript_15F5F0
+	call_if_eq LinkContestRoom1_EventScript_SaveContestMusic
 	return
 
-LinkContestRoom1_EventScript_15F5E0:: @ 815F5E0
+LinkContestRoom1_EventScript_SaveContestMusicPlayer1:: @ 815F5E0
 	savebgm MUS_LINK_CONTEST_P1
 	return
 
-LinkContestRoom1_EventScript_15F5E4:: @ 815F5E4
+LinkContestRoom1_EventScript_SaveContestMusicPlayer2:: @ 815F5E4
 	savebgm MUS_LINK_CONTEST_P2
 	return
 
-LinkContestRoom1_EventScript_15F5E8:: @ 815F5E8
+LinkContestRoom1_EventScript_SaveContestMusicPlayer3:: @ 815F5E8
 	savebgm MUS_LINK_CONTEST_P3
 	return
 
-LinkContestRoom1_EventScript_15F5EC:: @ 815F5EC
+LinkContestRoom1_EventScript_SaveContestMusicPlayer4:: @ 815F5EC
 	savebgm MUS_LINK_CONTEST_P4
 	return
 
-LinkContestRoom1_EventScript_15F5F0:: @ 815F5F0
+LinkContestRoom1_EventScript_SaveContestMusic:: @ 815F5F0
 	savebgm MUS_CONTEST
 	return
 
-LinkContestRoom1_MapScript1_15F5F4:: @ 815F5F4
+LinkContestRoom1_MapScript2_OnResume:: @ 815F5F4
 	compare VAR_TEMP_9, 1
 	call_if_eq LinkContestRoom1_EventScript_15F600
 	end
@@ -54,11 +54,11 @@ LinkContestRoom1_EventScript_15F600:: @ 815F600
 	call LinkContestRoom1_EventScript_15F919
 	return
 
-LinkContestRoom1_MapScript2_15F606:: @ 815F606
+LinkContestRoom1_MapScript2_OnFrame:: @ 815F606
 	map_script_2 VAR_LINK_CONTEST_ROOM_STATE, 1, LinkContestRoom1_EventScript_15F61A
 	.2byte 0
 
-LinkContestRoom1_MapScript2_15F610:: @ 815F610
+LinkContestRoom1_MapScript2_OnWarp:: @ 815F610
 	map_script_2 VAR_LINK_CONTEST_ROOM_STATE, 1, LinkContestRoom1_EventScript_15F625
 	.2byte 0
 
@@ -72,223 +72,223 @@ LinkContestRoom1_EventScript_15F625:: @ 815F625
 	call LinkContestRoom1_EventScript_15F919
 	end
 
-LinkContestRoom1_EventScript_15F630:: @ 815F630
-	call LinkContestRoom1_EventScript_15F6E6
-	call LinkContestRoom1_EventScript_15F646
+LinkContestRoom1_EventScript_AddRandomAudienceMembers:: @ 815F630
+	call LinkContestRoom1_EventScript_GetRandomAudienceGfxId
+	call ContestHall_EventScript_SetRandomAudienceGfx
 	compare VAR_TEMP_0, 8
-	goto_if_lt LinkContestRoom1_EventScript_15F630
+	goto_if_lt LinkContestRoom1_EventScript_AddRandomAudienceMembers
 	return
 
-LinkContestRoom1_EventScript_15F646:: @ 815F646
+ContestHall_EventScript_SetRandomAudienceGfx:: @ 815F646
 	switch VAR_TEMP_0
-	case 1, LinkContestRoom1_EventScript_15F699
-	case 2, LinkContestRoom1_EventScript_15F6A4
-	case 3, LinkContestRoom1_EventScript_15F6AF
-	case 4, LinkContestRoom1_EventScript_15F6BA
-	case 5, LinkContestRoom1_EventScript_15F6C5
-	case 6, LinkContestRoom1_EventScript_15F6D0
-	case 7, LinkContestRoom1_EventScript_15F6DB
+	case 1, LinkContestRoom1_EventScript_SetRandomAudience1
+	case 2, LinkContestRoom1_EventScript_SetRandomAudience2
+	case 3, LinkContestRoom1_EventScript_SetRandomAudience3
+	case 4, LinkContestRoom1_EventScript_SetRandomAudience4
+	case 5, LinkContestRoom1_EventScript_SetRandomAudience5
+	case 6, LinkContestRoom1_EventScript_SetRandomAudience6
+	case 7, LinkContestRoom1_EventScript_SetRandomAudience7
 	end
 
-LinkContestRoom1_EventScript_15F699:: @ 815F699
+LinkContestRoom1_EventScript_SetRandomAudience1:: @ 815F699
 	copyvar VAR_OBJ_GFX_ID_4, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
-LinkContestRoom1_EventScript_15F6A4:: @ 815F6A4
+LinkContestRoom1_EventScript_SetRandomAudience2:: @ 815F6A4
 	copyvar VAR_OBJ_GFX_ID_5, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
-LinkContestRoom1_EventScript_15F6AF:: @ 815F6AF
+LinkContestRoom1_EventScript_SetRandomAudience3:: @ 815F6AF
 	copyvar VAR_OBJ_GFX_ID_6, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
-LinkContestRoom1_EventScript_15F6BA:: @ 815F6BA
+LinkContestRoom1_EventScript_SetRandomAudience4:: @ 815F6BA
 	copyvar VAR_OBJ_GFX_ID_7, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
-LinkContestRoom1_EventScript_15F6C5:: @ 815F6C5
+LinkContestRoom1_EventScript_SetRandomAudience5:: @ 815F6C5
 	copyvar VAR_OBJ_GFX_ID_8, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
-LinkContestRoom1_EventScript_15F6D0:: @ 815F6D0
+LinkContestRoom1_EventScript_SetRandomAudience6:: @ 815F6D0
 	copyvar VAR_OBJ_GFX_ID_9, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
-LinkContestRoom1_EventScript_15F6DB:: @ 815F6DB
+LinkContestRoom1_EventScript_SetRandomAudience7:: @ 815F6DB
 	copyvar VAR_OBJ_GFX_ID_A, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
-LinkContestRoom1_EventScript_15F6E6:: @ 815F6E6
+LinkContestRoom1_EventScript_GetRandomAudienceGfxId:: @ 815F6E6
 	setvar VAR_RESULT, 32
 	special ScriptRandom
 	addvar VAR_RESULT, 1
 	switch VAR_RESULT
-	case 1, LinkContestRoom1_EventScript_15F859
-	case 2, LinkContestRoom1_EventScript_15F85F
-	case 3, LinkContestRoom1_EventScript_15F865
-	case 4, LinkContestRoom1_EventScript_15F86B
-	case 5, LinkContestRoom1_EventScript_15F871
-	case 6, LinkContestRoom1_EventScript_15F877
-	case 7, LinkContestRoom1_EventScript_15F87D
-	case 8, LinkContestRoom1_EventScript_15F883
-	case 9, LinkContestRoom1_EventScript_15F889
-	case 10, LinkContestRoom1_EventScript_15F88F
-	case 11, LinkContestRoom1_EventScript_15F895
-	case 12, LinkContestRoom1_EventScript_15F89B
-	case 13, LinkContestRoom1_EventScript_15F8A1
-	case 14, LinkContestRoom1_EventScript_15F8A7
-	case 15, LinkContestRoom1_EventScript_15F8AD
-	case 16, LinkContestRoom1_EventScript_15F8B3
-	case 17, LinkContestRoom1_EventScript_15F8B9
-	case 18, LinkContestRoom1_EventScript_15F8BF
-	case 19, LinkContestRoom1_EventScript_15F8C5
-	case 20, LinkContestRoom1_EventScript_15F8CB
-	case 21, LinkContestRoom1_EventScript_15F8D1
-	case 22, LinkContestRoom1_EventScript_15F8D7
-	case 23, LinkContestRoom1_EventScript_15F8DD
-	case 24, LinkContestRoom1_EventScript_15F8E3
-	case 25, LinkContestRoom1_EventScript_15F8E9
-	case 26, LinkContestRoom1_EventScript_15F8EF
-	case 27, LinkContestRoom1_EventScript_15F8F5
-	case 28, LinkContestRoom1_EventScript_15F8FB
-	case 29, LinkContestRoom1_EventScript_15F901
-	case 30, LinkContestRoom1_EventScript_15F907
-	case 31, LinkContestRoom1_EventScript_15F90D
-	case 32, LinkContestRoom1_EventScript_15F913
+	case 1, LinkContestRoom1_EventScript_RandomAudience5
+	case 2, LinkContestRoom1_EventScript_RandomAudience6
+	case 3, LinkContestRoom1_EventScript_RandomAudience7
+	case 4, LinkContestRoom1_EventScript_RandomAudience8
+	case 5, LinkContestRoom1_EventScript_RandomAudience10
+	case 6, LinkContestRoom1_EventScript_RandomAudience11
+	case 7, LinkContestRoom1_EventScript_RandomAudience12
+	case 8, LinkContestRoom1_EventScript_RandomAudience13
+	case 9, LinkContestRoom1_EventScript_RandomAudience14
+	case 10, LinkContestRoom1_EventScript_RandomAudience15
+	case 11, LinkContestRoom1_EventScript_RandomAudience17
+	case 12, LinkContestRoom1_EventScript_RandomAudience18
+	case 13, LinkContestRoom1_EventScript_RandomAudience19
+	case 14, LinkContestRoom1_EventScript_RandomAudience20
+	case 15, LinkContestRoom1_EventScript_RandomAudience21
+	case 16, LinkContestRoom1_EventScript_RandomAudience22
+	case 17, LinkContestRoom1_EventScript_RandomAudience25
+	case 18, LinkContestRoom1_EventScript_RandomAudience26
+	case 19, LinkContestRoom1_EventScript_RandomAudience27
+	case 20, LinkContestRoom1_EventScript_RandomAudience47
+	case 21, LinkContestRoom1_EventScript_RandomAudience30
+	case 22, LinkContestRoom1_EventScript_RandomAudience31
+	case 23, LinkContestRoom1_EventScript_RandomAudience32
+	case 24, LinkContestRoom1_EventScript_RandomAudience33
+	case 25, LinkContestRoom1_EventScript_RandomAudience34
+	case 26, LinkContestRoom1_EventScript_RandomAudience35
+	case 27, LinkContestRoom1_EventScript_RandomAudience36
+	case 28, LinkContestRoom1_EventScript_RandomAudience37
+	case 29, LinkContestRoom1_EventScript_RandomAudience38
+	case 30, LinkContestRoom1_EventScript_RandomAudience44
+	case 31, LinkContestRoom1_EventScript_RandomAudience45
+	case 32, LinkContestRoom1_EventScript_RandomAudience46
 	end
 
-LinkContestRoom1_EventScript_15F859:: @ 815F859
+LinkContestRoom1_EventScript_RandomAudience5:: @ 815F859
 	setvar VAR_TEMP_1, 5
 	return
 
-LinkContestRoom1_EventScript_15F85F:: @ 815F85F
+LinkContestRoom1_EventScript_RandomAudience6:: @ 815F85F
 	setvar VAR_TEMP_1, 6
 	return
 
-LinkContestRoom1_EventScript_15F865:: @ 815F865
+LinkContestRoom1_EventScript_RandomAudience7:: @ 815F865
 	setvar VAR_TEMP_1, 7
 	return
 
-LinkContestRoom1_EventScript_15F86B:: @ 815F86B
+LinkContestRoom1_EventScript_RandomAudience8:: @ 815F86B
 	setvar VAR_TEMP_1, 8
 	return
 
-LinkContestRoom1_EventScript_15F871:: @ 815F871
+LinkContestRoom1_EventScript_RandomAudience10:: @ 815F871
 	setvar VAR_TEMP_1, 10
 	return
 
-LinkContestRoom1_EventScript_15F877:: @ 815F877
+LinkContestRoom1_EventScript_RandomAudience11:: @ 815F877
 	setvar VAR_TEMP_1, 11
 	return
 
-LinkContestRoom1_EventScript_15F87D:: @ 815F87D
+LinkContestRoom1_EventScript_RandomAudience12:: @ 815F87D
 	setvar VAR_TEMP_1, 12
 	return
 
-LinkContestRoom1_EventScript_15F883:: @ 815F883
+LinkContestRoom1_EventScript_RandomAudience13:: @ 815F883
 	setvar VAR_TEMP_1, 13
 	return
 
-LinkContestRoom1_EventScript_15F889:: @ 815F889
+LinkContestRoom1_EventScript_RandomAudience14:: @ 815F889
 	setvar VAR_TEMP_1, 14
 	return
 
-LinkContestRoom1_EventScript_15F88F:: @ 815F88F
+LinkContestRoom1_EventScript_RandomAudience15:: @ 815F88F
 	setvar VAR_TEMP_1, 15
 	return
 
-LinkContestRoom1_EventScript_15F895:: @ 815F895
+LinkContestRoom1_EventScript_RandomAudience17:: @ 815F895
 	setvar VAR_TEMP_1, 17
 	return
 
-LinkContestRoom1_EventScript_15F89B:: @ 815F89B
+LinkContestRoom1_EventScript_RandomAudience18:: @ 815F89B
 	setvar VAR_TEMP_1, 18
 	return
 
-LinkContestRoom1_EventScript_15F8A1:: @ 815F8A1
+LinkContestRoom1_EventScript_RandomAudience19:: @ 815F8A1
 	setvar VAR_TEMP_1, 19
 	return
 
-LinkContestRoom1_EventScript_15F8A7:: @ 815F8A7
+LinkContestRoom1_EventScript_RandomAudience20:: @ 815F8A7
 	setvar VAR_TEMP_1, 20
 	return
 
-LinkContestRoom1_EventScript_15F8AD:: @ 815F8AD
+LinkContestRoom1_EventScript_RandomAudience21:: @ 815F8AD
 	setvar VAR_TEMP_1, 21
 	return
 
-LinkContestRoom1_EventScript_15F8B3:: @ 815F8B3
+LinkContestRoom1_EventScript_RandomAudience22:: @ 815F8B3
 	setvar VAR_TEMP_1, 22
 	return
 
-LinkContestRoom1_EventScript_15F8B9:: @ 815F8B9
+LinkContestRoom1_EventScript_RandomAudience25:: @ 815F8B9
 	setvar VAR_TEMP_1, 25
 	return
 
-LinkContestRoom1_EventScript_15F8BF:: @ 815F8BF
+LinkContestRoom1_EventScript_RandomAudience26:: @ 815F8BF
 	setvar VAR_TEMP_1, 26
 	return
 
-LinkContestRoom1_EventScript_15F8C5:: @ 815F8C5
+LinkContestRoom1_EventScript_RandomAudience27:: @ 815F8C5
 	setvar VAR_TEMP_1, 27
 	return
 
-LinkContestRoom1_EventScript_15F8CB:: @ 815F8CB
+LinkContestRoom1_EventScript_RandomAudience47:: @ 815F8CB
 	setvar VAR_TEMP_1, 47
 	return
 
-LinkContestRoom1_EventScript_15F8D1:: @ 815F8D1
+LinkContestRoom1_EventScript_RandomAudience30:: @ 815F8D1
 	setvar VAR_TEMP_1, 30
 	return
 
-LinkContestRoom1_EventScript_15F8D7:: @ 815F8D7
+LinkContestRoom1_EventScript_RandomAudience31:: @ 815F8D7
 	setvar VAR_TEMP_1, 31
 	return
 
-LinkContestRoom1_EventScript_15F8DD:: @ 815F8DD
+LinkContestRoom1_EventScript_RandomAudience32:: @ 815F8DD
 	setvar VAR_TEMP_1, 32
 	return
 
-LinkContestRoom1_EventScript_15F8E3:: @ 815F8E3
+LinkContestRoom1_EventScript_RandomAudience33:: @ 815F8E3
 	setvar VAR_TEMP_1, 33
 	return
 
-LinkContestRoom1_EventScript_15F8E9:: @ 815F8E9
+LinkContestRoom1_EventScript_RandomAudience34:: @ 815F8E9
 	setvar VAR_TEMP_1, 34
 	return
 
-LinkContestRoom1_EventScript_15F8EF:: @ 815F8EF
+LinkContestRoom1_EventScript_RandomAudience35:: @ 815F8EF
 	setvar VAR_TEMP_1, 35
 	return
 
-LinkContestRoom1_EventScript_15F8F5:: @ 815F8F5
+LinkContestRoom1_EventScript_RandomAudience36:: @ 815F8F5
 	setvar VAR_TEMP_1, 36
 	return
 
-LinkContestRoom1_EventScript_15F8FB:: @ 815F8FB
+LinkContestRoom1_EventScript_RandomAudience37:: @ 815F8FB
 	setvar VAR_TEMP_1, 37
 	return
 
-LinkContestRoom1_EventScript_15F901:: @ 815F901
+LinkContestRoom1_EventScript_RandomAudience38:: @ 815F901
 	setvar VAR_TEMP_1, 38
 	return
 
-LinkContestRoom1_EventScript_15F907:: @ 815F907
+LinkContestRoom1_EventScript_RandomAudience44:: @ 815F907
 	setvar VAR_TEMP_1, 44
 	return
 
-LinkContestRoom1_EventScript_15F90D:: @ 815F90D
+LinkContestRoom1_EventScript_RandomAudience45:: @ 815F90D
 	setvar VAR_TEMP_1, 45
 	return
 
-LinkContestRoom1_EventScript_15F913:: @ 815F913
+LinkContestRoom1_EventScript_RandomAudience46:: @ 815F913
 	setvar VAR_TEMP_1, 46
 	return
 
@@ -409,21 +409,18 @@ LinkContestRoom1_EventScript_15FBD1:: @ 815FBD1
 	waitstate
 	end
 
-FallarborTown_ContestLobby_EventScript_15FBDB:: @ 815FBDB
-LilycoveCity_ContestLobby_EventScript_15FBDB:: @ 815FBDB
-SlateportCity_ContestLobby_EventScript_15FBDB:: @ 815FBDB
-VerdanturfTown_ContestLobby_EventScript_15FBDB:: @ 815FBDB
+LilycoveCity_ContestLobby_EventScript_SetupRivalGfxId:: @ 815FBDB
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_if_eq FallarborTown_ContestLobby_EventScript_15FBF3
+	goto_if_eq FallarborTown_ContestLobby_EventScript_SetupRivalGfxIdMale
 	compare VAR_RESULT, 1
-	goto_if_eq FallarborTown_ContestLobby_EventScript_15FBF9
+	goto_if_eq FallarborTown_ContestLobby_EventScript_SetupRivalGfxIdFemale
 	return
 
-FallarborTown_ContestLobby_EventScript_15FBF3:: @ 815FBF3
+FallarborTown_ContestLobby_EventScript_SetupRivalGfxIdMale:: @ 815FBF3
 	setvar VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
-FallarborTown_ContestLobby_EventScript_15FBF9:: @ 815FBF9
+FallarborTown_ContestLobby_EventScript_SetupRivalGfxIdFemale:: @ 815FBF9
 	setvar VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
 	return

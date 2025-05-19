@@ -1,7 +1,4 @@
-FallarborTown_ContestLobby_EventScript_1A4E92:: @ 81A4E92
 LilycoveCity_ContestLobby_EventScript_1A4E92:: @ 81A4E92
-SlateportCity_ContestLobby_EventScript_1A4E92:: @ 81A4E92
-VerdanturfTown_ContestLobby_EventScript_1A4E92:: @ 81A4E92
 	lock
 	faceplayer
 	checkitem ITEM_CONTEST_PASS, 1
@@ -44,7 +41,7 @@ FallarborTown_ContestLobby_EventScript_1A4F13:: @ 81A4F13
 	giveitem ITEM_CONTEST_PASS
 	setflag FLAG_RECEIVED_CONTEST_PASS
 	setflag FLAG_TEMP_1
-	msgbox FallarborTown_ContestLobby_Text_1A5E98, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_ExplainContests, MSGBOX_DEFAULT
 	goto FallarborTown_ContestLobby_EventScript_1A4F8F
 	end
 
@@ -96,27 +93,27 @@ FallarborTown_ContestLobby_EventScript_1A4FCC:: @ 81A4FCC
 	end
 
 FallarborTown_ContestLobby_EventScript_1A5014:: @ 81A5014
-	msgbox FallarborTown_ContestLobby_Text_1A5E98, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_ExplainContests, MSGBOX_DEFAULT
 	goto FallarborTown_ContestLobby_EventScript_1A4FCC
 	end
 
 FallarborTown_ContestLobby_EventScript_1A5022:: @ 81A5022
-	msgbox FallarborTown_ContestLobby_Text_1A609B, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_ExplainContestTypes, MSGBOX_DEFAULT
 	goto FallarborTown_ContestLobby_EventScript_1A4FCC
 	end
 
 FallarborTown_ContestLobby_EventScript_1A5030:: @ 81A5030
-	msgbox FallarborTown_ContestLobby_Text_1A613F, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_ExplainContestRanks, MSGBOX_DEFAULT
 	goto FallarborTown_ContestLobby_EventScript_1A4FCC
 	end
 
 FallarborTown_ContestLobby_EventScript_1A503E:: @ 81A503E
-	msgbox FallarborTown_ContestLobby_Text_188559, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_ParticipateAnotherTime, MSGBOX_DEFAULT
 	release
 	end
 
 FallarborTown_ContestLobby_EventScript_1A5048:: @ 81A5048
-	msgbox FallarborTown_ContestLobby_Text_1A6319, MSGBOX_DEFAULT
+	msgbox FallarborTown_ContestLobby_Text_EnterWhichPokemon1, MSGBOX_DEFAULT
 	choosecontestmon
 	compare VAR_0x8004, 255
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1A5097
@@ -145,13 +142,13 @@ FallarborTown_ContestLobby_EventScript_1A5097:: @ 81A5097
 	end
 
 FallarborTown_ContestLobby_EventScript_1A50C8:: @ 81A50C8
-	msgbox FallarborTown_ContestLobby_Text_1A664A, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_MonNotQualifiedForRank, MSGBOX_DEFAULT
 	goto FallarborTown_ContestLobby_EventScript_1A5048
 	release
 	end
 
 FallarborTown_ContestLobby_EventScript_1A50D7:: @ 81A50D7
-	msgbox FallarborTown_ContestLobby_Text_1A67A3, MSGBOX_YESNO
+	msgbox LilycoveCity_ContestLobby_Text_ConfirmContestMon, MSGBOX_YESNO
 	switch VAR_RESULT
 	case NO, FallarborTown_ContestLobby_EventScript_1A5048
 	case YES, FallarborTown_ContestLobby_EventScript_1A513D
@@ -165,13 +162,13 @@ FallarborTown_ContestLobby_EventScript_1A50FB:: @ 81A50FB
 	end
 
 FallarborTown_ContestLobby_EventScript_1A511F:: @ 81A511F
-	msgbox FallarborTown_ContestLobby_Text_1A669F, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_EggCannotTakePart, MSGBOX_DEFAULT
 	goto FallarborTown_ContestLobby_EventScript_1A5048
 	release
 	end
 
 FallarborTown_ContestLobby_EventScript_1A512E:: @ 81A512E
-	msgbox FallarborTown_ContestLobby_Text_1A66DC, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_MonInNoConditionForContest, MSGBOX_DEFAULT
 	goto FallarborTown_ContestLobby_EventScript_1A5048
 	release
 	end

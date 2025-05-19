@@ -10,7 +10,7 @@ FallarborTown_ContestLobby_Text_1A5E46:: @ 81A5E46
 FallarborTown_ContestLobby_Text_1A5E7C:: @ 81A5E7C
 	.string "Which topic would you like?$"
 
-FallarborTown_ContestLobby_Text_1A5E98:: @ 81A5E98
+LilycoveCity_ContestLobby_Text_ExplainContests:: @ 81A5E98
 	.string "A POKéMON CONTEST involves four\n"
 	.string "TRAINERS entering one POKéMON each\l"
 	.string "in competitive judging.\p"
@@ -29,14 +29,14 @@ FallarborTown_ContestLobby_Text_1A5E98:: @ 81A5E98
 	.string "The POKéMON garnering the highest\n"
 	.string "score is declared the winner.$"
 
-FallarborTown_ContestLobby_Text_1A609B:: @ 81A609B
+LilycoveCity_ContestLobby_Text_ExplainContestTypes:: @ 81A609B
 	.string "There are five kinds of CONTESTS.\p"
 	.string "COOL, BEAUTY, CUTE, SMART, and\n"
 	.string "TOUGH are the five categories.\p"
 	.string "Choose the CONTEST that is right for\n"
 	.string "the POKéMON you plan to enter.$"
 
-FallarborTown_ContestLobby_Text_1A613F:: @ 81A613F
+LilycoveCity_ContestLobby_Text_ExplainContestRanks:: @ 81A613F
 	.string "There are four ranks of POKéMON\n"
 	.string "CONTESTS.\p"
 	.string "NORMAL, SUPER, HYPER and MASTER\n"
@@ -54,7 +54,7 @@ FallarborTown_ContestLobby_Text_1A613F:: @ 81A613F
 	.string "may compete in the MASTER Rank as\l"
 	.string "often as its TRAINER wants.$"
 
-FallarborTown_ContestLobby_Text_1A6319:: @ 81A6319
+FallarborTown_ContestLobby_Text_EnterWhichPokemon1:: @ 81A6319
 	.string "Which POKéMON would you like to enter?$"
 
 FallarborTown_ContestLobby_Text_1A6340:: @ 81A6340
@@ -65,7 +65,7 @@ FallarborTown_ContestLobby_Text_1A6340:: @ 81A6340
 	.string "Please obtain a CONTEST PASS and\n"
 	.string "come again.$"
 
-LilycoveCity_ContestLobby_Text_1A63F4:: @ 81A63F4
+LilycoveCity_ContestLobby_Text_RegistrationsFromFourNeedContestPass:: @ 81A63F4
 	.string "I accept registrations only from four\n"
 	.string "linked players for a POKéMON CONTEST.\p"
 	.string "Anyone with a CONTEST PASS may enter.\p"
@@ -99,19 +99,16 @@ FallarborTown_ContestLobby_Text_1A65EA:: @ 81A65EA
 FallarborTown_ContestLobby_Text_1A6623:: @ 81A6623
 	.string "Which CONTEST would you like to enter?$"
 
-FallarborTown_ContestLobby_Text_1A664A:: @ 81A664A
-LilycoveCity_ContestLobby_Text_1A664A:: @ 81A664A
+LilycoveCity_ContestLobby_Text_MonNotQualifiedForRank:: @ 81A664A
 	.string "I'm terribly sorry, but your POKéMON\n"
 	.string "is not qualified to compete at this\l"
 	.string "Rank yet...$"
 
-FallarborTown_ContestLobby_Text_1A669F:: @ 81A669F
-LilycoveCity_ContestLobby_Text_1A669F:: @ 81A669F
+LilycoveCity_ContestLobby_Text_EggCannotTakePart:: @ 81A669F
 	.string "I'm sorry, but an EGG cannot take part\n"
 	.string "in a POKéMON CONTEST.$"
 
-FallarborTown_ContestLobby_Text_1A66DC:: @ 81A66DC
-LilycoveCity_ContestLobby_Text_1A66DC:: @ 81A66DC
+LilycoveCity_ContestLobby_Text_MonInNoConditionForContest:: @ 81A66DC
 	.string "Your POKéMON appears to be in no\n"
 	.string "condition to take part in a CONTEST...$"
 
@@ -122,8 +119,7 @@ FallarborTown_ContestLobby_Text_1A6724:: @ 81A6724
 	.string "Would you like to enter it in this\n"
 	.string "CONTEST anyway?$"
 
-FallarborTown_ContestLobby_Text_1A67A3:: @ 81A67A3
-LilycoveCity_ContestLobby_Text_1A67A3:: @ 81A67A3
+LilycoveCity_ContestLobby_Text_ConfirmContestMon:: @ 81A67A3
 	.string "Is that your CONTEST POKéMON?$"
 
 FallarborTown_ContestLobby_Text_1A67C1:: @ 81A67C1
@@ -132,10 +128,7 @@ FallarborTown_ContestLobby_Text_1A67C1:: @ 81A67C1
 	.string "Your POKéMON is Entry No. 4.\n"
 	.string "The CONTEST will begin shortly.$"
 
-FallarborTown_ContestLobby_Text_1A6832:: @ 81A6832
-LilycoveCity_ContestLobby_Text_1A6832:: @ 81A6832
-SlateportCity_ContestLobby_Text_1A6832:: @ 81A6832
-VerdanturfTown_ContestLobby_Text_1A6832:: @ 81A6832
+LilycoveCity_ContestLobby_Text_ComeThroughHere:: @ 81A6832
 	.string "Please come in through here.\n"
 	.string "Good luck!$"
 

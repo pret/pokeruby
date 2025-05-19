@@ -23,7 +23,7 @@ VerdanturfTown_ContestLobby_EventScript_1B763F:: @ 81B763F
 	goto VerdanturfTown_ContestLobby_EventScript_1B7681
 	end
 
-LilycoveCity_ContestLobby_EventScript_1B7659:: @ 81B7659
+BerryBlender_EventScript_BerryBlender2:: @ 81B7659
 	setvar VAR_0x8008, 3
 	setvar VAR_0x8009, 3
 	applymovement 9, Common_Movement_FaceOriginalDirection
@@ -135,7 +135,7 @@ VerdanturfTown_ContestLobby_EventScript_1B77A0:: @ 81B77A0
 	goto VerdanturfTown_ContestLobby_EventScript_BerryBlendWithNPC
 	end
 
-LilycoveCity_ContestLobby_EventScript_1B77AB:: @ 81B77AB
+BerryBlender_EventScript_Blender2OldMan:: @ 81B77AB
 	setvar VAR_0x8008, 3
 	goto VerdanturfTown_ContestLobby_EventScript_BerryBlendWithNPC
 	end
@@ -194,7 +194,7 @@ VerdanturfTown_ContestLobby_EventScript_1B782F:: @ 81B782F
 	goto VerdanturfTown_ContestLobby_EventScript_1B783B
 	end
 
-LilycoveCity_ContestLobby_EventScript_1B7835:: @ 81B7835
+BerryBlender_EventScript_BerryBlender1:: @ 81B7835
 	goto LilycoveCity_ContestLobby_EventScript_1B783B
 	end
 

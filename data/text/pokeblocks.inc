@@ -56,7 +56,7 @@ FallarborTown_ContestLobby_Text_1B71D2:: @ 81B71D2
 SlateportCity_ContestLobby_Text_LetsGetBlendingAlready:: @ 81B7225
 	.string "Let's get blending already!$"
 
-LilycoveCity_ContestLobby_Text_1B7241:: @ 81B7241
+BerryBlender_Text_WhatKindOfPokeblockWillIGet:: @ 81B7241
 	.string "I wonder what kind of {POKEBLOCK} I'll get?\n"
 	.string "This is so exciting!$"
 
