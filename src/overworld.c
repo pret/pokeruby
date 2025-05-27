@@ -477,7 +477,7 @@ void sub_8053538(u8 a1)
     const struct HealLocation *warp = GetHealLocation(a1);
 
     if (warp)
-        Overworld_SetWarpDestination(warp->group, warp->map, -1, warp->x, warp->y);
+        Overworld_SetWarpDestination(warp->mapGroup, warp->mapNum, -1, warp->x, warp->y);
 }
 
 void Overworld_SetWarpDestToLastHealLoc(void)
@@ -490,7 +490,7 @@ void Overworld_SetHealLocationWarp(u8 healLocationId)
     const struct HealLocation *healLocation = GetHealLocation(healLocationId);
 
     if (healLocation != NULL)
-        SetWarpData(&gSaveBlock1.lastHealLocation, healLocation->group, healLocation->map, -1, healLocation->x, healLocation->y);
+        SetWarpData(&gSaveBlock1.lastHealLocation, healLocation->mapGroup, healLocation->mapNum, -1, healLocation->x, healLocation->y);
 }
 
 void sub_80535C4(s16 a1, s16 a2)
@@ -548,7 +548,7 @@ void sub_80537CC(u8 a1)
 {
     const struct HealLocation *warp = GetHealLocation(a1);
     if (warp)
-        SetWarpData(&gSaveBlock1.warp1, warp->group, warp->map, -1, warp->x, warp->y);
+        SetWarpData(&gSaveBlock1.warp1, warp->mapGroup, warp->mapNum, -1, warp->x, warp->y);
 }
 
 void gpu_sync_bg_hide()
@@ -752,9 +752,9 @@ u16 GetCenterScreenMetatileBehavior(void)
 bool32 Overworld_IsBikingAllowed(void)
 {
     // is player in cycling road entrance?
-    if (gSaveBlock1.location.mapGroup == MAP_GROUP(ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE)
-     && (gSaveBlock1.location.mapNum == MAP_NUM(ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE)
-      || gSaveBlock1.location.mapNum == MAP_NUM(ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE)))
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE)
+     && (gSaveBlock1.location.mapNum == MAP_NUM(MAP_ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE)
+      || gSaveBlock1.location.mapNum == MAP_NUM(MAP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE)))
         return TRUE;
 
     // is player indoor, in a secret base, or underwater?
@@ -766,11 +766,11 @@ bool32 Overworld_IsBikingAllowed(void)
         return FALSE;
 
     // Thou shalt not bike on the sacred resting grounds of Kyogre/Groudon.
-    if (gSaveBlock1.location.mapGroup == MAP_GROUP(SEAFLOOR_CAVERN_ROOM9)
-     && gSaveBlock1.location.mapNum == MAP_NUM(SEAFLOOR_CAVERN_ROOM9))
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_SEAFLOOR_CAVERN_ROOM9)
+     && gSaveBlock1.location.mapNum == MAP_NUM(MAP_SEAFLOOR_CAVERN_ROOM9))
         return FALSE;
-    if (gSaveBlock1.location.mapGroup == MAP_GROUP(CAVE_OF_ORIGIN_B4F)
-     && gSaveBlock1.location.mapNum == MAP_NUM(CAVE_OF_ORIGIN_B4F))
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_CAVE_OF_ORIGIN_B4F)
+     && gSaveBlock1.location.mapNum == MAP_NUM(MAP_CAVE_OF_ORIGIN_B4F))
         return FALSE;
 
     return TRUE;
@@ -812,16 +812,16 @@ static bool16 ShouldLegendaryMusicPlayAtLocation(struct WarpData *warp)
     {
         switch (warp->mapNum)
         {
-        case MAP_NUM(LILYCOVE_CITY):
-        case MAP_NUM(MOSSDEEP_CITY):
-        case MAP_NUM(SOOTOPOLIS_CITY):
-        case MAP_NUM(EVER_GRANDE_CITY):
+        case MAP_NUM(MAP_LILYCOVE_CITY):
+        case MAP_NUM(MAP_MOSSDEEP_CITY):
+        case MAP_NUM(MAP_SOOTOPOLIS_CITY):
+        case MAP_NUM(MAP_EVER_GRANDE_CITY):
             return TRUE;
-        case MAP_NUM(ROUTE124):
-        case MAP_NUM(ROUTE125):
-        case MAP_NUM(ROUTE126):
-        case MAP_NUM(ROUTE127):
-        case MAP_NUM(ROUTE128):
+        case MAP_NUM(MAP_ROUTE124):
+        case MAP_NUM(MAP_ROUTE125):
+        case MAP_NUM(MAP_ROUTE126):
+        case MAP_NUM(MAP_ROUTE127):
+        case MAP_NUM(MAP_ROUTE128):
             return TRUE;
         }
     }
@@ -832,10 +832,10 @@ static bool16 IsInfiltratedWeatherInstitute(struct WarpData *warp)
 {
     if (VarGet(VAR_WEATHER_INSTITUTE_STATE))
         return FALSE;
-    if (warp->mapGroup != MAP_GROUP(ROUTE119_WEATHER_INSTITUTE_1F))
+    if (warp->mapGroup != MAP_GROUP(MAP_ROUTE119_WEATHER_INSTITUTE_1F))
         return FALSE;
-    if (warp->mapNum == MAP_NUM(ROUTE119_WEATHER_INSTITUTE_1F)
-     || warp->mapNum == MAP_NUM(ROUTE119_WEATHER_INSTITUTE_2F))
+    if (warp->mapNum == MAP_NUM(MAP_ROUTE119_WEATHER_INSTITUTE_1F)
+     || warp->mapNum == MAP_NUM(MAP_ROUTE119_WEATHER_INSTITUTE_2F))
         return TRUE;
     return FALSE;
 }
@@ -855,8 +855,8 @@ u16 GetCurrLocationDefaultMusic(void)
     u16 music;
 
     // Play the desert music only when the sandstorm is active on Route 111.
-    if (gSaveBlock1.location.mapGroup == MAP_GROUP(ROUTE111)
-     && gSaveBlock1.location.mapNum == MAP_NUM(ROUTE111)
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_ROUTE111)
+     && gSaveBlock1.location.mapNum == MAP_NUM(MAP_ROUTE111)
      && GetSav1Weather() == 8)
         return MUS_ROUTE111;
 
@@ -883,8 +883,8 @@ u16 GetWarpDestinationMusic(void)
     }
     else
     {
-        if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAUVILLE_CITY)
-         && gSaveBlock1.location.mapNum == MAP_NUM(MAUVILLE_CITY))
+        if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_MAUVILLE_CITY)
+         && gSaveBlock1.location.mapNum == MAP_NUM(MAP_MAUVILLE_CITY))
             return MUS_ROUTE110;
         else
             return MUS_ROUTE119;
@@ -1038,8 +1038,8 @@ void UpdateAmbientCry(s16 *state, u16 *delayCounter)
 
 static void ChooseAmbientCrySpecies(void)
 {
-    if ((gSaveBlock1.location.mapGroup == MAP_GROUP(ROUTE130)
-     && gSaveBlock1.location.mapNum == MAP_NUM(ROUTE130))
+    if ((gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_ROUTE130)
+     && gSaveBlock1.location.mapNum == MAP_NUM(MAP_ROUTE130))
      && !IsMirageIslandPresent())
     {
         // Only play water pokemon cries on this route

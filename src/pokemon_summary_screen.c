@@ -32,6 +32,7 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/region_map_sections.h"
 
 static void SummaryScreen_PrintPokemonInfoLabels(void);
 static void SummaryScreen_PrintPokemonSkillsLabels(void);
@@ -2515,7 +2516,7 @@ static void PokemonSummaryScreen_PrintEggTrainerMemo(struct Pokemon *mon, u8 lef
 
     locationMet = GetMonData(mon, MON_DATA_MET_LOCATION);
 
-    if (locationMet == 255)
+    if (locationMet == METLOC_FATEFUL_ENCOUNTER)
     {
         // Eggs received from Pokemon Box.
         Menu_PrintText(gOtherText_EggNicePlace, left, top);
@@ -2530,7 +2531,7 @@ static void PokemonSummaryScreen_PrintEggTrainerMemo(struct Pokemon *mon, u8 lef
 
     asm(""); // needed to match for some reason
 
-    if (locationMet == 253)
+    if (locationMet == METLOC_SPECIAL_EGG)
     {
         Menu_PrintText(gOtherText_EggHotSprings, left, top);
         return;
@@ -2605,7 +2606,7 @@ static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *mon, u8 left, 
         else
         {
             locationMet = GetMonData(mon, MON_DATA_MET_LOCATION);
-            if (locationMet == 0xFF)
+            if (locationMet == METLOC_FATEFUL_ENCOUNTER)
             {
                 u8 levelMet = GetMonData(mon, MON_DATA_MET_LEVEL);
 
@@ -2615,7 +2616,7 @@ static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *mon, u8 left, 
 
                 StringCopy(ptr, gOtherText_FatefulEncounter);
             }
-            else if (locationMet >= 88)
+            else if (locationMet >= MAPSEC_NONE)
             {
                 *ptr = CHAR_NEWLINE;
                 ptr++;

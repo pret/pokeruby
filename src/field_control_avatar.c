@@ -25,6 +25,7 @@
 #include "constants/vars.h"
 #include "wild_encounter.h"
 #include "constants/event_bg.h"
+#include "constants/event_objects.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
 
@@ -358,7 +359,7 @@ const u8 *GetInteractedLinkPlayerScript(struct MapPosition *position, u8 metatil
     else
         objectEventId = GetObjectEventIdByXYZ(position->x + gDirectionToVectors[direction].x, position->y + gDirectionToVectors[direction].y, position->height);
 
-    if (objectEventId == 16 || gObjectEvents[objectEventId].localId == 0xFF)
+    if (objectEventId == 16 || gObjectEvents[objectEventId].localId == LOCALID_PLAYER)
         return NULL;
 
     for (i = 0; i < 4; i++)
@@ -379,14 +380,14 @@ static const u8 *GetInteractedObjectEventScript(struct MapPosition *position, u8
     const u8 *script;
 
     objectEventId = GetObjectEventIdByXYZ(position->x, position->y, position->height);
-    if (objectEventId == 16 || gObjectEvents[objectEventId].localId == 0xFF)
+    if (objectEventId == 16 || gObjectEvents[objectEventId].localId == LOCALID_PLAYER)
     {
         if (MetatileBehavior_IsCounter(metatileBehavior) != TRUE)
             return NULL;
 
         // Look for an object event on the other side of the counter.
         objectEventId = GetObjectEventIdByXYZ(position->x + gDirectionToVectors[direction].x, position->y + gDirectionToVectors[direction].y, position->height);
-        if (objectEventId == 16 || gObjectEvents[objectEventId].localId == 0xFF)
+        if (objectEventId == 16 || gObjectEvents[objectEventId].localId == LOCALID_PLAYER)
             return NULL;
     }
 
@@ -766,7 +767,7 @@ static void sub_8068C30(struct MapHeader *unused, s8 warpEventId, struct MapPosi
 {
     const struct WarpEvent *warpEvent = &gMapHeader.events->warps[warpEventId];
 
-    if (warpEvent->mapNum == MAP_NUM(DYNAMIC))
+    if (warpEvent->mapNum == MAP_NUM(MAP_DYNAMIC))
     {
         copy_saved_warp2_bank_and_enter_x_to_warp1(warpEvent->warpId);
     }
@@ -777,7 +778,7 @@ static void sub_8068C30(struct MapHeader *unused, s8 warpEventId, struct MapPosi
         warp1_set_2(warpEvent->mapGroup, warpEvent->mapNum, warpEvent->warpId);
         sub_80535C4(position->x, position->y);
         mapHeader = Overworld_GetMapHeaderByGroupAndId(warpEvent->mapGroup, warpEvent->mapNum);
-        if (mapHeader->events->warps[warpEvent->warpId].mapNum == MAP_NUM(DYNAMIC))
+        if (mapHeader->events->warps[warpEvent->warpId].mapNum == MAP_NUM(MAP_DYNAMIC))
             saved_warp2_set(mapHeader->events->warps[warpEventId].warpId, gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, warpEventId);
     }
 }

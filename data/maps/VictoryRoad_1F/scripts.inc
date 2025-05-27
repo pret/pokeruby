@@ -35,7 +35,7 @@ VictoryRoad_1F_EventScript_WallyTrigger2:: @ 815DEBF
 	end
 
 VictoryRoad_1F_EventScript_WallyApproachPlayer:: @ 815DED3
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox VictoryRoad_1F_Text_WallyNotGoingToLoseAnymore, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_WALLY_1, VictoryRoad_1F_Text_WallyEntranceDefeat

@@ -229,7 +229,7 @@ Route120_EventScript_15189D:: @ 815189D
 
 Route120_EventScript_151908:: @ 8151908
 	applymovement 31, Common_Movement_WalkInPlaceFastestDown
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox Route120_Text_171A40, MSGBOX_DEFAULT
 	giveitem ITEM_DEVON_SCOPE
@@ -253,12 +253,12 @@ Route120_EventScript_151908:: @ 8151908
 	end
 
 Route120_EventScript_15197F:: @ 815197F
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 Route120_EventScript_15198A:: @ 815198A
-	applymovement OBJ_EVENT_ID_PLAYER, Route120_Movement_151995
+	applymovement LOCALID_PLAYER, Route120_Movement_151995
 	waitmovement 0
 	return
 

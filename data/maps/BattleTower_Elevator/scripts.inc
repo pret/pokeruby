@@ -10,13 +10,13 @@ BattleTower_Elevator_MapScript2_1607DA:: @ 81607DA
 BattleTower_Elevator_EventScript_1607E4:: @ 81607E4
 	setvar VAR_TEMP_0, 1
 	applymovement 1, BattleTower_Elevator_Movement_160835
-	applymovement OBJ_EVENT_ID_PLAYER, BattleTower_Elevator_Movement_160839
+	applymovement LOCALID_PLAYER, BattleTower_Elevator_Movement_160839
 	waitmovement 0
 	special ShakeScreenInElevator
 	waitstate
 	delay 64
 	applymovement 1, BattleTower_Elevator_Movement_16083D
-	applymovement OBJ_EVENT_ID_PLAYER, BattleTower_Elevator_Movement_160841
+	applymovement LOCALID_PLAYER, BattleTower_Elevator_Movement_160841
 	waitmovement 0
 	setvar VAR_TEMP_0, 0
 	warp MAP_BATTLE_TOWER_CORRIDOR, 255, 8, 1
@@ -29,7 +29,7 @@ BattleTower_Elevator_MapScript2_160821:: @ 8160821
 
 BattleTower_Elevator_EventScript_16082B:: @ 816082B
 	setvar VAR_TEMP_1, 1
-	turnobject OBJ_EVENT_ID_PLAYER, 2
+	turnobject LOCALID_PLAYER, 2
 	end
 
 BattleTower_Elevator_Movement_160835:: @ 8160835

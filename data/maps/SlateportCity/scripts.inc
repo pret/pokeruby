@@ -491,7 +491,7 @@ SlateportCity_EventScript_CaptStern:: @ 814BEBC
 	waitmovement 0
 	delay 25
 	applymovement 11, SlateportCity_Movement_SternWatchGabbyAndTyExit
-	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_Movement_PlayerFaceStern
+	applymovement LOCALID_PLAYER, SlateportCity_Movement_PlayerFaceStern
 	applymovement 10, SlateportCity_Movement_GabbyExit
 	applymovement 9, SlateportCity_Movement_TyExit
 	waitmovement 0
@@ -523,7 +523,7 @@ SlateportCity_EventScript_CaptStern:: @ 814BEBC
 	msgbox SlateportCity_Text_PleaseComeWithMe, MSGBOX_DEFAULT
 	closemessage
 	applymovement 11, SlateportCity_Movement_SternEnterHarbor
-	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_Movement_PlayerEnterHarbor
+	applymovement LOCALID_PLAYER, SlateportCity_Movement_PlayerEnterHarbor
 	waitmovement 0
 	removeobject 11
 	clearflag FLAG_HIDE_STERN_SLATEPORT_HARBOR

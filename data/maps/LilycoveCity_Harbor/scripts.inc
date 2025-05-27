@@ -84,18 +84,18 @@ LilycoveCity_Harbor_EventScript_BoardFerry:: @ 815998A
 	compare VAR_FACING, 4
 	call_if_eq LilycoveCity_Harbor_EventScript_PlayerBoardFerryEast
 	delay 30
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
+	hideobjectat LOCALID_PLAYER, MAP_PETALBURG_CITY
 	setvar VAR_0x8004, 2
 	call Common_EventScript_FerryDepart
 	return
 
 LilycoveCity_Harbor_EventScript_PlayerBoardFerryEast:: @ 81599CE
-	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_Harbor_Movement_PlayerBoardFerryEast
+	applymovement LOCALID_PLAYER, LilycoveCity_Harbor_Movement_PlayerBoardFerryEast
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_PlayerBoardFerryNorth:: @ 81599D9
-	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_Harbor_Movement_PlayerBoardFerryNorth
+	applymovement LOCALID_PLAYER, LilycoveCity_Harbor_Movement_PlayerBoardFerryNorth
 	waitmovement 0
 	return
 
@@ -130,7 +130,7 @@ LilycoveCity_Harbor_EventScript_FerryAttendantLocationAndBoarding:: @ 81599EE
 	compare VAR_FACING, 4
 	call_if_eq LilycoveCity_Harbor_EventScript_PlayerBoardFerryEast
 	delay 30
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
+	hideobjectat LOCALID_PLAYER, MAP_PETALBURG_CITY
 	special ScrSpecial_HealPlayerParty
 	setvar VAR_0x8004, 2
 	call Common_EventScript_FerryDepart

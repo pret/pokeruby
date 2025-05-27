@@ -14,7 +14,7 @@ LittlerootTown_ProfessorBirchsLab_OnWarp:: @ 8152C9D
 	.2byte 0
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152CA7:: @ 8152CA7
-	turnobject OBJ_EVENT_ID_PLAYER, 2
+	turnobject LOCALID_PLAYER, 2
 	end
 
 LittlerootTown_ProfessorBirchsLab_OnFrame:: @ 8152CAC
@@ -67,7 +67,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_DeclineSeeingRival:: @ 8152D2B
 
 LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedexEvent:: @ 8152D4A
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForPokedex
+	applymovement LOCALID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForPokedex
 	waitmovement 0
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex
 	end
@@ -119,7 +119,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex:: @ 8152DBA
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex, MSGBOX_DEFAULT
 	applymovement 3, LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	checkplayergender
 	compare VAR_RESULT, 0

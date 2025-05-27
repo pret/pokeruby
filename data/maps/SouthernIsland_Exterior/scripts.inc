@@ -31,12 +31,12 @@ SouthernIsland_Exterior_EventScript_160B25:: @ 8160B25
 	end
 
 Ferry_EventScript_DepartIslandSouth:: @ 8160B2F
-	applymovement OBJ_EVENT_ID_PLAYER, BattleTower_Outside_Movement_160B45
+	applymovement LOCALID_PLAYER, BattleTower_Outside_Movement_160B45
 	waitmovement 0
 	return
 
 Ferry_EventScript_DepartIslandWest:: @ 8160B3A
-	applymovement OBJ_EVENT_ID_PLAYER, BattleTower_Outside_Movement_160B47
+	applymovement LOCALID_PLAYER, BattleTower_Outside_Movement_160B47
 	waitmovement 0
 	return
 
