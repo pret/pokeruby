@@ -80,7 +80,7 @@ include make_tools.mk
 SHA1SUM   := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
 GBAGFX    := tools/gbagfx/gbagfx$(EXE)
 RSFONT    := tools/rsfont/rsfont$(EXE)
-AIF2PCM   := tools/aif2pcm/aif2pcm$(EXE)
+WAV2AGB   := tools/wav2agb/wav2agb$(EXE)
 MID2AGB   := tools/mid2agb/mid2agb$(EXE)
 PREPROC   := tools/preproc/preproc$(EXE)
 SCANINC   := tools/scaninc/scaninc$(EXE)
@@ -321,11 +321,11 @@ generated: $(AUTO_GEN_TARGETS)
 
 #### Sound Rules ####
 
-sound/direct_sound_samples/cries/cry_%.bin: sound/direct_sound_samples/cries/cry_%.aif
-	$(AIF2PCM) $< $@ --compress
+sound/direct_sound_samples/cries/cry_%.bin: sound/direct_sound_samples/cries/cry_%.wav
+	$(WAV2AGB) -b -c -l 1 --no-pad $< $@
 
-sound/%.bin: sound/%.aif
-	$(AIF2PCM) $< $@
+sound/%.bin: sound/%.wav
+	$(WAV2AGB) -b $< $@
 
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID2AGB) $(<F)
