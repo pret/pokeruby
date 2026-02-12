@@ -1775,7 +1775,7 @@ void DebugMenu_80781A8(u8 taskId)
         task->func = DebugMenu_807817C;
         return;
     }
-    else if (!DebugMenu_8077DD8(task->data + 0, 1, 13, gMain.newAndRepeatedKeys & (DPAD_UP | DPAD_DOWN)))
+    else if (!DebugMenu_8077DD8(task->data + 0, 1, 13, JOY_REPT(DPAD_UP | DPAD_DOWN)))
         return;
     Menu_BlankWindowRect(4, 17, 22, 18);
     ConvertIntToDecimalStringN(gStringVar1, task->data[0], STR_CONV_MODE_RIGHT_ALIGN, 3);
@@ -2111,13 +2111,13 @@ bool32 DebugMenu_807860C(u8 taskId)
                 data[0]++;
                 return FALSE;
             }
-            if (gMain.newAndRepeatedKeys & DPAD_UP)
+            if (JOY_REPT(DPAD_UP))
             {
                 data[1]++;
                 if (data[1] == NUM_GAME_STATS)
                     data[1] = 0;
             }
-            else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+            else if (JOY_REPT(DPAD_DOWN))
             {
                 data[1]--;
                 if (data[1] < 0)

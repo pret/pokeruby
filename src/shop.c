@@ -133,7 +133,7 @@ static void Task_DoBuySellMenu(u8 taskId)
 {
     const u8 taskIdConst = taskId; // why is a local const needed to match?
 
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         if (gMartInfo.cursor) // can move cursor up?
         {
@@ -141,7 +141,7 @@ static void Task_DoBuySellMenu(u8 taskId)
             gMartInfo.cursor = Menu_MoveCursor(-1);
         }
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPT(DPAD_DOWN))
     {
         if (gMartInfo.cursor != gMartInfo.numChoices) // can move cursor down?
         {
@@ -1029,7 +1029,7 @@ static void Shop_DoCursorAction(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP) // only up can be pressed
+        if (JOY_REPT(DPAD_ANY) == DPAD_UP) // only up can be pressed
         {
             if (gMartInfo.cursor == 0)
             {
@@ -1050,7 +1050,7 @@ static void Shop_DoCursorAction(u8 taskId)
                 Shop_PrintItemDescText();
             }
         }
-        else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN) // only down can be pressed
+        else if (JOY_REPT(DPAD_ANY) == DPAD_DOWN) // only down can be pressed
         {
             if (gMartInfo.cursor == 7) // are you at the bottom of the menu?
             {

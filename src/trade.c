@@ -1873,19 +1873,19 @@ static void sub_8049620(void)
 static void sub_8049680(void)
 {
     int i;
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         TradeMenuMoveCursor(&gUnknown_03004824->tradeMenuCursorPosition, 0);
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPT(DPAD_DOWN))
     {
         TradeMenuMoveCursor(&gUnknown_03004824->tradeMenuCursorPosition, 1);
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    else if (JOY_REPT(DPAD_LEFT))
     {
         TradeMenuMoveCursor(&gUnknown_03004824->tradeMenuCursorPosition, 2);
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    else if (JOY_REPT(DPAD_RIGHT))
     {
         TradeMenuMoveCursor(&gUnknown_03004824->tradeMenuCursorPosition, 3);
     }
@@ -1933,12 +1933,12 @@ static void sub_8049804(void)
 
 static void sub_8049860(void)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         gUnknown_03004824->unk_007c = Menu_MoveCursor(-1);
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPT(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         gUnknown_03004824->unk_007c = Menu_MoveCursor(+1);
@@ -2034,12 +2034,12 @@ static void sub_8049A20(void)
 
 static void sub_8049AC0(void)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         gUnknown_03004824->unk_007c = Menu_MoveCursor(-1);
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPT(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         gUnknown_03004824->unk_007c = Menu_MoveCursor(+1);
@@ -2077,12 +2077,12 @@ static void sub_8049AC0(void)
 
 static void sub_8049BC0(void)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         gUnknown_03004824->unk_007c = Menu_MoveCursor(-1);
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPT(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         gUnknown_03004824->unk_007c = Menu_MoveCursor(+1);

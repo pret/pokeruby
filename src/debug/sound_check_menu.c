@@ -264,17 +264,17 @@ bool8 Task_ProcessSoundCheckMenuInput(u8 taskId)
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gTasks[taskId].func = sub_80BA68C;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_UP)
+    else if (JOY_REPT(DPAD_UP))
     {
         gTasks[taskId].tWindowSelected ^= 1;
         return TRUE;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPT(DPAD_DOWN))
     {
         gTasks[taskId].tWindowSelected ^= 1;
         return TRUE;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    else if (JOY_REPT(DPAD_RIGHT))
     {
         if (gTasks[taskId].tWindowSelected != 0)
         {
@@ -292,7 +292,7 @@ bool8 Task_ProcessSoundCheckMenuInput(u8 taskId)
         }
         return TRUE;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    else if (JOY_REPT(DPAD_LEFT))
     {
         if (gTasks[taskId].tWindowSelected != 0)
         {
@@ -463,7 +463,7 @@ void Task_ProcessDriverTestInput(u8 taskId)
         gTasks[taskId].func = Task_InitSoundCheckMenu;
         return;
     }
-    if (gMain.newAndRepeatedKeys & DPAD_UP) // _080BAAA8
+    if (JOY_REPT(DPAD_UP)) // _080BAAA8
     {
         u8 old = sDriverTestSelection;
 
@@ -472,7 +472,7 @@ void Task_ProcessDriverTestInput(u8 taskId)
         sub_80BAE10(old, sDriverTestSelection);
         return;
     }
-    if (gMain.newAndRepeatedKeys & DPAD_DOWN) // _080BAAD0
+    if (JOY_REPT(DPAD_DOWN)) // _080BAAD0
     {
         u8 old = sDriverTestSelection;
 
@@ -494,25 +494,25 @@ void Task_ProcessDriverTestInput(u8 taskId)
         SetPokemonCryStereo(gUnknown_020387D9);
         return;
     }
-    if (gMain.newAndRepeatedKeys & R_BUTTON) // _080BAB38
+    if (JOY_REPT(R_BUTTON)) // _080BAB38
     {
         AdjustSelectedDriverParam(10);
         PrintDriverTestMenuText();
         return;
     }
-    if (gMain.newAndRepeatedKeys & L_BUTTON) // _080BAB46
+    if (JOY_REPT(L_BUTTON)) // _080BAB46
     {
         AdjustSelectedDriverParam(-10);
         PrintDriverTestMenuText();
         return;
     }
-    if (gMain.newAndRepeatedKeys & DPAD_LEFT) // _080BAB56
+    if (JOY_REPT(DPAD_LEFT)) // _080BAB56
     {
         AdjustSelectedDriverParam(-1);
         PrintDriverTestMenuText();
         return;
     }
-    if (gMain.newAndRepeatedKeys & DPAD_RIGHT) // _080BAB64
+    if (JOY_REPT(DPAD_RIGHT)) // _080BAB64
     {
         AdjustSelectedDriverParam(1);
         PrintDriverTestMenuText();
@@ -776,13 +776,13 @@ void sub_80BB038(u8 taskId)
         if (sSoundTestParams[CRY_TEST_PANPOT] < 0)
             sSoundTestParams[CRY_TEST_PANPOT] = 4;
     }
-    if (gMain.newAndRepeatedKeys & DPAD_RIGHT) // _080BB192
+    if (JOY_REPT(DPAD_RIGHT)) // _080BB192
     {
         sSoundTestParams[CRY_TEST_VOICE]++;
         if (sSoundTestParams[CRY_TEST_VOICE] > 247)
             sSoundTestParams[CRY_TEST_VOICE] = 0;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_LEFT) // _080BB1B0
+    else if (JOY_REPT(DPAD_LEFT)) // _080BB1B0
     {
         sSoundTestParams[CRY_TEST_VOICE]--;
         if (sSoundTestParams[CRY_TEST_VOICE] < 0)
@@ -1265,13 +1265,13 @@ void Task_ProcessCryTestInput(u8 taskId)
     {
         StopCryAndClearCrySongs();
     }
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         if(--gSoundTestCryNum == 0)
             gSoundTestCryNum = 384; // total species
         PrintCryNumber();
     }
-    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    if (JOY_REPT(DPAD_DOWN))
     {
         if(++gSoundTestCryNum > 384)
             gSoundTestCryNum = 1;

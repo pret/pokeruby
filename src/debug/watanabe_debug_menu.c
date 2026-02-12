@@ -821,7 +821,7 @@ void debug_80C3D2C(u8 taskId)
         PlaySE(SE_SELECT);
         gTasks[taskId].data[8] ^= 1;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    else if (JOY_REPT(DPAD_LEFT))
     {
         if (gTasks[taskId].data[8])
         {
@@ -842,7 +842,7 @@ void debug_80C3D2C(u8 taskId)
                 gTasks[taskId].data[7] = 0x8000;
         }
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    else if (JOY_REPT(DPAD_RIGHT))
     {
         if (gTasks[taskId].data[8])
         {
@@ -863,7 +863,7 @@ void debug_80C3D2C(u8 taskId)
                 gTasks[taskId].data[7] = 0x100;
         }
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_UP)
+    else if (JOY_REPT(DPAD_UP))
     {
         if (gTasks[taskId].data[8])
         {
@@ -874,7 +874,7 @@ void debug_80C3D2C(u8 taskId)
             gTasks[taskId].data[5]--;
         }
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPT(DPAD_DOWN))
     {
         if (gTasks[taskId].data[8])
         {
@@ -885,7 +885,7 @@ void debug_80C3D2C(u8 taskId)
             gTasks[taskId].data[5]++;
         }
     }
-    else if (gMain.newAndRepeatedKeys & START_BUTTON)
+    else if (JOY_REPT(START_BUTTON))
     {
         if (gTasks[taskId].data[0] < 0x182)
             gTasks[taskId].data[0]++;
@@ -895,7 +895,7 @@ void debug_80C3D2C(u8 taskId)
         DestroySprite(gSprites + gTasks[taskId].data[3]);
         gTasks[taskId].func = debug_80C3A50;
     }
-    else if (gMain.newAndRepeatedKeys & SELECT_BUTTON)
+    else if (JOY_REPT(SELECT_BUTTON))
     {
         if (gTasks[taskId].data[0] > 1)
             gTasks[taskId].data[0]--;
@@ -1158,12 +1158,12 @@ void debug_80C43A8(u8 taskId)
         debug_80C38E4(0, 1, 1, 14, 0);
         gTasks[taskId].func = debug_80C44EC;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_UP && gUnknown_Debug_2038A0C[1] != 0)
+    else if (JOY_REPT(DPAD_UP) && gUnknown_Debug_2038A0C[1] != 0)
     {
         gUnknown_Debug_2038A0C[1]--;
         gTasks[taskId].func = debug_80C4348;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN && gUnknown_Debug_2038A0C[1] < 5 && GetMonData(gPlayerParty + gUnknown_Debug_2038A0C[1], MON_DATA_SPECIES) != SPECIES_NONE)
+    else if (JOY_REPT(DPAD_DOWN) && gUnknown_Debug_2038A0C[1] < 5 && GetMonData(gPlayerParty + gUnknown_Debug_2038A0C[1], MON_DATA_SPECIES) != SPECIES_NONE)
     {
         gUnknown_Debug_2038A0C[1]++;
         gTasks[taskId].func = debug_80C4348;
@@ -1205,12 +1205,12 @@ void debug_80C4550(u8 taskId)
         debug_80C38E4(0, 16, 1, 14, 0);
         gTasks[taskId].func = debug_80C4348;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_UP && gUnknown_Debug_2038A0C[2] != 0)
+    else if (JOY_REPT(DPAD_UP) && gUnknown_Debug_2038A0C[2] != 0)
     {
         gUnknown_Debug_2038A0C[2]--;
         gTasks[taskId].func = debug_80C44EC;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN && gUnknown_Debug_2038A0C[2] < 5 && GetMonData(gEnemyParty + gUnknown_Debug_2038A0C[2], MON_DATA_SPECIES) != SPECIES_NONE)
+    else if (JOY_REPT(DPAD_DOWN) && gUnknown_Debug_2038A0C[2] < 5 && GetMonData(gEnemyParty + gUnknown_Debug_2038A0C[2], MON_DATA_SPECIES) != SPECIES_NONE)
     {
         gUnknown_Debug_2038A0C[2]++;
         gTasks[taskId].func = debug_80C44EC;
@@ -1318,12 +1318,12 @@ void debug_80C4900(u8 taskId)
             gTasks[taskId].func = debug_80C4F48;
         }
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_UP && gUnknown_Debug_2038A0C[3] > 0)
+    else if (JOY_REPT(DPAD_UP) && gUnknown_Debug_2038A0C[3] > 0)
     {
         gUnknown_Debug_2038A0C[3]--;
         gTasks[taskId].func = debug_80C48A0;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN && gUnknown_Debug_2038A0C[3] < 2)
+    else if (JOY_REPT(DPAD_DOWN) && gUnknown_Debug_2038A0C[3] < 2)
     {
         gUnknown_Debug_2038A0C[3]++;
         gTasks[taskId].func = debug_80C48A0;
@@ -1370,7 +1370,7 @@ void debug_80C4AC4(u8 taskId)
         eWatanabe17000.contestant = 0;
         gTasks[taskId].func = debug_80C4F48;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_UP)
+    else if (JOY_REPT(DPAD_UP))
     {
         if (gUnknown_Debug_2038A0C[5] > 0)
             gUnknown_Debug_2038A0C[5]--;
@@ -1381,7 +1381,7 @@ void debug_80C4AC4(u8 taskId)
         }
         gTasks[taskId].func = debug_80C4A60;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN && gUnknown_Debug_2038A0C[5] < 9)
+    else if (JOY_REPT(DPAD_DOWN) && gUnknown_Debug_2038A0C[5] < 9)
     {
         if (gUnknown_Debug_2038A0C[5] < 5)
             gUnknown_Debug_2038A0C[5]++;
@@ -1463,7 +1463,7 @@ void debug_80C4E18(u8 taskId)
         gBattleTerrain = gUnknown_Debug_083F814C[r6].data.type3;
         gTasks[taskId].func = debug_80C5158;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_UP)
+    else if (JOY_REPT(DPAD_UP))
     {
         if (gUnknown_Debug_2038A0C[7] > 0)
             gUnknown_Debug_2038A0C[7]--;
@@ -1474,7 +1474,7 @@ void debug_80C4E18(u8 taskId)
         }
         gTasks[taskId].func = debug_80C4DB8;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN && gUnknown_Debug_2038A0C[7] < 8)
+    else if (JOY_REPT(DPAD_DOWN) && gUnknown_Debug_2038A0C[7] < 8)
     {
         if (gUnknown_Debug_2038A0C[7] < 5)
             gUnknown_Debug_2038A0C[7]++;
@@ -1543,12 +1543,12 @@ void debug_80C5098(u8 taskId)
         gSaveBlock2.playerGender = gUnknown_Debug_2038A0C[8];
         gTasks[taskId].func = debug_80C42B8;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_UP && gUnknown_Debug_2038A0C[8] > 0)
+    else if (JOY_REPT(DPAD_UP) && gUnknown_Debug_2038A0C[8] > 0)
     {
         gUnknown_Debug_2038A0C[8]--;
         gTasks[taskId].func = debug_80C5038;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN && gUnknown_Debug_2038A0C[8] < 1)
+    else if (JOY_REPT(DPAD_DOWN) && gUnknown_Debug_2038A0C[8] < 1)
     {
         gUnknown_Debug_2038A0C[8]++;
         gTasks[taskId].func = debug_80C5038;
@@ -1959,12 +1959,12 @@ void debug_80C55E4(u8 taskId)
         gUnknown_Debug_2038A1C->unk64[r7] = gUnknown_Debug_2038A1C->unk164;
         gTasks[taskId].func = debug_80C53C0;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_UP)
+    else if (JOY_REPT(DPAD_UP))
     {
         debug_80C6544(1);
         debug_80C643C();
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPT(DPAD_DOWN))
     {
         debug_80C6544(2);
         debug_80C643C();
@@ -2732,12 +2732,12 @@ void debug_80C6FA8(u8 taskId)
         SetMainCallback2(debug_80C370C);
         gTasks[taskId].func = debug_80C373C;
     }
-    else if (gMain.newAndRepeatedKeys & R_BUTTON)
+    else if (JOY_REPT(R_BUTTON))
     {
         gUnknown_Debug_2038A20->totalPoints = debug_80C3878(0, gUnknown_Debug_2038A20->totalPoints);
         gTasks[taskId].func = debug_80C71FC;
     }
-    else if (gMain.newAndRepeatedKeys & L_BUTTON)
+    else if (JOY_REPT(L_BUTTON))
     {
         gUnknown_Debug_2038A20->totalPoints = debug_80C3878(1, gUnknown_Debug_2038A20->totalPoints);
         gTasks[taskId].func = debug_80C71FC;
@@ -2749,14 +2749,14 @@ void debug_80C6FA8(u8 taskId)
         REG_WIN0V = 0x4167;
         gTasks[taskId].func = debug_80C7294;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT && gUnknown_Debug_2038A20->unk7 < 14)
+    else if (JOY_REPT(DPAD_RIGHT) && gUnknown_Debug_2038A20->unk7 < 14)
     {
         ((u16 *)PLTT)[0x81 + gUnknown_Debug_2038A20->unk7] = 0;
         do; while(0);
         gUnknown_Debug_2038A20->unk7++;
         gTasks[taskId].func = debug_80C6EE8;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_LEFT && gUnknown_Debug_2038A20->unk7 > 0)
+    else if (JOY_REPT(DPAD_LEFT) && gUnknown_Debug_2038A20->unk7 > 0)
     {
         ((u16 *)PLTT)[0x81 + gUnknown_Debug_2038A20->unk7] = 0;
         do; while(0);
@@ -3116,15 +3116,15 @@ void debug_80C7294(u8 taskId)
         CpuCopy16(gUnknown_Debug_2038A20->personality2, gPlttBufferFaded + 0x100 + gUnknown_Debug_2038A20->unk6 * 16, 32);
         gTasks[taskId].func = debug_80C6EE8;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN && gUnknown_Debug_2038A20->unkA < 2)
+    else if (JOY_REPT(DPAD_DOWN) && gUnknown_Debug_2038A20->unkA < 2)
     {
         gUnknown_Debug_2038A20->unkA++;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_UP && gUnknown_Debug_2038A20->unkA > 0)
+    else if (JOY_REPT(DPAD_UP) && gUnknown_Debug_2038A20->unkA > 0)
     {
         gUnknown_Debug_2038A20->unkA--;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    else if (JOY_REPT(DPAD_RIGHT))
     {
         switch (gUnknown_Debug_2038A20->unkA)
         {
@@ -3145,7 +3145,7 @@ void debug_80C7294(u8 taskId)
                 break;
         }
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    else if (JOY_REPT(DPAD_LEFT))
     {
         switch (gUnknown_Debug_2038A20->unkA)
         {
@@ -3340,12 +3340,12 @@ void debug_80C7B14(u8 taskId)
         SetMainCallback2(debug_80C370C);
         gTasks[taskId].func = debug_80C373C;
     }
-    else if (gMain.newAndRepeatedKeys & R_BUTTON)
+    else if (JOY_REPT(R_BUTTON))
     {
         gUnknown_Debug_2038A20->totalPoints = debug_80C38B4(0, gUnknown_Debug_2038A20->totalPoints);
         gTasks[taskId].func = debug_80C7D44;
     }
-    else if (gMain.newAndRepeatedKeys & L_BUTTON)
+    else if (JOY_REPT(L_BUTTON))
     {
         gUnknown_Debug_2038A20->totalPoints = debug_80C38B4(1, gUnknown_Debug_2038A20->totalPoints);
         gTasks[taskId].func = debug_80C7D44;
@@ -3357,14 +3357,14 @@ void debug_80C7B14(u8 taskId)
         REG_WIN0V = 0x4167;
         gTasks[taskId].func = debug_80C7DDC;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT && gUnknown_Debug_2038A20->unk7 < 14)
+    else if (JOY_REPT(DPAD_RIGHT) && gUnknown_Debug_2038A20->unk7 < 14)
     {
         ((u16 *)PLTT)[0x81 + gUnknown_Debug_2038A20->unk7] = 0;
         do; while (0); // this matches the asm here...
         gUnknown_Debug_2038A20->unk7++;
         gTasks[taskId].func = debug_80C7A54;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_LEFT && gUnknown_Debug_2038A20->unk7 > 0)
+    else if (JOY_REPT(DPAD_LEFT) && gUnknown_Debug_2038A20->unk7 > 0)
     {
         ((u16 *)PLTT)[0x81 + gUnknown_Debug_2038A20->unk7] = 0;
         do; while (0); // ... but not here
@@ -3707,15 +3707,15 @@ void debug_80C7DDC(u8 taskId)
         CpuCopy16(gUnknown_Debug_2038A20->personality2, gPlttBufferFaded + 0x100 + gUnknown_Debug_2038A20->unk6 * 16, 32);
         gTasks[taskId].func = debug_80C7A54;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN && gUnknown_Debug_2038A20->unkA < 2)
+    else if (JOY_REPT(DPAD_DOWN) && gUnknown_Debug_2038A20->unkA < 2)
     {
         gUnknown_Debug_2038A20->unkA++;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_UP && gUnknown_Debug_2038A20->unkA > 0)
+    else if (JOY_REPT(DPAD_UP) && gUnknown_Debug_2038A20->unkA > 0)
     {
         gUnknown_Debug_2038A20->unkA--;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    else if (JOY_REPT(DPAD_RIGHT))
     {
         switch (gUnknown_Debug_2038A20->unkA)
         {
@@ -3736,7 +3736,7 @@ void debug_80C7DDC(u8 taskId)
                 break;
         }
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    else if (JOY_REPT(DPAD_LEFT))
     {
         switch (gUnknown_Debug_2038A20->unkA)
         {

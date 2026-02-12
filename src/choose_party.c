@@ -318,7 +318,7 @@ static void sub_812238C(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        if (gMain.newAndRepeatedKeys & 0x40)
+        if (JOY_REPT(0x40))
         {
             if (Menu_GetCursorPos() != 0)
             {
@@ -327,7 +327,7 @@ static void sub_812238C(u8 taskId)
             }
             return;
         }
-        if (gMain.newAndRepeatedKeys & 0x80)
+        if (JOY_REPT(0x80))
         {
             if (Menu_GetCursorPos() != 3)
             {
@@ -836,7 +836,7 @@ static void Task_DaycareStorageMenu8122EAC(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        if (gMain.newAndRepeatedKeys & 0x40)
+        if (JOY_REPT(0x40))
         {
             if (Menu_GetCursorPos() != 0)
             {
@@ -845,7 +845,7 @@ static void Task_DaycareStorageMenu8122EAC(u8 taskId)
             }
             return;
         }
-        if (gMain.newAndRepeatedKeys & 0x80)
+        if (JOY_REPT(0x80))
         {
             if (Menu_GetCursorPos() != 3)
             {

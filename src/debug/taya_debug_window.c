@@ -455,7 +455,7 @@ bool8 debug_sub_8090C88(void)
             eTayaLuckyNumber.digit++;
             break;
         }
-        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        if (JOY_REPT(DPAD_UP))
         {
             u8 r4;
 
@@ -472,7 +472,7 @@ bool8 debug_sub_8090C88(void)
                 break;
             }
         }
-        if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        if (JOY_REPT(DPAD_DOWN))
         {
             u8 r4;
 

@@ -514,7 +514,7 @@ static bool8 MoveYourBase_HandleJoypad_2(void)
 {
     u32 r4 = sMoveYourBase_CursorPos == 0 ? 7 : 10;
 
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         if (sMoveYourBase_CursorPos)
             MoveYourBase_EditOwnerID(1);
@@ -523,7 +523,7 @@ static bool8 MoveYourBase_HandleJoypad_2(void)
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    if (JOY_REPT(DPAD_DOWN))
     {
         if (sMoveYourBase_CursorPos)
             MoveYourBase_EditOwnerID(-1);
@@ -532,7 +532,7 @@ static bool8 MoveYourBase_HandleJoypad_2(void)
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    if (JOY_REPT(DPAD_LEFT))
     {
         if (sMoveYourBase_XCursorPos == 0)
             sMoveYourBase_XCursorPos = r4 - 1;
@@ -542,7 +542,7 @@ static bool8 MoveYourBase_HandleJoypad_2(void)
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    if (JOY_REPT(DPAD_RIGHT))
     {
         if (sMoveYourBase_XCursorPos == r4 - 1)
             sMoveYourBase_XCursorPos = 0;
@@ -1096,7 +1096,7 @@ static bool8 NakaGenderTest_HandleJoypad(void)
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & A_BUTTON)
+    if (JOY_REPT(A_BUTTON))
     {
         if (sNakaGenderTest_CursorPosition < 6)
             NakaGenderTest_AdjustSpecies(sNakaGenderTest_CursorPosition, +1);
@@ -1108,7 +1108,7 @@ static bool8 NakaGenderTest_HandleJoypad(void)
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & B_BUTTON)
+    if (JOY_REPT(B_BUTTON))
     {
         if (sNakaGenderTest_CursorPosition < 6)
             NakaGenderTest_AdjustSpecies(sNakaGenderTest_CursorPosition, -1);
@@ -1120,7 +1120,7 @@ static bool8 NakaGenderTest_HandleJoypad(void)
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & R_BUTTON)
+    if (JOY_REPT(R_BUTTON))
     {
         if (sNakaGenderTest_CursorPosition < 6)
             NakaGenderTest_AdjustSpecies(sNakaGenderTest_CursorPosition, +10);
@@ -1132,7 +1132,7 @@ static bool8 NakaGenderTest_HandleJoypad(void)
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & L_BUTTON)
+    if (JOY_REPT(L_BUTTON))
     {
         if (sNakaGenderTest_CursorPosition < 6)
             NakaGenderTest_AdjustSpecies(sNakaGenderTest_CursorPosition, -10);
@@ -1879,19 +1879,19 @@ static void SetPokeblock_GivePokeblock(void)
 
 static bool8 SetPokeblock_HandleJoypad(void)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         Menu_MoveCursor(-1);
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    if (JOY_REPT(DPAD_DOWN))
     {
         Menu_MoveCursor(+1);
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    if (JOY_REPT(DPAD_LEFT))
     {
         SetPokeblock_AdjustFlavor(Menu_GetCursorPos(), -1);
         SetPokeblock_PrintFlavorValue(Menu_GetCursorPos());
@@ -1899,7 +1899,7 @@ static bool8 SetPokeblock_HandleJoypad(void)
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    if (JOY_REPT(DPAD_RIGHT))
     {
         SetPokeblock_AdjustFlavor(Menu_GetCursorPos(), +1);
         SetPokeblock_PrintFlavorValue(Menu_GetCursorPos());
@@ -2164,19 +2164,19 @@ static bool8 RNGTest_HandleJoypad(void)
     s8 r5 = JOY_HELD(R_BUTTON) ? 100 : 1;
     s8 r4;
 
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         Menu_MoveCursor(-1);
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    if (JOY_REPT(DPAD_DOWN))
     {
         Menu_MoveCursor(+1);
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    if (JOY_REPT(DPAD_LEFT))
     {
         r4 = Menu_GetCursorPos();
         if (r4 == 0)
@@ -2190,7 +2190,7 @@ static bool8 RNGTest_HandleJoypad(void)
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    if (JOY_REPT(DPAD_RIGHT))
     {
         r4 = Menu_GetCursorPos();
         if (r4 == 0)

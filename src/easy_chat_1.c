@@ -1260,14 +1260,14 @@ bool8 sub_80E75D8(void)
         return TRUE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         gEasyChatStruct->unk86--;
         if (gEasyChatStruct->unk86 < 0)
             gEasyChatStruct->unk86 = gEasyChatStruct->unk84;
         pressedUpDown = TRUE;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPT(DPAD_DOWN))
     {
         gEasyChatStruct->unk86++;
         if (gEasyChatStruct->unk86 > gEasyChatStruct->unk84)
@@ -1300,7 +1300,7 @@ bool8 sub_80E75D8(void)
     }
     else
     {
-        if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+        if (JOY_REPT(DPAD_LEFT))
         {
             if (--gEasyChatStruct->unk85 < 0)
             {
@@ -1318,7 +1318,7 @@ bool8 sub_80E75D8(void)
             }
             return TRUE;
         }
-        if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+        if (JOY_REPT(DPAD_RIGHT))
         {
             if (gEasyChatStruct->unk86 == gEasyChatStruct->unk84)
             {
@@ -1346,14 +1346,14 @@ bool8 sub_80E77C8(void)
 
     if (gEasyChatStruct->unk1B7 != 0)
     {
-        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        if (JOY_REPT(DPAD_UP))
         {
             gEasyChatStruct->unk1A8--;
             if (gEasyChatStruct->unk1A8 < 1)
                 gEasyChatStruct->unk1A8 = 3;
             return TRUE;
         }
-        else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        else if (JOY_REPT(DPAD_DOWN))
         {
             gEasyChatStruct->unk1A8++;
             if (gEasyChatStruct->unk1A8 > 3)
@@ -1367,14 +1367,14 @@ bool8 sub_80E77C8(void)
         {
             pressedUpDown = FALSE;
 
-            if (gMain.newAndRepeatedKeys & DPAD_UP)
+            if (JOY_REPT(DPAD_UP))
             {
                 gEasyChatStruct->unk1A8--;
                 if (gEasyChatStruct->unk1A8 < 0)
                     gEasyChatStruct->unk1A8 = 3;
                 pressedUpDown = TRUE;
             }
-            else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+            else if (JOY_REPT(DPAD_DOWN))
             {
                 gEasyChatStruct->unk1A8++;
                 if (gEasyChatStruct->unk1A8 > 3)
@@ -1393,7 +1393,7 @@ bool8 sub_80E77C8(void)
             pressedUpDown = FALSE;
             gEasyChatStruct->unk1C0 = 0;
 
-            if (gMain.newAndRepeatedKeys & DPAD_UP)
+            if (JOY_REPT(DPAD_UP))
             {
                 if (gEasyChatStruct->unk1A8 == 0)
                     return FALSE;
@@ -1402,7 +1402,7 @@ bool8 sub_80E77C8(void)
                     gEasyChatStruct->unk1C0 = -1;
                 pressedUpDown = TRUE;
             }
-            else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+            else if (JOY_REPT(DPAD_DOWN))
             {
                 if (gEasyChatStruct->unk1A8 >= gEasyChatStruct->unk1B6 - 1)
                     return FALSE;
@@ -1424,7 +1424,7 @@ bool8 sub_80E77C8(void)
         }
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    if (JOY_REPT(DPAD_LEFT))
     {
         if (gEasyChatStruct->unk1A9 != 0)
             gEasyChatStruct->unk1A9--;
@@ -1432,7 +1432,7 @@ bool8 sub_80E77C8(void)
             gEasyChatStruct->unk1A9 = gEasyChatStruct->unk1AA[gEasyChatStruct->unk1A8];
         pressedLeftRight = TRUE;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    else if (JOY_REPT(DPAD_RIGHT))
     {
         if (gEasyChatStruct->unk1B7 != 0
          || gEasyChatStruct->unk1A9 == gEasyChatStruct->unk1AA[gEasyChatStruct->unk1A8])
@@ -1487,7 +1487,7 @@ bool8 sub_80E7B40(void)
     bool8 pressedUpDown = FALSE;
 
     gEasyChatStruct->unk1C0 = 0;
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         if (gEasyChatStruct->unk99A4 == 0)
             return FALSE;
@@ -1499,7 +1499,7 @@ bool8 sub_80E7B40(void)
         }
         pressedUpDown = TRUE;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPT(DPAD_DOWN))
     {
         if (gEasyChatStruct->unk99A4 >= gEasyChatStruct->unk9A28 - 1)
             return FALSE;
@@ -1518,14 +1518,14 @@ bool8 sub_80E7B40(void)
         return TRUE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    if (JOY_REPT(DPAD_LEFT))
     {
         gEasyChatStruct->unk99A5--;
         if (gEasyChatStruct->unk99A5 < 0)
             gEasyChatStruct->unk99A5 = gEasyChatStruct->unk99A6[gEasyChatStruct->unk99A4] - 1;
         return TRUE;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    else if (JOY_REPT(DPAD_RIGHT))
     {
         gEasyChatStruct->unk99A5++;
         if (gEasyChatStruct->unk99A5 >= gEasyChatStruct->unk99A6[gEasyChatStruct->unk99A4])

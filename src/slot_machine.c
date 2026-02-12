@@ -5859,28 +5859,28 @@ static void debug_sub_811B654(u8 taskId)
         DestroyTask(taskId);
         break;
     case 3:
-        if (gMain.newAndRepeatedKeys & 0x80)
+        if (JOY_REPT(0x80))
         {
             sSlotMachine->coins += 100;
             if (sSlotMachine->coins > 9999)
                 sSlotMachine->coins = 9999;
             break;
         }
-        if (gMain.newAndRepeatedKeys & 0x40)
+        if (JOY_REPT(0x40))
         {
             sSlotMachine->coins -= 100;
             if (sSlotMachine->coins <= 0)
                 sSlotMachine->coins = 9999;
             break;
         }
-        if (gMain.newAndRepeatedKeys & 0x20)
+        if (JOY_REPT(0x20))
         {
             sSlotMachine->coins -= 1000;
             if (sSlotMachine->coins <= 0)
                 sSlotMachine->coins = 9999;
             break;
         }
-        if (gMain.newAndRepeatedKeys & 0x10)
+        if (JOY_REPT(0x10))
         {
             sSlotMachine->coins += 1000;
             if (sSlotMachine->coins > 9999)

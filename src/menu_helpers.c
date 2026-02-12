@@ -241,11 +241,11 @@ u8 sub_80F92BC(void)
 {
     if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
     {
-        if (gMain.newAndRepeatedKeys & L_BUTTON)
+        if (JOY_REPT(L_BUTTON))
         {
             return 1;
         }
-        if (gMain.newAndRepeatedKeys & R_BUTTON)
+        if (JOY_REPT(R_BUTTON))
         {
             return 2;
         }

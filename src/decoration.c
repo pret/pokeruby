@@ -1596,11 +1596,11 @@ void sub_80FE604(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        if (JOY_REPT(DPAD_UP))
         {
             PlaySE(SE_SELECT);
             Menu_MoveCursor(-1);
-        } else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        } else if (JOY_REPT(DPAD_DOWN))
         {
             PlaySE(SE_SELECT);
             Menu_MoveCursor(1);
@@ -1737,7 +1737,7 @@ void sub_80FE948(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+        if (JOY_REPT(DPAD_ANY) == DPAD_UP)
         {
             if (gUnknown_020388F2 != 0)
             {
@@ -1747,7 +1747,7 @@ void sub_80FE948(u8 taskId)
                 sub_80FE894(taskId, 0, -1);
             }
         }
-        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
+        if (JOY_REPT(DPAD_ANY) == DPAD_DOWN)
         {
             if (gUnknown_020388F2 != gUnknown_020388F3)
             {

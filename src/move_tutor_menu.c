@@ -826,7 +826,7 @@ static void MoveCursorPos(s8 delta)
 
 static void HandleMoveTutorMenuInput(void)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         if (sMoveTutorMenu->menuSelection != 0)
         {
@@ -844,7 +844,7 @@ static void HandleMoveTutorMenuInput(void)
             }
         }
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPT(DPAD_DOWN))
     {
         if (sMoveTutorMenu->menuSelection < sMoveTutorMenu->numMenuChoices - 1)
         {

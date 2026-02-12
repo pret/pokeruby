@@ -279,13 +279,13 @@ static void sub_8089D94(u8 taskID)
 {
     if (!gPaletteFade.active)
     {
-        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+        if (JOY_REPT(DPAD_ANY) == DPAD_UP)
         {
             PlaySE(SE_SELECT);
             sPokeMenuCursorPos = Menu_MoveCursor(-1);
             sub_808B5B4(taskID);
         }
-        else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
+        else if (JOY_REPT(DPAD_ANY) == DPAD_DOWN)
         {
             PlaySE(SE_SELECT);
             sPokeMenuCursorPos = Menu_MoveCursor(1);

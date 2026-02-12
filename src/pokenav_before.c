@@ -2836,13 +2836,13 @@ void sub_80EE06C()
         gPokenavStructPtr->unk304++;
         break;
     case 1:
-        if ((gMain.newAndRepeatedKeys & 0x40) && (gPokenavStructPtr->unk87DC))
+        if (JOY_REPT(0x40) && (gPokenavStructPtr->unk87DC))
         {
 			PlaySE(SE_SELECT);
 			sub_80F6A4C(-1);
 			gPokenavStructPtr->unk304++;
         }
-		else if ((gMain.newAndRepeatedKeys & 0x80) && gPokenavStructPtr->unk87DC < gPokenavStructPtr->unk8774)
+		else if (JOY_REPT(0x80) && gPokenavStructPtr->unk87DC < gPokenavStructPtr->unk8774)
 		{
             PlaySE(SE_SELECT);
             sub_80F6A4C(1);

@@ -584,13 +584,13 @@ static void Task_HandlePopupMenuInput(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        if (JOY_REPT(DPAD_UP))
         {
             PlaySE(SE_SELECT);
             Menu_MoveCursor(-1);
             return;
         }
-        if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        if (JOY_REPT(DPAD_DOWN))
         {
             PlaySE(SE_SELECT);
             Menu_MoveCursor(1);

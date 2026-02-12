@@ -902,7 +902,7 @@ void sub_80BC824(u8 taskId)
 {
     s16 *taskData = gTasks[taskId].data;
 
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         if (taskData[1])
         {
@@ -916,7 +916,7 @@ void sub_80BC824(u8 taskId)
             sub_80BC6B0(taskId);
         }
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPT(DPAD_DOWN))
     {
         if (taskData[1] == taskData[3])
         {
@@ -991,7 +991,7 @@ void sub_80BC980(u8 taskId)
 
 void sub_80BC9E4(u8 taskId)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         if (Menu_GetCursorPos())
         {
@@ -999,7 +999,7 @@ void sub_80BC9E4(u8 taskId)
             Menu_MoveCursor(-1);
         }
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPT(DPAD_DOWN))
     {
         if (Menu_GetCursorPos() != 1)
         {

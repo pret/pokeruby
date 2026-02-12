@@ -253,9 +253,9 @@ static void sub_8146480(u8 taskid)
 {
     if (!gPaletteFade.active)
     {
-        if ((gMain.newAndRepeatedKeys & (DPAD_RIGHT | DPAD_LEFT | DPAD_UP | DPAD_DOWN)) == DPAD_UP)
+        if (JOY_REPT(DPAD_ANY) == DPAD_UP)
             sub_81466E8(taskid, -1);
-        if ((gMain.newAndRepeatedKeys & (DPAD_RIGHT | DPAD_LEFT | DPAD_UP | DPAD_DOWN)) == DPAD_DOWN)
+        if (JOY_REPT(DPAD_ANY) == DPAD_DOWN)
             sub_81466E8(taskid, 1);
         if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
             sub_8146440(taskid);
