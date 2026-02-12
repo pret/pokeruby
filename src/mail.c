@@ -716,6 +716,7 @@ void debug_sub_810C990(u8 taskId)
 void debug_sub_810CA7C(u8 taskId)
 {
     if (JOY_NEW(DPAD_ANY))
+    {
         gSpecialVar_0x8004 ^= 1;
         Menu_PrintText(_8411560[gSpecialVar_0x8004], 2, 2);
     }
