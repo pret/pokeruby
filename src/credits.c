@@ -436,7 +436,7 @@ static void CB2_Credits(void)
     BuildOamBuffer();
     UpdatePaletteFade();
 
-    if ((gMain.heldKeys & B_BUTTON)
+    if (JOY_HELD(B_BUTTON)
      && gHasHallOfFameRecords != 0
      && gTasks[sSavedTaskId].func == Task_CreditsMain)
     {

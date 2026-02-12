@@ -967,7 +967,7 @@ void BattleMainCB2(void)
     BuildOamBuffer();
 
 #if DEBUG
-    if ((gMain.heldKeys & (R_BUTTON | SELECT_BUTTON)) == ((R_BUTTON | SELECT_BUTTON)))
+    if (JOY_HELD(R_BUTTON | SELECT_BUTTON) == ((R_BUTTON | SELECT_BUTTON)))
     {
         gSpecialVar_Result = gBattleOutcome = 1;
         gMain.inBattle = FALSE;

@@ -745,9 +745,9 @@ static void Task_SetClock2(u8 taskId)
         else
         {
             gTasks[taskId].tMvmtDir = JOY_NEW(A_BUTTON);
-            if (gMain.heldKeys & DPAD_LEFT)
+            if (JOY_HELD(DPAD_LEFT))
                 gTasks[taskId].tMvmtDir = MVMT_BACKWARD;
-            if (gMain.heldKeys & DPAD_RIGHT)
+            if (JOY_HELD(DPAD_RIGHT))
                 gTasks[taskId].tMvmtDir = MVMT_FORWARD;
             if (gTasks[taskId].tMvmtDir)
             {

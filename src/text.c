@@ -2429,7 +2429,7 @@ static u8 UpdateWindowText(struct Window *win)
     case WIN_STATE_CHAR_DELAY:
         // Allow the player to speed up text by holding a button
         if (PlayerCanInterruptDelay(win)
-         && (gMain.heldKeys & (A_BUTTON | B_BUTTON))
+         && JOY_HELD(A_BUTTON | B_BUTTON)
          && gMain.watchedKeysPressed == TRUE)
         {
             win->delayCounter = 0;

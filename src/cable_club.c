@@ -376,12 +376,12 @@ static void sub_80830E4(u8 taskId)
             ShowFieldAutoScrollMessage(gUnknown_081A4932);
             gTasks[taskId].func = sub_8082FEC;
         }
-        else if (gMain.heldKeys & B_BUTTON)
+        else if (JOY_HELD(B_BUTTON))
         {
             ShowFieldAutoScrollMessage(gUnknown_081A4932);
             gTasks[taskId].func = sub_8082FEC;
         }
-        else if (gMain.heldKeys & A_BUTTON)
+        else if (JOY_HELD(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             sub_8007F4C();

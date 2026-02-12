@@ -310,7 +310,7 @@ bool8 Task_ProcessSoundCheckMenuInput(u8 taskId)
         }
         return TRUE;
     }
-    else if (gMain.heldKeys & SELECT_BUTTON)
+    else if (JOY_HELD(SELECT_BUTTON))
     {
         gUnknown_020387B0 = 1;
     }

@@ -825,7 +825,7 @@ void debug_80C3D2C(u8 taskId)
     {
         if (gTasks[taskId].data[8])
         {
-            if (gMain.heldKeys & R_BUTTON)
+            if (JOY_HELD(R_BUTTON))
                 gTasks[taskId].data[6] += 16;
             else
                 gTasks[taskId].data[6] += 1;
@@ -834,7 +834,7 @@ void debug_80C3D2C(u8 taskId)
         }
         else
         {
-            if (gMain.heldKeys & R_BUTTON)
+            if (JOY_HELD(R_BUTTON))
                 gTasks[taskId].data[7] += 16;
             else
                 gTasks[taskId].data[7] += 1;
@@ -846,7 +846,7 @@ void debug_80C3D2C(u8 taskId)
     {
         if (gTasks[taskId].data[8])
         {
-            if (gMain.heldKeys & R_BUTTON)
+            if (JOY_HELD(R_BUTTON))
                 gTasks[taskId].data[6] -= 16;
             else
                 gTasks[taskId].data[6] -= 1;
@@ -855,7 +855,7 @@ void debug_80C3D2C(u8 taskId)
         }
         else
         {
-            if (gMain.heldKeys & R_BUTTON)
+            if (JOY_HELD(R_BUTTON))
                 gTasks[taskId].data[7] -= 16;
             else
                 gTasks[taskId].data[7] -= 1;

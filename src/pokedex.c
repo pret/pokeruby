@@ -2397,10 +2397,10 @@ static u16 TryDoPokedexScroll(u16 a, u16 b)
     u16 r6;
     u8 r10 = 0;
 
-    if (!((gMain.heldKeys & 0x40) && (a > 0)))
+    if (!(JOY_HELD(DPAD_UP) && (a > 0)))
     {
         //_0808E4B6
-        if (!((gMain.heldKeys & 0x80) && (a < gPokedexView->pokemonListCount - 1)))
+        if (!(JOY_HELD(DPAD_DOWN) && (a < gPokedexView->pokemonListCount - 1)))
         //_0808E4CE
         {
             if (JOY_NEW(DPAD_LEFT) && (a > 0))

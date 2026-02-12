@@ -1298,7 +1298,7 @@ void debug_sub_8058C00(void)
     ScriptContext1_Init();
     ScriptContext2_Disable();
 
-    if (gMain.heldKeys & R_BUTTON)
+    if (JOY_HELD(R_BUTTON))
         gFieldCallback = ExecuteTruckSequence;
     else
         gFieldCallback = sub_8080B60;
@@ -1467,7 +1467,7 @@ void CB2_ContinueSavedGame(void)
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
 #if DEBUG
-    if (gMain.heldKeys & R_BUTTON)
+    if (JOY_HELD(R_BUTTON))
         gUnknown_020297ED = TRUE;
 #endif
     ResetSafariZoneFlag_();
@@ -2075,19 +2075,19 @@ void sub_8055280(u16 a1)
 
 u16 sub_80552B0(u32 a1)
 {
-    if (gMain.heldKeys & DPAD_UP)
+    if (JOY_HELD(DPAD_UP))
     {
         return 19;
     }
-    else if (gMain.heldKeys & DPAD_DOWN)
+    else if (JOY_HELD(DPAD_DOWN))
     {
         return 18;
     }
-    else if (gMain.heldKeys & DPAD_LEFT)
+    else if (JOY_HELD(DPAD_LEFT))
     {
         return 20;
     }
-    else if (gMain.heldKeys & DPAD_RIGHT)
+    else if (JOY_HELD(DPAD_RIGHT))
     {
         return 21;
     }

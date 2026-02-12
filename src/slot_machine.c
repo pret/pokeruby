@@ -672,7 +672,7 @@ static bool8 sub_8101E3C(struct Task *task)
 #if DEBUG
     if (unk_debug_bss_1_1 != 0 && unk_debug_bss_1_4 != 0)
     {
-        if (sSlotMachine->coins <= 3 || (gMain.heldKeys & B_BUTTON))
+        if (sSlotMachine->coins <= 3 || JOY_HELD(B_BUTTON))
         {
             unk_debug_bss_1_4 = 0;
         }
@@ -1543,7 +1543,7 @@ static bool8 sub_8102AD0(struct Task *task)
         if (sSlotMachine->coins < 9999)
             sSlotMachine->coins++;
         task->data[1] = 8;
-        if (gMain.heldKeys & A_BUTTON)
+        if (JOY_HELD(A_BUTTON))
             task->data[1] = 4;
     }
     if (IsFanfareTaskInactive() && JOY_NEW(START_BUTTON))

@@ -666,7 +666,7 @@ static void SaveDialogStartTimeout(void)
 static bool8 SaveDialogCheckForTimeoutOrKeypress(void)
 {
     saveDialogTimer--;
-    if (gMain.heldKeys & A_BUTTON)
+    if (JOY_HELD(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         return TRUE;
@@ -680,7 +680,7 @@ static bool8 SaveDialogCheckForTimeoutAndKeypress(void)
 {
     if (saveDialogTimer != 0)
         saveDialogTimer--;
-    else if (gMain.heldKeys & A_BUTTON)
+    else if (JOY_HELD(A_BUTTON))
         return TRUE;
     return FALSE;
 }

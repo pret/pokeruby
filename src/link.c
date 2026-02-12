@@ -405,7 +405,7 @@ static void LinkTestProcessKeyInput(void)
 {
     if (JOY_NEW(A_BUTTON))
         gShouldAdvanceLinkState = 1;
-    if (gMain.heldKeys & B_BUTTON)
+    if (JOY_HELD(B_BUTTON))
         InitBlockSend(gSharedMem + 0x4000, 0x2004);
     if (JOY_NEW(L_BUTTON))
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(2, 0, 0));

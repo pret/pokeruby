@@ -2478,7 +2478,7 @@ void sub_80ED858(void)
         }
         break;
     case 4:
-        if (({gMain.heldKeys & DPAD_UP;}))
+        if (JOY_HELD(DPAD_UP))
         {
             if (gPokenavStructPtr->unk87CB && (
                 gPokenavStructPtr->unk76AA == 0
@@ -2492,7 +2492,7 @@ void sub_80ED858(void)
                 break;
             }
         }
-        if (({gMain.heldKeys & DPAD_DOWN;}))
+        if (JOY_HELD(DPAD_DOWN))
         {
             if (gPokenavStructPtr->unk87CB && (
                 gPokenavStructPtr->unk76AA == 0
@@ -3144,13 +3144,13 @@ void sub_80EE658()
 			gPokenavStructPtr->unk304++;
         break;
     case 8:
-        if ((gMain.heldKeys & 0x40) && gPokenavStructPtr->unk87DC)
+        if (JOY_HELD(0x40) && gPokenavStructPtr->unk87DC)
         {
 			PlaySE(SE_SELECT);
 			sub_80F708C(-1);
 			gPokenavStructPtr->unk304 = 0x10;
         }
-        else if ((gMain.heldKeys & 0x80) && gPokenavStructPtr->unk87DC < gPokenavStructPtr->unk8774)
+        else if (JOY_HELD(0x80) && gPokenavStructPtr->unk87DC < gPokenavStructPtr->unk8774)
         {
 			PlaySE(SE_SELECT);
 			sub_80F708C(1);

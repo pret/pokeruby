@@ -2161,7 +2161,7 @@ static void RNGTest_AdjustAndPrintNumAtLine(u16 * a0, s8 a1, u8 a2)
 
 static bool8 RNGTest_HandleJoypad(void)
 {
-    s8 r5 = gMain.heldKeys & R_BUTTON ? 100 : 1;
+    s8 r5 = JOY_HELD(R_BUTTON) ? 100 : 1;
     s8 r4;
 
     if (gMain.newAndRepeatedKeys & DPAD_UP)

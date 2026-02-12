@@ -422,7 +422,7 @@ void debug_sub_815D1D8(void)
     case 1:
         if (!gPaletteFade.active)
         {
-            if (gMain.heldKeys & 0x100)
+            if (JOY_HELD(R_BUTTON))
                 gUnknown_Debug_30030E0++;
             MenuPrintMessage(Str_843DA70, 4, 15);
             gMain.state++;

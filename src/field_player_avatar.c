@@ -330,7 +330,7 @@ static void PlayerAllowForcedMovementIfMovingSameDirection(void)
 static bool8 TryDoMetatileBehaviorForcedMovement(void)
 {
 #if DEBUG
-    if (gUnknown_020297ED != 0 && (gMain.heldKeys & R_BUTTON))
+    if (gUnknown_020297ED != 0 && JOY_HELD(R_BUTTON))
         return 0;
 #endif
     return sForcedMovementFuncs[GetForcedMovementByMetatileBehavior()]();
@@ -1826,7 +1826,7 @@ static void AlignFishingAnimationFrames(void)
 
 u8 debug_sub_805F2B0(u8 a)
 {
-    if (gMain.heldKeys & 0x100)
+    if (JOY_HELD(R_BUTTON))
         return debug_sub_805F2DC(a);
     else
         return 0;

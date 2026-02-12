@@ -374,14 +374,14 @@ static void sub_8136638(void)
     switch (gUnknown_02039304->unk50)
     {
         case 0:
-            if (gMain.heldKeys & DPAD_UP)
+            if (JOY_HELD(DPAD_UP))
             {
                 PlaySE(SE_SELECT);
                 sub_80F5060(TRUE);
                 move_anim_execute();
                 gUnknown_02039304->unk50 = 1;
             }
-            else if (gMain.heldKeys & DPAD_DOWN)
+            else if (JOY_HELD(DPAD_DOWN))
             {
                 PlaySE(SE_SELECT);
                 sub_80F5060(FALSE);

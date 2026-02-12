@@ -2688,7 +2688,7 @@ bool8 sub_810038C(u8 taskId)
 
 bool8 sub_8100430(void)
 {
-    if ((gMain.heldKeys & DPAD_ANY) != DPAD_UP && (gMain.heldKeys & DPAD_ANY) != DPAD_DOWN && (gMain.heldKeys & DPAD_ANY) != DPAD_LEFT && (gMain.heldKeys & DPAD_ANY) != DPAD_RIGHT)
+    if (JOY_HELD(DPAD_ANY) != DPAD_UP && JOY_HELD(DPAD_ANY) != DPAD_DOWN && JOY_HELD(DPAD_ANY) != DPAD_LEFT && JOY_HELD(DPAD_ANY) != DPAD_RIGHT)
     {
         return FALSE;
     }
@@ -2715,28 +2715,28 @@ void sub_8100494(u8 taskId)
             gUnknown_083EC96C[gTasks[taskId].data[12]].noFunc(taskId);
             return;
         }
-        if ((gMain.heldKeys & DPAD_ANY) == DPAD_UP)
+        if (JOY_HELD(DPAD_ANY) == DPAD_UP)
         {
             gUnknown_020391AA = DIR_SOUTH;
             gSprites[gUnknown_020391A8].data[2] =  0;
             gSprites[gUnknown_020391A8].data[3] = -2;
             gTasks[taskId].data[1]--;
         }
-        if ((gMain.heldKeys & DPAD_ANY) == DPAD_DOWN)
+        if (JOY_HELD(DPAD_ANY) == DPAD_DOWN)
         {
             gUnknown_020391AA = DIR_NORTH;
             gSprites[gUnknown_020391A8].data[2] =  0;
             gSprites[gUnknown_020391A8].data[3] =  2;
             gTasks[taskId].data[1]++;
         }
-        if ((gMain.heldKeys & DPAD_ANY) == DPAD_LEFT)
+        if (JOY_HELD(DPAD_ANY) == DPAD_LEFT)
         {
             gUnknown_020391AA = DIR_WEST;
             gSprites[gUnknown_020391A8].data[2] = -2;
             gSprites[gUnknown_020391A8].data[3] =  0;
             gTasks[taskId].data[0]--;
         }
-        if ((gMain.heldKeys & DPAD_ANY) == DPAD_RIGHT)
+        if (JOY_HELD(DPAD_ANY) == DPAD_RIGHT)
         {
             gUnknown_020391AA = DIR_EAST;
             gSprites[gUnknown_020391A8].data[2] =  2;
