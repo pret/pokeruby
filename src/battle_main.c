@@ -2779,28 +2779,28 @@ void debug_sub_8012D10(u8 taskId)
         sub_802E3E4(gTasks[taskId].data[2], 0);
         break;
     case 1:
-        if (gMain.newKeys & DPAD_UP)
+        if (JOY_NEW(DPAD_UP))
         {
             PlaySE(SE_SELECT);
             nullsub_8(gTasks[taskId].data[2]);
             gTasks[taskId].data[2] &= ~2;
             sub_802E3E4(gTasks[taskId].data[2], 0);
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        else if (JOY_NEW(DPAD_DOWN))
         {
             PlaySE(SE_SELECT);
             nullsub_8(gTasks[taskId].data[2]);
             gTasks[taskId].data[2] |= 2;
             sub_802E3E4(gTasks[taskId].data[2], 0);
         }
-        else if (gMain.newKeys & DPAD_LEFT)
+        else if (JOY_NEW(DPAD_LEFT))
         {
             PlaySE(SE_SELECT);
             nullsub_8(gTasks[taskId].data[2]);
             gTasks[taskId].data[2] &= ~1;
             sub_802E3E4(gTasks[taskId].data[2], 0);
         }
-        else if (gMain.newKeys & DPAD_RIGHT)
+        else if (JOY_NEW(DPAD_RIGHT))
         {
             PlaySE(SE_SELECT);
             nullsub_8(gTasks[taskId].data[2]);
@@ -2930,26 +2930,26 @@ void debug_sub_8012D10(u8 taskId)
         }
         break;
     case 2:
-        if (gMain.newKeys & DPAD_UP)
+        if (JOY_NEW(DPAD_UP))
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B4C(gTasks[taskId].data[3]);
             gTasks[taskId].data[3] = 0;
             debug_sub_8012B2C(0);
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        else if (JOY_NEW(DPAD_DOWN))
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B4C(gTasks[taskId].data[3]);
             gTasks[taskId].data[3] = 1;
             debug_sub_8012B2C(1);
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             debug_sub_8012C08(taskId, gTasks[taskId].data[3]);
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             asm("");
@@ -2957,56 +2957,56 @@ void debug_sub_8012D10(u8 taskId)
         }
         return;
     case 3:
-        if (gMain.newKeys & DPAD_UP)
+        if (JOY_NEW(DPAD_UP))
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B4C(gTasks[taskId].data[3]);
             gTasks[taskId].data[3] = 0;
             debug_sub_8012B2C(0);
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        else if (JOY_NEW(DPAD_DOWN))
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B4C(gTasks[taskId].data[3]);
             gTasks[taskId].data[3] = 1;
             debug_sub_8012B2C(1);
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             if (gTasks[taskId].data[3] == 0)
                 debug_sub_80132C8(31, gUnknown_Debug_2023B62, 411);
             debug_sub_8012B70(taskId, 1);
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B70(taskId, 1);
         }
         break;
     case 4:
-        if (gMain.newKeys & DPAD_UP)
+        if (JOY_NEW(DPAD_UP))
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B4C(gTasks[taskId].data[3]);
             gTasks[taskId].data[3] = 0;
             debug_sub_8012B2C(0);
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        else if (JOY_NEW(DPAD_DOWN))
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B4C(gTasks[taskId].data[3]);
             gTasks[taskId].data[3] = 1;
             debug_sub_8012B2C(1);
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             if (gTasks[taskId].data[3] == 0)
                 debug_sub_8013294(31, gUnknown_Debug_2023B62, 411);
             debug_sub_8012B70(taskId, 1);
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B70(taskId, 1);

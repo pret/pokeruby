@@ -306,7 +306,7 @@ bool8 debug_sub_808F5D8(void)
 
 bool8 debug_sub_808F648(void)
 {
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         Menu_EraseWindowRect(10, 0, 29, 13);
         gDebug_03000726 ^= 1;
@@ -415,7 +415,7 @@ void debug_sub_808F8CC(void)
 bool8 debug_sub_808F93C(void)
 {
     bool8 updateDisplay = FALSE;
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         gDebug_03000725++;
         if (gDebug_03000725 == 24)
@@ -423,7 +423,7 @@ bool8 debug_sub_808F93C(void)
         PlaySE(SE_SELECT);
         updateDisplay = TRUE;
     }
-    if (gMain.newKeys & DPAD_DOWN)
+    if (JOY_NEW(DPAD_DOWN))
     {
         if (gDebug_03000725 == 0)
             gDebug_03000725 = 24;
@@ -431,7 +431,7 @@ bool8 debug_sub_808F93C(void)
         PlaySE(SE_SELECT);
         updateDisplay = TRUE;
     }
-    if (gMain.newKeys & DPAD_RIGHT)
+    if (JOY_NEW(DPAD_RIGHT))
     {
         gDebug_03000724++;
         if (gDebug_03000724 == 12)
@@ -439,7 +439,7 @@ bool8 debug_sub_808F93C(void)
         PlaySE(SE_SELECT);
         updateDisplay = TRUE;
     }
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         if (gDebug_03000724 == 0)
             gDebug_03000724 = 12;
@@ -455,12 +455,12 @@ bool8 debug_sub_808F93C(void)
         ConvertIntToDecimalStringN(gStringVar1, gDebug_03000725, STR_CONV_MODE_LEFT_ALIGN, 2);
         Menu_PrintText(gStringVar1, 23, 1);
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_PIN);
         debug_sub_808FA88(gDebug_03000725, gUnknown_Debug_083C4ABD[gDebug_03000724]);
     }
-    if (gMain.newKeys & (B_BUTTON | START_BUTTON))
+    if (JOY_NEW(B_BUTTON | START_BUTTON))
     {
         sub_80BF588(gSaveBlock1.tvShows);
         CloseMenu();
@@ -764,7 +764,7 @@ bool8 debug_sub_808FF3C(void)
 {
     bool8 updateDisplay = FALSE;
 
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         gDebug_03000725++;
         if (gDebug_03000725 == 16)
@@ -773,7 +773,7 @@ bool8 debug_sub_808FF3C(void)
         updateDisplay = TRUE;
     }
 
-    if (gMain.newKeys & DPAD_DOWN)
+    if (JOY_NEW(DPAD_DOWN))
     {
         if (gDebug_03000725 == 0)
             gDebug_03000725 = 16;
@@ -782,7 +782,7 @@ bool8 debug_sub_808FF3C(void)
         updateDisplay = TRUE;
     }
 
-    if (gMain.newKeys & DPAD_RIGHT)
+    if (JOY_NEW(DPAD_RIGHT))
     {
         gDebug_03000724++;
         if (gDebug_03000724 == 3)
@@ -791,7 +791,7 @@ bool8 debug_sub_808FF3C(void)
         updateDisplay = TRUE;
     }
 
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         if (gDebug_03000724 == 0)
             gDebug_03000724 = 3;
@@ -809,13 +809,13 @@ bool8 debug_sub_808FF3C(void)
         Menu_PrintText(gStringVar1, 23, 1);
     }
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_PIN);
         debug_sub_8090080(gDebug_03000725, gUnknown_Debug_083C4B20[gDebug_03000724]);
     }
 
-    if (gMain.newKeys & (B_BUTTON | START_BUTTON))
+    if (JOY_NEW(B_BUTTON | START_BUTTON))
     {
         sub_80BEC40();
         CloseMenu();
@@ -963,7 +963,7 @@ bool8 debug_sub_8090238(void)
 
 bool8 debug_sub_8090278(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         CloseMenu();
         return TRUE;

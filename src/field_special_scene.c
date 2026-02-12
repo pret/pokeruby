@@ -306,7 +306,7 @@ void Task_HandlePorthole(u8 taskId)
         }
         break;
     case IDLE_CHECK: // idle and move.
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
             data[1] = 1;
         if (!ScriptMovement_IsObjectMovementFinished(LOCALID_PLAYER, location->mapNum, location->mapGroup))
             return;

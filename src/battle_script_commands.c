@@ -5294,21 +5294,21 @@ static void atk5A_yesnoboxlearnmove(void)
         sub_802BC6C();
         break;
     case 1:
-        if (gMain.newKeys & DPAD_UP && gBattleCommunication[1] != 0)
+        if (JOY_NEW(DPAD_UP) && gBattleCommunication[1] != 0)
         {
             PlaySE(SE_SELECT);
             nullsub_6();
             gBattleCommunication[1] = 0;
             sub_802BC6C();
         }
-        if (gMain.newKeys & DPAD_DOWN && gBattleCommunication[1] == 0)
+        if (JOY_NEW(DPAD_DOWN) && gBattleCommunication[1] == 0)
         {
             PlaySE(SE_SELECT);
             nullsub_6();
             gBattleCommunication[1] = 1;
             sub_802BC6C();
         }
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             if (gBattleCommunication[1] == 0)
@@ -5320,7 +5320,7 @@ static void atk5A_yesnoboxlearnmove(void)
             }
             goto state_tracker_4;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
           state_tracker_4:
@@ -5406,21 +5406,21 @@ static void atk5B_yesnoboxstoplearningmove(void)
         sub_802BC6C();
         break;
     case 1:
-        if (gMain.newKeys & DPAD_UP && gBattleCommunication[1] != 0)
+        if (JOY_NEW(DPAD_UP) && gBattleCommunication[1] != 0)
         {
             PlaySE(SE_SELECT);
             nullsub_6();
             gBattleCommunication[1] = 0;
             sub_802BC6C();
         }
-        if (gMain.newKeys & DPAD_DOWN && gBattleCommunication[1] == 0)
+        if (JOY_NEW(DPAD_DOWN) && gBattleCommunication[1] == 0)
         {
             PlaySE(SE_SELECT);
             nullsub_6();
             gBattleCommunication[1] = 1;
             sub_802BC6C();
         }
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             if (gBattleCommunication[1] != 0)
@@ -5429,7 +5429,7 @@ static void atk5B_yesnoboxstoplearningmove(void)
                 gBattlescriptCurrInstr += 5;
             sub_8023AD8();
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
@@ -5664,28 +5664,28 @@ static void atk67_yesnobox(void)
         sub_802BC6C();
         break;
     case 1:
-        if (gMain.newKeys & DPAD_UP && gBattleCommunication[1] != 0)
+        if (JOY_NEW(DPAD_UP) && gBattleCommunication[1] != 0)
         {
             PlaySE(SE_SELECT);
             nullsub_6();
             gBattleCommunication[1] = 0;
             sub_802BC6C();
         }
-        if (gMain.newKeys & DPAD_DOWN && gBattleCommunication[1] == 0)
+        if (JOY_NEW(DPAD_DOWN) && gBattleCommunication[1] == 0)
         {
             PlaySE(SE_SELECT);
             nullsub_6();
             gBattleCommunication[1] = 1;
             sub_802BC6C();
         }
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             gBattleCommunication[1] = 1;
             PlaySE(SE_SELECT);
             sub_8023AD8();
             gBattlescriptCurrInstr++;
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             sub_8023AD8();
@@ -9633,21 +9633,21 @@ static void atkF3_trygivecaughtmonnick(void)
         sub_802BC6C();
         break;
     case 1:
-        if (gMain.newKeys & DPAD_UP && gBattleCommunication[1] != 0)
+        if (JOY_NEW(DPAD_UP) && gBattleCommunication[1] != 0)
         {
             PlaySE(SE_SELECT);
             nullsub_6();
             gBattleCommunication[1] = 0;
             sub_802BC6C();
         }
-        if (gMain.newKeys & DPAD_DOWN && gBattleCommunication[1] == 0)
+        if (JOY_NEW(DPAD_DOWN) && gBattleCommunication[1] == 0)
         {
             PlaySE(SE_SELECT);
             nullsub_6();
             gBattleCommunication[1] = 1;
             sub_802BC6C();
         }
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             if (gBattleCommunication[1] == 0)
@@ -9658,7 +9658,7 @@ static void atkF3_trygivecaughtmonnick(void)
             else
                 gBattleCommunication[0] = 4;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             gBattleCommunication[0] = 4;

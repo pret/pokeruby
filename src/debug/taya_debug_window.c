@@ -231,7 +231,7 @@ bool8 TayaDebugMenu_Trend(void)
 
 bool8 debug_sub_8090808(void)
 {
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         Menu_EraseScreen();
         CloseMenu();
@@ -445,12 +445,12 @@ bool8 debug_sub_8090C88(void)
 
     do
     {
-        if (gMain.newKeys & DPAD_LEFT && eTayaLuckyNumber.digit != 0)
+        if (JOY_NEW(DPAD_LEFT) && eTayaLuckyNumber.digit != 0)
         {
             eTayaLuckyNumber.digit--;
             break;
         }
-        if (gMain.newKeys & DPAD_RIGHT && eTayaLuckyNumber.digit < 4)
+        if (JOY_NEW(DPAD_RIGHT) && eTayaLuckyNumber.digit < 4)
         {
             eTayaLuckyNumber.digit++;
             break;
@@ -489,12 +489,12 @@ bool8 debug_sub_8090C88(void)
                 break;
             }
         }
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             CloseMenu();
             return TRUE;
         }
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             SetLotteryNumber16_Unused(eTayaLuckyNumber.curLuckyId);
             CloseMenu();
@@ -658,14 +658,14 @@ bool8 TayaDebugMenu_8091190(void)
             return FALSE;
         case -2:
             r4 = sTayaTopMenuPage;
-            if (gMain.newKeys & DPAD_LEFT)
+            if (JOY_NEW(DPAD_LEFT))
             {
                 sTayaTopMenuPage--;
                 if (sTayaTopMenuPage < 0)
                     sTayaTopMenuPage = 1;
             }
 
-            if (gMain.newKeys & DPAD_RIGHT)
+            if (JOY_NEW(DPAD_RIGHT))
             {
                 sTayaTopMenuPage++;
                 if ((u8)sTayaTopMenuPage > 1)
@@ -729,7 +729,7 @@ void debug_sub_8091334(void)
     {
         case 0:
             eTayaMonData.redraw = 0;
-            if (gMain.newKeys & DPAD_UP)
+            if (JOY_NEW(DPAD_UP))
             {
                 if (eTayaMonData.y != 0)
                 {
@@ -737,7 +737,7 @@ void debug_sub_8091334(void)
                     eTayaMonData.redraw = 1;
                 }
             }
-            if (gMain.newKeys & DPAD_DOWN)
+            if (JOY_NEW(DPAD_DOWN))
             {
                 if (eTayaMonData.x != 2)
                 {
@@ -756,7 +756,7 @@ void debug_sub_8091334(void)
                     }
                 }
             }
-            if (gMain.newKeys & DPAD_LEFT)
+            if (JOY_NEW(DPAD_LEFT))
             {
                 if (eTayaMonData.x != 0)
                 {
@@ -764,7 +764,7 @@ void debug_sub_8091334(void)
                     eTayaMonData.redraw = 1;
                 }
             }
-            if (gMain.newKeys & DPAD_RIGHT)
+            if (JOY_NEW(DPAD_RIGHT))
             {
                 if (eTayaMonData.y != 5)
                 {
@@ -787,7 +787,7 @@ void debug_sub_8091334(void)
             {
                 debug_sub_80916AC();
             }
-            else if (gMain.newKeys & A_BUTTON)
+            else if (JOY_NEW(A_BUTTON))
             {
                 u16 param = gUnknown_Debug_083C50EC[eTayaMonData.y][eTayaMonData.x].param;
                 if (param >= MON_DATA_COOL_RIBBON && param <= MON_DATA_TOUGH_RIBBON)
@@ -796,7 +796,7 @@ void debug_sub_8091334(void)
                     eTayaMonData.maxVal = 1;
                 eTayaMonData.state = 1;
             }
-            else if (gMain.newKeys & B_BUTTON)
+            else if (JOY_NEW(B_BUTTON))
             {
                 BlendPalettes(0xFFFFFFFF, 16, RGB(0, 0, 0));
                 SetMainCallback2(sub_80546F0);
@@ -804,7 +804,7 @@ void debug_sub_8091334(void)
             break;
         case 1:
             eTayaMonData.redraw = 0;
-            if (gMain.newKeys & DPAD_UP)
+            if (JOY_NEW(DPAD_UP))
             {
                 if (eTayaMonData.data[eTayaMonData.y][eTayaMonData.x] < eTayaMonData.maxVal)
                 {
@@ -812,7 +812,7 @@ void debug_sub_8091334(void)
                     eTayaMonData.redraw = 1;
                 }
             }
-            if (gMain.newKeys & DPAD_DOWN)
+            if (JOY_NEW(DPAD_DOWN))
             {
                 if (eTayaMonData.data[eTayaMonData.y][eTayaMonData.x] != 0)
                 {
@@ -826,13 +826,13 @@ void debug_sub_8091334(void)
             }
             else
             {
-                if (gMain.newKeys & B_BUTTON)
+                if (JOY_NEW(B_BUTTON))
                 {
                     eTayaMonData.data[eTayaMonData.y][eTayaMonData.x] = GetMonData(gPlayerParty, gUnknown_Debug_083C50EC[eTayaMonData.y][eTayaMonData.x].param);
                     debug_sub_80916AC();
                     eTayaMonData.state = 0;
                 }
-                if (gMain.newKeys & A_BUTTON)
+                if (JOY_NEW(A_BUTTON))
                 {
                     if (gUnknown_Debug_083C50EC[eTayaMonData.y][eTayaMonData.x].param)
                         SetMonData(gPlayerParty, gUnknown_Debug_083C50EC[eTayaMonData.y][eTayaMonData.x].param, &eTayaMonData.data[eTayaMonData.y][eTayaMonData.x]);

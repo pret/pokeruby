@@ -291,13 +291,13 @@ static void sub_8089D94(u8 taskID)
             sPokeMenuCursorPos = Menu_MoveCursor(1);
             sub_808B5B4(taskID);
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             sPokemonMenuActions[sPokeMenuOptionsOrder[sPokeMenuCursorPos]].func(taskID);
             sub_808B5B4(taskID);
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PokemonMenu_Cancel(taskID);
             sub_808B5B4(taskID);
@@ -389,12 +389,12 @@ static void sub_808A060(u8 taskID)
         sPokeMenuCursorPos = Menu_MoveCursor(1);
         PlaySE(SE_SELECT);
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         PartyMenuGetPopupMenuFunc(0, &sUnknown_0839F578, sPokemonMenuActions, sPokeMenuCursorPos)(taskID);
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         ClosePartyPopupMenu(0, &sUnknown_0839F578);
         PokemonMenu_CancelSubmenu(taskID);
@@ -644,12 +644,12 @@ static void sub_808A73C(u8 taskID)
         else
             sPokeMenuCursorPos = Menu_MoveCursor(1);
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         PartyMenuGetPopupMenuFunc(0, &sUnknown_0839F584, sPokemonMenuActions, sPokeMenuCursorPos)(taskID);
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         ClosePartyPopupMenu(0, &sUnknown_0839F584);
         PokemonMenu_Cancel(taskID);
@@ -760,7 +760,7 @@ static void PokemonMenu_FieldMove(u8 taskID)
 
 static void sub_808AAF0(u8 taskID)
 {
-    if (gPartyMenuMessage_IsPrinting != 1 && (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON))
+    if (gPartyMenuMessage_IsPrinting != 1 && (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON)))
     {
         Menu_EraseWindowRect(0, 14, 29, 19);
         PokemonMenu_Cancel(taskID);
@@ -799,7 +799,7 @@ static void FieldCallback_AfterFadeInFromMenu(u8 taskID)
 
 static void sub_808ABF4(u8 taskID)
 {
-    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         Menu_EraseWindowRect(1, 17, 28, 18);
         PokemonMenu_Cancel(taskID);

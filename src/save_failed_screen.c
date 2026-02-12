@@ -209,7 +209,7 @@ static void CB2_GameplayCannotBeContinued(void)
 {
     gSaveFailedClockInfo[0] = FALSE;
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         Menu_DrawStdWindowFrame(1, MSG_WIN_TOP, 28, 19);
         Menu_PrintText(gSystemText_GameplayEnded, 2, MSG_WIN_TOP + 1);
@@ -222,7 +222,7 @@ static void CB2_FadeAndReturnToTitleScreen(void)
 {
     gSaveFailedClockInfo[0] = FALSE;
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         SetVBlankCallback(VBlankCB);

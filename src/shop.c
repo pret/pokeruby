@@ -149,7 +149,7 @@ static void Task_DoBuySellMenu(u8 taskId)
             gMartInfo.cursor = Menu_MoveCursor(1);
         }
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         if (gMartInfo.martType == MART_TYPE_0)
@@ -157,7 +157,7 @@ static void Task_DoBuySellMenu(u8 taskId)
         else
             sBuySellQuitMenuActions[gMartBuyNoSellOptionList[gMartInfo.cursor]].func(taskIdConst);
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         Task_HandleShopMenuQuit(taskIdConst);
@@ -622,7 +622,7 @@ static void Shop_PrintItemDescText(void)
 
 static void Shop_DoPremierBallCheck(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         Shop_DisplayPriceInList(gMartInfo.cursor, gMartInfo.cursor, 0);
         PlaySE(SE_SELECT);
@@ -712,7 +712,7 @@ static void Shop_PrintPrice(u8 taskId)
     if (SellMenu_QuantityRoller(taskId, gMartInfo.curItemCount) == TRUE)
         Shop_DisplayPriceInCheckoutWindow(taskId);
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         gMartTotalCost = (ItemId_GetPrice(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]) >> GetPriceReduction(1)) * gTasks[taskId].tItemCount; // set total cost of your purchase.
         Menu_EraseWindowRect(0, 0xA, 0xD, 0xD);
@@ -725,7 +725,7 @@ static void Shop_PrintPrice(u8 taskId)
         StringExpandPlaceholders(gStringVar4, gOtherText_ThatWillBe);
         DisplayItemMessageOnField(taskId, gStringVar4, Shop_DoYesNoPurchase, 0xC3E1);
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         Shop_DisplayPriceInList(gMartInfo.cursor, gMartInfo.cursor, 0);
         Task_ReturnToBuyMenu(taskId);
@@ -1071,7 +1071,7 @@ static void Shop_DoCursorAction(u8 taskId)
                 Shop_PrintItemDescText();
             }
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
 
@@ -1124,7 +1124,7 @@ static void Shop_DoCursorAction(u8 taskId)
                 Task_ExitBuyMenu(taskId);
             }
         }
-        else if (gMain.newKeys & B_BUTTON) // go back to buy/sell/exit menu
+        else if (JOY_NEW(B_BUTTON)) // go back to buy/sell/exit menu
         {
             PlaySE(SE_SELECT);
             Task_ExitBuyMenu(taskId);

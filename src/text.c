@@ -2409,7 +2409,7 @@ static u8 UpdateWindowText(struct Window *win)
     case WIN_STATE_WAIT_BUTTON:
         if (PlayerCanInterruptDelay(win))
         {
-            if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+            if (JOY_NEW(A_BUTTON | B_BUTTON))
             {
                 PlaySE(SE_SELECT);
             }
@@ -3247,7 +3247,7 @@ static u8 WaitWithDownArrow(struct Window *win)
     }
     else
     {
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             PlaySE(SE_SELECT);
             TryEraseDownArrow(win);

@@ -232,9 +232,9 @@ static u8 sub_80FAB78(void)
         event = INPUT_EVENT_DPAD;
     }
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
         event = INPUT_EVENT_A_BUTTON;
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
         event = INPUT_EVENT_B_BUTTON;
 
     if (event == INPUT_EVENT_DPAD)
@@ -303,9 +303,9 @@ static u8 sub_80FAD04(void)
         event = INPUT_EVENT_DPAD;
     }
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
         event = INPUT_EVENT_A_BUTTON;
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
         event = INPUT_EVENT_B_BUTTON;
 
     if (event == INPUT_EVENT_DPAD)
@@ -1724,7 +1724,7 @@ void debug_sub_8110D84(void)
         {
             debug_sub_8110CCC();
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             sub_80FBCA0();
             sub_80FAEC4();
@@ -1743,7 +1743,7 @@ void debug_sub_8110D84(void)
         {
             debug_sub_8110CCC();
         }
-        if (gMain.newKeys & A_BUTTON)  // no "else if" like above?
+        if (JOY_NEW(A_BUTTON))  // no "else if" like above?
         {
             sub_80FBCA0();
             sub_80FAEC4();

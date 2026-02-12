@@ -637,7 +637,7 @@ static void sub_80F8F58(void)
 
 static void sub_80F8F78(void)
 {
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         sSharedMemPtr->varF0 = sub_80F8FB4;
@@ -687,24 +687,24 @@ void debug_sub_810C910(u8 taskId)
 
 void debug_sub_810C990(u8 taskId)
 {
-    if (gMain.newKeys & (DPAD_LEFT | DPAD_DOWN))
+    if (JOY_NEW(DPAD_LEFT | DPAD_DOWN))
     {
         gSpecialVar_0x8006 = (gSpecialVar_0x8006 + 11) % 12;
         Menu_DrawStdWindowFrame(1, 1, 10, 4);
         Menu_PrintText(_84115C4[gSpecialVar_0x8006], 2, 2);
     }
-    else if (gMain.newKeys & (DPAD_UP | DPAD_RIGHT))
+    else if (JOY_NEW(DPAD_UP | DPAD_RIGHT))
     {
         gSpecialVar_0x8006 = (gSpecialVar_0x8006 + 1) % 12;
         Menu_DrawStdWindowFrame(1, 1, 10, 4);
         Menu_PrintText(_84115C4[gSpecialVar_0x8006], 2, 2);
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gTasks[taskId].func = debug_sub_810C910;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         Menu_DisplayDialogueFrame();
         Menu_PrintText(Str_8411540, 4, 15);
@@ -715,12 +715,11 @@ void debug_sub_810C990(u8 taskId)
 
 void debug_sub_810CA7C(u8 taskId)
 {
-    if (gMain.newKeys & 0xF0)
-    {
+    if (JOY_NEW(DPAD_ANY))
         gSpecialVar_0x8004 ^= 1;
         Menu_PrintText(_8411560[gSpecialVar_0x8004], 2, 2);
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         if (gMain.watchedKeysPressed)
         {
@@ -747,7 +746,7 @@ void debug_sub_810CB50(u8 taskId)
     u8 sp8[] = DTR("メール{STR_VAR_1}　{STR_VAR_2}", "MAIL{STR_VAR_1} {STR_VAR_2}");
     bool8 r2 = FALSE;
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         ConvertIntToDecimalStringN(gStringVar1, gSpecialVar_0x8005, 2, 1);
         StringCopy(gStringVar2, gSpeciesNames[gTasks[taskId].data[0]]);
@@ -760,7 +759,7 @@ void debug_sub_810CB50(u8 taskId)
         debug_sub_810D340();
         return;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         DestroyTask(taskId);
         Menu_EraseScreen();
@@ -768,12 +767,12 @@ void debug_sub_810CB50(u8 taskId)
         debug_sub_810D340();
         return;
     }
-    else if (gMain.newKeys & (DPAD_LEFT | DPAD_DOWN))
+    else if (JOY_NEW(DPAD_LEFT | DPAD_DOWN))
     {
         gTasks[taskId].data[0] = (gTasks[taskId].data[0] + 0x19B) % 0x19C;
         r2 = TRUE;
     }
-    else if (gMain.newKeys & (DPAD_UP | DPAD_RIGHT))
+    else if (JOY_NEW(DPAD_UP | DPAD_RIGHT))
     {
         gTasks[taskId].data[0] = (gTasks[taskId].data[0] + 1) % 0x19C;
         r2 = TRUE;

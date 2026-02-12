@@ -1961,22 +1961,22 @@ static bool8 InitDebugWindow(void)
 
 static bool8 TopMenu_HandleInput(void)
 {
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         sTopMenuCursorPos = Menu_MoveCursor(-1);
     }
-    if (gMain.newKeys & DPAD_DOWN)
+    if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         sTopMenuCursorPos = Menu_MoveCursor(+1);
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         return sMenuActions_TopMenu[sTopMenuCursorPos].func();
     }
-    if (gMain.newKeys & (B_BUTTON | START_BUTTON))
+    if (JOY_NEW(B_BUTTON | START_BUTTON))
     {
         CloseMenu();
         return TRUE;
@@ -2171,22 +2171,22 @@ static bool8 PreviewData_HandleInput(void)
 
 static bool8 TrickHouse_HandleInput(void)
 {
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         sTrickRelatedMenuCursorPos = Menu_MoveCursor(-1);
     }
-    if (gMain.newKeys & DPAD_DOWN)
+    if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         sTrickRelatedMenuCursorPos = Menu_MoveCursor(+1);
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         return sMenuActions_TrickRelated[sTrickRelatedMenuCursorPos].func();
     }
-    if (gMain.newKeys & (B_BUTTON | START_BUTTON))
+    if (JOY_NEW(B_BUTTON | START_BUTTON))
     {
         CloseMenu();
         return TRUE;
@@ -2196,22 +2196,22 @@ static bool8 TrickHouse_HandleInput(void)
 
 static bool8 ControlEvents_HandleInput(void)
 {
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         sControlEventsCursorPos = Menu_MoveCursor(-1);
     }
-    if (gMain.newKeys & DPAD_DOWN)
+    if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         sControlEventsCursorPos = Menu_MoveCursor(+1);
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         return sMenuActions_ControlEvents[sControlEventsCursorPos].func();
     }
-    if (gMain.newKeys & (B_BUTTON | START_BUTTON))
+    if (JOY_NEW(B_BUTTON | START_BUTTON))
     {
         CloseMenu();
         return TRUE;
@@ -2221,22 +2221,22 @@ static bool8 ControlEvents_HandleInput(void)
 
 static bool8 ControlFlags_HandleInput(void)
 {
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         sControlFlagsCursorPos = Menu_MoveCursor(-1);
     }
-    if (gMain.newKeys & DPAD_DOWN)
+    if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         sControlFlagsCursorPos = Menu_MoveCursor(+1);
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         return sMenuActions_ControlFlags[sControlFlagsCursorPos].func();
     }
-    if (gMain.newKeys & (B_BUTTON | START_BUTTON))
+    if (JOY_NEW(B_BUTTON | START_BUTTON))
     {
         CloseMenu();
         return TRUE;
@@ -2246,22 +2246,22 @@ static bool8 ControlFlags_HandleInput(void)
 
 static bool8 ControlWorks_HandleInput(void)
 {
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         sControlWORKCursorPos = Menu_MoveCursor(-1);
     }
-    if (gMain.newKeys & DPAD_DOWN)
+    if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         sControlWORKCursorPos = Menu_MoveCursor(+1);
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         return sMenuActions_ControlWorks[sControlWORKCursorPos].func();
     }
-    if (gMain.newKeys & (B_BUTTON | START_BUTTON))
+    if (JOY_NEW(B_BUTTON | START_BUTTON))
     {
         CloseMenu();
         return TRUE;
@@ -2607,7 +2607,7 @@ static bool8 debug_sub_808C6C8(void)
 
 static void debug_sub_808C714(u8 whichMenu, u8 cursorPos)
 {
-    if (gMain.newKeys & R_BUTTON)
+    if (JOY_NEW(R_BUTTON))
     {
         if (!FlagGet(gUnknown_Debug_83C31E6[whichMenu][cursorPos]))
             FlagSet(gUnknown_Debug_83C31E6[whichMenu][cursorPos]);
@@ -2769,7 +2769,7 @@ static bool8 debug_sub_808CB74(void)
 
 static void debug_sub_808CBC0(u8 whichMenu, u8 cursorPos)
 {
-    if (gMain.newKeys & R_BUTTON)
+    if (JOY_NEW(R_BUTTON))
     {
         if (!FlagGet(gUnknown_Debug_083C271A[whichMenu][cursorPos]))
             FlagSet(gUnknown_Debug_083C271A[whichMenu][cursorPos]);
@@ -2865,7 +2865,7 @@ static bool8 debug_sub_808CE10(void)
 
 static void debug_sub_808CE5C(u8 whichMenu, u8 cursorPos)
 {
-    if (gMain.newKeys & R_BUTTON)
+    if (JOY_NEW(R_BUTTON))
     {
         if (!FlagGet(gUnknown_Debug_083C1C38[whichMenu][cursorPos]))
             FlagSet(gUnknown_Debug_083C1C38[whichMenu][cursorPos]);
@@ -3027,7 +3027,7 @@ static bool8 debug_sub_808D2BC(void)
 
 static void debug_sub_808D308(u8 whichMenu, u8 cursorPos)
 {
-    if (gMain.newKeys & R_BUTTON)
+    if (JOY_NEW(R_BUTTON))
     {
         if (!FlagGet(gUnknown_Debug_083C19C6[whichMenu][cursorPos]))
             FlagSet(gUnknown_Debug_083C19C6[whichMenu][cursorPos]);
@@ -3112,7 +3112,7 @@ static bool8 ControlFlags_FH_OBJ_Subsubmenu_HandleInput(void)
 
 static void ControlFlags_FH_OBJ_FlagToggle(u8 whichMenu, u8 cursorPos)
 {
-    if (gMain.newKeys & R_BUTTON)
+    if (JOY_NEW(R_BUTTON))
     {
         if (!FlagGet(sControlFlags_FH_OBJ_FlagsArrays[whichMenu][cursorPos]))
             FlagSet(sControlFlags_FH_OBJ_FlagsArrays[whichMenu][cursorPos]);
@@ -3197,7 +3197,7 @@ static bool8 debug_sub_808D744(void)
 
 static void debug_sub_808D790(u8 whichMenu, u8 cursorPos)
 {
-    if (gMain.newKeys & R_BUTTON)
+    if (JOY_NEW(R_BUTTON))
     {
         if (!FlagGet(gUnknown_Debug_083C12D2[whichMenu][cursorPos]))
             FlagSet(gUnknown_Debug_083C12D2[whichMenu][cursorPos]);
@@ -3271,7 +3271,7 @@ static bool8 debug_sub_808D930(void)
 
 static void debug_sub_808D97C(u8 whichMenu, u8 cursorPos)
 {
-    if (gMain.newKeys & R_BUTTON)
+    if (JOY_NEW(R_BUTTON))
     {
         if (!FlagGet(gUnknown_Debug_083C1AAE[whichMenu][cursorPos]))
             FlagSet(gUnknown_Debug_083C1AAE[whichMenu][cursorPos]);
@@ -3326,11 +3326,11 @@ static void ControlWorks_AnsWork_AdjustRESULT(void)
 {
     u16 delta;
 
-    if (gMain.newKeys & R_BUTTON)
+    if (JOY_NEW(R_BUTTON))
     {
         delta = +1;
     }
-    else if (gMain.newKeys & L_BUTTON)
+    else if (JOY_NEW(L_BUTTON))
     {
         delta = -1;
     }
@@ -3494,9 +3494,9 @@ static void debug_sub_808DF64(u8 whichMenu, u8 cursorPos)
 {
     u16 delta;
 
-    if (gMain.newKeys & R_BUTTON)
+    if (JOY_NEW(R_BUTTON))
         delta = +1;
-    else if (gMain.newKeys & L_BUTTON)
+    else if (JOY_NEW(L_BUTTON))
         delta = -1;
     else
         return;
@@ -3625,9 +3625,9 @@ static void debug_sub_808E310(u8 whichMenu, u8 cursorPos)
 {
     u16 delta;
 
-    if (gMain.newKeys & R_BUTTON)
+    if (JOY_NEW(R_BUTTON))
         delta = +1;
-    else if (gMain.newKeys & L_BUTTON)
+    else if (JOY_NEW(L_BUTTON))
         delta = -1;
     else
         return;
@@ -3822,9 +3822,9 @@ static void debug_sub_808E850(u8 whichMenu, u8 cursorPos)
 {
     u16 delta;
 
-    if (gMain.newKeys & R_BUTTON)
+    if (JOY_NEW(R_BUTTON))
         delta = +1;
-    else if (gMain.newKeys & L_BUTTON)
+    else if (JOY_NEW(L_BUTTON))
         delta = -1;
     else
         return;
@@ -3919,9 +3919,9 @@ static void debug_sub_808EAFC(u8 whichMenu, u8 cursorPos)
 {
     u16 delta;
 
-    if (gMain.newKeys & R_BUTTON)
+    if (JOY_NEW(R_BUTTON))
         delta = +1;
-    else if (gMain.newKeys & L_BUTTON)
+    else if (JOY_NEW(L_BUTTON))
         delta = -1;
     else
         return;
@@ -4065,7 +4065,7 @@ static void PicTest_SelectPersonality(void)
         else
             sPicTest_Personality = UINT32_MAX;
     }
-    if ((gMain.newKeys & (L_BUTTON | R_BUTTON)) == (L_BUTTON | R_BUTTON))
+    if (JOY_NEW(L_BUTTON | R_BUTTON) == (L_BUTTON | R_BUTTON))
     {
         sPicTest_Personality = UINT32_MAX;
     }

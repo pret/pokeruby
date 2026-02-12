@@ -269,7 +269,7 @@ u8 Menu_GetCursorPos(void)
 
 s8 Menu_ProcessInput(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         if (gMenu.menu_field_7)
@@ -277,20 +277,20 @@ s8 Menu_ProcessInput(void)
         return gMenu.cursorPos;
     }
 
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         if (gMenu.menu_field_7)
             Menu_DestroyCursor();
         return -1;
     }
 
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(-1);
         return -2;
     }
-    else if (gMain.newKeys & DPAD_DOWN)
+    else if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(1);
@@ -304,7 +304,7 @@ s8 Menu_ProcessInputNoWrap(void)
 {
     u8 cursorPos = gMenu.cursorPos;
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         if (gMenu.menu_field_7)
@@ -312,20 +312,20 @@ s8 Menu_ProcessInputNoWrap(void)
         return gMenu.cursorPos;
     }
 
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         if (gMenu.menu_field_7)
             Menu_DestroyCursor();
         return -1;
     }
 
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         if (cursorPos != Menu_MoveCursorNoWrap(-1))
             PlaySE(SE_SELECT);
         return -2;
     }
-    else if (gMain.newKeys & DPAD_DOWN)
+    else if (JOY_NEW(DPAD_DOWN))
     {
         if (cursorPos != Menu_MoveCursorNoWrap(1))
             PlaySE(SE_SELECT);
@@ -385,19 +385,19 @@ static u8 MoveMenuCursorGridLayout(s8 delta)
 // Returns TRUE if the cursor is on an edge and cannot move in the pressed direction
 static bool8 IsGridCursorMovementClamped(void)
 {
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         // is cursor on first row?
         if (gMenu.cursorPos < gMenu.width)
             return TRUE;
     }
-    if (gMain.newKeys & DPAD_DOWN)
+    if (JOY_NEW(DPAD_DOWN))
     {
         // is cursor on last row?
         if (gMenu.cursorPos >= gMenu.maxCursorPos + 1 - gMenu.width)
             return TRUE;
     }
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         // is cursor on first column?
         if ((gMenu.cursorPos - gMenu.cursorPos % gMenu.width) % gMenu.width == 1 // always false
@@ -405,7 +405,7 @@ static bool8 IsGridCursorMovementClamped(void)
          || gMenu.cursorPos % gMenu.width == 0)
             return TRUE;
     }
-    if (gMain.newKeys & DPAD_RIGHT)
+    if (JOY_NEW(DPAD_RIGHT))
     {
         // is cursor on last column?
         if (gMenu.cursorPos % gMenu.width == gMenu.width - 1)
@@ -531,7 +531,7 @@ void sub_807274C(u8 left, u8 top, u8 menuItemCount, u8 a4, const struct MenuActi
 
 s8 Menu_ProcessInputGridLayout(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         if (gMenu.menu_field_7)
             Menu_DestroyCursor();
@@ -539,34 +539,34 @@ s8 Menu_ProcessInputGridLayout(void)
         return Menu_GetCursorPos();
     }
 
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         if (gMenu.menu_field_7)
             Menu_DestroyCursor();
         return -1;
     }
 
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         // Move up one whole row
         MoveMenuCursorGridLayout(-gMenu.width);
         return -2;
     }
-    else if (gMain.newKeys & DPAD_DOWN)
+    else if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         // Move down one whole column
         MoveMenuCursorGridLayout(gMenu.width);
         return -2;
     }
-    else if (gMain.newKeys & DPAD_LEFT)
+    else if (JOY_NEW(DPAD_LEFT))
     {
         PlaySE(SE_SELECT);
         MoveMenuCursorGridLayout(-1);
         return -2;
     }
-    else if (gMain.newKeys & DPAD_RIGHT)
+    else if (JOY_NEW(DPAD_RIGHT))
     {
         PlaySE(SE_SELECT);
         MoveMenuCursorGridLayout(1);

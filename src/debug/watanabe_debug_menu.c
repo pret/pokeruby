@@ -809,14 +809,14 @@ NAKED void debug_80C3A50(u8 taskId)
 
 void debug_80C3D2C(u8 taskId)
 {
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         SetMainCallback2(debug_80C370C);
         gTasks[taskId].func = debug_80C373C;
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[8] ^= 1;
@@ -1133,17 +1133,17 @@ void debug_80C4348(u8 taskId)
 
 void debug_80C43A8(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         debug_sub_80A433C(gPlayerParty + gUnknown_Debug_2038A0C[1], debug_80C41D4);
         DestroyTask(taskId);
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].func = debug_80C4F48;
     }
-    else if (gMain.newKeys & START_BUTTON)
+    else if (JOY_NEW(START_BUTTON))
     {
         if (debug_80C4774())
         {
@@ -1153,7 +1153,7 @@ void debug_80C43A8(u8 taskId)
             gTasks[taskId].func = debug_80C4D14;
         }
     }
-    else if (gMain.newKeys & (R_BUTTON | DPAD_RIGHT))
+    else if (JOY_NEW(R_BUTTON | DPAD_RIGHT))
     {
         debug_80C38E4(0, 1, 1, 14, 0);
         gTasks[taskId].func = debug_80C44EC;
@@ -1180,17 +1180,17 @@ void debug_80C44EC(u8 taskId)
 
 void debug_80C4550(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         debug_sub_80A433C(gEnemyParty + gUnknown_Debug_2038A0C[2], debug_80C41F4);
         DestroyTask(taskId);
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].func = debug_80C4F48;
     }
-    else if (gMain.newKeys & START_BUTTON)
+    else if (JOY_NEW(START_BUTTON))
     {
         if (debug_80C4774())
         {
@@ -1200,7 +1200,7 @@ void debug_80C4550(u8 taskId)
             gTasks[taskId].func = debug_80C4D14;
         }
     }
-    else if (gMain.newKeys & (L_BUTTON | DPAD_LEFT))
+    else if (JOY_NEW(L_BUTTON | DPAD_LEFT))
     {
         debug_80C38E4(0, 16, 1, 14, 0);
         gTasks[taskId].func = debug_80C4348;
@@ -1291,7 +1291,7 @@ void debug_80C48A0(u8 taskId)
 
 void debug_80C4900(u8 taskId)
 {
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
@@ -1302,7 +1302,7 @@ void debug_80C4900(u8 taskId)
         gUnknown_02023A14_50 = 0;
         gTasks[taskId].func = debug_80C373C;
     }
-    else if (gMain.newKeys & START_BUTTON || gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(START_BUTTON) || JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         gBattleTypeFlags = gUnknown_Debug_083F8068[gUnknown_Debug_2038A0C[3]].data.type1[0];
@@ -1342,7 +1342,7 @@ void debug_80C4AC4(u8 taskId)
 {
     u8 r1 = gUnknown_Debug_2038A0C[4] + gUnknown_Debug_2038A0C[5];
     
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         u32 mask = gUnknown_Debug_083F80D8[r1].data.type2;
         if (byte_3005E30 & mask)
@@ -1352,12 +1352,12 @@ void debug_80C4AC4(u8 taskId)
         debug_80C4C44(gUnknown_Debug_2038A0C[4]);
         gTasks[taskId].func = debug_80C4A60;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         debug_80C38E4(0, 16, 1, 14, 0);
         gTasks[taskId].func = debug_80C48A0;
     }
-    else if (gMain.newKeys & START_BUTTON)
+    else if (JOY_NEW(START_BUTTON))
     {
         PlaySE(SE_SELECT);
         gTrainerBattleOpponent = SECRET_BASE_OPPONENT;
@@ -1453,11 +1453,11 @@ void debug_80C4DB8(u8 taskId)
 void debug_80C4E18(u8 taskId)
 {
     u8 r6 = gUnknown_Debug_2038A0C[6] + gUnknown_Debug_2038A0C[7];
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].func = debug_80C42B8;
     }
-    else if (gMain.newKeys & START_BUTTON || gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(START_BUTTON) || JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         gBattleTerrain = gUnknown_Debug_083F814C[r6].data.type3;
@@ -1533,11 +1533,11 @@ void debug_80C5038(u8 taskId)
 
 void debug_80C5098(u8 taskId)
 {
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].func = debug_80C47BC;
     }
-    else if (gMain.newKeys & START_BUTTON || gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(START_BUTTON) || JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         gSaveBlock2.playerGender = gUnknown_Debug_2038A0C[8];
@@ -1892,20 +1892,20 @@ void debug_80C53C0(u8 taskId)
 
 void debug_80C53F0(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         gUnknown_Debug_2038A1C->unk164 = gUnknown_Debug_2038A1C->unk64[gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]];
         gUnknown_Debug_2038A1C->unk16a = 0;
         debug_80C643C();
         gTasks[taskId].func = debug_80C55E4;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         SetMainCallback2(debug_80C370C);
         gTasks[taskId].func = debug_80C373C;
     }
-    else if (gMain.newKeys & START_BUTTON)
+    else if (JOY_NEW(START_BUTTON))
     {
         bool8 r4;
         PlaySE(SE_SELECT);
@@ -1918,28 +1918,28 @@ void debug_80C53F0(u8 taskId)
             Menu_PrintText(gUnknown_Debug_083F8720, 4, 9);
         gTasks[taskId].func = debug_80C5708;
     }
-    else if (gMain.newKeys & SELECT_BUTTON)
+    else if (JOY_NEW(SELECT_BUTTON))
     {
         u32 r4 = gUnknown_Debug_2038A1C->unk64[0];
         GetSetPokedexFlag(r4, 2);
         GetSetPokedexFlag(r4, 3);
         PlaySE(SE_SELECT);
     }
-    else if (gMain.newKeys & DPAD_UP)
+    else if (JOY_NEW(DPAD_UP))
     {
         debug_80C627C(2);
     }
-    else if (gMain.newKeys & DPAD_DOWN)
+    else if (JOY_NEW(DPAD_DOWN))
     {
         debug_80C627C(1);
     }
-    else if (gMain.newKeys & L_BUTTON && gUnknown_Debug_2038A1C->unk168 > 0)
+    else if (JOY_NEW(L_BUTTON) && gUnknown_Debug_2038A1C->unk168 > 0)
     {
         gUnknown_Debug_2038A1C->unk168--;
         gUnknown_Debug_2038A1C->unk169 = 0;
         gTasks[taskId].func = debug_80C53C0;
     }
-    else if (gMain.newKeys & R_BUTTON && gUnknown_Debug_2038A1C->unk168 < 5)
+    else if (JOY_NEW(R_BUTTON) && gUnknown_Debug_2038A1C->unk168 < 5)
     {
         gUnknown_Debug_2038A1C->unk168++;
         gUnknown_Debug_2038A1C->unk169 = 0;
@@ -1950,11 +1950,11 @@ void debug_80C53F0(u8 taskId)
 void debug_80C55E4(u8 taskId)
 {
     u8 r7 = gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169];
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         gTasks[taskId].func = debug_80C53C0;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         gUnknown_Debug_2038A1C->unk64[r7] = gUnknown_Debug_2038A1C->unk164;
         gTasks[taskId].func = debug_80C53C0;
@@ -1971,12 +1971,12 @@ void debug_80C55E4(u8 taskId)
     }
     else if (gUnknown_Debug_083F8554[r7].data.type4->unk9 != 0xFF)
     {
-        if (gMain.newKeys & DPAD_LEFT && gUnknown_Debug_2038A1C->unk16a < gUnknown_Debug_083F8554[r7].data.type4->unk9 - 1)
+        if (JOY_NEW(DPAD_LEFT) && gUnknown_Debug_2038A1C->unk16a < gUnknown_Debug_083F8554[r7].data.type4->unk9 - 1)
         {
             gUnknown_Debug_2038A1C->unk16a++;
             debug_80C643C();
         }
-        else if (gMain.newKeys & DPAD_RIGHT && gUnknown_Debug_2038A1C->unk16a > 0)
+        else if (JOY_NEW(DPAD_RIGHT) && gUnknown_Debug_2038A1C->unk16a > 0)
         {
             gUnknown_Debug_2038A1C->unk16a--;
             debug_80C643C();
@@ -1986,7 +1986,7 @@ void debug_80C55E4(u8 taskId)
 
 void debug_80C5708(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         gTasks[taskId].func = debug_80C53C0;
     }
@@ -2725,7 +2725,7 @@ void debug_80C6EE8(u8 taskId)
 #ifdef NONMATCHING
 void debug_80C6FA8(u8 taskId)
 {
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
@@ -2742,7 +2742,7 @@ void debug_80C6FA8(u8 taskId)
         gUnknown_Debug_2038A20->totalPoints = debug_80C3878(1, gUnknown_Debug_2038A20->totalPoints);
         gTasks[taskId].func = debug_80C71FC;
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         gUnknown_Debug_2038A20->contestant = 1;
         REG_WIN0H = 0x51EF;
@@ -2763,7 +2763,7 @@ void debug_80C6FA8(u8 taskId)
         gUnknown_Debug_2038A20->unk7--;
         gTasks[taskId].func = debug_80C6EE8;
     }
-    else if (gMain.newKeys & START_BUTTON)
+    else if (JOY_NEW(START_BUTTON))
     {
         gUnknown_Debug_2038A20->unk9 ^= 1;
         if (gUnknown_Debug_2038A20->unk9)
@@ -2776,7 +2776,7 @@ void debug_80C6FA8(u8 taskId)
     }
     else
     {
-        if (gMain.newKeys & SELECT_BUTTON)
+        if (JOY_NEW(SELECT_BUTTON))
         {
             StopCryAndClearCrySongs();
             PlayCry1(gUnknown_Debug_2038A20->totalPoints, 0);
@@ -3098,14 +3098,14 @@ void debug_80C71FC(u8 taskId)
 
 void debug_80C7294(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         gUnknown_Debug_2038A20->contestant = 0;
         REG_WIN0H = 0x51EF;
         REG_WIN0V = 0x699F;
         gTasks[taskId].func = debug_80C6EE8;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         gUnknown_Debug_2038A20->contestant = 0;
         REG_WIN0H = 0x51EF;
@@ -3333,7 +3333,7 @@ void debug_80C7A54(u8 taskId)
 #ifdef NONMATCHING
 void debug_80C7B14(u8 taskId)
 {
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
@@ -3350,7 +3350,7 @@ void debug_80C7B14(u8 taskId)
         gUnknown_Debug_2038A20->totalPoints = debug_80C38B4(1, gUnknown_Debug_2038A20->totalPoints);
         gTasks[taskId].func = debug_80C7D44;
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         gUnknown_Debug_2038A20->contestant = 1;
         REG_WIN0H = 0x51EF;
@@ -3371,7 +3371,7 @@ void debug_80C7B14(u8 taskId)
         gUnknown_Debug_2038A20->unk7--;
         gTasks[taskId].func = debug_80C7A54;
     }
-    else if (gMain.newKeys & START_BUTTON)
+    else if (JOY_NEW(START_BUTTON))
     {
         gUnknown_Debug_2038A20->unk9 ^= 1;
         if (gUnknown_Debug_2038A20->unk9)
@@ -3689,14 +3689,14 @@ void debug_80C7D44(u8 taskId)
 
 void debug_80C7DDC(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         gUnknown_Debug_2038A20->contestant = 0;
         REG_WIN0H = 0x51EF;
         REG_WIN0V = 0x699F;
         gTasks[taskId].func = debug_80C7A54;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         gUnknown_Debug_2038A20->contestant = 0;
         REG_WIN0H = 0x51EF;

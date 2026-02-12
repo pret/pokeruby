@@ -2091,11 +2091,11 @@ u16 sub_80552B0(u32 a1)
     {
         return 21;
     }
-    else if (gMain.newKeys & START_BUTTON)
+    else if (JOY_NEW(START_BUTTON))
     {
         return 24;
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         return 25;
     }
@@ -2207,7 +2207,7 @@ u16 sub_8055468(u32 a1)
 
 u16 sub_805546C(u32 linkPlayerId)
 {
-    if (gUnknown_03000580[linkPlayerId] == 0x82 && (gMain.newKeys & B_BUTTON))
+    if (gUnknown_03000580[linkPlayerId] == 0x82 && JOY_NEW(B_BUTTON))
     {
         sub_80543DC(sub_8055468);
         return 29;

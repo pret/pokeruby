@@ -195,7 +195,7 @@ void debug_sub_8075C40(u8 taskId)
         data[0]++;
         break;
     case 3:
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             Menu_EraseScreen();
             ScriptContext2_Disable();
@@ -415,17 +415,17 @@ void sub_8071310(void)
 
 static u8 StartMenu_InputProcessCallback(void)
 {
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         sStartMenuCursorPos = Menu_MoveCursor(-1);
     }
-    if (gMain.newKeys & DPAD_DOWN)
+    if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         sStartMenuCursorPos = Menu_MoveCursor(1);
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         if (sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func == StartMenu_PokedexCallback)
@@ -440,7 +440,7 @@ static u8 StartMenu_InputProcessCallback(void)
             FadeScreen(1, 0);
         return 0;
     }
-    if (gMain.newKeys & (START_BUTTON | B_BUTTON))
+    if (JOY_NEW(START_BUTTON | B_BUTTON))
     {
         CloseMenu();
         return 1;

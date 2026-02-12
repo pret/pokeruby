@@ -212,7 +212,7 @@ bool32 BrailleWait_CheckButtonPress(void)
     if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
         keyMask |= L_BUTTON;
 
-    if (gMain.newKeys & keyMask)
+    if (JOY_NEW(keyMask))
         return TRUE;
     else
         return FALSE;

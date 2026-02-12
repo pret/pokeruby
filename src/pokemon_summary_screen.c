@@ -942,30 +942,30 @@ static void SummaryScreenHandleKeyInput(u8 taskId)
     if (gPaletteFade.active)
         return;
 
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         SummaryScreenHandleUpDownInput(taskId, -1);
     }
-    else if (gMain.newKeys & DPAD_DOWN)
+    else if (JOY_NEW(DPAD_DOWN))
     {
         SummaryScreenHandleUpDownInput(taskId, 1);
     }
-    else if ((gMain.newKeys & DPAD_LEFT) || sub_80F9284() == 1)
+    else if (JOY_NEW(DPAD_LEFT) || sub_80F9284() == 1)
     {
         SummaryScreenHandleLeftRightInput(taskId, -1);
     }
-    else if ((gMain.newKeys & DPAD_RIGHT) || sub_80F9284() == 2)
+    else if (JOY_NEW(DPAD_RIGHT) || sub_80F9284() == 2)
     {
         SummaryScreenHandleLeftRightInput(taskId, 1);
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         if (pssData.page >= PSS_PAGE_BATTLE_MOVES)
             SummaryScreenHandleAButton(taskId);
         if (pssData.page == PSS_PAGE_INFO)
             SummaryScreenExit(taskId);
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         SummaryScreenExit(taskId);
     }
@@ -976,23 +976,23 @@ static void sub_809E260(u8 taskId)
     if (gPaletteFade.active)
         return;
 
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         gTasks[taskId].data[0] = 4;
         sub_809E8F0(taskId, -1, &pssData.selectedMoveIndex);
     }
-    else if (gMain.newKeys & DPAD_DOWN)
+    else if (JOY_NEW(DPAD_DOWN))
     {
         gTasks[taskId].data[0] = 4;
         sub_809E8F0(taskId, 1, &pssData.selectedMoveIndex);
     }
-    else if ((gMain.newKeys & DPAD_LEFT) || sub_80F9284() == 1)
+    else if (JOY_NEW(DPAD_LEFT) || sub_80F9284() == 1)
     {
         if (pssData.page == PSS_PAGE_CONTEST_MOVES && (pssData.selectedMoveIndex != 4 || pssData.moveToLearn != 0))
             Menu_EraseWindowRect(0, 14, 9, 18);
         SummaryScreenHandleLeftRightInput(taskId, -1);
     }
-    else if ((gMain.newKeys & DPAD_RIGHT) || sub_80F9284() == 2)
+    else if (JOY_NEW(DPAD_RIGHT) || sub_80F9284() == 2)
     {
         if (pssData.page != pssData.lastPage)
         {
@@ -1001,7 +1001,7 @@ static void sub_809E260(u8 taskId)
             SummaryScreenHandleLeftRightInput(taskId, 1);
         }
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         if (SummaryScreen_CanForgetSelectedMove(taskId) == TRUE || pssData.selectedMoveIndex == 4)
         {
@@ -1015,7 +1015,7 @@ static void sub_809E260(u8 taskId)
             sub_809F9D0(taskId, pssData.selectedMoveIndex);
         }
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         pssData.switchMoveIndex = 4;
         gSpecialVar_0x8005 = pssData.switchMoveIndex;
@@ -1028,17 +1028,17 @@ static void SummaryScreen_MoveSelect_HandleInput(u8 taskId)
     if (gPaletteFade.active)
         return;
 
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         gTasks[taskId].data[0] = 4;
         sub_809E8F0(taskId, -1, &pssData.selectedMoveIndex);
     }
-    else if (gMain.newKeys & DPAD_DOWN)
+    else if (JOY_NEW(DPAD_DOWN))
     {
         gTasks[taskId].data[0] = 4;
         sub_809E8F0(taskId, 1, &pssData.selectedMoveIndex);
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         if (pssData.selectedMoveIndex != 4 && !pssData.disableMoveOrderEditing)
         {
@@ -1063,7 +1063,7 @@ static void SummaryScreen_MoveSelect_HandleInput(u8 taskId)
             SummaryScreen_MoveSelect_Cancel(taskId);
         }
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         SummaryScreen_MoveSelect_Cancel(taskId);
@@ -1086,21 +1086,21 @@ static bool8 MonKnowsMultipleMoves(struct Pokemon *mon)
 
 static void sub_809E534(u8 taskId)
 {
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         gTasks[taskId].data[0] = 3;
         sub_809E8F0(taskId, -1, &pssData.switchMoveIndex);
     }
-    else if (gMain.newKeys & DPAD_DOWN)
+    else if (JOY_NEW(DPAD_DOWN))
     {
         gTasks[taskId].data[0] = 3;
         sub_809E8F0(taskId, 1, &pssData.switchMoveIndex);
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         sub_809E83C(taskId, 1);
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         sub_809E83C(taskId, -1);
     }
@@ -1908,7 +1908,7 @@ void sub_809F814(u8 taskId)
     {
         taskData[14]++;
     }
-    else if (gMain.newKeys & DPAD_UP)
+    else if (JOY_NEW(DPAD_UP))
     {
         gTasks[taskId].func = sub_809E260;
         taskData[0] = 4;
@@ -1916,7 +1916,7 @@ void sub_809F814(u8 taskId)
         pssData.selectedMoveIndex = taskData[15];
         sub_809E8F0(taskId, -1, &pssData.selectedMoveIndex);
     }
-    else if (gMain.newKeys & DPAD_DOWN)
+    else if (JOY_NEW(DPAD_DOWN))
     {
         gTasks[taskId].func = sub_809E260;
         taskData[0] = 4;
@@ -1924,7 +1924,7 @@ void sub_809F814(u8 taskId)
         pssData.selectedMoveIndex = taskData[15];
         sub_809E8F0(taskId, 1, &pssData.selectedMoveIndex);
     }
-    else if ((gMain.newKeys & DPAD_LEFT) || sub_80F9284() == 1)
+    else if (JOY_NEW(DPAD_LEFT) || sub_80F9284() == 1)
     {
         if (pssData.page != PSS_PAGE_BATTLE_MOVES)
         {
@@ -1938,7 +1938,7 @@ void sub_809F814(u8 taskId)
             sub_80A1654(1, taskData[15]);
         }
     }
-    else if ((gMain.newKeys & DPAD_RIGHT) || sub_80F9284() == 2)
+    else if (JOY_NEW(DPAD_RIGHT) || sub_80F9284() == 2)
     {
         if (pssData.page != pssData.lastPage)
         {
@@ -1952,7 +1952,7 @@ void sub_809F814(u8 taskId)
             sub_80A1654(1, taskData[15]);
         }
     }
-    else if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+    else if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         sub_80A1488(2, taskData[15]);
         sub_80A1654(2, taskData[15]);

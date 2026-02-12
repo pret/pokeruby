@@ -767,21 +767,21 @@ static void Task_EvolutionScene(u8 taskID)
             }
             break;
         case 4:
-            if (gMain.newKeys & DPAD_UP && sEvoCursorPos != 0)
+            if (JOY_NEW(DPAD_UP) && sEvoCursorPos != 0)
             {
                 PlaySE(SE_SELECT);
                 nullsub_6();
                 sEvoCursorPos = 0;
                 sub_802BC6C();
             }
-            if (gMain.newKeys & DPAD_DOWN && sEvoCursorPos == 0)
+            if (JOY_NEW(DPAD_DOWN) && sEvoCursorPos == 0)
             {
                 PlaySE(SE_SELECT);
                 nullsub_6();
                 sEvoCursorPos = 1;
                 sub_802BC6C();
             }
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 sub_8023AD8();
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[292]);
@@ -796,7 +796,7 @@ static void Task_EvolutionScene(u8 taskID)
                         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
                 }
             }
-            if (gMain.newKeys & B_BUTTON)
+            if (JOY_NEW(B_BUTTON))
             {
                 sub_8023AD8();
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[292]);
@@ -1121,21 +1121,21 @@ static void Task_TradeEvolutionScene(u8 taskID)
             }
             break;
         case 4:
-            if (gMain.newKeys & DPAD_UP && sEvoCursorPos != 0)
+            if (JOY_NEW(DPAD_UP) && sEvoCursorPos != 0)
             {
                 PlaySE(SE_SELECT);
                 EvoDummyFunc2();
                 sEvoCursorPos = 0;
                 sub_81150D8();
             }
-            if (gMain.newKeys & DPAD_DOWN && sEvoCursorPos == 0)
+            if (JOY_NEW(DPAD_DOWN) && sEvoCursorPos == 0)
             {
                 PlaySE(SE_SELECT);
                 EvoDummyFunc2();
                 sEvoCursorPos = 1;
                 sub_81150D8();
             }
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 Text_EraseWindowRect(&gUnknown_03004828->window, 0x18, 8, 0x1D, 0xD);
                 DestroyMenuCursor();
@@ -1155,7 +1155,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
                         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
                 }
             }
-            if (gMain.newKeys & B_BUTTON)
+            if (JOY_NEW(B_BUTTON))
             {
                 Text_EraseWindowRect(&gUnknown_03004828->window, 0x18, 8, 0x1D, 0xD);
                 DestroyMenuCursor();

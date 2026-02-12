@@ -637,7 +637,7 @@ static void MainCB2(void)
 static void Task_TitleScreenPhase1(u8 taskId)
 {
     //Skip to next phase when A, B, Start, or Select is pressed
-    if ((gMain.newKeys & A_B_START_SELECT) || gTasks[taskId].data[1] != 0)
+    if (JOY_NEW(A_B_START_SELECT) || gTasks[taskId].data[1] != 0)
     {
         gTasks[taskId].tSkipToNext = TRUE;
         gTasks[taskId].tCounter = 0;
@@ -682,7 +682,7 @@ static void Task_TitleScreenPhase1(u8 taskId)
 static void Task_TitleScreenPhase2(u8 taskId)
 {
     //Skip to next phase when A, B, Start, or Select is pressed
-    if ((gMain.newKeys & A_B_START_SELECT) || gTasks[taskId].tSkipToNext)
+    if (JOY_NEW(A_B_START_SELECT) || gTasks[taskId].tSkipToNext)
     {
         gTasks[taskId].tSkipToNext = TRUE;
         gTasks[taskId].tCounter = 0;
@@ -719,7 +719,7 @@ static void Task_TitleScreenPhase3(u8 taskId)
     REG_BLDALPHA = 0x1F0F;
     REG_BLDY = 0;
 
-    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & START_BUTTON))
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(START_BUTTON))
     {
         FadeOutBGM(4);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, FADE_COLOR_WHITE);

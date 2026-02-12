@@ -596,7 +596,7 @@ static void Task_HandlePopupMenuInput(u8 taskId)
             Menu_MoveCursor(1);
             return;
         }
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             func = PartyMenuGetPopupMenuFunc(gTasks[taskId].data[4],
@@ -606,7 +606,7 @@ static void Task_HandlePopupMenuInput(u8 taskId)
             func(taskId);
             return;
         }
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             Task_BattlePartyMenuCancel(taskId);

@@ -268,10 +268,10 @@ void Task_PokemonStorageSystem(u8 taskId)
             {
                 case -2:
                     task->data[3] = task->data[1];
-                    if (gMain.newKeys & DPAD_UP && --task->data[3] < 0)
+                    if (JOY_NEW(DPAD_UP) && --task->data[3] < 0)
                         task->data[3] = 3;
 
-                    if (gMain.newKeys & DPAD_DOWN && ++task->data[3] > 3)
+                    if (JOY_NEW(DPAD_DOWN) && ++task->data[3] > 3)
                         task->data[3] = 0;
                     if (task->data[1] != task->data[3])
                     {
@@ -310,13 +310,13 @@ void Task_PokemonStorageSystem(u8 taskId)
             }
             break;
         case 3:
-            if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+            if (JOY_NEW(A_BUTTON | B_BUTTON))
             {
                 StorageSystemClearMessageWindow();
                 Menu_PrintText(gUnknown_083B600C[task->data[1]].desc, 2, 15);
                 task->data[0] = 2;
             }
-            else if (gMain.newKeys & DPAD_UP)
+            else if (JOY_NEW(DPAD_UP))
             {
                 if (--task->data[1] < 0)
                     task->data[1] = 3;
@@ -326,7 +326,7 @@ void Task_PokemonStorageSystem(u8 taskId)
                 Menu_PrintText(gUnknown_083B600C[task->data[1]].desc, 2, 15);
                 task->data[0] = 2;
             }
-            else if (gMain.newKeys & DPAD_DOWN)
+            else if (JOY_NEW(DPAD_DOWN))
             {
                 if (++task->data[1] > 3)
                     task->data[1] = 0;
@@ -612,22 +612,22 @@ void sub_809635C(void)
 
 u8 sub_8096368(void)
 {
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         return 201;
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         return gUnknown_02038478->curBox;
     }
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         PlaySE(SE_SELECT);
         sub_809662C();
     }
-    else if (gMain.newKeys & DPAD_RIGHT)
+    else if (JOY_NEW(DPAD_RIGHT))
     {
         PlaySE(SE_SELECT);
         sub_80965F8();

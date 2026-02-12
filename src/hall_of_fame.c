@@ -737,7 +737,7 @@ static void sub_8142794(u8 taskID)
 
 static void sub_8142818(u8 taskID)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         FadeOutBGM(4);
         gTasks[taskID].func = sub_8142850;
@@ -960,7 +960,7 @@ static void sub_8142CC8(u8 taskID)
 static void sub_8142DF4(u8 taskID)
 {
     u16 i;
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         if (gTasks[taskID].tCurrTeamNo != 0) // prepare another team to view
         {
@@ -988,7 +988,7 @@ static void sub_8142DF4(u8 taskID)
             gTasks[taskID].func = sub_8142F78;
         }
     }
-    else if (gMain.newKeys & B_BUTTON) // turn off hall of fame PC
+    else if (JOY_NEW(B_BUTTON)) // turn off hall of fame PC
     {
         if (IsCryPlayingOrClearCrySongs())
         {
@@ -997,12 +997,12 @@ static void sub_8142DF4(u8 taskID)
         }
         gTasks[taskID].func = sub_8142F78;
     }
-    else if (gMain.newKeys & DPAD_UP && gTasks[taskID].tCurrPokeID != 0) // change poke -1
+    else if (JOY_NEW(DPAD_UP) && gTasks[taskID].tCurrPokeID != 0) // change poke -1
     {
         gTasks[taskID].tCurrPokeID--;
         gTasks[taskID].func = sub_8142CC8;
     }
-    else if (gMain.newKeys & DPAD_DOWN && gTasks[taskID].tCurrPokeID < gTasks[taskID].tPokesNo - 1) // change poke +1
+    else if (JOY_NEW(DPAD_DOWN) && gTasks[taskID].tCurrPokeID < gTasks[taskID].tPokesNo - 1) // change poke +1
     {
         gTasks[taskID].tCurrPokeID++;
         gTasks[taskID].func = sub_8142CC8;
@@ -1035,7 +1035,7 @@ static void sub_8142FEC(u8 taskID)
 
 static void sub_814302C(u8 taskID)
 {
-    if (Menu_UpdateWindowText() && gMain.newKeys & A_BUTTON)
+    if (Menu_UpdateWindowText() && JOY_NEW(A_BUTTON))
         gTasks[taskID].func = sub_8142F78;
 }
 

@@ -1486,23 +1486,23 @@ void Task_DecorationPCProcessMenuInput(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        if (gMain.newKeys & DPAD_UP)
+        if (JOY_NEW(DPAD_UP))
         {
             PlaySE(SE_SELECT);
             gUnknown_020388D4 = Menu_MoveCursor(-1);
             sub_80FE394();
         }
-        if (gMain.newKeys & DPAD_DOWN)
+        if (JOY_NEW(DPAD_DOWN))
         {
             PlaySE(SE_SELECT);
             gUnknown_020388D4 = Menu_MoveCursor(1);
             sub_80FE394();
         }
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             gUnknown_083EC604[gUnknown_020388D4].func(taskId);
-        } else if (gMain.newKeys & B_BUTTON)
+        } else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             gpu_pal_decompress_alloc_tag_and_upload(taskId);
@@ -1604,7 +1604,7 @@ void sub_80FE604(u8 taskId)
         {
             PlaySE(SE_SELECT);
             Menu_MoveCursor(1);
-        } else if (gMain.newKeys & A_BUTTON)
+        } else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             gUnknown_020388F6 = Menu_GetCursorPos();
@@ -1630,7 +1630,7 @@ void sub_80FE604(u8 taskId)
             {
                 sub_80FE728(taskId);
             }
-        } else if (gMain.newKeys & B_BUTTON)
+        } else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             sub_80FE728(taskId);
@@ -1757,7 +1757,7 @@ void sub_80FE948(u8 taskId)
                 sub_80FE894(taskId, 0, 1);
             }
         }
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             Menu_DestroyCursor();
             PlaySE(SE_SELECT);
@@ -1769,7 +1769,7 @@ void sub_80FE948(u8 taskId)
             {
                 gUnknown_083EC634[gTasks[taskId].data[11]].yesFunc(taskId);
             }
-        } else if (gMain.newKeys & B_BUTTON)
+        } else if (JOY_NEW(B_BUTTON))
         {
             Menu_DestroyCursor();
             PlaySE(SE_SELECT);
@@ -1993,7 +1993,7 @@ bool8 sub_80FEFA4(void)
 
 void sub_80FEFF4(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         LoadScrollIndicatorPalette();
         gTasks[taskId].func = sub_80FE868;
@@ -2755,11 +2755,11 @@ void sub_8100494(u8 taskId)
     }
     if (!gTasks[taskId].data[10])
     {
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             gTasks[taskId].data[10] = A_BUTTON;
         }
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             gTasks[taskId].data[10] = B_BUTTON;
         }
@@ -2776,7 +2776,7 @@ void sub_810065C(u8 taskId)
 
 void sub_81006A8(u8 taskId)
 {
-    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         sub_810065C(taskId);
     }
@@ -3288,7 +3288,7 @@ void sub_8101024(u8 taskId)
 
 void sub_81010F0(u8 taskId)
 {
-    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         sub_8100EEC(taskId);
     }

@@ -250,14 +250,14 @@ static void ReadKeys(void)
     // Remap L to A if the L=A option is enabled.
     if (gSaveBlock2.optionsButtonMode == 2)
     {
-        if (gMain.newKeys & L_BUTTON)
+        if (JOY_NEW(L_BUTTON))
             gMain.newKeys |= A_BUTTON;
 
         if (gMain.heldKeys & L_BUTTON)
             gMain.heldKeys |= A_BUTTON;
     }
 
-    if (gMain.newKeys & gMain.watchedKeysMask)
+    if (JOY_NEW(gMain.watchedKeysMask))
         gMain.watchedKeysPressed = TRUE;
 }
 

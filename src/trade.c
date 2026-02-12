@@ -1889,7 +1889,7 @@ static void sub_8049680(void)
     {
         TradeMenuMoveCursor(&gUnknown_03004824->tradeMenuCursorPosition, 3);
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         if (gUnknown_03004824->tradeMenuCursorPosition < PARTY_SIZE)
@@ -1912,7 +1912,7 @@ static void sub_8049680(void)
             sub_804ACD8(gUnknown_0820C14C[4], BG_CHAR_ADDR(4) + 32 * gUnknown_03004824->unk_007e, 20);
         }
     }
-    if (gMain.newKeys & R_BUTTON)
+    if (JOY_NEW(R_BUTTON))
     {
         for (i = 0; i < 10; i ++)
         {
@@ -1943,7 +1943,7 @@ static void sub_8049860(void)
         PlaySE(SE_SELECT);
         gUnknown_03004824->unk_007c = Menu_MoveCursor(+1);
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         if (Menu_GetCursorPos() == 0)
@@ -1962,7 +1962,7 @@ static void sub_8049860(void)
             gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx].invisible = TRUE;
         }
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         sub_8049804();
@@ -1971,7 +1971,7 @@ static void sub_8049860(void)
 
 static void sub_8049954(void)
 {
-    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         sub_8049804();
@@ -2044,7 +2044,7 @@ static void sub_8049AC0(void)
         PlaySE(SE_SELECT);
         gUnknown_03004824->unk_007c = Menu_MoveCursor(+1);
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         if (Menu_GetCursorPos() == 0)
@@ -2062,7 +2062,7 @@ static void sub_8049AC0(void)
         }
         gUnknown_03004824->unk_007b = 100;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         sub_804AADC(3, 1);
         if (Menu_GetCursorPos() == 0)
@@ -2087,7 +2087,7 @@ static void sub_8049BC0(void)
         PlaySE(SE_SELECT);
         gUnknown_03004824->unk_007c = Menu_MoveCursor(+1);
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         if (Menu_GetCursorPos() == 0)
@@ -2104,7 +2104,7 @@ static void sub_8049BC0(void)
             sub_8049804();
         }
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         sub_8049804();
@@ -2144,7 +2144,7 @@ static void DisplayMessageAndContinueTask(void)
 
 static void sub_8049D44(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         sub_804A840(0);
@@ -4765,7 +4765,7 @@ static bool8 sub_804C29C(void)
             {
                 return TRUE;
             }
-            else if (gMain.newKeys & A_BUTTON)
+            else if (JOY_NEW(A_BUTTON))
             {
                 gUnknown_03004828->unk_00c4 ++;
             }

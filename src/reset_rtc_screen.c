@@ -349,7 +349,7 @@ void Task_ResetRtc_1(u8 taskId)
     u8 selection = data[2];
     const struct ResetRtcStruct *selectionInfo = &gUnknown_08376420[selection - 1];
 
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].func = Task_ResetRtc_2;
         data[1] = 0;
@@ -358,7 +358,7 @@ void Task_ResetRtc_1(u8 taskId)
         return;
     }
 
-    if (gMain.newKeys & DPAD_RIGHT)
+    if (JOY_NEW(DPAD_RIGHT))
     {
         if (selectionInfo->right)
         {
@@ -368,7 +368,7 @@ void Task_ResetRtc_1(u8 taskId)
         }
     }
 
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         if (selectionInfo->left)
         {
@@ -380,7 +380,7 @@ void Task_ResetRtc_1(u8 taskId)
 
     if (selection == 5)
     {
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             gLocalTime.days = data[3];
             gLocalTime.hours = data[4];
@@ -483,12 +483,12 @@ void Task_ShowResetRtcPrompt(u8 taskId)
         ResetRtcScreen_ShowMessage(gSystemText_ResetRTCPrompt);
         data[0]++;
     case 1:
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             DestroyTask(taskId);
             DoSoftReset();
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             DestroyTask(taskId);
@@ -572,7 +572,7 @@ void Task_ResetRtcScreen(u8 taskId)
         data[0] = 5;
         // fall through
     case 5:
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             BeginNormalPaletteFade(0xFFFFFFFF, 1, 0, 16, FADE_COLOR_WHITE);
             data[0] = 6;
@@ -679,7 +679,7 @@ void debug_sub_806F9E4(u8 taskId)
         }
         else
         {
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 Menu_EraseScreen();
                 DestroyTask(taskId);

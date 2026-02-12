@@ -665,7 +665,7 @@ static void sub_810BF7C(u8 taskId)
                 sub_810BF38(FALSE);
             }
         }
-        else if (gMain.newKeys & SELECT_BUTTON)
+        else if (JOY_NEW(SELECT_BUTTON))
         {
             if (gUnknown_02039248.unk1 + gUnknown_02039248.unk0 != gUnknown_02039248.unk2)
             {
@@ -675,7 +675,7 @@ static void sub_810BF7C(u8 taskId)
                 gTasks[taskId].func = sub_810C0C8;
             }
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             if (gUnknown_02039248.unk1 + gUnknown_02039248.unk0 == gUnknown_02039248.unk2)
@@ -688,7 +688,7 @@ static void sub_810BF7C(u8 taskId)
                 sub_810C368(taskId);
             }
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             gSpecialVar_Result = 0xffff;
@@ -735,14 +735,14 @@ static void sub_810C0C8(u8 taskId)
             sub_810C1C8(taskId, 1);
         }
     }
-    else if (gMain.newKeys & A_BUTTON || gMain.newKeys & SELECT_BUTTON)
+    else if (JOY_NEW(A_BUTTON) || JOY_NEW(SELECT_BUTTON))
     {
         PlaySE(SE_SELECT);
         sub_810C1C8(taskId, 0);
         sub_810C23C(taskId);
         gTasks[taskId].func = sub_810BF7C;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         sub_810C1C8(taskId, 0);
@@ -854,12 +854,12 @@ static void sub_810C40C(u8 taskId)
             Menu_MoveCursor(+1);
         }
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         gUnknown_083F7EF4[gUnknown_03000758[Menu_GetCursorPos()]].func(taskId);
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         sub_810C748(taskId);
@@ -930,7 +930,7 @@ static void sub_810C668(u8 taskId)
 
 static void sub_810C6DC(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         sub_810C668(taskId);
     }

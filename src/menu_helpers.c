@@ -224,11 +224,11 @@ u8 sub_80F9284(void)
 {
     if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
     {
-        if (gMain.newKeys & L_BUTTON)
+        if (JOY_NEW(L_BUTTON))
         {
             return 1;
         }
-        if (gMain.newKeys & R_BUTTON)
+        if (JOY_NEW(R_BUTTON))
         {
             return 2;
         }

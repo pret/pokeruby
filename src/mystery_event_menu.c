@@ -113,7 +113,7 @@ static void CB2_MysteryEventMenu(void)
             MenuPrintMessageDefaultCoords(gSystemText_LoadEventPressA);
             gMain.state++;
         }
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             CloseLink();
@@ -133,7 +133,7 @@ static void CB2_MysteryEventMenu(void)
             gMain.state = 13;
             break;
         }
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             sub_8007F4C();
@@ -141,7 +141,7 @@ static void CB2_MysteryEventMenu(void)
             Menu_PrintText(gSystemText_LoadingEvent, 7, 6);
             gMain.state++;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             CloseLink();
@@ -179,7 +179,7 @@ static void CB2_MysteryEventMenu(void)
                 break;
             }
         }
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             CloseLink();
@@ -193,7 +193,7 @@ static void CB2_MysteryEventMenu(void)
         {
             goto label;
         }
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             sub_8007F4C();
@@ -201,7 +201,7 @@ static void CB2_MysteryEventMenu(void)
             Menu_PrintText(gSystemText_LoadingEvent, 7, 6);
             gMain.state++;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             CloseLink();
@@ -258,7 +258,7 @@ static void CB2_MysteryEventMenu(void)
             }
             break;
         }
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             CloseLink();
@@ -307,7 +307,7 @@ static void CB2_MysteryEventMenu(void)
         }
         break;
     case 14:
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             gMain.state++;
@@ -360,7 +360,7 @@ void debug_sub_815D04C(u8 taskId)
         gTasks[taskId].data[0]++;
     }
 
-    if (gMain.newKeys & 0x20)
+    if (JOY_NEW(DPAD_LEFT))
     {
         if (gTasks[taskId].data[1] == 0)
             gTasks[taskId].data[1] = gUnknown_Debug_842E350 - 1;
@@ -368,7 +368,7 @@ void debug_sub_815D04C(u8 taskId)
             gTasks[taskId].data[1]--;
         gTasks[taskId].data[0] = 0;
     }
-    if (gMain.newKeys & 0x10)
+    if (JOY_NEW(DPAD_RIGHT))
     {
         if (gTasks[taskId].data[1] == gUnknown_Debug_842E350 - 1)
             gTasks[taskId].data[1] = 0;
@@ -376,7 +376,7 @@ void debug_sub_815D04C(u8 taskId)
             gTasks[taskId].data[1]++;
         gTasks[taskId].data[0] = 0;
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         // TODO: fix this
         s32 var = gTasks[taskId].data[1];
@@ -473,7 +473,7 @@ void debug_sub_815D1D8(void)
         }
         break;
     case 10:
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             gMain.state++;

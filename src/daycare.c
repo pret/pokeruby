@@ -1019,7 +1019,7 @@ static void GetDaycareLevelMenuLevelText(struct DayCare *daycare, u8 *dest)
 
 static void HandleDaycareLevelMenuInput(u8 taskId)
 {
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         if (gTasks[taskId].data[0] != 0)
         {
@@ -1028,7 +1028,7 @@ static void HandleDaycareLevelMenuInput(u8 taskId)
             PlaySE(SE_SELECT);
         }
     }
-    else if (gMain.newKeys & DPAD_DOWN)
+    else if (JOY_NEW(DPAD_DOWN))
     {
         if (gTasks[taskId].data[0] != 2)
         {
@@ -1037,7 +1037,7 @@ static void HandleDaycareLevelMenuInput(u8 taskId)
             PlaySE(SE_SELECT);
         }
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         Menu_DestroyCursor();
         PlaySE(SE_SELECT);
@@ -1046,7 +1046,7 @@ static void HandleDaycareLevelMenuInput(u8 taskId)
         Menu_EraseWindowRect(15, 6, 29, 13);
         EnableBothScriptContexts();
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         Menu_DestroyCursor();
         gLastFieldPokeMenuOpened = gSpecialVar_Result = 2;

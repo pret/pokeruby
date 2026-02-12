@@ -199,19 +199,19 @@ void sub_80BA384(u8 taskId) // Task_HandleDrawingSoundCheckMenuText
 
 bool8 Task_ProcessSoundCheckMenuInput(u8 taskId)
 {
-    if (gMain.newKeys & R_BUTTON) // driver test
+    if (JOY_NEW(R_BUTTON)) // driver test
     {
         gTasks[taskId].func = Task_DrawDriverTestMenu;
     }
-    else if (gMain.newKeys & L_BUTTON)
+    else if (JOY_NEW(L_BUTTON))
     {
         gTasks[taskId].func = sub_80BAF84;
     }
-    else if (gMain.newKeys & START_BUTTON)
+    else if (JOY_NEW(START_BUTTON))
     {
         gTasks[taskId].func = Task_InitCryTest;
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         if (gTasks[taskId].tWindowSelected != 0) // is playing?
         {
@@ -258,7 +258,7 @@ bool8 Task_ProcessSoundCheckMenuInput(u8 taskId)
             }
         }
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         m4aSongNumStart(SE_SELECT);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
@@ -454,7 +454,7 @@ void Task_DrawDriverTestMenu(u8 taskId) // Task_DrawDriverTestMenu
 
 void Task_ProcessDriverTestInput(u8 taskId)
 {
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         REG_DISPCNT = 0x7140;
         REG_WIN0H = WIN_RANGE(17, 223);
@@ -481,13 +481,13 @@ void Task_ProcessDriverTestInput(u8 taskId)
         sub_80BAE10(old, sDriverTestSelection);
         return;
     }
-    if (gMain.newKeys & START_BUTTON) // _080BAAF8
+    if (JOY_NEW(START_BUTTON)) // _080BAAF8
     {
         gUnknown_020387D8 ^= 1;
         PrintDriverTestMenuText();
         return;
     }
-    if (gMain.newKeys & SELECT_BUTTON) // _080BAB14
+    if (JOY_NEW(SELECT_BUTTON)) // _080BAB14
     {
         gUnknown_020387D9 ^= 1;
         PrintDriverTestMenuText();
@@ -518,7 +518,7 @@ void Task_ProcessDriverTestInput(u8 taskId)
         PrintDriverTestMenuText();
         return;
     }
-    if (gMain.newKeys & A_BUTTON) // _080BAB78
+    if (JOY_NEW(A_BUTTON)) // _080BAB78
     {
         u8 divide, remaining;
 
@@ -728,7 +728,7 @@ void sub_80BB038(u8 taskId)
         }
     }
      // _080BB0A2
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         REG_DISPCNT = 0x7140;
         REG_WIN0H = WIN_RANGE(17, 223);
@@ -737,7 +737,7 @@ void sub_80BB038(u8 taskId)
         gTasks[taskId].func = Task_InitSoundCheckMenu;
         return;
     }
-    if (gMain.newKeys & A_BUTTON) // _080BB104
+    if (JOY_NEW(A_BUTTON)) // _080BB104
     {
         s8 panpot = gUnknown_083D03F8[sSoundTestParams[CRY_TEST_PANPOT]];
         if (panpot != -128)
@@ -764,13 +764,13 @@ void sub_80BB038(u8 taskId)
         sSoundTestParams[CRY_TEST_PROGRESS] = 0;
         return;
     }
-    if (gMain.newKeys & L_BUTTON) // _080BB15E
+    if (JOY_NEW(L_BUTTON)) // _080BB15E
     {
         sSoundTestParams[CRY_TEST_PANPOT]++;
         if (sSoundTestParams[CRY_TEST_PANPOT] > 4)
             sSoundTestParams[CRY_TEST_PANPOT] = 0;
     }
-    if (gMain.newKeys & R_BUTTON) // _080BB176
+    if (JOY_NEW(R_BUTTON)) // _080BB176
     {
         sSoundTestParams[CRY_TEST_PANPOT]--;
         if (sSoundTestParams[CRY_TEST_PANPOT] < 0)
@@ -1257,11 +1257,11 @@ void Task_ProcessCryTestInput(u8 taskId)
 {
     UpdateCryWaveformWindow(3);
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         CryScreenPlayButton(gSoundTestCryNum);
     }
-    if (gMain.newKeys & R_BUTTON)
+    if (JOY_NEW(R_BUTTON))
     {
         StopCryAndClearCrySongs();
     }
@@ -1277,7 +1277,7 @@ void Task_ProcessCryTestInput(u8 taskId)
             gSoundTestCryNum = 1;
         PrintCryNumber();
     }
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         REG_DISPCNT = 0x7140;
         REG_WIN0H = WIN_RANGE(17, 223);

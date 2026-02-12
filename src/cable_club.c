@@ -227,7 +227,7 @@ static bool32 sub_8082DF4(u8 taskId)
 
 static bool32 sub_8082E28(u8 taskId)
 {
-    if ((gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON)
      && IsLinkConnectionEstablished() == FALSE)
     {
         gTasks[taskId].func = sub_80833EC;
@@ -241,7 +241,7 @@ static bool32 sub_8082E6C(u8 taskId)
     if (IsLinkConnectionEstablished())
         SetSuppressLinkErrorMessage(TRUE);
 
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].func = sub_80833EC;
         return TRUE;
@@ -337,7 +337,7 @@ static void sub_808303C(u8 taskId)
 
     sub_8082D60(taskId, linkPlayerCount);
 
-    if (!(gMain.newKeys & A_BUTTON))
+    if (!JOY_NEW(A_BUTTON))
         return;
 
 #if ENGLISH

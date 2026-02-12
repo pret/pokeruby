@@ -257,7 +257,7 @@ static void sub_8146480(u8 taskid)
             sub_81466E8(taskid, -1);
         if ((gMain.newAndRepeatedKeys & (DPAD_RIGHT | DPAD_LEFT | DPAD_UP | DPAD_DOWN)) == DPAD_DOWN)
             sub_81466E8(taskid, 1);
-        if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
             sub_8146440(taskid);
     }
 }

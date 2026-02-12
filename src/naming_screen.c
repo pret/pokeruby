@@ -663,22 +663,22 @@ static void InputState_Disabled(struct Task *task)
 static void InputState_Enabled(struct Task *task)
 {
     task->tKeyboardEvent = 0;
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         task->tKeyboardEvent = KBEVENT_PRESSED_A;
         return;
     }
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         task->tKeyboardEvent = KBEVENT_PRESSED_B;
         return;
     }
-    if (gMain.newKeys & SELECT_BUTTON)
+    if (JOY_NEW(SELECT_BUTTON))
     {
         task->tKeyboardEvent = KBEVENT_PRESSED_SELECT;
         return;
     }
-    if (gMain.newKeys & START_BUTTON)
+    if (JOY_NEW(START_BUTTON))
     {
         task->tKeyboardEvent = KBEVENT_PRESSED_START;
         MoveCursorToOKButton();

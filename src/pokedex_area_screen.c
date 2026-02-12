@@ -1142,11 +1142,11 @@ static void DebugCB_WaitButton(void)
     switch (gPokedexAreaScreenPtr->state)
     {
         case 0:
-            if (gMain.newKeys & B_BUTTON)
+            if (JOY_NEW(B_BUTTON))
             {
                 SetCallback(DebugCB_GoBack);
             }
-            else if (gMain.newKeys & DPAD_RIGHT || (gMain.newKeys & R_BUTTON && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+            else if (JOY_NEW(DPAD_RIGHT) || (JOY_NEW(R_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
             {
                 SetCallback(DebugCB_GoNext);
             }
@@ -1277,12 +1277,12 @@ static void Task_PokedexAreaScreen_1(u8 taskId)
                 return;
             break;
         case 1:
-            if (gMain.newKeys & B_BUTTON)
+            if (JOY_NEW(B_BUTTON))
             {
                 gTasks[taskId].data[1] = 1;
                 PlaySE(SE_PC_OFF);
             }
-            else if (gMain.newKeys & DPAD_RIGHT || (gMain.newKeys & R_BUTTON && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+            else if (JOY_NEW(DPAD_RIGHT) || (JOY_NEW(R_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
             {
                 gTasks[taskId].data[1] = 2;
                 PlaySE(SE_DEX_PAGE);

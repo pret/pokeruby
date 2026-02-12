@@ -201,7 +201,7 @@ static void sub_80A9DD8(u8 taskId)
 
 static void sub_80A9E04(u8 taskId)
 {
-    if (gMain.newKeys == 2)
+    if (gMain.newKeys == B_BUTTON)
         gTasks[(u8)gTasks[taskId].data[10]].func = sub_80A9D30;
 }
 
@@ -464,7 +464,7 @@ static void sub_80AA064(void)
     BuildOamBuffer();
     RunTasks();
     UpdatePaletteFade();
-    if (gMain.newKeys == 4)
+    if (gMain.newKeys == SELECT_BUTTON)
         SetMainCallback2(c2_exit_to_overworld_1_sub_8080DEC);
 }
 
