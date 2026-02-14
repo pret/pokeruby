@@ -123,24 +123,26 @@
 #define STATUS2_TORMENT               (1 << 31)
 
 // Seems like per-battler statuses. Not quite sure how to categorize these
-#define STATUS3_LEECHSEED_BATTLER       0x3
-#define STATUS3_LEECHSEED               0x4
-#define STATUS3_ALWAYS_HITS             0x18    // two bits
-#define STATUS3_PERISH_SONG             0x20
-#define STATUS3_ON_AIR                  0x40
-#define STATUS3_UNDERGROUND             0x80
-#define STATUS3_MINIMIZED               0x100
-#define STATUS3_ROOTED                  0x400
-#define STATUS3_CHARGED_UP              0x200
-#define STATUS3_YAWN                    0x1800  // two bits
-#define STATUS3_IMPRISONED_OTHERS       0x2000
-#define STATUS3_GRUDGE                  0x4000
-#define STATUS3_CANT_SCORE_A_CRIT       0x8000
-#define STATUS3_MUDSPORT                0x10000
-#define STATUS3_WATERSPORT              0x20000
-#define STATUS3_UNDERWATER              0x40000
-#define STATUS3_INTIMIDATE_POKES        0x80000
-#define STATUS3_TRACE                   0x100000
+#define STATUS3_LEECHSEED_BATTLER       (1 << 0 | 1 << 1) // The battler to receive HP from Leech Seed
+#define STATUS3_LEECHSEED               (1 << 2)
+#define STATUS3_ALWAYS_HITS             (1 << 3 | 1 << 4)
+#define STATUS3_ALWAYS_HITS_TURN(num)   (((num) << 3) & STATUS3_ALWAYS_HITS) // "Always Hits" is set as a 2 turn timer, i.e. next turn is the last turn when it's active
+#define STATUS3_PERISH_SONG             (1 << 5)
+#define STATUS3_ON_AIR                  (1 << 6)
+#define STATUS3_UNDERGROUND             (1 << 7)
+#define STATUS3_MINIMIZED               (1 << 8)
+#define STATUS3_CHARGED_UP              (1 << 9)
+#define STATUS3_ROOTED                  (1 << 10)
+#define STATUS3_YAWN                    (1 << 11 | 1 << 12) // Number of turns to sleep
+#define STATUS3_YAWN_TURN(num)          (((num) << 11) & STATUS3_YAWN)
+#define STATUS3_IMPRISONED_OTHERS       (1 << 13)
+#define STATUS3_GRUDGE                  (1 << 14)
+#define STATUS3_CANT_SCORE_A_CRIT       (1 << 15)
+#define STATUS3_MUDSPORT                (1 << 16)
+#define STATUS3_WATERSPORT              (1 << 17)
+#define STATUS3_UNDERWATER              (1 << 18)
+#define STATUS3_INTIMIDATE_POKES        (1 << 19)
+#define STATUS3_TRACE                   (1 << 20)
 #define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER)
 
 // Not really sure what a "hitmarker" is.

@@ -1157,7 +1157,7 @@ u8 TurnBasedEffects(void)
                 break;
             case ENDTURN_LOCK_ON:  // lock-on decrement
                 if (gStatuses3[gActiveBattler] & STATUS3_ALWAYS_HITS)
-                    gStatuses3[gActiveBattler] -= 0x8;
+                    gStatuses3[gActiveBattler] -= STATUS3_ALWAYS_HITS_TURN(1);
                 gBattleStruct->turnEffectsTracker++;
                 break;
             case ENDTURN_CHARGE:  // charge
@@ -1173,7 +1173,7 @@ u8 TurnBasedEffects(void)
             case ENDTURN_YAWN:  // yawn
                 if (gStatuses3[gActiveBattler] & STATUS3_YAWN)
                 {
-                    gStatuses3[gActiveBattler] -= 0x800;
+                    gStatuses3[gActiveBattler] -= STATUS3_YAWN_TURN(1);
                     if (!(gStatuses3[gActiveBattler] & STATUS3_YAWN) && !(gBattleMons[gActiveBattler].status1 & STATUS1_ANY)
                      && gBattleMons[gActiveBattler].ability != ABILITY_VITAL_SPIRIT
                      && gBattleMons[gActiveBattler].ability != ABILITY_INSOMNIA && !UproarWakeUpCheck(gActiveBattler))

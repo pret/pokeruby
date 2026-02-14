@@ -3546,7 +3546,7 @@ void SwitchInClearSetData(void)
              && (gDisableStructs[i].battlerWithSureHit == gActiveBattler))
             {
                 gStatuses3[i] &= ~STATUS3_ALWAYS_HITS;
-                gStatuses3[i] |= 0x10;
+                gStatuses3[i] |= STATUS3_ALWAYS_HITS_TURN(2);
             }
         }
     }

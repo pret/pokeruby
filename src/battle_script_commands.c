@@ -7876,7 +7876,7 @@ static void atkA6_settypetorandomresistance(void)
 static void atkA7_setalwayshitflag(void)
 {
     gStatuses3[gBattlerTarget] &= ~(STATUS3_ALWAYS_HITS);
-    gStatuses3[gBattlerTarget] |= 0x10;
+    gStatuses3[gBattlerTarget] |= STATUS3_ALWAYS_HITS_TURN(2);
     gDisableStructs[gBattlerTarget].battlerWithSureHit = gBattlerAttacker;
     gBattlescriptCurrInstr++;
 }
@@ -8934,7 +8934,7 @@ static void atkD7_setyawn(void)
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     else
     {
-        gStatuses3[gBattlerTarget] |= 0x1000;
+        gStatuses3[gBattlerTarget] |= STATUS3_YAWN_TURN(2);
         gBattlescriptCurrInstr += 5;
     }
 }
