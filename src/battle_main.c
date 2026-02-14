@@ -4594,14 +4594,14 @@ u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreMovePriorities)
     // Check for abilities that boost speed in weather.
     if (WEATHER_HAS_EFFECT)
     {
-        if ((gBattleMons[bank1].ability == ABILITY_SWIFT_SWIM && (gBattleWeather & WEATHER_RAIN_ANY))
-            || (gBattleMons[bank1].ability == ABILITY_CHLOROPHYLL && (gBattleWeather & WEATHER_SUN_ANY)))
+        if ((gBattleMons[bank1].ability == ABILITY_SWIFT_SWIM && (gBattleWeather & B_WEATHER_RAIN))
+            || (gBattleMons[bank1].ability == ABILITY_CHLOROPHYLL && (gBattleWeather & B_WEATHER_SUN)))
             bank1SpeedMultiplier = 2;
         else
             bank1SpeedMultiplier = 1;
 
-        if ((gBattleMons[bank2].ability == ABILITY_SWIFT_SWIM && (gBattleWeather & WEATHER_RAIN_ANY))
-            || (gBattleMons[bank2].ability == ABILITY_CHLOROPHYLL && (gBattleWeather & WEATHER_SUN_ANY)))
+        if ((gBattleMons[bank2].ability == ABILITY_SWIFT_SWIM && (gBattleWeather & B_WEATHER_RAIN))
+            || (gBattleMons[bank2].ability == ABILITY_CHLOROPHYLL && (gBattleWeather & B_WEATHER_SUN)))
             bank2SpeedMultiplier = 2;
         else
             bank2SpeedMultiplier = 1;
