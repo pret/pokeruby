@@ -374,26 +374,26 @@ static void sub_8136638(void)
     switch (gUnknown_02039304->unk50)
     {
         case 0:
-            if (gMain.heldKeys & DPAD_UP)
+            if (JOY_HELD(DPAD_UP))
             {
                 PlaySE(SE_SELECT);
                 sub_80F5060(TRUE);
                 move_anim_execute();
                 gUnknown_02039304->unk50 = 1;
             }
-            else if (gMain.heldKeys & DPAD_DOWN)
+            else if (JOY_HELD(DPAD_DOWN))
             {
                 PlaySE(SE_SELECT);
                 sub_80F5060(FALSE);
                 move_anim_execute();
                 gUnknown_02039304->unk50 = 1;
             }
-            else if (gMain.newKeys & B_BUTTON)
+            else if (JOY_NEW(B_BUTTON))
             {
                 PlaySE(SE_SELECT);
                 gUnknown_02039304->unk50 = 3;
             }
-            else if (gMain.newKeys & A_BUTTON)
+            else if (JOY_NEW(A_BUTTON))
             {
                 PlaySE(SE_SELECT);
                 if (gPokenavStructPtr->unk87DC == gPokenavStructPtr->unk87DA - 1)
@@ -450,7 +450,7 @@ static void sub_8136638(void)
             }
             break;
         case 7:
-            if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+            if (JOY_NEW(A_BUTTON | B_BUTTON))
             {
                 sub_8136D8C();
                 gUnknown_02039304->unk50 = 0;
@@ -544,7 +544,7 @@ static void sub_81369CC(void)
             gUnknown_02039304->unk50++;
             break;
         case 1:
-            if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+            if (JOY_NEW(A_BUTTON | B_BUTTON))
                 gUnknown_02039304->unk50++;
             break;
         case 2:
@@ -571,7 +571,7 @@ static void sub_81369CC(void)
             }
             break;
         case 5:
-            if (gMain.newKeys & (A_BUTTON | B_BUTTON) && !sub_8136D00())
+            if (JOY_NEW(A_BUTTON | B_BUTTON) && !sub_8136D00())
             {
                 PokeblockClearIfExists((u8)gSpecialVar_ItemId);
                 launch_c3_walk_stairs_and_run_once(sub_8136B44);

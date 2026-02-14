@@ -318,7 +318,7 @@ static void sub_812238C(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        if (gMain.newAndRepeatedKeys & 0x40)
+        if (JOY_REPT(0x40))
         {
             if (Menu_GetCursorPos() != 0)
             {
@@ -327,7 +327,7 @@ static void sub_812238C(u8 taskId)
             }
             return;
         }
-        if (gMain.newAndRepeatedKeys & 0x80)
+        if (JOY_REPT(0x80))
         {
             if (Menu_GetCursorPos() != 3)
             {
@@ -336,7 +336,7 @@ static void sub_812238C(u8 taskId)
             }
             return;
         }
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             TaskFunc popupMenuFunc;
 
@@ -349,7 +349,7 @@ static void sub_812238C(u8 taskId)
             popupMenuFunc(taskId);
             return;
         }
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             BattleTowerEntryMenuCallback_Exit(taskId);
             return;
@@ -370,7 +370,7 @@ static void sub_8122450(u8 taskId)
 // Wait for A or B press
 static void sub_8122480(u8 taskId)
 {
-    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         BattleTowerEntryMenuCallback_Exit(taskId);
 }
 
@@ -475,7 +475,7 @@ static void sub_8122728(u8 taskId)
     if (gPartyMenuMessage_IsPrinting == 1)
         return;
 
-    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         Menu_EraseWindowRect(0, 14, 29, 19);
         Menu_DestroyCursor();
@@ -836,7 +836,7 @@ static void Task_DaycareStorageMenu8122EAC(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        if (gMain.newAndRepeatedKeys & 0x40)
+        if (JOY_REPT(0x40))
         {
             if (Menu_GetCursorPos() != 0)
             {
@@ -845,7 +845,7 @@ static void Task_DaycareStorageMenu8122EAC(u8 taskId)
             }
             return;
         }
-        if (gMain.newAndRepeatedKeys & 0x80)
+        if (JOY_REPT(0x80))
         {
             if (Menu_GetCursorPos() != 3)
             {
@@ -854,7 +854,7 @@ static void Task_DaycareStorageMenu8122EAC(u8 taskId)
             }
             return;
         }
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             TaskFunc popupMenuFunc;
 
@@ -867,7 +867,7 @@ static void Task_DaycareStorageMenu8122EAC(u8 taskId)
             popupMenuFunc(taskId);
             return;
         }
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             DaycareStorageMenuCallback_Exit(taskId);
             return;

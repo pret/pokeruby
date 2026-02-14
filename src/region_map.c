@@ -211,30 +211,30 @@ static u8 sub_80FAB78(void)
 
     gRegionMap->cursorDeltaX = 0;
     gRegionMap->cursorDeltaY = 0;
-    if ((gMain.heldKeys & DPAD_UP) && gRegionMap->cursorPosY > MAPCURSOR_Y_MIN)
+    if (JOY_HELD(DPAD_UP) && gRegionMap->cursorPosY > MAPCURSOR_Y_MIN)
     {
         gRegionMap->cursorDeltaY = -1;
         event = INPUT_EVENT_DPAD;
     }
-    if ((gMain.heldKeys & DPAD_DOWN) && gRegionMap->cursorPosY < MAPCURSOR_Y_MAX)
+    if (JOY_HELD(DPAD_DOWN) && gRegionMap->cursorPosY < MAPCURSOR_Y_MAX)
     {
         gRegionMap->cursorDeltaY = 1;
         event = INPUT_EVENT_DPAD;
     }
-    if ((gMain.heldKeys & DPAD_LEFT) && gRegionMap->cursorPosX > MAPCURSOR_X_MIN)
+    if (JOY_HELD(DPAD_LEFT) && gRegionMap->cursorPosX > MAPCURSOR_X_MIN)
     {
         gRegionMap->cursorDeltaX = -1;
         event = INPUT_EVENT_DPAD;
     }
-    if ((gMain.heldKeys & DPAD_RIGHT) && gRegionMap->cursorPosX < MAPCURSOR_X_MAX)
+    if (JOY_HELD(DPAD_RIGHT) && gRegionMap->cursorPosX < MAPCURSOR_X_MAX)
     {
         gRegionMap->cursorDeltaX = 1;
         event = INPUT_EVENT_DPAD;
     }
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
         event = INPUT_EVENT_A_BUTTON;
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
         event = INPUT_EVENT_B_BUTTON;
 
     if (event == INPUT_EVENT_DPAD)
@@ -282,30 +282,30 @@ static u8 sub_80FAD04(void)
 
     gRegionMap->unk6A = 0;
     gRegionMap->unk68 = 0;
-    if ((gMain.heldKeys & DPAD_UP) && gRegionMap->scrollY > -52)
+    if (JOY_HELD(DPAD_UP) && gRegionMap->scrollY > -52)
     {
         gRegionMap->unk68 = -1;
         event = INPUT_EVENT_DPAD;
     }
-    if ((gMain.heldKeys & DPAD_DOWN) && gRegionMap->scrollY < 60)
+    if (JOY_HELD(DPAD_DOWN) && gRegionMap->scrollY < 60)
     {
         gRegionMap->unk68 = 1;
         event = INPUT_EVENT_DPAD;
     }
-    if ((gMain.heldKeys & DPAD_LEFT) && gRegionMap->scrollX > -44)
+    if (JOY_HELD(DPAD_LEFT) && gRegionMap->scrollX > -44)
     {
         gRegionMap->unk6A = -1;
         event = INPUT_EVENT_DPAD;
     }
-    if ((gMain.heldKeys & DPAD_RIGHT) && gRegionMap->scrollX < 172)
+    if (JOY_HELD(DPAD_RIGHT) && gRegionMap->scrollX < 172)
     {
         gRegionMap->unk6A = 1;
         event = INPUT_EVENT_DPAD;
     }
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
         event = INPUT_EVENT_A_BUTTON;
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
         event = INPUT_EVENT_B_BUTTON;
 
     if (event == INPUT_EVENT_DPAD)
@@ -1724,7 +1724,7 @@ void debug_sub_8110D84(void)
         {
             debug_sub_8110CCC();
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             sub_80FBCA0();
             sub_80FAEC4();
@@ -1743,7 +1743,7 @@ void debug_sub_8110D84(void)
         {
             debug_sub_8110CCC();
         }
-        if (gMain.newKeys & A_BUTTON)  // no "else if" like above?
+        if (JOY_NEW(A_BUTTON))  // no "else if" like above?
         {
             sub_80FBCA0();
             sub_80FAEC4();

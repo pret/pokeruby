@@ -687,12 +687,12 @@ bool8 TrainerCard_WaitForFadeInToFinish(struct Task *task)
 
 bool8 TrainerCard_WaitForKeys(struct Task *task)
 {
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         gTrainerCardPtr->current_state = 5; /* Jump to fadeout state */
         return TRUE;
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         /* It appears that it was previously possible to return the the front side
            after viewing the back side. This was probably removed due to being
@@ -709,7 +709,7 @@ bool8 TrainerCard_WaitForKeys(struct Task *task)
         return TRUE;
     }
 #if DEBUG
-    else if (gDebug_03000748 && gMain.newKeys & R_BUTTON)
+    else if (gDebug_03000748 && JOY_NEW(R_BUTTON))
     {
         gTrainerCardPtr->starCount++;
         gTrainerCardPtr->starCount %= 5;

@@ -1552,7 +1552,7 @@ static bool8 sub_80A4F74(u8 a)
 {
     bool8 retVal = FALSE;
 
-    if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+    if (JOY_REPT(DPAD_ANY) == DPAD_UP)
     {
         if (gBagPocketScrollStates[sCurrentBagPocket].cursorPos != 0)
             sub_80A4B58(-1, a);
@@ -1562,7 +1562,7 @@ static bool8 sub_80A4F74(u8 a)
             gMain.keyRepeatCounter = 11;
         retVal = TRUE;
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
+    else if (JOY_REPT(DPAD_ANY) == DPAD_DOWN)
     {
         if (sReturnLocation != RETURN_TO_FIELD_5)
         {
@@ -1618,7 +1618,7 @@ static void sub_80A50C8(u8 taskId)
             return;
         }
 
-        if ((gMain.newKeys & SELECT_BUTTON)
+        if (JOY_NEW(SELECT_BUTTON)
          && !(sCurrentBagPocket == BAG_POCKET_BERRIES || sCurrentBagPocket == BAG_POCKET_TMs_HMs)
          && (sReturnLocation == RETURN_TO_FIELD_0 || sReturnLocation == RETURN_TO_BATTLE))
         {
@@ -1647,7 +1647,7 @@ static void sub_80A50C8(u8 taskId)
             return;
         }
 
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             if (gBagPocketScrollStates[sCurrentBagPocket].scrollTop + gBagPocketScrollStates[sCurrentBagPocket].cursorPos == gBagPocketScrollStates[sCurrentBagPocket].numSlots)
             {
@@ -1685,7 +1685,7 @@ static void sub_80A50C8(u8 taskId)
             return;
         }
 
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             if (taskData[10] == 0)
             {
@@ -1709,7 +1709,7 @@ bool8 SellMenu_QuantityRoller(u8 taskId, u16 b)
 {
     s16 *taskData = gTasks[taskId].data;
 
-    if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+    if (JOY_REPT(DPAD_ANY) == DPAD_UP)
     {
         if (taskData[1] != b)
             taskData[1]++;
@@ -1718,7 +1718,7 @@ bool8 SellMenu_QuantityRoller(u8 taskId, u16 b)
         return TRUE;
     }
 
-    if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
+    if (JOY_REPT(DPAD_ANY) == DPAD_DOWN)
     {
         if (taskData[1] != 1)
             taskData[1]--;
@@ -1727,7 +1727,7 @@ bool8 SellMenu_QuantityRoller(u8 taskId, u16 b)
         return TRUE;
     }
 
-    if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_RIGHT)
+    if (JOY_REPT(DPAD_ANY) == DPAD_RIGHT)
     {
         if (taskData[1] + 10 < b)
             taskData[1] += 10;
@@ -1736,7 +1736,7 @@ bool8 SellMenu_QuantityRoller(u8 taskId, u16 b)
         return TRUE;
     }
 
-    if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_LEFT)
+    if (JOY_REPT(DPAD_ANY) == DPAD_LEFT)
     {
         if (taskData[1] > 10)
             taskData[1] -= 10;
@@ -1786,7 +1786,7 @@ static void sub_80A5414(u8 taskId)
     {
         while (1)
         {
-            if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+            if (JOY_REPT(DPAD_ANY) == DPAD_UP)
             {
                 if ((sPopupMenuSelection & 1) && sPopupMenuActionList[sPopupMenuSelection - 1] != 8)
                 {
@@ -1795,7 +1795,7 @@ static void sub_80A5414(u8 taskId)
                 }
                 break;
             }
-            if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
+            if (JOY_REPT(DPAD_ANY) == DPAD_DOWN)
             {
                 if ((!(sPopupMenuSelection & 1)) && sPopupMenuActionList[sPopupMenuSelection + 1] != 8)
                 {
@@ -1804,7 +1804,7 @@ static void sub_80A5414(u8 taskId)
                 }
                 break;
             }
-            if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_LEFT)
+            if (JOY_REPT(DPAD_ANY) == DPAD_LEFT)
             {
                 if ((sPopupMenuSelection >= 2) && sPopupMenuActionList[sPopupMenuSelection - 2] != 8)
                 {
@@ -1813,7 +1813,7 @@ static void sub_80A5414(u8 taskId)
                 }
                 break;
             }
-            if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_RIGHT)
+            if (JOY_REPT(DPAD_ANY) == DPAD_RIGHT)
             {
                 if ((sPopupMenuSelection < 2) && sPopupMenuActionList[sPopupMenuSelection + 2] != 8)
                 {
@@ -1822,7 +1822,7 @@ static void sub_80A5414(u8 taskId)
                 }
                 break;
             }
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 gTasks[taskId].data[10] = 0;
                 sub_80A4DA4(gBGTilemapBuffers[1]);
@@ -1830,7 +1830,7 @@ static void sub_80A5414(u8 taskId)
                 r5(taskId);
                 break;
             }
-            if (gMain.newKeys & B_BUTTON)
+            if (JOY_NEW(B_BUTTON))
             {
                 gTasks[taskId].data[10] = 0;
                 sub_80A48E8(taskId, gBagPocketScrollStates[sCurrentBagPocket].cursorPos, gBagPocketScrollStates[sCurrentBagPocket].cursorPos);
@@ -1869,7 +1869,7 @@ static void sub_80A5600(u8 taskId)
 
     while (1)
     {
-        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+        if (JOY_REPT(DPAD_ANY) == DPAD_UP)
         {
             if (sPopupMenuSelection != 0 && sPopupMenuActionList[sPopupMenuSelection - 1] != 8)
             {
@@ -1878,7 +1878,7 @@ static void sub_80A5600(u8 taskId)
             }
             break;
         }
-        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
+        if (JOY_REPT(DPAD_ANY) == DPAD_DOWN)
         {
             if (sPopupMenuSelection != gUnknown_02038564 - 1 && sPopupMenuSelection != 2 && sPopupMenuActionList[sPopupMenuSelection + 1] != 8)
             {
@@ -1887,7 +1887,7 @@ static void sub_80A5600(u8 taskId)
             }
             break;
         }
-        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_LEFT)
+        if (JOY_REPT(DPAD_ANY) == DPAD_LEFT)
         {
             if ((sPopupMenuSelection >= 3) && sPopupMenuActionList[sPopupMenuSelection - 3] != 8)
             {
@@ -1896,7 +1896,7 @@ static void sub_80A5600(u8 taskId)
             }
             break;
         }
-        if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_RIGHT)
+        if (JOY_REPT(DPAD_ANY) == DPAD_RIGHT)
         {
             if ((sPopupMenuSelection < 3) && sPopupMenuActionList[sPopupMenuSelection + 3] != 8)
             {
@@ -1905,7 +1905,7 @@ static void sub_80A5600(u8 taskId)
             }
             break;
         }
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             gTasks[taskId].data[10] = 0;
             sub_80A4DA4(gBGTilemapBuffers[1]);
@@ -1913,7 +1913,7 @@ static void sub_80A5600(u8 taskId)
             r5(taskId);
             break;
         }
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             gTasks[taskId].data[10] = 0;
             sub_80A48E8(taskId, gBagPocketScrollStates[sCurrentBagPocket].cursorPos, gBagPocketScrollStates[sCurrentBagPocket].cursorPos);
@@ -1972,7 +1972,7 @@ static void sub_80A5888(u8 taskId)
 {
     if (sub_80A78A0() != 0)
     {
-        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        if (JOY_REPT(DPAD_UP))
         {
             if (sPopupMenuSelection != 0)
             {
@@ -1980,7 +1980,7 @@ static void sub_80A5888(u8 taskId)
                 sPopupMenuSelection = Menu_MoveCursor(-1);
             }
         }
-        else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        else if (JOY_REPT(DPAD_DOWN))
         {
             if (sPopupMenuSelection != gUnknown_02038564 - 1)
             {
@@ -1988,14 +1988,14 @@ static void sub_80A5888(u8 taskId)
                 sPopupMenuSelection = Menu_MoveCursor(1);
             }
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             gTasks[taskId].data[10] = 0;
             sub_80A48E8(taskId, gBagPocketScrollStates[sCurrentBagPocket].cursorPos, gBagPocketScrollStates[sCurrentBagPocket].cursorPos);
             sub_80A4DA4(gBGTilemapBuffers[1]);
             sItemPopupMenuActions[sPopupMenuActionList[sPopupMenuSelection]].func(taskId);
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             gTasks[taskId].data[10] = 0;
             sub_80A4DA4(gBGTilemapBuffers[1]);
@@ -2190,7 +2190,7 @@ static void sub_80A5DF8(void)
 
 static void sub_80A5E1C(u8 taskId)
 {
-    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].data[10] = 0;
         sub_80A41D4(taskId);
@@ -2214,13 +2214,13 @@ static void sub_80A5EA0(u8 taskId)
 {
     if (sub_80A5350(taskId) == TRUE)
         return;
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         sub_80A5DA0(gSpecialVar_ItemId, gTasks[taskId].data[1]);
         DoYesNoFuncWithChoice(taskId, &gUnknown_083C16F4);
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         sub_80A5D38(taskId);
@@ -2278,7 +2278,7 @@ static void sub_80A6000(u8 taskId)
 
 static void sub_80A6024(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         sub_80A36B8(gBGTilemapBuffers[1], 0, 0, 31, 31);
         Menu_EraseWindowRect(0, 14, 29, 19);
@@ -2455,7 +2455,7 @@ static void sub_80A648C(u8 taskId)
 
 static void sub_80A6520(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         BuyMenuPrintItemQuantityAndPrice(taskId);
@@ -2505,7 +2505,7 @@ static void Task_BuyHowManyDialogueHandleInput(u8 taskId)
         Menu_EraseWindowRect(6, 11, 12, 11);
         BuyMenuDisplayMessage(gSpecialVar_ItemId, gTasks[taskId].data[1]);
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         Menu_EraseWindowRect(0, 10, 13, 13);
@@ -2514,7 +2514,7 @@ static void Task_BuyHowManyDialogueHandleInput(u8 taskId)
         StringExpandPlaceholders(gStringVar4, gOtherText_CanPay);
         DisplayCannotUseItemMessage(taskId, gStringVar4, sub_80A6650, 1);
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         BuyMenuPrintItemQuantityAndPrice(taskId);
@@ -2661,7 +2661,7 @@ static void sub_80A6A84(u8 taskId)
 
 static void sub_80A6B00(u8 taskId)
 {
-    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].data[10] = 0;
         sub_80A48E8(taskId, gBagPocketScrollStates[sCurrentBagPocket].cursorPos, gBagPocketScrollStates[sCurrentBagPocket].cursorPos);
@@ -2697,13 +2697,13 @@ static void sub_80A6BE0(u8 taskId)
 {
     if (sub_80A5350(taskId) == TRUE)
         return;
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         sub_80A4DA4(gBGTilemapBuffers[1]);
         sub_80A6B64(taskId);
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].data[10] = 0;
         sub_80A48E8(taskId, gBagPocketScrollStates[sCurrentBagPocket].cursorPos, gBagPocketScrollStates[sCurrentBagPocket].cursorPos);
@@ -2802,7 +2802,7 @@ static void sub_80A6DF0(u16 *a)
 
 static void sub_80A6EB8(u8 taskId)
 {
-    if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+    if (JOY_REPT(DPAD_ANY) == DPAD_UP)
     {
         if (sPopupMenuSelection == 1)
         {
@@ -2810,7 +2810,7 @@ static void sub_80A6EB8(u8 taskId)
             sPopupMenuSelection = Menu_MoveCursor(-1);
         }
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
+    else if (JOY_REPT(DPAD_ANY) == DPAD_DOWN)
     {
         if (sPopupMenuSelection + 1 < gUnknown_02038564)
         {
@@ -2818,14 +2818,14 @@ static void sub_80A6EB8(u8 taskId)
             sPopupMenuSelection = Menu_MoveCursor(1);
         }
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         gTasks[taskId].data[10] = 0;
         sub_80A48E8(taskId, gBagPocketScrollStates[sCurrentBagPocket].cursorPos, gBagPocketScrollStates[sCurrentBagPocket].cursorPos);
         sub_80A4DA4(gBGTilemapBuffers[1]);
         sItemPopupMenuActions[sPopupMenuActionList[sPopupMenuSelection]].func(taskId);
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].data[10] = 0;
         sub_80A48E8(taskId, gBagPocketScrollStates[sCurrentBagPocket].cursorPos, gBagPocketScrollStates[sCurrentBagPocket].cursorPos);

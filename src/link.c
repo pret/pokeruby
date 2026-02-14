@@ -403,17 +403,17 @@ static void TestBlockTransfer(u32 a1, u32 a2, u32 a3)
 
 static void LinkTestProcessKeyInput(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
         gShouldAdvanceLinkState = 1;
-    if (gMain.heldKeys & B_BUTTON)
+    if (JOY_HELD(B_BUTTON))
         InitBlockSend(gSharedMem + 0x4000, 0x2004);
-    if (gMain.newKeys & L_BUTTON)
+    if (JOY_NEW(L_BUTTON))
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(2, 0, 0));
-    if (gMain.newKeys & START_BUTTON)
+    if (JOY_NEW(START_BUTTON))
         SetSuppressLinkErrorMessage(TRUE);
-    if (gMain.newKeys & R_BUTTON)
+    if (JOY_NEW(R_BUTTON))
         Save_WriteData(SAVE_LINK);
-    if (gMain.newKeys & SELECT_BUTTON)
+    if (JOY_NEW(SELECT_BUTTON))
         SetCloseLinkCallback();
     if (gLinkTestDebugValuesEnabled)
     {

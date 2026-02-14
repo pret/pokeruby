@@ -225,23 +225,23 @@ static void InitPlayerPCMenu(u8 taskId)
 
 static void PlayerPCProcessMenuInput(u8 taskId)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(-1);
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPT(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(1);
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         Menu_DestroyCursor();
         PlaySE(SE_SELECT);
         sPlayerPCMenuActions[gPcItemMenuOptionOrder[Menu_GetCursorPos()]].func(taskId);
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         Menu_DestroyCursor();
         PlaySE(SE_SELECT);
@@ -320,24 +320,24 @@ static void ItemStorageMenuPrint(const u8 *textPtr)
 
 static void ItemStorageMenuProcessInput(u8 var)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(-1);
         ItemStorageMenuPrint(gPCText_OptionDescList[Menu_GetCursorPos()]);
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPT(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(1);
         ItemStorageMenuPrint(gPCText_OptionDescList[Menu_GetCursorPos()]);
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         gPCText_ItemPCOptionsText[Menu_GetCursorPos()].func(var);
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         Menu_DestroyCursor();
         PlaySE(SE_SELECT);
@@ -445,7 +445,7 @@ static void ItemStorage_ProcessInput(u8 taskId)
     s16 *data = TASK.data;
     s16 trueIndex;
 
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         if(PAGE_INDEX != 0) // did the cursor move physically upwards?
         {
@@ -477,7 +477,7 @@ static void ItemStorage_ProcessInput(u8 taskId)
                 Menu_MoveCursor(0); // don't move the cursor. it's at the top of the page index, but not the true index.
         }
     }
-    else if(gMain.newAndRepeatedKeys & DPAD_DOWN) // _0813A306
+    else if (JOY_REPT(DPAD_DOWN)) // _0813A306
     {
         if(PAGE_INDEX != NUM_PAGE_ITEMS - 1)
         {
@@ -503,7 +503,7 @@ static void ItemStorage_ProcessInput(u8 taskId)
                 Menu_MoveCursor(0);
         }
     }
-    else if(gMain.newKeys & SELECT_BUTTON) // _0813A3A0
+    else if (JOY_NEW(SELECT_BUTTON)) // _0813A3A0
     {
         if (SWITCH_MODE_ACTIVE == FALSE)
         {
@@ -524,7 +524,7 @@ static void ItemStorage_ProcessInput(u8 taskId)
             ItemStorage_DrawBothListAndDescription(taskId);
         }
     }
-    else if(gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         if(SWITCH_MODE_ACTIVE == FALSE)
@@ -544,7 +544,7 @@ static void ItemStorage_ProcessInput(u8 taskId)
             ItemStorage_DrawBothListAndDescription(taskId);
         }
     }
-    else if(gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         if(SWITCH_MODE_ACTIVE == FALSE)
@@ -613,7 +613,7 @@ static void ItemStorage_HandleQuantityRolling(u8 taskId)
     s16 *data = TASK.data;
     u8 trueIndex = PAGE_INDEX + ITEMS_ABOVE_TOP;
 
-    if(gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         if(NUM_QUANTITY_ROLLER != gSaveBlock1.pcItems[trueIndex].quantity)
             NUM_QUANTITY_ROLLER++;
@@ -622,7 +622,7 @@ static void ItemStorage_HandleQuantityRolling(u8 taskId)
 
         sub_80A418C(NUM_QUANTITY_ROLLER, STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3); // print quantity?
     }
-    else if(gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPT(DPAD_DOWN))
     {
         if(NUM_QUANTITY_ROLLER != 1)
             NUM_QUANTITY_ROLLER--;
@@ -631,7 +631,7 @@ static void ItemStorage_HandleQuantityRolling(u8 taskId)
 
         sub_80A418C(NUM_QUANTITY_ROLLER, STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3); // print quantity?
     }
-    else if(gMain.newAndRepeatedKeys & DPAD_LEFT) // reduce by 10.
+    else if (JOY_REPT(DPAD_LEFT)) // reduce by 10.
     {
         NUM_QUANTITY_ROLLER -= 10;
 
@@ -640,7 +640,7 @@ static void ItemStorage_HandleQuantityRolling(u8 taskId)
 
         sub_80A418C(NUM_QUANTITY_ROLLER, STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3); // print quantity?
     }
-    else if(gMain.newAndRepeatedKeys & DPAD_RIGHT) // add 10.
+    else if (JOY_REPT(DPAD_RIGHT)) // add 10.
     {
         NUM_QUANTITY_ROLLER += 10;
 
@@ -649,7 +649,7 @@ static void ItemStorage_HandleQuantityRolling(u8 taskId)
 
         sub_80A418C(NUM_QUANTITY_ROLLER, STR_CONV_MODE_RIGHT_ALIGN, 8, 9, 3); // print quantity?
     }
-    else if(gMain.newKeys & A_BUTTON) // confirm quantity.
+    else if (JOY_NEW(A_BUTTON)) // confirm quantity.
     {
         PlaySE(SE_SELECT);
         Menu_EraseWindowRect(6, 6, 0xD, 0xB);
@@ -659,7 +659,7 @@ static void ItemStorage_HandleQuantityRolling(u8 taskId)
         else
             ItemStorage_DoItemToss(taskId);
     }
-    else if(gMain.newKeys & B_BUTTON) // cancel quantity.
+    else if (JOY_NEW(B_BUTTON)) // cancel quantity.
     {
         PlaySE(SE_SELECT);
         Menu_EraseWindowRect(6, 6, 0xD, 0xB);
@@ -735,7 +735,7 @@ static void ItemStorage_HandleRemoveItem(u8 taskId)
     s16 *data = TASK.data;
     s16 oldNumItems;
 
-    if(gMain.newKeys & A_BUTTON || gMain.newKeys == B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || gMain.newKeys == B_BUTTON)
     {
         RemovePCItem(PAGE_INDEX + ITEMS_ABOVE_TOP, NUM_QUANTITY_ROLLER);
         oldNumItems = NUM_ITEMS;
@@ -754,7 +754,7 @@ static void ItemStorage_WaitPressHandleResumeProcessInput(u8 taskId)
 {
     s16 *data = TASK.data;
 
-    if(gMain.newKeys & A_BUTTON || gMain.newKeys == B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || gMain.newKeys == B_BUTTON)
     {
         ItemStorage_PrintItemPcResponse(gSaveBlock1.pcItems[ITEMS_ABOVE_TOP + PAGE_INDEX].itemId);
         StartVerticalScrollIndicators(TOP_ARROW);
@@ -1082,7 +1082,7 @@ static void Mailbox_ProcessInput(u8 taskId)
 {
     if(!gPaletteFade.active)
     {
-        if(gMain.newAndRepeatedKeys & DPAD_UP)
+        if (JOY_REPT(DPAD_UP))
         {
             if(eMailboxInfo.cursorPos != 0)
             {
@@ -1096,7 +1096,7 @@ static void Mailbox_ProcessInput(u8 taskId)
                 Mailbox_DrawMailList(taskId);
             }
         }
-        else if(gMain.newAndRepeatedKeys & DPAD_DOWN)
+        else if (JOY_REPT(DPAD_DOWN))
         {
             if(eMailboxInfo.cursorPos != eMailboxInfo.pageItems - 1)
             {
@@ -1110,7 +1110,7 @@ static void Mailbox_ProcessInput(u8 taskId)
                 Mailbox_DrawMailList(taskId);
             }
         }
-        else if(gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             Menu_DestroyCursor();
             PlaySE(SE_SELECT);
@@ -1125,7 +1125,7 @@ static void Mailbox_ProcessInput(u8 taskId)
                 TASK.FUNC = Mailbox_PrintWhatToDoWithPlayerMailText;
             }
         }
-        else if(gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             Menu_DestroyCursor();
             PlaySE(SE_SELECT);
@@ -1172,22 +1172,22 @@ static void Mailbox_PrintMailOptions(u8 taskId) // Mailbox_PrintMailOptions
 
 static void Mailbox_MailOptionsProcessInput(u8 taskId)
 {
-    if(gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(-1);
     }
-    else if(gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPT(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(1);
     }
-    else if(gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         gMailboxMailOptions[Menu_GetCursorPos()].func(taskId);
     }
-    else if(gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         Mailbox_Cancel(taskId);

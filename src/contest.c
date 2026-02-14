@@ -461,7 +461,7 @@ void sub_80ABC3C(u8 taskId)
 
 void Task_TryShowMoveSelectScreen(u8 taskId)
 {
-    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys == B_BUTTON))
+    if (JOY_NEW(A_BUTTON) || (gMain.newKeys == B_BUTTON))
     {
         PlaySE(SE_SELECT);
         if (!Contest_IsMonsTurnDisabled(gContestPlayerMonIndex))
@@ -544,7 +544,7 @@ void Task_HandleMoveSelectInput(u8 taskId)
             numMoves++;
     }
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         DestroyMenuCursor();
         PlaySE(SE_SELECT);

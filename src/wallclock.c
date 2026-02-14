@@ -737,17 +737,17 @@ static void Task_SetClock2(u8 taskId)
     {
         gTasks[taskId].tMinuteHandAngle = gTasks[taskId].tMinutes * 6;
         gTasks[taskId].tHourHandAngle = (gTasks[taskId].tHours % 12) * 30 + (gTasks[taskId].tMinutes / 10) * 5;
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             gTasks[taskId].func = Task_SetClock3;
             return;
         }
         else
         {
-            gTasks[taskId].tMvmtDir = gMain.newKeys & A_BUTTON;
-            if (gMain.heldKeys & DPAD_LEFT)
+            gTasks[taskId].tMvmtDir = JOY_NEW(A_BUTTON);
+            if (JOY_HELD(DPAD_LEFT))
                 gTasks[taskId].tMvmtDir = MVMT_BACKWARD;
-            if (gMain.heldKeys & DPAD_RIGHT)
+            if (JOY_HELD(DPAD_RIGHT))
                 gTasks[taskId].tMvmtDir = MVMT_FORWARD;
             if (gTasks[taskId].tMvmtDir)
             {
@@ -821,7 +821,7 @@ static void Task_ViewClock1(u8 taskId)
 static void Task_ViewClock2(u8 taskId)
 {
     InitClockWithRtc(taskId);
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
         gTasks[taskId].func = Task_ViewClock3;
 }
 

@@ -685,7 +685,7 @@ void sub_80E6AE4(void)
     gEasyChatStruct->unk87 = sub_80E75D8();
     if (gEasyChatStruct->unk87)
         PlaySE(SE_SELECT);
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         if (gEasyChatStruct->unk86 == gEasyChatStruct->unk84)
@@ -711,7 +711,7 @@ void sub_80E6AE4(void)
             return;
         }
     }
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         sub_80E682C(sub_80E6C84);
     }
@@ -756,7 +756,7 @@ void sub_80E6BC0(void)
         sub_80E682C(sub_80E6AC4);
         break;
     case 100:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
             sub_80E682C(sub_80E6AC4);
         break;
     }
@@ -898,7 +898,7 @@ void sub_80E6D7C(void)
         }
         break;
     case 10:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
             sub_80E682C(sub_80E6AC4);
         break;
     case 100:
@@ -906,7 +906,7 @@ void sub_80E6D7C(void)
         gEasyChatStruct->unk24++;
         // fall through
     case 101:
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
             gEasyChatStruct->unk24++;
         break;
     case 102:
@@ -954,7 +954,7 @@ void sub_80E6FC8(void)
     {
         if (gEasyChatStruct->unk96)
             PlaySE(SE_SELECT);
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             if (gEasyChatStruct->unk1B7 != 0)
             {
@@ -988,11 +988,11 @@ void sub_80E6FC8(void)
                 }
             }
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             sub_80E682C(sub_80E7114);
         }
-        else if (gMain.newKeys & SELECT_BUTTON)
+        else if (JOY_NEW(SELECT_BUTTON))
         {
             sub_80E682C(sub_80E718C);
         }
@@ -1105,12 +1105,12 @@ void sub_80E7294(void)
     {
         if (gEasyChatStruct->unk1B9)
             PlaySE(SE_SELECT);
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             sub_80E682C(sub_80E7324);
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             sub_80E682C(sub_80E73D0);
         }
@@ -1253,21 +1253,21 @@ bool8 sub_80E75D8(void)
     bool8 pressedUpDown = FALSE;
     u8 r0;
 
-    if (gMain.newKeys & START_BUTTON)
+    if (JOY_NEW(START_BUTTON))
     {
         gEasyChatStruct->unk86 = gEasyChatStruct->unk84;
         gEasyChatStruct->unk85 = 2;
         return TRUE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         gEasyChatStruct->unk86--;
         if (gEasyChatStruct->unk86 < 0)
             gEasyChatStruct->unk86 = gEasyChatStruct->unk84;
         pressedUpDown = TRUE;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPT(DPAD_DOWN))
     {
         gEasyChatStruct->unk86++;
         if (gEasyChatStruct->unk86 > gEasyChatStruct->unk84)
@@ -1300,7 +1300,7 @@ bool8 sub_80E75D8(void)
     }
     else
     {
-        if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+        if (JOY_REPT(DPAD_LEFT))
         {
             if (--gEasyChatStruct->unk85 < 0)
             {
@@ -1318,7 +1318,7 @@ bool8 sub_80E75D8(void)
             }
             return TRUE;
         }
-        if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+        if (JOY_REPT(DPAD_RIGHT))
         {
             if (gEasyChatStruct->unk86 == gEasyChatStruct->unk84)
             {
@@ -1346,14 +1346,14 @@ bool8 sub_80E77C8(void)
 
     if (gEasyChatStruct->unk1B7 != 0)
     {
-        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        if (JOY_REPT(DPAD_UP))
         {
             gEasyChatStruct->unk1A8--;
             if (gEasyChatStruct->unk1A8 < 1)
                 gEasyChatStruct->unk1A8 = 3;
             return TRUE;
         }
-        else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        else if (JOY_REPT(DPAD_DOWN))
         {
             gEasyChatStruct->unk1A8++;
             if (gEasyChatStruct->unk1A8 > 3)
@@ -1367,14 +1367,14 @@ bool8 sub_80E77C8(void)
         {
             pressedUpDown = FALSE;
 
-            if (gMain.newAndRepeatedKeys & DPAD_UP)
+            if (JOY_REPT(DPAD_UP))
             {
                 gEasyChatStruct->unk1A8--;
                 if (gEasyChatStruct->unk1A8 < 0)
                     gEasyChatStruct->unk1A8 = 3;
                 pressedUpDown = TRUE;
             }
-            else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+            else if (JOY_REPT(DPAD_DOWN))
             {
                 gEasyChatStruct->unk1A8++;
                 if (gEasyChatStruct->unk1A8 > 3)
@@ -1393,7 +1393,7 @@ bool8 sub_80E77C8(void)
             pressedUpDown = FALSE;
             gEasyChatStruct->unk1C0 = 0;
 
-            if (gMain.newAndRepeatedKeys & DPAD_UP)
+            if (JOY_REPT(DPAD_UP))
             {
                 if (gEasyChatStruct->unk1A8 == 0)
                     return FALSE;
@@ -1402,7 +1402,7 @@ bool8 sub_80E77C8(void)
                     gEasyChatStruct->unk1C0 = -1;
                 pressedUpDown = TRUE;
             }
-            else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+            else if (JOY_REPT(DPAD_DOWN))
             {
                 if (gEasyChatStruct->unk1A8 >= gEasyChatStruct->unk1B6 - 1)
                     return FALSE;
@@ -1424,7 +1424,7 @@ bool8 sub_80E77C8(void)
         }
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    if (JOY_REPT(DPAD_LEFT))
     {
         if (gEasyChatStruct->unk1A9 != 0)
             gEasyChatStruct->unk1A9--;
@@ -1432,7 +1432,7 @@ bool8 sub_80E77C8(void)
             gEasyChatStruct->unk1A9 = gEasyChatStruct->unk1AA[gEasyChatStruct->unk1A8];
         pressedLeftRight = TRUE;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    else if (JOY_REPT(DPAD_RIGHT))
     {
         if (gEasyChatStruct->unk1B7 != 0
          || gEasyChatStruct->unk1A9 == gEasyChatStruct->unk1AA[gEasyChatStruct->unk1A8])
@@ -1487,7 +1487,7 @@ bool8 sub_80E7B40(void)
     bool8 pressedUpDown = FALSE;
 
     gEasyChatStruct->unk1C0 = 0;
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         if (gEasyChatStruct->unk99A4 == 0)
             return FALSE;
@@ -1499,7 +1499,7 @@ bool8 sub_80E7B40(void)
         }
         pressedUpDown = TRUE;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPT(DPAD_DOWN))
     {
         if (gEasyChatStruct->unk99A4 >= gEasyChatStruct->unk9A28 - 1)
             return FALSE;
@@ -1518,14 +1518,14 @@ bool8 sub_80E7B40(void)
         return TRUE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    if (JOY_REPT(DPAD_LEFT))
     {
         gEasyChatStruct->unk99A5--;
         if (gEasyChatStruct->unk99A5 < 0)
             gEasyChatStruct->unk99A5 = gEasyChatStruct->unk99A6[gEasyChatStruct->unk99A4] - 1;
         return TRUE;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    else if (JOY_REPT(DPAD_RIGHT))
     {
         gEasyChatStruct->unk99A5++;
         if (gEasyChatStruct->unk99A5 >= gEasyChatStruct->unk99A6[gEasyChatStruct->unk99A4])
@@ -1533,7 +1533,7 @@ bool8 sub_80E7B40(void)
         return TRUE;
     }
 
-    if (gMain.newKeys & START_BUTTON)
+    if (JOY_NEW(START_BUTTON))
     {
         if (gEasyChatStruct->unk9A29 != 0)
         {
@@ -1544,7 +1544,7 @@ bool8 sub_80E7B40(void)
         gEasyChatStruct->unk99A4 += gEasyChatStruct->unk1C0;
         gEasyChatStruct->unk1BE = 4;
     }
-    else if (gMain.newKeys & SELECT_BUTTON)
+    else if (JOY_NEW(SELECT_BUTTON))
     {
         if (gEasyChatStruct->unk9A29 < gEasyChatStruct->unk9A28 - 4)
         {

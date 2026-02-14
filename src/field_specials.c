@@ -1120,7 +1120,7 @@ void sub_810E984(u8 taskId)
         Menu_MoveCursorNoWrap(+1);
         sub_810EAC8(curMenuPos, DPAD_DOWN);
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         saved_warp2_set_2(0, gUnknown_03000760[gUnknown_0203925B].var1, gUnknown_03000760[gUnknown_0203925B].var2, -1, 2, 1);
         if (gSpecialVar_0x8005 == gUnknown_0203925B)
@@ -1141,7 +1141,7 @@ void sub_810E984(u8 taskId)
             DestroyTask(taskId);
         }
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         gSpecialVar_Result = 0;
         PlaySE(SE_SELECT);
@@ -1489,7 +1489,7 @@ void sub_810F118(u8 taskId)
         Menu_MoveCursorNoWrap(1);
         sub_810F1F4(prevCursorPos, DPAD_DOWN);
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         Menu_DestroyCursor();
         gSpecialVar_Result = gUnknown_0203925B;
@@ -1498,7 +1498,7 @@ void sub_810F118(u8 taskId)
         Menu_EraseWindowRect(0, 0, 29, 12);
         sub_810EC9C(taskId);
     }
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         Menu_DestroyCursor();
         gSpecialVar_Result = 0x7f;

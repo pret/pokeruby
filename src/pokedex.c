@@ -1510,7 +1510,7 @@ void Task_PokedexMainScreen(u8 taskId)
         gPokedexView->menuY -= 8;
     else
     {
-        if ((gMain.newKeys & A_BUTTON) && gPokedexView->pokedexList[gPokedexView->selectedPokemon].seen)
+        if (JOY_NEW(A_BUTTON) && gPokedexView->pokedexList[gPokedexView->selectedPokemon].seen)
         {
             UpdateSelectedMonSpriteId();
             BeginNormalPaletteFade(
@@ -1520,7 +1520,7 @@ void Task_PokedexMainScreen(u8 taskId)
             gTasks[taskId].func = Task_OpenInfoScreenAfterMonMovement;
             PlaySE(SE_PIN);
         }
-        else if (gMain.newKeys & START_BUTTON)
+        else if (JOY_NEW(START_BUTTON))
         {
             //Open menu
             gPokedexView->menuY = 0;
@@ -1529,7 +1529,7 @@ void Task_PokedexMainScreen(u8 taskId)
             gTasks[taskId].func = Task_PokedexMainScreenMenu;
             PlaySE(SE_SELECT);
         }
-        else if (gMain.newKeys & SELECT_BUTTON)
+        else if (JOY_NEW(SELECT_BUTTON))
         {
             PlaySE(SE_SELECT);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
@@ -1542,7 +1542,7 @@ void Task_PokedexMainScreen(u8 taskId)
             gTasks[taskId].func = Task_WaitForExitSearch;
             PlaySE(SE_PC_LOGIN);
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             gTasks[taskId].func = Task_ClosePokedex;
@@ -1576,7 +1576,7 @@ static void Task_PokedexMainScreenMenu(u8 taskId)
         gPokedexView->menuY += 8;
     else
     {
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             switch (gPokedexView->menuCursorPos)
             {
@@ -1607,18 +1607,18 @@ static void Task_PokedexMainScreenMenu(u8 taskId)
         }
 
         //Exit menu when Start or B is pressed
-        if (gMain.newKeys & (START_BUTTON | B_BUTTON))
+        if (JOY_NEW(START_BUTTON | B_BUTTON))
         {
             gPokedexView->menuIsOpen = 0;
             gTasks[taskId].func = Task_PokedexMainScreen;
             PlaySE(SE_SELECT);
         }
-        else if ((gMain.newAndRepeatedKeys & DPAD_UP) && gPokedexView->menuCursorPos != 0)
+        else if (JOY_REPT(DPAD_UP) && gPokedexView->menuCursorPos != 0)
         {
             gPokedexView->menuCursorPos--;
             PlaySE(SE_SELECT);
         }
-        else if ((gMain.newAndRepeatedKeys & DPAD_DOWN) && gPokedexView->menuCursorPos <= 2)
+        else if (JOY_REPT(DPAD_DOWN) && gPokedexView->menuCursorPos <= 2)
         {
             gPokedexView->menuCursorPos++;
             PlaySE(SE_SELECT);
@@ -1708,7 +1708,7 @@ static void Task_PokedexResultsScreen(u8 taskId)
     }
     else
     {
-        if ((gMain.newKeys & A_BUTTON) && gPokedexView->pokedexList[gPokedexView->selectedPokemon].seen)
+        if (JOY_NEW(A_BUTTON) && gPokedexView->pokedexList[gPokedexView->selectedPokemon].seen)
         {
             u32 excludedPalettes;
 
@@ -1719,7 +1719,7 @@ static void Task_PokedexResultsScreen(u8 taskId)
             gTasks[taskId].func = Task_OpenSearchResultsInfoScreenAfterMonMovement;
             PlaySE(SE_PIN);
         }
-        else if (gMain.newKeys & START_BUTTON)
+        else if (JOY_NEW(START_BUTTON))
         {
             gPokedexView->menuY = 0;
             gPokedexView->menuIsOpen = 1;
@@ -1727,7 +1727,7 @@ static void Task_PokedexResultsScreen(u8 taskId)
             gTasks[taskId].func = Task_PokedexResultsScreenMenu;
             PlaySE(SE_SELECT);
         }
-        else if (gMain.newKeys & SELECT_BUTTON)
+        else if (JOY_NEW(SELECT_BUTTON))
         {
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             gTasks[taskId].data[0] = LoadSearchMenu();
@@ -1735,7 +1735,7 @@ static void Task_PokedexResultsScreen(u8 taskId)
             gTasks[taskId].func = Task_WaitForExitSearch;
             PlaySE(SE_PC_LOGIN);
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             gTasks[taskId].func = Task_PokedexResultsScreenReturnToMainScreen;
@@ -1769,7 +1769,7 @@ static void Task_PokedexResultsScreenMenu(u8 taskId)
     }
     else
     {
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             switch (gPokedexView->menuCursorPos)
             {
@@ -1805,18 +1805,18 @@ static void Task_PokedexResultsScreenMenu(u8 taskId)
         }
 
         //Exit menu when Start or B is pressed
-        if (gMain.newKeys & (START_BUTTON | B_BUTTON))
+        if (JOY_NEW(START_BUTTON | B_BUTTON))
         {
             gPokedexView->menuIsOpen = 0;
             gTasks[taskId].func = Task_PokedexResultsScreen;
             PlaySE(SE_SELECT);
         }
-        else if ((gMain.newAndRepeatedKeys & DPAD_UP) && gPokedexView->menuCursorPos)
+        else if (JOY_REPT(DPAD_UP) && gPokedexView->menuCursorPos)
         {
             gPokedexView->menuCursorPos--;
             PlaySE(SE_SELECT);
         }
-        else if ((gMain.newAndRepeatedKeys & DPAD_DOWN) && gPokedexView->menuCursorPos <= 3)
+        else if (JOY_REPT(DPAD_DOWN) && gPokedexView->menuCursorPos <= 3)
         {
             gPokedexView->menuCursorPos++;
             PlaySE(SE_SELECT);
@@ -2397,13 +2397,13 @@ static u16 TryDoPokedexScroll(u16 a, u16 b)
     u16 r6;
     u8 r10 = 0;
 
-    if (!((gMain.heldKeys & 0x40) && (a > 0)))
+    if (!(JOY_HELD(DPAD_UP) && (a > 0)))
     {
         //_0808E4B6
-        if (!((gMain.heldKeys & 0x80) && (a < gPokedexView->pokemonListCount - 1)))
+        if (!(JOY_HELD(DPAD_DOWN) && (a < gPokedexView->pokemonListCount - 1)))
         //_0808E4CE
         {
-            if ((gMain.newKeys & 0x20) && (a > 0))
+            if (JOY_NEW(DPAD_LEFT) && (a > 0))
             {
                 r6 = a;
                 //_0808E4E0
@@ -2415,7 +2415,7 @@ static u16 TryDoPokedexScroll(u16 a, u16 b)
                 PlaySE(0x6D);
             }
             //_0808E53C
-            else if ((gMain.newKeys & 0x10) && (a < gPokedexView->pokemonListCount - 1))
+            else if (JOY_NEW(DPAD_RIGHT) && (a < gPokedexView->pokemonListCount - 1))
             {
                 r6 = a;
                 for (i = 0; i < 7; i++)
@@ -2489,7 +2489,7 @@ static u8 TryDoInfoScreenScroll(void)
     u16 r2;
     u16 r4 = gPokedexView->selectedPokemon;
 
-    if ((gMain.newKeys & DPAD_UP) && r4)
+    if (JOY_NEW(DPAD_UP) && r4)
     {
         r2 = r4;
         while (r2 != 0)
@@ -2512,7 +2512,7 @@ static u8 TryDoInfoScreenScroll(void)
             return 1;
         }
     }
-    else if ((gMain.newKeys & DPAD_DOWN) && r4 < gPokedexView->pokemonListCount - 1)
+    else if (JOY_NEW(DPAD_DOWN) && r4 < gPokedexView->pokemonListCount - 1)
     {
         r2 = r4;
         while (r2 < gPokedexView->pokemonListCount - 1)
@@ -3023,14 +3023,14 @@ static void Task_PageScreenProcessInput(u8 taskId)
         PlaySE(SE_DEX_SCROLL);
         return;
     }
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gTasks[taskId].func = Task_ClosePageScreen;
         PlaySE(SE_PC_OFF);
         return;
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         switch (gPokedexView->selectedScreen)
         {
@@ -3062,8 +3062,8 @@ static void Task_PageScreenProcessInput(u8 taskId)
         }
         return;
     }
-    if (((gMain.newKeys & DPAD_LEFT)
-     || ((gMain.newKeys & L_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+    if ((JOY_NEW(DPAD_LEFT)
+     || (JOY_NEW(L_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
      && gPokedexView->selectedScreen > 0)
     {
         gPokedexView->selectedScreen--;
@@ -3071,8 +3071,8 @@ static void Task_PageScreenProcessInput(u8 taskId)
         PlaySE(SE_DEX_PAGE);
         return;
     }
-    if (((gMain.newKeys & DPAD_RIGHT)
-     || ((gMain.newKeys & R_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+    if ((JOY_NEW(DPAD_RIGHT)
+     || (JOY_NEW(R_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
      && gPokedexView->selectedScreen < 3)
     {
         gPokedexView->selectedScreen++;
@@ -3258,7 +3258,7 @@ static void Task_CryScreenProcessInput(u8 taskId)
     else
         LoadPlayArrowPalette(0);
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         LoadPlayArrowPalette(1);
         CryScreenPlayButton(NationalPokedexNumToSpecies(sPokedexListItem->dexNum));
@@ -3266,7 +3266,7 @@ static void Task_CryScreenProcessInput(u8 taskId)
     }
     else if (!gPaletteFade.active)
     {
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, RGB(0, 0, 0));
             m4aMPlayContinue(&gMPlayInfo_BGM);
@@ -3275,8 +3275,8 @@ static void Task_CryScreenProcessInput(u8 taskId)
             PlaySE(SE_PC_OFF);
             return;
         }
-        if ((gMain.newKeys & DPAD_LEFT)
-         || ((gMain.newKeys & L_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+        if (JOY_NEW(DPAD_LEFT)
+         || (JOY_NEW(L_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
         {
             BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, RGB(0, 0, 0));
             m4aMPlayContinue(&gMPlayInfo_BGM);
@@ -3285,8 +3285,8 @@ static void Task_CryScreenProcessInput(u8 taskId)
             PlaySE(SE_DEX_PAGE);
             return;
         }
-        if ((gMain.newKeys & DPAD_RIGHT)
-         || ((gMain.newKeys & R_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+        if (JOY_NEW(DPAD_RIGHT)
+         || (JOY_NEW(R_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
         {
             if (!sPokedexListItem->owned)
             {
@@ -3430,15 +3430,15 @@ static void Task_InitSizeScreenMultistep(u8 taskId)
 
 static void Task_SizeScreenProcessInput(u8 taskId)
 {
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, RGB(0, 0, 0));
         gPokedexView->screenSwitchState = 1;
         gTasks[taskId].func = Task_SwitchScreensFromSizeScreen;
         PlaySE(SE_PC_OFF);
     }
-    else if ((gMain.newKeys & DPAD_LEFT)
-     || ((gMain.newKeys & L_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+    else if (JOY_NEW(DPAD_LEFT)
+     || (JOY_NEW(L_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
     {
         BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, RGB(0, 0, 0));
         gPokedexView->screenSwitchState = 2;
@@ -3869,14 +3869,14 @@ static void sub_8090750(u8 taskId)
 
 static void sub_8090A3C(u8 taskId)
 {
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         BeginNormalPaletteFade(0xFFFC, 0, 0, 16, RGB(0, 0, 0));
         gSprites[gTasks[taskId].data[3]].callback = sub_8090C28;
         gTasks[taskId].func = sub_8090B8C;
         return;
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         if (gTasks[taskId].data[4] == 0)
         {
@@ -4788,13 +4788,13 @@ static void Task_SwitchToSearchMenuTopBar(u8 taskId)
 
 static void Task_HandleSearchTopBarInput(u8 taskId)
 {
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_PC_OFF);
         gTasks[taskId].func = Task_ExitSearch;
         return;
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         switch (gTasks[taskId].data[0])
         {
@@ -4815,13 +4815,13 @@ static void Task_HandleSearchTopBarInput(u8 taskId)
         }
         return;
     }
-    if ((gMain.newKeys & DPAD_LEFT) && gTasks[taskId].data[0] > 0)
+    if (JOY_NEW(DPAD_LEFT) && gTasks[taskId].data[0] > 0)
     {
         PlaySE(SE_DEX_PAGE);
         gTasks[taskId].data[0]--;
         HighlightSelectedSearchTopBarItem(gTasks[taskId].data[0]);
     }
-    if ((gMain.newKeys & DPAD_RIGHT) && gTasks[taskId].data[0] < 2)
+    if (JOY_NEW(DPAD_RIGHT) && gTasks[taskId].data[0] < 2)
     {
         PlaySE(SE_DEX_PAGE);
         gTasks[taskId].data[0]++;
@@ -4855,14 +4855,14 @@ static void Task_HandleSearchMenuInput(u8 taskId)
             r6 = sSearchMovementMap_SearchNatDex;
     }
 
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_BALL);
         SetDefaultSearchModeAndOrder(taskId);
         gTasks[taskId].func = Task_SwitchToSearchMenuTopBar;
         return;
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         if (gTasks[taskId].data[1] == 6)
         {
@@ -4896,25 +4896,25 @@ static void Task_HandleSearchMenuInput(u8 taskId)
         return;
     }
 
-    if ((gMain.newKeys & DPAD_LEFT) && r6[gTasks[taskId].data[1]][0] != 0xFF)
+    if (JOY_NEW(DPAD_LEFT) && r6[gTasks[taskId].data[1]][0] != 0xFF)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][0];
         HighlightSelectedSearchMenuItem(gTasks[taskId].data[0], gTasks[taskId].data[1]);
     }
-    if ((gMain.newKeys & DPAD_RIGHT) && r6[gTasks[taskId].data[1]][1] != 0xFF)
+    if (JOY_NEW(DPAD_RIGHT) && r6[gTasks[taskId].data[1]][1] != 0xFF)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][1];
         HighlightSelectedSearchMenuItem(gTasks[taskId].data[0], gTasks[taskId].data[1]);
     }
-    if ((gMain.newKeys & DPAD_UP) && r6[gTasks[taskId].data[1]][2] != 0xFF)
+    if (JOY_NEW(DPAD_UP) && r6[gTasks[taskId].data[1]][2] != 0xFF)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][2];
         HighlightSelectedSearchMenuItem(gTasks[taskId].data[0], gTasks[taskId].data[1]);
     }
-    if ((gMain.newKeys & DPAD_DOWN) && r6[gTasks[taskId].data[1]][3] != 0xFF)
+    if (JOY_NEW(DPAD_DOWN) && r6[gTasks[taskId].data[1]][3] != 0xFF)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][3];
@@ -4955,7 +4955,7 @@ static void Task_WaitAndCompleteSearch(u8 taskId)
 
 static void Task_SearchCompleteWaitForInput(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         if (gPokedexView->pokemonListCount != 0)
         {
@@ -5010,7 +5010,7 @@ static void Task_HandleSearchParameterInput(u8 taskId)
     p1 = (u16 *)&gTasks[taskId].data[sSearchOptions[r1].taskDataCursorPos];
     p2 = (u16 *)&gTasks[taskId].data[sSearchOptions[r1].taskDataScrollOffset];
     r2 = sSearchOptions[r1].numOptions - 1;
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         sub_814ADC8();
         PlaySE(SE_PIN);
@@ -5019,7 +5019,7 @@ static void Task_HandleSearchParameterInput(u8 taskId)
         gTasks[taskId].func = Task_SwitchToSearchMenu;
         return;
     }
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         sub_814ADC8();
         PlaySE(SE_BALL);
@@ -5031,7 +5031,7 @@ static void Task_HandleSearchParameterInput(u8 taskId)
         return;
     }
     r3 = FALSE;
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         if (*p1 != 0)
         {
@@ -5054,7 +5054,7 @@ static void Task_HandleSearchParameterInput(u8 taskId)
         }
         return;
     }
-    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    if (JOY_REPT(DPAD_DOWN))
     {
         if (*p1 < 5 && *p1 < r2)
         {

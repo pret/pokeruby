@@ -87,17 +87,17 @@ bool8 InitNakamuraDebugMenu(void)
 
 static bool8 TopMenu_HandleJoypad(void)
 {
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         Menu_MoveCursor(-1);
     }
 
-    if (gMain.newKeys & DPAD_DOWN)
+    if (JOY_NEW(DPAD_DOWN))
     {
         Menu_MoveCursor(+1);
     }
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         MenuFunc func = sNakamuraTopMenuActions[Menu_GetCursorPos()].func;
 #if !(ENGLISH && REVISION == 0)
@@ -106,7 +106,7 @@ static bool8 TopMenu_HandleJoypad(void)
         return func();
     }
 
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         CloseMenu();
         return TRUE;
@@ -342,7 +342,7 @@ static void BaseLocation_Redraw(void)
 
 static bool8 BaseLocation_HandleJoypad(void)
 {
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         if (sSecretBaseIdx == 0)
             sSecretBaseIdx = 19;
@@ -352,7 +352,7 @@ static bool8 BaseLocation_HandleJoypad(void)
         return FALSE;
     }
 
-    if (gMain.newKeys & DPAD_RIGHT)
+    if (JOY_NEW(DPAD_RIGHT))
     {
         if (sSecretBaseIdx == 19)
             sSecretBaseIdx = 0;
@@ -362,7 +362,7 @@ static bool8 BaseLocation_HandleJoypad(void)
         return FALSE;
     }
 
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         CloseMenu();
         return TRUE;
@@ -514,7 +514,7 @@ static bool8 MoveYourBase_HandleJoypad_2(void)
 {
     u32 r4 = sMoveYourBase_CursorPos == 0 ? 7 : 10;
 
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         if (sMoveYourBase_CursorPos)
             MoveYourBase_EditOwnerID(1);
@@ -523,7 +523,7 @@ static bool8 MoveYourBase_HandleJoypad_2(void)
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    if (JOY_REPT(DPAD_DOWN))
     {
         if (sMoveYourBase_CursorPos)
             MoveYourBase_EditOwnerID(-1);
@@ -532,7 +532,7 @@ static bool8 MoveYourBase_HandleJoypad_2(void)
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    if (JOY_REPT(DPAD_LEFT))
     {
         if (sMoveYourBase_XCursorPos == 0)
             sMoveYourBase_XCursorPos = r4 - 1;
@@ -542,7 +542,7 @@ static bool8 MoveYourBase_HandleJoypad_2(void)
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    if (JOY_REPT(DPAD_RIGHT))
     {
         if (sMoveYourBase_XCursorPos == r4 - 1)
             sMoveYourBase_XCursorPos = 0;
@@ -552,7 +552,7 @@ static bool8 MoveYourBase_HandleJoypad_2(void)
         return FALSE;
     }
 
-    if (gMain.newKeys & SELECT_BUTTON)
+    if (JOY_NEW(SELECT_BUTTON))
     {
         if (sMoveYourBase_CursorPos == 0)
             sSecretBaseNameCharGroup = (sSecretBaseNameCharGroup + 1) % 5;
@@ -560,7 +560,7 @@ static bool8 MoveYourBase_HandleJoypad_2(void)
         return FALSE;
     }
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         Menu_BlankWindowRect(2, 5, 11, 6);
         Menu_BlankWindowRect(11, 1, 11, 2);
@@ -568,7 +568,7 @@ static bool8 MoveYourBase_HandleJoypad_2(void)
         return FALSE;
     }
 
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         if (sMoveYourBase_CursorPos == 0)
             MoveYourBase_EditOwnerNameChar(100);
@@ -580,19 +580,19 @@ static bool8 MoveYourBase_HandleJoypad_2(void)
 
 static bool8 MoveYourBase_JoypadAction(void)
 {
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         Menu_MoveCursor(-2);
         return FALSE;
     }
 
-    if (gMain.newKeys & DPAD_DOWN)
+    if (JOY_NEW(DPAD_DOWN))
     {
         Menu_MoveCursor(+2);
         return FALSE;
     }
 
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         if (sSecretBaseIdx == 0)
             sSecretBaseIdx = 19;
@@ -602,7 +602,7 @@ static bool8 MoveYourBase_JoypadAction(void)
         return FALSE;
     }
 
-    if (gMain.newKeys & DPAD_RIGHT)
+    if (JOY_NEW(DPAD_RIGHT))
     {
         if (sSecretBaseIdx == 19)
             sSecretBaseIdx = 0;
@@ -612,7 +612,7 @@ static bool8 MoveYourBase_JoypadAction(void)
         return FALSE;
     }
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         if (sSecretBaseIdx != 0 && gSaveBlock1.secretBases[sSecretBaseIdx].secretBaseId != 0)
         {
@@ -625,7 +625,7 @@ static bool8 MoveYourBase_JoypadAction(void)
         return FALSE;
     }
 
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         CloseMenu();
         return TRUE;
@@ -657,19 +657,19 @@ static const u8 Str_843E580[] = _(
 
 static bool8 MovingPKMN_HandleJoypad(void)
 {
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         Menu_MoveCursor(-1);
         return FALSE;
     }
 
-    if (gMain.newKeys & DPAD_DOWN)
+    if (JOY_NEW(DPAD_DOWN))
     {
         Menu_MoveCursor(+1);
         return FALSE;
     }
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         CloseMenu();
         switch (Menu_GetCursorPos())
@@ -685,7 +685,7 @@ static bool8 MovingPKMN_HandleJoypad(void)
         return TRUE;
     }
 
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         CloseMenu();
         return TRUE;
@@ -814,7 +814,7 @@ static u16 FishingPoints_GetIndexOfCurrentFishingSpot(void)
 
 static bool8 FishingPoints_HandleJoypad(void)
 {
-    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         Menu_EraseWindowRect(0, 0, 29, 19);
         CloseMenu();
@@ -1072,31 +1072,31 @@ static void NakaGenderTest_JoypadAction(u8 i)
 
 static bool8 NakaGenderTest_HandleJoypad(void)
 {
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         NakaGenderTest_JoypadAction(0);
         return FALSE;
     }
 
-    if (gMain.newKeys & DPAD_DOWN)
+    if (JOY_NEW(DPAD_DOWN))
     {
         NakaGenderTest_JoypadAction(1);
         return FALSE;
     }
 
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         NakaGenderTest_JoypadAction(2);
         return FALSE;
     }
 
-    if (gMain.newKeys & DPAD_RIGHT)
+    if (JOY_NEW(DPAD_RIGHT))
     {
         NakaGenderTest_JoypadAction(3);
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & A_BUTTON)
+    if (JOY_REPT(A_BUTTON))
     {
         if (sNakaGenderTest_CursorPosition < 6)
             NakaGenderTest_AdjustSpecies(sNakaGenderTest_CursorPosition, +1);
@@ -1108,7 +1108,7 @@ static bool8 NakaGenderTest_HandleJoypad(void)
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & B_BUTTON)
+    if (JOY_REPT(B_BUTTON))
     {
         if (sNakaGenderTest_CursorPosition < 6)
             NakaGenderTest_AdjustSpecies(sNakaGenderTest_CursorPosition, -1);
@@ -1120,7 +1120,7 @@ static bool8 NakaGenderTest_HandleJoypad(void)
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & R_BUTTON)
+    if (JOY_REPT(R_BUTTON))
     {
         if (sNakaGenderTest_CursorPosition < 6)
             NakaGenderTest_AdjustSpecies(sNakaGenderTest_CursorPosition, +10);
@@ -1132,7 +1132,7 @@ static bool8 NakaGenderTest_HandleJoypad(void)
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & L_BUTTON)
+    if (JOY_REPT(L_BUTTON))
     {
         if (sNakaGenderTest_CursorPosition < 6)
             NakaGenderTest_AdjustSpecies(sNakaGenderTest_CursorPosition, -10);
@@ -1144,7 +1144,7 @@ static bool8 NakaGenderTest_HandleJoypad(void)
         return FALSE;
     }
 
-    if (gMain.newKeys & START_BUTTON)
+    if (JOY_NEW(START_BUTTON))
     {
         NakaGenderTest_PartyCompactionEnsureAtLeastOne();
         CloseMenu();
@@ -1879,19 +1879,19 @@ static void SetPokeblock_GivePokeblock(void)
 
 static bool8 SetPokeblock_HandleJoypad(void)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         Menu_MoveCursor(-1);
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    if (JOY_REPT(DPAD_DOWN))
     {
         Menu_MoveCursor(+1);
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    if (JOY_REPT(DPAD_LEFT))
     {
         SetPokeblock_AdjustFlavor(Menu_GetCursorPos(), -1);
         SetPokeblock_PrintFlavorValue(Menu_GetCursorPos());
@@ -1899,7 +1899,7 @@ static bool8 SetPokeblock_HandleJoypad(void)
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    if (JOY_REPT(DPAD_RIGHT))
     {
         SetPokeblock_AdjustFlavor(Menu_GetCursorPos(), +1);
         SetPokeblock_PrintFlavorValue(Menu_GetCursorPos());
@@ -1907,14 +1907,14 @@ static bool8 SetPokeblock_HandleJoypad(void)
         return FALSE;
     }
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         SetPokeblock_GivePokeblock();
         PlaySE(SE_SELECT);
         return FALSE;
     }
 
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         Menu_EraseWindowRect(0, 0, 29, 19);
         CloseMenu();
@@ -2050,21 +2050,21 @@ static void EVTest_MovePartyCursor(s8 a0)
 
 static bool8 EVTest_HandleJoypad(void)
 {
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         EVTest_MovePartyCursor(-1);
         EVTest_PrintMonData(gPlayerParty + sEVTest_CursorPosition);
         return FALSE;
     }
 
-    if (gMain.newKeys & DPAD_RIGHT)
+    if (JOY_NEW(DPAD_RIGHT))
     {
         EVTest_MovePartyCursor(+1);
         EVTest_PrintMonData(gPlayerParty + sEVTest_CursorPosition);
         return FALSE;
     }
 
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         Menu_EraseWindowRect(0, 0, 29, 19);
         CloseMenu();
@@ -2161,22 +2161,22 @@ static void RNGTest_AdjustAndPrintNumAtLine(u16 * a0, s8 a1, u8 a2)
 
 static bool8 RNGTest_HandleJoypad(void)
 {
-    s8 r5 = gMain.heldKeys & R_BUTTON ? 100 : 1;
+    s8 r5 = JOY_HELD(R_BUTTON) ? 100 : 1;
     s8 r4;
 
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         Menu_MoveCursor(-1);
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    if (JOY_REPT(DPAD_DOWN))
     {
         Menu_MoveCursor(+1);
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    if (JOY_REPT(DPAD_LEFT))
     {
         r4 = Menu_GetCursorPos();
         if (r4 == 0)
@@ -2190,7 +2190,7 @@ static bool8 RNGTest_HandleJoypad(void)
         return FALSE;
     }
 
-    if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    if (JOY_REPT(DPAD_RIGHT))
     {
         r4 = Menu_GetCursorPos();
         if (r4 == 0)
@@ -2204,7 +2204,7 @@ static bool8 RNGTest_HandleJoypad(void)
         return FALSE;
     }
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         if (sRngMax != 0)
         {
@@ -2214,7 +2214,7 @@ static bool8 RNGTest_HandleJoypad(void)
         return FALSE;
     }
 
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         Menu_EraseWindowRect(0, 0, 29, 19);
         CloseMenu();

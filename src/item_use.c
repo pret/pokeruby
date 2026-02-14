@@ -615,13 +615,13 @@ void ItemUseOutOfBattle_CoinCase(u8 taskId)
 
 static void SSTicketWaitForAButtonPress(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
         CleanUpItemMenuMessage(taskId);
 }
 
 static void SSTicketWaitForAButtonPress2(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
         CleanUpOverworldMessage(taskId);
 }
 
@@ -751,7 +751,7 @@ static void BootTMHM(u8 taskId)
 
 static void WaitButtonPressAndDisplayTMHMInfo(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         StringCopy(gStringVar1, gMoveNames[ItemIdToBattleMoveId(gSpecialVar_ItemId)]);
         StringExpandPlaceholders(gStringVar4, gOtherText_ContainsMove);
@@ -889,7 +889,7 @@ void ItemUseInBattle_PokeBall(u8 taskId)
 
 void sub_80CA294(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         sub_80A7094(taskId);
 }
 

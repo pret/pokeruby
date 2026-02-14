@@ -1266,14 +1266,14 @@ bool8 debug_sub_8085564(void)
 {
     bool8 changed = FALSE;
 
-    if (gMain.newKeys & R_BUTTON)
+    if (JOY_NEW(R_BUTTON))
     {
         sSelectedDebugWeather++;
         if (sSelectedDebugWeather == 15)
             sSelectedDebugWeather = 0;
         changed = TRUE;
     }
-    if (gMain.newKeys & L_BUTTON)
+    if (JOY_NEW(L_BUTTON))
     {
         if (sSelectedDebugWeather != 0)
             sSelectedDebugWeather--;
@@ -1288,7 +1288,7 @@ bool8 debug_sub_8085564(void)
         Menu_PrintText(sDebugText_Weather[sSelectedDebugWeather], 23, 1);
     }
     
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         ChangeWeather(sSelectedDebugWeather);
         CloseMenu();
