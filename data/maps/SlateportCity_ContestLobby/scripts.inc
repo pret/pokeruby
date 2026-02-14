@@ -3,16 +3,16 @@ SlateportCity_ContestLobby_MapScripts:: @ 8155411
 	.byte 0
 
 SlateportCity_ContestLobby_MapScript1_OnTransition:: @ 8155417
-	call SlateportCity_ContestLobby_EventScript_1AE188
+	call LilycoveCity_ContestLobby_EventScript_TryShowContestReporter
 	end
 
 SlateportCity_ContestLobby_EventScript_ContestReceptionist:: @ 815541D
 	setvar VAR_0x800B, 7
 	setvar VAR_CONTEST_RANK, 2
-	call SlateportCity_ContestLobby_EventScript_1A4E92
+	call LilycoveCity_ContestLobby_EventScript_1A4E92
 	call SlateportCity_ContestLobby_EventScript_155448
 	special SetContestTrainerGfxIds
-	call SlateportCity_ContestLobby_EventScript_15FBDB
+	call LilycoveCity_ContestLobby_EventScript_SetupRivalGfxId
 	setvar VAR_CONTEST_LOCATION, 3
 	warp MAP_LINK_CONTEST_ROOM1, 255, 7, 5
 	waitstate
@@ -37,7 +37,7 @@ SlateportCity_ContestLobby_EventScript_155448:: @ 8155448
 	waitmovement 0
 	applymovement LOCALID_PLAYER, SlateportCity_ContestLobby_Movement_1554CA
 	waitmovement 0
-	msgbox SlateportCity_ContestLobby_Text_1A6832, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_ComeThroughHere, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, SlateportCity_ContestLobby_Movement_1554D3
 	applymovement LOCALID_PLAYER, SlateportCity_ContestLobby_Movement_1554C0

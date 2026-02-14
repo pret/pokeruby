@@ -3,16 +3,16 @@ VerdanturfTown_ContestLobby_MapScripts:: @ 8153D6A
 	.byte 0
 
 VerdanturfTown_ContestLobby_MapScript1_153D70:: @ 8153D70
-	call VerdanturfTown_ContestLobby_EventScript_1AE188
+	call LilycoveCity_ContestLobby_EventScript_TryShowContestReporter
 	end
 
 VerdanturfTown_ContestLobby_EventScript_153D76:: @ 8153D76
 	setvar VAR_0x800B, 5
 	setvar VAR_CONTEST_RANK, 0
-	call VerdanturfTown_ContestLobby_EventScript_1A4E92
+	call LilycoveCity_ContestLobby_EventScript_1A4E92
 	call VerdanturfTown_ContestLobby_EventScript_153DA1
 	special SetContestTrainerGfxIds
-	call VerdanturfTown_ContestLobby_EventScript_15FBDB
+	call LilycoveCity_ContestLobby_EventScript_SetupRivalGfxId
 	setvar VAR_CONTEST_LOCATION, 1
 	warp MAP_LINK_CONTEST_ROOM1, 255, 7, 5
 	waitstate
@@ -37,7 +37,7 @@ VerdanturfTown_ContestLobby_EventScript_153DA1:: @ 8153DA1
 	waitmovement 0
 	applymovement LOCALID_PLAYER, VerdanturfTown_ContestLobby_Movement_153E23
 	waitmovement 0
-	msgbox VerdanturfTown_ContestLobby_Text_1A6832, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_ComeThroughHere, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, VerdanturfTown_ContestLobby_Movement_153E2C
 	applymovement LOCALID_PLAYER, VerdanturfTown_ContestLobby_Movement_153E19
