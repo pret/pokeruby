@@ -18,6 +18,8 @@
 
 #include "data/wild_encounters.h"
 
+#define MAX_ENCOUNTER_RATE 2880
+
 const struct WildPokemon gWildFeebasRoute119Data = {20, 25, SPECIES_FEEBAS};
 
 const u16 gRoute119WaterTileData[] =
@@ -79,8 +81,8 @@ static bool8 CheckFeebas(void)
     u8 route119section = 0;
     u16 waterTileNum;
 
-    if (gSaveBlock1.location.mapGroup == MAP_GROUP(ROUTE119)
-     && gSaveBlock1.location.mapNum == MAP_NUM(ROUTE119))
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_ROUTE119)
+     && gSaveBlock1.location.mapNum == MAP_NUM(MAP_ROUTE119))
     {
         GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
         x -= 7;
@@ -374,7 +376,7 @@ static bool8 DoMassOutbreakEncounterTest(void)
 
 static bool8 DoWildEncounterRateDiceRoll(u16 encounterRate)
 {
-    if (Random() % 2880 < encounterRate)
+    if (Random() % MAX_ENCOUNTER_RATE < encounterRate)
         return TRUE;
     else
         return FALSE;
@@ -417,8 +419,8 @@ static bool8 DoWildEncounterTest(u32 encounterRate, bool8 ignoreAbility)
                 encounterRate *= 2;
         }
     }
-    if (encounterRate > 2880)
-        encounterRate = 2880;
+    if (encounterRate > MAX_ENCOUNTER_RATE)
+        encounterRate = MAX_ENCOUNTER_RATE;
     return DoWildEncounterRateDiceRoll(encounterRate);
 }
 

@@ -541,7 +541,7 @@ void sub_8115634(u8 taskId)
     eRoulette->var2C.b =  sin;
     eRoulette->var2C.c = -sin;
 #if DEBUG
-    if (unk_203955C[0] != 0 && (gMain.newKeys & START_BUTTON))
+    if (unk_203955C[0] != 0 && JOY_NEW(START_BUTTON))
     {
         gTasks[eRoulette->varA4].func = sub_81157AC;
         m4aMPlayStop(&gMPlayInfo_SE1);
@@ -701,25 +701,25 @@ void sub_8115B58(u8 r0)
 {
     u8 z = 0;
     bool8 var0 = FALSE;
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         var0 = TRUE;
         if (!sub_8115A94(&gTasks[r0].data[4], 0))
             return;
     }
-    if (gMain.newKeys & DPAD_DOWN)
+    if (JOY_NEW(DPAD_DOWN))
     {
         var0 = TRUE;
         if (!sub_8115A94(&gTasks[r0].data[4], 1))
             return;
     }
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         var0 = TRUE;
         if (!sub_8115A94(&gTasks[r0].data[4], 2))
             return;
     }
-    if (gMain.newKeys & DPAD_RIGHT)
+    if (JOY_NEW(DPAD_RIGHT))
     {
         var0 = TRUE;
         if (!sub_8115A94(&gTasks[r0].data[4], 3))
@@ -795,7 +795,7 @@ void sub_8115E14(u8 taskid)
     default:
         gTasks[taskid].data[1]++;
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         if ((eRoulette->var08 & gUnknown_083F8C00[gTasks[taskid].data[4]].var08))
             PlaySE(SE_BOO);
@@ -1010,7 +1010,7 @@ void sub_811637C(u8 taskid)
             }
             if (gTasks[taskid].data[1] < 61)
             {
-                if (gMain.newKeys & A_BUTTON)
+                if (JOY_NEW(A_BUTTON))
                     gTasks[taskid].data[1] = 60;
                 gTasks[taskid].data[1]++;
             }
@@ -1274,7 +1274,7 @@ void sub_8116B40(u8 taskId) // end roulette ?
 
 void sub_8116BC0(u8 taskid)
 {
-    if (eRoulette->varA8 == 0 || gMain.newKeys & eRoulette->varAA)
+    if (eRoulette->varA8 == 0 || JOY_NEW(eRoulette->varAA))
     {
         gTasks[taskid].func = eRoulette->varAC;
         if (eRoulette->varAA > 0)
@@ -1605,7 +1605,7 @@ void sub_81175C0(u8 taskid)
 void sub_81175DC(u8 taskid)
 {
     gTasks[taskid].data[0]++;
-    if (!(gMain.newKeys & (A_BUTTON | B_BUTTON)) && gTasks[taskid].data[0] < 61)
+    if (!JOY_NEW(A_BUTTON | B_BUTTON) && gTasks[taskid].data[0] < 61)
         return;
     gSpecialVar_0x8004 = 1;
     Menu_EraseScreen();
@@ -1673,7 +1673,7 @@ void debug_sub_812CDE4(u8 taskId)
     u8 coinText[] = {0xFD, 0x02, 0xFF};
 #endif
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         gTasks[taskId].data[13]++;
         if (gTasks[taskId].data[13] == 10000)
@@ -1687,7 +1687,7 @@ void debug_sub_812CDE4(u8 taskId)
         MenuPrint_RightAligned(gStringVar4, 9, 1);
 #endif
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].data[13]--;
         if (gTasks[taskId].data[13] == -1)
@@ -1701,7 +1701,7 @@ void debug_sub_812CDE4(u8 taskId)
         MenuPrint_RightAligned(gStringVar4, 9, 1);
 #endif
     }
-    else if (gMain.newKeys & R_BUTTON)
+    else if (JOY_NEW(R_BUTTON))
     {
         gTasks[taskId].data[13] += 10;
         if (gTasks[taskId].data[13] > 9999)
@@ -1715,7 +1715,7 @@ void debug_sub_812CDE4(u8 taskId)
         MenuPrint_RightAligned(gStringVar4, 9, 1);
 #endif
     }
-    else if (gMain.newKeys & L_BUTTON)
+    else if (JOY_NEW(L_BUTTON))
     {
         gTasks[taskId].data[13] -= 10;
         if (gTasks[taskId].data[13] < 0)
@@ -1729,7 +1729,7 @@ void debug_sub_812CDE4(u8 taskId)
         MenuPrint_RightAligned(gStringVar4, 9, 1);
 #endif
     }
-    else if (gMain.newKeys & START_BUTTON)
+    else if (JOY_NEW(START_BUTTON))
     {
         gSaveBlock1.coins = gTasks[taskId].data[13];
         gTasks[taskId].func = Task_Roulette_0;
@@ -1743,7 +1743,7 @@ void debug_sub_812CDE4(u8 taskId)
 #endif
         unk_2039560 = 0;
     }
-    else if (gMain.newKeys & SELECT_BUTTON)
+    else if (JOY_NEW(SELECT_BUTTON))
     {
         gSaveBlock1.coins = gTasks[taskId].data[13];
         gTasks[taskId].func = Task_Roulette_0;

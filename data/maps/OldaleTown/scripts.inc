@@ -49,20 +49,20 @@ OldaleTown_EventScript_MartEmployee:: @ 814DDBC
 
 OldaleTown_EventScript_GoToMartSouth:: @ 814DE07
 	applymovement 2, OldaleTown_Movement_EmployeeSouth
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PlayerSouth
+	applymovement LOCALID_PLAYER, OldaleTown_Movement_PlayerSouth
 	waitmovement 0
 	goto OldaleTown_EventScript_ExplainPokemonMart
 	end
 
 OldaleTown_EventScript_GoToMartNorth:: @ 814DE1E
 	applymovement 2, OldaleTown_Movement_EmployeeNorth
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PlayerNorth
+	applymovement LOCALID_PLAYER, OldaleTown_Movement_PlayerNorth
 	waitmovement 0
 	goto OldaleTown_EventScript_ExplainPokemonMart
 	end
 
 OldaleTown_EventScript_GoToMartEast:: @ 814DE35
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PlayerEast
+	applymovement LOCALID_PLAYER, OldaleTown_Movement_PlayerEast
 	applymovement 2, OldaleTown_Movement_EmployeeEast
 	waitmovement 0
 	goto OldaleTown_EventScript_ExplainPokemonMart
@@ -200,7 +200,7 @@ OldaleTown_EventScript_FootprintsMan:: @ 814DEDF
 
 OldaleTown_EventScript_BlockedPath:: @ 814DEFF
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PlayerStepBack
+	applymovement LOCALID_PLAYER, OldaleTown_Movement_PlayerStepBack
 	applymovement 3, OldaleTown_Movement_BackUp
 	waitmovement 0
 	msgbox OldaleTown_Text_WaitDontComeInHere, MSGBOX_DEFAULT
@@ -226,7 +226,7 @@ OldaleTown_EventScript_RivalTrigger1:: @ 814DF41
 	lockall
 	applymovement 4, OldaleTown_Movement_RivalApproachPlayer1
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	goto OldaleTown_EventScript_ShowRivalMessage
 	end
@@ -235,7 +235,7 @@ OldaleTown_EventScript_RivalTrigger2:: @ 814DF5C
 	lockall
 	applymovement 4, OldaleTown_Movement_RivalApproachPlayer2
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	goto OldaleTown_EventScript_ShowRivalMessage
 	end
@@ -244,7 +244,7 @@ OldaleTown_EventScript_RivalTrigger3:: @ 814DF77
 	lockall
 	applymovement 4, OldaleTown_Movement_RivalApproachPlayer3
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	goto OldaleTown_EventScript_ShowRivalMessage
 	end

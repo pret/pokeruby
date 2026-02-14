@@ -23,7 +23,7 @@ EverGrandeCity_SidneysRoom_OnWarp:: @ 815B570
 	.2byte 0
 
 EverGrandeCity_SidneysRoom_EventScript_PlayerTurnNorth:: @ 815B57A
-	turnobject OBJ_EVENT_ID_PLAYER, 2
+	turnobject LOCALID_PLAYER, 2
 	end
 
 EverGrandeCity_SidneysRoom_OnFrame:: @ 815B57F

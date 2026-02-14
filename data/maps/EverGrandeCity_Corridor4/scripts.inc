@@ -7,5 +7,5 @@ EverGrandeCity_Corridor4_OnWarp:: @ 815BA51
 	.2byte 0
 
 EverGrandeCity_Corridor4_TurnPlayerNorth:: @ 815BA5B
-	turnobject OBJ_EVENT_ID_PLAYER, 2
+	turnobject LOCALID_PLAYER, 2
 	end

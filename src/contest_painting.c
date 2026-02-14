@@ -194,7 +194,7 @@ static void HoldContestPainting(void)
             sFrameCounter--;
         break;
     case 1:
-        if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+        if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         {
             sHoldState++;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);

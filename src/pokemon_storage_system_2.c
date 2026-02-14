@@ -579,7 +579,7 @@ void sub_8096C84(void)
         }
         break;
     case 3:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             sub_8098A5C();
             gPokemonStorageSystemPtr->unk_0004 = 0;
@@ -596,7 +596,7 @@ void sub_8096C84(void)
         gPokemonStorageSystemPtr->unk_0004 = 6;
         break;
     case 6:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             sub_8098A5C();
             SetPSSCallback(sub_8096C84);
@@ -766,7 +766,7 @@ void sub_8097078(void)
         gPokemonStorageSystemPtr->unk_0004 = 5;
         break;
     case 5:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             sub_8098A5C();
             SetPSSCallback(sub_8096C84);
@@ -851,7 +851,7 @@ void sub_8097390(void)
         }
         break;
     case 1:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             sub_8098A5C();
             SetPSSCallback(sub_8096C84);
@@ -938,7 +938,7 @@ void sub_809746C(void)
         }
         break;
     case 4:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             PrintStorageActionText(PC_TEXT_DEPOSIT_IN_WHICH_BOX);
             gPokemonStorageSystemPtr->unk_0004 = 1;
@@ -999,14 +999,14 @@ void sub_8097594(void)
         gPokemonStorageSystemPtr->unk_0004++;
         break;
     case 4:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             PrintStorageActionText(PC_TEXT_BYE_BYE);
             gPokemonStorageSystemPtr->unk_0004++;
         }
         break;
     case 5:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             sub_8098A5C();
             if (gUnknown_0203847C)
@@ -1038,14 +1038,14 @@ void sub_8097594(void)
         gPokemonStorageSystemPtr->unk_0004++;
         break;
     case 9:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             PrintStorageActionText(PC_TEXT_SURPRISE);
             gPokemonStorageSystemPtr->unk_0004++;
         }
         break;
     case 10:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             sub_8098A5C();
             sub_8099958();
@@ -1061,14 +1061,14 @@ void sub_8097594(void)
         }
         break;
     case 12:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             PrintStorageActionText(PC_TEXT_WORRIED);
             gPokemonStorageSystemPtr->unk_0004++;
         }
         break;
     case 13:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             sub_8098A5C();
             SetPSSCallback(sub_8096C84);
@@ -1318,7 +1318,7 @@ void sub_8097BA0(void)
         }
         break;
     case 1:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             sub_8098A5C();
             SetPSSCallback(sub_8096C84);
@@ -1377,7 +1377,7 @@ void sub_8097CC0(void)
         }
         break;
     case 1:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             sub_8098A5C();
             SetPSSCallback(sub_8096C84);

@@ -35,12 +35,12 @@ SlateportCity_ContestLobby_EventScript_155448:: @ 8155448
 	delay 20
 	applymovement 1, SlateportCity_ContestLobby_Movement_1554DC
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_ContestLobby_Movement_1554CA
+	applymovement LOCALID_PLAYER, SlateportCity_ContestLobby_Movement_1554CA
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_ComeThroughHere, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, SlateportCity_ContestLobby_Movement_1554D3
-	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_ContestLobby_Movement_1554C0
+	applymovement LOCALID_PLAYER, SlateportCity_ContestLobby_Movement_1554C0
 	waitmovement 0
 	releaseall
 	return

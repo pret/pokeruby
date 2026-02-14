@@ -940,11 +940,11 @@ RusturfTunnel_EventScript_SetRusturfTunnelOpen:: @ 81A0442
 
 EventScript_UnusedBoardFerry:
 	delay 30
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	showobjectat OBJ_EVENT_ID_PLAYER, 0
+	showobjectat LOCALID_PLAYER, 0
 	delay 30
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_UnusedBoardFerry
+	applymovement LOCALID_PLAYER, Movement_UnusedBoardFerry
 	waitmovement 0
 	delay 30
 	return
@@ -959,7 +959,7 @@ Common_EventScript_FerryDepartIsland:: @ 81A047C
 	compare VAR_FACING, DIR_WEST
 	call_if_eq Ferry_EventScript_DepartIslandWest
 	delay 30
-	hideobjectat OBJ_EVENT_ID_PLAYER, 0
+	hideobjectat LOCALID_PLAYER, 0
 	call Common_EventScript_FerryDepart
 	return
 
@@ -1666,7 +1666,7 @@ gUnknown_081C6C02:: @ 81C6C02
 
 @ 81C6C1D
 	lockall
-	braillemessage Underwater_SealedChamber_Braille_1C533D
+	braillemessage Underwater_SealedChamber_Braille_GoUpHere
 	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall

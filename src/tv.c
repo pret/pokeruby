@@ -40,6 +40,7 @@
 #include "strings.h"
 #include "text.h"
 #include "ewram.h"
+#include "constants/event_objects.h"
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
 #include "constants/metatile_labels.h"
@@ -543,8 +544,8 @@ void UpdateTVScreensOnMap(int width, int height)
     case 2:
         break;
     default:
-        if (gSaveBlock1.location.mapGroup == MAP_GROUP(LILYCOVE_CITY_COVE_LILY_MOTEL_1F)
-         && gSaveBlock1.location.mapNum == MAP_NUM(LILYCOVE_CITY_COVE_LILY_MOTEL_1F))
+        if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_LILYCOVE_CITY_COVE_LILY_MOTEL_1F)
+         && gSaveBlock1.location.mapNum == MAP_NUM(MAP_LILYCOVE_CITY_COVE_LILY_MOTEL_1F))
         {
             SetTVMetatilesOnMap(width, height, METATILE_ID(Building, TV_On));
         }
@@ -721,41 +722,41 @@ u8 GabbyAndTyGetLastBattleTrivia(void)
     return 0;
 }
 
-void GabbyAndTySetScriptVarsToObjectEventLocalIds(void)
+void GetGabbyAndTyLocalIds(void)
 {
     switch (GabbyAndTyGetBattleNum())
     {
     case 1:
-        gSpecialVar_0x8004 = 0xE;
-        gSpecialVar_0x8005 = 0xD;
+        gSpecialVar_0x8004 = LOCALID_ROUTE111_GABBY_1;
+        gSpecialVar_0x8005 = LOCALID_ROUTE111_TY_1;
         break;
     case 2:
-        gSpecialVar_0x8004 = 0x5;
-        gSpecialVar_0x8005 = 0x6;
+        gSpecialVar_0x8004 = LOCALID_ROUTE118_GABBY_1;
+        gSpecialVar_0x8005 = LOCALID_ROUTE118_TY_1;
         break;
     case 3:
-        gSpecialVar_0x8004 = 0x12;
-        gSpecialVar_0x8005 = 0x11;
+        gSpecialVar_0x8004 = LOCALID_ROUTE120_GABBY_1;
+        gSpecialVar_0x8005 = LOCALID_ROUTE120_TY_1;
         break;
     case 4:
-        gSpecialVar_0x8004 = 0x15;
-        gSpecialVar_0x8005 = 0x16;
+        gSpecialVar_0x8004 = LOCALID_ROUTE111_GABBY_2;
+        gSpecialVar_0x8005 = LOCALID_ROUTE111_TY_2;
         break;
     case 5:
-        gSpecialVar_0x8004 = 0x8;
-        gSpecialVar_0x8005 = 0x9;
+        gSpecialVar_0x8004 = LOCALID_ROUTE118_GABBY_2;
+        gSpecialVar_0x8005 = LOCALID_ROUTE118_TY_2;
         break;
     case 6:
-        gSpecialVar_0x8004 = 0x13;
-        gSpecialVar_0x8005 = 0x14;
+        gSpecialVar_0x8004 = LOCALID_ROUTE120_GABBY_2;
+        gSpecialVar_0x8005 = LOCALID_ROUTE120_TY_2;
         break;
     case 7:
-        gSpecialVar_0x8004 = 0x17;
-        gSpecialVar_0x8005 = 0x18;
+        gSpecialVar_0x8004 = LOCALID_ROUTE111_GABBY_3;
+        gSpecialVar_0x8005 = LOCALID_ROUTE111_TY_3;
         break;
     case 8:
-        gSpecialVar_0x8004 = 0xA;
-        gSpecialVar_0x8005 = 0xB;
+        gSpecialVar_0x8004 = LOCALID_ROUTE118_GABBY_3;
+        gSpecialVar_0x8005 = LOCALID_ROUTE118_TY_3;
         break;
     }
 }
@@ -1452,16 +1453,16 @@ bool8 IsPriceDiscounted(u8 arg0)
     switch (arg0)
     {
     case 1:
-        if (gSaveBlock1.location.mapGroup == MAP_GROUP(SLATEPORT_CITY)
-         && gSaveBlock1.location.mapNum == MAP_NUM(SLATEPORT_CITY)
+        if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_SLATEPORT_CITY)
+         && gSaveBlock1.location.mapNum == MAP_NUM(MAP_SLATEPORT_CITY)
          && gSpecialVar_LastTalked == 0x1a)
             return TRUE;
         else
             return FALSE;
         break;
     case 3:
-        if (gSaveBlock1.location.mapGroup == MAP_GROUP(LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP)
-         && gSaveBlock1.location.mapNum == MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP))
+        if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP)
+         && gSaveBlock1.location.mapNum == MAP_NUM(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP))
             return TRUE;
         else
             return FALSE;
@@ -2113,16 +2114,16 @@ u32 GetPlayerTrainerId(void)
 
 u8 CheckForBigMovieOrEmergencyNewsOnTV(void)
 {
-    if (gSaveBlock1.location.mapGroup != MAP_GROUP(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
+    if (gSaveBlock1.location.mapGroup != MAP_GROUP(MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
         return 0;
     if (gSaveBlock2.playerGender == MALE)
     {
-        if (gSaveBlock1.location.mapNum != MAP_NUM(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
+        if (gSaveBlock1.location.mapNum != MAP_NUM(MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
             return 0;
     }
     else
     {
-        if (gSaveBlock1.location.mapNum != MAP_NUM(LITTLEROOT_TOWN_MAYS_HOUSE_1F))
+        if (gSaveBlock1.location.mapNum != MAP_NUM(MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F))
             return 0;
     }
     if (FlagGet(FLAG_SYS_TV_LATI) == 1)
@@ -2134,11 +2135,11 @@ u8 CheckForBigMovieOrEmergencyNewsOnTV(void)
 
 void GetMomOrDadStringForTVMessage(void)
 {
-    if (gSaveBlock1.location.mapGroup == MAP_GROUP(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
     {
         if (gSaveBlock2.playerGender == MALE)
         {
-            if (gSaveBlock1.location.mapNum == MAP_NUM(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
+            if (gSaveBlock1.location.mapNum == MAP_NUM(MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
             {
                 StringCopy(gStringVar1, gOtherText_Mom);
                 VarSet(VAR_TEMP_3, 1);
@@ -2146,7 +2147,7 @@ void GetMomOrDadStringForTVMessage(void)
         }
         else
         {
-            if (gSaveBlock1.location.mapNum == MAP_NUM(LITTLEROOT_TOWN_MAYS_HOUSE_1F))
+            if (gSaveBlock1.location.mapNum == MAP_NUM(MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F))
             {
                 StringCopy(gStringVar1, gOtherText_Mom);
                 VarSet(VAR_TEMP_3, 1);
@@ -2186,7 +2187,7 @@ void GetMomOrDadStringForTVMessage(void)
 void sub_80BFD20(void)
 {
     VarSet(VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0);
-    RemoveObjectEventByLocalIdAndMap(5, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+    RemoveObjectEventByLocalIdAndMap(LOCALID_TOWER_LOBBY_REPORTER, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
 }
 
 void sub_80BFE24(TVShow arg0[TV_SHOWS_COUNT], TVShow arg1[TV_SHOWS_COUNT], TVShow arg2[TV_SHOWS_COUNT], TVShow arg3[TV_SHOWS_COUNT]);

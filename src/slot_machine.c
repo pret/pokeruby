@@ -672,7 +672,7 @@ static bool8 sub_8101E3C(struct Task *task)
 #if DEBUG
     if (unk_debug_bss_1_1 != 0 && unk_debug_bss_1_4 != 0)
     {
-        if (sSlotMachine->coins <= 3 || (gMain.heldKeys & B_BUTTON))
+        if (sSlotMachine->coins <= 3 || JOY_HELD(B_BUTTON))
         {
             unk_debug_bss_1_4 = 0;
         }
@@ -687,7 +687,7 @@ static bool8 sub_8101E3C(struct Task *task)
             return 0;
         }
     }
-    if (unk_debug_bss_1_1 != 0 && (gMain.newKeys & 8))
+    if (unk_debug_bss_1_1 != 0 && JOY_NEW(START_BUTTON))
     {
         debug_sub_811B620();
         sSlotMachine->state = 29;
@@ -695,12 +695,12 @@ static bool8 sub_8101E3C(struct Task *task)
     }
 #endif
 
-    if (gMain.newKeys & SELECT_BUTTON)
+    if (JOY_NEW(SELECT_BUTTON))
     {
         sub_8104AB8(0);
         sSlotMachine->state = 8;
     }
-    else if (gMain.newKeys & R_BUTTON)
+    else if (JOY_NEW(R_BUTTON))
     {
         if (sSlotMachine->coins - (3 - sSlotMachine->bet) >= 0)
         {
@@ -718,16 +718,16 @@ static bool8 sub_8101E3C(struct Task *task)
     }
     else
     {
-        if (gMain.newKeys & DPAD_DOWN && sSlotMachine->coins != 0)
+        if (JOY_NEW(DPAD_DOWN) && sSlotMachine->coins != 0)
         {
             PlaySE(SE_SHOP);
             sub_8103D50(sSlotMachine->bet);
             sSlotMachine->coins--;
             sSlotMachine->bet++;
         }
-        if (sSlotMachine->bet >= 3 || (sSlotMachine->bet != 0 && gMain.newKeys & A_BUTTON))
+        if (sSlotMachine->bet >= 3 || (sSlotMachine->bet != 0 && JOY_NEW(A_BUTTON)))
             sSlotMachine->state = 9;
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
             sSlotMachine->state = 21;
     }
     return FALSE;
@@ -748,7 +748,7 @@ static bool8 sub_8101F44(struct Task *task)
 
 static bool8 sub_8101F60(struct Task *task)
 {
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         Menu_EraseScreen();
         sSlotMachine->state = 5;
@@ -834,7 +834,7 @@ static bool8 sub_8102058(struct Task *task)
     }
 #endif
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_CONTEST_PLACE);
         sub_8102E1C(sSlotMachine->unk18);
@@ -1088,7 +1088,7 @@ static bool8 sub_810239C(struct Task *task)
 
 static bool8 sub_81023B8(struct Task *task)
 {
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         Menu_EraseScreen();
         sSlotMachine->state = 5;
@@ -1105,7 +1105,7 @@ static bool8 sub_81023E0(struct Task *task)
 
 static bool8 sub_81023FC(struct Task *task)
 {
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         Menu_EraseScreen();
         sSlotMachine->state = 27;
@@ -1543,10 +1543,10 @@ static bool8 sub_8102AD0(struct Task *task)
         if (sSlotMachine->coins < 9999)
             sSlotMachine->coins++;
         task->data[1] = 8;
-        if (gMain.heldKeys & A_BUTTON)
+        if (JOY_HELD(A_BUTTON))
             task->data[1] = 4;
     }
-    if (IsFanfareTaskInactive() && gMain.newKeys & START_BUTTON)
+    if (IsFanfareTaskInactive() && JOY_NEW(START_BUTTON))
     {
         PlaySE(SE_PIN);
         sSlotMachine->coins += sSlotMachine->payout;
@@ -3035,7 +3035,7 @@ static void sub_8104B80(struct Task *task)
 
 static void sub_8104BC8(struct Task *task)
 {
-    if (gMain.newKeys & (B_BUTTON | SELECT_BUTTON))
+    if (JOY_NEW(B_BUTTON | SELECT_BUTTON))
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         task->data[0]++;
@@ -5797,13 +5797,13 @@ static void debug_sub_811B654(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             Menu_EraseScreen();
             DestroyTask(taskId);
             break;
         }
-        if (gMain.newKeys & 0x20)
+        if (JOY_NEW(DPAD_LEFT))
         {
             sSlotMachine->unk01--;
             if ((s8)sSlotMachine->unk01 < 0)  // Why? It's unsigned
@@ -5811,7 +5811,7 @@ static void debug_sub_811B654(u8 taskId)
             debug_sub_811B2E8();
             break;
         }
-        if (gMain.newKeys & 0x10)
+        if (JOY_NEW(DPAD_RIGHT))
         {
             sSlotMachine->unk01++;
             if (sSlotMachine->unk01 > 5)
@@ -5819,7 +5819,7 @@ static void debug_sub_811B654(u8 taskId)
             debug_sub_811B2E8();
             break;
         }
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             task->data[0] = 3;
             Menu_EraseScreen();
@@ -5828,7 +5828,7 @@ static void debug_sub_811B654(u8 taskId)
             Menu_PrintText(Str_841B264, 1, 3);
             break;
         }
-        if (gMain.newKeys & 4)
+        if (JOY_NEW(SELECT_BUTTON))
         {
             unk_debug_bss_1_2 = 0;
             unk_debug_bss_1_3 = 0;
@@ -5839,7 +5839,7 @@ static void debug_sub_811B654(u8 taskId)
             InitMenu(0, 1, 3, 8, 0, 9);
             task->data[0]++;
         }
-        if (gMain.newKeys & 8)
+        if (JOY_NEW(START_BUTTON))
         {
             unk_debug_bss_1_4 = 1;
             Menu_EraseScreen();
@@ -5859,35 +5859,35 @@ static void debug_sub_811B654(u8 taskId)
         DestroyTask(taskId);
         break;
     case 3:
-        if (gMain.newAndRepeatedKeys & 0x80)
+        if (JOY_REPT(0x80))
         {
             sSlotMachine->coins += 100;
             if (sSlotMachine->coins > 9999)
                 sSlotMachine->coins = 9999;
             break;
         }
-        if (gMain.newAndRepeatedKeys & 0x40)
+        if (JOY_REPT(0x40))
         {
             sSlotMachine->coins -= 100;
             if (sSlotMachine->coins <= 0)
                 sSlotMachine->coins = 9999;
             break;
         }
-        if (gMain.newAndRepeatedKeys & 0x20)
+        if (JOY_REPT(0x20))
         {
             sSlotMachine->coins -= 1000;
             if (sSlotMachine->coins <= 0)
                 sSlotMachine->coins = 9999;
             break;
         }
-        if (gMain.newAndRepeatedKeys & 0x10)
+        if (JOY_REPT(0x10))
         {
             sSlotMachine->coins += 1000;
             if (sSlotMachine->coins > 9999)
                 sSlotMachine->coins = 9999;
             break;
         }
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             Menu_EraseScreen();
             DestroyTask(taskId);

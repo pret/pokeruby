@@ -4483,19 +4483,19 @@ void sub_80F5CDC(u8 a0)
 
 u8 sub_80F5DD4(void)
 {
-    if (({gMain.newAndRepeatedKeys & DPAD_UP;}))
+    if (JOY_REPT(DPAD_UP))
     {
         return sub_80F5E20();
     }
-    else if (({gMain.newAndRepeatedKeys & DPAD_DOWN;}))
+    else if (JOY_REPT(DPAD_DOWN))
     {
         return sub_80F5EE4();
     }
-    else if (({gMain.newAndRepeatedKeys & DPAD_LEFT;}))
+    else if (JOY_REPT(DPAD_LEFT))
     {
         return sub_80F5FB4();
     }
-    else if (({gMain.newAndRepeatedKeys & DPAD_RIGHT;}))
+    else if (JOY_REPT(DPAD_RIGHT))
     {
         return sub_80F6010();
     }
@@ -4952,7 +4952,7 @@ u8 sub_80F68E8(void)
     s8 r12 = 1;
     do
     {
-        if (({gMain.newAndRepeatedKeys & DPAD_UP;}) && r4 > 0)
+        if (JOY_REPT(DPAD_UP) && r4 > 0)
         {
             while (r4 > 0)
             {
@@ -4968,7 +4968,7 @@ u8 sub_80F68E8(void)
             }
             r4 = gPokenavStructPtr->unkBC91;
         }
-        if (({gMain.newAndRepeatedKeys & DPAD_DOWN;}) && r4 < 3)
+        if (JOY_REPT(DPAD_DOWN) && r4 < 3)
         {
             while (r4 < 3)
             {
@@ -4984,7 +4984,7 @@ u8 sub_80F68E8(void)
             }
             r4 = gPokenavStructPtr->unkBC91;
         }
-        if (({gMain.newAndRepeatedKeys & DPAD_LEFT;}))
+        if (JOY_REPT(DPAD_LEFT))
         {
             if (r5 > 0)
             {
@@ -4992,7 +4992,7 @@ u8 sub_80F68E8(void)
                 break;
             }
         }
-        if (({gMain.newAndRepeatedKeys & DPAD_RIGHT;}))
+        if (JOY_REPT(DPAD_RIGHT))
         {
             if (r5 < gPokenavStructPtr->unkBC96[r4] - 1)
             {

@@ -37,7 +37,7 @@ LavaridgeTown_EventScript_RivalGiveGoGoggles:: @ 814E4ED
 	waitdooranim
 	applymovement 8, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	applymovement 8, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement 8, Common_Movement_Delay48

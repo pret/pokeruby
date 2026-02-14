@@ -967,7 +967,7 @@ void BattleMainCB2(void)
     BuildOamBuffer();
 
 #if DEBUG
-    if ((gMain.heldKeys & (R_BUTTON | SELECT_BUTTON)) == ((R_BUTTON | SELECT_BUTTON)))
+    if (JOY_HELD(R_BUTTON | SELECT_BUTTON) == ((R_BUTTON | SELECT_BUTTON)))
     {
         gSpecialVar_Result = gBattleOutcome = 1;
         gMain.inBattle = FALSE;
@@ -1685,7 +1685,7 @@ void debug_sub_8010CAC(void)
         }
         debug_sub_80125A0();
     }
-    if (gMain.newAndRepeatedKeys & B_BUTTON)
+    if (JOY_REPT(B_BUTTON))
     {
         switch (gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5)
         {
@@ -1746,7 +1746,7 @@ void debug_sub_8010CAC(void)
             break;
         }
     }
-    if (gMain.newAndRepeatedKeys & A_BUTTON)
+    if (JOY_REPT(A_BUTTON))
     {
         switch (gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5)
         {
@@ -1807,7 +1807,7 @@ void debug_sub_8010CAC(void)
             break;
         }
     }
-    if (gMain.newAndRepeatedKeys & L_BUTTON)
+    if (JOY_REPT(L_BUTTON))
     {
         if (gUnknown_Debug_030043A0 == 4 && gUnknown_Debug_030043A4 < 6)
         {
@@ -1834,7 +1834,7 @@ void debug_sub_8010CAC(void)
         debug_sub_8011EA0(gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0);
         debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
     }
-    if (gMain.newAndRepeatedKeys & R_BUTTON)
+    if (JOY_REPT(R_BUTTON))
     {
         if (gUnknown_Debug_030043A0 == 4 && gUnknown_Debug_030043A4 < 6)
         {
@@ -1892,28 +1892,28 @@ void debug_sub_8011498(void)
 		gUnknown_Debug_030043A8 ^= 1;
 		debug_sub_8012628();
 	}
-	if (gMain.newAndRepeatedKeys & B_BUTTON)
+	if (JOY_REPT(B_BUTTON))
 	{
 		gUnknown_Debug_2023B02[gUnknown_Debug_03004360][r9 / 5][gUnknown_Debug_030043A8]--;
 		if (gUnknown_Debug_2023B02[gUnknown_Debug_03004360][r9 / 5][gUnknown_Debug_030043A8] < gUnknown_Debug_821F564[gUnknown_Debug_030043A8][4])
 			gUnknown_Debug_2023B02[gUnknown_Debug_03004360][r9 / 5][gUnknown_Debug_030043A8] = gUnknown_Debug_821F564[gUnknown_Debug_030043A8][3];
 		debug_sub_8012294();
 	}
-	if (gMain.newAndRepeatedKeys & A_BUTTON)
+	if (JOY_REPT(A_BUTTON))
 	{
 		gUnknown_Debug_2023B02[gUnknown_Debug_03004360][r9 / 5][gUnknown_Debug_030043A8]++;
 		if (gUnknown_Debug_2023B02[gUnknown_Debug_03004360][r9 / 5][gUnknown_Debug_030043A8] > gUnknown_Debug_821F564[gUnknown_Debug_030043A8][3])
 			gUnknown_Debug_2023B02[gUnknown_Debug_03004360][r9 / 5][gUnknown_Debug_030043A8] = gUnknown_Debug_821F564[gUnknown_Debug_030043A8][4];
 		debug_sub_8012294();
 	}
-	if (gMain.newAndRepeatedKeys & L_BUTTON)
+	if (JOY_REPT(L_BUTTON))
 	{
 		gUnknown_Debug_2023B02[gUnknown_Debug_03004360][r9 / 5][gUnknown_Debug_030043A8] -= 10;
 		while (gUnknown_Debug_2023B02[gUnknown_Debug_03004360][r9 / 5][gUnknown_Debug_030043A8] < gUnknown_Debug_821F564[gUnknown_Debug_030043A8][4])
 			gUnknown_Debug_2023B02[gUnknown_Debug_03004360][r9 / 5][gUnknown_Debug_030043A8] += gUnknown_Debug_821F564[gUnknown_Debug_030043A8][3];
 		debug_sub_8012294();
 	}
-	if (gMain.newAndRepeatedKeys & R_BUTTON)
+	if (JOY_REPT(R_BUTTON))
 	{
 		gUnknown_Debug_2023B02[gUnknown_Debug_03004360][r9 / 5][gUnknown_Debug_030043A8] += 10;
 		while (gUnknown_Debug_2023B02[gUnknown_Debug_03004360][r9 / 5][gUnknown_Debug_030043A8] > gUnknown_Debug_821F564[gUnknown_Debug_030043A8][3])
@@ -2779,35 +2779,35 @@ void debug_sub_8012D10(u8 taskId)
         sub_802E3E4(gTasks[taskId].data[2], 0);
         break;
     case 1:
-        if (gMain.newKeys & DPAD_UP)
+        if (JOY_NEW(DPAD_UP))
         {
             PlaySE(SE_SELECT);
             nullsub_8(gTasks[taskId].data[2]);
             gTasks[taskId].data[2] &= ~2;
             sub_802E3E4(gTasks[taskId].data[2], 0);
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        else if (JOY_NEW(DPAD_DOWN))
         {
             PlaySE(SE_SELECT);
             nullsub_8(gTasks[taskId].data[2]);
             gTasks[taskId].data[2] |= 2;
             sub_802E3E4(gTasks[taskId].data[2], 0);
         }
-        else if (gMain.newKeys & DPAD_LEFT)
+        else if (JOY_NEW(DPAD_LEFT))
         {
             PlaySE(SE_SELECT);
             nullsub_8(gTasks[taskId].data[2]);
             gTasks[taskId].data[2] &= ~1;
             sub_802E3E4(gTasks[taskId].data[2], 0);
         }
-        else if (gMain.newKeys & DPAD_RIGHT)
+        else if (JOY_NEW(DPAD_RIGHT))
         {
             PlaySE(SE_SELECT);
             nullsub_8(gTasks[taskId].data[2]);
             gTasks[taskId].data[2] |= 1;
             sub_802E3E4(gTasks[taskId].data[2], 0);
         }
-        else if (gMain.newAndRepeatedKeys & A_BUTTON)
+        else if (JOY_REPT(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             switch (gTasks[taskId].data[2])
@@ -2836,7 +2836,7 @@ void debug_sub_8012D10(u8 taskId)
                 break;
             }
         }
-        else if (gMain.newAndRepeatedKeys & B_BUTTON)
+        else if (JOY_REPT(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             switch (gTasks[taskId].data[2])
@@ -2865,7 +2865,7 @@ void debug_sub_8012D10(u8 taskId)
                 break;
             }
         }
-        else if (gMain.newAndRepeatedKeys & R_BUTTON)
+        else if (JOY_REPT(R_BUTTON))
         {
             PlaySE(SE_SELECT);
             switch (gTasks[taskId].data[2])
@@ -2896,7 +2896,7 @@ void debug_sub_8012D10(u8 taskId)
                 break;
             }
         }
-        else if (gMain.newAndRepeatedKeys & L_BUTTON)
+        else if (JOY_REPT(L_BUTTON))
         {
             PlaySE(SE_SELECT);
             switch (gTasks[taskId].data[2])
@@ -2930,26 +2930,26 @@ void debug_sub_8012D10(u8 taskId)
         }
         break;
     case 2:
-        if (gMain.newKeys & DPAD_UP)
+        if (JOY_NEW(DPAD_UP))
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B4C(gTasks[taskId].data[3]);
             gTasks[taskId].data[3] = 0;
             debug_sub_8012B2C(0);
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        else if (JOY_NEW(DPAD_DOWN))
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B4C(gTasks[taskId].data[3]);
             gTasks[taskId].data[3] = 1;
             debug_sub_8012B2C(1);
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             debug_sub_8012C08(taskId, gTasks[taskId].data[3]);
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             asm("");
@@ -2957,56 +2957,56 @@ void debug_sub_8012D10(u8 taskId)
         }
         return;
     case 3:
-        if (gMain.newKeys & DPAD_UP)
+        if (JOY_NEW(DPAD_UP))
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B4C(gTasks[taskId].data[3]);
             gTasks[taskId].data[3] = 0;
             debug_sub_8012B2C(0);
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        else if (JOY_NEW(DPAD_DOWN))
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B4C(gTasks[taskId].data[3]);
             gTasks[taskId].data[3] = 1;
             debug_sub_8012B2C(1);
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             if (gTasks[taskId].data[3] == 0)
                 debug_sub_80132C8(31, gUnknown_Debug_2023B62, 411);
             debug_sub_8012B70(taskId, 1);
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B70(taskId, 1);
         }
         break;
     case 4:
-        if (gMain.newKeys & DPAD_UP)
+        if (JOY_NEW(DPAD_UP))
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B4C(gTasks[taskId].data[3]);
             gTasks[taskId].data[3] = 0;
             debug_sub_8012B2C(0);
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        else if (JOY_NEW(DPAD_DOWN))
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B4C(gTasks[taskId].data[3]);
             gTasks[taskId].data[3] = 1;
             debug_sub_8012B2C(1);
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             if (gTasks[taskId].data[3] == 0)
                 debug_sub_8013294(31, gUnknown_Debug_2023B62, 411);
             debug_sub_8012B70(taskId, 1);
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             debug_sub_8012B70(taskId, 1);
@@ -3546,7 +3546,7 @@ void SwitchInClearSetData(void)
              && (gDisableStructs[i].battlerWithSureHit == gActiveBattler))
             {
                 gStatuses3[i] &= ~STATUS3_ALWAYS_HITS;
-                gStatuses3[i] |= 0x10;
+                gStatuses3[i] |= STATUS3_ALWAYS_HITS_TURN(2);
             }
         }
     }
@@ -3558,8 +3558,8 @@ void SwitchInClearSetData(void)
 
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (gBattleMons[i].status2 & (gBitTable[gActiveBattler] << 16))
-            gBattleMons[i].status2 &= ~(gBitTable[gActiveBattler] << 16);
+        if (gBattleMons[i].status2 & STATUS2_INFATUATED_WITH(gActiveBattler))
+            gBattleMons[i].status2 &= ~STATUS2_INFATUATED_WITH(gActiveBattler);
         if ((gBattleMons[i].status2 & STATUS2_WRAPPED) && gSharedMem[BSTRUCT_OFF(wrappedBy) + i] == gActiveBattler)
             gBattleMons[i].status2 &= ~STATUS2_WRAPPED;
     }
@@ -3612,8 +3612,8 @@ void UndoEffectsAfterFainting(void)
     {
         if ((gBattleMons[i].status2 & STATUS2_ESCAPE_PREVENTION) && gDisableStructs[i].bankPreventingEscape == gActiveBattler)
             gBattleMons[i].status2 &= ~STATUS2_ESCAPE_PREVENTION;
-        if (gBattleMons[i].status2 & (gBitTable[gActiveBattler] << 16))
-            gBattleMons[i].status2 &= ~(gBitTable[gActiveBattler] << 16);
+        if (gBattleMons[i].status2 & STATUS2_INFATUATED_WITH(gActiveBattler))
+            gBattleMons[i].status2 &= ~STATUS2_INFATUATED_WITH(gActiveBattler);
         if ((gBattleMons[i].status2 & STATUS2_WRAPPED) && gSharedMem[BSTRUCT_OFF(wrappedBy) + i] == gActiveBattler)
             gBattleMons[i].status2 &= ~STATUS2_WRAPPED;
     }
@@ -4032,7 +4032,7 @@ void BattleBeginFirstTurn(void)
         for (i = 0; i < 8; i++)
             gBattleCommunication[i] = 0;
         for (i = 0; i < gBattlersCount; i++)
-            gBattleMons[i].status2 &= ~8;
+            gBattleMons[i].status2 &= ~STATUS2_FLINCHED;
         gBattleStruct->turnEffectsTracker = 0;
         gBattleStruct->turnEffectsBattlerId = 0;
         gBattleStruct->wishPerishSongState = 0;
@@ -4056,8 +4056,8 @@ void bc_8013B1C(void)
             gBattleCommunication[i] = 0;
         for (i = 0; i < gBattlersCount; i++)
         {
-            gBattleMons[i].status2 &= ~8;
-            if ((gBattleMons[i].status1 & 7) && (gBattleMons[i].status2 & 0x1000))
+            gBattleMons[i].status2 &= ~STATUS2_FLINCHED;
+            if ((gBattleMons[i].status1 & STATUS1_SLEEP) && (gBattleMons[i].status2 & STATUS2_MULTIPLETURNS))
                 CancelMultiTurnMoves(i);
         }
         gBattleStruct->turnEffectsTracker = 0;
@@ -4258,8 +4258,8 @@ void sub_8012324(void)
                     break;
                 }
                 //_08012468
-                if ((gBattleMons[gActiveBattler].status2 & 0x1000)
-                    || (gBattleMons[gActiveBattler].status2 & 0x400000))
+                if ((gBattleMons[gActiveBattler].status2 & STATUS2_MULTIPLETURNS)
+                    || (gBattleMons[gActiveBattler].status2 & STATUS2_RECHARGE))
                 {
                     gActionForBanks[gActiveBattler] = 0;
                     gBattleCommunication[gActiveBattler] = 3;
@@ -4594,14 +4594,14 @@ u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreMovePriorities)
     // Check for abilities that boost speed in weather.
     if (WEATHER_HAS_EFFECT)
     {
-        if ((gBattleMons[bank1].ability == ABILITY_SWIFT_SWIM && (gBattleWeather & WEATHER_RAIN_ANY))
-            || (gBattleMons[bank1].ability == ABILITY_CHLOROPHYLL && (gBattleWeather & WEATHER_SUN_ANY)))
+        if ((gBattleMons[bank1].ability == ABILITY_SWIFT_SWIM && (gBattleWeather & B_WEATHER_RAIN))
+            || (gBattleMons[bank1].ability == ABILITY_CHLOROPHYLL && (gBattleWeather & B_WEATHER_SUN)))
             bank1SpeedMultiplier = 2;
         else
             bank1SpeedMultiplier = 1;
 
-        if ((gBattleMons[bank2].ability == ABILITY_SWIFT_SWIM && (gBattleWeather & WEATHER_RAIN_ANY))
-            || (gBattleMons[bank2].ability == ABILITY_CHLOROPHYLL && (gBattleWeather & WEATHER_SUN_ANY)))
+        if ((gBattleMons[bank2].ability == ABILITY_SWIFT_SWIM && (gBattleWeather & B_WEATHER_RAIN))
+            || (gBattleMons[bank2].ability == ABILITY_CHLOROPHYLL && (gBattleWeather & B_WEATHER_SUN)))
             bank2SpeedMultiplier = 2;
         else
             bank2SpeedMultiplier = 1;
@@ -4913,7 +4913,7 @@ static void RunTurnActionsFunctions(void)
 
     if (gCurrentTurnActionNumber >= gBattlersCount) // everyone did their actions, turn finished
     {
-        gHitMarker &= ~(HITMARKER_x100000);
+        gHitMarker &= ~(HITMARKER_PASSIVE_HP_UPDATE);
         gBattleMainFunc = gUnknown_081FA678[gBattleOutcome & 0x7F];
     }
     else
@@ -5660,9 +5660,9 @@ void HandleAction_NothingIsFainted(void)
     gCurrentActionFuncId = gActionsByTurnOrder[gCurrentTurnActionNumber];
     gHitMarker &= ~(HITMARKER_DESTINYBOND | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_ATTACKSTRING_PRINTED
                     | HITMARKER_NO_PPDEDUCT | HITMARKER_STATUS_ABILITY_EFFECT | HITMARKER_IGNORE_ON_AIR
-                    | HITMARKER_IGNORE_UNDERGROUND | HITMARKER_IGNORE_UNDERWATER | HITMARKER_x100000
-                    | HITMARKER_OBEYS | HITMARKER_x10 | HITMARKER_SYNCHRONISE_EFFECT
-                    | HITMARKER_CHARGING | HITMARKER_x4000000);
+                    | HITMARKER_IGNORE_UNDERGROUND | HITMARKER_IGNORE_UNDERWATER | HITMARKER_PASSIVE_HP_UPDATE
+                    | HITMARKER_OBEYS | HITMARKER_WAKE_UP_CLEAR | HITMARKER_SYNCHRONIZE_EFFECT
+                    | HITMARKER_CHARGING | HITMARKER_NEVER_SET);
 }
 
 void HandleAction_ActionFinished(void)
@@ -5672,9 +5672,9 @@ void HandleAction_ActionFinished(void)
     SpecialStatusesClear();
     gHitMarker &= ~(HITMARKER_DESTINYBOND | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_ATTACKSTRING_PRINTED
                     | HITMARKER_NO_PPDEDUCT | HITMARKER_STATUS_ABILITY_EFFECT | HITMARKER_IGNORE_ON_AIR
-                    | HITMARKER_IGNORE_UNDERGROUND | HITMARKER_IGNORE_UNDERWATER | HITMARKER_x100000
-                    | HITMARKER_OBEYS | HITMARKER_x10 | HITMARKER_SYNCHRONISE_EFFECT
-                    | HITMARKER_CHARGING | HITMARKER_x4000000);
+                    | HITMARKER_IGNORE_UNDERGROUND | HITMARKER_IGNORE_UNDERWATER | HITMARKER_PASSIVE_HP_UPDATE
+                    | HITMARKER_OBEYS | HITMARKER_WAKE_UP_CLEAR | HITMARKER_SYNCHRONIZE_EFFECT
+                    | HITMARKER_CHARGING | HITMARKER_NEVER_SET);
 
     gBattleMoveDamage = 0;
     gBattleStruct->animTurn = 0;

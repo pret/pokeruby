@@ -617,7 +617,7 @@ static void MoveTutorMain(void)
             sMoveTutorMenu->state = 33;
         break;
     case 33:
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             sMoveTutorMenu->state = 14;
@@ -664,10 +664,10 @@ static void DrawBattleMoveInfoHeaders(bool8 noTeachMoveText)
 
 static u8 ChangeToContestMoveInfoWindow(void)
 {
-    u32 result = (gMain.newKeys & DPAD_LEFT) || (gMain.newKeys & DPAD_RIGHT);
+    u32 result = JOY_NEW(DPAD_LEFT) || JOY_NEW(DPAD_RIGHT);
 
     if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR
-     && ((gMain.newKeys & L_BUTTON) || (gMain.newKeys & R_BUTTON)))
+     && (JOY_NEW(L_BUTTON) || JOY_NEW(R_BUTTON)))
         result++;
 
     if (result != 0)
@@ -710,10 +710,10 @@ static void DrawContestMoveInfoHeaders(bool8 noTeachMoveText)
 
 static u8 ChangeToBattleMoveInfoWindow(void)
 {
-    u32 result = (gMain.newKeys & DPAD_LEFT) || (gMain.newKeys & DPAD_RIGHT);
+    u32 result = JOY_NEW(DPAD_LEFT) || JOY_NEW(DPAD_RIGHT);
 
     if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR
-     && ((gMain.newKeys & L_BUTTON) || (gMain.newKeys & R_BUTTON)))
+     && (JOY_NEW(L_BUTTON) || JOY_NEW(R_BUTTON)))
         result++;
 
     if (result != 0)
@@ -826,7 +826,7 @@ static void MoveCursorPos(s8 delta)
 
 static void HandleMoveTutorMenuInput(void)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
     {
         if (sMoveTutorMenu->menuSelection != 0)
         {
@@ -844,7 +844,7 @@ static void HandleMoveTutorMenuInput(void)
             }
         }
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPT(DPAD_DOWN))
     {
         if (sMoveTutorMenu->menuSelection < sMoveTutorMenu->numMenuChoices - 1)
         {
@@ -862,7 +862,7 @@ static void HandleMoveTutorMenuInput(void)
             }
         }
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         if (sMoveTutorMenu->menuSelection != sMoveTutorMenu->numMenuChoices - 1)
@@ -879,7 +879,7 @@ static void HandleMoveTutorMenuInput(void)
             sMoveTutorMenu->state = 12;
         }
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         sMoveTutorMenu->state = 12;

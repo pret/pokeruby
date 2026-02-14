@@ -34,12 +34,12 @@ Route128_EventScript_15213F:: @ 815213F
 	closemessage
 	applymovement 5, Route128_Movement_1522A1
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox Route128_Text_172008, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, Route128_Movement_15227E
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	applymovement 5, Route128_Movement_152290
 	waitmovement 0
 	msgbox Route128_Text_17210B, MSGBOX_DEFAULT
@@ -57,12 +57,12 @@ Route128_EventScript_15213F:: @ 815213F
 	addobject 3
 	applymovement 3, Route128_Movement_15226F
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox Route128_Text_172181, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, Route128_Movement_15226D
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox Route128_Text_1721A2, MSGBOX_DEFAULT

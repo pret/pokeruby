@@ -42,6 +42,7 @@
 #include "sound.h"
 #include "string_util.h"
 #include "tv.h"
+#include "constants/event_objects.h"
 #include "constants/maps.h"
 
 typedef u16 (*SpecialFunc)(void);
@@ -766,7 +767,7 @@ bool8 ScrCmd_warphole(struct ScriptContext *ctx)
     u16 y;
 
     PlayerGetDestCoords(&x, &y);
-    if (mapGroup == MAP_GROUP(UNDEFINED) && mapNum == MAP_NUM(UNDEFINED))
+    if (mapGroup == MAP_GROUP(MAP_UNDEFINED) && mapNum == MAP_NUM(MAP_UNDEFINED))
         SetFixedHoleWarpAsDestination(x - 7, y - 7);
     else
         Overworld_SetWarpDestination(mapGroup, mapNum, -1, x - 7, y - 7);
@@ -985,7 +986,7 @@ bool8 ScrCmd_waitmovement(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
 
-    if (localId != 0)
+    if (localId != LOCALID_NONE)
         sMovingNpcId = localId;
     sMovingNpcMapBank = gSaveBlock1.location.mapGroup;
     sMovingNpcMapId = gSaveBlock1.location.mapNum;
@@ -999,7 +1000,7 @@ bool8 ScrCmd_waitmovement_at(struct ScriptContext *ctx)
     u8 mapBank;
     u8 mapId;
 
-    if (localId != 0)
+    if (localId != LOCALID_NONE)
         sMovingNpcId = localId;
     mapBank = ScriptReadByte(ctx);
     mapId = ScriptReadByte(ctx);
@@ -1205,7 +1206,7 @@ bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
     u8 objectId;
 
     HideFieldMessageBox();
-    objectId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
+    objectId = GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objectId]);
     sub_80A2178();
     UnfreezeObjectEvents();
@@ -1219,7 +1220,7 @@ bool8 ScrCmd_release(struct ScriptContext *ctx)
     HideFieldMessageBox();
     if (gObjectEvents[gSelectedObjectEvent].active)
         ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gSelectedObjectEvent]);
-    objectId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
+    objectId = GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objectId]);
     sub_80A2178();
     UnfreezeObjectEvents();
@@ -1260,9 +1261,9 @@ bool8 ScrCmd_closemessage(struct ScriptContext *ctx)
 
 static bool8 WaitForAorBPress(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
         return TRUE;
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
         return TRUE;
     return FALSE;
 }
@@ -1421,15 +1422,15 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
 {
     u8 *ptr = (u8 *)ScriptReadWord(ctx);
 
-    u8 v2 = ptr[0];
-    u8 v3 = ptr[1];
-    u8 v4 = ptr[2];
-    u8 v5 = ptr[3];
-    u8 v6 = ptr[4];
-    u8 v7 = ptr[5];
+    u8 winLeft = ptr[0];
+    u8 winTop = ptr[1];
+    u8 winRight = ptr[2];
+    u8 winBottom = ptr[3];
+    u8 textLeft = ptr[4];
+    u8 textTop = ptr[5];
     StringBraille(gStringVar4, ptr + 6);
-    Menu_DrawStdWindowFrame(v2, v3, v4, v5);
-    Menu_PrintText(gStringVar4, v6, v7);
+    Menu_DrawStdWindowFrame(winLeft, winTop, winRight, winBottom);
+    Menu_PrintText(gStringVar4, textLeft, textTop);
     return FALSE;
 }
 

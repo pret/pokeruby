@@ -1331,13 +1331,13 @@ static void BattleAICmd_if_status_not_in_party(void)
 
 static void BattleAICmd_get_weather(void)
 {
-    if (gBattleWeather & WEATHER_RAIN_ANY)
+    if (gBattleWeather & B_WEATHER_RAIN)
         AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_RAIN;
-    if (gBattleWeather & WEATHER_SANDSTORM_ANY)
+    if (gBattleWeather & B_WEATHER_SANDSTORM)
         AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_SANDSTORM;
-    if (gBattleWeather & WEATHER_SUN_ANY)
+    if (gBattleWeather & B_WEATHER_SUN)
         AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_SUN;
-    if (gBattleWeather & WEATHER_HAIL)
+    if (gBattleWeather & B_WEATHER_HAIL_TEMPORARY)
         AI_THINKING_STRUCT->funcResult = WEATHER_TYPE_HAIL;
 
     gAIScriptPtr += 1;

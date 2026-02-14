@@ -120,7 +120,7 @@ MauvilleCity_EventScript_WallyAndUncleExitNorth:: @ 814C187
 	delay 30
 	applymovement 7, MauvilleCity_Movement_WallysUncleApproachPlayerNorth
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox MauvilleCity_Text_UncleVisitUsSometime, MSGBOX_DEFAULT
 	closemessage
@@ -139,7 +139,7 @@ MauvilleCity_EventScript_WallyAndUncleExitEast:: @ 814C1D9
 	delay 30
 	applymovement 7, MauvilleCity_Movement_WallysUncleApproachPlayerEast
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox MauvilleCity_Text_UncleVisitUsSometime, MSGBOX_DEFAULT
 	closemessage

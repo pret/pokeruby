@@ -123,7 +123,7 @@ enum
     f;                       \
 })
 
-#define TEST_BUTTON(value, button) ({(value) & (button);})
+#define TEST_BUTTON(value, button) ((value) & (button))
 #define JOY_NEW(button) (TEST_BUTTON(gMain.newKeys, button))
 #define JOY_HELD(button) (TEST_BUTTON(gMain.heldKeys, button))
 #define JOY_REPT(button) (TEST_BUTTON(gMain.newAndRepeatedKeys, button))

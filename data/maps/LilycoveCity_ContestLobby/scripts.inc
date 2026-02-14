@@ -22,7 +22,7 @@ LilycoveCity_ContestLobby_EventScript_ContestArtist:: @ 8158898
 	addobject 4
 	applymovement 4, LilycoveCity_ContestLobby_Movement_ArtistApproachPlayer
 	waitmovement 4
-	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_PlayerFaceArtist
+	applymovement LOCALID_PLAYER, LilycoveCity_ContestLobby_Movement_PlayerFaceArtist
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_YourPokemonSpurredMeToPaint, MSGBOX_DEFAULT
 	lockall
@@ -196,7 +196,7 @@ LilycoveCity_ContestLobby_EventScript_LinkContestArtist:: @ 8158A6A
 	addobject 11
 	applymovement 11, LilycoveCity_ContestLobby_Movement_LinkArtistApproachPlayer
 	waitmovement 11
-	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_PlayerFaceLinkArtist
+	applymovement LOCALID_PLAYER, LilycoveCity_ContestLobby_Movement_PlayerFaceLinkArtist
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_YourPokemonSpurredMeToPaint, MSGBOX_DEFAULT
 	lockall
@@ -505,14 +505,14 @@ LilycoveCity_ContestLobby_EventScript_158E0B:: @ 8158E0B
 	delay 20
 	applymovement 2, LilycoveCity_ContestLobby_Movement_158EAE
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_158E99
+	applymovement LOCALID_PLAYER, LilycoveCity_ContestLobby_Movement_158E99
 	waitmovement 0
 	messageautoscroll LilycoveCity_ContestLobby_Text_ComeThroughHere
 	waitmessage
 	delay 20
 	closemessage
 	applymovement 2, LilycoveCity_ContestLobby_Movement_158EA4
-	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_158E8E
+	applymovement LOCALID_PLAYER, LilycoveCity_ContestLobby_Movement_158E8E
 	waitmovement 0
 	releaseall
 	return
@@ -644,12 +644,12 @@ LilycoveCity_ContestLobby_EventScript_LeadToLinkContestHall:: @ 8158F86
 	delay 20
 	applymovement 1, LilycoveCity_ContestLobby_Movement_LinkReceptionistFacePlayer
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_PlayerApproachLinkReceptionist
+	applymovement LOCALID_PLAYER, LilycoveCity_ContestLobby_Movement_PlayerApproachLinkReceptionist
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_ComeThroughHere, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LilycoveCity_ContestLobby_Movement_LinkReceptionistWalkToContestHall
-	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_PlayerWalkToLinkContestHall
+	applymovement LOCALID_PLAYER, LilycoveCity_ContestLobby_Movement_PlayerWalkToLinkContestHall
 	waitmovement 0
 	releaseall
 	return

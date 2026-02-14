@@ -73,7 +73,7 @@ SootopolisCity_Gym_1F_EventScript_UnlockThirdStairs:: @ 815AFD0
 SootopolisCity_Gym_1F_EventScript_FallThroughIce:: @ 815AFE4
 	lockall
 	delay 20
-	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Gym_1F_Movement_FallThroughIce
+	applymovement LOCALID_PLAYER, SootopolisCity_Gym_1F_Movement_FallThroughIce
 	waitmovement 0
 	playse SE_FALL
 	delay 60

@@ -584,19 +584,19 @@ static void Task_HandlePopupMenuInput(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        if (JOY_REPT(DPAD_UP))
         {
             PlaySE(SE_SELECT);
             Menu_MoveCursor(-1);
             return;
         }
-        if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        if (JOY_REPT(DPAD_DOWN))
         {
             PlaySE(SE_SELECT);
             Menu_MoveCursor(1);
             return;
         }
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             func = PartyMenuGetPopupMenuFunc(gTasks[taskId].data[4],
@@ -606,7 +606,7 @@ static void Task_HandlePopupMenuInput(u8 taskId)
             func(taskId);
             return;
         }
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             Task_BattlePartyMenuCancel(taskId);

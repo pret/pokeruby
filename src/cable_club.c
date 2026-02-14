@@ -227,7 +227,7 @@ static bool32 sub_8082DF4(u8 taskId)
 
 static bool32 sub_8082E28(u8 taskId)
 {
-    if ((gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON)
      && IsLinkConnectionEstablished() == FALSE)
     {
         gTasks[taskId].func = sub_80833EC;
@@ -241,7 +241,7 @@ static bool32 sub_8082E6C(u8 taskId)
     if (IsLinkConnectionEstablished())
         SetSuppressLinkErrorMessage(TRUE);
 
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].func = sub_80833EC;
         return TRUE;
@@ -337,7 +337,7 @@ static void sub_808303C(u8 taskId)
 
     sub_8082D60(taskId, linkPlayerCount);
 
-    if (!(gMain.newKeys & A_BUTTON))
+    if (!JOY_NEW(A_BUTTON))
         return;
 
 #if ENGLISH
@@ -376,12 +376,12 @@ static void sub_80830E4(u8 taskId)
             ShowFieldAutoScrollMessage(gUnknown_081A4932);
             gTasks[taskId].func = sub_8082FEC;
         }
-        else if (gMain.heldKeys & B_BUTTON)
+        else if (JOY_HELD(B_BUTTON))
         {
             ShowFieldAutoScrollMessage(gUnknown_081A4932);
             gTasks[taskId].func = sub_8082FEC;
         }
-        else if (gMain.heldKeys & A_BUTTON)
+        else if (JOY_HELD(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             sub_8007F4C();

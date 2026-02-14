@@ -145,17 +145,17 @@ void Task_HandleGetDecorationMenuInput(u8 taskId)
 {
     struct MauvilleManTrader *trader = &gSaveBlock1.mauvilleMan.trader;
 
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(-1);
     }
-    else if (gMain.newKeys & DPAD_DOWN)
+    else if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(1);
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         gSpecialVar_0x8005 = Menu_GetCursorPos();
@@ -169,7 +169,7 @@ void Task_HandleGetDecorationMenuInput(u8 taskId)
             sub_8109B34(taskId, trader->unk1[gSpecialVar_0x8005]);
         }
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         sub_8109B34(taskId, 0);

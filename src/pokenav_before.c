@@ -1485,7 +1485,7 @@ void sub_80EC268()
         }
         else
         {
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 gPokenavStructPtr->unk6DDC = gPokenavStructPtr->unk6DAD;
                 switch (gPokenavStructPtr->unk6DB2[gPokenavStructPtr->unk6DDC] - 1)
@@ -1509,7 +1509,7 @@ void sub_80EC268()
                     break;
                 }
             }
-            else if (gMain.newKeys & B_BUTTON)
+            else if (JOY_NEW(B_BUTTON))
             {
                 gPokenavStructPtr->unk304 = 1;
             }
@@ -1565,7 +1565,7 @@ void sub_80EC268()
             gPokenavStructPtr->unk304 = 0;
             sub_80EED9C();
         }
-        else if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        else if (JOY_NEW(A_BUTTON | B_BUTTON))
 		{
 			sub_80EF428(0, gPokenavStructPtr->unk6DAD);
 			gPokenavStructPtr->unk304 = var1;
@@ -1766,7 +1766,7 @@ void sub_80EC86C()
             sub_80EF428(1, gPokenavStructPtr->unk6DAD);
             sub_80EED9C();
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             gPokenavStructPtr->unk6DF0 = gPokenavStructPtr->unk6DAD;
@@ -1783,7 +1783,7 @@ void sub_80EC86C()
                 break;
             }
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             gPokenavStructPtr->unk6DF0 = 0x2;
@@ -1919,7 +1919,7 @@ void sub_80ECC08()
             sub_80EF428(2, gPokenavStructPtr->unk6DAD);
             sub_80EED9C();
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             switch ((s8)gPokenavStructPtr->unk6DAD)
@@ -1948,7 +1948,7 @@ void sub_80ECC08()
             gPokenavStructPtr->unk76AA = 1;
             sub_80EBDBC(&sub_80ED01C);
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             gPokenavStructPtr->unk6DAD = 0x5;
@@ -2204,13 +2204,13 @@ void sub_80ED31C()
             gPokenavStructPtr->unk304++;
             return;
         default:
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 PlaySE(SE_SELECT);
                 sub_80EBDBC(&sub_80ED4D8);
 				return;
             }
-            else if (gMain.newKeys & B_BUTTON)
+            else if (JOY_NEW(B_BUTTON))
             {
                 PlaySE(SE_SELECT);
                 sub_80EBDBC(&sub_80ECD80);
@@ -2478,7 +2478,7 @@ void sub_80ED858(void)
         }
         break;
     case 4:
-        if (({gMain.heldKeys & DPAD_UP;}))
+        if (JOY_HELD(DPAD_UP))
         {
             if (gPokenavStructPtr->unk87CB && (
                 gPokenavStructPtr->unk76AA == 0
@@ -2492,7 +2492,7 @@ void sub_80ED858(void)
                 break;
             }
         }
-        if (({gMain.heldKeys & DPAD_DOWN;}))
+        if (JOY_HELD(DPAD_DOWN))
         {
             if (gPokenavStructPtr->unk87CB && (
                 gPokenavStructPtr->unk76AA == 0
@@ -2506,7 +2506,7 @@ void sub_80ED858(void)
                 break;
             }
         }
-        if (({gMain.newKeys & B_BUTTON;}))
+        if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             sub_80F4FDC();
@@ -2514,7 +2514,7 @@ void sub_80ED858(void)
             gPokenavStructPtr->unk304 = 9;
             break;
         }
-        if (({gMain.newKeys & A_BUTTON;}))
+        if (JOY_NEW(A_BUTTON))
         {
             if (gPokenavStructPtr->unk76AA == 0)
             {
@@ -2708,13 +2708,13 @@ void sub_80EDDBC()
             gPokenavStructPtr->unk304++;
             return;
         default:
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 PlaySE(SE_SELECT);
                 sub_80EBDBC(&sub_80EDEE4);
 				return;
             }
-            else if (gMain.newKeys & B_BUTTON)
+            else if (JOY_NEW(B_BUTTON))
             {
                 PlaySE(SE_SELECT);
                 sub_80EBDBC(&sub_80EDE70);
@@ -2836,25 +2836,25 @@ void sub_80EE06C()
         gPokenavStructPtr->unk304++;
         break;
     case 1:
-        if ((gMain.newAndRepeatedKeys & 0x40) && (gPokenavStructPtr->unk87DC))
+        if (JOY_REPT(0x40) && (gPokenavStructPtr->unk87DC))
         {
 			PlaySE(SE_SELECT);
 			sub_80F6A4C(-1);
 			gPokenavStructPtr->unk304++;
         }
-		else if ((gMain.newAndRepeatedKeys & 0x80) && gPokenavStructPtr->unk87DC < gPokenavStructPtr->unk8774)
+		else if (JOY_REPT(0x80) && gPokenavStructPtr->unk87DC < gPokenavStructPtr->unk8774)
 		{
             PlaySE(SE_SELECT);
             sub_80F6A4C(1);
             gPokenavStructPtr->unk304++;
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             sub_80EEFBC(0xB);
             gPokenavStructPtr->unk304 = 0x4;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             sub_80EBDBC(&sub_80EE294);
@@ -2890,7 +2890,7 @@ void sub_80EE06C()
             return;
         default:
         case 0:
-            if (gMain.newKeys & B_BUTTON)
+            if (JOY_NEW(B_BUTTON))
             {
                 PlaySE(SE_SELECT);
                 sub_80F3B94();
@@ -3068,13 +3068,13 @@ void sub_80EE58C()
             gPokenavStructPtr->unk304++;
             return;
         default:
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 PlaySE(SE_SELECT);
                 sub_80EBDBC(&sub_80EE658);
 				return;
             }
-            else if (gMain.newKeys & B_BUTTON)
+            else if (JOY_NEW(B_BUTTON))
             {
                 PlaySE(SE_SELECT);
                 sub_80EBDBC(&sub_80EE8F4);
@@ -3144,19 +3144,19 @@ void sub_80EE658()
 			gPokenavStructPtr->unk304++;
         break;
     case 8:
-        if ((gMain.heldKeys & 0x40) && gPokenavStructPtr->unk87DC)
+        if (JOY_HELD(0x40) && gPokenavStructPtr->unk87DC)
         {
 			PlaySE(SE_SELECT);
 			sub_80F708C(-1);
 			gPokenavStructPtr->unk304 = 0x10;
         }
-        else if ((gMain.heldKeys & 0x80) && gPokenavStructPtr->unk87DC < gPokenavStructPtr->unk8774)
+        else if (JOY_HELD(0x80) && gPokenavStructPtr->unk87DC < gPokenavStructPtr->unk8774)
         {
 			PlaySE(SE_SELECT);
 			sub_80F708C(1);
 			gPokenavStructPtr->unk304 = 0x10;
         }
-		else if (gMain.newKeys & B_BUTTON)
+		else if (JOY_NEW(B_BUTTON))
 		{
             PlaySE(SE_SELECT);
             sub_80F4394();
@@ -3337,7 +3337,7 @@ bool8 sub_80EEA0C(void)
 // var6dad and var6dae must be s8 in this func
 bool8 sub_80EEC10()
 {
-    if (gMain.newKeys & 0x40)
+    if (JOY_NEW(DPAD_UP))
     {
         do
         {
@@ -3346,7 +3346,7 @@ bool8 sub_80EEC10()
         } while (!gPokenavStructPtr->unk6DB2[gPokenavStructPtr->unk6DAD]);
         return TRUE;
     }
-    if (gMain.newKeys & 0x80)
+    if (JOY_NEW(DPAD_DOWN))
     {
         do
         {
@@ -3364,13 +3364,13 @@ bool8 sub_80EEC10()
 
 bool8 sub_80EEC90()
 {
-    if (gMain.newKeys & 0x40)
+    if (JOY_NEW(DPAD_UP))
     {
         if (--gPokenavStructPtr->unk6DAD < 0)
             gPokenavStructPtr->unk6DAD = gPokenavStructPtr->unk6DAE - 1;
         return TRUE;
     }
-    if (gMain.newKeys & 0x80)
+    if (JOY_NEW(DPAD_DOWN))
     {
         if (++gPokenavStructPtr->unk6DAD >= gPokenavStructPtr->unk6DAE)
             gPokenavStructPtr->unk6DAD = 0;

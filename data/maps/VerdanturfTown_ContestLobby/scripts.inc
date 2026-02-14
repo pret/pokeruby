@@ -35,12 +35,12 @@ VerdanturfTown_ContestLobby_EventScript_153DA1:: @ 8153DA1
 	delay 20
 	applymovement 1, VerdanturfTown_ContestLobby_Movement_153E35
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, VerdanturfTown_ContestLobby_Movement_153E23
+	applymovement LOCALID_PLAYER, VerdanturfTown_ContestLobby_Movement_153E23
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_ComeThroughHere, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, VerdanturfTown_ContestLobby_Movement_153E2C
-	applymovement OBJ_EVENT_ID_PLAYER, VerdanturfTown_ContestLobby_Movement_153E19
+	applymovement LOCALID_PLAYER, VerdanturfTown_ContestLobby_Movement_153E19
 	waitmovement 0
 	releaseall
 	return

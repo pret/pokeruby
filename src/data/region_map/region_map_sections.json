@@ -1,7 +1,7 @@
 {
     "map_sections": [
         {
-            "map_section": "MAPSEC_LITTLEROOT_TOWN",
+            "id": "MAPSEC_LITTLEROOT_TOWN",
             "name": "LITTLEROOT{NAME_END} TOWN",
             "x": 4,
             "y": 11,
@@ -9,7 +9,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_OLDALE_TOWN",
+            "id": "MAPSEC_OLDALE_TOWN",
             "name": "OLDALE{NAME_END} TOWN",
             "x": 4,
             "y": 9,
@@ -17,7 +17,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_DEWFORD_TOWN",
+            "id": "MAPSEC_DEWFORD_TOWN",
             "name": "DEWFORD{NAME_END} TOWN",
             "x": 2,
             "y": 14,
@@ -25,7 +25,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_LAVARIDGE_TOWN",
+            "id": "MAPSEC_LAVARIDGE_TOWN",
             "name": "LAVARIDGE{NAME_END} TOWN",
             "x": 5,
             "y": 3,
@@ -33,7 +33,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_FALLARBOR_TOWN",
+            "id": "MAPSEC_FALLARBOR_TOWN",
             "name": "FALLARBOR{NAME_END} TOWN",
             "x": 3,
             "y": 0,
@@ -41,7 +41,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_VERDANTURF_TOWN",
+            "id": "MAPSEC_VERDANTURF_TOWN",
             "name": "VERDANTURF{NAME_END} TOWN",
             "x": 4,
             "y": 6,
@@ -49,7 +49,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_PACIFIDLOG_TOWN",
+            "id": "MAPSEC_PACIFIDLOG_TOWN",
             "name": "PACIFIDLOG{NAME_END} TOWN",
             "x": 17,
             "y": 10,
@@ -57,7 +57,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_PETALBURG_CITY",
+            "id": "MAPSEC_PETALBURG_CITY",
             "name": "PETALBURG{NAME_END} CITY",
             "x": 1,
             "y": 9,
@@ -65,7 +65,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_SLATEPORT_CITY",
+            "id": "MAPSEC_SLATEPORT_CITY",
             "name": "SLATEPORT{NAME_END} CITY",
             "x": 8,
             "y": 10,
@@ -73,7 +73,7 @@
             "height": 2
         },
         {
-            "map_section": "MAPSEC_MAUVILLE_CITY",
+            "id": "MAPSEC_MAUVILLE_CITY",
             "name": "MAUVILLE{NAME_END} CITY",
             "x": 8,
             "y": 6,
@@ -81,7 +81,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_RUSTBORO_CITY",
+            "id": "MAPSEC_RUSTBORO_CITY",
             "name": "RUSTBORO{NAME_END} CITY",
             "x": 0,
             "y": 5,
@@ -89,7 +89,7 @@
             "height": 2
         },
         {
-            "map_section": "MAPSEC_FORTREE_CITY",
+            "id": "MAPSEC_FORTREE_CITY",
             "name": "FORTREE{NAME_END} CITY",
             "x": 12,
             "y": 0,
@@ -97,7 +97,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_LILYCOVE_CITY",
+            "id": "MAPSEC_LILYCOVE_CITY",
             "name": "LILYCOVE{NAME_END} CITY",
             "x": 18,
             "y": 3,
@@ -105,7 +105,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_MOSSDEEP_CITY",
+            "id": "MAPSEC_MOSSDEEP_CITY",
             "name": "MOSSDEEP{NAME_END} CITY",
             "x": 24,
             "y": 5,
@@ -113,7 +113,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_SOOTOPOLIS_CITY",
+            "id": "MAPSEC_SOOTOPOLIS_CITY",
             "name": "SOOTOPOLIS{NAME_END} CITY",
             "x": 21,
             "y": 7,
@@ -121,7 +121,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_EVER_GRANDE_CITY",
+            "id": "MAPSEC_EVER_GRANDE_CITY",
             "name": "EVER GRANDE{NAME_END} CITY",
             "x": 27,
             "y": 8,
@@ -129,7 +129,7 @@
             "height": 2
         },
         {
-            "map_section": "MAPSEC_ROUTE_101",
+            "id": "MAPSEC_ROUTE_101",
             "name": "ROUTE 101",
             "x": 4,
             "y": 10,
@@ -137,7 +137,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_102",
+            "id": "MAPSEC_ROUTE_102",
             "name": "ROUTE 102",
             "x": 2,
             "y": 9,
@@ -145,7 +145,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_103",
+            "id": "MAPSEC_ROUTE_103",
             "name": "ROUTE 103",
             "x": 4,
             "y": 8,
@@ -153,7 +153,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_104",
+            "id": "MAPSEC_ROUTE_104",
             "name": "ROUTE 104",
             "x": 0,
             "y": 7,
@@ -161,7 +161,7 @@
             "height": 3
         },
         {
-            "map_section": "MAPSEC_ROUTE_105",
+            "id": "MAPSEC_ROUTE_105",
             "name": "ROUTE 105",
             "x": 0,
             "y": 10,
@@ -169,7 +169,7 @@
             "height": 3
         },
         {
-            "map_section": "MAPSEC_ROUTE_106",
+            "id": "MAPSEC_ROUTE_106",
             "name": "ROUTE 106",
             "x": 0,
             "y": 13,
@@ -177,7 +177,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_107",
+            "id": "MAPSEC_ROUTE_107",
             "name": "ROUTE 107",
             "x": 3,
             "y": 14,
@@ -185,7 +185,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_108",
+            "id": "MAPSEC_ROUTE_108",
             "name": "ROUTE 108",
             "x": 6,
             "y": 14,
@@ -193,7 +193,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_109",
+            "id": "MAPSEC_ROUTE_109",
             "name": "ROUTE 109",
             "x": 8,
             "y": 12,
@@ -201,7 +201,7 @@
             "height": 3
         },
         {
-            "map_section": "MAPSEC_ROUTE_110",
+            "id": "MAPSEC_ROUTE_110",
             "name": "ROUTE 110",
             "x": 8,
             "y": 7,
@@ -209,7 +209,7 @@
             "height": 3
         },
         {
-            "map_section": "MAPSEC_ROUTE_111",
+            "id": "MAPSEC_ROUTE_111",
             "name": "ROUTE 111",
             "x": 8,
             "y": 0,
@@ -217,7 +217,7 @@
             "height": 6
         },
         {
-            "map_section": "MAPSEC_ROUTE_112",
+            "id": "MAPSEC_ROUTE_112",
             "name": "ROUTE 112",
             "x": 6,
             "y": 3,
@@ -225,7 +225,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_113",
+            "id": "MAPSEC_ROUTE_113",
             "name": "ROUTE 113",
             "x": 4,
             "y": 0,
@@ -233,7 +233,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_114",
+            "id": "MAPSEC_ROUTE_114",
             "name": "ROUTE 114",
             "x": 1,
             "y": 0,
@@ -241,7 +241,7 @@
             "height": 3
         },
         {
-            "map_section": "MAPSEC_ROUTE_115",
+            "id": "MAPSEC_ROUTE_115",
             "name": "ROUTE 115",
             "x": 0,
             "y": 2,
@@ -249,7 +249,7 @@
             "height": 3
         },
         {
-            "map_section": "MAPSEC_ROUTE_116",
+            "id": "MAPSEC_ROUTE_116",
             "name": "ROUTE 116",
             "x": 1,
             "y": 5,
@@ -257,7 +257,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_117",
+            "id": "MAPSEC_ROUTE_117",
             "name": "ROUTE 117",
             "x": 5,
             "y": 6,
@@ -265,7 +265,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_118",
+            "id": "MAPSEC_ROUTE_118",
             "name": "ROUTE 118",
             "x": 10,
             "y": 6,
@@ -273,7 +273,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_119",
+            "id": "MAPSEC_ROUTE_119",
             "name": "ROUTE 119",
             "x": 11,
             "y": 0,
@@ -281,7 +281,7 @@
             "height": 6
         },
         {
-            "map_section": "MAPSEC_ROUTE_120",
+            "id": "MAPSEC_ROUTE_120",
             "name": "ROUTE 120",
             "x": 13,
             "y": 0,
@@ -289,7 +289,7 @@
             "height": 4
         },
         {
-            "map_section": "MAPSEC_ROUTE_121",
+            "id": "MAPSEC_ROUTE_121",
             "name": "ROUTE 121",
             "x": 14,
             "y": 3,
@@ -297,7 +297,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_122",
+            "id": "MAPSEC_ROUTE_122",
             "name": "ROUTE 122",
             "x": 16,
             "y": 4,
@@ -305,7 +305,7 @@
             "height": 2
         },
         {
-            "map_section": "MAPSEC_ROUTE_123",
+            "id": "MAPSEC_ROUTE_123",
             "name": "ROUTE 123",
             "x": 12,
             "y": 6,
@@ -313,7 +313,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_124",
+            "id": "MAPSEC_ROUTE_124",
             "name": "ROUTE 124",
             "x": 20,
             "y": 3,
@@ -321,7 +321,7 @@
             "height": 3
         },
         {
-            "map_section": "MAPSEC_ROUTE_125",
+            "id": "MAPSEC_ROUTE_125",
             "name": "ROUTE 125",
             "x": 24,
             "y": 3,
@@ -329,7 +329,7 @@
             "height": 2
         },
         {
-            "map_section": "MAPSEC_ROUTE_126",
+            "id": "MAPSEC_ROUTE_126",
             "name": "ROUTE 126",
             "x": 20,
             "y": 6,
@@ -337,7 +337,7 @@
             "height": 3
         },
         {
-            "map_section": "MAPSEC_ROUTE_127",
+            "id": "MAPSEC_ROUTE_127",
             "name": "ROUTE 127",
             "x": 23,
             "y": 6,
@@ -345,7 +345,7 @@
             "height": 3
         },
         {
-            "map_section": "MAPSEC_ROUTE_128",
+            "id": "MAPSEC_ROUTE_128",
             "name": "ROUTE 128",
             "x": 23,
             "y": 9,
@@ -353,7 +353,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_129",
+            "id": "MAPSEC_ROUTE_129",
             "name": "ROUTE 129",
             "x": 24,
             "y": 10,
@@ -361,7 +361,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_130",
+            "id": "MAPSEC_ROUTE_130",
             "name": "ROUTE 130",
             "x": 21,
             "y": 10,
@@ -369,7 +369,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_131",
+            "id": "MAPSEC_ROUTE_131",
             "name": "ROUTE 131",
             "x": 18,
             "y": 10,
@@ -377,7 +377,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_132",
+            "id": "MAPSEC_ROUTE_132",
             "name": "ROUTE 132",
             "x": 15,
             "y": 10,
@@ -385,7 +385,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_133",
+            "id": "MAPSEC_ROUTE_133",
             "name": "ROUTE 133",
             "x": 12,
             "y": 10,
@@ -393,7 +393,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ROUTE_134",
+            "id": "MAPSEC_ROUTE_134",
             "name": "ROUTE 134",
             "x": 9,
             "y": 10,
@@ -401,7 +401,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_UNDERWATER_124",
+            "id": "MAPSEC_UNDERWATER_124",
             "name": "UNDERWATER",
             "x": 20,
             "y": 3,
@@ -409,7 +409,7 @@
             "height": 3
         },
         {
-            "map_section": "MAPSEC_UNDERWATER_125",
+            "id": "MAPSEC_UNDERWATER_125",
             "name": "UNDERWATER",
             "x": 20,
             "y": 6,
@@ -417,7 +417,7 @@
             "height": 3
         },
         {
-            "map_section": "MAPSEC_UNDERWATER_126",
+            "id": "MAPSEC_UNDERWATER_126",
             "name": "UNDERWATER",
             "x": 23,
             "y": 6,
@@ -425,7 +425,7 @@
             "height": 3
         },
         {
-            "map_section": "MAPSEC_UNDERWATER_127",
+            "id": "MAPSEC_UNDERWATER_127",
             "name": "UNDERWATER",
             "x": 23,
             "y": 9,
@@ -433,7 +433,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_UNDERWATER_SOOTOPOLIS",
+            "id": "MAPSEC_UNDERWATER_SOOTOPOLIS",
             "name": "UNDERWATER",
             "x": 21,
             "y": 7,
@@ -441,7 +441,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_GRANITE_CAVE",
+            "id": "MAPSEC_GRANITE_CAVE",
             "name": "GRANITE CAVE",
             "x": 1,
             "y": 13,
@@ -449,7 +449,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_MT_CHIMNEY",
+            "id": "MAPSEC_MT_CHIMNEY",
             "name": "MT. CHIMNEY",
             "x": 6,
             "y": 2,
@@ -457,7 +457,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_SAFARI_ZONE",
+            "id": "MAPSEC_SAFARI_ZONE",
             "name": "SAFARI ZONE",
             "x": 16,
             "y": 2,
@@ -465,7 +465,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_BATTLE_TOWER",
+            "id": "MAPSEC_BATTLE_TOWER",
             "name": "BATTLE TOWER",
             "x": 22,
             "y": 12,
@@ -473,7 +473,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_PETALBURG_WOODS",
+            "id": "MAPSEC_PETALBURG_WOODS",
             "name": "PETALBURG WOODS",
             "x": 0,
             "y": 8,
@@ -481,7 +481,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_RUSTURF_TUNNEL",
+            "id": "MAPSEC_RUSTURF_TUNNEL",
             "name": "RUSTURF TUNNEL",
             "x": 2,
             "y": 5,
@@ -489,7 +489,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ABANDONED_SHIP",
+            "id": "MAPSEC_ABANDONED_SHIP",
             "name": "ABANDONED SHIP",
             "x": 6,
             "y": 14,
@@ -497,7 +497,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_NEW_MAUVILLE",
+            "id": "MAPSEC_NEW_MAUVILLE",
             "name": "NEW MAUVILLE",
             "x": 8,
             "y": 7,
@@ -505,7 +505,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_METEOR_FALLS",
+            "id": "MAPSEC_METEOR_FALLS",
             "name": "METEOR FALLS",
             "x": 0,
             "y": 3,
@@ -513,7 +513,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_METEOR_FALLS_2",
+            "id": "MAPSEC_METEOR_FALLS_2",
             "name": "METEOR FALLS",
             "x": 1,
             "y": 2,
@@ -521,7 +521,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_MT_PYRE",
+            "id": "MAPSEC_MT_PYRE",
             "name": "MT. PYRE",
             "x": 16,
             "y": 4,
@@ -529,7 +529,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_EVIL_TEAM_HIDEOUT",
+            "id": "MAPSEC_EVIL_TEAM_HIDEOUT",
             "name": "{EVIL_TEAM} HIDEOUT",
             "x": 19,
             "y": 3,
@@ -537,7 +537,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_SHOAL_CAVE",
+            "id": "MAPSEC_SHOAL_CAVE",
             "name": "SHOAL CAVE",
             "x": 24,
             "y": 4,
@@ -545,7 +545,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_SEAFLOOR_CAVERN",
+            "id": "MAPSEC_SEAFLOOR_CAVERN",
             "name": "SEAFLOOR CAVERN",
             "x": 24,
             "y": 9,
@@ -553,7 +553,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_UNDERWATER_128",
+            "id": "MAPSEC_UNDERWATER_128",
             "name": "UNDERWATER",
             "x": 24,
             "y": 9,
@@ -561,7 +561,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_VICTORY_ROAD",
+            "id": "MAPSEC_VICTORY_ROAD",
             "name": "VICTORY ROAD",
             "x": 27,
             "y": 9,
@@ -569,7 +569,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_MIRAGE_ISLAND",
+            "id": "MAPSEC_MIRAGE_ISLAND",
             "name": "MIRAGE ISLAND",
             "x": 17,
             "y": 10,
@@ -577,7 +577,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_CAVE_OF_ORIGIN",
+            "id": "MAPSEC_CAVE_OF_ORIGIN",
             "name": "CAVE OF ORIGIN",
             "x": 21,
             "y": 7,
@@ -585,7 +585,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_SOUTHERN_ISLAND",
+            "id": "MAPSEC_SOUTHERN_ISLAND",
             "name": "SOUTHERN ISLAND",
             "x": 12,
             "y": 14,
@@ -593,7 +593,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_FIERY_PATH",
+            "id": "MAPSEC_FIERY_PATH",
             "name": "FIERY PATH",
             "x": 6,
             "y": 3,
@@ -601,7 +601,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_FIERY_PATH_2",
+            "id": "MAPSEC_FIERY_PATH_2",
             "name": "FIERY PATH",
             "x": 7,
             "y": 3,
@@ -609,7 +609,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_JAGGED_PASS",
+            "id": "MAPSEC_JAGGED_PASS",
             "name": "JAGGED PASS",
             "x": 6,
             "y": 3,
@@ -617,7 +617,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_JAGGED_PASS_2",
+            "id": "MAPSEC_JAGGED_PASS_2",
             "name": "JAGGED PASS",
             "x": 7,
             "y": 2,
@@ -625,7 +625,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_SEALED_CHAMBER",
+            "id": "MAPSEC_SEALED_CHAMBER",
             "name": "SEALED CHAMBER",
             "x": 11,
             "y": 10,
@@ -633,7 +633,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_UNDERWATER_SEALED_CHAMBER",
+            "id": "MAPSEC_UNDERWATER_SEALED_CHAMBER",
             "name": "UNDERWATER",
             "x": 11,
             "y": 10,
@@ -641,7 +641,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_SCORCHED_SLAB",
+            "id": "MAPSEC_SCORCHED_SLAB",
             "name": "SCORCHED SLAB",
             "x": 13,
             "y": 0,
@@ -649,7 +649,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ISLAND_CAVE",
+            "id": "MAPSEC_ISLAND_CAVE",
             "name": "ISLAND CAVE",
             "x": 0,
             "y": 10,
@@ -657,7 +657,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_DESERT_RUINS",
+            "id": "MAPSEC_DESERT_RUINS",
             "name": "DESERT RUINS",
             "x": 8,
             "y": 3,
@@ -665,7 +665,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_ANCIENT_TOMB",
+            "id": "MAPSEC_ANCIENT_TOMB",
             "name": "ANCIENT TOMB",
             "x": 13,
             "y": 2,
@@ -673,7 +673,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_INSIDE_OF_TRUCK",
+            "id": "MAPSEC_INSIDE_OF_TRUCK",
             "name": "INSIDE OF TRUCK",
             "x": 0,
             "y": 0,
@@ -681,7 +681,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_SKY_PILLAR",
+            "id": "MAPSEC_SKY_PILLAR",
             "name": "SKY PILLAR",
             "x": 19,
             "y": 10,
@@ -689,7 +689,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_SECRET_BASE",
+            "id": "MAPSEC_SECRET_BASE",
             "name": "SECRET BASE",
             "x": 0,
             "y": 0,
@@ -697,7 +697,7 @@
             "height": 1
         },
         {
-            "map_section": "MAPSEC_DYNAMIC",
+            "id": "MAPSEC_DYNAMIC",
             "name": "",
             "x": 0,
             "y": 0,

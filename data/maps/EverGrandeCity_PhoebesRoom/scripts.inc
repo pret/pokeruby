@@ -9,7 +9,7 @@ EverGrandeCity_PhoebesRoom_OnWarp:: @ 815B5E9
 	.2byte 0
 
 EverGrandeCity_PhoebesRoom_EventScript_PlayerTurnNorth:: @ 815B5F3
-	turnobject OBJ_EVENT_ID_PLAYER, 2
+	turnobject LOCALID_PLAYER, 2
 	end
 
 EverGrandeCity_PhoebesRoom_OnFrame:: @ 815B5F8

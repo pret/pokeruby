@@ -330,7 +330,7 @@ static void PlayerAllowForcedMovementIfMovingSameDirection(void)
 static bool8 TryDoMetatileBehaviorForcedMovement(void)
 {
 #if DEBUG
-    if (gUnknown_020297ED != 0 && (gMain.heldKeys & R_BUTTON))
+    if (gUnknown_020297ED != 0 && JOY_HELD(R_BUTTON))
         return 0;
 #endif
     return sForcedMovementFuncs[GetForcedMovementByMetatileBehavior()]();
@@ -1182,7 +1182,7 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     u8 objectEventId;
     struct ObjectEvent *objectEvent;
 
-    playerObjEventTemplate.localId = 0xFF;
+    playerObjEventTemplate.localId = LOCALID_PLAYER;
     playerObjEventTemplate.graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, gender);
     playerObjEventTemplate.x = x - 7;
     playerObjEventTemplate.y = y - 7;
@@ -1586,7 +1586,7 @@ static bool8 Fishing5(struct Task *task)
 
     AlignFishingAnimationFrames();
     task->tFrameCounter++;
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         task->tStep = FISHING_NO_BITE;
         if (task->tRoundsPlayed != 0)
@@ -1646,7 +1646,7 @@ static bool8 Fishing8(struct Task *task)
     task->tFrameCounter++;
     if (task->tFrameCounter >= reelTimeouts[task->tFishingRod])
         task->tStep = FISHING_GOT_AWAY;
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
         task->tStep++;
     return FALSE;
 }
@@ -1826,7 +1826,7 @@ static void AlignFishingAnimationFrames(void)
 
 u8 debug_sub_805F2B0(u8 a)
 {
-    if (gMain.heldKeys & 0x100)
+    if (JOY_HELD(R_BUTTON))
         return debug_sub_805F2DC(a);
     else
         return 0;

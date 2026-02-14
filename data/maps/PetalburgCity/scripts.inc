@@ -29,7 +29,7 @@ PetalburgCity_EventScript_WallyTutorial:: @ 814B747
 	special SavePlayerParty
 	special PutZigzagoonInPlayerParty
 	applymovement 2, PetalburgCity_Movement_WallyTutorialWally
-	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_WallyTutorialPlayer
+	applymovement LOCALID_PLAYER, PetalburgCity_Movement_WallyTutorialPlayer
 	waitmovement 0
 	msgbox Route102_Text_WatchMeCatchPokemon, MSGBOX_DEFAULT
 	special ScrSpecial_StartWallyTutorialBattle
@@ -208,7 +208,7 @@ PetalburgCity_EventScript_ShowGymToPlayer:: @ 814B866
 	call_if_eq PetalburgCity_EventScript_LeadPlayerToGym3
 	msgbox PetalburgCity_Text_ThisIsPetalburgGym, MSGBOX_DEFAULT
 	applymovement 9, Common_Movement_WalkInPlaceFastestRight
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox PetalburgCity_Text_ThisIsGymSign, MSGBOX_DEFAULT
 	closemessage
@@ -221,7 +221,7 @@ PetalburgCity_EventScript_ShowGymToPlayer:: @ 814B866
 PetalburgCity_EventScript_BoyApproachPlayer0:: @ 814B91B
 	applymovement 9, PetalburgCity_Movement_BoyApproachPlayer0
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
@@ -233,38 +233,38 @@ PetalburgCity_EventScript_BoyApproachPlayer1:: @ 814B930
 PetalburgCity_EventScript_BoyApproachPlayer2:: @ 814B93B
 	applymovement 9, PetalburgCity_Movement_BoyApproachPlayer2
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_BoyApproachPlayer3:: @ 814B950
 	applymovement 9, PetalburgCity_Movement_BoyApproachPlayer3
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_LeadPlayerToGym0:: @ 814B965
 	applymovement 9, PetalburgCity_Movement_BoyWalkToGym0
-	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_PlayerWalkToGym0
+	applymovement LOCALID_PLAYER, PetalburgCity_Movement_PlayerWalkToGym0
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_LeadPlayerToGym1:: @ 814B977
 	applymovement 9, PetalburgCity_Movement_BoyWalkToGym1
-	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_PlayerWalkToGym1
+	applymovement LOCALID_PLAYER, PetalburgCity_Movement_PlayerWalkToGym1
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_LeadPlayerToGym2:: @ 814B989
 	applymovement 9, PetalburgCity_Movement_BoyWalkToGym2
-	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_PlayerWalkToGym2
+	applymovement LOCALID_PLAYER, PetalburgCity_Movement_PlayerWalkToGym2
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_LeadPlayerToGym3:: @ 814B99B
 	applymovement 9, PetalburgCity_Movement_BoyWalkToGym3
-	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_PlayerWalkToGym3
+	applymovement LOCALID_PLAYER, PetalburgCity_Movement_PlayerWalkToGym3
 	waitmovement 0
 	return
 

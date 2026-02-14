@@ -364,7 +364,7 @@ static void Task_StarterChoose2(u8 taskId)
 {
     u8 selection = gTasks[taskId].tStarterSelection;
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         u8 spriteId;
 
@@ -398,12 +398,12 @@ static void Task_StarterChoose2(u8 taskId)
     }
     else
     {
-        if ((gMain.newKeys & DPAD_LEFT) && selection > 0)
+        if (JOY_NEW(DPAD_LEFT) && selection > 0)
         {
             gTasks[taskId].tStarterSelection--;
             CreateStarterPokemonLabel(selection, gTasks[taskId].tStarterSelection);
         }
-        else if ((gMain.newKeys & DPAD_RIGHT) && selection < 2)
+        else if (JOY_NEW(DPAD_RIGHT) && selection < 2)
         {
             gTasks[taskId].tStarterSelection++;
             CreateStarterPokemonLabel(selection, gTasks[taskId].tStarterSelection);

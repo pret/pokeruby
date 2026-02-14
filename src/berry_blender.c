@@ -1815,9 +1815,9 @@ static void sub_80500A8(void)
     u8 var2 = gBerryBlenderData->field_A2[GetMultiplayerId()];
     if (gBerryBlenderData->field_6F == 0)
     {
-        if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A && gMain.newKeys & A_BUTTON)
+        if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A && JOY_NEW(A_BUTTON))
             A_pressed = ((gMain.heldKeysRaw & (A_BUTTON | L_BUTTON)) != (A_BUTTON | L_BUTTON));
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
             A_pressed = 1;
         if (A_pressed)
         {
@@ -1838,7 +1838,7 @@ static void sub_80500A8(void)
             gBerryBlenderData->field_56--;
         gBerryBlenderData->field_7E = 0;
     }
-    if (gUnknown_020297ED && gMain.newKeys & L_BUTTON)
+    if (gUnknown_020297ED && JOY_NEW(L_BUTTON))
         gBerryBlenderData->field_14B ^= 1;
 }
 
@@ -2240,24 +2240,24 @@ static void sub_8050954(void)
         gBerryBlenderData->field_6F++;
         break;
     case 10:
-        if (gMain.newKeys & DPAD_UP)
+        if (JOY_NEW(DPAD_UP))
         {
             if (gBerryBlenderData->field_AA != 0)
                 PlaySE(SE_SELECT);
             sub_80508D4(0);
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        else if (JOY_NEW(DPAD_DOWN))
         {
             if (gBerryBlenderData->field_AA != 1)
                 PlaySE(SE_SELECT);
             sub_80508D4(1);
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             gBerryBlenderData->field_6F++;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             gBerryBlenderData->field_6F++;
@@ -2742,7 +2742,7 @@ void unref_sub_80516F8(u8 taskID)
                     Menu_PrintText(gOtherText_PressAToStart, 1, 15);
                 }
             }
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 sub_8007E4C();
                 DestroyTask(taskID);
@@ -3067,7 +3067,7 @@ bool8 Blender_PrintBlendingResults(void)
         }
         break;
     case 4:
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
             gBerryBlenderData->field_0++;
         break;
     case 5:
@@ -3242,7 +3242,7 @@ static bool8 Blender_PrintBlendingRanking(void)
             gBerryBlenderData->field_0++;
         break;
     case 5:
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             gBerryBlenderData->field_0++;
@@ -3412,47 +3412,47 @@ static void sub_80527BC(void)
 
 static void sub_8052918(void)
 {
-    if (gMain.newKeys & R_BUTTON)
+    if (JOY_NEW(R_BUTTON))
     {
         sBlenderDebug.BPM += 1000;
         if (sBlenderDebug.BPM > 30000)
             sBlenderDebug.BPM = 1000;
         sBlenderDebug.field_10++;
     }
-    if (gMain.newKeys & L_BUTTON)
+    if (JOY_NEW(L_BUTTON))
     {
         sBlenderDebug.BPM -= 1000;
         if (sBlenderDebug.BPM < 0)
             sBlenderDebug.BPM = 30000;
         sBlenderDebug.field_10++;
     }
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         sBlenderDebug.cursorPos -= 1;
         if (sBlenderDebug.cursorPos < 0)
             sBlenderDebug.cursorPos = 3;
         sBlenderDebug.field_10++;
     }
-    if (gMain.newKeys & DPAD_DOWN)
+    if (JOY_NEW(DPAD_DOWN))
     {
         sBlenderDebug.cursorPos += 1;
         if (sBlenderDebug.cursorPos > 3)
             sBlenderDebug.cursorPos = 0;
         sBlenderDebug.field_10++;
     }
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         if (--sBlenderDebug.berries[sBlenderDebug.cursorPos] < 0)
             sBlenderDebug.berries[sBlenderDebug.cursorPos] = 42;
         sBlenderDebug.field_10++;
     }
-    if (gMain.newKeys & DPAD_RIGHT)
+    if (JOY_NEW(DPAD_RIGHT))
     {
         if (++sBlenderDebug.berries[sBlenderDebug.cursorPos] > 42)
             sBlenderDebug.berries[sBlenderDebug.cursorPos] = 0;
         sBlenderDebug.field_10++;
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         u16 berryIDs[4];
         struct BlenderBerry berries[4];
@@ -3482,7 +3482,7 @@ static void sub_8052918(void)
         BlenderDebug_PrintBerryData();
         sBlenderDebug.field_10 = 0;
     }
-    if (gMain.newKeys & SELECT_BUTTON && gUnknown_020297DC == 0)
+    if (JOY_NEW(SELECT_BUTTON) && gUnknown_020297DC == 0)
     {
         gUnknown_020297DC++;
         gUnknown_020297E0 = 0;

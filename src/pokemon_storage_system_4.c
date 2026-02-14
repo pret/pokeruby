@@ -2103,16 +2103,16 @@ u8 sub_809C85C(void)
             break;
         }
 
-        if (gMain.heldKeys & DPAD_LEFT)
+        if (JOY_HELD(DPAD_LEFT))
             return 10;
-        if (gMain.heldKeys & DPAD_RIGHT)
+        if (JOY_HELD(DPAD_RIGHT))
             return 9;
 
         if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
         {
-            if (gMain.heldKeys & L_BUTTON)
+            if (JOY_HELD(L_BUTTON))
                 return 10;
-            if (gMain.heldKeys & R_BUTTON)
+            if (JOY_HELD(R_BUTTON))
                 return 9;
         }
 

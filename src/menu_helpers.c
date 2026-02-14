@@ -224,11 +224,11 @@ u8 sub_80F9284(void)
 {
     if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
     {
-        if (gMain.newKeys & L_BUTTON)
+        if (JOY_NEW(L_BUTTON))
         {
             return 1;
         }
-        if (gMain.newKeys & R_BUTTON)
+        if (JOY_NEW(R_BUTTON))
         {
             return 2;
         }
@@ -241,11 +241,11 @@ u8 sub_80F92BC(void)
 {
     if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
     {
-        if (gMain.newAndRepeatedKeys & L_BUTTON)
+        if (JOY_REPT(L_BUTTON))
         {
             return 1;
         }
-        if (gMain.newAndRepeatedKeys & R_BUTTON)
+        if (JOY_REPT(R_BUTTON))
         {
             return 2;
         }
@@ -261,7 +261,7 @@ bool8 sub_80F92F4(u16 itemId)
         return TRUE;
     }
 
-    if (!(gSaveBlock1.location.mapGroup == MAP_GROUP(TRADE_CENTER) && gSaveBlock1.location.mapNum == MAP_NUM(TRADE_CENTER)))
+    if (!(gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_TRADE_CENTER) && gSaveBlock1.location.mapNum == MAP_NUM(MAP_TRADE_CENTER)))
     {
         return TRUE;
     }

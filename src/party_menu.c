@@ -1225,14 +1225,14 @@ u16 HandleDefaultPartyMenuInput(u8 taskId)
         ChangePartyMenuSelection(taskId, menuDirectionPressed);
         return gMain.newAndRepeatedKeys;
     }
-    else if ((gMain.newKeys & A_BUTTON) && gSprites[sub_806CA00(taskId)].data[0] == 7)
+    else if (JOY_NEW(A_BUTTON) && gSprites[sub_806CA00(taskId)].data[0] == 7)
     {
         // Selected "CANCEL"
         return B_BUTTON;
     }
     else
     {
-        return gMain.newKeys & (A_BUTTON | B_BUTTON);
+        return JOY_NEW(A_BUTTON | B_BUTTON);
     }
 }
 
@@ -1269,7 +1269,7 @@ u16 HandleBattleTowerPartyMenuInput(u8 taskId)
         }
     }
 
-    if (gMain.newKeys & START_BUTTON)
+    if (JOY_NEW(START_BUTTON))
     {
         SelectBattleTowerOKButton(taskId);
         return START_BUTTON;
@@ -1284,7 +1284,7 @@ u16 HandleBattleTowerPartyMenuInput(u8 taskId)
         }
         else
         {
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 if (gSprites[sub_806CA00(taskId)].data[0] == 7)
                     return B_BUTTON;
@@ -1292,7 +1292,7 @@ u16 HandleBattleTowerPartyMenuInput(u8 taskId)
         }
     }
 
-    return gMain.newKeys & (A_BUTTON | B_BUTTON);
+    return JOY_NEW(A_BUTTON | B_BUTTON);
 }
 
 void task_pc_turn_off(const u8 *a, u8 b)
@@ -1836,7 +1836,7 @@ void HandlePartyMenuSwitchPokemonInput(u8 taskId)
         break;
     }
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(5);
         gTasks[taskId].func = ePartyMenu.unkC;
@@ -3285,7 +3285,7 @@ void Task_TeamMonTMMove4(u8 taskId)
 {
     if (IsFanfareTaskInactive())
     {
-        if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+        if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         {
             SetHeldItemIconVisibility(gPartyMenu.unk4, gPartyMenu.primarySelectedMonIndex);
             if (ePartyMenu2.pmUnk282 == 1)
@@ -3866,21 +3866,21 @@ void CreateItemUseMoveMenu(u8 partyMonIndex)
 
 void Task_HandleItemUseMoveMenuInput(u8 taskId)
 {
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(-1);
     }
-    else if (gMain.newKeys & DPAD_DOWN)
+    else if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(1);
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         gUnknown_08376B54[0](taskId);
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         gUnknown_08376B54[1](taskId);
@@ -4044,7 +4044,7 @@ void Task_RareCandy1(u8 taskId)
 {
     if (WaitFanfare(0) && gPartyMenuMessage_IsPrinting == 0)
     {
-        if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+        if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             PrintStatGrowthsInLevelUpWindow(taskId);
@@ -4055,7 +4055,7 @@ void Task_RareCandy1(u8 taskId)
 
 void Task_RareCandy2(u8 taskId)
 {
-    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         PrintNewStatsInLevelUpWindow(taskId);
@@ -4161,7 +4161,7 @@ void Task_RareCandy3(u8 taskId)
 {
     if (WaitFanfare(0))
     {
-        if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+        if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         {
             u16 learnedMove;
             u16 evolutionSpecies;

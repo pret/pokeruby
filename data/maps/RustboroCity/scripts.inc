@@ -219,7 +219,7 @@ RustboroCity_EventScript_StolenGoodsScene:: @ 814C4F4
 @ 814C59B
 	applymovement 9, RustboroCity_Movement_EmployeeApproachPlayerFar
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
@@ -382,7 +382,7 @@ RustboroCity_EventScript_EmployeeFacePlayerUp1:: @ 814C691
 	waitmovement 0
 	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
@@ -394,7 +394,7 @@ RustboroCity_EventScript_EmployeeFacePlayerLeft1:: @ 814C6BD
 	waitmovement 0
 	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -406,7 +406,7 @@ RustboroCity_EventScript_EmployeeFacePlayerDown1:: @ 814C6E9
 	waitmovement 0
 	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
@@ -420,7 +420,7 @@ RustboroCity_EventScript_EmployeeApproachPlayerDown1:: @ 814C715
 	waitmovement 0
 	applymovement 9, RustboroCity_Movement_EmployeeApproachPlayerDown
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
@@ -490,7 +490,7 @@ RustboroCity_EventScript_EmployeeFacePlayerUp2:: @ 814C7FE
 	waitmovement 0
 	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
@@ -502,7 +502,7 @@ RustboroCity_EventScript_EmployeeFacePlayerLeft2:: @ 814C82A
 	waitmovement 0
 	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
@@ -514,7 +514,7 @@ RustboroCity_EventScript_EmployeeFacePlayerDown2:: @ 814C856
 	waitmovement 0
 	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
@@ -528,7 +528,7 @@ RustboroCity_EventScript_EmployeeApproachPlayerDown2:: @ 814C882
 	waitmovement 0
 	applymovement 9, RustboroCity_Movement_EmployeeApproachPlayerDown
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 

@@ -74,7 +74,7 @@ void unref_sub_8083CF0(void)
 
 bool8 sub_8083D4C(void)
 {
-     if ( gMain.newKeys & A_BUTTON )
+    if (JOY_NEW(A_BUTTON))
     {
         CloseMenu();
         return TRUE;

@@ -548,15 +548,17 @@
 		.endif
 	.endm
 
-	@ Blocks script execution until the movements being applied to the specified (index) Object event finish. If the specified Object event is 0x0000, then the command will block script execution until all Object events affected by applymovement finish their movements. If the specified Object event is not currently being manipulated with applymovement, then this command does nothing.
+	@ Blocks script execution until the movements being applied to the specified (localId) object finish.
+	@ If localId is LOCALID_NONE (0), then the id of the last-moved object will be used instead.
+	@ If the specified object is not currently being manipulated with applymovement, then this command does nothing.
 	@ If no map is specified, then the current map is used.
-	.macro waitmovement index:req, map
+	.macro waitmovement localId=LOCALID_NONE, map
 		.ifb \map
 			.byte 0x51
-			.2byte \index
+			.2byte \localId
 		.else
 			.byte 0x52
-			.2byte \index
+			.2byte \localId
 			map \map
 		.endif
 	.endm
@@ -875,6 +877,16 @@
 	.macro braillemessage text:req
 	.byte 0x78
 	.4byte \text
+	.endm
+
+	@ Formatting for the braille window, to be put at the start of a pointer used by braillemessage.
+	.macro brailleformat winLeft:req, winTop:req, winRight:req, winBottom:req, textLeft:req, textTop:req
+	.byte \winLeft
+	.byte \winTop
+	.byte \winRight
+	.byte \winBottom
+	.byte \textLeft
+	.byte \textTop
 	.endm
 
 	@ Gives the player one of the specified (species) Pokemon at level level holding item. The trailing 0s are unused parameters

@@ -35,6 +35,7 @@
 #include "strings.h"
 #include "task.h"
 #include "constants/event_bg.h"
+#include "constants/event_objects.h"
 #include "constants/map_types.h"
 #include "constants/species.h"
 #include "constants/vars.h"
@@ -548,15 +549,15 @@ u8 GetPlayerDirectionTowardsHiddenItem(s16 itemX, s16 itemY)
 
 void SetPlayerDirectionTowardsItem(u8 direction)
 {
-    ObjectEventClearHeldMovementIfFinished(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)]);
-    ObjectEventClearHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)]);
-    UnfreezeObjectEvent(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)]);
+    ObjectEventClearHeldMovementIfFinished(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0)]);
+    ObjectEventClearHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0)]);
+    UnfreezeObjectEvent(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0)]);
     PlayerTurnInPlace(direction);
 }
 
 void DisplayItemRespondingMessageAndExitItemfinder(u8 taskId)
 {
-    if (ObjectEventCheckHeldMovementStatus(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE)
+    if (ObjectEventCheckHeldMovementStatus(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0)]) == TRUE)
         DisplayItemMessageOnField(taskId, gOtherText_ItemfinderResponding, ExitItemfinder, 0);
 }
 
@@ -564,7 +565,7 @@ void RotatePlayerAndExitItemfinder(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (ObjectEventCheckHeldMovementStatus(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE
+    if (ObjectEventCheckHeldMovementStatus(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0)]) == TRUE
     || data[2] == FALSE)
     {
         SetPlayerDirectionTowardsItem(gItemFinderDirections[data[5]]);
@@ -614,13 +615,13 @@ void ItemUseOutOfBattle_CoinCase(u8 taskId)
 
 static void SSTicketWaitForAButtonPress(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
         CleanUpItemMenuMessage(taskId);
 }
 
 static void SSTicketWaitForAButtonPress2(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
         CleanUpOverworldMessage(taskId);
 }
 
@@ -750,7 +751,7 @@ static void BootTMHM(u8 taskId)
 
 static void WaitButtonPressAndDisplayTMHMInfo(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         StringCopy(gStringVar1, gMoveNames[ItemIdToBattleMoveId(gSpecialVar_ItemId)]);
         StringExpandPlaceholders(gStringVar4, gOtherText_ContainsMove);
@@ -888,7 +889,7 @@ void ItemUseInBattle_PokeBall(u8 taskId)
 
 void sub_80CA294(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         sub_80A7094(taskId);
 }
 

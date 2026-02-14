@@ -75,7 +75,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern:: @ 8155CE6
 	fadescreen FADE_FROM_BLACK
 	delay 30
 	setflag FLAG_HIDE_EVIL_TEAM_OCEANIC_MUSEUM
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_SternThankYouForSavingUs, MSGBOX_DEFAULT
 	setvar VAR_0x8004, ITEM_DEVON_GOODS
@@ -94,7 +94,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern:: @ 8155CE6
 	end
 
 SlateportCity_OceanicMuseum_2F_EventScript_PlayerFaceGrunts:: @ 8155E62
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
@@ -104,12 +104,12 @@ SlateportCity_OceanicMuseum_2F_EventScript_SternFaceGrunts:: @ 8155E6D
 	return
 
 SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntSouth:: @ 8155E78
-	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_OceanicMuseum_2F_Movement_PlayerApproachGruntSouth
+	applymovement LOCALID_PLAYER, SlateportCity_OceanicMuseum_2F_Movement_PlayerApproachGruntSouth
 	waitmovement 0
 	return
 
 SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntWest:: @ 8155E83
-	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_OceanicMuseum_2F_Movement_PlayerApproachGruntWest
+	applymovement LOCALID_PLAYER, SlateportCity_OceanicMuseum_2F_Movement_PlayerApproachGruntWest
 	waitmovement 0
 	return
 

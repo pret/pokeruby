@@ -19,7 +19,7 @@ RustboroCity_DevonCorp_3F_OnWarp:: @ 8157739
 	.2byte 0
 
 RustboroCity_DevonCorp_3F_EventScript_PlayerFaceEast:: @ 8157743
-	turnobject OBJ_EVENT_ID_PLAYER, 4
+	turnobject LOCALID_PLAYER, 4
 	end
 
 RustboroCity_DevonCorp_3F_OnFrame:: @ 8157748
@@ -39,13 +39,13 @@ RustboroCity_DevonCorp_3F_EventScript_MeetPresident:: @ 8157752
 	closemessage
 	playbgm MUS_FOLLOW_ME, FALSE
 	applymovement 2, RustboroCity_DevonCorp_3F_Movement_LeadPlayerToPresident
-	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_DevonCorp_3F_Movement_PlayerFollowToPresident
+	applymovement LOCALID_PLAYER, RustboroCity_DevonCorp_3F_Movement_PlayerFollowToPresident
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_PleaseGoAhead, MSGBOX_DEFAULT
 	closemessage
 	fadedefaultbgm
 	applymovement 2, RustboroCity_DevonCorp_3F_Movement_EmployeeFaceDesk
-	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_DevonCorp_3F_Movement_PlayerApproachDesk
+	applymovement LOCALID_PLAYER, RustboroCity_DevonCorp_3F_Movement_PlayerApproachDesk
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_MrStoneIHaveFavor, MSGBOX_DEFAULT
 	giveitem ITEM_LETTER

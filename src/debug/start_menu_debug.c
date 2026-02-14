@@ -445,7 +445,7 @@ void debug_sub_8076BB4(u8 taskId)
         gDebug_TestMenuItems[gUnknown_030006C4[cursorPos]].func();
         break;
     case -2:
-        if (gMain.newKeys & 0x20)
+        if (JOY_NEW(DPAD_LEFT))
         {
             if (data[0] == 0)
                 data[0] = 1;
@@ -454,7 +454,7 @@ void debug_sub_8076BB4(u8 taskId)
             debug_sub_8076AC8(data[0]);
             PlaySE(SE_SELECT);
         }
-        else if (gMain.newKeys & 0x10)
+        else if (JOY_NEW(DPAD_RIGHT))
         {
             if (data[0] == 1)
                 data[0] = 0;
@@ -574,7 +574,7 @@ void DebugMenu_8076D6C(u8 taskId)
         data[0]++;
         break;
     case 1:
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             Menu_DisplayDialogueFrame();
             Menu_PrintText(Str_839BD4C, 2, 15);
@@ -582,14 +582,14 @@ void DebugMenu_8076D6C(u8 taskId)
             RtcReset();
             data[0]++;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             DestroyTask(taskId);
             DoSoftReset();
         }
         break;
     case 2:
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             DestroyTask(taskId);
             DoSoftReset();
@@ -617,7 +617,7 @@ void DebugMenu_8076E30(u8 taskId)
             data[0]++;
             break;
         case 1:
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 Menu_DisplayDialogueFrame();
                 sub_813B79C();
@@ -625,14 +625,14 @@ void DebugMenu_8076E30(u8 taskId)
                 PlaySE(SE_DING_DONG);
                 data[0]++;
             }
-            else if (gMain.newKeys & B_BUTTON)
+            else if (JOY_NEW(B_BUTTON))
             {
                 DestroyTask(taskId);
                 DoSoftReset(); // noreturn
             }
             break;
         case 2:
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 DestroyTask(taskId);
                 DoSoftReset(); // noreturn
@@ -757,17 +757,17 @@ u8 DebugMenu_807709C(void)
 {
     u8 actionRet;
 
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         gUnknown_030006C0 = Menu_MoveCursor(-1);
     }
-    if (gMain.newKeys & DPAD_DOWN)
+    if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         gUnknown_030006C0 = Menu_MoveCursor(+1);
     }
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         PlaySE(SE_SELECT);
         if (gUnknown_030006C1 == 0)
@@ -777,7 +777,7 @@ u8 DebugMenu_807709C(void)
         DebugMenu_8077004();
         DebugMenu_807719C();
     }
-    if (gMain.newKeys & DPAD_RIGHT)
+    if (JOY_NEW(DPAD_RIGHT))
     {
         PlaySE(SE_SELECT);
         if (gUnknown_030006C1 == 7)
@@ -787,7 +787,7 @@ u8 DebugMenu_807709C(void)
         DebugMenu_8077004();
         DebugMenu_807719C();
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         actionRet = gDebug0x839B9BC[gUnknown_030006C4[gUnknown_030006C0]].func();
@@ -798,7 +798,7 @@ u8 DebugMenu_807709C(void)
 #endif
         return actionRet;
     }
-    if (gMain.newKeys & (B_BUTTON | START_BUTTON))
+    if (JOY_NEW(B_BUTTON | START_BUTTON))
     {
         CloseMenu();
 // TODO: see if this is in rev1+
@@ -1131,7 +1131,7 @@ void DebugMenu_8077704(void)
 
 u8 DebugMenu_8077760(void)
 {
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(-1);
@@ -1140,7 +1140,7 @@ u8 DebugMenu_8077760(void)
         else
             gUnknown_030006B8 = 3;
     }
-    if (gMain.newKeys & DPAD_DOWN)
+    if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(+1);
@@ -1149,13 +1149,13 @@ u8 DebugMenu_8077760(void)
         else
             gUnknown_030006B8 = 0;
     }
-    if (gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
+    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {
         PlaySE(SE_SELECT);
         gUnknown_030006C8 ^= (1 << Menu_GetCursorPos());
         DebugMenu_80776B4(Menu_GetCursorPos());
     }
-    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         REG_DISPCNT = (REG_DISPCNT & 0xF0FF) + (gUnknown_030006C8 << 8);
         CloseMenu();
@@ -1184,13 +1184,13 @@ void DebugMenu_807786C(u8 a0)
 
 u8 DebugMenu_80778A8(void)
 {
-    if (gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
+    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {
         PlaySE(SE_SELECT);
         gWildEncountersDisabled ^= 1;
         DebugMenu_807786C(gWildEncountersDisabled);
     }
-    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         CloseMenu();
         return TRUE;
@@ -1554,7 +1554,7 @@ u8 DebugMenu_8077D78(const struct MenuAction *menuActions)
 
 bool8 DebugMenu_8077DB4(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         CloseMenu();
         return TRUE;
@@ -1595,12 +1595,12 @@ bool32 DebugMenu_8077DD8(s16 * a0, s32 a1, s32 a2, u16 a3)
 
 int DebugMenu_8077E40(int flag)
 {
-    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         CloseMenu();
         return -1;
     }
-    if (gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
+    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {
         PlaySE(SE_SELECT);
         if (flag)
@@ -1659,14 +1659,14 @@ const u8 Str_839C014[] = _("How many？");
 void DebugMenu_8077F7C(u8 taskId)
 {
     struct Task *task = gTasks + taskId;
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         Menu_DisplayDialogueFrame();
         Menu_PrintText(Str_839C014, 2, 15);
         DebugMenu_8077EE0(task->data[1], task->data[2]);
         task->func = DebugMenu_8077FFC;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         task->func = DebugMenu_807806C;
     }
@@ -1679,13 +1679,13 @@ void DebugMenu_8077F7C(u8 taskId)
 void DebugMenu_8077FFC(u8 taskId)
 {
     struct Task *task = gTasks + taskId;
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         if (AddBagItem(task->data[1], task->data[2]) == TRUE)
             PlaySE(SE_SELECT);
         task->func = DebugMenu_8077F40;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         task->func = DebugMenu_8077F40;
     }
@@ -1755,7 +1755,7 @@ void DebugMenu_807808C(u32 a0)
 
 void DebugMenu_807817C(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         Menu_EraseScreen();
         DestroyTask(taskId);
@@ -1769,13 +1769,13 @@ void DebugMenu_80781A8(u8 taskId)
 
     if (task->data[0] == 0)
         task->data[0]++;
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         DebugMenu_807808C(task->data[0]);
         task->func = DebugMenu_807817C;
         return;
     }
-    else if (!DebugMenu_8077DD8(task->data + 0, 1, 13, gMain.newAndRepeatedKeys & (DPAD_UP | DPAD_DOWN)))
+    else if (!DebugMenu_8077DD8(task->data + 0, 1, 13, JOY_REPT(DPAD_UP | DPAD_DOWN)))
         return;
     Menu_BlankWindowRect(4, 17, 22, 18);
     ConvertIntToDecimalStringN(gStringVar1, task->data[0], STR_CONV_MODE_RIGHT_ALIGN, 3);
@@ -1846,7 +1846,7 @@ void DebugMenu_8078310(u8 taskId)
             data[0]++;
             break;
         case 1:
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 PlaySE(SE_DING_DONG);
                 *GetVarPointer(VAR_MIRAGE_RND_H) = data[1];
@@ -1854,7 +1854,7 @@ void DebugMenu_8078310(u8 taskId)
                 DestroyTask(taskId);
                 ScriptContext2_Disable();
             }
-            else if (gMain.newKeys & B_BUTTON)
+            else if (JOY_NEW(B_BUTTON))
             {
                 Menu_EraseScreen();
                 DestroyTask(taskId);
@@ -1876,7 +1876,7 @@ u8 DebugMenu_MiragaIslandRND(void)
 
 bool8 DebugMenu_80783C8(void)
 {
-    if (gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
+    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {
         PlaySE(SE_SELECT);
         if (!FlagGet(FLAG_SYS_GAME_CLEAR))
@@ -1890,7 +1890,7 @@ bool8 DebugMenu_80783C8(void)
             DebugMenu_807786C(1);
         }
     }
-    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         CloseMenu();
         return TRUE;
@@ -2101,23 +2101,23 @@ bool32 DebugMenu_807860C(u8 taskId)
             data[0]++;
             return FALSE;
         case 1:
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 data[0]--;
                 return TRUE;
             }
-            if (gMain.newKeys & B_BUTTON)
+            if (JOY_NEW(B_BUTTON))
             {
                 data[0]++;
                 return FALSE;
             }
-            if (gMain.newAndRepeatedKeys & DPAD_UP)
+            if (JOY_REPT(DPAD_UP))
             {
                 data[1]++;
                 if (data[1] == NUM_GAME_STATS)
                     data[1] = 0;
             }
-            else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+            else if (JOY_REPT(DPAD_DOWN))
             {
                 data[1]--;
                 if (data[1] < 0)
@@ -2240,7 +2240,7 @@ void DebugMenu_8078880(u8 taskId)
             gTasks[taskId].data[0]++;
             break;
         case 2:
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 Menu_EraseScreen();
                 ScriptContext2_Disable();
@@ -2309,18 +2309,18 @@ void DebugMenu_80789CC(u8 taskId)
 void DebugMenu_8078A14(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
-    if (gMain.newKeys & (DPAD_UP | DPAD_DOWN))
+    if (JOY_NEW(DPAD_UP | DPAD_DOWN))
     {
         data[0] = data[0] == 0 ? 1 : 0;
         DebugMenu_8078968(data[0]);
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         data[1] = gSaveBlock2.battleTower.curStreakChallengesNum[data[0]];
         DebugMenu_80789A4(data[1]);
         gTasks[taskId].func = DebugMenu_8078AA4;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].func = DebugMenu_8078B38;
     }
@@ -2333,13 +2333,13 @@ void DebugMenu_8078AA4(u8 taskId)
     {
         DebugMenu_80789A4(data[1]);
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         gSaveBlock2.battleTower.curStreakChallengesNum[data[0]] = data[1];
         PlaySE(SE_DING_DONG);
         gTasks[taskId].func = DebugMenu_8078B38;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         DebugMenu_8078950();
         DebugMenu_8078968(data[0]);
@@ -2433,7 +2433,7 @@ void DebugMenu_8078BD4(u8 taskId)
             data[0]++;
             break;
         case 1:
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 PlaySE(SE_DING_DONG);
                 Menu_EraseScreen();
@@ -2441,7 +2441,7 @@ void DebugMenu_8078BD4(u8 taskId)
                 ScriptContext2_Disable();
                 DebugMenu_8078B94();
             }
-            else if (gMain.newKeys & B_BUTTON)
+            else if (JOY_NEW(B_BUTTON))
             {
                 Menu_EraseScreen();
                 DestroyTask(taskId);
@@ -2484,12 +2484,12 @@ bool8 DebugMenu_8078C80(void)
 
 bool8 DebugMenu_8078CA8(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         gMenuCallback = DebugMenu_8078CE4;
         return FALSE;
     }
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         CloseMenu();
         return TRUE;
@@ -2537,7 +2537,7 @@ bool8 DebugMenu_8078D7C(void)
 
 bool8 DebugMenu_8078DA4(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         CloseMenu();
         return TRUE;
@@ -2637,7 +2637,7 @@ void DebugMenu_8078F68(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         gSaveBlock2.playTimeHours = data[1];
         gSaveBlock2.playTimeMinutes = data[2];
@@ -2645,11 +2645,11 @@ void DebugMenu_8078F68(u8 taskId)
         PlaySE(SE_DING_DONG);
         gTasks[taskId].func = DebugMenu_8079020;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].func = DebugMenu_8079020;
     }
-    else if (gMain.newKeys & DPAD_LEFT)
+    else if (JOY_NEW(DPAD_LEFT))
     {
         if ((u16)data[0] > 0)
         {
@@ -2657,7 +2657,7 @@ void DebugMenu_8078F68(u8 taskId)
             DebugMenu_8078E80(data);
         }
     }
-    else if (gMain.newKeys & DPAD_RIGHT)
+    else if (JOY_NEW(DPAD_RIGHT))
     {
         if ((u16)data[0] < 2)
         {
@@ -2767,7 +2767,7 @@ void DebugMenu_8079110(u8 taskId)
             gTasks[taskId].data[0]++;
             break;
         case 2:
-            if (Menu_UpdateWindowText() && gMain.newKeys & A_BUTTON)
+            if (Menu_UpdateWindowText() && JOY_NEW(A_BUTTON))
             {
                 Menu_EraseScreen();
                 ScriptContext2_Disable();

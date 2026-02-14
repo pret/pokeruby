@@ -206,7 +206,7 @@ void SafariBufferRunCommand(void)
 
 void bx_battle_menu_t6_2(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         DestroyMenuCursor();
@@ -229,7 +229,7 @@ void bx_battle_menu_t6_2(void)
         }
         SafariBufferExecCompleted();
     }
-    else if (gMain.newKeys & DPAD_LEFT)
+    else if (JOY_NEW(DPAD_LEFT))
     {
         if (gActionSelectionCursor[gActiveBattler] & 1)
         {
@@ -239,7 +239,7 @@ void bx_battle_menu_t6_2(void)
             sub_802E3E4(gActionSelectionCursor[gActiveBattler], 0);
         }
     }
-    else if (gMain.newKeys & DPAD_RIGHT)
+    else if (JOY_NEW(DPAD_RIGHT))
     {
         if (!(gActionSelectionCursor[gActiveBattler] & 1))
         {
@@ -249,7 +249,7 @@ void bx_battle_menu_t6_2(void)
             sub_802E3E4(gActionSelectionCursor[gActiveBattler], 0);
         }
     }
-    else if (gMain.newKeys & DPAD_UP)
+    else if (JOY_NEW(DPAD_UP))
     {
         if (gActionSelectionCursor[gActiveBattler] & 2)
         {
@@ -259,7 +259,7 @@ void bx_battle_menu_t6_2(void)
             sub_802E3E4(gActionSelectionCursor[gActiveBattler], 0);
         }
     }
-    else if (gMain.newKeys & DPAD_DOWN)
+    else if (JOY_NEW(DPAD_DOWN))
     {
         if (!(gActionSelectionCursor[gActiveBattler] & 2))
         {
@@ -270,12 +270,12 @@ void bx_battle_menu_t6_2(void)
         }
     }
 #if DEBUG
-    else if (gMain.newKeys & R_BUTTON)
+    else if (JOY_NEW(R_BUTTON))
     {
         if (!ewram17810[gActiveBattler].unk0_5)
             move_anim_start_t3(gActiveBattler, gActiveBattler, gActiveBattler, 4, 0);
     }
-    else if (gMain.newKeys & START_BUTTON)
+    else if (JOY_NEW(START_BUTTON))
     {
         sub_804454C();
     }

@@ -323,7 +323,7 @@ void Task_MainMenuWaitForSaveErrorAck(u8 taskId)
 {
     if (Menu_UpdateWindowText())
     {
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             Menu_EraseWindowRect(2, 14, 27, 19);
             gTasks[taskId].func = Task_MainMenuCheckRtc;
@@ -362,7 +362,7 @@ void Task_MainMenuWaitForRtcErrorAck(u8 taskId)
 {
     if (Menu_UpdateWindowText())
     {
-        if ( gMain.newKeys & 1 )
+        if (JOY_NEW(A_BUTTON))
         {
             Menu_EraseWindowRect(2, 14, 27, 19);
             gTasks[taskId].func = Task_MainMenuDraw;
@@ -441,13 +441,13 @@ void Task_MainMenuHighlight(u8 taskId)
 
 bool8 MainMenuProcessKeyInput(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gTasks[taskId].func = Task_MainMenuPressedA;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, FADE_COLOR_WHITE);
@@ -473,7 +473,7 @@ bool8 MainMenuProcessKeyInput(u8 taskId)
             break;
         }
 
-        if (gMain.newKeys & DPAD_UP)
+        if (JOY_NEW(DPAD_UP))
         {
             if (gTasks[taskId].tMenuSelection > 0)
             {
@@ -481,7 +481,7 @@ bool8 MainMenuProcessKeyInput(u8 taskId)
                 return TRUE;
             }
         }
-        if (gMain.newKeys & DPAD_DOWN)
+        if (JOY_NEW(DPAD_DOWN))
         {
             if (gTasks[taskId].tMenuSelection < menuItemCount - 1)
             {

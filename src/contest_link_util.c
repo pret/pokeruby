@@ -684,7 +684,7 @@ static void sub_80C2D1C(u8 taskId)
 {
     int i;
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         if (!(gIsLinkContest & 1))
         {

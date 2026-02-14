@@ -34,6 +34,7 @@
 #include "random.h"
 #include "constants/abilities.h"
 #include "constants/event_object_movement.h"
+#include "constants/event_objects.h"
 #include "constants/metatile_labels.h"
 #include "constants/moves.h"
 #include "constants/species.h"
@@ -210,7 +211,7 @@ u16 GetRecordedCyclingRoadResults(void) {
 }
 
 void UpdateCyclingRoadState(void) {
-    if (gLastUsedWarp.mapNum == MAP_NUM(ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE) && gLastUsedWarp.mapGroup == MAP_GROUP(ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE))
+    if (gLastUsedWarp.mapNum == MAP_NUM(MAP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE) && gLastUsedWarp.mapGroup == MAP_GROUP(MAP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE))
     {
         return;
     }
@@ -262,38 +263,38 @@ u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
         case 2:
             if (*varCruiseStepCount < 60)
             {
-                *mapNum = MAP_NUM(ROUTE134);
+                *mapNum = MAP_NUM(MAP_ROUTE134);
                 *x = *varCruiseStepCount + 19;
             }
             else if (*varCruiseStepCount < 140)
             {
-                *mapNum = MAP_NUM(ROUTE133);
+                *mapNum = MAP_NUM(MAP_ROUTE133);
                 *x = *varCruiseStepCount - 60;
             }
             else
             {
-                *mapNum = MAP_NUM(ROUTE132);
+                *mapNum = MAP_NUM(MAP_ROUTE132);
                 *x = *varCruiseStepCount - 140;
             }
             break;
         case 7:
             if (*varCruiseStepCount < 66)
             {
-                *mapNum = MAP_NUM(ROUTE132);
+                *mapNum = MAP_NUM(MAP_ROUTE132);
                 *x = 65 - *varCruiseStepCount;
             }
             else if (*varCruiseStepCount < 146) {
-                *mapNum = MAP_NUM(ROUTE133);
+                *mapNum = MAP_NUM(MAP_ROUTE133);
                 *x = 145 - *varCruiseStepCount;
             }
             else
             {
-                *mapNum = MAP_NUM(ROUTE134);
+                *mapNum = MAP_NUM(MAP_ROUTE134);
                 *x = 224 - *varCruiseStepCount;
             }
             break;
     }
-    *mapGroup = MAP_GROUP(ROUTE132);
+    *mapGroup = MAP_GROUP(MAP_ROUTE132);
     *y = 20;
     return 0;
 }
@@ -714,11 +715,11 @@ void CableCarWarp(void)
 {
     if (gSpecialVar_0x8004 != 0)
     {
-        Overworld_SetWarpDestination(MAP_GROUP(ROUTE112_CABLE_CAR_STATION), MAP_NUM(ROUTE112_CABLE_CAR_STATION), -1, 6, 4);
+        Overworld_SetWarpDestination(MAP_GROUP(MAP_ROUTE112_CABLE_CAR_STATION), MAP_NUM(MAP_ROUTE112_CABLE_CAR_STATION), -1, 6, 4);
     }
     else
     {
-        Overworld_SetWarpDestination(MAP_GROUP(MT_CHIMNEY_CABLE_CAR_STATION), MAP_NUM(MT_CHIMNEY_CABLE_CAR_STATION), -1, 6, 4);
+        Overworld_SetWarpDestination(MAP_GROUP(MAP_MT_CHIMNEY_CABLE_CAR_STATION), MAP_NUM(MAP_MT_CHIMNEY_CABLE_CAR_STATION), -1, 6, 4);
     }
 }
 
@@ -1013,22 +1014,22 @@ void SetDepartmentStoreFloorVar(void)
     u8 deptStoreFloor;
     switch (gSaveBlock1.dynamicWarp.mapNum)
     {
-        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_1F):
+        case MAP_NUM(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_1F):
             deptStoreFloor = 0;
             break;
-        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_2F):
+        case MAP_NUM(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_2F):
             deptStoreFloor = 1;
             break;
-        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_3F):
+        case MAP_NUM(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_3F):
             deptStoreFloor = 2;
             break;
-        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_4F):
+        case MAP_NUM(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_4F):
             deptStoreFloor = 3;
             break;
-        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_5F):
+        case MAP_NUM(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_5F):
             deptStoreFloor = 4;
             break;
-        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP):
+        case MAP_NUM(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP):
             deptStoreFloor = 15;
             break;
         default:
@@ -1119,7 +1120,7 @@ void sub_810E984(u8 taskId)
         Menu_MoveCursorNoWrap(+1);
         sub_810EAC8(curMenuPos, DPAD_DOWN);
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         saved_warp2_set_2(0, gUnknown_03000760[gUnknown_0203925B].var1, gUnknown_03000760[gUnknown_0203925B].var2, -1, 2, 1);
         if (gSpecialVar_0x8005 == gUnknown_0203925B)
@@ -1140,7 +1141,7 @@ void sub_810E984(u8 taskId)
             DestroyTask(taskId);
         }
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         gSpecialVar_Result = 0;
         PlaySE(SE_SELECT);
@@ -1488,7 +1489,7 @@ void sub_810F118(u8 taskId)
         Menu_MoveCursorNoWrap(1);
         sub_810F1F4(prevCursorPos, DPAD_DOWN);
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         Menu_DestroyCursor();
         gSpecialVar_Result = gUnknown_0203925B;
@@ -1497,7 +1498,7 @@ void sub_810F118(u8 taskId)
         Menu_EraseWindowRect(0, 0, 29, 12);
         sub_810EC9C(taskId);
     }
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         Menu_DestroyCursor();
         gSpecialVar_Result = 0x7f;
@@ -1595,7 +1596,7 @@ void GlassWorkshopUpdateScrollIndicators(u8 newPos, u8 maxItems)
 
 void SpawnCameraDummy(void)
 {
-    u8 objectEventId = SpawnSpecialObjectEventParametrized(7, MOVEMENT_TYPE_FACE_DOWN, 0x7f, gSaveBlock1.pos.x + 7, gSaveBlock1.pos.y + 7, 3);
+    u8 objectEventId = SpawnSpecialObjectEventParametrized(7, MOVEMENT_TYPE_FACE_DOWN, LOCALID_CAMERA, gSaveBlock1.pos.x + 7, gSaveBlock1.pos.y + 7, 3);
     gObjectEvents[objectEventId].invisible = TRUE;
     CameraObjectSetFollowedObjectId(gObjectEvents[objectEventId].spriteId);
 }
@@ -1603,7 +1604,7 @@ void SpawnCameraDummy(void)
 void RemoveCameraDummy(void)
 {
     CameraObjectSetFollowedObjectId(GetPlayerAvatarObjectId());
-    RemoveObjectEventByLocalIdAndMap(0x7f, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+    RemoveObjectEventByLocalIdAndMap(LOCALID_CAMERA, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
 }
 
 u8 GetPokeblockNameByMonNature(void)
@@ -1713,7 +1714,7 @@ bool8 ScrSpecial_AreLeadMonEVsMaxedOut(void)
 
 u8 TryUpdateRusturfTunnelState(void)
 {
-    if (!FlagGet(FLAG_RUSTURF_TUNNEL_OPENED) && gSaveBlock1.location.mapGroup == MAP_GROUP(RUSTURF_TUNNEL) && gSaveBlock1.location.mapNum == MAP_NUM(RUSTURF_TUNNEL))
+    if (!FlagGet(FLAG_RUSTURF_TUNNEL_OPENED) && gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_RUSTURF_TUNNEL) && gSaveBlock1.location.mapNum == MAP_NUM(MAP_RUSTURF_TUNNEL))
     {
         if (FlagGet(FLAG_HIDE_RUSTURF_TUNNEL_ROCK_1))
         {

@@ -80,7 +80,7 @@ include make_tools.mk
 SHA1SUM   := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
 GBAGFX    := tools/gbagfx/gbagfx$(EXE)
 RSFONT    := tools/rsfont/rsfont$(EXE)
-AIF2PCM   := tools/aif2pcm/aif2pcm$(EXE)
+WAV2AGB   := tools/wav2agb/wav2agb$(EXE)
 MID2AGB   := tools/mid2agb/mid2agb$(EXE)
 PREPROC   := tools/preproc/preproc$(EXE)
 SCANINC   := tools/scaninc/scaninc$(EXE)
@@ -221,11 +221,12 @@ tidy:
 
 $(ROM): %.gba: %.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
+	$(GBAFIX) $@ -p --silent
 
 %.elf: $(LD_SCRIPT) $(ALL_OBJECTS)
 	@echo "cd $(BUILD_DIR) && $(LD) -T $(LD_SCRIPT:$(BUILD_DIR)/%=%) -Map ../../$(MAP) -o ../../$@ <objects> <lib>"
 	@cd $(BUILD_DIR) && $(LD) -T $(LD_SCRIPT:$(BUILD_DIR)/%=%) -Map ../../$(MAP) -o ../../$@ $(OBJS_REL) $(LDFLAGS)
-	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
+	$(GBAFIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
 
 $(LD_SCRIPT): $(LD_SCRIPT:$(BUILD_DIR)/%.ld=%.txt) $(BUILD_DIR)/sym_common.ld $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_bss.ld
 	sed -e "s#tools/#../../tools/#g" $< >$@
@@ -242,7 +243,7 @@ $(C_OBJECTS): $(BUILD_DIR)/%.o: %.c $$(C_DEP)
 # Only .s files in data need preproc
 $(BUILD_DIR)/data/%.o: data/%.s $$(ASM_DEP)
 	@echo "$(AS) <flags> -o $@ $<"
-	@$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) -o $@
+	@$(PREPROC) $< charmap.txt | $(CPP) -I include | $(PREPROC) -ie $< charmap.txt | $(AS) $(ASFLAGS) -o $@
 
 $(BUILD_DIR)/%.o: %.s $$(ASM_DEP)
 	@echo "$(AS) <flags> -o $@ $<"
@@ -320,11 +321,11 @@ generated: $(AUTO_GEN_TARGETS)
 
 #### Sound Rules ####
 
-sound/direct_sound_samples/cries/cry_%.bin: sound/direct_sound_samples/cries/cry_%.aif
-	$(AIF2PCM) $< $@ --compress
+sound/direct_sound_samples/cries/cry_%.bin: sound/direct_sound_samples/cries/cry_%.wav
+	$(WAV2AGB) -b -c -l 1 --no-pad $< $@
 
-sound/%.bin: sound/%.aif
-	$(AIF2PCM) $< $@
+sound/%.bin: sound/%.wav
+	$(WAV2AGB) -b $< $@
 
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID2AGB) $(<F)

@@ -91,7 +91,7 @@ static const u8 gUnknown_083F8438[] = INCBIN_U8("graphics/pokedex/area_glow.4bpp
 static const u16 sSpeciesHiddenFromAreaScreen[] = {SPECIES_WYNAUT};
 
 static const u16 sFeebasData[][3] = {
-    {SPECIES_FEEBAS, MAP_GROUP(ROUTE119), MAP_NUM(ROUTE119)},
+    {SPECIES_FEEBAS, MAP_GROUP(MAP_ROUTE119), MAP_NUM(MAP_ROUTE119)},
     {NUM_SPECIES}
 };
 
@@ -241,11 +241,11 @@ static void FindMapsWithMon(u16 mon)
             {
                 switch (sFeebasData[i][1])
                 {
-                    case MAP_GROUP(PETALBURG_CITY):
+                    case MAP_GROUP(MAP_PETALBURG_CITY):
                         SetAreaHasMon(sFeebasData[i][1], sFeebasData[i][2]);
                         break;
-                    case MAP_GROUP(METEOR_FALLS_1F_1R):
-                    case MAP_GROUP(SAFARI_ZONE_NORTHWEST):
+                    case MAP_GROUP(MAP_METEOR_FALLS_1F_1R):
+                    case MAP_GROUP(MAP_SAFARI_ZONE_NORTHWEST):
                         SetSpecialMapHasMon(sFeebasData[i][1], sFeebasData[i][2]);
                         break;
                 }
@@ -257,11 +257,11 @@ static void FindMapsWithMon(u16 mon)
             {
                 switch (gWildMonHeaders[i].mapGroup)
                 {
-                    case MAP_GROUP(PETALBURG_CITY):
+                    case MAP_GROUP(MAP_PETALBURG_CITY):
                         SetAreaHasMon(gWildMonHeaders[i].mapGroup, gWildMonHeaders[i].mapNum);
                         break;
-                    case MAP_GROUP(METEOR_FALLS_1F_1R):
-                    case MAP_GROUP(SAFARI_ZONE_NORTHWEST):
+                    case MAP_GROUP(MAP_METEOR_FALLS_1F_1R):
+                    case MAP_GROUP(MAP_SAFARI_ZONE_NORTHWEST):
                         SetSpecialMapHasMon(gWildMonHeaders[i].mapGroup, gWildMonHeaders[i].mapNum);
                         break;
                 }
@@ -1142,11 +1142,11 @@ static void DebugCB_WaitButton(void)
     switch (gPokedexAreaScreenPtr->state)
     {
         case 0:
-            if (gMain.newKeys & B_BUTTON)
+            if (JOY_NEW(B_BUTTON))
             {
                 SetCallback(DebugCB_GoBack);
             }
-            else if (gMain.newKeys & DPAD_RIGHT || (gMain.newKeys & R_BUTTON && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+            else if (JOY_NEW(DPAD_RIGHT) || (JOY_NEW(R_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
             {
                 SetCallback(DebugCB_GoNext);
             }
@@ -1277,12 +1277,12 @@ static void Task_PokedexAreaScreen_1(u8 taskId)
                 return;
             break;
         case 1:
-            if (gMain.newKeys & B_BUTTON)
+            if (JOY_NEW(B_BUTTON))
             {
                 gTasks[taskId].data[1] = 1;
                 PlaySE(SE_PC_OFF);
             }
-            else if (gMain.newKeys & DPAD_RIGHT || (gMain.newKeys & R_BUTTON && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+            else if (JOY_NEW(DPAD_RIGHT) || (JOY_NEW(R_BUTTON) && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
             {
                 gTasks[taskId].data[1] = 2;
                 PlaySE(SE_DEX_PAGE);
