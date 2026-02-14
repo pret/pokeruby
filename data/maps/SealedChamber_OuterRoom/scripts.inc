@@ -28,7 +28,7 @@ SealedChamber_OuterRoom_EventScript_15F0F5:: @ 815F0F5
 
 SealedChamber_OuterRoom_EventScript_15F12C:: @ 815F12C
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_1C534F
+	braillemessage SealedChamber_OuterRoom_Braille_ABC
 	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -36,7 +36,7 @@ SealedChamber_OuterRoom_EventScript_15F12C:: @ 815F12C
 
 SealedChamber_OuterRoom_EventScript_15F13A:: @ 815F13A
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_1C5359
+	braillemessage SealedChamber_OuterRoom_Braille_GHI
 	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -44,7 +44,7 @@ SealedChamber_OuterRoom_EventScript_15F13A:: @ 815F13A
 
 SealedChamber_OuterRoom_EventScript_15F148:: @ 815F148
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_1C5363
+	braillemessage SealedChamber_OuterRoom_Braille_MNO
 	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -52,7 +52,7 @@ SealedChamber_OuterRoom_EventScript_15F148:: @ 815F148
 
 SealedChamber_OuterRoom_EventScript_15F156:: @ 815F156
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_1C536D
+	braillemessage SealedChamber_OuterRoom_Braille_TUV
 	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -60,7 +60,7 @@ SealedChamber_OuterRoom_EventScript_15F156:: @ 815F156
 
 SealedChamber_OuterRoom_EventScript_15F164:: @ 815F164
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_1C5377
+	braillemessage SealedChamber_OuterRoom_Braille_DEF
 	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -68,7 +68,7 @@ SealedChamber_OuterRoom_EventScript_15F164:: @ 815F164
 
 SealedChamber_OuterRoom_EventScript_15F172:: @ 815F172
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_1C5381
+	braillemessage SealedChamber_OuterRoom_Braille_JKL
 	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -76,7 +76,7 @@ SealedChamber_OuterRoom_EventScript_15F172:: @ 815F172
 
 SealedChamber_OuterRoom_EventScript_15F180:: @ 815F180
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_1C538B
+	braillemessage SealedChamber_OuterRoom_Braille_PQRS
 	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -84,7 +84,7 @@ SealedChamber_OuterRoom_EventScript_15F180:: @ 815F180
 
 SealedChamber_OuterRoom_EventScript_15F18E:: @ 815F18E
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_1C5396
+	braillemessage SealedChamber_OuterRoom_Braille_Period
 	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -92,7 +92,7 @@ SealedChamber_OuterRoom_EventScript_15F18E:: @ 815F18E
 
 SealedChamber_OuterRoom_EventScript_15F19C:: @ 815F19C
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_1C539E
+	braillemessage SealedChamber_OuterRoom_Braille_WXYZ
 	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -100,7 +100,7 @@ SealedChamber_OuterRoom_EventScript_15F19C:: @ 815F19C
 
 SealedChamber_OuterRoom_EventScript_15F1AA:: @ 815F1AA
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_1C53A9
+	braillemessage SealedChamber_OuterRoom_Braille_Comma
 	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -109,7 +109,7 @@ SealedChamber_OuterRoom_EventScript_15F1AA:: @ 815F1AA
 SealedChamber_OuterRoom_EventScript_15F1B8:: @ 815F1B8
 	lockall
 	goto_if_set FLAG_SYS_BRAILLE_DIG, SealedChamber_OuterRoom_EventScript_15F1CF
-	braillemessage SealedChamber_OuterRoom_Braille_1C53B1
+	braillemessage SealedChamber_OuterRoom_Braille_DigHere
 	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -122,7 +122,7 @@ SealedChamber_OuterRoom_EventScript_15F1CF:: @ 815F1CF
 
 SealedChamber_OuterRoom_EventScript_15F1D9:: @ 815F1D9
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_1C53B1
+	braillemessage SealedChamber_OuterRoom_Braille_DigHere
 	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall

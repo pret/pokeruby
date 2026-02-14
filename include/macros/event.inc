@@ -879,6 +879,16 @@
 	.4byte \text
 	.endm
 
+	@ Formatting for the braille window, to be put at the start of a pointer used by braillemessage.
+	.macro brailleformat winLeft:req, winTop:req, winRight:req, winBottom:req, textLeft:req, textTop:req
+	.byte \winLeft
+	.byte \winTop
+	.byte \winRight
+	.byte \winBottom
+	.byte \textLeft
+	.byte \textTop
+	.endm
+
 	@ Gives the player one of the specified (species) Pokemon at level level holding item. The trailing 0s are unused parameters
 	.macro givemon species:req, level:req, item:req
 	.byte 0x79

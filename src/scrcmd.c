@@ -1422,15 +1422,15 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
 {
     u8 *ptr = (u8 *)ScriptReadWord(ctx);
 
-    u8 v2 = ptr[0];
-    u8 v3 = ptr[1];
-    u8 v4 = ptr[2];
-    u8 v5 = ptr[3];
-    u8 v6 = ptr[4];
-    u8 v7 = ptr[5];
+    u8 winLeft = ptr[0];
+    u8 winTop = ptr[1];
+    u8 winRight = ptr[2];
+    u8 winBottom = ptr[3];
+    u8 textLeft = ptr[4];
+    u8 textTop = ptr[5];
     StringBraille(gStringVar4, ptr + 6);
-    Menu_DrawStdWindowFrame(v2, v3, v4, v5);
-    Menu_PrintText(gStringVar4, v6, v7);
+    Menu_DrawStdWindowFrame(winLeft, winTop, winRight, winBottom);
+    Menu_PrintText(gStringVar4, textLeft, textTop);
     return FALSE;
 }
 

@@ -32,7 +32,7 @@ DesertRuins_MapScript1_15CB52:: @ 815CB52
 DesertRuins_EventScript_15CB56:: @ 815CB56
 	lockall
 	goto_if_set FLAG_SYS_BRAILLE_STRENGTH, DesertRuins_EventScript_15CB6D
-	braillemessage DesertRuins_Braille_1C54C8
+	braillemessage DesertRuins_Braille_UseStrength
 	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -45,7 +45,7 @@ DesertRuins_EventScript_15CB6D:: @ 815CB6D
 
 DesertRuins_EventScript_15CB77:: @ 815CB77
 	lockall
-	braillemessage DesertRuins_Braille_1C54C8
+	braillemessage DesertRuins_Braille_UseStrength
 	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
