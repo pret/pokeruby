@@ -99,7 +99,7 @@ EWRAM_DATA struct WatanabeEwram18000_2 * gUnknown_Debug_2038A20 = NULL;
 
 u32 byte_3005E30;
 
-extern s8 gBattleTerrain;
+extern s8 gBattleEnvironment;
 
 void debug_80C3A50(u8 taskId);
 void debug_80C3D2C(u8 taskId);
@@ -1460,7 +1460,7 @@ void debug_80C4E18(u8 taskId)
     else if (gMain.newKeys & START_BUTTON || gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        gBattleTerrain = gUnknown_Debug_083F814C[r6].data.type3;
+        gBattleEnvironment = gUnknown_Debug_083F814C[r6].data.type3;
         gTasks[taskId].func = debug_80C5158;
     }
     else if (gMain.newAndRepeatedKeys & DPAD_UP)

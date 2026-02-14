@@ -1,5 +1,6 @@
 #define rgb(red, green, blue) (((blue)<<10)|((green)<<5)|(red))
 
+#include "constants/battle.h"
 #include "constants/battle_anim.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
@@ -9629,16 +9630,16 @@ Move_SKY_UPPERCUT: @ 81D53ED
 	end
 
 Move_SECRET_POWER: @ 81D54E6
-	createvisualtask AnimTask_GetBattleTerrain, 5
-	jumpargeq 0, 0, Move_NEEDLE_ARM
-	jumpargeq 0, 1, Move_MAGICAL_LEAF
-	jumpargeq 0, 2, Move_MUD_SHOT
-	jumpargeq 0, 3, Move_WATERFALL
-	jumpargeq 0, 4, Move_SURF
-	jumpargeq 0, 5, Move_BUBBLE_BEAM
-	jumpargeq 0, 6, Move_ROCK_THROW
-	jumpargeq 0, 7, Move_BITE
-	jumpargeq 0, 8, Move_STRENGTH
+	createvisualtask AnimTask_GetBattleEnvironment, 5
+	jumpargeq 0, BATTLE_ENVIRONMENT_GRASS,      Move_NEEDLE_ARM
+	jumpargeq 0, BATTLE_ENVIRONMENT_LONG_GRASS, Move_MAGICAL_LEAF
+	jumpargeq 0, BATTLE_ENVIRONMENT_SAND,       Move_MUD_SHOT
+	jumpargeq 0, BATTLE_ENVIRONMENT_UNDERWATER, Move_WATERFALL
+	jumpargeq 0, BATTLE_ENVIRONMENT_WATER,      Move_SURF
+	jumpargeq 0, BATTLE_ENVIRONMENT_POND,       Move_BUBBLE_BEAM
+	jumpargeq 0, BATTLE_ENVIRONMENT_MOUNTAIN,   Move_ROCK_THROW
+	jumpargeq 0, BATTLE_ENVIRONMENT_CAVE,       Move_BITE
+	jumpargeq 0, BATTLE_ENVIRONMENT_BUILDING,   Move_STRENGTH
 	goto Move_SLAM
 
 Move_TWISTER: @ 81D553A

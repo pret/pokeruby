@@ -200,7 +200,7 @@ u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT];
 u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT];
 u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT];
 
-s8 gBattleTerrain;
+s8 gBattleEnvironment;
 
 void (*gBattleMainFunc)(void);
 
@@ -266,9 +266,9 @@ void CB2_InitBattleInternal(void)
 
 #if DEBUG
     if (!(gUnknown_02023A14_50 & 8))
-        gBattleTerrain = BattleSetup_GetTerrain();
+        gBattleEnvironment = BattleSetup_GetEnvironmentId();
 #else
-    gBattleTerrain = BattleSetup_GetTerrain();
+    gBattleEnvironment = BattleSetup_GetEnvironmentId();
 #endif
 
     Text_InitWindowWithTemplate(&gWindowTemplate_Contest_MoveDescription, &gWindowTemplate_81E6C58);
@@ -1960,7 +1960,7 @@ void debug_sub_801174C(void)
 	}
 	gBattleTypeFlags = gUnknown_Debug_821F598[i - 1];
 	gUnknown_02023A14_50 = 8;
-	gBattleTerrain = spC;
+	gBattleEnvironment = spC;
 	if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
 		EnterSafariMode();
 	if (gUnknown_Debug_2023A76[0][30] >= 2 && gUnknown_Debug_2023A76[0][30] <= 4)
@@ -2610,7 +2610,7 @@ void debug_sub_8012688(void)
 	gBattle_BG2_Y = 0;
 	gBattle_BG3_X = 0;
 	gBattle_BG3_Y = 0;
-	gBattleTerrain = 9;
+	gBattleEnvironment = 9;
 	sub_800D6D4();
 	LoadBattleTextboxAndBackground();
 	ResetSpriteData();
@@ -3692,7 +3692,7 @@ static void BattlePrepIntroSlide(void)
     if (gBattleControllerExecFlags == 0)
     {
         gActiveBattler = GetBattlerAtPosition(0);
-        BtlController_EmitIntroSlide(0, gBattleTerrain);
+        BtlController_EmitIntroSlide(0, gBattleEnvironment);
         MarkBattlerForControllerExec(gActiveBattler);
         gBattleMainFunc = sub_8011384;
         gBattleCommunication[0] = 0;

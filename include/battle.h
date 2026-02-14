@@ -580,7 +580,7 @@ void BtlController_EmitHitAnimation(u8 a); //0x29
 void BtlController_EmitPlaySE(u8 a, u16 sound); //0x2B
 void BtlController_EmitPlayFanfareOrBGM(u8 a, u16 sound);    //0x2C
 void BtlController_EmitFaintingCry(u8 a); //0x2D
-void BtlController_EmitIntroSlide(u8 a, u8 b); //0x2E
+void BtlController_EmitIntroSlide(u8 bufferId, u8 environmentId); //0x2E
 void BtlController_EmitHidePartyStatusSummary(u8 a);  //0x31
 void BtlController_EmitSpriteInvisibility(u8 a, u8 b); //0x33
 void BtlController_EmitBattleAnimation(u8 a, u8 b, u16 c); //0x34

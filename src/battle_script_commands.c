@@ -63,7 +63,7 @@ extern u16 gPauseCounterBattle;
 extern u16 gPaydayMoney;
 extern u16 gRandomTurnNumber;
 extern u8 gBattleOutcome;
-extern u8 gBattleTerrain;
+extern u8 gBattleEnvironment;
 extern u16 gTrainerBattleOpponent;
 extern u8 gBattlerAttacker;
 extern u8 gBattlerTarget;
@@ -498,7 +498,7 @@ static void atkC8_sethail(void);
 static void atkC9_jumpifattackandspecialattackcannotfall(void);
 static void atkCA_setforcedtarget(void);
 static void atkCB_setcharge(void);
-static void atkCC_callterrainattack(void);
+static void atkCC_callenvironmentattack(void);
 static void atkCD_cureifburnedparalysedorpoisoned(void);
 static void atkCE_settorment(void);
 static void atkCF_jumpifnodamage(void);
@@ -529,7 +529,7 @@ static void atkE7_trycastformdatachange(void);
 static void atkE8_settypebasedhalvers(void);
 static void atkE9_setweatherballtype(void);
 static void atkEA_tryrecycleitem(void);
-static void atkEB_settypetoterrain(void);
+static void atkEB_settypetoenvironment(void);
 static void atkEC_pursuitrelated(void);
 static void atkEF_snatchsetbattlers(void);
 static void atkEE_removelightscreenreflect(void);
@@ -749,7 +749,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkC9_jumpifattackandspecialattackcannotfall,
     atkCA_setforcedtarget,
     atkCB_setcharge,
-    atkCC_callterrainattack,
+    atkCC_callenvironmentattack,
     atkCD_cureifburnedparalysedorpoisoned,
     atkCE_settorment,
     atkCF_jumpifnodamage,
@@ -780,7 +780,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkE8_settypebasedhalvers,
     atkE9_setweatherballtype,
     atkEA_tryrecycleitem,
-    atkEB_settypetoterrain,
+    atkEB_settypetoenvironment,
     atkEC_pursuitrelated,
     atkEF_snatchsetbattlers,
     atkEE_removelightscreenreflect,
@@ -1016,18 +1016,18 @@ static const u16 sPickupItems[] =
     ITEM_KINGS_ROCK, 1
 };
 
-static const u8 sTerrainToType[] =
+static const u8 sEnvironmentToType[] =
 {
-    TYPE_GRASS, // tall grass
-    TYPE_GRASS, // long grass
-    TYPE_GROUND, // sand
-    TYPE_WATER, // underwater
-    TYPE_WATER, // water
-    TYPE_WATER, // pond water
-    TYPE_ROCK, // rock
-    TYPE_ROCK, // cave
-    TYPE_NORMAL, // building
-    TYPE_NORMAL, // plain
+    [BATTLE_ENVIRONMENT_GRASS]      = TYPE_GRASS,
+    [BATTLE_ENVIRONMENT_LONG_GRASS] = TYPE_GRASS,
+    [BATTLE_ENVIRONMENT_SAND]       = TYPE_GROUND,
+    [BATTLE_ENVIRONMENT_UNDERWATER] = TYPE_WATER,
+    [BATTLE_ENVIRONMENT_WATER]      = TYPE_WATER,
+    [BATTLE_ENVIRONMENT_POND]       = TYPE_WATER,
+    [BATTLE_ENVIRONMENT_MOUNTAIN]   = TYPE_ROCK,
+    [BATTLE_ENVIRONMENT_CAVE]       = TYPE_ROCK,
+    [BATTLE_ENVIRONMENT_BUILDING]   = TYPE_NORMAL,
+    [BATTLE_ENVIRONMENT_PLAIN]      = TYPE_NORMAL,
 };
 
 static const u8 sBallCatchBonuses[] =
@@ -8722,10 +8722,10 @@ static void atkCB_setcharge(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atkCC_callterrainattack(void) //nature power
+static void atkCC_callenvironmentattack(void) //nature power
 {
     gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
-    gCurrentMove = sNaturePowerMoves[gBattleTerrain];
+    gCurrentMove = sNaturePowerMoves[gBattleEnvironment];
     gBattlerTarget = GetMoveTarget(gCurrentMove, 0);
     BattleScriptPush(gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect]);
     gBattlescriptCurrInstr++;
@@ -9164,30 +9164,30 @@ static void atkE3_jumpifhasnohp(void)
 
 static void atkE4_getsecretpowereffect(void)
 {
-    switch (gBattleTerrain)
+    switch (gBattleEnvironment)
     {
-    case BATTLE_TERRAIN_GRASS:
+    case BATTLE_ENVIRONMENT_GRASS:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 2;
         break;
-    case BATTLE_TERRAIN_LONG_GRASS:
+    case BATTLE_ENVIRONMENT_LONG_GRASS:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 1;
         break;
-    case BATTLE_TERRAIN_SAND:
+    case BATTLE_ENVIRONMENT_SAND:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 27;
         break;
-    case BATTLE_TERRAIN_UNDERWATER:
+    case BATTLE_ENVIRONMENT_UNDERWATER:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 23;
         break;
-    case BATTLE_TERRAIN_WATER:
+    case BATTLE_ENVIRONMENT_WATER:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 22;
         break;
-    case BATTLE_TERRAIN_POND:
+    case BATTLE_ENVIRONMENT_POND:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 24;
         break;
-    case BATTLE_TERRAIN_MOUNTAIN:
+    case BATTLE_ENVIRONMENT_MOUNTAIN:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 7;
         break;
-    case BATTLE_TERRAIN_CAVE:
+    case BATTLE_ENVIRONMENT_CAVE:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 8;
         break;
     default:
@@ -9312,15 +9312,15 @@ static void atkEA_tryrecycleitem(void)
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
 }
 
-static void atkEB_settypetoterrain(void)
+static void atkEB_settypetoenvironment(void)
 {
-    if (gBattleMons[gBattlerAttacker].type1 != sTerrainToType[gBattleTerrain] && gBattleMons[gBattlerAttacker].type2 != sTerrainToType[gBattleTerrain])
+    if (gBattleMons[gBattlerAttacker].type1 != sEnvironmentToType[gBattleEnvironment] && gBattleMons[gBattlerAttacker].type2 != sEnvironmentToType[gBattleEnvironment])
     {
-        gBattleMons[gBattlerAttacker].type1 = sTerrainToType[gBattleTerrain];
-        gBattleMons[gBattlerAttacker].type2 = sTerrainToType[gBattleTerrain];
+        gBattleMons[gBattlerAttacker].type1 = sEnvironmentToType[gBattleEnvironment];
+        gBattleMons[gBattlerAttacker].type2 = sEnvironmentToType[gBattleEnvironment];
         gBattleTextBuff1[0] = 0xFD;
         gBattleTextBuff1[1] = 3;
-        gBattleTextBuff1[2] = sTerrainToType[gBattleTerrain];
+        gBattleTextBuff1[2] = sEnvironmentToType[gBattleEnvironment];
         gBattleTextBuff1[3] = 0xFF;
         gBattlescriptCurrInstr += 5;
     }
@@ -9529,9 +9529,9 @@ static void atkF1_trysetcaughtmondexflags(void)
     }
 }
 
-extern const u32 gBattleTerrainTiles_Building[];
-extern const u32 gBattleTerrainTilemap_Building[];
-extern const u32 gBattleTerrainPalette_BattleTower[];
+extern const u32 gBattleEnvironmentTiles_Building[];
+extern const u32 gBattleEnvironmentTilemap_Building[];
+extern const u32 gBattleEnvironmentPalette_BattleTower[];
 
 static void atkF2_displaydexinfo(void)
 {
@@ -9551,9 +9551,9 @@ static void atkF2_displaydexinfo(void)
     case 2:
         if (!gPaletteFade.active && gMain.callback2 == BattleMainCB2 && !gTasks[gBattleCommunication[1]].isActive)
         {
-            LZDecompressVram(gBattleTerrainTiles_Building, (void*)(VRAM + 0x8000));
-            LZDecompressVram(gBattleTerrainTilemap_Building, (void*)(VRAM + 0xD000));
-            LoadCompressedPalette(gBattleTerrainPalette_BattleTower, 0x20, 0x60);
+            LZDecompressVram(gBattleEnvironmentTiles_Building, (void*)(VRAM + 0x8000));
+            LZDecompressVram(gBattleEnvironmentTilemap_Building, (void*)(VRAM + 0xD000));
+            LoadCompressedPalette(gBattleEnvironmentPalette_BattleTower, 0x20, 0x60);
             REG_BG3CNT = 0x5a0b;
             gBattle_BG3_X = 0x100;
             BeginNormalPaletteFade(0xFFFC, 0, 16, 0, RGB(0, 0, 0));

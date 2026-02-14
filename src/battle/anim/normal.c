@@ -19,7 +19,7 @@ extern u8 gBattleAnimTarget;
 extern u8 gHealthboxSpriteIds[];
 extern u8 gBattlersCount;
 extern u8 gBattlerSpriteIds[];
-extern u8 gBattleTerrain;
+extern u8 gBattleEnvironment;
 extern u16 gBattlerPartyIndexes[];
 extern u8 gBattlerTarget;
 extern u8 gEffectBattler;
@@ -1020,36 +1020,36 @@ void sub_80E2B74(u8 taskId)
 {
     u32 selectedPalettes = UnpackSelectedBattleAnimPalettes(gBattleAnimArgs[0]);
 
-    switch (gBattleTerrain)
+    switch (gBattleEnvironment)
     {
-    case BATTLE_TERRAIN_GRASS:
+    case BATTLE_ENVIRONMENT_GRASS:
         gBattleAnimArgs[4] = 0x0B0C;
         break;
-    case BATTLE_TERRAIN_LONG_GRASS:
+    case BATTLE_ENVIRONMENT_LONG_GRASS:
         gBattleAnimArgs[4] = 0x09E0;
         break;
-    case BATTLE_TERRAIN_SAND:
+    case BATTLE_ENVIRONMENT_SAND:
         gBattleAnimArgs[4] = 0x2F1E;
         break;
-    case BATTLE_TERRAIN_UNDERWATER:
+    case BATTLE_ENVIRONMENT_UNDERWATER:
         gBattleAnimArgs[4] = 0x4800;
         break;
-    case BATTLE_TERRAIN_WATER:
+    case BATTLE_ENVIRONMENT_WATER:
         gBattleAnimArgs[4] = 0x7ECB;
         break;
-    case BATTLE_TERRAIN_POND:
+    case BATTLE_ENVIRONMENT_POND:
         gBattleAnimArgs[4] = 0x7ECB;
         break;
-    case BATTLE_TERRAIN_MOUNTAIN:
+    case BATTLE_ENVIRONMENT_MOUNTAIN:
         gBattleAnimArgs[4] = 0x2A16;
         break;
-    case BATTLE_TERRAIN_CAVE:
+    case BATTLE_ENVIRONMENT_CAVE:
         gBattleAnimArgs[4] = 0x0D2E;
         break;
-    case BATTLE_TERRAIN_BUILDING:
+    case BATTLE_ENVIRONMENT_BUILDING:
         gBattleAnimArgs[4] = 0x7FFF;
         break;
-    case BATTLE_TERRAIN_PLAIN:
+    case BATTLE_ENVIRONMENT_PLAIN:
         gBattleAnimArgs[4] = 0x7FFF;
         break;
     }
@@ -1784,9 +1784,9 @@ static void sub_80E3E64(u8 taskId)
     }
 }
 
-void AnimTask_GetBattleTerrain(u8 taskId)
+void AnimTask_GetBattleEnvironment(u8 taskId)
 {
-    gBattleAnimArgs[0] = gBattleTerrain;
+    gBattleAnimArgs[0] = gBattleEnvironment;
     DestroyAnimVisualTask(taskId);
 }
 

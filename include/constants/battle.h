@@ -272,17 +272,17 @@
 #define MOVE_EFFECT_AFFECTS_USER        0x40
 #define MOVE_EFFECT_CERTAIN             0x80
 
-// Battle terrain defines for gBattleTerrain.
-#define BATTLE_TERRAIN_GRASS        0
-#define BATTLE_TERRAIN_LONG_GRASS   1
-#define BATTLE_TERRAIN_SAND         2
-#define BATTLE_TERRAIN_UNDERWATER   3
-#define BATTLE_TERRAIN_WATER        4
-#define BATTLE_TERRAIN_POND         5
-#define BATTLE_TERRAIN_MOUNTAIN     6
-#define BATTLE_TERRAIN_CAVE         7
-#define BATTLE_TERRAIN_BUILDING     8
-#define BATTLE_TERRAIN_PLAIN        9
+// Battle environment defines for gBattleEnvironment.
+#define BATTLE_ENVIRONMENT_GRASS        0
+#define BATTLE_ENVIRONMENT_LONG_GRASS   1
+#define BATTLE_ENVIRONMENT_SAND         2
+#define BATTLE_ENVIRONMENT_UNDERWATER   3
+#define BATTLE_ENVIRONMENT_WATER        4
+#define BATTLE_ENVIRONMENT_POND         5
+#define BATTLE_ENVIRONMENT_MOUNTAIN     6
+#define BATTLE_ENVIRONMENT_CAVE         7
+#define BATTLE_ENVIRONMENT_BUILDING     8
+#define BATTLE_ENVIRONMENT_PLAIN        9
 
 #define TARGET_SELECTED_POKEMON 0
 #define TARGET_SPECIAL          (1 << 0)

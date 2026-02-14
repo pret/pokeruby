@@ -1018,7 +1018,7 @@
 	.byte 0xcb
 	.endm
 
-	.macro callterrainattack
+	.macro callenvironmentattack
 	.byte 0xcc
 	.endm
 
@@ -1166,7 +1166,7 @@
 	.4byte \address
 	.endm
 
-	.macro settypetoterrain address
+	.macro settypetoenvironment address
 	.byte 0xeb
 	.4byte \address
 	.endm

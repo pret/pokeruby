@@ -182,7 +182,7 @@ void BtlController_EmitCmd42(u8 a);
 void BtlController_EmitPlaySE(u8 a, u16 b);
 void BtlController_EmitPlayFanfareOrBGM(u8 a, u16 b);
 void BtlController_EmitFaintingCry(u8 a);
-void BtlController_EmitIntroSlide(u8 a, u8 b);
+void BtlController_EmitIntroSlide(u8 bufferId, u8 environmentId);
 void BtlController_EmitIntroTrainerBallThrow(u8 a);
 void BtlController_EmitDrawPartyStatusSummary(u8 a, struct HpAndStatus *hpAndStatus, u8 c); //0x30
 void BtlController_EmitHidePartyStatusSummary(u8 a);
