@@ -4057,7 +4057,7 @@ void bc_8013B1C(void)
         for (i = 0; i < gBattlersCount; i++)
         {
             gBattleMons[i].status2 &= ~8;
-            if ((gBattleMons[i].status1 & 7) && (gBattleMons[i].status2 & 0x1000))
+            if ((gBattleMons[i].status1 & STATUS1_SLEEP) && (gBattleMons[i].status2 & 0x1000))
                 CancelMultiTurnMoves(i);
         }
         gBattleStruct->turnEffectsTracker = 0;

@@ -968,9 +968,9 @@ u8 TurnBasedEffects(void)
                     gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
-                    if ((gBattleMons[gActiveBattler].status1 & 0xF00) != 0xF00) // not 16 turns
-                        gBattleMons[gActiveBattler].status1 += 0x100;
-                    gBattleMoveDamage *= (gBattleMons[gActiveBattler].status1 & 0xF00) >> 8;
+                    if ((gBattleMons[gActiveBattler].status1 & STATUS1_TOXIC_COUNTER) != STATUS1_TOXIC_TURN(15)) // not 16 turns
+                        gBattleMons[gActiveBattler].status1 += STATUS1_TOXIC_TURN(1);
+                    gBattleMoveDamage *= (gBattleMons[gActiveBattler].status1 & STATUS1_TOXIC_COUNTER) >> 8;
                     BattleScriptExecute(BattleScript_PoisonTurnDmg);
                     effect++;
                 }
