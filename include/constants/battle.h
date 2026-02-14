@@ -94,31 +94,33 @@
 
 // Volatile status ailments
 // These are removed after exiting the battle or switching out
-#define STATUS2_CONFUSION             0x00000007
+#define STATUS2_CONFUSION             (1 << 0 | 1 << 1 | 1 << 2)
 #define STATUS2_CONFUSION_TURN(num)   ((num) << 0)
-#define STATUS2_FLINCHED              0x00000008
-#define STATUS2_UPROAR                0x00000070
+#define STATUS2_FLINCHED              (1 << 3)
+#define STATUS2_UPROAR                (1 << 4 | 1 << 5 | 1 << 6)
 #define STATUS2_UPROAR_TURN(num)      ((num) << 4)
-#define STATUS2_BIDE                  0x00000300  // two bits 0x100, 0x200
-#define STATUS2_LOCK_CONFUSE          0x00000C00
-#define STATUS2_LOCK_CONFUSE_TURN(num) ((num) << 10)
-#define STATUS2_MULTIPLETURNS         0x00001000
-#define STATUS2_WRAPPED               0x0000E000
+#define STATUS2_UNUSED                (1 << 7)
+#define STATUS2_BIDE                  (1 << 8 | 1 << 9)
+#define STATUS2_BIDE_TURN(num)        (((num) << 8) & STATUS2_BIDE)
+#define STATUS2_LOCK_CONFUSE          (1 << 10 | 1 << 11) // e.g. Thrash
+#define STATUS2_LOCK_CONFUSE_TURN(num)((num) << 10)
+#define STATUS2_MULTIPLETURNS         (1 << 12)
+#define STATUS2_WRAPPED               (1 << 13 | 1 << 14 | 1 << 15)
 #define STATUS2_WRAPPED_TURN(num)     ((num) << 13)
-#define STATUS2_INFATUATION           0x000F0000  // 4 bits, one for every battler
+#define STATUS2_INFATUATION           (1 << 16 | 1 << 17 | 1 << 18 | 1 << 19)  // 4 bits, one for every battler
 #define STATUS2_INFATUATED_WITH(battler) (gBitTable[battler] << 16)
-#define STATUS2_FOCUS_ENERGY          0x00100000
-#define STATUS2_TRANSFORMED           0x00200000
-#define STATUS2_RECHARGE              0x00400000
-#define STATUS2_RAGE                  0x00800000
-#define STATUS2_SUBSTITUTE            0x01000000
-#define STATUS2_DESTINY_BOND          0x02000000
-#define STATUS2_ESCAPE_PREVENTION     0x04000000
-#define STATUS2_NIGHTMARE             0x08000000
-#define STATUS2_CURSED                0x10000000
-#define STATUS2_FORESIGHT             0x20000000
-#define STATUS2_DEFENSE_CURL          0x40000000
-#define STATUS2_TORMENT               0x80000000
+#define STATUS2_FOCUS_ENERGY          (1 << 20)
+#define STATUS2_TRANSFORMED           (1 << 21)
+#define STATUS2_RECHARGE              (1 << 22)
+#define STATUS2_RAGE                  (1 << 23)
+#define STATUS2_SUBSTITUTE            (1 << 24)
+#define STATUS2_DESTINY_BOND          (1 << 25)
+#define STATUS2_ESCAPE_PREVENTION     (1 << 26)
+#define STATUS2_NIGHTMARE             (1 << 27)
+#define STATUS2_CURSED                (1 << 28)
+#define STATUS2_FORESIGHT             (1 << 29)
+#define STATUS2_DEFENSE_CURL          (1 << 30)
+#define STATUS2_TORMENT               (1 << 31)
 
 // Seems like per-battler statuses. Not quite sure how to categorize these
 #define STATUS3_LEECHSEED_BATTLER       0x3

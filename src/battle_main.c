@@ -3558,8 +3558,8 @@ void SwitchInClearSetData(void)
 
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (gBattleMons[i].status2 & (gBitTable[gActiveBattler] << 16))
-            gBattleMons[i].status2 &= ~(gBitTable[gActiveBattler] << 16);
+        if (gBattleMons[i].status2 & STATUS2_INFATUATED_WITH(gActiveBattler))
+            gBattleMons[i].status2 &= ~STATUS2_INFATUATED_WITH(gActiveBattler);
         if ((gBattleMons[i].status2 & STATUS2_WRAPPED) && gSharedMem[BSTRUCT_OFF(wrappedBy) + i] == gActiveBattler)
             gBattleMons[i].status2 &= ~STATUS2_WRAPPED;
     }
@@ -3612,8 +3612,8 @@ void UndoEffectsAfterFainting(void)
     {
         if ((gBattleMons[i].status2 & STATUS2_ESCAPE_PREVENTION) && gDisableStructs[i].bankPreventingEscape == gActiveBattler)
             gBattleMons[i].status2 &= ~STATUS2_ESCAPE_PREVENTION;
-        if (gBattleMons[i].status2 & (gBitTable[gActiveBattler] << 16))
-            gBattleMons[i].status2 &= ~(gBitTable[gActiveBattler] << 16);
+        if (gBattleMons[i].status2 & STATUS2_INFATUATED_WITH(gActiveBattler))
+            gBattleMons[i].status2 &= ~STATUS2_INFATUATED_WITH(gActiveBattler);
         if ((gBattleMons[i].status2 & STATUS2_WRAPPED) && gSharedMem[BSTRUCT_OFF(wrappedBy) + i] == gActiveBattler)
             gBattleMons[i].status2 &= ~STATUS2_WRAPPED;
     }
@@ -4032,7 +4032,7 @@ void BattleBeginFirstTurn(void)
         for (i = 0; i < 8; i++)
             gBattleCommunication[i] = 0;
         for (i = 0; i < gBattlersCount; i++)
-            gBattleMons[i].status2 &= ~8;
+            gBattleMons[i].status2 &= ~STATUS2_FLINCHED;
         gBattleStruct->turnEffectsTracker = 0;
         gBattleStruct->turnEffectsBattlerId = 0;
         gBattleStruct->wishPerishSongState = 0;
@@ -4056,8 +4056,8 @@ void bc_8013B1C(void)
             gBattleCommunication[i] = 0;
         for (i = 0; i < gBattlersCount; i++)
         {
-            gBattleMons[i].status2 &= ~8;
-            if ((gBattleMons[i].status1 & STATUS1_SLEEP) && (gBattleMons[i].status2 & 0x1000))
+            gBattleMons[i].status2 &= ~STATUS2_FLINCHED;
+            if ((gBattleMons[i].status1 & STATUS1_SLEEP) && (gBattleMons[i].status2 & STATUS2_MULTIPLETURNS))
                 CancelMultiTurnMoves(i);
         }
         gBattleStruct->turnEffectsTracker = 0;
@@ -4258,8 +4258,8 @@ void sub_8012324(void)
                     break;
                 }
                 //_08012468
-                if ((gBattleMons[gActiveBattler].status2 & 0x1000)
-                    || (gBattleMons[gActiveBattler].status2 & 0x400000))
+                if ((gBattleMons[gActiveBattler].status2 & STATUS2_MULTIPLETURNS)
+                    || (gBattleMons[gActiveBattler].status2 & STATUS2_RECHARGE))
                 {
                     gActionForBanks[gActiveBattler] = 0;
                     gBattleCommunication[gActiveBattler] = 3;

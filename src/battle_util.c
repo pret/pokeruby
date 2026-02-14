@@ -1013,7 +1013,7 @@ u8 TurnBasedEffects(void)
             case ENDTURN_WRAP:  // wrap
                 if ((gBattleMons[gActiveBattler].status2 & STATUS2_WRAPPED) && gBattleMons[gActiveBattler].hp != 0)
                 {
-                    gBattleMons[gActiveBattler].status2 -= 0x2000;
+                    gBattleMons[gActiveBattler].status2 -= STATUS2_WRAPPED_TURN(1);
                     if (gBattleMons[gActiveBattler].status2 & STATUS2_WRAPPED)  // damaged by wrap
                     {
                         gBattleStruct->animArg1 = gSharedMem[BSTRUCT_OFF(wrappedMove) + 2 * gActiveBattler + 0];
@@ -1068,7 +1068,7 @@ u8 TurnBasedEffects(void)
                     else
                     {
                         gBattlerAttacker = gActiveBattler;
-                        gBattleMons[gActiveBattler].status2 -= 0x10;  // uproar timer goes down
+                        gBattleMons[gActiveBattler].status2 -= STATUS2_UPROAR_TURN(1);
                         if (WasUnableToUseMove(gActiveBattler))
                         {
                             CancelMultiTurnMoves(gActiveBattler);
@@ -1094,7 +1094,7 @@ u8 TurnBasedEffects(void)
             case ENDTURN_THRASH:  // thrash
                 if (gBattleMons[gActiveBattler].status2 & STATUS2_LOCK_CONFUSE)
                 {
-                    gBattleMons[gActiveBattler].status2 -= 0x400;
+                    gBattleMons[gActiveBattler].status2 -= STATUS2_LOCK_CONFUSE_TURN(1);
                     if (WasUnableToUseMove(gActiveBattler))
                         CancelMultiTurnMoves(gActiveBattler);
                     else if (!(gBattleMons[gActiveBattler].status2 & STATUS2_LOCK_CONFUSE)
@@ -1581,7 +1581,7 @@ u8 AtkCanceller_UnableToUseMove(void)
         case 12: // bide
             if (gBattleMons[gBattlerAttacker].status2 & STATUS2_BIDE)
             {
-                gBattleMons[gBattlerAttacker].status2 -= 0x100;
+                gBattleMons[gBattlerAttacker].status2 -= STATUS2_BIDE_TURN(1);;
                 if (gBattleMons[gBattlerAttacker].status2 & STATUS2_BIDE)
                     gBattlescriptCurrInstr = BattleScript_BideStoringEnergy;
                 else
@@ -2241,7 +2241,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 		     && GetGenderFromSpeciesAndPersonality(speciesAtk, pidAtk) != 0xFF
 		     && GetGenderFromSpeciesAndPersonality(speciesDef, pidDef) != 0xFF)
 		    {
-			gBattleMons[gBattlerAttacker].status2 |= (gBitTable[gBattlerTarget] << 0x10);
+			gBattleMons[gBattlerAttacker].status2 |= STATUS2_INFATUATED_WITH(gBattlerTarget);
 			BattleScriptPushCursor();
 			gBattlescriptCurrInstr = BattleScript_CuteCharmActivates;
 			effect++;
@@ -2262,7 +2262,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 		     && GetGenderFromSpeciesAndPersonality(speciesAtk, pidAtk) != 0xFF
 		     && GetGenderFromSpeciesAndPersonality(speciesDef, pidDef) != 0xFF)
 		    {
-			gBattleMons[gBattlerAttacker].status2 |= (gBitTable[gBattlerTarget] << 0x10);
+			gBattleMons[gBattlerAttacker].status2 |= STATUS2_INFATUATED_WITH(gBattlerTarget);
 			BattleScriptPushCursor();
 			gBattlescriptCurrInstr = BattleScript_CuteCharmActivates;
 			effect++;

@@ -7431,7 +7431,7 @@ static void atk97_tryinfatuating(void)
             }
         else
         {
-            gBattleMons[gBattlerTarget].status2 |=  (gBitTable[gBattlerAttacker] << 16);
+            gBattleMons[gBattlerTarget].status2 |= STATUS2_INFATUATED_WITH(gBattlerAttacker);
             gBattlescriptCurrInstr += 5;
         }
     }
