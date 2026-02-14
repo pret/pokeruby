@@ -9,44 +9,52 @@
 #include "pokemon.h"
 #include "pokemon_size_record.h"
 #include "script.h"
-#include "constants/species.h"
 #include "strings.h"
 #include "string_util.h"
 #include "text.h"
 #include "util.h"
 #include "mystery_event_msg.h"
-
-#if ENGLISH
-#define LANGUAGE_MASK 0x2
-#elif GERMAN
-#define LANGUAGE_MASK 0x4
-#endif
-
-#ifdef SAPPHIRE
-#define VERSION_MASK 0x100
-#else
-#define VERSION_MASK 0x80
-#endif
-
-extern void party_compaction(void);
+#include "pokemon_storage_system.h"
+#include "constants/berry.h"
+#include "constants/species.h"
 
 extern ScrCmdFunc gMysteryEventScriptCmdTable[];
 extern ScrCmdFunc gMysteryEventScriptCmdTableEnd[];
 
+// 0x1 in English FRLG, 0x1 in English Emerald
+#if ENGLISH
+#define LANGUAGE_MASK (1 << 1)
+#elif GERMAN
+#define LANGUAGE_MASK (1 << 2)
+#endif
+
+// 0x1 in FireRed, 0x2 in LeafGreen, 0x200 in Emerald
+#ifdef SAPPHIRE
+#define VERSION_MASK (1 << 8)
+#else
+#define VERSION_MASK (1 << 7)
+#endif
+
+#define mScriptBase data[0]
+#define mOffset data[1]
+#define mStatus data[2]
+#define mValid data[3]
+
 static EWRAM_DATA struct ScriptContext sMysteryEventScriptContext = {0};
 
-static bool32 CheckCompatibility(u16 a1, u32 a2, u16 a3, u32 a4)
+static bool32 CheckCompatibility(u16 unk0, u32 unk1, u16 unk2, u32 version)
 {
-    if (!(a1 & LANGUAGE_MASK))
+    if (!(unk0 & LANGUAGE_MASK))
         return FALSE;
 
-    if (!(a2 & LANGUAGE_MASK))
+    if (!(unk1 & LANGUAGE_MASK))
         return FALSE;
 
-    if (!(a3 & 0x4))
+    // 0x1 in FRLG, 0x4 in Emerald
+    if (!(unk2 & 0x4))
         return FALSE;
 
-    if (!(a4 & VERSION_MASK))
+    if (!(version & VERSION_MASK))
         return FALSE;
 
     return TRUE;
@@ -54,23 +62,23 @@ static bool32 CheckCompatibility(u16 a1, u32 a2, u16 a3, u32 a4)
 
 static void SetIncompatible(void)
 {
-    StringExpandPlaceholders(gStringVar4, gOtherText_DataCannotUseVersion);
-    SetMysteryEventScriptStatus(3);
+    StringExpandPlaceholders(gStringVar4, gText_MysteryEventCantBeUsed);
+    SetMysteryEventScriptStatus(MEVENT_STATUS_FAILURE);
 }
 
 static void InitMysteryEventScript(struct ScriptContext *ctx, u8 *script)
 {
     InitScriptContext(ctx, gMysteryEventScriptCmdTable, gMysteryEventScriptCmdTableEnd);
     SetupBytecodeScript(ctx, script);
-    ctx->data[0] = (u32)script;
-    ctx->data[1] = 0;
-    ctx->data[2] = 0;
-    ctx->data[3] = 0;
+    ctx->mScriptBase = (u32)script;
+    ctx->mOffset = 0;
+    ctx->mStatus = MEVENT_STATUS_LOAD_OK;
+    ctx->mValid = FALSE;
 }
 
 static bool32 RunMysteryEventScriptCommand(struct ScriptContext *ctx)
 {
-    if (RunScriptCommand(ctx) && ctx->data[3])
+    if (RunScriptCommand(ctx) && ctx->mValid)
         return TRUE;
     else
         return FALSE;
@@ -80,14 +88,14 @@ u32 RunMysteryEventScript(u8 *script)
 {
     struct ScriptContext *ctx = &sMysteryEventScriptContext;
     InitMysteryEventScript(ctx, script);
-    while (RunMysteryEventScriptCommand(ctx))
-        ;
-    return ctx->data[2];
+    while (RunMysteryEventScriptCommand(ctx));
+
+    return ctx->mStatus;
 }
 
-void SetMysteryEventScriptStatus(u32 val)
+void SetMysteryEventScriptStatus(u32 status)
 {
-    sMysteryEventScriptContext.data[2] = val;
+    sMysteryEventScriptContext.mStatus = status;
 }
 
 static int CalcChecksum(u8 *data, int size)
@@ -161,25 +169,16 @@ static u32 CalcRecordMixingGiftChecksum(void)
 static bool32 IsRecordMixingGiftValid(void)
 {
     struct RecordMixingGiftData *data = &gSaveBlock1.recordMixingGift.data;
-
     u32 checksum = CalcRecordMixingGiftChecksum();
 
-    if (!data->unk0)
+    if (data->unk0 == 0
+        || data->quantity == 0
+        || data->itemId == 0
+        || checksum == 0
+        || checksum != gSaveBlock1.recordMixingGift.checksum)
         return FALSE;
-
-    if (!data->quantity)
-        return FALSE;
-
-    if (!data->itemId)
-        return FALSE;
-
-    if (checksum == 0)
-        return FALSE;
-
-    if (checksum == gSaveBlock1.recordMixingGift.checksum)
-        return TRUE;
     else
-        return FALSE;
+        return TRUE;
 }
 
 static void ClearRecordMixingGift(void)
@@ -219,6 +218,7 @@ u16 GetRecordMixingGift(void)
             ClearRecordMixingGift();
         else
             gSaveBlock1.recordMixingGift.checksum = CalcRecordMixingGiftChecksum();
+
         return itemId;
     }
 }
@@ -231,19 +231,19 @@ bool8 MEScrCmd_end(struct ScriptContext *ctx)
 
 bool8 MEScrCmd_checkcompat(struct ScriptContext *ctx)
 {
-    u16 v1;
-    u32 v2;
-    u16 v3;
-    u32 v4;
+    u16 unk0;
+    u32 unk1;
+    u16 unk2;
+    u32 version;
 
-    ctx->data[1] = ScriptReadWord(ctx);
-    v1 = ScriptReadHalfword(ctx);
-    v2 = ScriptReadWord(ctx);
-    v3 = ScriptReadHalfword(ctx);
-    v4 = ScriptReadWord(ctx);
+    ctx->mOffset = ScriptReadWord(ctx);
+    unk0 = ScriptReadHalfword(ctx);
+    unk1 = ScriptReadWord(ctx);
+    unk2 = ScriptReadHalfword(ctx);
+    version = ScriptReadWord(ctx);
 
-    if (CheckCompatibility(v1, v2, v3, v4) == TRUE)
-        ctx->data[3] = 1;
+    if (CheckCompatibility(unk0, unk1, unk2, version) == TRUE)
+        ctx->mValid = TRUE;
     else
         SetIncompatible();
 
@@ -257,23 +257,23 @@ bool8 MEScrCmd_nop(struct ScriptContext *ctx)
 
 bool8 MEScrCmd_setstatus(struct ScriptContext *ctx)
 {
-    u8 value = ScriptReadByte(ctx);
-    ctx->data[2] = value;
+    u8 status = ScriptReadByte(ctx);
+    ctx->mStatus = status;
     return FALSE;
 }
 
 bool8 MEScrCmd_setmsg(struct ScriptContext *ctx)
 {
-    u8 value = ScriptReadByte(ctx);
-    u8 *str = (u8 *)(ScriptReadWord(ctx) - ctx->data[1] + ctx->data[0]);
-    if (value == 255 || value == ctx->data[2])
+    u8 status = ScriptReadByte(ctx);
+    u8 *str = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
+    if (status == MEVENT_STATUS_FF || status == ctx->mStatus)
         StringExpandPlaceholders(gStringVar4, str);
     return FALSE;
 }
 
 bool8 MEScrCmd_runscript(struct ScriptContext *ctx)
 {
-    u8 *script = (u8 *)(ScriptReadWord(ctx) - ctx->data[1] + ctx->data[0]);
+    u8 *script = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
     RunScriptImmediately(script);
     return FALSE;
 }
@@ -283,35 +283,35 @@ bool8 MEScrCmd_setenigmaberry(struct ScriptContext *ctx)
     u8 *str;
     const u8 *message;
     bool32 haveBerry = IsEnigmaBerryValid();
-    u8 *berry = (u8 *)(ScriptReadWord(ctx) - ctx->data[1] + ctx->data[0]);
-    StringCopyN(gStringVar1, gSaveBlock1.enigmaBerry.berry.name, 7);
+    u8 *berry = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
+    StringCopyN(gStringVar1, gSaveBlock1.enigmaBerry.berry.name, BERRY_NAME_LENGTH + 1);
     SetEnigmaBerry(berry);
-    StringCopyN(gStringVar2, gSaveBlock1.enigmaBerry.berry.name, 7);
+    StringCopyN(gStringVar2, gSaveBlock1.enigmaBerry.berry.name, BERRY_NAME_LENGTH + 1);
 
     if (!haveBerry)
     {
         str = gStringVar4;
-        message = gOtherText_BerryObtainedDadHasIt;
+        message = gText_MysteryEventBerry;
     }
     else if (StringCompare(gStringVar1, gStringVar2))
     {
         str = gStringVar4;
-        message = gOtherText_BerryTransformed;
+        message = gText_MysteryEventBerryTransform;
     }
     else
     {
         str = gStringVar4;
-        message = gOtherText_BerryAlreadyObtained;
+        message = gText_MysteryEventBerryObtained;
     }
 
     StringExpandPlaceholders(str, message);
 
-    ctx->data[2] = 2;
+    ctx->mStatus = MEVENT_STATUS_SUCCESS;
 
     if (IsEnigmaBerryValid() == TRUE)
         VarSet(VAR_ENIGMA_BERRY_AVAILABLE, 1);
     else
-        ctx->data[2] = 1;
+        ctx->mStatus = MEVENT_STATUS_LOAD_ERROR;
 
     return FALSE;
 }
@@ -321,8 +321,8 @@ bool8 MEScrCmd_giveribbon(struct ScriptContext *ctx)
     u8 index = ScriptReadByte(ctx);
     u8 ribbonId = ScriptReadByte(ctx);
     GiveGiftRibbonToParty(index, ribbonId);
-    StringExpandPlaceholders(gStringVar4, gOtherText_SpecialRibbonReceived);
-    ctx->data[2] = 2;
+    StringExpandPlaceholders(gStringVar4, gText_MysteryEventSpecialRibbon);
+    ctx->mStatus = MEVENT_STATUS_SUCCESS;
     return FALSE;
 }
 
@@ -331,8 +331,8 @@ bool8 MEScrCmd_initramscript(struct ScriptContext *ctx)
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
     u8 objectId = ScriptReadByte(ctx);
-    u8 *script = (u8 *)(ScriptReadWord(ctx) - ctx->data[1] + ctx->data[0]);
-    u8 *scriptEnd = (u8 *)(ScriptReadWord(ctx) - ctx->data[1] + ctx->data[0]);
+    u8 *script = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
+    u8 *scriptEnd = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
     InitRamScript(script, scriptEnd - script, mapGroup, mapNum, objectId);
     return FALSE;
 }
@@ -340,16 +340,16 @@ bool8 MEScrCmd_initramscript(struct ScriptContext *ctx)
 bool8 MEScrCmd_givenationaldex(struct ScriptContext *ctx)
 {
     EnableNationalPokedex();
-    StringExpandPlaceholders(gStringVar4, gOtherText_DexUpgraded);
-    ctx->data[2] = 2;
+    StringExpandPlaceholders(gStringVar4, gText_MysteryEventNationalDex);
+    ctx->mStatus = MEVENT_STATUS_SUCCESS;
     return FALSE;
 }
 
 bool8 MEScrCmd_addrareword(struct ScriptContext *ctx)
 {
-    sub_80EB890(ScriptReadByte(ctx));
-    StringExpandPlaceholders(gStringVar4, gOtherText_RareWordAdded);
-    ctx->data[2] = 2;
+    UnlockTrendySaying(ScriptReadByte(ctx));
+    StringExpandPlaceholders(gStringVar4, gText_MysteryEventRareWord);
+    ctx->mStatus = MEVENT_STATUS_SUCCESS;
     return FALSE;
 }
 
@@ -368,7 +368,7 @@ bool8 MEScrCmd_givepokemon(struct ScriptContext *ctx)
     struct Pokemon pokemon;
     u16 species;
     u16 heldItem;
-    u32 data = ScriptReadWord(ctx) - ctx->data[1] + ctx->data[0];
+    u32 data = ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase;
     void *pokemonPtr = (void *)data;
     void *mailPtr = (void *)(data + sizeof(struct Pokemon));
 
@@ -376,34 +376,34 @@ bool8 MEScrCmd_givepokemon(struct ScriptContext *ctx)
     species = GetMonData(&pokemon, MON_DATA_SPECIES2);
 
     if (species == SPECIES_EGG)
-        StringCopyN(gStringVar1, gSystemText_Egg, 11);
+        StringCopyN(gStringVar1, gText_EggNickname, POKEMON_NAME_LENGTH + 1);
     else
-        StringCopyN(gStringVar1, gSystemText_Pokemon2, 11);
+        StringCopyN(gStringVar1, gText_Pokemon, POKEMON_NAME_LENGTH + 1);
 
-    if (gPlayerPartyCount == 6)
+    if (gPlayerPartyCount == PARTY_SIZE)
     {
-        StringExpandPlaceholders(gStringVar4, gOtherText_PartyIsFull);
-        ctx->data[2] = 3;
+        StringExpandPlaceholders(gStringVar4, gText_MysteryEventFullParty);
+        ctx->mStatus = MEVENT_STATUS_FAILURE;
     }
     else
     {
-        memcpy(&gPlayerParty[5], pokemonPtr, sizeof(struct Pokemon));
+        memcpy(&gPlayerParty[PARTY_SIZE - 1], pokemonPtr, sizeof(struct Pokemon));
         memcpy(&mail, mailPtr, sizeof(struct MailStruct));
 
         if (species != SPECIES_EGG)
         {
             u16 pokedexNum = SpeciesToNationalPokedexNum(species);
-            GetSetPokedexFlag(pokedexNum, 2);
-            GetSetPokedexFlag(pokedexNum, 3);
+            GetSetPokedexFlag(pokedexNum, FLAG_SET_SEEN);
+            GetSetPokedexFlag(pokedexNum, FLAG_SET_CAUGHT);
         }
 
-        heldItem = GetMonData(&gPlayerParty[5], MON_DATA_HELD_ITEM);
+        heldItem = GetMonData(&gPlayerParty[PARTY_SIZE - 1], MON_DATA_HELD_ITEM);
         if (ItemIsMail(heldItem))
-            GiveMailToMon2(&gPlayerParty[5], &mail);
-        party_compaction();
+            GiveMailToMon2(&gPlayerParty[PARTY_SIZE - 1], &mail);
+        CompactPartySlots();
         CalculatePlayerPartyCount();
-        StringExpandPlaceholders(gStringVar4, gOtherText_PokeWasSentOver);
-        ctx->data[2] = 2;
+        StringExpandPlaceholders(gStringVar4, gText_MysteryEventSentOver);
+        ctx->mStatus = MEVENT_STATUS_SUCCESS;
     }
 
     return FALSE;
@@ -411,31 +411,31 @@ bool8 MEScrCmd_givepokemon(struct ScriptContext *ctx)
 
 bool8 MEScrCmd_addtrainer(struct ScriptContext *ctx)
 {
-    u32 data = ScriptReadWord(ctx) - ctx->data[1] + ctx->data[0];
+    u32 data = ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase;
     memcpy(&gSaveBlock2.battleTower.ereaderTrainer, (void *)data, sizeof(gSaveBlock2.battleTower.ereaderTrainer));
     ValidateEReaderTrainer();
-    StringExpandPlaceholders(gStringVar4, gOtherText_NewTrainerInHoenn);
-    ctx->data[2] = 2;
+    StringExpandPlaceholders(gStringVar4, gText_MysteryEventNewTrainer);
+    ctx->mStatus = MEVENT_STATUS_SUCCESS;
     return FALSE;
 }
 
 bool8 MEScrCmd_enableresetrtc(struct ScriptContext *ctx)
 {
     EnableResetRTC();
-    StringExpandPlaceholders(gStringVar4, gSystemText_ClockAdjustmentUsable);
-    ctx->data[2] = 2;
+    StringExpandPlaceholders(gStringVar4, gText_InGameClockUsable);
+    ctx->mStatus = MEVENT_STATUS_SUCCESS;
     return FALSE;
 }
 
 bool8 MEScrCmd_checksum(struct ScriptContext *ctx)
 {
     int checksum = ScriptReadWord(ctx);
-    u8 *data = (u8 *)(ScriptReadWord(ctx) - ctx->data[1] + ctx->data[0]);
-    u8 *dataEnd = (u8 *)(ScriptReadWord(ctx) - ctx->data[1] + ctx->data[0]);
+    u8 *data = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
+    u8 *dataEnd = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
     if (checksum != CalcChecksum(data, dataEnd - data))
     {
-        ctx->data[3] = 0;
-        ctx->data[2] = 1;
+        ctx->mValid = FALSE;
+        ctx->mStatus = MEVENT_STATUS_LOAD_ERROR;
     }
     return TRUE;
 }
@@ -443,12 +443,12 @@ bool8 MEScrCmd_checksum(struct ScriptContext *ctx)
 bool8 MEScrCmd_crc(struct ScriptContext *ctx)
 {
     int crc = ScriptReadWord(ctx);
-    u8 *data = (u8 *)(ScriptReadWord(ctx) - ctx->data[1] + ctx->data[0]);
-    u8 *dataEnd = (u8 *)(ScriptReadWord(ctx) - ctx->data[1] + ctx->data[0]);
+    u8 *data = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
+    u8 *dataEnd = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
     if (crc != CalcCRC16(data, dataEnd - data))
     {
-        ctx->data[3] = 0;
-        ctx->data[2] = 1;
+        ctx->mValid = FALSE;
+        ctx->mStatus = MEVENT_STATUS_LOAD_ERROR;
     }
     return TRUE;
 }

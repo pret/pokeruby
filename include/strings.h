@@ -17,8 +17,8 @@ extern const u8 gExpandedPlaceholder_Brendan[];
 extern const u8 gExpandedPlaceholder_May[];
 
 // system text
-extern const u8 gSystemText_Egg[];
-extern const u8 gSystemText_Pokemon2[];
+extern const u8 gText_EggNickname[];
+extern const u8 gText_Pokemon[];
 
 // main menu text
 extern const u8 gMainMenuString_NewGame[];
@@ -902,7 +902,7 @@ extern const u8 gSystemText_ClockResetDataSave[];
 extern const u8 gSystemText_SaveCompleted[];
 extern const u8 gSystemText_SaveFailed[];
 extern const u8 gSystemText_NoSaveFileNoTime[];
-extern const u8 gSystemText_ClockAdjustmentUsable[];
+extern const u8 gText_InGameClockUsable[];
 extern const u8 gSystemText_Saving[];
 
 #endif

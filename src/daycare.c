@@ -139,7 +139,7 @@ static void StorePokemonInDaycare(struct Pokemon * mon, struct DayCare * daycare
     BoxMonRestorePP(&daycare->mons[emptySlot]);
     daycare->misc.countersEtc.steps[emptySlot] = 0;
     ZeroMonData(mon);
-    party_compaction();
+    CompactPartySlots();
     CalculatePlayerPartyCount();
 }
 
@@ -221,7 +221,7 @@ static u16 TakeSelectedPokemonFromDaycare(struct DayCare * daycare, u8 slot)
         ClearDaycareMail(&daycare->misc.mail[slot]);
     }
 
-    party_compaction();
+    CompactPartySlots();
     ZeroBoxMonData(&daycare->mons[slot]);
     daycare->misc.countersEtc.steps[slot] = 0;
     ShiftDaycareSlots(daycare);
@@ -678,7 +678,7 @@ static void _GiveEggFromDaycare(struct DayCare *daycare) // give_egg
     isEgg = TRUE;
     SetMonData(&egg, MON_DATA_IS_EGG, &isEgg);
     gPlayerParty[5] = egg;
-    party_compaction();
+    CompactPartySlots();
     CalculatePlayerPartyCount();
     RemoveEggFromDayCare(daycare);
 }

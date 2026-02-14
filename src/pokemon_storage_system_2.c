@@ -924,7 +924,7 @@ void sub_809746C(void)
         }
         break;
     case 2:
-        party_compaction();
+        CompactPartySlots();
         sub_8099310();
         gPokemonStorageSystemPtr->unk_0004++;
         break;
@@ -1011,7 +1011,7 @@ void sub_8097594(void)
             sub_8098A5C();
             if (gUnknown_0203847C)
             {
-                party_compaction();
+                CompactPartySlots();
                 sub_8099310();
                 gPokemonStorageSystemPtr->unk_0004++;
             }
@@ -1125,7 +1125,7 @@ void sub_8097858(void)
     switch (gPokemonStorageSystemPtr->unk_0004)
     {
     case 0:
-        party_compaction();
+        CompactPartySlots();
         sub_8099310();
         gPokemonStorageSystemPtr->unk_0004++;
         break;
@@ -1703,7 +1703,7 @@ bool8 sub_80985CC(void)
     {
         gUnknown_0203847C = 0;
         sub_809954C();
-        party_compaction();
+        CompactPartySlots();
         sub_809D034(BG_SCREEN_ADDR(15), 21, 0, gPokemonStorageSystemPtr->unk_00a8, 12, 0, 1, 2);
         return FALSE;
     }
