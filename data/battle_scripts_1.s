@@ -2956,7 +2956,7 @@ BattleScript_HandleFaintedMon:: @ 81D8C7B
 	atk24 BattleScript_1D8D87
 	jumpifbyte NOT_EQUAL, gBattleOutcome, 0, BattleScript_FaintedMonEnd
 	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_FaintedMonTryChooseAnother
-	jumpifword NO_COMMON_BITS, gHitMarker, HITMARKER_x400000, BattleScript_FaintedMonTryChooseAnother
+	jumpifword NO_COMMON_BITS, gHitMarker, HITMARKER_PLAYER_FAINTED, BattleScript_FaintedMonTryChooseAnother
 	printstring BATTLE_TEXT_UseNext
 	setbyte gBattleCommunication, 0
 	yesnobox
@@ -2971,7 +2971,7 @@ BattleScript_FaintedMonTryChooseAnother: @ 81D8CC2
 	jumpifbattletype BATTLE_TYPE_LINK, BattleScript_FaintedMonChooseAnother
 	jumpifbattletype BATTLE_TYPE_BATTLE_TOWER, BattleScript_FaintedMonChooseAnother
 	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonChooseAnother
-	jumpifword COMMON_BITS, gHitMarker, HITMARKER_x400000, BattleScript_FaintedMonChooseAnother
+	jumpifword COMMON_BITS, gHitMarker, HITMARKER_PLAYER_FAINTED, BattleScript_FaintedMonChooseAnother
 	jumpifbyte EQUAL, sBATTLE_STYLE, 1, BattleScript_FaintedMonChooseAnother
 	jumpifcantswitch USER, BattleScript_FaintedMonChooseAnother
 	printstring BATTLE_TEXT_WillSwitch
@@ -3255,7 +3255,7 @@ BattleScript_DamagingWeatherLoop: @ 81D8F95
 	jumpifword EQUAL, gBattleMoveDamage, 0x0, BattleScript_DamagingWeatherLoopIncrement
 	printfromtable gSandStormHailDmgStringIds
 	waitmessage 64
-	orword gHitMarker, HITMARKER_x20 | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000 | HITMARKER_GRUDGE
+	orword gHitMarker, HITMARKER_IGNORE_BIDE | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_HP_UPDATE | HITMARKER_GRUDGE
 	effectivenesssound
 	hitanimation USER
 	healthbarupdate USER
@@ -3269,7 +3269,7 @@ BattleScript_DamagingWeatherLoopIncrement: @ 81D8FD6
 	jumpifbytenotequal gBattleCommunication, gBattlersCount, BattleScript_DamagingWeatherLoop
 
 BattleScript_DamagingWeatherContinuesEnd: @ 81D8FF5
-	bicword gHitMarker, HITMARKER_x20 | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000 | HITMARKER_GRUDGE
+	bicword gHitMarker, HITMARKER_IGNORE_BIDE | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_HP_UPDATE | HITMARKER_GRUDGE
 	end2
 
 BattleScript_SandStormHailEnds:: @ 81D8FFF
@@ -3313,7 +3313,7 @@ BattleScript_SafeguardEnds:: @ 81D9041
 
 BattleScript_LeechSeedTurnDrain:: @ 81D904B
 	playanimation USER, B_ANIM_LEECH_SEED_DRAIN, sANIM_ARG1
-	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_HP_UPDATE
 	healthbarupdate USER
 	datahpupdate USER
 	copyword gBattleMoveDamage, gHpDealt
@@ -3326,7 +3326,7 @@ BattleScript_LeechSeedTurnPrintLiquidOoze: @ 81D907D
 	setbyte cMULTISTRING_CHOOSER, 4
 
 BattleScript_LeechSeedTurnPrintAndUpdateHp: @ 81D9083
-	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_HP_UPDATE
 	healthbarupdate TARGET
 	datahpupdate TARGET
 	printfromtable gLeechSeedStringIds
@@ -3418,14 +3418,14 @@ BattleScript_EncoredNoMore:: @ 81D914F
 BattleScript_DestinyBondTakesLife:: @ 81D9156
 	printstring BATTLE_TEXT_DestinyBondTaken
 	waitmessage 64
-	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_HP_UPDATE
 	healthbarupdate USER
 	datahpupdate USER
 	tryfaintmon USER, FALSE, NULL
 	return
 
 BattleScript_SpikesOnAttacker:: @ 81D9171
-	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_HP_UPDATE
 	healthbarupdate USER
 	datahpupdate USER
 	call BattleScript_PrintHurtBySpikes
@@ -3439,7 +3439,7 @@ BattleScript_SpikesOnAttackerFainted: @ 81D9192
 	goto BattleScript_HandleFaintedMon
 
 BattleScript_SpikesOnTarget:: @ 81D919F
-	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_HP_UPDATE
 	healthbarupdate TARGET
 	datahpupdate TARGET
 	call BattleScript_PrintHurtBySpikes
@@ -3453,7 +3453,7 @@ BattleScript_SpikesOnTargetFainted: @ 81D91C0
 	goto BattleScript_HandleFaintedMon
 
 BattleScript_SpikesOngBank1:: @ 81D91CD
-	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_HP_UPDATE
 	healthbarupdate 3
 	datahpupdate 3
 	call BattleScript_PrintHurtBySpikes
@@ -3474,7 +3474,7 @@ BattleScript_PrintHurtBySpikes: @ 81D91FB
 BattleScript_PerishSongHits:: @ 81D9202
 	printstring BATTLE_TEXT_PerishSongFell
 	waitmessage 64
-	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_HP_UPDATE
 	healthbarupdate USER
 	datahpupdate USER
 	tryfaintmon USER, FALSE, NULL
@@ -3706,7 +3706,7 @@ BattleScript_MagicCoatBounce:: @ 81D946F
 	pause 32
 	printstring BATTLE_TEXT_MagicCoatBounce
 	waitmessage 64
-	orword gHitMarker, HITMARKER_ATTACKSTRING_PRINTED | HITMARKER_NO_PPDEDUCT | HITMARKER_x800000
+	orword gHitMarker, HITMARKER_ATTACKSTRING_PRINTED | HITMARKER_NO_PPDEDUCT | HITMARKER_ALLOW_NO_PP
 	setmagiccoattarget USER
 	return
 
@@ -3717,7 +3717,7 @@ BattleScript_SnatchedMove:: @ 81D9487
 	playanimation TARGET, B_ANIM_SNATCH_MOVE, NULL
 	printstring BATTLE_TEXT_SnatchedMove
 	waitmessage 64
-	orword gHitMarker, HITMARKER_ATTACKSTRING_PRINTED | HITMARKER_NO_PPDEDUCT | HITMARKER_x800000
+	orword gHitMarker, HITMARKER_ATTACKSTRING_PRINTED | HITMARKER_NO_PPDEDUCT | HITMARKER_ALLOW_NO_PP
 	atk5f
 	return
 
@@ -3758,7 +3758,7 @@ BattleScript_MoveUsedIsAsleep:: @ 81D94EE
 	goto BattleScript_MoveEnd
 
 BattleScript_MoveUsedWokeUp:: @ 81D94FB
-	bicword gHitMarker, HITMARKER_x10
+	bicword gHitMarker, HITMARKER_WAKE_UP_CLEAR
 	printfromtable gWokeUpStringIds
 	waitmessage 64
 	updatestatusicon USER
@@ -3778,7 +3778,7 @@ BattleScript_DoStatusTurnDmg: @ 81D951E
 	statusanimation USER
 
 BattleScript_DoTurnDmg: @ 81D9520
-	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_HP_UPDATE
 	healthbarupdate USER
 	datahpupdate USER
 	tryfaintmon USER, FALSE, NULL
@@ -3846,7 +3846,7 @@ BattleScript_DoSelfConfusionDmg: @ 81D95AC
 	effectivenesssound
 	hitanimation USER
 	waitstate
-	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_HP_UPDATE
 	healthbarupdate USER
 	datahpupdate USER
 	tryfaintmon USER, FALSE, NULL
@@ -3980,7 +3980,7 @@ BattleScript_MoveEffectRecoil33:: @ 81D96C8
 	jumpifability USER, ABILITY_ROCK_HEAD, BattleScript_Recoil33End
 
 BattleScript_DoRecoil33: @ 81D96DB
-	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_HP_UPDATE
 	healthbarupdate USER
 	datahpupdate USER
 	printstring BATTLE_TEXT_HitRecoil
@@ -4233,7 +4233,7 @@ BattleScript_ColorChangeActivates:: @ 81D9921
 	return
 
 BattleScript_RoughSkinActivates:: @ 81D9928
-	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_HP_UPDATE
 	healthbarupdate USER
 	datahpupdate USER
 	printstring BATTLE_TEXT_HurtOther

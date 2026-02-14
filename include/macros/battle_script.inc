@@ -1350,7 +1350,7 @@
 	.endm
 	
 	.macro chosenstatus2animation bank, status
-	chosenstatusanimation \bank 0x1 \status
+	chosenstatusanimation \bank, 0x1, \status
 	.endm
 	
 	.macro sethword dst, value

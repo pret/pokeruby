@@ -836,7 +836,7 @@ void sub_802CA60(void)
                 gBattleMons[gActiveBattler].moves[i] = r9->moves[i];
                 gBattleMons[gActiveBattler].pp[i] = r9->currentPp[i];
             }
-            if (!(gBattleMons[gActiveBattler].status2 & 0x200000))
+            if (!(gBattleMons[gActiveBattler].status2 & STATUS2_TRANSFORMED))
             {
                 for (i = 0; i < 4; i++)
                 {

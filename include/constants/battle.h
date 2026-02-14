@@ -79,94 +79,99 @@
 
 // Non-volatile status conditions
 // These persist remain outside of battle and after switching out
-#define STATUS1_NONE             0x0
-#define STATUS1_SLEEP            0x7
-#define STATUS1_SLEEP_TURN(num)  ((num) << 0)
-#define STATUS1_POISON           0x8
-#define STATUS1_BURN             0x10
-#define STATUS1_FREEZE           0x20
-#define STATUS1_PARALYSIS        0x40
-#define STATUS1_TOXIC_POISON     0x80
-#define STATUS1_TOXIC_COUNTER    0xF00
+#define STATUS1_NONE             0
+#define STATUS1_SLEEP            (1 << 0 | 1 << 1 | 1 << 2) // First 3 bits (Number of turns to sleep)
+#define STATUS1_SLEEP_TURN(num)  ((num) << 0) // Just for readability (or if rearranging statuses)
+#define STATUS1_POISON           (1 << 3)
+#define STATUS1_BURN             (1 << 4)
+#define STATUS1_FREEZE           (1 << 5)
+#define STATUS1_PARALYSIS        (1 << 6)
+#define STATUS1_TOXIC_POISON     (1 << 7)
+#define STATUS1_TOXIC_COUNTER    (1 << 8 | 1 << 9 | 1 << 10 | 1 << 11)
+#define STATUS1_TOXIC_TURN(num)  ((num) << 8)
 #define STATUS1_PSN_ANY          (STATUS1_POISON | STATUS1_TOXIC_POISON)
 #define STATUS1_ANY              (STATUS1_SLEEP | STATUS1_POISON | STATUS1_BURN | STATUS1_FREEZE | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON)
 
 // Volatile status ailments
 // These are removed after exiting the battle or switching out
-#define STATUS2_CONFUSION             0x00000007
+#define STATUS2_CONFUSION             (1 << 0 | 1 << 1 | 1 << 2)
 #define STATUS2_CONFUSION_TURN(num)   ((num) << 0)
-#define STATUS2_FLINCHED              0x00000008
-#define STATUS2_UPROAR                0x00000070
+#define STATUS2_FLINCHED              (1 << 3)
+#define STATUS2_UPROAR                (1 << 4 | 1 << 5 | 1 << 6)
 #define STATUS2_UPROAR_TURN(num)      ((num) << 4)
-#define STATUS2_BIDE                  0x00000300  // two bits 0x100, 0x200
-#define STATUS2_LOCK_CONFUSE          0x00000C00
-#define STATUS2_LOCK_CONFUSE_TURN(num) ((num) << 10)
-#define STATUS2_MULTIPLETURNS         0x00001000
-#define STATUS2_WRAPPED               0x0000E000
+#define STATUS2_UNUSED                (1 << 7)
+#define STATUS2_BIDE                  (1 << 8 | 1 << 9)
+#define STATUS2_BIDE_TURN(num)        (((num) << 8) & STATUS2_BIDE)
+#define STATUS2_LOCK_CONFUSE          (1 << 10 | 1 << 11) // e.g. Thrash
+#define STATUS2_LOCK_CONFUSE_TURN(num)((num) << 10)
+#define STATUS2_MULTIPLETURNS         (1 << 12)
+#define STATUS2_WRAPPED               (1 << 13 | 1 << 14 | 1 << 15)
 #define STATUS2_WRAPPED_TURN(num)     ((num) << 13)
-#define STATUS2_INFATUATION           0x000F0000  // 4 bits, one for every battler
+#define STATUS2_INFATUATION           (1 << 16 | 1 << 17 | 1 << 18 | 1 << 19)  // 4 bits, one for every battler
 #define STATUS2_INFATUATED_WITH(battler) (gBitTable[battler] << 16)
-#define STATUS2_FOCUS_ENERGY          0x00100000
-#define STATUS2_TRANSFORMED           0x00200000
-#define STATUS2_RECHARGE              0x00400000
-#define STATUS2_RAGE                  0x00800000
-#define STATUS2_SUBSTITUTE            0x01000000
-#define STATUS2_DESTINY_BOND          0x02000000
-#define STATUS2_ESCAPE_PREVENTION     0x04000000
-#define STATUS2_NIGHTMARE             0x08000000
-#define STATUS2_CURSED                0x10000000
-#define STATUS2_FORESIGHT             0x20000000
-#define STATUS2_DEFENSE_CURL          0x40000000
-#define STATUS2_TORMENT               0x80000000
+#define STATUS2_FOCUS_ENERGY          (1 << 20)
+#define STATUS2_TRANSFORMED           (1 << 21)
+#define STATUS2_RECHARGE              (1 << 22)
+#define STATUS2_RAGE                  (1 << 23)
+#define STATUS2_SUBSTITUTE            (1 << 24)
+#define STATUS2_DESTINY_BOND          (1 << 25)
+#define STATUS2_ESCAPE_PREVENTION     (1 << 26)
+#define STATUS2_NIGHTMARE             (1 << 27)
+#define STATUS2_CURSED                (1 << 28)
+#define STATUS2_FORESIGHT             (1 << 29)
+#define STATUS2_DEFENSE_CURL          (1 << 30)
+#define STATUS2_TORMENT               (1 << 31)
 
 // Seems like per-battler statuses. Not quite sure how to categorize these
-#define STATUS3_LEECHSEED_BATTLER       0x3
-#define STATUS3_LEECHSEED               0x4
-#define STATUS3_ALWAYS_HITS             0x18    // two bits
-#define STATUS3_PERISH_SONG             0x20
-#define STATUS3_ON_AIR                  0x40
-#define STATUS3_UNDERGROUND             0x80
-#define STATUS3_MINIMIZED               0x100
-#define STATUS3_ROOTED                  0x400
-#define STATUS3_CHARGED_UP              0x200
-#define STATUS3_YAWN                    0x1800  // two bits
-#define STATUS3_IMPRISONED_OTHERS       0x2000
-#define STATUS3_GRUDGE                  0x4000
-#define STATUS3_CANT_SCORE_A_CRIT       0x8000
-#define STATUS3_MUDSPORT                0x10000
-#define STATUS3_WATERSPORT              0x20000
-#define STATUS3_UNDERWATER              0x40000
-#define STATUS3_INTIMIDATE_POKES        0x80000
-#define STATUS3_TRACE                   0x100000
+#define STATUS3_LEECHSEED_BATTLER       (1 << 0 | 1 << 1) // The battler to receive HP from Leech Seed
+#define STATUS3_LEECHSEED               (1 << 2)
+#define STATUS3_ALWAYS_HITS             (1 << 3 | 1 << 4)
+#define STATUS3_ALWAYS_HITS_TURN(num)   (((num) << 3) & STATUS3_ALWAYS_HITS) // "Always Hits" is set as a 2 turn timer, i.e. next turn is the last turn when it's active
+#define STATUS3_PERISH_SONG             (1 << 5)
+#define STATUS3_ON_AIR                  (1 << 6)
+#define STATUS3_UNDERGROUND             (1 << 7)
+#define STATUS3_MINIMIZED               (1 << 8)
+#define STATUS3_CHARGED_UP              (1 << 9)
+#define STATUS3_ROOTED                  (1 << 10)
+#define STATUS3_YAWN                    (1 << 11 | 1 << 12) // Number of turns to sleep
+#define STATUS3_YAWN_TURN(num)          (((num) << 11) & STATUS3_YAWN)
+#define STATUS3_IMPRISONED_OTHERS       (1 << 13)
+#define STATUS3_GRUDGE                  (1 << 14)
+#define STATUS3_CANT_SCORE_A_CRIT       (1 << 15)
+#define STATUS3_MUDSPORT                (1 << 16)
+#define STATUS3_WATERSPORT              (1 << 17)
+#define STATUS3_UNDERWATER              (1 << 18)
+#define STATUS3_INTIMIDATE_POKES        (1 << 19)
+#define STATUS3_TRACE                   (1 << 20)
 #define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER)
 
 // Not really sure what a "hitmarker" is.
-#define HITMARKER_x10                   0x00000010
-#define HITMARKER_x20                   0x00000020
-#define HITMARKER_DESTINYBOND           0x00000040
-#define HITMARKER_NO_ANIMATIONS         0x00000080
-#define HITMARKER_IGNORE_SUBSTITUTE     0x00000100
-#define HITMARKER_NO_ATTACKSTRING       0x00000200
-#define HITMARKER_ATTACKSTRING_PRINTED  0x00000400
-#define HITMARKER_NO_PPDEDUCT           0x00000800
-#define HITMARKER_SWAP_ATTACKER_TARGET  0x00001000
-#define HITMARKER_STATUS_ABILITY_EFFECT 0x00002000
-#define HITMARKER_SYNCHRONISE_EFFECT    0x00004000
-#define HITMARKER_RUN                   0x00008000
-#define HITMARKER_IGNORE_ON_AIR         0x00010000
-#define HITMARKER_IGNORE_UNDERGROUND    0x00020000
-#define HITMARKER_IGNORE_UNDERWATER     0x00040000
-#define HITMARKER_UNABLE_TO_USE_MOVE    0x00080000
-#define HITMARKER_x100000               0x00100000
-#define HITMARKER_x200000               0x00200000
-#define HITMARKER_x400000               0x00400000
-#define HITMARKER_x800000               0x00800000
-#define HITMARKER_GRUDGE                0x01000000
-#define HITMARKER_OBEYS                 0x02000000
-#define HITMARKER_x4000000              0x04000000
-#define HITMARKER_CHARGING              0x08000000
-#define HITMARKER_FAINTED(battler)      (gBitTable[battler] << 0x1C)
-#define HITMARKER_UNK(battler)          (0x10000000 << battler)
+#define HITMARKER_WAKE_UP_CLEAR         (1 << 4) // Cleared when waking up. Never set or checked.
+#define HITMARKER_IGNORE_BIDE           (1 << 5)
+#define HITMARKER_DESTINYBOND           (1 << 6)
+#define HITMARKER_NO_ANIMATIONS         (1 << 7)
+#define HITMARKER_IGNORE_SUBSTITUTE     (1 << 8)
+#define HITMARKER_NO_ATTACKSTRING       (1 << 9)
+#define HITMARKER_ATTACKSTRING_PRINTED  (1 << 10)
+#define HITMARKER_NO_PPDEDUCT           (1 << 11)
+#define HITMARKER_SWAP_ATTACKER_TARGET  (1 << 12)
+#define HITMARKER_STATUS_ABILITY_EFFECT (1 << 13)
+#define HITMARKER_SYNCHRONIZE_EFFECT    (1 << 14)
+#define HITMARKER_RUN                   (1 << 15)
+#define HITMARKER_IGNORE_ON_AIR         (1 << 16)
+#define HITMARKER_IGNORE_UNDERGROUND    (1 << 17)
+#define HITMARKER_IGNORE_UNDERWATER     (1 << 18)
+#define HITMARKER_UNABLE_TO_USE_MOVE    (1 << 19)
+#define HITMARKER_PASSIVE_HP_UPDATE     (1 << 20)
+#define HITMARKER_DISOBEDIENT_MOVE      (1 << 21)
+#define HITMARKER_PLAYER_FAINTED        (1 << 22)
+#define HITMARKER_ALLOW_NO_PP           (1 << 23)
+#define HITMARKER_GRUDGE                (1 << 24)
+#define HITMARKER_OBEYS                 (1 << 25)
+#define HITMARKER_NEVER_SET             (1 << 26) // Cleared as part of a large group. Never set or checked
+#define HITMARKER_CHARGING              (1 << 27)
+#define HITMARKER_FAINTED(battler)      (gBitTable[battler] << 28)
+#define HITMARKER_FAINTED2(battler)     ((1 << 28) << battler)
 
 // Per-side statuses that affect an entire party
 #define SIDE_STATUS_REFLECT          (1 << 0)
@@ -190,19 +195,19 @@
 #define MOVE_RESULT_NO_EFFECT          (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE | MOVE_RESULT_FAILED)
 
 // Battle Weather flags
-#define WEATHER_RAIN_TEMPORARY      (1 << 0)
-#define WEATHER_RAIN_DOWNPOUR       (1 << 1)  // unused
-#define WEATHER_RAIN_PERMANENT      (1 << 2)
-#define WEATHER_RAIN_ANY            (WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_DOWNPOUR | WEATHER_RAIN_PERMANENT)
-#define WEATHER_SANDSTORM_TEMPORARY (1 << 3)
-#define WEATHER_SANDSTORM_PERMANENT (1 << 4)
-#define WEATHER_SANDSTORM_ANY       (WEATHER_SANDSTORM_TEMPORARY | WEATHER_SANDSTORM_PERMANENT)
-#define WEATHER_SUN_TEMPORARY       (1 << 5)
-#define WEATHER_SUN_PERMANENT       (1 << 6)
-#define WEATHER_SUN_ANY             (WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT)
-#define WEATHER_HAIL                (1 << 7)
-#define WEATHER_HAIL_ANY            (WEATHER_HAIL)
-#define WEATHER_ANY                 (WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_SUN_ANY | WEATHER_HAIL_ANY)
+#define B_WEATHER_RAIN_TEMPORARY      (1 << 0)
+#define B_WEATHER_RAIN_DOWNPOUR       (1 << 1)  // unused
+#define B_WEATHER_RAIN_PERMANENT      (1 << 2)
+#define B_WEATHER_RAIN                (B_WEATHER_RAIN_TEMPORARY | B_WEATHER_RAIN_DOWNPOUR | B_WEATHER_RAIN_PERMANENT)
+#define B_WEATHER_SANDSTORM_TEMPORARY (1 << 3)
+#define B_WEATHER_SANDSTORM_PERMANENT (1 << 4)
+#define B_WEATHER_SANDSTORM           (B_WEATHER_SANDSTORM_TEMPORARY | B_WEATHER_SANDSTORM_PERMANENT)
+#define B_WEATHER_SUN_TEMPORARY       (1 << 5)
+#define B_WEATHER_SUN_PERMANENT       (1 << 6)
+#define B_WEATHER_SUN                 (B_WEATHER_SUN_TEMPORARY | B_WEATHER_SUN_PERMANENT)
+#define B_WEATHER_HAIL_TEMPORARY      (1 << 7)
+#define B_WEATHER_HAIL                (B_WEATHER_HAIL_TEMPORARY)
+#define B_WEATHER_ANY                 (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_SUN | B_WEATHER_HAIL)
 
 // Move Effects
 #define MOVE_EFFECT_SLEEP               0x1
