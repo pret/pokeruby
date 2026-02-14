@@ -32,7 +32,7 @@ AncientTomb_EventScript_15EFEA:: @ 815EFEA
 AncientTomb_EventScript_15F021:: @ 815F021
 	lockall
 	goto_if_set FLAG_SYS_BRAILLE_FLY, AncientTomb_EventScript_15F038
-	braillemessage AncientTomb_Braille_1C552E
+	braillemessage AncientTomb_Braille_AimToTheSkyInTheMiddle
 	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -45,7 +45,7 @@ AncientTomb_EventScript_15F038:: @ 815F038
 
 AncientTomb_EventScript_15F042:: @ 815F042
 	lockall
-	braillemessage AncientTomb_Braille_1C552E
+	braillemessage AncientTomb_Braille_AimToTheSkyInTheMiddle
 	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall

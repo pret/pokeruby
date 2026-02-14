@@ -1656,7 +1656,7 @@ gUnknown_081C6C02:: @ 81C6C02
 
 @ 81C6C1D
 	lockall
-	braillemessage Underwater_SealedChamber_Braille_1C533D
+	braillemessage Underwater_SealedChamber_Braille_GoUpHere
 	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
