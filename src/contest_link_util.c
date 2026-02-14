@@ -2765,7 +2765,7 @@ void sub_80C489C(u8 taskId)
 
 void sub_80C48C8(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     CreateTask(sub_80C489C, 10);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
 }
@@ -2786,7 +2786,7 @@ void sub_80C4914(u8 taskId)
 
 void sub_80C4940(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     CreateTask(sub_80C4914, 10);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
 }
@@ -2799,7 +2799,7 @@ void ScrSpecial_GetContestPlayerMonIdx(void)
 void ContestLinkTransfer(u8 category)
 {
     u8 taskId;
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     taskId = CreateTask(Task_LinkContest_Init, 0);
     SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_Init, Task_StartCommunication);
     gTasks[taskId].data[9] = category;
@@ -2889,8 +2889,8 @@ void Task_LinkContest_FinalizeConnection(u8 taskId)
     else
     {
         DestroyTask(taskId);
-        ScriptContext2_Disable();
-        EnableBothScriptContexts();
+        UnlockPlayerFieldControls();
+        ScriptContext_Enable();
     }
 }
 
@@ -2905,7 +2905,7 @@ void Task_LinkContest_WaitDisconnect(u8 taskId)
     if (!gReceivedRemoteLinkPlayers)
     {
         DestroyTask(taskId);
-        ScriptContext2_Disable();
-        EnableBothScriptContexts();
+        UnlockPlayerFieldControls();
+        ScriptContext_Enable();
     }
 }

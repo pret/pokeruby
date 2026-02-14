@@ -2124,7 +2124,7 @@ void CleanUpOverworldMessage(u8 taskId)
     Menu_EraseWindowRect(0, 13, 29, 19);
     DestroyTask(taskId);
     ScriptUnfreezeObjectEvents();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
 }
 
 void ExecuteItemUseFromBlackPalette(void)
@@ -2745,7 +2745,7 @@ bool32 UseRegisteredKeyItem(void)
         {
             u8 taskId;
 
-            ScriptContext2_Enable();
+            LockPlayerFieldControls();
             FreezeObjectEvents();
             sub_80594C0();
             sub_80597F4();
@@ -2756,7 +2756,7 @@ bool32 UseRegisteredKeyItem(void)
         }
         gSaveBlock1.registeredItem = 0;
     }
-    ScriptContext1_SetupScript(Event_NoRegisteredItem);
+    ScriptContext_SetupScript(Event_NoRegisteredItem);
     return TRUE;
 }
 

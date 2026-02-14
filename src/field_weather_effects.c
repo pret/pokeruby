@@ -342,7 +342,7 @@ void task50_0807B6D4(u8 taskId)
         task->tState++;
         break;
     case 4:
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
         break;
     }

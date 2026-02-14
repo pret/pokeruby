@@ -52,7 +52,7 @@ void DoBrailleDigEffect(void)
     DrawWholeMapView();
     PlaySE(SE_BANG);
     FlagSet(FLAG_SYS_BRAILLE_DIG);
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
 }
 
 bool8 CheckRelicanthWailord(void)
@@ -95,7 +95,7 @@ void DoBrailleStrengthEffect(void)
     DrawWholeMapView();
     PlaySE(SE_BANG);
     FlagSet(FLAG_SYS_BRAILLE_STRENGTH);
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
 }
 
 bool8 ShouldDoBrailleFlyEffect(void)
@@ -141,7 +141,7 @@ void UseFlyAncientTomb_Finish(void)
     DrawWholeMapView();
     PlaySE(SE_BANG);
     FlagSet(FLAG_SYS_BRAILLE_FLY);
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
 }
 
 void DoBrailleWait(void)
@@ -188,7 +188,7 @@ void Task_BrailleWait(u8 taskId)
         }
         ScriptUnfreezeObjectEvents();
         DestroyTask(taskId);
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         break;
     case 3:
         data[1] = data[1] - 1;
@@ -197,7 +197,7 @@ void Task_BrailleWait(u8 taskId)
         break;
     case 4:
         ScriptUnfreezeObjectEvents();
-        ScriptContext1_SetupScript(S_OpenRegiceChamber);
+        ScriptContext_SetupScript(S_OpenRegiceChamber);
         DestroyTask(taskId);
         break;
     }
@@ -257,7 +257,7 @@ void SealedChamberShakingEffect(u8 taskId)
         if (task->data[2] == task->data[6])
         {
             DestroyTask(taskId);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
             InstallCameraPanAheadCallback();
         }
     }

@@ -166,7 +166,7 @@ void Task_RecordMixing_Main(u8 taskId)
             sub_8055588();
             Menu_EraseScreen();
             DestroyTask(taskId);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
         }
         break;
     }

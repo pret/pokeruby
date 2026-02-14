@@ -926,7 +926,7 @@ void debug_sub_80986AC(void)
      && IsPlayerSurfingNorth() == TRUE)
         sub_808AE08();
     else
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
 }
 #endif
 

@@ -810,8 +810,8 @@ void debug_sub_810CCEC(u8 taskId)
 u8 debug_sub_810CD9C(void)
 {
     CloseMenu();
-    ScriptContext1_Stop();
-    ScriptContext2_Enable();
+    ScriptContext_Stop();
+    LockPlayerFieldControls();
     gUnknown_Debug_0300079C = 0;
     gSpecialVar_0x8004 = gSpecialVar_0x8005 = gSpecialVar_0x8006 = 0;
     SetMainCallback2(debug_sub_810D388);

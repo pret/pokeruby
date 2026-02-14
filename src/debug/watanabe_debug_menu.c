@@ -239,7 +239,7 @@ void debug_80C370C(void)
 void debug_80C373C(u8 taskId)
 {
     DestroyTask(taskId);
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
     SetMainCallback2(sub_80546F0);
 }
 
@@ -373,7 +373,7 @@ void InitWatanabeDebugMenu(void)
         case 3:
             if (!IsSEPlaying())
             {
-                ScriptContext2_Disable();
+                UnlockPlayerFieldControls();
                 SetMainCallback2(sub_80546F0);
             }
             break;

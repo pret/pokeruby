@@ -675,7 +675,7 @@ bool8 UpdateRepelCounter(void)
         VarSet(VAR_REPEL_STEP_COUNT, steps);
         if (steps == 0)
         {
-            ScriptContext1_SetupScript(S_RepelWoreOff);
+            ScriptContext_SetupScript(S_RepelWoreOff);
             return TRUE;
         }
     }

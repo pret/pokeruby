@@ -614,7 +614,7 @@ void debug_sub_806F908(u8 taskId)
                 RtcCalcLocalTimeOffset(gLocalTime.days, gLocalTime.hours, gLocalTime.minutes, gLocalTime.seconds);
             DestroyTask(data[1]);
             Menu_EraseScreen();
-            ScriptContext2_Disable();
+            UnlockPlayerFieldControls();
             DestroyTask(taskId);
         }
         break;
@@ -625,14 +625,14 @@ void debug_sub_806F99C(void)
 {
     RtcCalcLocalTime();
     CreateTask(debug_sub_806F908, 80);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 void debug_sub_806F9B8(void)
 {
     gLocalTime = gSaveBlock2.lastBerryTreeUpdate;
     CreateTask(debug_sub_806F908, 80);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 static const u8 sDebugText_Days[] = DTR("にっすう", "days");
@@ -683,7 +683,7 @@ void debug_sub_806F9E4(u8 taskId)
             {
                 Menu_EraseScreen();
                 DestroyTask(taskId);
-                ScriptContext2_Disable();
+                UnlockPlayerFieldControls();
             }
         }
         break;

@@ -89,7 +89,7 @@ static const struct YesNoFuncTable sShopPurchaseYesNoFuncs[] =
 
 static u8 CreateShopMenu(u8 martType)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gMartInfo.martType = martType;
     gMartInfo.cursor = 0;
 
@@ -185,7 +185,7 @@ static void Task_HandleShopMenuQuit(u8 taskId)
     Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 0, 11, 8);
     sub_80BE3BC();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
     DestroyTask(taskId);
 
     if (gMartInfo.callback)
@@ -1203,21 +1203,21 @@ void Shop_CreatePokemartMenu(u16 *itemList)
     CreateShopMenu(MART_TYPE_0);
     SetShopItemsForSale(itemList);
     ClearItemPurchases();
-    SetShopMenuCallback(EnableBothScriptContexts);
+    SetShopMenuCallback(ScriptContext_Enable);
 }
 
 void Shop_CreateDecorationShop1Menu(u16 *itemList)
 {
     CreateShopMenu(MART_TYPE_1);
     SetShopItemsForSale(itemList);
-    SetShopMenuCallback(EnableBothScriptContexts);
+    SetShopMenuCallback(ScriptContext_Enable);
 }
 
 void Shop_CreateDecorationShop2Menu(u16 *itemList)
 {
     CreateShopMenu(MART_TYPE_2);
     SetShopItemsForSale(itemList);
-    SetShopMenuCallback(EnableBothScriptContexts);
+    SetShopMenuCallback(ScriptContext_Enable);
 }
 
 #if DEBUG

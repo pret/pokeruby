@@ -62,7 +62,7 @@ static void task08_080C9820(u8 taskId)
 {
     u8 objEventId;
 
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gPlayerAvatar.preventStep = TRUE;
     objEventId = gPlayerAvatar.objectEventId;
     if (!ObjectEventIsMovementOverridden(&gObjectEvents[objEventId])
@@ -130,7 +130,7 @@ void debug_sub_8120968(void)
     }
     else
     {
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
     }
 }
 #endif
@@ -152,7 +152,7 @@ bool8 SetUpFieldMove_RockSmash(void)
 static void sub_810B53C(void)
 {
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
-    ScriptContext1_SetupScript(S_UseRockSmash);
+    ScriptContext_SetupScript(S_UseRockSmash);
 }
 
 int FldEff_RockSmash(void)
@@ -169,7 +169,7 @@ static void sub_810B58C(void)
 {
     PlaySE(SE_M_ROCK_THROW);
     FieldEffectActiveListRemove(FLDEFF_USE_ROCK_SMASH);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 int SetUpFieldMove_Dig(void)

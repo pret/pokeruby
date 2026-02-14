@@ -215,7 +215,7 @@ void ItemUseOnFieldCB_Bike(u8 taskId)
         GetOnOffBike(PLAYER_AVATAR_FLAG_ACRO_BIKE);
 
     ScriptUnfreezeObjectEvents();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
     DestroyTask(taskId);
 }
 
@@ -323,7 +323,7 @@ void ExitItemfinder(u8 taskId)
 {
     Menu_EraseWindowRect(0, 14, 29, 19);
     ScriptUnfreezeObjectEvents();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
     DestroyTask(taskId);
 }
 
@@ -659,8 +659,8 @@ void ItemUseOutOfBattle_Berry(u8 taskId)
 static void ItemUseOnFieldCB_Berry(u8 taskId)
 {
     RemoveBagItem(gSpecialVar_ItemId, 1);
-    ScriptContext2_Enable();
-    ScriptContext1_SetupScript(S_PlantBerryTreeFromBag);
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(S_PlantBerryTreeFromBag);
     DestroyTask(taskId);
 }
 
@@ -679,8 +679,8 @@ void ItemUseOutOfBattle_WailmerPail(u8 taskId)
 
 static void ItemUseOnFieldCB_WailmerPail(u8 taskId)
 {
-    ScriptContext2_Enable();
-    ScriptContext1_SetupScript(S_WaterBerryTreeFromBag);
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(S_WaterBerryTreeFromBag);
     DestroyTask(taskId);
 }
 

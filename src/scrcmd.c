@@ -48,7 +48,7 @@
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
 
-extern u32 gUnknown_0202E8AC;
+extern u32 gRamScriptRetAddr;
 
 static EWRAM_DATA u32 gUnknown_0202E8B0 = 0;
 static EWRAM_DATA u16 sPauseCounter = 0;
@@ -142,7 +142,7 @@ bool8 ScrCmd_callnative(struct ScriptContext *ctx)
 
 bool8 ScrCmd_waitstate(struct ScriptContext *ctx)
 {
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
     return TRUE;
 }
 
@@ -283,7 +283,7 @@ bool8 ScrCmd_callstd_if(struct ScriptContext *ctx)
 
 bool8 ScrCmd_gotoram(struct ScriptContext *ctx)
 {
-    ScriptJump(ctx, (u8 *)gUnknown_0202E8AC);
+    ScriptJump(ctx, (u8 *)gRamScriptRetAddr);
     return FALSE;
 }
 
@@ -605,7 +605,7 @@ bool8 ScrCmd_incrementgamestat(struct ScriptContext *ctx)
 bool8 ScrCmd_animateflash(struct ScriptContext *ctx)
 {
     sub_8081594(ScriptReadByte(ctx));
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
     return TRUE;
 }
 
@@ -1281,7 +1281,7 @@ bool8 ScrCmd_yesnobox(struct ScriptContext *ctx)
 
     if (ScriptMenu_YesNo(left, top) == TRUE)
     {
-        ScriptContext1_Stop();
+        ScriptContext_Stop();
         return TRUE;
     }
     else
@@ -1299,7 +1299,7 @@ bool8 ScrCmd_multichoice(struct ScriptContext *ctx)
 
     if (ScriptMenu_Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
     {
-        ScriptContext1_Stop();
+        ScriptContext_Stop();
         return TRUE;
     }
     else
@@ -1318,7 +1318,7 @@ bool8 ScrCmd_multichoicedefault(struct ScriptContext *ctx)
 
     if (ScriptMenu_MultichoiceWithDefault(left, top, multichoiceId, ignoreBPress, defaultChoice) == TRUE)
     {
-        ScriptContext1_Stop();
+        ScriptContext_Stop();
         return TRUE;
     }
     else
@@ -1348,7 +1348,7 @@ bool8 ScrCmd_multichoicegrid(struct ScriptContext *ctx)
 
     if (ScriptMenu_MultichoiceGrid(left, top, multichoiceId, ignoreBPress, numColumns) == TRUE)
     {
-        ScriptContext1_Stop();
+        ScriptContext_Stop();
         return TRUE;
     }
     else
@@ -1378,7 +1378,7 @@ bool8 ScrCmd_drawboxtext(struct ScriptContext *ctx)
 
     if (Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
     {
-        ScriptContext1_Stop();
+        ScriptContext_Stop();
         return TRUE;
     }
     else
@@ -1414,7 +1414,7 @@ bool8 ScrCmd_showcontestwinner(struct ScriptContext *ctx)
     if (v1)
         SetContestWinnerForPainting(v1);
     ShowContestWinner();
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
     return TRUE;
 }
 
@@ -1748,7 +1748,7 @@ bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
 bool8 ScrCmd_dowildbattle(struct ScriptContext *ctx)
 {
     BattleSetup_StartScriptedWildBattle();
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
     return TRUE;
 }
 
@@ -1757,7 +1757,7 @@ bool8 ScrCmd_pokemart(struct ScriptContext *ctx)
     void *ptr = (void *)ScriptReadWord(ctx);
 
     Shop_CreatePokemartMenu(ptr);
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
     return TRUE;
 }
 
@@ -1766,7 +1766,7 @@ bool8 ScrCmd_pokemartdecoration(struct ScriptContext *ctx)
     void *ptr = (void *)ScriptReadWord(ctx);
 
     Shop_CreateDecorationShop1Menu(ptr);
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
     return TRUE;
 }
 
@@ -1775,7 +1775,7 @@ bool8 ScrCmd_pokemartdecoration2(struct ScriptContext *ctx)
     void *ptr = (void *)ScriptReadWord(ctx);
 
     Shop_CreateDecorationShop2Menu(ptr);
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
     return TRUE;
 }
 
@@ -1784,7 +1784,7 @@ bool8 ScrCmd_playslotmachine(struct ScriptContext *ctx)
     u8 v2 = VarGet(ScriptReadHalfword(ctx));
 
     PlaySlotMachine(v2, CB2_ReturnToFieldContinueScriptPlayMapMusic);
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
     return TRUE;
 }
 
@@ -1812,28 +1812,28 @@ bool8 ScrCmd_getpricereduction(struct ScriptContext *ctx)
 bool8 ScrCmd_choosecontestmon(struct ScriptContext *ctx)
 {
     sub_80F99CC();
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
     return TRUE;
 }
 
 bool8 ScrCmd_startcontest(struct ScriptContext *ctx)
 {
     sub_80C48C8();
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
     return TRUE;
 }
 
 bool8 ScrCmd_showcontestresults(struct ScriptContext *ctx)
 {
     sub_80C4940();
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
     return TRUE;
 }
 
 bool8 ScrCmd_contestlinktransfer(struct ScriptContext *ctx)
 {
     ContestLinkTransfer(gSpecialVar_ContestCategory);
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
     return TRUE;
 }
 
@@ -1987,7 +1987,7 @@ bool8 ScrCmd_addelevmenuitem(struct ScriptContext *ctx)
 bool8 ScrCmd_showelevmenu(struct ScriptContext *ctx)
 {
     ScriptShowElevatorMenu();
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
     return TRUE;
 }
 

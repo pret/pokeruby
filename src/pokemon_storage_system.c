@@ -284,8 +284,8 @@ void Task_PokemonStorageSystem(u8 taskId)
                 case  3:
                     Menu_DestroyCursor();
                     Menu_EraseWindowRect(0, 0, 13, 9);
-                    ScriptContext2_Disable();
-                    EnableBothScriptContexts();
+                    UnlockPlayerFieldControls();
+                    ScriptContext_Enable();
                     DestroyTask(taskId);
                     break;
                 default:
@@ -352,7 +352,7 @@ void ShowPokemonStorageSystem(void)
     u8 taskId = CreateTask(Task_PokemonStorageSystem, 80);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = 0;
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 void FieldCB_ReturnToOverworld(void)

@@ -79,7 +79,7 @@ void debug_sub_8122080(void)
     if (gMapHeader.cave == 1 && !FlagGet(FLAG_SYS_USE_FLASH))
         sub_810CBFC();
     else
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
 }
 
 #endif
@@ -108,7 +108,7 @@ static void sub_810CC34(void)
 {
     PlaySE(SE_M_REFLECT);
     FlagSet(FLAG_SYS_USE_FLASH);
-    ScriptContext1_SetupScript(gUnknown_081B694A);
+    ScriptContext_SetupScript(gUnknown_081B694A);
 }
 
 void sub_810CC54(void)

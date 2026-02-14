@@ -954,7 +954,7 @@ void mapldr_080842E8(void)
 {
     pal_fill_black();
     CreateTask(task00_8084310, 0);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjectEvents();
     gFieldCallback = NULL;
 }
@@ -997,7 +997,7 @@ void mapldr_08084390(void)
     {
         ObjectEventTurn(&gObjectEvents[gPlayerAvatar.objectEventId], DIR_WEST);
     }
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjectEvents();
     gFieldCallback = NULL;
 }
@@ -1017,7 +1017,7 @@ void c3_080843F8(u8 taskId)
     }
     if (!FieldEffectActiveListContains(FLDEFF_FLY_IN))
     {
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         UnfreezeObjectEvents();
         DestroyTask(taskId);
     }
@@ -1031,7 +1031,7 @@ void sub_8086748(void)
 {
     Overworld_PlaySpecialMapMusic();
     pal_fill_for_map_transition();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjectEvents();
     CreateTask(sub_8086774, 0);
     gFieldCallback = NULL;
@@ -1148,7 +1148,7 @@ bool8 sub_80869B8(struct Task *task)
 bool8 sub_80869F8(struct Task *task)
 {
     gPlayerAvatar.preventStep = FALSE;
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
     CameraObjectReset1();
     UnfreezeObjectEvents();
     InstallCameraPanAheadCallback();
@@ -1299,7 +1299,7 @@ void sub_8086C94(void)
 {
     Overworld_PlaySpecialMapMusic();
     pal_fill_for_map_transition();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     CreateTask(sub_8086CBC, 0);
     gFieldCallback = NULL;
 }
@@ -1416,7 +1416,7 @@ bool8 sub_8086ED4(struct Task *task)
     if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         CameraObjectReset1();
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         ObjectEventSetHeldMovement(objectEvent, GetWalkNormalMovementAction(DIR_EAST));
         DestroyTask(FindTaskIdByFunc(sub_8086CBC));
     }
@@ -1441,7 +1441,7 @@ void sub_8086F64(u8 taskId)
 
 bool8 sub_8086FB0(struct Task *task, struct ObjectEvent *objectEvent)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gPlayerAvatar.preventStep = TRUE;
     task->data[0]++;
     return FALSE;
@@ -1449,7 +1449,7 @@ bool8 sub_8086FB0(struct Task *task, struct ObjectEvent *objectEvent)
 
 bool8 waterfall_1_do_anim_probably(struct Task *task, struct ObjectEvent *objectEvent)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     if (!ObjectEventIsMovementOverridden(objectEvent))
     {
         ObjectEventClearHeldMovementIfFinished(objectEvent);
@@ -1488,7 +1488,7 @@ bool8 sub_8087058(struct Task *task, struct ObjectEvent *objectEvent)
         task->data[0] = 3;
         return TRUE;
     }
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
     gPlayerAvatar.preventStep = FALSE;
     DestroyTask(FindTaskIdByFunc(sub_8086F64));
     FieldEffectActiveListRemove(FLDEFF_USE_WATERFALL);
@@ -1521,7 +1521,7 @@ bool8 sub_8087124(struct Task *task)
 
 bool8 dive_2_unknown(struct Task *task)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gFieldEffectArguments[0] = task->data[15];
     FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
     task->data[0]++;
@@ -1662,7 +1662,7 @@ void mapldr_080851BC(void)
 {
     Overworld_PlaySpecialMapMusic();
     pal_fill_for_map_transition();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gFieldCallback = NULL;
     CreateTask(sub_8087470, 0);
 }
@@ -1715,7 +1715,7 @@ bool8 sub_808759C(struct Task *task, struct ObjectEvent *objectEvent, struct Spr
     if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         gPlayerAvatar.preventStep = FALSE;
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         UnfreezeObjectEvents();
         DestroyTask(FindTaskIdByFunc(sub_8087470));
     }
@@ -1843,7 +1843,7 @@ void sub_808788C(struct Sprite *sprite)
 
 void StartEscapeRopeFieldEffect(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjectEvents();
     CreateTask(DoEscapeRopeFieldEffect, 0x50);
 }
@@ -1911,7 +1911,7 @@ void mapldr_080859D4(void)
 {
     Overworld_PlaySpecialMapMusic();
     pal_fill_for_map_transition();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjectEvents();
     gFieldCallback = NULL;
     gObjectEvents[gPlayerAvatar.objectEventId].invisible = TRUE;
@@ -1945,7 +1945,7 @@ void sub_8087AC8(struct Task *task)
         if (task->data[2] >= 32 && task->data[15] == GetPlayerFacingDirection())
         {
             objectEvent->invisible = FALSE;
-            ScriptContext2_Disable();
+            UnlockPlayerFieldControls();
             UnfreezeObjectEvents();
             DestroyTask(FindTaskIdByFunc(sub_8087A74));
             return;
@@ -1986,7 +1986,7 @@ static void ExecuteTeleportFieldEffectTask(u8 taskId)
 
 static void TeleportFieldEffectTask1(struct Task *task)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjectEvents();
     CameraObjectReset2();
     task->data[15] = GetPlayerFacingDirection();
@@ -2059,7 +2059,7 @@ static void mapldr_08085D88(void)
 {
     Overworld_PlaySpecialMapMusic();
     pal_fill_for_map_transition();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjectEvents();
     gFieldCallback = NULL;
     gObjectEvents[gPlayerAvatar.objectEventId].invisible = TRUE;
@@ -2146,7 +2146,7 @@ void sub_8087FDC(struct Task *task)
         task->data[1] = 8;
         if ((++task->data[2]) > 4 && task->data[14] == objectEvent->facingDirection)
         {
-            ScriptContext2_Disable();
+            UnlockPlayerFieldControls();
             CameraObjectReset1();
             UnfreezeObjectEvents();
             DestroyTask(FindTaskIdByFunc(sub_8087E1C));
@@ -2600,7 +2600,7 @@ void sub_8088954(u8 taskId)
 
 void sub_8088984(struct Task *task)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjectEvents();
     gPlayerAvatar.preventStep = TRUE;
     SetPlayerAvatarStateMask(8);
@@ -2661,7 +2661,7 @@ void sub_8088AF4(struct Task *task)
         ObjectEventSetHeldMovement(objectEvent, GetFaceDirectionMovementAction(objectEvent->movementDirection));
         sub_8127ED0(objectEvent->fieldEffectSpriteId, 1);
         UnfreezeObjectEvents();
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         FieldEffectActiveListRemove(FLDEFF_USE_SURF);
         DestroyTask(FindTaskIdByFunc(sub_8088954));
     }

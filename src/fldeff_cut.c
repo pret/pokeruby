@@ -120,7 +120,7 @@ void Debug_SetUpFieldMove_Cut(void)
         }
     }
 
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
 }
 
 #endif
@@ -186,7 +186,7 @@ bool8 FldEff_UseCutOnGrass(void)
 static void FieldCallback_CutTree(void)
 {
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
-    ScriptContext1_SetupScript(DoCutFieldEffectScript);
+    ScriptContext_SetupScript(DoCutFieldEffectScript);
 }
 
 bool8 FldEff_UseCutOnTree(void)
@@ -378,12 +378,12 @@ static void CutGrassSpriteCallbackEnd(struct Sprite *sprite)
         DestroySprite(&gSprites[eCutGrassSpriteArray[i]]);
     FieldEffectStop(&gSprites[eCutGrassSpriteArray[0]], FLDEFF_CUT_GRASS);
     ScriptUnfreezeObjectEvents();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
 }
 
 static void StartCutTreeFieldEffect(void)
 {
     PlaySE(SE_M_CUT);
     FieldEffectActiveListRemove(FLDEFF_USE_CUT_ON_TREE);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }

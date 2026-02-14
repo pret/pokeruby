@@ -1044,7 +1044,7 @@ static void HandleDaycareLevelMenuInput(u8 taskId)
         gLastFieldPokeMenuOpened = gSpecialVar_Result = gTasks[taskId].data[0];
         DestroyTask(taskId);
         Menu_EraseWindowRect(15, 6, 29, 13);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
     else if (JOY_NEW(B_BUTTON))
     {
@@ -1052,7 +1052,7 @@ static void HandleDaycareLevelMenuInput(u8 taskId)
         gLastFieldPokeMenuOpened = gSpecialVar_Result = 2;
         DestroyTask(taskId);
         Menu_EraseWindowRect(15, 6, 29, 13);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
 }
 

@@ -256,7 +256,7 @@ bool8 FldEff_SandPillar(void)
 {
     s16 x, y;
 
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     gFieldEffectArguments[5] = x;
     gFieldEffectArguments[6] = y;
@@ -328,7 +328,7 @@ void SpriteCB_SandPillar_1(struct Sprite *sprite)
 void SpriteCB_SandPillar_2(struct Sprite *sprite)
 {
     FieldEffectStop(sprite, FLDEFF_SAND_PILLAR);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 void GetShieldToyTVDecorationInfo(void)

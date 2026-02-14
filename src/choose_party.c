@@ -965,7 +965,7 @@ static void sub_81231C4(u8 taskId)
     if (IsWeatherNotFadingIn() == TRUE)
     {
         DestroyTask(taskId);
-        ScriptContext2_Disable();
-        EnableBothScriptContexts();
+        UnlockPlayerFieldControls();
+        ScriptContext_Enable();
     }
 }

@@ -138,7 +138,7 @@ void sub_8109B34(u8 taskId, u8 decorationId)
     Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 1, 12, 12);
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 void Task_HandleGetDecorationMenuInput(u8 taskId)
@@ -232,7 +232,7 @@ void sub_8109D04(u8 taskId)
         gSpecialVar_0x8006 = 0xFFFF;
     }
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 void sub_8109DAC(u8 taskId)
@@ -241,7 +241,7 @@ void sub_8109DAC(u8 taskId)
     Menu_EraseWindowRect(0, 0, 29, 19);
     gSpecialVar_0x8006 = 0;
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 void ScrSpecial_TraderDoDecorationTrade(void)

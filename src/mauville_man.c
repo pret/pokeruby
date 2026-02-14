@@ -378,7 +378,7 @@ void ScrSpecial_PlayBardSong(void)
 {
     StartBardSong(gSpecialVar_0x8004);
     Menu_DisplayDialogueFrame();
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
 }
 
 void ScrSpecial_GetHipsterSpokenFlag(void)
@@ -747,7 +747,7 @@ static void Task_BardSong(u8 taskId)
         {
             FadeInNewBGM(MUS_POKE_CENTER, 6);
             m4aMPlayFadeOutTemporarily(&gMPlayInfo_SE2, 2);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
             DestroyTask(taskId);
         }
         else if (gStringVar4[task->tCharIndex] == CHAR_SPACE)
@@ -1093,7 +1093,7 @@ static void Task_StoryListMenu(u8 taskId)
         Menu_DestroyCursor();
         Menu_EraseWindowRect(0, 0, 25, 12);
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         break;
     }
 }

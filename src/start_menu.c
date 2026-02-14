@@ -198,7 +198,7 @@ void debug_sub_8075C40(u8 taskId)
         if (JOY_NEW(A_BUTTON))
         {
             Menu_EraseScreen();
-            ScriptContext2_Disable();
+            UnlockPlayerFieldControls();
             DestroyTask(taskId);
         }
         break;
@@ -208,7 +208,7 @@ void debug_sub_8075C40(u8 taskId)
 void debug_sub_8075D9C(void)
 {
     CreateTask(debug_sub_8075C40, 10);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 void debug_sub_8075DB4(struct BattleTowerEReaderTrainer *ereaderTrainer, const u8 *b, u32 trainerId)
@@ -410,7 +410,7 @@ void sub_8071310(void)
         sub_80597F4();
     }
     CreateStartMenuTask(sub_80712B4);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 static u8 StartMenu_InputProcessCallback(void)
@@ -589,7 +589,7 @@ static u8 SaveCallback2(void)
     case SAVE_ERROR:
         Menu_EraseScreen();
         ScriptUnfreezeObjectEvents();
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         return TRUE;
     }
     return FALSE;
@@ -645,7 +645,7 @@ static void Task_SaveDialog(u8 taskId)
         return;
     }
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 static void sub_8071700(void)

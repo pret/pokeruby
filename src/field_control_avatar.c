@@ -324,7 +324,7 @@ static bool8 TryStartInteractionScript(struct MapPosition *position, u16 metatil
      && script != EventScript_PC)
         PlaySE(5);
 
-    ScriptContext1_SetupScript(script);
+    ScriptContext_SetupScript(script);
     return TRUE;
 }
 
@@ -520,7 +520,7 @@ static bool32 TrySetupDiveDownScript(void)
 {
     if (FlagGet(FLAG_BADGE07_GET) && TrySetDiveWarp() == 2)
     {
-        ScriptContext1_SetupScript(UseDiveScript);
+        ScriptContext_SetupScript(UseDiveScript);
         return TRUE;
     }
     return FALSE;
@@ -530,7 +530,7 @@ static bool32 TrySetupDiveEmergeScript(void)
 {
     if (FlagGet(FLAG_BADGE07_GET) && gMapHeader.mapType == MAP_TYPE_UNDERWATER && TrySetDiveWarp() == 1)
     {
-        ScriptContext1_SetupScript(S_UseDiveUnderwater);
+        ScriptContext_SetupScript(S_UseDiveUnderwater);
         return TRUE;
     }
     return FALSE;
@@ -557,7 +557,7 @@ bool8 TryStartCoordEventScript(struct MapPosition *position)
 
     if (script == NULL)
         return FALSE;
-    ScriptContext1_SetupScript(script);
+    ScriptContext_SetupScript(script);
     return TRUE;
 }
 
@@ -565,7 +565,7 @@ bool8 TryStartCrackedFloorHoleScript(u16 metatileBehavior)
 {
     if (MetatileBehavior_IsCrackedFloorHole(metatileBehavior))
     {
-        ScriptContext1_SetupScript(EventScript_FallDownHole);
+        ScriptContext_SetupScript(EventScript_FallDownHole);
         return TRUE;
     }
     return FALSE;
@@ -577,20 +577,20 @@ bool8 TryStartStepCountScript(void)
     UpdateHappinessStep();
     if (UpdatePoisonStepCounter() == TRUE)
     {
-        ScriptContext1_SetupScript(gUnknown_081A14B8);
+        ScriptContext_SetupScript(gUnknown_081A14B8);
         return TRUE;
     }
     if (ShouldEggHatch())
     {
         IncrementGameStat(GAME_STAT_HATCHED_EGGS);
-        ScriptContext1_SetupScript(S_EggHatch);
+        ScriptContext_SetupScript(S_EggHatch);
         return TRUE;
     }
     if (SafariZoneTakeStep() == TRUE)
         return TRUE;
     if (CountSSTidalStep(1) == TRUE)
     {
-        ScriptContext1_SetupScript(gUnknown_0815FD0D);
+        ScriptContext_SetupScript(gUnknown_0815FD0D);
         return TRUE;
     }
     return FALSE;
@@ -719,7 +719,7 @@ bool8 TryStartWarpEventScript(struct MapPosition *position, u16 metatileBehavior
         }
         if (MetatileBehavior_IsMtPyreHole(metatileBehavior) == TRUE)
         {
-            ScriptContext1_SetupScript(EventScript_FallDownHoleMtPyre);
+            ScriptContext_SetupScript(EventScript_FallDownHoleMtPyre);
             return TRUE;
         }
         sub_8080E88();
@@ -837,7 +837,7 @@ static const u8 *TryRunCoordEventScript(const struct CoordEvent *coordEvent)
         }
         if (coordEvent->trigger == 0)
         {
-            ScriptContext2_RunNewScript(coordEvent->script);
+            RunScriptImmediately(coordEvent->script);
             return NULL;
         }
         if (VarGet(coordEvent->trigger) == (u8)coordEvent->index)

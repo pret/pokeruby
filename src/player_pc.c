@@ -291,14 +291,14 @@ static void PlayerPC_TurnOff(u8 taskId)
         Menu_EraseWindowRect(0, 0, 0x1D, 0x13);
 
         if (gSaveBlock2.playerGender == MALE)
-            ScriptContext1_SetupScript(gBrendanHouse_TurnPCOff);
+            ScriptContext_SetupScript(gBrendanHouse_TurnPCOff);
         else
-            ScriptContext1_SetupScript(gMayHouse_TurnPCOff);
+            ScriptContext_SetupScript(gMayHouse_TurnPCOff);
     }
     else
     {
         Menu_EraseWindowRect(0, 0, 10, 9);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
     DestroyTask(taskId);
 }

@@ -239,7 +239,7 @@ static void VBlankCB_MoveTutorMenu(void)
 
 void DisplayMoveTutorMenu(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     CreateTask(InitMoveTutorMenuWaitFade, 10);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
 }

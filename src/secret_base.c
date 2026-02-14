@@ -403,7 +403,7 @@ void sub_80BBB50(u8 taskid)
     ObjectEventTurn(&(gObjectEvents[gPlayerAvatar.objectEventId]), 2);
     if (IsWeatherNotFadingIn() == 1)
     {
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskid);
     }
 }
@@ -412,7 +412,7 @@ void sub_80BBB90(void)
 {
     s16 x, y;
 
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     HideMapNamePopup();
     sub_80BB764(&x, &y, 0x220);
     MapGridSetMetatileIdAt(x + 7, y + 7, 0xe20);
@@ -565,7 +565,7 @@ void sub_80BC038(struct MapPosition *position, const struct MapEvents *events)
 {
     SetCurrentSecretBaseFromPosition(position, events);
     SetCurrentSecretBaseVar();
-    ScriptContext1_SetupScript(gUnknown_081A2E14);
+    ScriptContext_SetupScript(gUnknown_081A2E14);
 }
 
 bool8 sub_80BC050(void)
@@ -582,7 +582,7 @@ void sub_80BC074(u8 taskid)
     switch (gTasks[taskid].data[0])
     {
     case 0:
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         gTasks[taskid].data[0] = 1;
         break;
     case 1:
@@ -594,7 +594,7 @@ void sub_80BC074(u8 taskid)
         WarpIntoMap();
         gFieldCallback = mapldr_default;
         SetMainCallback2(CB2_LoadMap);
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         DestroyTask(taskid);
         break;
     }
@@ -808,7 +808,7 @@ void Task_SecretBasePC_Registry(u8 taskId)
 {
     s16 *taskData;
 
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     ClearVerticalScrollIndicatorPalettes();
     LoadScrollIndicatorPalette();
 
@@ -1093,9 +1093,9 @@ void sub_80BCC54(u8 taskId)
     DestroyVerticalScrollIndicator(BOTTOM_ARROW);
 
     if (curBaseIndex == 0)
-        ScriptContext1_SetupScript(SecretBase_EventScript_PCCancel);
+        ScriptContext_SetupScript(SecretBase_EventScript_PCCancel);
     else
-        ScriptContext1_SetupScript(SecretBase_EventScript_ShowRegisterMenu);
+        ScriptContext_SetupScript(SecretBase_EventScript_ShowRegisterMenu);
 
     DestroyTask(taskId);
 }
