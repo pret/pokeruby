@@ -172,11 +172,11 @@ static void sub_80CADA8(struct Sprite* sprite)
         sprite->y2 += Cos(sprite->data[5], -5);
         if ((u16)(sprite->data[5] - 0x40) < 0x80)
         {
-            sprite->subpriority = GetBattlerSubpriority(gBattleAnimAttacker) - 1;
+            sprite->subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 1;
         }
         else
         {
-            sprite->subpriority = GetBattlerSubpriority(gBattleAnimAttacker) + 1;
+            sprite->subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) + 1;
         }
 
         sprite->data[5] = (sprite->data[5] + 5) & 0xFF;

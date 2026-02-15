@@ -289,6 +289,10 @@
 #define BATTLE_TERRAIN_BUILDING     8
 #define BATTLE_TERRAIN_PLAIN        9
 
+#define B_WAIT_TIME_LONG  64
+#define B_WAIT_TIME_MED   48
+#define B_WAIT_TIME_SHORT 32
+
 #define TARGET_SELECTED_POKEMON 0
 #define TARGET_SPECIAL          (1 << 0)
 #define TARGET_UNK2             (1 << 1)
@@ -384,15 +388,6 @@
 #define B_ANIM_FOCUS_PUNCH_SET_UP       0x14
 #define B_ANIM_INGRAIN_HEAL             0x15
 #define B_ANIM_WISH_HEAL                0x16
-
-// special animation table
-#define B_ANIM_LVL_UP                   0x0
-#define B_ANIM_SWITCH_OUT_PLAYER_MON    0x1
-#define B_ANIM_SWITCH_OUT_OPPONENT_MON  0x2
-#define B_ANIM_BALL_THROW               0x3
-#define B_ANIM_SAFARI_BALL_THROW        0x4
-#define B_ANIM_SUBSTITUTE_TO_MON        0x5
-#define B_ANIM_MON_TO_SUBSTITUTE        0x6
 
 // AI switch items
 #define AI_ITEM_FULL_RESTORE     1

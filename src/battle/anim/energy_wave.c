@@ -232,7 +232,7 @@ void sub_80D3698(struct Sprite *sprite)
     sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
     sprite->y2 = -10;
 
-    subpriority = GetBattlerSubpriority(gBattleAnimAttacker);
+    subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker);
 
     if (!IsContest())
     {

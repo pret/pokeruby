@@ -294,7 +294,7 @@ bool8 IsBGMStopped(void)
     return FALSE;
 }
 
-void PlayCry1(u16 species, s8 pan)
+void PlayCry_Normal(u16 species, s8 pan)
 {
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 85);
     PlayCryInternal(species, pan, 125, 10, 0);

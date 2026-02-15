@@ -613,7 +613,7 @@ static void sub_80C2A8C(u8 taskId)
             HandleLoadSpecialPokePic(gMonFrontPicTable + species, gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, (void *)gSharedMem, gMonSpriteGfx_Sprite_ptr[1], species, personality);
             monPal = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
             LoadCompressedObjectPalette(monPal);
-            GetMonSpriteTemplate_803C56C(species, 1);
+            SetMultiuseSpriteTemplateToPokemon(species, 1);
             gCreatingSpriteTemplate.paletteTag = monPal->tag;
             spriteId = CreateSprite(&gCreatingSpriteTemplate, 0x110, 0x50, 10);
             gSprites[spriteId].data[1] = species;
@@ -1996,7 +1996,7 @@ void sub_80C3C44(struct Sprite *sprite)
     {
         if (++sprite->data[0] == 10)
         {
-            PlayCry1(sprite->data[1], 0);
+            PlayCry_Normal(sprite->data[1], 0);
             sprite->data[1] = 0;
         }
     }

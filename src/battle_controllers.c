@@ -87,7 +87,7 @@ void SetUpBattleVarsAndBirchPoochyena(void)
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
-        gBattlerControllerFuncs[i] = nullsub_91;
+        gBattlerControllerFuncs[i] = BattleControllerDummy;
         gBattlerPositions[i] = 0xFF;
         gActionSelectionCursor[i] = 0;
         gMoveSelectionCursor[i] = 0;
@@ -145,7 +145,7 @@ static void InitSinglePlayerBtlControllers(void)
         if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
             gBattlerControllerFuncs[0] = SetBankFuncToSafariBufferRunCommand;
         else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
-            gBattlerControllerFuncs[0] = SetBankFuncToWallyBufferRunCommand;
+            gBattlerControllerFuncs[0] = SetControllerToWally;
         else
             gBattlerControllerFuncs[0] = SetBankFuncToPlayerBufferRunCommand;
         gBattlerPositions[0] = 0;

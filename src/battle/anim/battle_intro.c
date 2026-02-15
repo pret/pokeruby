@@ -40,7 +40,7 @@ static const TaskFunc sBattleIntroTaskFuncs[] =
 #define tBgXOffset data[2]
 #define tFramesUntilBg1Slide data[3]
 
-void StartBattleIntroAnim(u8 a)
+void HandleIntroSlide(u8 a)
 {
     u8 taskId;
 

@@ -2,13 +2,13 @@
 #include "data2.h"
 #include "battle_setup.h"
 #include "battle.h"
-#include "trainer.h"
 #include "graphics.h"
 #include "gba/types.h"
 #include "constants/species.h"
 #include "constants/moves.h"
 #include "constants/items.h"
 #include "constants/opponents.h"
+#include "constants/trainers.h"
 
 const struct MonCoords gTrainerBackPicCoords[] = {
     {8, 4},

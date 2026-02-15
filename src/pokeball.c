@@ -326,12 +326,12 @@ static void sub_8047830(struct Sprite *);
 static void oamc_804BEB4(struct Sprite *);
 static u16 GetBattlerBall(u8);
 
-u8 StartSendOutMonAnimation(u16 a, u8 side)
+u8 DoPokeballSendOutAnimation(u16 a, u8 side)
 {
     u8 taskId;
 
     gDoingBattleAnim = 1;
-    ewram17810[gActiveBattler].unk0_3 = 1;
+    gBattleHealthBoxInfo[gActiveBattler].ballAnimActive = 1;
     taskId = CreateTask(SendOutMonAnimation, 5);
     gTasks[taskId].data[1] = a;
     gTasks[taskId].data[2] = side;
@@ -647,7 +647,7 @@ static void sub_8046AD0(u8 taskId)
             gTasks[taskId].data[15] = r6 + 1;
         break;
     case 1:
-        PlayCry1(species, r3);
+        PlayCry_Normal(species, r3);
         DestroyTask(taskId);
         break;
     case 2:
@@ -793,12 +793,12 @@ static void sub_8046E9C(struct Sprite *sprite)
 
         gSprites[gBattlerSpriteIds[r4]].y2 = 0;
         gDoingBattleAnim = 0;
-        ewram17810[r4].unk0_3 = 0;
+        gBattleHealthBoxInfo[r4].ballAnimActive = 0;
         FreeSpriteOamMatrix(sprite);
         DestroySprite(sprite);
         for (r3 = 0, i = 0; i < 4; i++)
         {
-            if (ewram17810[i].unk0_3 == 0)
+            if (gBattleHealthBoxInfo[i].ballAnimActive == 0)
                 r3++;
         }
         if (r3 == 4)
@@ -830,7 +830,7 @@ static void sub_8046FBC(struct Sprite *sprite)
         DestroySprite(&gSprites[gBattlerSpriteIds[sprite->data[6]]]);
         DestroySpriteAndFreeResources(sprite);
         if (gMain.inBattle)
-            ewram17810[r7].unk0_3 = 0;
+            gBattleHealthBoxInfo[r7].ballAnimActive = 0;
     }
 }
 
@@ -1101,7 +1101,7 @@ void obj_delete_and_free_associated_resources_(struct Sprite *sprite)
     DestroySpriteAndFreeResources(sprite);
 }
 
-void sub_804777C(u8 a)
+void StartHealthboxSlideIn(u8 a)
 {
     struct Sprite *sprite = &gSprites[gHealthboxSpriteIds[a]];
 
@@ -1140,7 +1140,7 @@ static void sub_8047830(struct Sprite *sprite)
         sprite->callback = SpriteCallbackDummy;
 }
 
-void sub_8047858(u8 a)
+void DoHitAnimHealthboxEffect(u8 a)
 {
     u8 spriteId;
 

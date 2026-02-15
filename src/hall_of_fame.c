@@ -624,7 +624,7 @@ static void sub_8142404(u8 taskID)
     if (gSprites[gTasks[taskID].tMonSpriteID(currPokeID)].data[0] != 0)
     {
         if (currMon->species != SPECIES_EGG)
-            PlayCry1(currMon->species, 0);
+            PlayCry_Normal(currMon->species, 0);
         HallOfFame_PrintMonInfo(currMon, 0, 14);
         gTasks[taskID].tFrameCount = 120;
         gTasks[taskID].func = sub_8142484;
@@ -950,7 +950,7 @@ static void sub_8142CC8(u8 taskID)
     if (currMon->species != SPECIES_EGG)
     {
         StopCryAndClearCrySongs();
-        PlayCry1(currMon->species, 0);
+        PlayCry_Normal(currMon->species, 0);
     }
     HallOfFame_PrintMonInfo(currMon, 0, 14);
 

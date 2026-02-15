@@ -35,7 +35,7 @@ extern u32 gTransformedPersonalities[];
 extern struct Window gWindowTemplate_Contest_MoveDescription;
 extern void (*gBattlerControllerFuncs[])(void);
 extern u8 gHealthboxSpriteIds[];
-extern u8 gUnknown_0300434C[];
+extern u8 gBattleControllerData[];
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
@@ -93,10 +93,10 @@ const struct SpritePalette gUnknown_0820A4D4[] =
     { gUnknown_08D1214C, 0xD704 },
 };
 
-extern void c3_0802FDF4(u8);
-extern void sub_804777C();
+extern void Task_PlayerController_RestoreBgmAfterCry(u8);
+extern void StartHealthboxSlideIn();
 extern u8 IsBankSpritePresent(u8);
-extern u8 sub_8077F68(u8);
+extern u8 GetBattlerSpriteDefault_Y(u8);
 extern u8 sub_8077F7C(u8);
 extern void sub_8094958(void);
 extern void sub_80105DC(struct Sprite *);
@@ -112,7 +112,7 @@ void sub_80327CC(void);
 void sub_8032978(struct Sprite *);
 void sub_80328A4(struct Sprite *);
 
-void sub_80312F0(struct Sprite *sprite)
+void SpriteCB_WaitForBattlerBallReleaseAnim(struct Sprite *sprite)
 {
     u8 spriteId = sprite->data[1];
 
@@ -140,7 +140,7 @@ void unref_sub_8031364(struct Sprite *sprite, bool8 stupid)
     AnimateSprite(sprite);
 }
 
-void sub_80313A0(struct Sprite *sprite)
+void SpriteCB_TrainerSlideIn(struct Sprite *sprite)
 {
     if (!(gIntroSlideFlags & 1))
     {
@@ -152,7 +152,7 @@ void sub_80313A0(struct Sprite *sprite)
 
 void move_anim_start_t2_for_situation(u8 a, u32 b)
 {
-    ewram17810[gActiveBattler].unk0_4 = 1;
+    gBattleHealthBoxInfo[gActiveBattler].statusAnimActive = 1;
     if (a == 0)
     {
         if (b == 0x20)
@@ -166,7 +166,7 @@ void move_anim_start_t2_for_situation(u8 a, u32 b)
         else if (b == 0x40)
             move_anim_start_t2(gActiveBattler, 5);
         else
-            ewram17810[gActiveBattler].unk0_4 = 0;
+            gBattleHealthBoxInfo[gActiveBattler].statusAnimActive = 0;
     }
     else
     {
@@ -181,11 +181,11 @@ void move_anim_start_t2_for_situation(u8 a, u32 b)
         else if (b & 0x0000E000)
             move_anim_start_t2(gActiveBattler, 9);
         else
-            ewram17810[gActiveBattler].unk0_4 = 0;
+            gBattleHealthBoxInfo[gActiveBattler].statusAnimActive = 0;
     }
 }
 
-bool8 move_anim_start_t3(u8 a, u8 b, u8 c, u8 d, u16 e)
+bool8 TryHandleLaunchBattleTableAnimation(u8 a, u8 b, u8 c, u8 d, u16 e)
 {
     u8 taskId;
 
@@ -194,9 +194,9 @@ bool8 move_anim_start_t3(u8 a, u8 b, u8 c, u8 d, u16 e)
         gBattleMonForms[a] = e & 0x7F;
         return TRUE;
     }
-    if (gBattleSpriteInfo[a].substituteSprite && sub_803163C(d) == 0)
+    if (gBattleSpriteInfo[a].behindSubstitute && sub_803163C(d) == 0)
         return TRUE;
-    if (gBattleSpriteInfo[a].substituteSprite && d == 2 && gSprites[gBattlerSpriteIds[a]].invisible)
+    if (gBattleSpriteInfo[a].behindSubstitute && d == 2 && gSprites[gBattlerSpriteIds[a]].invisible)
     {
         refresh_graphics_maybe(a, 1, gBattlerSpriteIds[a]);
         sub_80324E0(a);
@@ -208,7 +208,7 @@ bool8 move_anim_start_t3(u8 a, u8 b, u8 c, u8 d, u16 e)
     LaunchBattleAnimation(gBattleAnims_General, d, 0);
     taskId = CreateTask(sub_80315E8, 10);
     gTasks[taskId].data[0] = a;
-    ewram17810[gTasks[taskId].data[0]].unk0_5 = 1;
+    gBattleHealthBoxInfo[gTasks[taskId].data[0]].animFromTableActive = 1;
     return FALSE;
 }
 
@@ -217,7 +217,7 @@ void sub_80315E8(u8 taskId)
     gAnimScriptCallback();
     if (!gAnimScriptActive)
     {
-        ewram17810[gTasks[taskId].data[0]].unk0_5 = 0;
+        gBattleHealthBoxInfo[gTasks[taskId].data[0]].animFromTableActive = 0;
         DestroyTask(taskId);
     }
 }
@@ -238,7 +238,7 @@ u8 sub_803163C(u8 a)
     }
 }
 
-void move_anim_start_t4(u8 a, u8 b, u8 c, u8 d)
+void InitAndLaunchSpecialAnimation(u8 a, u8 b, u8 c, u8 d)
 {
     u8 taskId;
 
@@ -247,7 +247,7 @@ void move_anim_start_t4(u8 a, u8 b, u8 c, u8 d)
     LaunchBattleAnimation(gBattleAnims_Special, d, 0);
     taskId = CreateTask(sub_80316CC, 10);
     gTasks[taskId].data[0] = a;
-    ewram17810[gTasks[taskId].data[0]].unk0_6 = 1;
+    gBattleHealthBoxInfo[gTasks[taskId].data[0]].specialAnimActive = 1;
 }
 
 void sub_80316CC(u8 taskId)
@@ -255,7 +255,7 @@ void sub_80316CC(u8 taskId)
     gAnimScriptCallback();
     if (!gAnimScriptActive)
     {
-        ewram17810[gTasks[taskId].data[0]].unk0_6 = 0;
+        gBattleHealthBoxInfo[gTasks[taskId].data[0]].specialAnimActive = 0;
         DestroyTask(taskId);
     }
 }
@@ -271,15 +271,15 @@ bool8 mplay_80342A4(u8 a)
 
     if (IsSEPlaying())
     {
-        ewram17810[a].unk8++;
-        if (ewram17810[gActiveBattler].unk8 < 30)
+        gBattleHealthBoxInfo[a].unk8++;
+        if (gBattleHealthBoxInfo[gActiveBattler].unk8 < 30)
             return TRUE;
         m4aMPlayStop(&gMPlayInfo_SE1);
         m4aMPlayStop(&gMPlayInfo_SE2);
     }
     if (zero == 0)
     {
-        ewram17810[a].unk8 = 0;
+        gBattleHealthBoxInfo[a].unk8 = 0;
         return FALSE;
     }
     return TRUE;
@@ -296,14 +296,14 @@ void BattleLoadOpponentMonSprite(struct Pokemon *pkmn, u8 b)
     const u8 *lzPaletteData;
 
     personalityValue = GetMonData(pkmn, MON_DATA_PERSONALITY);
-    if (gBattleSpriteInfo[b].transformedSpecies == 0)
+    if (gBattleSpriteInfo[b].transformSpecies == 0)
     {
         species = GetMonData(pkmn, MON_DATA_SPECIES);
         r7 = personalityValue;
     }
     else
     {
-        species = gBattleSpriteInfo[b].transformedSpecies;
+        species = gBattleSpriteInfo[b].transformSpecies;
         r7 = gTransformedPersonalities[b];
     }
     otId = GetMonData(pkmn, MON_DATA_OT_ID);
@@ -317,7 +317,7 @@ void BattleLoadOpponentMonSprite(struct Pokemon *pkmn, u8 b)
       species,
       r7);
     paletteOffset = 0x100 + b * 16;
-    if (gBattleSpriteInfo[b].transformedSpecies == 0)
+    if (gBattleSpriteInfo[b].transformSpecies == 0)
         lzPaletteData = GetMonSpritePal(pkmn);
     else
         lzPaletteData = GetMonSpritePalFromOtIdPersonality(species, otId, personalityValue);
@@ -330,7 +330,7 @@ void BattleLoadOpponentMonSprite(struct Pokemon *pkmn, u8 b)
         LZDecompressWram(lzPaletteData, ewram16400);
         LoadPalette(ewram16400 + gBattleMonForms[b] * 32, paletteOffset, 0x20);
     }
-    if (gBattleSpriteInfo[b].transformedSpecies != 0)
+    if (gBattleSpriteInfo[b].transformSpecies != 0)
     {
         BlendPalette(paletteOffset, 16, 6, RGB(31, 31, 31));
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
@@ -348,14 +348,14 @@ void BattleLoadPlayerMonSprite(struct Pokemon *pkmn, u8 b)
     const u8 *lzPaletteData;
 
     personalityValue = GetMonData(pkmn, MON_DATA_PERSONALITY);
-    if (gBattleSpriteInfo[b].transformedSpecies == 0)
+    if (gBattleSpriteInfo[b].transformSpecies == 0)
     {
         species = GetMonData(pkmn, MON_DATA_SPECIES);
         r7 = personalityValue;
     }
     else
     {
-        species = gBattleSpriteInfo[b].transformedSpecies;
+        species = gBattleSpriteInfo[b].transformSpecies;
         r7 = gTransformedPersonalities[b];
     }
     otId = GetMonData(pkmn, MON_DATA_OT_ID);
@@ -369,7 +369,7 @@ void BattleLoadPlayerMonSprite(struct Pokemon *pkmn, u8 b)
       species,
       r7);
     paletteOffset = 0x100 + b * 16;
-    if (gBattleSpriteInfo[b].transformedSpecies == 0)
+    if (gBattleSpriteInfo[b].transformSpecies == 0)
         lzPaletteData = GetMonSpritePal(pkmn);
     else
         lzPaletteData = GetMonSpritePalFromOtIdPersonality(species, otId, personalityValue);
@@ -382,7 +382,7 @@ void BattleLoadPlayerMonSprite(struct Pokemon *pkmn, u8 b)
         LZDecompressWram(lzPaletteData, ewram16400);
         LoadPalette(ewram16400 + gBattleMonForms[b] * 32, paletteOffset, 0x20);
     }
-    if (gBattleSpriteInfo[b].transformedSpecies != 0)
+    if (gBattleSpriteInfo[b].transformSpecies != 0)
     {
         BlendPalette(paletteOffset, 16, 6, RGB(31, 31, 31));
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
@@ -417,7 +417,7 @@ void sub_8031A6C(u16 a, u8 b)
     LoadCompressedObjectPalette(&gTrainerFrontPicPaletteTable[a]);
 }
 
-void LoadPlayerTrainerBankSprite(u16 a, u8 b)
+void DecompressTrainerBackPic(u16 a, u8 b)
 {
     u8 status;
 
@@ -521,7 +521,7 @@ bool8 sub_8031C30(u8 a)
     return retVal;
 }
 
-void load_gfxc_health_bar(u8 a)
+void LoadBattleBarGfx(u8 a)
 {
     LZDecompressWram(gUnknown_08D09C48, eBattleInterfaceGfxBuffer);
 }
@@ -579,13 +579,13 @@ u8 battle_load_something(u8 *pState, u8 *b)
         if (GetBattlerSide(*b) == 0)
         {
             if (!(gBattleTypeFlags & 0x80))
-                sub_8045A5C(gHealthboxSpriteIds[*b], &gPlayerParty[gBattlerPartyIndexes[*b]], 0);
+                UpdateHealthboxAttribute(gHealthboxSpriteIds[*b], &gPlayerParty[gBattlerPartyIndexes[*b]], 0);
         }
         else
         {
-            sub_8045A5C(gHealthboxSpriteIds[*b], &gEnemyParty[gBattlerPartyIndexes[*b]], 0);
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[*b], &gEnemyParty[gBattlerPartyIndexes[*b]], 0);
         }
-        sub_8043DB0(gHealthboxSpriteIds[*b]);
+        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[*b]);
         (*b)++;
         if (*b == gBattlersCount)
         {
@@ -604,7 +604,7 @@ u8 battle_load_something(u8 *pState, u8 *b)
 
 void sub_8031EE8(void)
 {
-    memset(ewram17810, 0, 0x30);
+    memset(gBattleHealthBoxInfo, 0, 0x30);
     memset(&ewram17840, 0, 0x10);
 }
 
@@ -614,7 +614,7 @@ void sub_8031F0C(void)
     memset(gBattleSpriteInfo, 0, 0x10);
 }
 
-void sub_8031F24(void)
+void CopyAllBattleSpritesInvisibilities(void)
 {
     s32 i;
 
@@ -642,12 +642,12 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         paletteOffset = 0x100 + a * 16;
         LoadPalette(ewram16400 + ewram17840.unk0 * 32, paletteOffset, 32);
         gBattleMonForms[a] = ewram17840.unk0;
-        if (gBattleSpriteInfo[a].transformedSpecies != 0)
+        if (gBattleSpriteInfo[a].transformSpecies != 0)
         {
             BlendPalette(paletteOffset, 16, 6, RGB(31, 31, 31));
             CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
         }
-        gSprites[gBattlerSpriteIds[a]].y = sub_8077F68(a);
+        gSprites[gBattlerSpriteIds[a]].y = GetBattlerSpriteDefault_Y(a);
     }
     else
     {
@@ -716,10 +716,10 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
         if (!IsContest())
         {
-            gBattleSpriteInfo[a].transformedSpecies = species;
+            gBattleSpriteInfo[a].transformSpecies = species;
             gBattleMonForms[a] = gBattleMonForms[b];
         }
-        gSprites[gBattlerSpriteIds[a]].y = sub_8077F68(a);
+        gSprites[gBattlerSpriteIds[a]].y = GetBattlerSpriteDefault_Y(a);
         StartSpriteAnim(&gSprites[gBattlerSpriteIds[a]], gBattleMonForms[a]);
     }
 }
@@ -771,18 +771,18 @@ void refresh_graphics_maybe(u8 a, u8 b, u8 spriteId)
     if (b == 0)
         gSprites[spriteId].y = sub_8077F7C(a);
     else
-        gSprites[spriteId].y = sub_8077F68(a);
+        gSprites[spriteId].y = GetBattlerSpriteDefault_Y(a);
 }
 
-void sub_80324BC(u8 a, u16 b)
+void TrySetBehindSubstituteSpriteBit(u8 a, u16 b)
 {
     if (b == 0xA4)
-        gBattleSpriteInfo[a].substituteSprite = 1;
+        gBattleSpriteInfo[a].behindSubstitute = 1;
 }
 
 void sub_80324E0(u8 a)
 {
-    gBattleSpriteInfo[a].substituteSprite = 0;
+    gBattleSpriteInfo[a].behindSubstitute = 0;
 }
 
 void HandleLowHpMusicChange(struct Pokemon *pkmn, u8 b)
@@ -852,7 +852,7 @@ void sub_8032638(void)
     }
 }
 
-void sub_80326EC(u8 a)
+void SetBattlerSpriteAffineMode(u8 a)
 {
     s32 i;
 
@@ -863,12 +863,12 @@ void sub_80326EC(u8 a)
             gSprites[gBattlerSpriteIds[i]].oam.affineMode = a;
             if (a == 0)
             {
-                ewram17810[i].unk6 = gSprites[gBattlerSpriteIds[i]].oam.matrixNum;
+                gBattleHealthBoxInfo[i].unk6 = gSprites[gBattlerSpriteIds[i]].oam.matrixNum;
                 gSprites[gBattlerSpriteIds[i]].oam.matrixNum = 0;
             }
             else
             {
-                gSprites[gBattlerSpriteIds[i]].oam.matrixNum = ewram17810[i].unk6;
+                gSprites[gBattlerSpriteIds[i]].oam.matrixNum = gBattleHealthBoxInfo[i].unk6;
             }
         }
     }
@@ -880,13 +880,13 @@ void sub_80327CC(void)
 
     LoadCompressedObjectPic(&gUnknown_081FAF24);
     r5 = GetBattlerAtPosition(1);
-    ewram17810[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, GetBattlerSpriteCoord(r5, 0), GetBattlerSpriteCoord(r5, 1) + 32, 0xC8);
-    gSprites[ewram17810[r5].unk7].data[0] = r5;
+    gBattleHealthBoxInfo[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, GetBattlerSpriteCoord(r5, 0), GetBattlerSpriteCoord(r5, 1) + 32, 0xC8);
+    gSprites[gBattleHealthBoxInfo[r5].unk7].data[0] = r5;
     if (IsDoubleBattle())
     {
         r5 = GetBattlerAtPosition(3);
-        ewram17810[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, GetBattlerSpriteCoord(r5, 0), GetBattlerSpriteCoord(r5, 1) + 32, 0xC8);
-        gSprites[ewram17810[r5].unk7].data[0] = r5;
+        gBattleHealthBoxInfo[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, GetBattlerSpriteCoord(r5, 0), GetBattlerSpriteCoord(r5, 1) + 32, 0xC8);
+        gSprites[gBattleHealthBoxInfo[r5].unk7].data[0] = r5;
     }
 }
 
@@ -903,9 +903,9 @@ void sub_80328A4(struct Sprite *sprite)
     }
     if (gAnimScriptActive || r7->invisible)
         invisible = TRUE;
-    else if (gBattleSpriteInfo[r4].transformedSpecies != 0 && gEnemyMonElevation[gBattleSpriteInfo[r4].transformedSpecies] == 0)
+    else if (gBattleSpriteInfo[r4].transformSpecies != 0 && gEnemyMonElevation[gBattleSpriteInfo[r4].transformSpecies] == 0)
         invisible = TRUE;
-    if (gBattleSpriteInfo[r4].substituteSprite)
+    if (gBattleSpriteInfo[r4].behindSubstitute)
         invisible = TRUE;
     sprite->x = r7->x;
     sprite->x2 = r7->x2;
@@ -921,18 +921,18 @@ void sub_8032984(u8 a, u16 b)
 {
     if (GetBattlerSide(a) != 0)
     {
-        if (gBattleSpriteInfo[a].transformedSpecies != 0)
-            b = gBattleSpriteInfo[a].transformedSpecies;
+        if (gBattleSpriteInfo[a].transformSpecies != 0)
+            b = gBattleSpriteInfo[a].transformSpecies;
         if (gEnemyMonElevation[b] != 0)
-            gSprites[ewram17810[a].unk7].callback = sub_80328A4;
+            gSprites[gBattleHealthBoxInfo[a].unk7].callback = sub_80328A4;
         else
-            gSprites[ewram17810[a].unk7].callback = sub_8032978;
+            gSprites[gBattleHealthBoxInfo[a].unk7].callback = sub_8032978;
     }
 }
 
 void sub_8032A08(u8 a)
 {
-    gSprites[ewram17810[a].unk7].callback = sub_8032978;
+    gSprites[gBattleHealthBoxInfo[a].unk7].callback = sub_8032978;
 }
 
 void sub_8032A38(void)
@@ -960,7 +960,7 @@ void sub_8032A38(void)
 
 void sub_8032AA8(u8 a, u8 b)
 {
-    gBattleSpriteInfo[a].transformedSpecies = 0;
+    gBattleSpriteInfo[a].transformSpecies = 0;
     gBattleMonForms[a] = 0;
     if (b == 0)
         sub_80324E0(a);

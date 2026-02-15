@@ -1852,7 +1852,7 @@ static u8 SummaryScreen_LoadPokemonSprite(struct Pokemon *mon, u8 *state)
 
         palette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
         LoadCompressedObjectPalette(palette);
-        GetMonSpriteTemplate_803C56C(palette->tag, 1);
+        SetMultiuseSpriteTemplateToPokemon(palette->tag, 1);
         *state += 1;
         return 0xFF;
     }
@@ -3744,7 +3744,7 @@ static void SummaryScreen_SpritePlayCry(struct Sprite *sprite)
         sprite->callback = SpriteCallbackDummy;
 
         if (!GetMonData(&pssData.loadedMon, MON_DATA_IS_EGG))
-            PlayCry1(sprite->data[0], 0);
+            PlayCry_Normal(sprite->data[0], 0);
     }
 }
 

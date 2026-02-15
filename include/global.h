@@ -55,6 +55,7 @@
 
 #define POKEMON_SLOTS_NUMBER 412
 #define POKEMON_NAME_LENGTH 10
+#define POKEMON_NAME_BUFFER_SIZE max(20, POKEMON_NAME_LENGTH + 1) // Frequently used buffer size. Larger than necessary
 #define OT_NAME_LENGTH 7
 
 #define min(a, b) ((a) < (b) ? (a) : (b))

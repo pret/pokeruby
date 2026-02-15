@@ -385,10 +385,10 @@ struct BattleStruct /* 0x2000000 */
     /*0x160A5*/ u8 animArg2;
     /*0x160A6*/ u8 unk160A6; // related to gAbsentBattlerFlags, possibly absent flags turn ago?
     /*0x160A7*/ u8 unk160A7;
-    /*0x160A8*/ u8 unk160A8;
-    /*0x160A9*/ u8 unk160A9;
-    /*0x160AA*/ u8 unk160AA;
-    /*0x160AB*/ u8 unk160AB;
+    /*0x160A8*/ u8 wallyBattleState;
+    /*0x160A9*/ u8 wallyMovesState;
+    /*0x160AA*/ u8 wallyWaitFrames;
+    /*0x160AB*/ u8 wallyMoveFrames;
     /*0x160AC*/ u16 lastTakenMove[2 * 2 * 2];
     /*0x160BC*/ u16 HP_OnSwitchout[2];
     /*0x160C0*/ u8 abilityPreventingSwitchout;
@@ -443,27 +443,27 @@ struct BattleSpriteInfo
 {
     u8 invisible:1;
     u8 lowHpSong:1;
-    u8 substituteSprite:1;
+    u8 behindSubstitute:1;
     u8 flag_x8:1;
     u8 hpNumbersNoBars:1;
-    u16 transformedSpecies;
+    u16 transformSpecies;
 };
 
-struct Struct2017810
+struct BattleHealthboxInfo
 {
- /*0x00*/ u8 unk0_0:1;
+ /*0x00*/ u8 partyStatusSummaryShown:1;
  /*0x00*/ u8 unk0_1:1;
  /*0x00*/ u8 unk0_2:1;
- /*0x00*/ u8 unk0_3:1;
- /*0x00*/ u8 unk0_4:1;
- /*0x00*/ u8 unk0_5:1;
- /*0x00*/ u8 unk0_6:1;
- /*0x00*/ u8 unk0_7:1;
- /*0x01*/ u8 unk1_0:1;
+ /*0x00*/ u8 ballAnimActive:1;
+ /*0x00*/ u8 statusAnimActive:1;
+ /*0x00*/ u8 animFromTableActive:1;
+ /*0x00*/ u8 specialAnimActive:1;
+ /*0x00*/ u8 triedShinyMonAnim:1;
+ /*0x01*/ u8 finishedShinyMonAnim:1;
  /*0x01*/ u8 unk1_1:5;
  /*0x02*/ u8 unk2;
  /*0x03*/ u8 unk3;
- /*0x04*/ u8 unk4;
+ /*0x04*/ u8 animationState;
  /*0x05*/ u8 unk5;
  /*0x06*/ u8 unk6;
  /*0x07*/ u8 unk7;
@@ -685,20 +685,20 @@ u8 TypeCalc(u16 move, u8 bank_atk, u8 bank_def);
 u8 GetBattlerTurnOrderNum(u8 bank);
 
 // asm/battle_5.o
-void nullsub_91(void);
+void BattleControllerDummy(void);
 void SetBankFuncToPlayerBufferRunCommand(void);
 void sub_802C098();
-void c3_0802FDF4(u8);
+void Task_PlayerController_RestoreBgmAfterCry(u8);
 void sub_802E3E4(u8, int);
 void nullsub_8(u8);
 void sub_802E414(void);
 void sub_802E424(void);
 
 // asm/battle_7.o
-void move_anim_start_t4(u8 a, u8 b, u8 c, u8 d);
+void InitAndLaunchSpecialAnimation(u8 a, u8 b, u8 c, u8 d);
 void nullsub_9(u16);
 void nullsub_10(int);
-void load_gfxc_health_bar(u8);
+void LoadBattleBarGfx(u8);
 u8 battle_load_something();
 void sub_8031F88(u8);
 void HandleLowHpMusicChange(struct Pokemon *, u8);

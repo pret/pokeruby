@@ -14,9 +14,9 @@
 #include "string_util.h"
 #include "strings2.h"
 #include "text.h"
-#include "trainer.h"
 #include "util.h"
 #include "ewram.h"
+#include "constants/trainers.h"
 
 extern u8 gPlayerPartyCount;
 extern u8 gEnemyPartyCount;
@@ -159,14 +159,14 @@ const struct SpriteTemplate gSpriteTemplate_8208288[] =
         gAffineAnims_BattleSpriteOpponentSide, oac_poke_opponent},
 };
 
-void GetMonSpriteTemplate_803C56C(u16 species, u8 a2)
+void SetMultiuseSpriteTemplateToPokemon(u16 species, u8 a2)
 {
     gCreatingSpriteTemplate = gSpriteTemplate_8208288[a2];
     gCreatingSpriteTemplate.paletteTag = species;
     gCreatingSpriteTemplate.anims = (const union AnimCmd *const *)gSpriteAnimTable_81E7C64;  //Why do I have to cast this?
 }
 
-void GetMonSpriteTemplate_803C5A0(u16 species, u8 a2)
+void SetMultiuseSpriteTemplateToTrainerBack(u16 species, u8 a2)
 {
     gCreatingSpriteTemplate = gSpriteTemplate_8208288[a2];
     gCreatingSpriteTemplate.paletteTag = species;

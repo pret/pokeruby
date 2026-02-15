@@ -721,7 +721,7 @@ void sub_813FBB8(u8 taskId)
     }
 
     ballIndex = ball_number_to_ball_processing_index(gLastUsedItem);
-    subpriority = GetBattlerSubpriority(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)) + 1;
+    subpriority = GetBattlerSpriteSubpriority(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)) + 1;
     spriteId = CreateSprite(&gBallSpriteTemplates[ballIndex], x + 32, y | 80, subpriority);
     gSprites[spriteId].data[0] = 34;
     gSprites[spriteId].data[1] = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
@@ -1843,7 +1843,7 @@ void sub_81416C4(u8 taskId)
 
 void sub_81417D8(u8 taskId)
 {
-    gBattleAnimArgs[7] = gBattleSpriteInfo[gBattleAnimAttacker].substituteSprite;
+    gBattleAnimArgs[7] = gBattleSpriteInfo[gBattleAnimAttacker].behindSubstitute;
     DestroyAnimVisualTask(taskId);
 }
 
@@ -1853,7 +1853,7 @@ void sub_8141808(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8141828(u8 battler, struct Pokemon *mon)
+void TryShinyAnimation(u8 battler, struct Pokemon *mon)
 {
     int isShiny;
     u32 otId, personality;
@@ -1861,7 +1861,7 @@ void sub_8141828(u8 battler, struct Pokemon *mon)
     u8 taskId1, taskId2;
 
     isShiny = 0;
-    ewram17810[battler].unk0_7 = 1;
+    gBattleHealthBoxInfo[battler].triedShinyMonAnim = TRUE;
     otId = GetMonData(mon, MON_DATA_OT_ID);
     personality = GetMonData(mon, MON_DATA_PERSONALITY);
 
@@ -1889,7 +1889,7 @@ void sub_8141828(u8 battler, struct Pokemon *mon)
         }
     }
 
-    ewram17810[battler].unk1_0 = 1;
+    gBattleHealthBoxInfo[battler].finishedShinyMonAnim = TRUE;
 }
 
 static void sub_814191C(u8 taskId)
@@ -1970,7 +1970,7 @@ static void sub_8141AD8(u8 taskId)
         if (gTasks[taskId].data[1] == 1)
         {
             battler = gTasks[taskId].data[0];
-            ewram17810[battler].unk1_0 = 1;
+            gBattleHealthBoxInfo[battler].finishedShinyMonAnim = TRUE;
         }
 
         DestroyTask(taskId);

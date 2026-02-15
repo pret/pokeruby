@@ -235,11 +235,11 @@ static void sub_80CA8B4(struct Sprite* sprite)
     {
         if (sprite->data[5] > 0x7F)
         {
-            sprite->subpriority = GetBattlerSubpriority(gBattleAnimTarget) + 1;
+            sprite->subpriority = GetBattlerSpriteSubpriority(gBattleAnimTarget) + 1;
         }
         else
         {
-            sprite->subpriority = GetBattlerSubpriority(gBattleAnimTarget) + 6;
+            sprite->subpriority = GetBattlerSpriteSubpriority(gBattleAnimTarget) + 6;
         }
         sprite->x2 += Sin(sprite->data[5], 5);
         sprite->y2 += Cos(sprite->data[5], 14);
@@ -258,7 +258,7 @@ void sub_80CA928(u8 taskId)
         gBattleAnimArgs[1] = 0;
         gBattleAnimArgs[2] = 80;
         gBattleAnimArgs[3] = 0;
-        CreateSpriteAndAnimate(&gSpriteTemplate_83D631C, 0, 0, GetBattlerSubpriority(gBattleAnimTarget) + 1);
+        CreateSpriteAndAnimate(&gSpriteTemplate_83D631C, 0, 0, GetBattlerSpriteSubpriority(gBattleAnimTarget) + 1);
     }
 
     if (gTasks[taskId].data[1] == 15)

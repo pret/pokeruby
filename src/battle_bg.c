@@ -9,12 +9,11 @@
 #include "task.h"
 #include "text.h"
 #include "text_window.h"
-#include "trainer.h"
 #include "trig.h"
 #include "sound.h"
 #include "constants/map_types.h"
 #include "constants/songs.h"
-
+#include "constants/trainers.h"
 
 extern u16 gBattleTypeFlags;
 extern u8 gBattleOutcome;

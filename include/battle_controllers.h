@@ -1,8 +1,7 @@
 #ifndef GUARD_BATTLE_CONTROLLERS_H
 #define GUARD_BATTLE_CONTROLLERS_H
 
-enum
-{
+enum {
     REQUEST_ALL_BATTLE,
     REQUEST_SPECIES_BATTLE,
     REQUEST_HELDITEM_BATTLE,
@@ -65,6 +64,38 @@ enum
     REQUEST_TOUGH_RIBBON_BATTLE,
 };
 
+enum {
+   // For commands sent from the core battle engine to a controller.
+   B_COMM_TO_CONTROLLER, // gBattleBufferA
+
+   // For replies sent from a controller to the core battle engine.
+   B_COMM_TO_ENGINE, // gBattleBufferB
+
+   // During local play, a controller must directly mark itself as
+   // inactive when it's done processing, whether or not it sends
+   // a reply. During multiplayer, it must NOT directly mark itself
+   // as inactive, but instead send one of these, with the player's
+   // multiplayer ID as data.
+   B_COMM_CONTROLLER_IS_DONE
+};
+
+enum {
+    BALL_NO_SHAKES,
+    BALL_1_SHAKE,
+    BALL_2_SHAKES,
+    BALL_3_SHAKES_FAIL,
+    BALL_3_SHAKES_SUCCESS,
+    BALL_TRAINER_BLOCK,
+};
+
+#define INSTANT_HP_BAR_DROP     0x7FFF
+
+struct HpAndStatus
+{
+    u16 hp;
+    u32 status;
+};
+
 enum
 {
     CONTROLLER_GETMONDATA,
@@ -86,7 +117,7 @@ enum
     CONTROLLER_PRINTSTRING,
     CONTROLLER_PRINTSTRINGPLAYERONLY,
     CONTROLLER_CHOOSEACTION,
-    CONTROLLER_UNKNOWNYESNOBOX,
+    CONTROLLER_YESNOBOX,
     CONTROLLER_CHOOSEMOVE,
     CONTROLLER_OPENBAG,
     CONTROLLER_CHOOSEPOKEMON,
@@ -98,19 +129,19 @@ enum
     CONTROLLER_STATUSXOR,
     CONTROLLER_DATATRANSFER,
     CONTROLLER_DMA3TRANSFER,
-    CONTROLLER_31,
+    CONTROLLER_PLAYBGM,
     CONTROLLER_32,
     CONTROLLER_TWORETURNVALUES,
     CONTROLLER_CHOSENMONRETURNVALUE,
     CONTROLLER_ONERETURNVALUE,
     CONTROLLER_ONERETURNVALUE_DUPLICATE,
-    CONTROLLER_37,
-    CONTROLLER_38,
-    CONTROLLER_39,
-    CONTROLLER_40,
+    CONTROLLER_CLEARUNKVAR,
+    CONTROLLER_SETUNKVAR,
+    CONTROLLER_CLEARUNKFLAG,
+    CONTROLLER_TOGGLEUNKFLAG,
     CONTROLLER_HITANIMATION,
-    CONTROLLER_42,
-    CONTROLLER_EFFECTIVENESSSOUND,
+    CONTROLLER_CANTSWITCH,
+    CONTROLLER_PLAYSE,
     CONTROLLER_PLAYFANFAREORBGM,
     CONTROLLER_FAINTINGCRY,
     CONTROLLER_INTROSLIDE,
@@ -122,16 +153,10 @@ enum
     CONTROLLER_BATTLEANIMATION,
     CONTROLLER_LINKSTANDBYMSG,
     CONTROLLER_RESETACTIONMOVESELECTION,
-    CONTROLLER_55,
+    CONTROLLER_ENDLINKBATTLE,
     /*new controllers should go here*/
     CONTROLLER_TERMINATOR_NOP,
     CONTROLLER_CMDS_COUNT
-};
-
-struct HpAndStatus
-{
-    u16 hp;
-    u32 status;
 };
 
 struct DisableStruct;

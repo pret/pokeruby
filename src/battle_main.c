@@ -41,13 +41,13 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
-#include "trainer.h"
 #include "trig.h"
 #include "tv.h"
 #include "scanline_effect.h"
 #include "util.h"
 #include "ewram.h"
 #include "battle_string_ids.h"
+#include "constants/trainers.h"
 
 struct UnknownStruct7
 {
@@ -121,7 +121,7 @@ extern void (*gBattleMainFunc)(void);
 u8 gLeveledUpInBattle;
 void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
 u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
-u8 gUnknown_0300434C[MAX_BATTLERS_COUNT];
+u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 extern u16 gBattleTypeFlags;
 extern u8 gReservedSpritePaletteCount;
 extern u16 gTrainerBattleOpponent;
@@ -2627,7 +2627,7 @@ void debug_sub_8012688(void)
 	  gMonSpriteGfx_Sprite_ptr[1],
 	  gCurrentMove);
 	LoadCompressedPalette(gMonPaletteTable[gCurrentMove].data, 272, 32);
-	GetMonSpriteTemplate_803C56C(gCurrentMove, 1);
+	SetMultiuseSpriteTemplateToPokemon(gCurrentMove, 1);
 	spriteId = CreateSprite(&gCreatingSpriteTemplate, 176, 40 + gMonFrontPicCoords[gCurrentMove].y_offset, 40);
 	gSprites[spriteId].callback = nullsub_37;
 	gSprites[spriteId].oam.paletteNum = 1;
@@ -3072,7 +3072,7 @@ void sub_8010278(struct Sprite *sprite)
         if (sprite->x2 == 0)
         {
             sprite->callback = sub_80102AC;
-            PlayCry1(sprite->data[2], 25);
+            PlayCry_Normal(sprite->data[2], 25);
         }
     }
 }
@@ -3081,8 +3081,8 @@ void sub_80102AC(struct Sprite *sprite)
 {
     if (sprite->animEnded)
     {
-        sub_804777C(sprite->data[0]);
-        sub_8043DFC(gHealthboxSpriteIds[sprite->data[0]]);
+        StartHealthboxSlideIn(sprite->data[0]);
+        SetHealthboxSpriteVisible(gHealthboxSpriteIds[sprite->data[0]]);
         sprite->callback = nullsub_37;
         StartSpriteAnimIfDifferent(sprite, 0);
         BeginNormalPaletteFade(0x00020000, 0, 10, 0, RGB(15, 15, 15));
@@ -3123,8 +3123,8 @@ void sub_8010384(struct Sprite *sprite)
     u16 species;
     u8 yOffset;
 
-    if (gBattleSpriteInfo[r6].transformedSpecies != 0)
-        species = gBattleSpriteInfo[r6].transformedSpecies;
+    if (gBattleSpriteInfo[r6].transformSpecies != 0)
+        species = gBattleSpriteInfo[r6].transformSpecies;
     else
         species = sprite->data[2];
 
@@ -3255,12 +3255,12 @@ void dp11b_obj_instanciate(u8 bank, u8 b, s8 c, s8 d)
 
     if (b)
     {
-        if (ewram17810[bank].unk0_1)
+        if (gBattleHealthBoxInfo[bank].unk0_1)
             return;
     }
     else
     {
-        if (ewram17810[bank].unk0_2)
+        if (gBattleHealthBoxInfo[bank].unk0_2)
             return;
     }
 
@@ -3268,15 +3268,15 @@ void dp11b_obj_instanciate(u8 bank, u8 b, s8 c, s8 d)
     if (b == TRUE)
     {
         objectID = gHealthboxSpriteIds[bank];
-        ewram17810[bank].unk2 = spriteId;
-        ewram17810[bank].unk0_1 = 1;
+        gBattleHealthBoxInfo[bank].unk2 = spriteId;
+        gBattleHealthBoxInfo[bank].unk0_1 = 1;
         gSprites[spriteId].data[0] = 0x80;
     }
     else
     {
         objectID = gBattlerSpriteIds[bank];
-        ewram17810[bank].unk3 = spriteId;
-        ewram17810[bank].unk0_2 = 1;
+        gBattleHealthBoxInfo[bank].unk3 = spriteId;
+        gBattleHealthBoxInfo[bank].unk0_2 = 1;
         gSprites[spriteId].data[0] = 0xC0;
     }
     gSprites[spriteId].data[1] = c;
@@ -3293,19 +3293,19 @@ void dp11b_obj_free(u8 a, u8 b)
 
     if (b == TRUE)
     {
-        if (!ewram17810[a].unk0_1)
+        if (!gBattleHealthBoxInfo[a].unk0_1)
             return;
-        r4 = gSprites[ewram17810[a].unk2].data[3];
-        DestroySprite(&gSprites[ewram17810[a].unk2]);
-        ewram17810[a].unk0_1 = 0;
+        r4 = gSprites[gBattleHealthBoxInfo[a].unk2].data[3];
+        DestroySprite(&gSprites[gBattleHealthBoxInfo[a].unk2]);
+        gBattleHealthBoxInfo[a].unk0_1 = 0;
     }
     else
     {
-        if (!ewram17810[a].unk0_2)
+        if (!gBattleHealthBoxInfo[a].unk0_2)
             return;
-        r4 = gSprites[ewram17810[a].unk3].data[3];
-        DestroySprite(&gSprites[ewram17810[a].unk3]);
-        ewram17810[a].unk0_2 = 0;
+        r4 = gSprites[gBattleHealthBoxInfo[a].unk3].data[3];
+        DestroySprite(&gSprites[gBattleHealthBoxInfo[a].unk3]);
+        gBattleHealthBoxInfo[a].unk0_2 = 0;
     }
     gSprites[r4].x2 = 0;
     gSprites[r4].y2 = 0;

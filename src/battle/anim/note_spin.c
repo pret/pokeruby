@@ -116,7 +116,7 @@ void sub_80D2EC8(struct Sprite *sprite)
         sprite->callback = sub_80D2F80;
 
         sprite->data[0] = 0;
-        oamt_add_pos2_onto_pos1(sprite);
+        SetSpritePrimaryCoordsFromSecondaryCoords(sprite);
         sprite->data[2] = 5;
         sprite->data[4] = 0;
         sprite->data[3] = 0;

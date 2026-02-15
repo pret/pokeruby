@@ -1177,7 +1177,7 @@ void sub_80DF1A4(u8 taskId)
     task->data[11] = (GetBattlerSpriteCoordAttr(gBattleAnimAttacker, 1) / 2) + 8;
     task->data[7] = 0;
     task->data[5] = GetBattlerSpriteBGPriority(gBattleAnimAttacker);
-    task->data[6] = GetBattlerSubpriority(gBattleAnimAttacker) - 2;
+    task->data[6] = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 2;
     task->data[3] = 0;
     task->data[4] = 16;
     REG_BLDCNT = 0x3F40;

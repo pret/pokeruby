@@ -1086,7 +1086,7 @@ void sub_80D759C(u8 taskId)
         }
 
         task->data[13] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-        task->data[12] = GetBattlerSubpriority(gBattleAnimTarget) - 2;
+        task->data[12] = GetBattlerSpriteSubpriority(gBattleAnimTarget) - 2;
         task->data[0]++;
         break;
     case 1:

@@ -1660,7 +1660,7 @@ static void ScriptCmd_createsprite(void)
         else
             argVar *= -1;
 
-        subpriority = GetBattlerSubpriority(gBattleAnimTarget) + (s8)(argVar);
+        subpriority = GetBattlerSpriteSubpriority(gBattleAnimTarget) + (s8)(argVar);
     }
     else
     {
@@ -1669,7 +1669,7 @@ static void ScriptCmd_createsprite(void)
         else
             argVar *= -1;
 
-        subpriority = GetBattlerSubpriority(gBattleAnimAttacker) + (s8)(argVar);
+        subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) + (s8)(argVar);
     }
 
     if (subpriority < 3)
@@ -2526,7 +2526,7 @@ static void ScriptCmd_changebg(void)
 
 s8 BattleAnimAdjustPanning(s8 pan)
 {
-    if (!IsContest() && ewram17810[gBattleAnimAttacker].unk0_4)
+    if (!IsContest() && gBattleHealthBoxInfo[gBattleAnimAttacker].statusAnimActive)
     {
         if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
             pan = SOUND_PAN_TARGET;
@@ -2568,7 +2568,7 @@ s8 BattleAnimAdjustPanning(s8 pan)
 
 s8 BattleAnimAdjustPanning2(s8 pan)
 {
-    if (!IsContest() && ewram17810[gBattleAnimAttacker].unk0_4)
+    if (!IsContest() && gBattleHealthBoxInfo[gBattleAnimAttacker].statusAnimActive)
     {
         if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
             pan = SOUND_PAN_TARGET;

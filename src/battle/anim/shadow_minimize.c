@@ -27,7 +27,7 @@ void AnimTask_Minimize(u8 taskId)
     task->data[4] = 0x100;
     task->data[5] = 0;
     task->data[6] = 0;
-    task->data[7] = GetBattlerSubpriority(gBattleAnimAttacker);
+    task->data[7] = GetBattlerSpriteSubpriority(gBattleAnimAttacker);
     task->func = AnimTask_Minimize_Step;
 }
 

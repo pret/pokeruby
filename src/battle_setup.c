@@ -34,7 +34,7 @@
 #include "strings.h"
 #include "task.h"
 #include "text.h"
-#include "trainer.h"
+#include "constants/trainers.h"
 
 extern u16 gSpecialVar_Result;
 

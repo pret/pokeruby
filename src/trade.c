@@ -3527,7 +3527,7 @@ static void sub_804B2D0(u8 whichParty, u8 a1)
             gUnknown_03004828->tradeSpecies[whichParty] = species;
             break;
         case 1:
-            GetMonSpriteTemplate_803C56C(GetMonSpritePalStruct(pokemon)->tag, v0);
+            SetMultiuseSpriteTemplateToPokemon(GetMonSpritePalStruct(pokemon)->tag, v0);
             gUnknown_03004828->pokePicSpriteIdxs[whichParty] = CreateSprite(&gCreatingSpriteTemplate, 0x78, 0x3c, 0x6);
             gSprites[gUnknown_03004828->pokePicSpriteIdxs[whichParty]].invisible = TRUE;
             gSprites[gUnknown_03004828->pokePicSpriteIdxs[whichParty]].callback = SpriteCallbackDummy;

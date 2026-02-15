@@ -198,10 +198,10 @@ void unref_sub_80CE260(u8 taskId)
     for (i = 0; i < gBattlersCount; i++)
     {
         if (gBattleAnimArgs[0] == 1 && GetBattlerSide(i) == 0)
-            sub_8043DB0(gHealthboxSpriteIds[i]);
+            SetHealthboxSpriteInvisible(gHealthboxSpriteIds[i]);
 
         if (gBattleAnimArgs[1] == 1 && GetBattlerSide(i) == 1)
-            sub_8043DB0(gHealthboxSpriteIds[i]);
+            SetHealthboxSpriteInvisible(gHealthboxSpriteIds[i]);
     }
 
     DestroyAnimVisualTask(taskId);
@@ -212,7 +212,7 @@ void unref_sub_80CE2D4(u8 taskId)
     u8 i;
     for (i = 0; i < gBattlersCount; i++)
     {
-        sub_8043DFC(gHealthboxSpriteIds[i]);
+        SetHealthboxSpriteVisible(gHealthboxSpriteIds[i]);
     }
 
     DestroyAnimVisualTask(taskId);

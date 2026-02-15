@@ -182,7 +182,7 @@ void sub_812B18C(u8 taskId)
     {
         s16 mode = gBattleAnimArgs[1];
         if (mode == 0xFF)
-            PlayCry1(species, pan);
+            PlayCry_Normal(species, pan);
         else
             PlayCry3(species, pan, mode);
     }

@@ -30,20 +30,20 @@ extern void sub_802E414(void);
 extern void sub_80A6DCC(void);
 extern u8 *sub_8040D08();
 extern void SetMonPreventsSwitchingString(void);
-extern void nullsub_14();
+extern void ReshowBattleScreenDummy();
 extern u8 sub_803FBBC(void);
 
 extern u8 gPlayerPartyCount;
 extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[];
-extern u8 gBankInMenu;
+extern u8 gBattlerInMenuId;
 extern u8 gUnknown_0202E8F4;
 extern u8 gUnknown_0202E8F5;
 extern u8 gPartyMenuMessage_IsPrinting;
 extern u8 gUnknown_020384F0;
 extern void (*gPokemonItemUseCallback)();  //don't know types yet
 extern struct PokemonStorage gPokemonStorage;
-extern void nullsub_14();
+extern void ReshowBattleScreenDummy();
 
 void sub_8094C98(u8, u8);
 u8 pokemon_order_func(u8);
@@ -334,7 +334,7 @@ void sub_8094E20(u8 a)
 {
     gPaletteFade.bufferTransferDisabled = TRUE;
     gUnknown_02038473 = a;
-    nullsub_14();
+    ReshowBattleScreenDummy();
     pokemon_change_order();
     OpenPartyMenu(PARTY_MENU_TYPE_BATTLE, 0xFF);
 }
@@ -707,7 +707,7 @@ static void Task_BattlePartyMenuShift(u8 taskId)
     if (gUnknown_02038473 == 2)
     {
         u8 r0;
-        u8 r4 = gBankInMenu;
+        u8 r4 = gBattlerInMenuId;
 
         PartyMenuEraseMsgBoxAndFrame();
         r0 = pokemon_order_func(gBattlerPartyIndexes[r4]);
@@ -719,7 +719,7 @@ static void Task_BattlePartyMenuShift(u8 taskId)
     }
     gUnknown_0202E8F5 = sub_8094C20(partySelection);
     gUnknown_0202E8F4 = 1;
-    r4 = pokemon_order_func(gBattlerPartyIndexes[gBankInMenu]);
+    r4 = pokemon_order_func(gBattlerPartyIndexes[gBattlerInMenuId]);
     sub_8094C98(r4, partySelection);
     SwapPokemon(&gPlayerParty[r4], &gPlayerParty[partySelection]);
     gTasks[taskId].func = Task_809527C;
