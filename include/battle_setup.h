@@ -52,7 +52,7 @@ extern const struct TrainerEyeTrainer gTrainerEyeTrainers[56];
 void BattleSetup_StartWildBattle(void);
 void BattleSetup_StartRoamerBattle(void);
 void BattleSetup_StartScriptedWildBattle(void);
-s8 BattleSetup_GetTerrain(void);
+s8 BattleSetup_GetEnvironmentId(void);
 u8 BattleSetup_GetBattleTowerBattleTransition(void);
 u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data);
 void TrainerWantsBattle(u8, const u8 *);

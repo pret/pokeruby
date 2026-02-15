@@ -40,9 +40,9 @@ extern const u8 gPokeblockBlack_Pal[];
 extern const u8 gPokeblockWhite_Pal[];
 extern const u8 gPokeblockGold_Pal[];
 extern const u8 gPokeblock_Gfx[];
-extern const u8 gBattleTerrainTiles_Building[];
+extern const u8 gBattleEnvironmentTiles_Building[];
 extern const u8 gUnknown_08E782FC[];
-extern const u8 gBattleTerrainPalette_BattleTower[];
+extern const u8 gBattleEnvironmentPalette_BattleTower[];
 extern const struct CompressedSpriteSheet gUnknown_083F7F74;
 extern const struct CompressedSpritePalette gUnknown_083F7F7C;
 
@@ -650,7 +650,7 @@ static bool8 sub_8147B20(struct Pokemon* mon)
         ePokeblockGfxState++;
         break;
     case 6:
-        LZDecompressVram(gBattleTerrainTiles_Building, (void*)(VRAM));
+        LZDecompressVram(gBattleEnvironmentTiles_Building, (void*)(VRAM));
         ePokeblockGfxState++;
         break;
     case 7:
@@ -658,7 +658,7 @@ static bool8 sub_8147B20(struct Pokemon* mon)
         ePokeblockGfxState++;
         break;
     case 8:
-        LoadCompressedPalette(gBattleTerrainPalette_BattleTower, 0x20, 0x60);
+        LoadCompressedPalette(gBattleEnvironmentPalette_BattleTower, 0x20, 0x60);
         ePokeblockGfxState = 0;
         return TRUE;
     }

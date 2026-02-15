@@ -1109,11 +1109,11 @@ void BtlController_EmitFaintingCry(u8 a)
     PrepareBufferDataTransfer(a, gBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitIntroSlide(u8 a, u8 battleTerrain)
+void BtlController_EmitIntroSlide(u8 bufferId, u8 environmentId)
 {
     gBattleBuffersTransferData[0] = 46;
-    gBattleBuffersTransferData[1] = battleTerrain;
-    PrepareBufferDataTransfer(a, gBattleBuffersTransferData, 2);
+    gBattleBuffersTransferData[1] = environmentId;
+    PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 2);
 }
 
 void BtlController_EmitIntroTrainerBallThrow(u8 a)

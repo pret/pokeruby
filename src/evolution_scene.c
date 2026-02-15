@@ -65,7 +65,7 @@ void nullsub_6(void);
 bool32 IsHMMove2(u16 move);
 
 extern struct Window gWindowTemplate_Contest_MoveDescription;
-extern u8 gBattleTerrain;
+extern u8 gBattleEnvironment;
 extern u8 gReservedSpritePaletteCount;
 extern u16 gMoveToLearn;
 extern struct SpriteTemplate gCreatingSpriteTemplate;
@@ -205,7 +205,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     gBattle_BG3_Y = 0;
 
     Text_InitWindowWithTemplate(&gWindowTemplate_Contest_MoveDescription, &gWindowTemplate_81E6C58);
-    gBattleTerrain = BATTLE_TERRAIN_PLAIN;
+    gBattleEnvironment = BATTLE_ENVIRONMENT_PLAIN;
 
     sub_800D6D4();
     LoadBattleTextboxAndBackground();
@@ -313,7 +313,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     gBattle_BG3_Y = 0;
 
     Text_InitWindowWithTemplate(&gWindowTemplate_Contest_MoveDescription, &gWindowTemplate_81E6C58);
-    gBattleTerrain = BATTLE_TERRAIN_PLAIN;
+    gBattleEnvironment = BATTLE_ENVIRONMENT_PLAIN;
 
     sub_800D6D4();
     LoadBattleTextboxAndBackground();

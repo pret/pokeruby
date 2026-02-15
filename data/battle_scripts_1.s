@@ -2395,7 +2395,7 @@ BattleScript_EffectNaturePower: @ 81D868D
 	attackcanceler
 	attackstring
 	pause 32
-	callterrainattack
+	callenvironmentattack
 	printstring BATTLE_TEXT_NaturePower
 	waitmessage 64
 	return
@@ -2924,7 +2924,7 @@ BattleScript_EffectCamouflage: @ 81D8C43
 	attackcanceler
 	attackstring
 	ppreduce
-	settypetoterrain BattleScript_ButItFailed
+	settypetoenvironment BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	printstring BATTLE_TEXT_TypeTransform
