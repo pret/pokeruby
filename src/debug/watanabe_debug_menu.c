@@ -3049,7 +3049,7 @@ NAKED void debug_80C6FA8(u8 taskId)
         "\tldr\tr0, [r0]\n"
         "\tldrh\tr0, [r0]\n"
         "\tmov\tr1, #0x0\n"
-        "\tbl\tPlayCry1\n"
+        "\tbl\tPlayCry_Normal\n"
         "._706:\n"
         "\tldr\tr2, ._707       @ gUnknown_Debug_2038A20\n"
         "\tldr\tr1, [r2]\n"
