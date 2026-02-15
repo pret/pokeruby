@@ -65,7 +65,6 @@ extern void BtlController_EmitOneReturnValue(u8, u16);
 
 extern void ReshowBattleScreenDummy(void);
 extern void DoWallyTutorialBagMenu(void);
-extern void StartHealthboxSlideIn();
 extern bool8 IsDoubleBattle(void);
 extern void Task_PlayerController_RestoreBgmAfterCry(u8);
 extern void PlayerHandleGetRawMonData(void);

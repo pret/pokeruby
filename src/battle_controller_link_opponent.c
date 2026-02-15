@@ -9,6 +9,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "palette.h"
+#include "pokeball.h"
 #include "rom_8077ABC.h"
 #include "constants/songs.h"
 #include "sound.h"
@@ -98,7 +99,6 @@ extern u8 TryHandleLaunchBattleTableAnimation();
 extern void sub_8037FD8(void);
 extern void sub_8037F34(void);
 extern void LinkOpponentBufferExecCompleted(void);
-extern void StartHealthboxSlideIn();
 
 // this file's functions
 

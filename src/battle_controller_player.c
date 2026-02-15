@@ -1,27 +1,28 @@
 #include "global.h"
-#include "data2.h"
-#include "battle.h"
-#include "battle_anim.h"
 #include "battle_anim_special.h"
+#include "battle_anim.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_message.h"
+#include "battle.h"
+#include "data2.h"
+#include "ewram.h"
 #include "item.h"
-#include "constants/items.h"
 #include "link.h"
 #include "m4a.h"
 #include "main.h"
 #include "menu_cursor.h"
-#include "constants/moves.h"
 #include "palette.h"
+#include "pokeball.h"
 #include "pokemon.h"
-#include "constants/songs.h"
 #include "sound.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
 #include "util.h"
-#include "ewram.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/songs.h"
 
 struct MovePpInfo
 {
@@ -162,7 +163,6 @@ extern void dp11b_obj_free(u8, u8);
 extern void sub_8010520(struct Sprite *);
 extern void sub_8010574(struct Sprite *);
 extern bool8 IsDoubleBattle();
-extern void StartHealthboxSlideIn();
 extern void sub_8094E20(u8);
 extern void ReshowBattleScreenDummy(void);
 extern void sub_80A6DCC(void);

@@ -94,7 +94,6 @@ const struct SpritePalette gUnknown_0820A4D4[] =
 };
 
 extern void Task_PlayerController_RestoreBgmAfterCry(u8);
-extern void StartHealthboxSlideIn();
 extern u8 IsBankSpritePresent(u8);
 extern u8 GetBattlerSpriteDefault_Y(u8);
 extern u8 sub_8077F7C(u8);

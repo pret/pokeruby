@@ -1,19 +1,20 @@
 #include "global.h"
 #include "battle_anim_81258BC.h"
-#include "battle.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_message.h"
+#include "battle.h"
 #include "data2.h"
+#include "ewram.h"
 #include "link.h"
 #include "main.h"
 #include "menu_cursor.h"
 #include "palette.h"
-#include "constants/songs.h"
+#include "pokeball.h"
 #include "sound.h"
 #include "text.h"
 #include "util.h"
-#include "ewram.h"
+#include "constants/songs.h"
 
 extern struct Window gWindowTemplate_Contest_MoveDescription;
 extern u8 gDisplayedStringBattle[];
@@ -46,7 +47,6 @@ extern u8 GetBattlerSpriteSubpriority();
 extern void SpriteCB_TrainerSlideIn(struct Sprite *);
 extern void sub_810BADC(void);
 extern void HandleIntroSlide();
-extern void StartHealthboxSlideIn();
 extern bool8 TryHandleLaunchBattleTableAnimation();
 
 #if ENGLISH
