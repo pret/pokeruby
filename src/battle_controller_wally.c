@@ -10,8 +10,8 @@
 #include "main.h"
 #include "menu_cursor.h"
 #include "palette.h"
+#include "pokeball.h"
 #include "pokemon.h"
-#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "item_use.h"
@@ -20,6 +20,8 @@
 #include "text.h"
 #include "util.h"
 #include "ewram.h"
+#include "constants/songs.h"
+#include "constants/trainers.h"
 
 struct MovePpInfo
 {
@@ -46,289 +48,278 @@ extern u32 gTransformedPersonalities[];
 extern void (*gAnimScriptCallback)(void);
 extern bool8 gAnimScriptActive;
 extern u8 gDisplayedStringBattle[];
-extern u8 gBankInMenu;
+extern u8 gBattlerInMenuId;
 extern u8 gBattleMonForms[];
 extern u8 gBattleOutcome;
 extern u16 gIntroSlideFlags;
-extern u8 gUnknown_02024E68[];
+extern u8 gBattlerStatusSummaryTaskId[];
 extern struct SpriteTemplate gCreatingSpriteTemplate;
 extern u8 gAnimMoveTurn;
 extern struct Window gWindowTemplate_Contest_MoveDescription;
-extern u8 gUnknown_0300434C[];
+extern u8 gBattleControllerData[];
 extern const u8 BattleText_WallyMenu[];
 extern const u8 BattleText_MenuOptions[];
 
 extern void BtlController_EmitTwoReturnValues(u8, u8, u16);
 extern void BtlController_EmitOneReturnValue(u8, u16);
 
-extern void nullsub_14(void);
-extern void PrepareBagForWallyTutorial(void);
-extern void sub_804777C();
+extern void ReshowBattleScreenDummy(void);
+extern void DoWallyTutorialBagMenu(void);
 extern bool8 IsDoubleBattle(void);
-extern void c3_0802FDF4(u8);
-extern void PlayerHandlecmd1(void);
-extern void LoadPlayerTrainerBankSprite();
+extern void Task_PlayerController_RestoreBgmAfterCry(u8);
+extern void PlayerHandleGetRawMonData(void);
+extern void DecompressTrainerBackPic();
 extern u8 GetBattlerPosition(u8);
-extern void sub_80313A0(struct Sprite *);
+extern void SpriteCB_TrainerSlideIn(struct Sprite *);
 extern u8 GetBattlerAtPosition(u8);
 extern u8 IsMoveWithoutAnimation();
-extern void sub_80326EC();
-extern void sub_8031F24(void);
-extern void sub_80324BC();
+extern void SetBattlerSpriteAffineMode();
+extern void CopyAllBattleSpritesInvisibilities(void);
+extern void TrySetBehindSubstituteSpriteBit();
 extern u8 GetBattlerSide(u8);
 extern void sub_80304A8(void);
-extern void sub_8047858();
-extern void StartBattleIntroAnim();
-extern void oamt_add_pos2_onto_pos1();
+extern void DoHitAnimHealthboxEffect();
+extern void HandleIntroSlide();
+extern void SetSpritePrimaryCoordsFromSecondaryCoords();
 extern void StartAnimLinearTranslation(struct Sprite *);
-extern void sub_8030E38(struct Sprite *);
+extern void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *);
 extern void StoreSpriteCallbackInData();
-extern u8 StartSendOutMonAnimation();
+extern u8 DoPokeballSendOutAnimation();
 extern u8 GetBattlerSpriteCoord();
-extern u8 sub_8077F68();
-extern u8 GetBattlerSubpriority();
-extern void sub_80312F0(struct Sprite *);
-extern bool8 move_anim_start_t3();
+extern u8 GetBattlerSpriteDefault_Y();
+extern u8 GetBattlerSpriteSubpriority();
+extern void SpriteCB_WaitForBattlerBallReleaseAnim(struct Sprite *);
+extern bool8 TryHandleLaunchBattleTableAnimation();
 
 // this file's functions
+static void WallyHandleGetMonData(void);
+static void WallyHandleGetRawMonData(void);
+static void WallyHandleSetMonData(void);
+static void WallyHandleSetRawMonData(void);
+static void WallyHandleLoadMonSprite(void);
+static void WallyHandleSwitchInAnim(void);
+static void WallyHandleReturnMonToBall(void);
+static void WallyHandleDrawTrainerPic(void);
+static void WallyHandleTrainerSlide(void);
+static void WallyHandleTrainerSlideBack(void);
+static void WallyHandleFaintAnimation(void);
+static void WallyHandlePaletteFade(void);
+static void WallyHandleSuccessBallThrowAnim(void);
+static void WallyHandleBallThrowAnim(void);
+static void WallyHandlePause(void);
+static void WallyHandleMoveAnimation(void);
+static void WallyHandlePrintString(void);
+static void WallyHandlePrintSelectionString(void);
+static void WallyHandleChooseAction(void);
+static void WallyHandleYesNoBox(void);
+static void WallyHandleChooseMove(void);
+static void WallyHandleChooseItem(void);
+static void WallyHandleChoosePokemon(void);
+static void WallyHandleCmd23(void);
+static void WallyHandleHealthBarUpdate(void);
+static void WallyHandleExpUpdate(void);
+static void WallyHandleStatusIconUpdate(void);
+static void WallyHandleStatusAnimation(void);
+static void WallyHandleStatusXor(void);
+static void WallyHandleDataTransfer(void);
+static void WallyHandleDMA3Transfer(void);
+static void WallyHandlePlayBGM(void);
+static void WallyHandleCmd32(void);
+static void WallyHandleTwoReturnValues(void);
+static void WallyHandleChosenMonReturnValue(void);
+static void WallyHandleOneReturnValue(void);
+static void WallyHandleOneReturnValue_Duplicate(void);
+static void WallyHandleClearUnkVar(void);
+static void WallyHandleSetUnkVar(void);
+static void WallyHandleClearUnkFlag(void);
+static void WallyHandleToggleUnkFlag(void);
+static void WallyHandleHitAnimation(void);
+static void WallyHandleCantSwitch(void);
+static void WallyHandlePlaySE(void);
+static void WallyHandlePlayFanfareOrBGM(void);
+static void WallyHandleFaintingCry(void);
+static void WallyHandleIntroSlide(void);
+static void WallyHandleIntroTrainerBallThrow(void);
+static void WallyHandleDrawPartyStatusSummary(void);
+static void WallyHandleHidePartyStatusSummary(void);
+static void WallyHandleEndBounceEffect(void);
+static void WallyHandleSpriteInvisibility(void);
+static void WallyHandleBattleAnimation(void);
+static void WallyHandleLinkStandbyMsg(void);
+static void WallyHandleResetActionMoveSelection(void);
+static void WallyHandleEndLinkBattle(void);
+static void WallyCmdEnd(void);
 
-void WallyBufferRunCommand(void);
-void sub_81374FC(void);
-void sub_81376B8(void);
-void WallyBufferExecCompleted(void);
-u32 sub_8137A84(u8, u8 *);
-void sub_8138294(u8);
-void sub_81390D0(void);
-void sub_8139A2C(u8);
-
-void WallyHandleGetAttributes(void);
-void WallyHandlecmd1(void);
-void WallyHandleSetAttributes(void);
-void WallyHandlecmd3(void);
-void WallyHandleLoadPokeSprite(void);
-void WallyHandleSendOutPoke(void);
-void WallyHandleReturnPokeToBall(void);
-void WallyHandleTrainerThrow(void);
-void WallyHandleTrainerSlide(void);
-void WallyHandleTrainerSlideBack(void);
-void WallyHandleFaintAnimation(void);
-void WallyHandlePaletteFade(void);
-void WallyHandleSuccessBallThrowAnim(void);
-void WallyHandleBallThrowAnim(void);
-void WallyHandlePuase(void);
-void WallyHandleMoveAnimation(void);
-void WallyHandlePrintString(void);
-void WallyHandlePrintStringPlayerOnly(void);
-void WallyHandlecmd18(void);
-void WallyHandlecmd19(void);
-void WallyHandlecmd20(void);
-void WallyHandleOpenBag(void);
-void WallyHandlecmd22(void);
-void WallyHandlecmd23(void);
-void WallyHandleHealthBarUpdate(void);
-void WallyHandleExpBarUpdate(void);
-void WallyHandleStatusIconUpdate(void);
-void WallyHandleStatusAnimation(void);
-void WallyHandleStatusXor(void);
-void WallyHandlecmd29(void);
-void WallyHandleDMATransfer(void);
-void WallyHandlecmd31(void);
-void WallyHandlecmd32(void);
-void WallyHandlecmd33(void);
-void WallyHandlecmd34(void);
-void WallyHandlecmd35(void);
-void WallyHandlecmd36(void);
-void WallyHandlecmd37(void);
-void WallyHandlecmd38(void);
-void WallyHandlecmd39(void);
-void WallyHandlecmd40(void);
-void WallyHandleHitAnimation(void);
-void WallyHandlecmd42(void);
-void WallyHandleEffectivenessSound(void);
-void WallyHandlecmd44(void);
-void WallyHandleFaintingCry(void);
-void WallyHandleIntroSlide(void);
-void WallyHandleTrainerBallThrow(void);
-void WallyHandlecmd48(void);
-void WallyHandlecmd49(void);
-void WallyHandlecmd50(void);
-void WallyHandleSpriteInvisibility(void);
-void WallyHandleBattleAnimation(void);
-void WallyHandleLinkStandbyMsg(void);
-void WallyHandleResetActionMoveSelection(void);
-void WallyHandlecmd55(void);
-void WallyHandlecmd56(void);
-
-// const data
+static void WallyBufferRunCommand(void);
+static void WallyBufferExecCompleted(void);
+static void CompleteOnChosenItem(void);
+static void Intro_WaitForShinyAnimAndHealthbox(void);
+static u32 CopyWallyMonData(u8 monId, u8 *dst);
+static void SetWallyMonData(u8 monId);
+static void WallyDoMoveAnimation(void);
+static void Task_StartSendOutAnim(u8 taskId);
 
 typedef void (*BattleBufferCmd) (void);
-static const BattleBufferCmd gWallyBufferCommands[] =
+static const BattleBufferCmd sWallyBufferCommands[CONTROLLER_CMDS_COUNT] =
 {
-    WallyHandleGetAttributes,
-    WallyHandlecmd1,
-    WallyHandleSetAttributes,
-    WallyHandlecmd3,
-    WallyHandleLoadPokeSprite,
-    WallyHandleSendOutPoke,
-    WallyHandleReturnPokeToBall,
-    WallyHandleTrainerThrow,
-    WallyHandleTrainerSlide,
-    WallyHandleTrainerSlideBack,
-    WallyHandleFaintAnimation,
-    WallyHandlePaletteFade,
-    WallyHandleSuccessBallThrowAnim,
-    WallyHandleBallThrowAnim,
-    WallyHandlePuase,
-    WallyHandleMoveAnimation,
-    WallyHandlePrintString,
-    WallyHandlePrintStringPlayerOnly,
-    WallyHandlecmd18,
-    WallyHandlecmd19,
-    WallyHandlecmd20,
-    WallyHandleOpenBag,
-    WallyHandlecmd22,
-    WallyHandlecmd23,
-    WallyHandleHealthBarUpdate,
-    WallyHandleExpBarUpdate,
-    WallyHandleStatusIconUpdate,
-    WallyHandleStatusAnimation,
-    WallyHandleStatusXor,
-    WallyHandlecmd29,
-    WallyHandleDMATransfer,
-    WallyHandlecmd31,
-    WallyHandlecmd32,
-    WallyHandlecmd33,
-    WallyHandlecmd34,
-    WallyHandlecmd35,
-    WallyHandlecmd36,
-    WallyHandlecmd37,
-    WallyHandlecmd38,
-    WallyHandlecmd39,
-    WallyHandlecmd40,
-    WallyHandleHitAnimation,
-    WallyHandlecmd42,
-    WallyHandleEffectivenessSound,
-    WallyHandlecmd44,
-    WallyHandleFaintingCry,
-    WallyHandleIntroSlide,
-    WallyHandleTrainerBallThrow,
-    WallyHandlecmd48,
-    WallyHandlecmd49,
-    WallyHandlecmd50,
-    WallyHandleSpriteInvisibility,
-    WallyHandleBattleAnimation,
-    WallyHandleLinkStandbyMsg,
-    WallyHandleResetActionMoveSelection,
-    WallyHandlecmd55,
-    WallyHandlecmd56,
+    [CONTROLLER_GETMONDATA]               = WallyHandleGetMonData,
+    [CONTROLLER_GETRAWMONDATA]            = WallyHandleGetRawMonData,
+    [CONTROLLER_SETMONDATA]               = WallyHandleSetMonData,
+    [CONTROLLER_SETRAWMONDATA]            = WallyHandleSetRawMonData,
+    [CONTROLLER_LOADMONSPRITE]            = WallyHandleLoadMonSprite,
+    [CONTROLLER_SWITCHINANIM]             = WallyHandleSwitchInAnim,
+    [CONTROLLER_RETURNMONTOBALL]          = WallyHandleReturnMonToBall,
+    [CONTROLLER_DRAWTRAINERPIC]           = WallyHandleDrawTrainerPic,
+    [CONTROLLER_TRAINERSLIDE]             = WallyHandleTrainerSlide,
+    [CONTROLLER_TRAINERSLIDEBACK]         = WallyHandleTrainerSlideBack,
+    [CONTROLLER_FAINTANIMATION]           = WallyHandleFaintAnimation,
+    [CONTROLLER_PALETTEFADE]              = WallyHandlePaletteFade,
+    [CONTROLLER_SUCCESSBALLTHROWANIM]     = WallyHandleSuccessBallThrowAnim,
+    [CONTROLLER_BALLTHROWANIM]            = WallyHandleBallThrowAnim,
+    [CONTROLLER_PAUSE]                    = WallyHandlePause,
+    [CONTROLLER_MOVEANIMATION]            = WallyHandleMoveAnimation,
+    [CONTROLLER_PRINTSTRING]              = WallyHandlePrintString,
+    [CONTROLLER_PRINTSTRINGPLAYERONLY]    = WallyHandlePrintSelectionString,
+    [CONTROLLER_CHOOSEACTION]             = WallyHandleChooseAction,
+    [CONTROLLER_YESNOBOX]                 = WallyHandleYesNoBox,
+    [CONTROLLER_CHOOSEMOVE]               = WallyHandleChooseMove,
+    [CONTROLLER_OPENBAG]                  = WallyHandleChooseItem,
+    [CONTROLLER_CHOOSEPOKEMON]            = WallyHandleChoosePokemon,
+    [CONTROLLER_23]                       = WallyHandleCmd23,
+    [CONTROLLER_HEALTHBARUPDATE]          = WallyHandleHealthBarUpdate,
+    [CONTROLLER_EXPUPDATE]                = WallyHandleExpUpdate,
+    [CONTROLLER_STATUSICONUPDATE]         = WallyHandleStatusIconUpdate,
+    [CONTROLLER_STATUSANIMATION]          = WallyHandleStatusAnimation,
+    [CONTROLLER_STATUSXOR]                = WallyHandleStatusXor,
+    [CONTROLLER_DATATRANSFER]             = WallyHandleDataTransfer,
+    [CONTROLLER_DMA3TRANSFER]             = WallyHandleDMA3Transfer,
+    [CONTROLLER_PLAYBGM]                  = WallyHandlePlayBGM,
+    [CONTROLLER_32]                       = WallyHandleCmd32,
+    [CONTROLLER_TWORETURNVALUES]          = WallyHandleTwoReturnValues,
+    [CONTROLLER_CHOSENMONRETURNVALUE]     = WallyHandleChosenMonReturnValue,
+    [CONTROLLER_ONERETURNVALUE]           = WallyHandleOneReturnValue,
+    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = WallyHandleOneReturnValue_Duplicate,
+    [CONTROLLER_CLEARUNKVAR]              = WallyHandleClearUnkVar,
+    [CONTROLLER_SETUNKVAR]                = WallyHandleSetUnkVar,
+    [CONTROLLER_CLEARUNKFLAG]             = WallyHandleClearUnkFlag,
+    [CONTROLLER_TOGGLEUNKFLAG]            = WallyHandleToggleUnkFlag,
+    [CONTROLLER_HITANIMATION]             = WallyHandleHitAnimation,
+    [CONTROLLER_CANTSWITCH]               = WallyHandleCantSwitch,
+    [CONTROLLER_PLAYSE]                   = WallyHandlePlaySE,
+    [CONTROLLER_PLAYFANFAREORBGM]         = WallyHandlePlayFanfareOrBGM,
+    [CONTROLLER_FAINTINGCRY]              = WallyHandleFaintingCry,
+    [CONTROLLER_INTROSLIDE]               = WallyHandleIntroSlide,
+    [CONTROLLER_INTROTRAINERBALLTHROW]    = WallyHandleIntroTrainerBallThrow,
+    [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = WallyHandleDrawPartyStatusSummary,
+    [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = WallyHandleHidePartyStatusSummary,
+    [CONTROLLER_ENDBOUNCE]                = WallyHandleEndBounceEffect,
+    [CONTROLLER_SPRITEINVISIBILITY]       = WallyHandleSpriteInvisibility,
+    [CONTROLLER_BATTLEANIMATION]          = WallyHandleBattleAnimation,
+    [CONTROLLER_LINKSTANDBYMSG]           = WallyHandleLinkStandbyMsg,
+    [CONTROLLER_RESETACTIONMOVESELECTION] = WallyHandleResetActionMoveSelection,
+    [CONTROLLER_ENDLINKBATTLE]            = WallyHandleEndLinkBattle,
+    [CONTROLLER_TERMINATOR_NOP]           = WallyCmdEnd,
 };
 
-// code
-
-void unref_sub_8137220(void)
+static void UNUSED SpriteCB_Null7(void)
 {
 }
 
-void SetBankFuncToWallyBufferRunCommand(void)
+void SetControllerToWally(void)
 {
     gBattlerControllerFuncs[gActiveBattler] = WallyBufferRunCommand;
-    gBattleStruct->unk160A8 = 0;
-    gBattleStruct->unk160A9 = 0;
-    gBattleStruct->unk160AA = 0;
-    gBattleStruct->unk160AB = 0;
+    gBattleStruct->wallyBattleState = 0;
+    gBattleStruct->wallyMovesState = 0;
+    gBattleStruct->wallyWaitFrames = 0;
+    gBattleStruct->wallyMoveFrames = 0;
 }
 
-void WallyBufferRunCommand(void)
+static void WallyBufferRunCommand(void)
 {
     if (gBattleControllerExecFlags & gBitTable[gActiveBattler])
     {
-        if (gBattleBufferA[gActiveBattler][0] < 0x39)
-            gWallyBufferCommands[gBattleBufferA[gActiveBattler][0]]();
+        if (gBattleBufferA[gActiveBattler][0] < ARRAY_COUNT(sWallyBufferCommands))
+            sWallyBufferCommands[gBattleBufferA[gActiveBattler][0]]();
         else
             WallyBufferExecCompleted();
     }
 }
 
-void sub_81372BC(void)
+static void WallyHandleActions(void)
 {
-    u8 r4;
-
-    switch (gBattleStruct->unk160A8)
+    switch (gBattleStruct->wallyBattleState)
     {
     case 0:
-        gBattleStruct->unk160AA = 64;
-        gBattleStruct->unk160A8++;
+        gBattleStruct->wallyWaitFrames = B_WAIT_TIME_LONG;
+        gBattleStruct->wallyBattleState++;
         // fall through
     case 1:
-        r4 = --gBattleStruct->unk160AA;
-        if (r4 == 0)
+        if (--gBattleStruct->wallyWaitFrames == 0)
         {
             PlaySE(SE_SELECT);
-            BtlController_EmitTwoReturnValues(1, 0, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_USE_MOVE, 0);
             WallyBufferExecCompleted();
-            gBattleStruct->unk160A8++;
-            gBattleStruct->unk160A9 = r4;
-            gBattleStruct->unk160AA = 64;
+            gBattleStruct->wallyBattleState++;
+            gBattleStruct->wallyMovesState = 0;
+            gBattleStruct->wallyWaitFrames = B_WAIT_TIME_LONG;
         }
         break;
     case 2:
-        r4 = --gBattleStruct->unk160AA;
-        if (r4 == 0)
+        if (--gBattleStruct->wallyWaitFrames == 0)
         {
             PlaySE(SE_SELECT);
-            BtlController_EmitTwoReturnValues(1, 0, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_USE_MOVE, 0);
             WallyBufferExecCompleted();
-            gBattleStruct->unk160A8++;
-            gBattleStruct->unk160A9 = r4;
-            gBattleStruct->unk160AA = 64;
+            gBattleStruct->wallyBattleState++;
+            gBattleStruct->wallyMovesState = 0;
+            gBattleStruct->wallyWaitFrames = B_WAIT_TIME_LONG;
         }
         break;
     case 3:
-        r4 = --gBattleStruct->unk160AA;
-        if (r4 == 0)
+        if (--gBattleStruct->wallyWaitFrames == 0)
         {
-            BtlController_EmitTwoReturnValues(1, 9, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_WALLY_THROW, 0);
             WallyBufferExecCompleted();
-            gBattleStruct->unk160A8++;
-            gBattleStruct->unk160A9 = r4;
-            gBattleStruct->unk160AA = 64;
+            gBattleStruct->wallyBattleState++;
+            gBattleStruct->wallyMovesState = 0;
+            gBattleStruct->wallyWaitFrames = B_WAIT_TIME_LONG;
         }
         break;
     case 4:
-        if (--gBattleStruct->unk160AA == 0)
+        if (--gBattleStruct->wallyWaitFrames == 0)
         {
             PlaySE(SE_SELECT);
             nullsub_8(0);
             sub_802E3E4(1, 0);
-            gBattleStruct->unk160AA = 64;
-            gBattleStruct->unk160A8++;
+            gBattleStruct->wallyWaitFrames = B_WAIT_TIME_LONG;
+            gBattleStruct->wallyBattleState++;
         }
         break;
     case 5:
-        if (--gBattleStruct->unk160AA == 0)
+        if (--gBattleStruct->wallyWaitFrames == 0)
         {
             PlaySE(SE_SELECT);
             DestroyMenuCursor();
-            BtlController_EmitTwoReturnValues(1, 1, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_USE_ITEM, 0);
             WallyBufferExecCompleted();
         }
         break;
     }
 }
 
-void sub_813741C(void)
+static void CompleteOnBattlerSpriteCallbackDummy(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         WallyBufferExecCompleted();
 }
 
-void sub_8137454(void)
+static void CompleteOnInactiveTextPrinter(void)
 {
     if (gWindowTemplate_Contest_MoveDescription.state == 0)
         WallyBufferExecCompleted();
 }
 
-void sub_813746C(void)
+void WallySetBattleEndCallbacks(void)
 {
     if (!gPaletteFade.active)
     {
@@ -338,87 +329,96 @@ void sub_813746C(void)
     }
 }
 
-void CompleteOnFinishedAnimation(void)
+static void CompleteOnFinishedAnimation(void)
 {
     if (!gDoingBattleAnim)
         WallyBufferExecCompleted();
 }
 
-void sub_81374C4(void)
+static void OpenBagAfterPaletteFade(void)
 {
     if (!gPaletteFade.active)
     {
-        gBattlerControllerFuncs[gActiveBattler] = sub_81374FC;
-        nullsub_14();
-        PrepareBagForWallyTutorial();
+        gBattlerControllerFuncs[gActiveBattler] = CompleteOnChosenItem;
+        ReshowBattleScreenDummy();
+        DoWallyTutorialBagMenu();
     }
 }
 
-void sub_81374FC(void)
+static void CompleteOnChosenItem(void)
 {
-    if (gMain.callback2 == BattleMainCB2
-     && !gPaletteFade.active)
+    if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
-        BtlController_EmitOneReturnValue(1, gSpecialVar_ItemId);
+        BtlController_EmitOneReturnValue(B_COMM_TO_ENGINE, gSpecialVar_ItemId);
         WallyBufferExecCompleted();
     }
 }
 
-void sub_8137538(void)
+static void Intro_TryShinyAnimShowHealthbox(void)
 {
-    if (!ewram17810[gActiveBattler].unk0_3 && !ewram17810[gActiveBattler].unk0_7)
-        sub_8141828(gActiveBattler, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
+    if (!gBattleHealthBoxInfo[gActiveBattler].triedShinyMonAnim
+     && !gBattleHealthBoxInfo[gActiveBattler].ballAnimActive)
+        TryShinyAnimation(gActiveBattler, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
 
-    if (!ewram17810[gActiveBattler ^ 2].unk0_3 && !ewram17810[gActiveBattler ^ 2].unk0_7)
-        sub_8141828(gActiveBattler ^ 2, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler ^ 2]]);
+    if (!gBattleHealthBoxInfo[BATTLE_PARTNER(gActiveBattler)].triedShinyMonAnim
+     && !gBattleHealthBoxInfo[BATTLE_PARTNER(gActiveBattler)].ballAnimActive)
+        TryShinyAnimation(BATTLE_PARTNER(gActiveBattler), &gPlayerParty[gBattlerPartyIndexes[BATTLE_PARTNER(gActiveBattler)]]);
 
-    if (!ewram17810[gActiveBattler].unk0_3 && !ewram17810[gActiveBattler ^ 2].unk0_3)
+    if (!gBattleHealthBoxInfo[gActiveBattler].ballAnimActive
+        && !gBattleHealthBoxInfo[BATTLE_PARTNER(gActiveBattler)].ballAnimActive)
     {
         if (IsDoubleBattle() && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
         {
-            DestroySprite(&gSprites[gUnknown_0300434C[gActiveBattler ^ 2]]);
-            sub_8045A5C(gHealthboxSpriteIds[gActiveBattler ^ 2], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler ^ 2]], 0);
-            sub_804777C(gActiveBattler ^ 2);
-            sub_8043DFC(gHealthboxSpriteIds[gActiveBattler ^ 2]);
+            DestroySprite(&gSprites[gBattleControllerData[BATTLE_PARTNER(gActiveBattler)]]);
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[BATTLE_PARTNER(gActiveBattler)], &gPlayerParty[gBattlerPartyIndexes[BATTLE_PARTNER(gActiveBattler)]], HEALTHBOX_ALL);
+            StartHealthboxSlideIn(BATTLE_PARTNER(gActiveBattler));
+            SetHealthboxSpriteVisible(gHealthboxSpriteIds[BATTLE_PARTNER(gActiveBattler)]);
         }
-        DestroySprite(&gSprites[gUnknown_0300434C[gActiveBattler]]);
-        sub_8045A5C(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], 0);
-        sub_804777C(gActiveBattler);
-        sub_8043DFC(gHealthboxSpriteIds[gActiveBattler]);
-        ewram17840.unk9_0 = 0;
-        gBattlerControllerFuncs[gActiveBattler] = sub_81376B8;
+        DestroySprite(&gSprites[gBattleControllerData[gActiveBattler]]);
+        UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], HEALTHBOX_ALL);
+        StartHealthboxSlideIn(gActiveBattler);
+        SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
+
+        ewram17840.unk9_0 = FALSE;
+        gBattlerControllerFuncs[gActiveBattler] = Intro_WaitForShinyAnimAndHealthbox;
     }
 }
 
-void sub_81376B8(void)
+static void Intro_WaitForShinyAnimAndHealthbox(void)
 {
-    bool8 r4 = FALSE;
+    bool32 healthboxAnimDone = FALSE;
 
     if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
-        r4 = TRUE;
-    if (r4 && ewram17810[gActiveBattler].unk1_0 && ewram17810[gActiveBattler ^ 2].unk1_0)
+        healthboxAnimDone = TRUE;
+
+    if (healthboxAnimDone && gBattleHealthBoxInfo[gActiveBattler].finishedShinyMonAnim
+        && gBattleHealthBoxInfo[BATTLE_PARTNER(gActiveBattler)].finishedShinyMonAnim)
     {
-        ewram17810[gActiveBattler].unk0_7 = 0;
-        ewram17810[gActiveBattler].unk1_0 = 0;
-        ewram17810[gActiveBattler ^ 2].unk0_7 = 0;
-        ewram17810[gActiveBattler ^ 2].unk1_0 = 0;
-        FreeSpriteTilesByTag(0x27F9);
-        FreeSpritePaletteByTag(0x27F9);
-        CreateTask(c3_0802FDF4, 10);
+        gBattleHealthBoxInfo[gActiveBattler].triedShinyMonAnim = FALSE;
+        gBattleHealthBoxInfo[gActiveBattler].finishedShinyMonAnim = FALSE;
+
+        gBattleHealthBoxInfo[BATTLE_PARTNER(gActiveBattler)].triedShinyMonAnim = FALSE;
+        gBattleHealthBoxInfo[BATTLE_PARTNER(gActiveBattler)].finishedShinyMonAnim = FALSE;
+
+        FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
+        FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+
+        CreateTask(Task_PlayerController_RestoreBgmAfterCry, 10);
         HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
+
         WallyBufferExecCompleted();
     }
 }
 
-void sub_81377B0(void)
+static void CompleteOnHealthbarDone(void)
 {
-    s16 r4;
+    s16 hpValue = MoveBattleBar(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], HEALTH_BAR, 0);
 
-    r4 = sub_8045C78(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], 0, 0);
-    sub_8043DFC(gHealthboxSpriteIds[gActiveBattler]);
-    if (r4 != -1)
+    SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
+
+    if (hpValue != -1)
     {
-        sub_80440EC(gHealthboxSpriteIds[gActiveBattler], r4, 0);
+        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], hpValue, HP_CURRENT);
     }
     else
     {
@@ -427,7 +427,7 @@ void sub_81377B0(void)
     }
 }
 
-void bx_blink_t5(void)
+static void DoHitAnimBlinkSpriteEffect(void)
 {
     u8 spriteId = gBattlerSpriteIds[gActiveBattler];
 
@@ -446,39 +446,38 @@ void bx_blink_t5(void)
     }
 }
 
-void sub_813789C(void)
+static void DoSwitchOutAnimation(void)
 {
-    if (!ewram17810[gActiveBattler].unk0_6)
+    if (!gBattleHealthBoxInfo[gActiveBattler].specialAnimActive)
     {
         FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
         DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        sub_8043DB0(gHealthboxSpriteIds[gActiveBattler]);
+        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
         WallyBufferExecCompleted();
     }
 }
 
-// Duplicate of sub_813741C
-void CompleteOnBankSpriteCallbackDummy2(void)
+static void CompleteOnBankSpriteCallbackDummy2(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         WallyBufferExecCompleted();
 }
 
-void sub_8137940(void)
+static void CompleteOnFinishedBattleAnimation(void)
 {
-    if (!ewram17810[gActiveBattler].unk0_5)
+    if (!gBattleHealthBoxInfo[gActiveBattler].animFromTableActive)
         WallyBufferExecCompleted();
 }
 
-void WallyBufferExecCompleted(void)
+static void WallyBufferExecCompleted(void)
 {
     gBattlerControllerFuncs[gActiveBattler] = WallyBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
-        u8 multiplayerId = GetMultiplayerId();
+        u8 playerId = GetMultiplayerId();
 
-        PrepareBufferDataTransferLink(2, 4, &multiplayerId);
-        gBattleBufferA[gActiveBattler][0] = 0x38;
+        PrepareBufferDataTransferLink(B_COMM_CONTROLLER_IS_DONE, 4, &playerId);
+        gBattleBufferA[gActiveBattler][0] = CONTROLLER_TERMINATOR_NOP;
     }
     else
     {
@@ -486,42 +485,42 @@ void WallyBufferExecCompleted(void)
     }
 }
 
-void unref_sub_81379E4(void)
+static void UNUSED CompleteOnFinishedStatusAnimation(void)
 {
-    if (!ewram17810[gActiveBattler].unk0_4)
+    if (!gBattleHealthBoxInfo[gActiveBattler].statusAnimActive)
         WallyBufferExecCompleted();
 }
 
-void WallyHandleGetAttributes(void)
+static void WallyHandleGetMonData(void)
 {
-    u8 arr[0x100];
-    u32 r6 = 0;
-    u8 r4;
+    u8 monData[sizeof(struct Pokemon) * 2 + 56]; // this allows to get full data of two Pokémon, trying to get more will result in overwriting data
+    u32 size = 0;
+    u8 monToCheck;
     s32 i;
 
     if (gBattleBufferA[gActiveBattler][2] == 0)
     {
-        r6 = sub_8137A84(gBattlerPartyIndexes[gActiveBattler], arr);
+        size += CopyWallyMonData(gBattlerPartyIndexes[gActiveBattler], monData);
     }
     else
     {
-        r4 = gBattleBufferA[gActiveBattler][2];
-        for (i = 0; i < 6; i++)
+        monToCheck = gBattleBufferA[gActiveBattler][2];
+        for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (r4 & 1)
-                r6 += sub_8137A84(i, arr + r6);
-            r4 >>= 1;
+            if (monToCheck & 1)
+                size += CopyWallyMonData(i, monData + size);
+            monToCheck >>= 1;
         }
     }
-    BtlController_EmitDataTransfer(1, r6, arr);
+    BtlController_EmitDataTransfer(B_COMM_TO_ENGINE, size, monData);
     WallyBufferExecCompleted();
 }
 
-u32 sub_8137A84(u8 a, u8 *buffer)
+static u32 CopyWallyMonData(u8 monId, u8 *dst)
 {
-    struct BattlePokemon battlePokemon;
+    struct BattlePokemon battleMon;
     struct MovePpInfo moveData;
-    u8 nickname[20];
+    u8 nickname[POKEMON_NAME_BUFFER_SIZE];
     u8 *src;
     s16 data16;
     u32 data32;
@@ -529,323 +528,324 @@ u32 sub_8137A84(u8 a, u8 *buffer)
 
     switch (gBattleBufferA[gActiveBattler][1])
     {
-    case 0:
-        battlePokemon.species = GetMonData(&gPlayerParty[a], MON_DATA_SPECIES);
-        battlePokemon.item = GetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM);
-        for (size = 0; size < 4; size++)
+    case REQUEST_ALL_BATTLE:
+        battleMon.species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES);
+        battleMon.item = GetMonData(&gPlayerParty[monId], MON_DATA_HELD_ITEM);
+        for (size = 0; size < MAX_MON_MOVES; size++)
         {
-            battlePokemon.moves[size] = GetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + size);
-            battlePokemon.pp[size] = GetMonData(&gPlayerParty[a], MON_DATA_PP1 + size);
+            battleMon.moves[size] = GetMonData(&gPlayerParty[monId], MON_DATA_MOVE1 + size);
+            battleMon.pp[size] = GetMonData(&gPlayerParty[monId], MON_DATA_PP1 + size);
         }
-        battlePokemon.ppBonuses = GetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES);
-        battlePokemon.friendship = GetMonData(&gPlayerParty[a], MON_DATA_FRIENDSHIP);
-        battlePokemon.experience = GetMonData(&gPlayerParty[a], MON_DATA_EXP);
-        battlePokemon.hpIV = GetMonData(&gPlayerParty[a], MON_DATA_HP_IV);
-        battlePokemon.attackIV = GetMonData(&gPlayerParty[a], MON_DATA_ATK_IV);
-        battlePokemon.defenseIV = GetMonData(&gPlayerParty[a], MON_DATA_DEF_IV);
-        battlePokemon.speedIV = GetMonData(&gPlayerParty[a], MON_DATA_SPEED_IV);
-        battlePokemon.spAttackIV = GetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV);
-        battlePokemon.spDefenseIV = GetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV);
-        battlePokemon.personality = GetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY);
-        battlePokemon.status1 = GetMonData(&gPlayerParty[a], MON_DATA_STATUS);
-        battlePokemon.level = GetMonData(&gPlayerParty[a], MON_DATA_LEVEL);
-        battlePokemon.hp = GetMonData(&gPlayerParty[a], MON_DATA_HP);
-        battlePokemon.maxHP = GetMonData(&gPlayerParty[a], MON_DATA_MAX_HP);
-        battlePokemon.attack = GetMonData(&gPlayerParty[a], MON_DATA_ATK);
-        battlePokemon.defense = GetMonData(&gPlayerParty[a], MON_DATA_DEF);
-        battlePokemon.speed = GetMonData(&gPlayerParty[a], MON_DATA_SPEED);
-        battlePokemon.spAttack = GetMonData(&gPlayerParty[a], MON_DATA_SPATK);
-        battlePokemon.spDefense = GetMonData(&gPlayerParty[a], MON_DATA_SPDEF);
-        battlePokemon.isEgg = GetMonData(&gPlayerParty[a], MON_DATA_IS_EGG);
-        battlePokemon.altAbility = GetMonData(&gPlayerParty[a], MON_DATA_ALT_ABILITY);
-        battlePokemon.otId = GetMonData(&gPlayerParty[a], MON_DATA_OT_ID);
-        GetMonData(&gPlayerParty[a], MON_DATA_NICKNAME, nickname);
-        StringCopy10(battlePokemon.nickname, nickname);
-        GetMonData(&gPlayerParty[a], MON_DATA_OT_NAME, battlePokemon.otName);
-        MEMCPY_ALT(&battlePokemon, buffer, sizeof(battlePokemon), size, src);
+        battleMon.ppBonuses = GetMonData(&gPlayerParty[monId], MON_DATA_PP_BONUSES);
+        battleMon.friendship = GetMonData(&gPlayerParty[monId], MON_DATA_FRIENDSHIP);
+        battleMon.experience = GetMonData(&gPlayerParty[monId], MON_DATA_EXP);
+        battleMon.hpIV = GetMonData(&gPlayerParty[monId], MON_DATA_HP_IV);
+        battleMon.attackIV = GetMonData(&gPlayerParty[monId], MON_DATA_ATK_IV);
+        battleMon.defenseIV = GetMonData(&gPlayerParty[monId], MON_DATA_DEF_IV);
+        battleMon.speedIV = GetMonData(&gPlayerParty[monId], MON_DATA_SPEED_IV);
+        battleMon.spAttackIV = GetMonData(&gPlayerParty[monId], MON_DATA_SPATK_IV);
+        battleMon.spDefenseIV = GetMonData(&gPlayerParty[monId], MON_DATA_SPDEF_IV);
+        battleMon.personality = GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY);
+        battleMon.status1 = GetMonData(&gPlayerParty[monId], MON_DATA_STATUS);
+        battleMon.level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
+        battleMon.hp = GetMonData(&gPlayerParty[monId], MON_DATA_HP);
+        battleMon.maxHP = GetMonData(&gPlayerParty[monId], MON_DATA_MAX_HP);
+        battleMon.attack = GetMonData(&gPlayerParty[monId], MON_DATA_ATK);
+        battleMon.defense = GetMonData(&gPlayerParty[monId], MON_DATA_DEF);
+        battleMon.speed = GetMonData(&gPlayerParty[monId], MON_DATA_SPEED);
+        battleMon.spAttack = GetMonData(&gPlayerParty[monId], MON_DATA_SPATK);
+        battleMon.spDefense = GetMonData(&gPlayerParty[monId], MON_DATA_SPDEF);
+        battleMon.isEgg = GetMonData(&gPlayerParty[monId], MON_DATA_IS_EGG);
+        battleMon.altAbility = GetMonData(&gPlayerParty[monId], MON_DATA_ALT_ABILITY);
+        battleMon.otId = GetMonData(&gPlayerParty[monId], MON_DATA_OT_ID);
+        GetMonData(&gPlayerParty[monId], MON_DATA_NICKNAME, nickname);
+        StringCopy10(battleMon.nickname, nickname);
+        GetMonData(&gPlayerParty[monId], MON_DATA_OT_NAME, battleMon.otName);
+        MEMCPY_ALT(&battleMon, dst, sizeof(battleMon), size, src);
         break;
-    case 1:
-        data16 = GetMonData(&gPlayerParty[a], MON_DATA_SPECIES);
-        buffer[0] = data16;
-        buffer[1] = data16 >> 8;
+    case REQUEST_SPECIES_BATTLE:
+        data16 = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES);
+        dst[0] = data16;
+        dst[1] = data16 >> 8;
         size = 2;
         break;
-    case 2:
-        data16 = GetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM);
-        buffer[0] = data16;
-        buffer[1] = data16 >> 8;
+    case REQUEST_HELDITEM_BATTLE:
+        data16 = GetMonData(&gPlayerParty[monId], MON_DATA_HELD_ITEM);
+        dst[0] = data16;
+        dst[1] = data16 >> 8;
         size = 2;
         break;
-    case 3:
-        for (size = 0; size < 4; size++)
+    case REQUEST_MOVES_PP_BATTLE:
+        for (size = 0; size < MAX_MON_MOVES; size++)
         {
-            moveData.moves[size] = GetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + size);
-            moveData.pp[size] = GetMonData(&gPlayerParty[a], MON_DATA_PP1 + size);
+            moveData.moves[size] = GetMonData(&gPlayerParty[monId], MON_DATA_MOVE1 + size);
+            moveData.pp[size] = GetMonData(&gPlayerParty[monId], MON_DATA_PP1 + size);
         }
-        moveData.ppBonuses = GetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES);
-        MEMCPY_ALT(&moveData, buffer, sizeof(moveData), size, src);
+        moveData.ppBonuses = GetMonData(&gPlayerParty[monId], MON_DATA_PP_BONUSES);
+        MEMCPY_ALT(&moveData, dst, sizeof(moveData), size, src);
         break;
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-        data16 = GetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + gBattleBufferA[gActiveBattler][1] - 4);
-        buffer[0] = data16;
-        buffer[1] = data16 >> 8;
+    case REQUEST_MOVE1_BATTLE:
+    case REQUEST_MOVE2_BATTLE:
+    case REQUEST_MOVE3_BATTLE:
+    case REQUEST_MOVE4_BATTLE:
+        data16 = GetMonData(&gPlayerParty[monId], MON_DATA_MOVE1 + gBattleBufferA[gActiveBattler][1] - REQUEST_MOVE1_BATTLE);
+        dst[0] = data16;
+        dst[1] = data16 >> 8;
         size = 2;
         break;
-    case 8:
-        for (size = 0; size < 4; size++)
-            buffer[size] = GetMonData(&gPlayerParty[a], MON_DATA_PP1 + size);
-        buffer[size] = GetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES);
+    case REQUEST_PP_DATA_BATTLE:
+        for (size = 0; size < MAX_MON_MOVES; size++)
+            dst[size] = GetMonData(&gPlayerParty[monId], MON_DATA_PP1 + size);
+        dst[size] = GetMonData(&gPlayerParty[monId], MON_DATA_PP_BONUSES);
         size++;
         break;
-    case 9:
-    case 10:
-    case 11:
-    case 12:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_PP1 + gBattleBufferA[gActiveBattler][1] - 9);
+    case REQUEST_PPMOVE1_BATTLE:
+    case REQUEST_PPMOVE2_BATTLE:
+    case REQUEST_PPMOVE3_BATTLE:
+    case REQUEST_PPMOVE4_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_PP1 + gBattleBufferA[gActiveBattler][1] - REQUEST_PPMOVE1_BATTLE);
         size = 1;
         break;
-    case 17:
-        data32 = GetMonData(&gPlayerParty[a], MON_DATA_OT_ID);
-        buffer[0] = (data32 & 0x000000FF);
-        buffer[1] = (data32 & 0x0000FF00) >> 8;
-        buffer[2] = (data32 & 0x00FF0000) >> 16;
+    case REQUEST_OTID_BATTLE:
+        data32 = GetMonData(&gPlayerParty[monId], MON_DATA_OT_ID);
+        dst[0] = (data32 & 0x000000FF);
+        dst[1] = (data32 & 0x0000FF00) >> 8;
+        dst[2] = (data32 & 0x00FF0000) >> 16;
         size = 3;
         break;
-    case 18:
-        data32 = GetMonData(&gPlayerParty[a], MON_DATA_EXP);
-        buffer[0] = (data32 & 0x000000FF);
-        buffer[1] = (data32 & 0x0000FF00) >> 8;
-        buffer[2] = (data32 & 0x00FF0000) >> 16;
+    case REQUEST_EXP_BATTLE:
+        data32 = GetMonData(&gPlayerParty[monId], MON_DATA_EXP);
+        dst[0] = (data32 & 0x000000FF);
+        dst[1] = (data32 & 0x0000FF00) >> 8;
+        dst[2] = (data32 & 0x00FF0000) >> 16;
         size = 3;
         break;
-    case 19:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_HP_EV);
+    case REQUEST_HP_EV_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_HP_EV);
         size = 1;
         break;
-    case 20:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_ATK_EV);
+    case REQUEST_ATK_EV_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_ATK_EV);
         size = 1;
         break;
-    case 21:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_DEF_EV);
+    case REQUEST_DEF_EV_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_DEF_EV);
         size = 1;
         break;
-    case 22:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SPEED_EV);
+    case REQUEST_SPEED_EV_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_SPEED_EV);
         size = 1;
         break;
-    case 23:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SPATK_EV);
+    case REQUEST_SPATK_EV_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_SPATK_EV);
         size = 1;
         break;
-    case 24:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SPDEF_EV);
+    case REQUEST_SPDEF_EV_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_SPDEF_EV);
         size = 1;
         break;
-    case 25:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_FRIENDSHIP);
+    case REQUEST_FRIENDSHIP_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_FRIENDSHIP);
         size = 1;
         break;
-    case 26:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_POKERUS);
+    case REQUEST_POKERUS_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_POKERUS);
         size = 1;
         break;
-    case 27:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_MET_LOCATION);
+    case REQUEST_MET_LOCATION_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_MET_LOCATION);
         size = 1;
         break;
-    case 28:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_MET_LEVEL);
+    case REQUEST_MET_LEVEL_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_MET_LEVEL);
         size = 1;
         break;
-    case 29:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_MET_GAME);
+    case REQUEST_MET_GAME_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_MET_GAME);
         size = 1;
         break;
-    case 30:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_POKEBALL);
+    case REQUEST_POKEBALL_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_POKEBALL);
         size = 1;
         break;
-    case 31:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_HP_IV);
-        buffer[1] = GetMonData(&gPlayerParty[a], MON_DATA_ATK_IV);
-        buffer[2] = GetMonData(&gPlayerParty[a], MON_DATA_DEF_IV);
-        buffer[3] = GetMonData(&gPlayerParty[a], MON_DATA_SPEED_IV);
-        buffer[4] = GetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV);
-        buffer[5] = GetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV);
+    case REQUEST_ALL_IVS_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_HP_IV);
+        dst[1] = GetMonData(&gPlayerParty[monId], MON_DATA_ATK_IV);
+        dst[2] = GetMonData(&gPlayerParty[monId], MON_DATA_DEF_IV);
+        dst[3] = GetMonData(&gPlayerParty[monId], MON_DATA_SPEED_IV);
+        dst[4] = GetMonData(&gPlayerParty[monId], MON_DATA_SPATK_IV);
+        dst[5] = GetMonData(&gPlayerParty[monId], MON_DATA_SPDEF_IV);
         size = 6;
         break;
-    case 32:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_HP_IV);
+    case REQUEST_HP_IV_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_HP_IV);
         size = 1;
         break;
-    case 33:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_ATK_IV);
+    case REQUEST_ATK_IV_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_ATK_IV);
         size = 1;
         break;
-    case 34:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_DEF_IV);
+    case REQUEST_DEF_IV_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_DEF_IV);
         size = 1;
         break;
-    case 35:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SPEED_IV);
+    case REQUEST_SPEED_IV_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_SPEED_IV);
         size = 1;
         break;
-    case 36:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV);
+    case REQUEST_SPATK_IV_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_SPATK_IV);
         size = 1;
         break;
-    case 37:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV);
+    case REQUEST_SPDEF_IV_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_SPDEF_IV);
         size = 1;
         break;
-    case 38:
-        data32 = GetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY);
-        buffer[0] = (data32 & 0x000000FF);
-        buffer[1] = (data32 & 0x0000FF00) >> 8;
-        buffer[2] = (data32 & 0x00FF0000) >> 16;
-        buffer[3] = (data32 & 0xFF000000) >> 24;
+    case REQUEST_PERSONALITY_BATTLE:
+        data32 = GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY);
+        dst[0] = (data32 & 0x000000FF);
+        dst[1] = (data32 & 0x0000FF00) >> 8;
+        dst[2] = (data32 & 0x00FF0000) >> 16;
+        dst[3] = (data32 & 0xFF000000) >> 24;
         size = 4;
         break;
-    case 39:
-        data16 = GetMonData(&gPlayerParty[a], MON_DATA_CHECKSUM);
-        buffer[0] = data16;
-        buffer[1] = data16 >> 8;
+    case REQUEST_CHECKSUM_BATTLE:
+        data16 = GetMonData(&gPlayerParty[monId], MON_DATA_CHECKSUM);
+        dst[0] = data16;
+        dst[1] = data16 >> 8;
         size = 2;
         break;
-    case 40:
-        data32 = GetMonData(&gPlayerParty[a], MON_DATA_STATUS);
-        buffer[0] = (data32 & 0x000000FF);
-        buffer[1] = (data32 & 0x0000FF00) >> 8;
-        buffer[2] = (data32 & 0x00FF0000) >> 16;
-        buffer[3] = (data32 & 0xFF000000) >> 24;
+    case REQUEST_STATUS_BATTLE:
+        data32 = GetMonData(&gPlayerParty[monId], MON_DATA_STATUS);
+        dst[0] = (data32 & 0x000000FF);
+        dst[1] = (data32 & 0x0000FF00) >> 8;
+        dst[2] = (data32 & 0x00FF0000) >> 16;
+        dst[3] = (data32 & 0xFF000000) >> 24;
         size = 4;
         break;
-    case 41:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_LEVEL);
+    case REQUEST_LEVEL_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
         size = 1;
         break;
-    case 42:
-        data16 = GetMonData(&gPlayerParty[a], MON_DATA_HP);
-        buffer[0] = data16;
-        buffer[1] = data16 >> 8;
+    case REQUEST_HP_BATTLE:
+        data16 = GetMonData(&gPlayerParty[monId], MON_DATA_HP);
+        dst[0] = data16;
+        dst[1] = data16 >> 8;
         size = 2;
         break;
-    case 43:
-        data16 = GetMonData(&gPlayerParty[a], MON_DATA_MAX_HP);
-        buffer[0] = data16;
-        buffer[1] = data16 >> 8;
+    case REQUEST_MAX_HP_BATTLE:
+        data16 = GetMonData(&gPlayerParty[monId], MON_DATA_MAX_HP);
+        dst[0] = data16;
+        dst[1] = data16 >> 8;
         size = 2;
         break;
-    case 44:
-        data16 = GetMonData(&gPlayerParty[a], MON_DATA_ATK);
-        buffer[0] = data16;
-        buffer[1] = data16 >> 8;
+    case REQUEST_ATK_BATTLE:
+        data16 = GetMonData(&gPlayerParty[monId], MON_DATA_ATK);
+        dst[0] = data16;
+        dst[1] = data16 >> 8;
         size = 2;
         break;
-    case 45:
-        data16 = GetMonData(&gPlayerParty[a], MON_DATA_DEF);
-        buffer[0] = data16;
-        buffer[1] = data16 >> 8;
+    case REQUEST_DEF_BATTLE:
+        data16 = GetMonData(&gPlayerParty[monId], MON_DATA_DEF);
+        dst[0] = data16;
+        dst[1] = data16 >> 8;
         size = 2;
         break;
-    case 46:
-        data16 = GetMonData(&gPlayerParty[a], MON_DATA_SPEED);
-        buffer[0] = data16;
-        buffer[1] = data16 >> 8;
+    case REQUEST_SPEED_BATTLE:
+        data16 = GetMonData(&gPlayerParty[monId], MON_DATA_SPEED);
+        dst[0] = data16;
+        dst[1] = data16 >> 8;
         size = 2;
         break;
-    case 47:
-        data16 = GetMonData(&gPlayerParty[a], MON_DATA_SPATK);
-        buffer[0] = data16;
-        buffer[1] = data16 >> 8;
+    case REQUEST_SPATK_BATTLE:
+        data16 = GetMonData(&gPlayerParty[monId], MON_DATA_SPATK);
+        dst[0] = data16;
+        dst[1] = data16 >> 8;
         size = 2;
         break;
-    case 48:
-        data16 = GetMonData(&gPlayerParty[a], MON_DATA_SPDEF);
-        buffer[0] = data16;
-        buffer[1] = data16 >> 8;
+    case REQUEST_SPDEF_BATTLE:
+        data16 = GetMonData(&gPlayerParty[monId], MON_DATA_SPDEF);
+        dst[0] = data16;
+        dst[1] = data16 >> 8;
         size = 2;
         break;
-    case 49:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_COOL);
+    case REQUEST_COOL_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_COOL);
         size = 1;
         break;
-    case 50:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_BEAUTY);
+    case REQUEST_BEAUTY_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_BEAUTY);
         size = 1;
         break;
-    case 51:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_CUTE);
+    case REQUEST_CUTE_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_CUTE);
         size = 1;
         break;
-    case 52:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SMART);
+    case REQUEST_SMART_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_SMART);
         size = 1;
         break;
-    case 53:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_TOUGH);
+    case REQUEST_TOUGH_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_TOUGH);
         size = 1;
         break;
-    case 54:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SHEEN);
+    case REQUEST_SHEEN_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_SHEEN);
         size = 1;
         break;
-    case 55:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_COOL_RIBBON);
+    case REQUEST_COOL_RIBBON_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_COOL_RIBBON);
         size = 1;
         break;
-    case 56:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_BEAUTY_RIBBON);
+    case REQUEST_BEAUTY_RIBBON_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_BEAUTY_RIBBON);
         size = 1;
         break;
-    case 57:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_CUTE_RIBBON);
+    case REQUEST_CUTE_RIBBON_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_CUTE_RIBBON);
         size = 1;
         break;
-    case 58:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SMART_RIBBON);
+    case REQUEST_SMART_RIBBON_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_SMART_RIBBON);
         size = 1;
         break;
-    case 59:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_TOUGH_RIBBON);
+    case REQUEST_TOUGH_RIBBON_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_TOUGH_RIBBON);
         size = 1;
         break;
     }
+
     return size;
 }
 
-void WallyHandlecmd1(void)
+static void WallyHandleGetRawMonData(void)
 {
-    PlayerHandlecmd1();
+    PlayerHandleGetRawMonData();
 }
 
-void WallyHandleSetAttributes(void)
+static void WallyHandleSetMonData(void)
 {
-    u8 r4;
+    u8 monToCheck;
     u8 i;
 
     if (gBattleBufferA[gActiveBattler][2] == 0)
     {
-        sub_8138294(gBattlerPartyIndexes[gActiveBattler]);
+        SetWallyMonData(gBattlerPartyIndexes[gActiveBattler]);
     }
     else
     {
-        r4 = gBattleBufferA[gActiveBattler][2];
-        for (i = 0; i < 6; i++)
+        monToCheck = gBattleBufferA[gActiveBattler][2];
+        for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (r4 & 1)
-                sub_8138294(i);
-            r4 >>= 1;
+            if (monToCheck & 1)
+                SetWallyMonData(i);
+            monToCheck >>= 1;
         }
     }
     WallyBufferExecCompleted();
 }
 
-void sub_8138294(u8 a)
+static void SetWallyMonData(u8 monId)
 {
     struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gBattleBufferA[gActiveBattler][3];
     struct MovePpInfo *moveData = (struct MovePpInfo *)&gBattleBufferA[gActiveBattler][3];
@@ -853,315 +853,320 @@ void sub_8138294(u8 a)
 
     switch (gBattleBufferA[gActiveBattler][1])
     {
-    case 0:
+    case REQUEST_ALL_BATTLE:
         {
             u8 iv;
 
-            SetMonData(&gPlayerParty[a], MON_DATA_SPECIES, &battlePokemon->species);
-            SetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM, &battlePokemon->item);
-            for (i = 0; i < 4; i++)
+            SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &battlePokemon->species);
+            SetMonData(&gPlayerParty[monId], MON_DATA_HELD_ITEM, &battlePokemon->item);
+            for (i = 0; i < MAX_MON_MOVES; i++)
             {
-                SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, &battlePokemon->moves[i]);
-                SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, &battlePokemon->pp[i]);
+                SetMonData(&gPlayerParty[monId], MON_DATA_MOVE1 + i, &battlePokemon->moves[i]);
+                SetMonData(&gPlayerParty[monId], MON_DATA_PP1 + i, &battlePokemon->pp[i]);
             }
-            SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, &battlePokemon->ppBonuses);
-            SetMonData(&gPlayerParty[a], MON_DATA_FRIENDSHIP, &battlePokemon->friendship);
-            SetMonData(&gPlayerParty[a], MON_DATA_EXP, &battlePokemon->experience);
+            SetMonData(&gPlayerParty[monId], MON_DATA_PP_BONUSES, &battlePokemon->ppBonuses);
+            SetMonData(&gPlayerParty[monId], MON_DATA_FRIENDSHIP, &battlePokemon->friendship);
+            SetMonData(&gPlayerParty[monId], MON_DATA_EXP, &battlePokemon->experience);
             iv = battlePokemon->hpIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_HP_IV, &iv);
+            SetMonData(&gPlayerParty[monId], MON_DATA_HP_IV, &iv);
             iv = battlePokemon->attackIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_ATK_IV, &iv);
+            SetMonData(&gPlayerParty[monId], MON_DATA_ATK_IV, &iv);
             iv = battlePokemon->defenseIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, &iv);
+            SetMonData(&gPlayerParty[monId], MON_DATA_DEF_IV, &iv);
             iv = battlePokemon->speedIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_SPEED_IV, &iv);
+            SetMonData(&gPlayerParty[monId], MON_DATA_SPEED_IV, &iv);
             iv = battlePokemon->spAttackIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, &iv);
+            SetMonData(&gPlayerParty[monId], MON_DATA_SPATK_IV, &iv);
             iv = battlePokemon->spDefenseIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV, &iv);
-            SetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY, &battlePokemon->personality);
-            SetMonData(&gPlayerParty[a], MON_DATA_STATUS, &battlePokemon->status1);
-            SetMonData(&gPlayerParty[a], MON_DATA_LEVEL, &battlePokemon->level);
-            SetMonData(&gPlayerParty[a], MON_DATA_HP, &battlePokemon->hp);
-            SetMonData(&gPlayerParty[a], MON_DATA_MAX_HP, &battlePokemon->maxHP);
-            SetMonData(&gPlayerParty[a], MON_DATA_ATK, &battlePokemon->attack);
-            SetMonData(&gPlayerParty[a], MON_DATA_DEF, &battlePokemon->defense);
-            SetMonData(&gPlayerParty[a], MON_DATA_SPEED, &battlePokemon->speed);
-            SetMonData(&gPlayerParty[a], MON_DATA_SPATK, &battlePokemon->spAttack);
-            SetMonData(&gPlayerParty[a], MON_DATA_SPDEF, &battlePokemon->spDefense);
+            SetMonData(&gPlayerParty[monId], MON_DATA_SPDEF_IV, &iv);
+            SetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY, &battlePokemon->personality);
+            SetMonData(&gPlayerParty[monId], MON_DATA_STATUS, &battlePokemon->status1);
+            SetMonData(&gPlayerParty[monId], MON_DATA_LEVEL, &battlePokemon->level);
+            SetMonData(&gPlayerParty[monId], MON_DATA_HP, &battlePokemon->hp);
+            SetMonData(&gPlayerParty[monId], MON_DATA_MAX_HP, &battlePokemon->maxHP);
+            SetMonData(&gPlayerParty[monId], MON_DATA_ATK, &battlePokemon->attack);
+            SetMonData(&gPlayerParty[monId], MON_DATA_DEF, &battlePokemon->defense);
+            SetMonData(&gPlayerParty[monId], MON_DATA_SPEED, &battlePokemon->speed);
+            SetMonData(&gPlayerParty[monId], MON_DATA_SPATK, &battlePokemon->spAttack);
+            SetMonData(&gPlayerParty[monId], MON_DATA_SPDEF, &battlePokemon->spDefense);
         }
         break;
-    case 1:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPECIES, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_SPECIES_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 2:
-        SetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_HELDITEM_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_HELD_ITEM, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 3:
-        for (i = 0; i < 4; i++)
+    case REQUEST_MOVES_PP_BATTLE:
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
-            SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, &moveData->moves[i]);
-            SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, &moveData->pp[i]);
+            SetMonData(&gPlayerParty[monId], MON_DATA_MOVE1 + i, &moveData->moves[i]);
+            SetMonData(&gPlayerParty[monId], MON_DATA_PP1 + i, &moveData->pp[i]);
         }
-        SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, &moveData->ppBonuses);
+        SetMonData(&gPlayerParty[monId], MON_DATA_PP_BONUSES, &moveData->ppBonuses);
         break;
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-        SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + gBattleBufferA[gActiveBattler][1] - 4, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_MOVE1_BATTLE:
+    case REQUEST_MOVE2_BATTLE:
+    case REQUEST_MOVE3_BATTLE:
+    case REQUEST_MOVE4_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_MOVE1 + gBattleBufferA[gActiveBattler][1] - REQUEST_MOVE1_BATTLE, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 8:
-        SetMonData(&gPlayerParty[a], MON_DATA_PP1, &gBattleBufferA[gActiveBattler][3]);
-        SetMonData(&gPlayerParty[a], MON_DATA_PP2, &gBattleBufferA[gActiveBattler][4]);
-        SetMonData(&gPlayerParty[a], MON_DATA_PP3, &gBattleBufferA[gActiveBattler][5]);
-        SetMonData(&gPlayerParty[a], MON_DATA_PP4, &gBattleBufferA[gActiveBattler][6]);
-        SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, &gBattleBufferA[gActiveBattler][7]);
+    case REQUEST_PP_DATA_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_PP1, &gBattleBufferA[gActiveBattler][3]);
+        SetMonData(&gPlayerParty[monId], MON_DATA_PP2, &gBattleBufferA[gActiveBattler][4]);
+        SetMonData(&gPlayerParty[monId], MON_DATA_PP3, &gBattleBufferA[gActiveBattler][5]);
+        SetMonData(&gPlayerParty[monId], MON_DATA_PP4, &gBattleBufferA[gActiveBattler][6]);
+        SetMonData(&gPlayerParty[monId], MON_DATA_PP_BONUSES, &gBattleBufferA[gActiveBattler][7]);
         break;
-    case 9:
-    case 10:
-    case 11:
-    case 12:
-        SetMonData(&gPlayerParty[a], MON_DATA_PP1 + gBattleBufferA[gActiveBattler][1] - 9, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_PPMOVE1_BATTLE:
+    case REQUEST_PPMOVE2_BATTLE:
+    case REQUEST_PPMOVE3_BATTLE:
+    case REQUEST_PPMOVE4_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_PP1 + gBattleBufferA[gActiveBattler][1] - REQUEST_PPMOVE1_BATTLE, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 17:
-        SetMonData(&gPlayerParty[a], MON_DATA_OT_ID, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_OTID_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_OT_ID, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 18:
-        SetMonData(&gPlayerParty[a], MON_DATA_EXP, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_EXP_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_EXP, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 19:
-        SetMonData(&gPlayerParty[a], MON_DATA_HP_EV, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_HP_EV_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_HP_EV, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 20:
-        SetMonData(&gPlayerParty[a], MON_DATA_ATK_EV, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_ATK_EV_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_ATK_EV, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 21:
-        SetMonData(&gPlayerParty[a], MON_DATA_DEF_EV, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_DEF_EV_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_DEF_EV, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 22:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPEED_EV, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_SPEED_EV_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_SPEED_EV, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 23:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPATK_EV, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_SPATK_EV_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_SPATK_EV, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 24:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_EV, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_SPDEF_EV_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_SPDEF_EV, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 25:
-        SetMonData(&gPlayerParty[a], MON_DATA_FRIENDSHIP, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_FRIENDSHIP_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_FRIENDSHIP, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 26:
-        SetMonData(&gPlayerParty[a], MON_DATA_POKERUS, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_POKERUS_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_POKERUS, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 27:
-        SetMonData(&gPlayerParty[a], MON_DATA_MET_LOCATION, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_MET_LOCATION_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_MET_LOCATION, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 28:
-        SetMonData(&gPlayerParty[a], MON_DATA_MET_LEVEL, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_MET_LEVEL_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_MET_LEVEL, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 29:
-        SetMonData(&gPlayerParty[a], MON_DATA_MET_GAME, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_MET_GAME_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_MET_GAME, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 30:
-        SetMonData(&gPlayerParty[a], MON_DATA_POKEBALL, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_POKEBALL_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_POKEBALL, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 31:
-        SetMonData(&gPlayerParty[a], MON_DATA_HP_IV, &gBattleBufferA[gActiveBattler][3]);
-        SetMonData(&gPlayerParty[a], MON_DATA_ATK_IV, &gBattleBufferA[gActiveBattler][4]);
-        SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, &gBattleBufferA[gActiveBattler][5]);
-        SetMonData(&gPlayerParty[a], MON_DATA_SPEED_IV, &gBattleBufferA[gActiveBattler][6]);
-        SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, &gBattleBufferA[gActiveBattler][7]);
-        SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV, &gBattleBufferA[gActiveBattler][8]);
+    case REQUEST_ALL_IVS_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_HP_IV, &gBattleBufferA[gActiveBattler][3]);
+        SetMonData(&gPlayerParty[monId], MON_DATA_ATK_IV, &gBattleBufferA[gActiveBattler][4]);
+        SetMonData(&gPlayerParty[monId], MON_DATA_DEF_IV, &gBattleBufferA[gActiveBattler][5]);
+        SetMonData(&gPlayerParty[monId], MON_DATA_SPEED_IV, &gBattleBufferA[gActiveBattler][6]);
+        SetMonData(&gPlayerParty[monId], MON_DATA_SPATK_IV, &gBattleBufferA[gActiveBattler][7]);
+        SetMonData(&gPlayerParty[monId], MON_DATA_SPDEF_IV, &gBattleBufferA[gActiveBattler][8]);
         break;
-    case 32:
-        SetMonData(&gPlayerParty[a], MON_DATA_HP_IV, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_HP_IV_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_HP_IV, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 33:
-        SetMonData(&gPlayerParty[a], MON_DATA_ATK_IV, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_ATK_IV_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_ATK_IV, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 34:
-        SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_DEF_IV_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_DEF_IV, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 35:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPEED_IV, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_SPEED_IV_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_SPEED_IV, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 36:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_SPATK_IV_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_SPATK_IV, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 37:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_SPDEF_IV_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_SPDEF_IV, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 38:
-        SetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_PERSONALITY_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 39:
-        SetMonData(&gPlayerParty[a], MON_DATA_CHECKSUM, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_CHECKSUM_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_CHECKSUM, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 40:
-        SetMonData(&gPlayerParty[a], MON_DATA_STATUS, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_STATUS_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_STATUS, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 41:
-        SetMonData(&gPlayerParty[a], MON_DATA_LEVEL, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_LEVEL_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_LEVEL, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 42:
-        SetMonData(&gPlayerParty[a], MON_DATA_HP, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_HP_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_HP, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 43:
-        SetMonData(&gPlayerParty[a], MON_DATA_MAX_HP, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_MAX_HP_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_MAX_HP, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 44:
-        SetMonData(&gPlayerParty[a], MON_DATA_ATK, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_ATK_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_ATK, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 45:
-        SetMonData(&gPlayerParty[a], MON_DATA_DEF, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_DEF_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_DEF, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 46:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPEED, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_SPEED_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_SPEED, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 47:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPATK, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_SPATK_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_SPATK, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 48:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPDEF, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_SPDEF_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_SPDEF, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 49:
-        SetMonData(&gPlayerParty[a], MON_DATA_COOL, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_COOL_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_COOL, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 50:
-        SetMonData(&gPlayerParty[a], MON_DATA_BEAUTY, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_BEAUTY_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_BEAUTY, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 51:
-        SetMonData(&gPlayerParty[a], MON_DATA_CUTE, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_CUTE_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_CUTE, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 52:
-        SetMonData(&gPlayerParty[a], MON_DATA_SMART, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_SMART_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_SMART, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 53:
-        SetMonData(&gPlayerParty[a], MON_DATA_TOUGH, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_TOUGH_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_TOUGH, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 54:
-        SetMonData(&gPlayerParty[a], MON_DATA_SHEEN, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_SHEEN_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_SHEEN, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 55:
-        SetMonData(&gPlayerParty[a], MON_DATA_COOL_RIBBON, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_COOL_RIBBON_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_COOL_RIBBON, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 56:
-        SetMonData(&gPlayerParty[a], MON_DATA_BEAUTY_RIBBON, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_BEAUTY_RIBBON_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_BEAUTY_RIBBON, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 57:
-        SetMonData(&gPlayerParty[a], MON_DATA_CUTE_RIBBON, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_CUTE_RIBBON_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_CUTE_RIBBON, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 58:
-        SetMonData(&gPlayerParty[a], MON_DATA_SMART_RIBBON, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_SMART_RIBBON_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_SMART_RIBBON, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case 59:
-        SetMonData(&gPlayerParty[a], MON_DATA_TOUGH_RIBBON, &gBattleBufferA[gActiveBattler][3]);
+    case REQUEST_TOUGH_RIBBON_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_TOUGH_RIBBON, &gBattleBufferA[gActiveBattler][3]);
         break;
     }
+
     HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
 }
 
-void WallyHandlecmd3(void)
+static void WallyHandleSetRawMonData(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandleLoadPokeSprite(void)
+static void WallyHandleLoadMonSprite(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandleSendOutPoke(void)
+static void WallyHandleSwitchInAnim(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandleReturnPokeToBall(void)
+static void WallyHandleReturnMonToBall(void)
 {
     if (gBattleBufferA[gActiveBattler][1] == 0)
     {
-        move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 1);
-        gBattlerControllerFuncs[gActiveBattler] = sub_813789C;
+        InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SWITCH_OUT_PLAYER_MON);
+        gBattlerControllerFuncs[gActiveBattler] = DoSwitchOutAnimation;
     }
     else
     {
         FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
         DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        sub_8043DB0(gHealthboxSpriteIds[gActiveBattler]);
+        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
         WallyBufferExecCompleted();
     }
 }
 
-void WallyHandleTrainerThrow(void)
+#define sSpeedX data[0]
+
+static void WallyHandleDrawTrainerPic(void)
 {
-    LoadPlayerTrainerBankSprite(2, gActiveBattler);
-    GetMonSpriteTemplate_803C5A0(2, GetBattlerPosition(gActiveBattler));
-    gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gCreatingSpriteTemplate,
-      80, 80 + 4 * (8 - gTrainerBackPicCoords[2].coords),
-      30);
+    DecompressTrainerBackPic(TRAINER_BACK_PIC_WALLY, gActiveBattler);
+    SetMultiuseSpriteTemplateToTrainerBack(TRAINER_BACK_PIC_WALLY, GetBattlerPosition(gActiveBattler));
+    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gCreatingSpriteTemplate,
+                                               80,
+                                               80 + 4 * (8 - gTrainerBackPicCoords[TRAINER_BACK_PIC_WALLY].coords),
+                                               30);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = 240;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80313A0;
-    gBattlerControllerFuncs[gActiveBattler] = sub_813741C;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = DISPLAY_WIDTH;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].sSpeedX = -2;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy;
 }
 
-void WallyHandleTrainerSlide(void)
+static void WallyHandleTrainerSlide(void)
 {
-    LoadPlayerTrainerBankSprite(2, gActiveBattler);
-    GetMonSpriteTemplate_803C5A0(2, GetBattlerPosition(gActiveBattler));
-    gBattlerSpriteIds[gActiveBattler] = CreateSprite(
-      &gCreatingSpriteTemplate,
-      80, 80 + 4 * (8 - gTrainerBackPicCoords[2].coords),
-      30);
+    DecompressTrainerBackPic(TRAINER_BACK_PIC_WALLY, gActiveBattler);
+    SetMultiuseSpriteTemplateToTrainerBack(TRAINER_BACK_PIC_WALLY, GetBattlerPosition(gActiveBattler));
+    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gCreatingSpriteTemplate,
+                                               80,
+                                               80 + 4 * (8 - gTrainerBackPicCoords[TRAINER_BACK_PIC_WALLY].coords),
+                                               30);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
     gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -96;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 2;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80313A0;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].sSpeedX = 2;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnBankSpriteCallbackDummy2;
 }
 
-void WallyHandleTrainerSlideBack(void)
+#undef sSpeedX
+
+static void WallyHandleTrainerSlideBack(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandleFaintAnimation(void)
+static void WallyHandleFaintAnimation(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandlePaletteFade(void)
+static void WallyHandlePaletteFade(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandleSuccessBallThrowAnim(void)
+static void WallyHandleSuccessBallThrowAnim(void)
 {
-    ewram17840.unk8 = 4;
+    ewram17840.unk8 = BALL_3_SHAKES_SUCCESS;
     gDoingBattleAnim = TRUE;
-    move_anim_start_t4(gActiveBattler, gActiveBattler, GetBattlerAtPosition(1), 4);
+    InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_BALL_THROW_WITH_TRAINER);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedAnimation;
 }
 
-void WallyHandleBallThrowAnim(void)
+static void WallyHandleBallThrowAnim(void)
 {
     u8 ballThrowCaseId = gBattleBufferA[gActiveBattler][1];
 
     ewram17840.unk8 = ballThrowCaseId;
     gDoingBattleAnim = TRUE;
-    move_anim_start_t4(gActiveBattler, gActiveBattler, GetBattlerAtPosition(1), 4);
+    InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_BALL_THROW_WITH_TRAINER);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedAnimation;
 }
 
-void WallyHandlePuase(void)
+static void WallyHandlePause(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandleMoveAnimation(void)
+static void WallyHandleMoveAnimation(void)
 {
     u16 move = gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8);
 
@@ -1179,74 +1184,76 @@ void WallyHandleMoveAnimation(void)
     }
     else
     {
-        ewram17810[gActiveBattler].unk4 = 0;
-        gBattlerControllerFuncs[gActiveBattler] = sub_81390D0;
+        gBattleHealthBoxInfo[gActiveBattler].animationState = 0;
+        gBattlerControllerFuncs[gActiveBattler] = WallyDoMoveAnimation;
     }
 }
 
-void sub_81390D0(void)
+static void WallyDoMoveAnimation(void)
 {
-    u16 r4 = gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8);
+    u16 move = gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8);
 
-    switch (ewram17810[gActiveBattler].unk4)
+    switch (gBattleHealthBoxInfo[gActiveBattler].animationState)
     {
     case 0:
-        if (gBattleSpriteInfo[gActiveBattler].substituteSprite == 1)
-            move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 5);
-        ewram17810[gActiveBattler].unk4 = 1;
+        if (gBattleSpriteInfo[gActiveBattler].behindSubstitute)
+            InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, 5);
+        gBattleHealthBoxInfo[gActiveBattler].animationState = 1;
         break;
     case 1:
-        if (ewram17810[gActiveBattler].unk0_6)
-            break;
-        sub_80326EC(0);
-        DoMoveAnim(r4);
-        ewram17810[gActiveBattler].unk4 = 2;
+        if (!gBattleHealthBoxInfo[gActiveBattler].specialAnimActive)
+        {
+            SetBattlerSpriteAffineMode(ST_OAM_AFFINE_OFF);
+            DoMoveAnim(move);
+            gBattleHealthBoxInfo[gActiveBattler].animationState = 2;
+        }
         break;
     case 2:
         gAnimScriptCallback();
         if (!gAnimScriptActive)
         {
-            sub_80326EC(1);
-            if (gBattleSpriteInfo[gActiveBattler].substituteSprite == 1)
-                move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 6);
-            ewram17810[gActiveBattler].unk4 = 3;
+            SetBattlerSpriteAffineMode(ST_OAM_AFFINE_NORMAL);
+            if (gBattleSpriteInfo[gActiveBattler].behindSubstitute == 1)
+                InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, 6);
+            gBattleHealthBoxInfo[gActiveBattler].animationState = 3;
         }
         break;
     case 3:
-        if (ewram17810[gActiveBattler].unk0_6)
-            break;
-        sub_8031F24();
-        r4 = gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8);
-        sub_80324BC(gActiveBattler, r4);
-        ewram17810[gActiveBattler].unk4 = 0;
-        WallyBufferExecCompleted();
+        if (!gBattleHealthBoxInfo[gActiveBattler].specialAnimActive)
+        {
+            CopyAllBattleSpritesInvisibilities();
+            move = gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8);
+            TrySetBehindSubstituteSpriteBit(gActiveBattler, move);
+            gBattleHealthBoxInfo[gActiveBattler].animationState = 0;
+            WallyBufferExecCompleted();
+        }
         break;
     }
 }
 
-void WallyHandlePrintString(void)
+static void WallyHandlePrintString(void)
 {
-    u16 *ptr;
+    u16 *stringId;
 
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
-    ptr = (u16 *)&gBattleBufferA[gActiveBattler][2];
-    if (*ptr == 2)
+    stringId = (u16 *)&gBattleBufferA[gActiveBattler][2];
+    if (*stringId == 2)
         DestroyMenuCursor();
-    BufferStringBattle(*ptr);
+    BufferStringBattle(*stringId);
     Contest_StartTextPrinter(&gWindowTemplate_Contest_MoveDescription, gDisplayedStringBattle, 0x90, 2, 15);
-    gBattlerControllerFuncs[gActiveBattler] = sub_8137454;
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 
-void WallyHandlePrintStringPlayerOnly(void)
+static void WallyHandlePrintSelectionString(void)
 {
-    if (GetBattlerSide(gActiveBattler) == 0)
+    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         WallyHandlePrintString();
     else
         WallyBufferExecCompleted();
 }
 
-void WallyHandlecmd18(void)
+static void WallyHandleChooseAction(void)
 {
     s32 i;
 
@@ -1255,7 +1262,7 @@ void WallyHandlecmd18(void)
     gWindowTemplate_Contest_MoveDescription.paletteNum = 0;
     Text_FillWindowRectDefPalette(&gWindowTemplate_Contest_MoveDescription, 10, 2, 15, 27, 18);
     Text_FillWindowRectDefPalette(&gWindowTemplate_Contest_MoveDescription, 10, 2, 35, 16, 36);
-    gBattlerControllerFuncs[gActiveBattler] = sub_81372BC;
+    gBattlerControllerFuncs[gActiveBattler] = WallyHandleActions;
     Text_InitWindow(&gWindowTemplate_Contest_MoveDescription, BattleText_MenuOptions, 400, 18, 35);
     Text_PrintWindow8002F44(&gWindowTemplate_Contest_MoveDescription);
     MenuCursor_Create814A5C0(0, 0xFFFF, 12, 0x2D9F, 0);
@@ -1271,154 +1278,155 @@ void WallyHandlecmd18(void)
     Text_PrintWindow8002F44(&gWindowTemplate_Contest_MoveDescription);
 }
 
-void WallyHandlecmd19(void)
+static void WallyHandleYesNoBox(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandlecmd20(void)
+static void WallyHandleChooseMove(void)
 {
-    switch (gBattleStruct->unk160A9)
+    switch (gBattleStruct->wallyMovesState)
     {
     case 0:
         sub_80304A8();
-        gBattleStruct->unk160A9++;
-        gBattleStruct->unk160AB = 80;
+        gBattleStruct->wallyMovesState++;
+        gBattleStruct->wallyMoveFrames = 80;
         // fall through
     case 1:
-        gBattleStruct->unk160AB--;
-        if (gBattleStruct->unk160AB == 0)
+        if (--gBattleStruct->wallyMoveFrames == 0)
         {
             DestroyMenuCursor();
             PlaySE(SE_SELECT);
-            BtlController_EmitTwoReturnValues(1, 10, 256);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, 10, 0x100);
             WallyBufferExecCompleted();
         }
         break;
     }
 }
 
-void WallyHandleOpenBag(void)
+static void WallyHandleChooseItem(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
-    gBattlerControllerFuncs[gActiveBattler] = sub_81374C4;
-    gBankInMenu = gActiveBattler;
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+    gBattlerControllerFuncs[gActiveBattler] = OpenBagAfterPaletteFade;
+    gBattlerInMenuId = gActiveBattler;
 }
 
-void WallyHandlecmd22(void)
+static void WallyHandleChoosePokemon(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandlecmd23(void)
+static void WallyHandleCmd23(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandleHealthBarUpdate(void)
+static void WallyHandleHealthBarUpdate(void)
 {
-    s16 r7;
+    s16 hpVal;
 
-    load_gfxc_health_bar(0);
-    r7 = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
-    if (r7 != 0x7FFF)
+    LoadBattleBarGfx(0);
+    hpVal = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
+
+    if (hpVal != INSTANT_HP_BAR_DROP)
     {
         u32 maxHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
         u32 curHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_HP);
 
-        sub_8043D84(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], maxHP, curHP, r7);
+        SetBattleBarStruct(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], maxHP, curHP, hpVal);
     }
     else
     {
         u32 maxHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
 
-        sub_8043D84(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], maxHP, 0, r7);
-        sub_80440EC(gHealthboxSpriteIds[gActiveBattler], 0, 0);
+        SetBattleBarStruct(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], maxHP, 0, hpVal);
+        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], 0, HP_CURRENT);
     }
-    gBattlerControllerFuncs[gActiveBattler] = sub_81377B0;
+
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthbarDone;
 }
 
-void WallyHandleExpBarUpdate(void)
+static void WallyHandleExpUpdate(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandleStatusIconUpdate(void)
+static void WallyHandleStatusIconUpdate(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandleStatusAnimation(void)
+static void WallyHandleStatusAnimation(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandleStatusXor(void)
+static void WallyHandleStatusXor(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandlecmd29(void)
+static void WallyHandleDataTransfer(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandleDMATransfer(void)
+static void WallyHandleDMA3Transfer(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandlecmd31(void)
+static void WallyHandlePlayBGM(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandlecmd32(void)
+static void WallyHandleCmd32(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandlecmd33(void)
+static void WallyHandleTwoReturnValues(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandlecmd34(void)
+static void WallyHandleChosenMonReturnValue(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandlecmd35(void)
+static void WallyHandleOneReturnValue(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandlecmd36(void)
+static void WallyHandleOneReturnValue_Duplicate(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandlecmd37(void)
+static void WallyHandleClearUnkVar(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandlecmd38(void)
+static void WallyHandleSetUnkVar(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandlecmd39(void)
+static void WallyHandleClearUnkFlag(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandlecmd40(void)
+static void WallyHandleToggleUnkFlag(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandleHitAnimation(void)
+static void WallyHandleHitAnimation(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].invisible == TRUE)
     {
@@ -1426,92 +1434,104 @@ void WallyHandleHitAnimation(void)
     }
     else
     {
-        gDoingBattleAnim = 1;
+        gDoingBattleAnim = TRUE;
         gSprites[gBattlerSpriteIds[gActiveBattler]].data[1] = 0;
-        sub_8047858(gActiveBattler);
-        gBattlerControllerFuncs[gActiveBattler] = bx_blink_t5;
+        DoHitAnimHealthboxEffect(gActiveBattler);
+        gBattlerControllerFuncs[gActiveBattler] = DoHitAnimBlinkSpriteEffect;
     }
 }
 
-void WallyHandlecmd42(void)
+static void WallyHandleCantSwitch(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandleEffectivenessSound(void)
+static void WallyHandlePlaySE(void)
 {
     PlaySE(gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8));
     WallyBufferExecCompleted();
 }
 
-void WallyHandlecmd44(void)
+static void WallyHandlePlayFanfareOrBGM(void)
 {
     PlayFanfare(gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8));
     WallyBufferExecCompleted();
 }
 
-void WallyHandleFaintingCry(void)
+static void WallyHandleFaintingCry(void)
 {
-    PlayCry1(GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES), 25);
+    u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
+
+    // Seems that it doesn't bother using CRY_MODE_FAINT because
+    // Wally's Pokémon during the tutorial is never intended to faint.
+    PlayCry_Normal(species, 25);
     WallyBufferExecCompleted();
 }
 
-void WallyHandleIntroSlide(void)
+static void WallyHandleIntroSlide(void)
 {
-    StartBattleIntroAnim(gBattleBufferA[gActiveBattler][1]);
+    HandleIntroSlide(gBattleBufferA[gActiveBattler][1]);
     gIntroSlideFlags |= 1;
     WallyBufferExecCompleted();
 }
 
-void WallyHandleTrainerBallThrow(void)
+static void WallyHandleIntroTrainerBallThrow(void)
 {
     u8 paletteNum;
     u8 taskId;
 
-    oamt_add_pos2_onto_pos1(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
+    SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
+
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 50;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[5] = gActiveBattler;
-    StoreSpriteCallbackInData(&gSprites[gBattlerSpriteIds[gActiveBattler]], sub_8030E38);
+
+    StoreSpriteCallbackInData(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCB_FreePlayerSpriteLoadMonSprite);
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 1);
+
     paletteNum = AllocSpritePalette(0xD6F8);
-    LoadCompressedPalette(gTrainerBackPicPaletteTable[2].data, 0x100 + paletteNum * 16, 32);
+    LoadCompressedPalette(gTrainerBackPicPaletteTable[TRAINER_BACK_PIC_WALLY].data, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = paletteNum;
-    taskId = CreateTask(sub_8139A2C, 5);
+
+    taskId = CreateTask(Task_StartSendOutAnim, 5);
     gTasks[taskId].data[0] = gActiveBattler;
-    if (ewram17810[gActiveBattler].unk0_0)
-        gTasks[gUnknown_02024E68[gActiveBattler]].func = sub_8044CA0;
-    ewram17810[4].unk9 |= 1;
-    gBattlerControllerFuncs[gActiveBattler] = nullsub_91;
+
+    if (gBattleHealthBoxInfo[gActiveBattler].partyStatusSummaryShown)
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8044CA0;
+
+    gBattleHealthBoxInfo[4].unk9 |= 1;
+    gBattlerControllerFuncs[gActiveBattler] = BattleControllerDummy;
 }
 
-void sub_81398BC(u8 bank)
+static void StartSendOutAnim(u8 battler)
 {
     u16 species;
 
-    gBattleSpriteInfo[bank].transformedSpecies = 0;
-    gBattlerPartyIndexes[bank] = gBattleBufferA[bank][1];
-    species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES);
-    gUnknown_0300434C[bank] = CreateInvisibleSpriteWithCallback(sub_80312F0);
-    GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(bank));
-    gBattlerSpriteIds[bank] = CreateSprite(
-      &gCreatingSpriteTemplate,
-      GetBattlerSpriteCoord(bank, 2),
-      sub_8077F68(bank),
-      GetBattlerSubpriority(bank));
-    gSprites[gUnknown_0300434C[bank]].data[1] = gBattlerSpriteIds[bank];
-    gSprites[gBattlerSpriteIds[bank]].data[0] = bank;
-    gSprites[gBattlerSpriteIds[bank]].data[2] = species;
-    gSprites[gBattlerSpriteIds[bank]].oam.paletteNum = bank;
-    StartSpriteAnim(&gSprites[gBattlerSpriteIds[bank]], gBattleMonForms[bank]);
-    gSprites[gBattlerSpriteIds[bank]].invisible = TRUE;
-    gSprites[gBattlerSpriteIds[bank]].callback = SpriteCallbackDummy;
-    gSprites[gUnknown_0300434C[bank]].data[0] = StartSendOutMonAnimation(0, 0xFF);
+    gBattleSpriteInfo[battler].transformSpecies = 0;
+    gBattlerPartyIndexes[battler] = gBattleBufferA[battler][1];
+    species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
+    gBattleControllerData[battler] = CreateInvisibleSpriteWithCallback(SpriteCB_WaitForBattlerBallReleaseAnim);
+    SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battler));
+    gBattlerSpriteIds[battler] = CreateSprite(&gCreatingSpriteTemplate,
+                                        GetBattlerSpriteCoord(battler, BATTLER_COORD_X_2),
+                                        GetBattlerSpriteDefault_Y(battler),
+                                        GetBattlerSpriteSubpriority(battler));
+
+    gSprites[gBattleControllerData[battler]].data[1] = gBattlerSpriteIds[battler];
+
+    gSprites[gBattlerSpriteIds[battler]].data[0] = battler;
+    gSprites[gBattlerSpriteIds[battler]].data[2] = species;
+    gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
+
+    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], gBattleMonForms[battler]);
+    gSprites[gBattlerSpriteIds[battler]].invisible = TRUE;
+    gSprites[gBattlerSpriteIds[battler]].callback = SpriteCallbackDummy;
+    gSprites[gBattleControllerData[battler]].data[0] = DoPokeballSendOutAnimation(0, POKEBALL_PLAYER_SENDOUT);
 }
 
-void sub_8139A2C(u8 taskId)
+static void Task_StartSendOutAnim(u8 taskId)
 {
     if (gTasks[taskId].data[1] < 31)
     {
@@ -1523,73 +1543,74 @@ void sub_8139A2C(u8 taskId)
 
         gActiveBattler = gTasks[taskId].data[0];
         gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
-        sub_81398BC(gActiveBattler);
-        gBattlerControllerFuncs[gActiveBattler] = sub_8137538;
+        StartSendOutAnim(gActiveBattler);
+        gBattlerControllerFuncs[gActiveBattler] = Intro_TryShinyAnimShowHealthbox;
         gActiveBattler = savedActiveBank;
         DestroyTask(taskId);
     }
 }
 
-void WallyHandlecmd48(void)
+static void WallyHandleDrawPartyStatusSummary(void)
 {
-    if (gBattleBufferA[gActiveBattler][1] != 0 && GetBattlerSide(gActiveBattler) == 0)
+    if (gBattleBufferA[gActiveBattler][1] != 0 && GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
     {
         WallyBufferExecCompleted();
     }
     else
     {
-        ewram17810[gActiveBattler].unk0_0 = 1;
-        gUnknown_02024E68[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4], gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][2]);
+        gBattleHealthBoxInfo[gActiveBattler].partyStatusSummaryShown = 1;
+        gBattlerStatusSummaryTaskId[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4], gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][2]);
         WallyBufferExecCompleted();
     }
 }
 
-void WallyHandlecmd49(void)
+static void WallyHandleHidePartyStatusSummary(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandlecmd50(void)
+static void WallyHandleEndBounceEffect(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandleSpriteInvisibility(void)
+static void WallyHandleSpriteInvisibility(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandleBattleAnimation(void)
+static void WallyHandleBattleAnimation(void)
 {
-    u8 val2 = gBattleBufferA[gActiveBattler][1];
-    u16 val = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
+    u8 animationId = gBattleBufferA[gActiveBattler][1];
+    u16 argument = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
 
-    if (move_anim_start_t3(gActiveBattler, gActiveBattler, gActiveBattler, val2, val))
+    if (TryHandleLaunchBattleTableAnimation(gActiveBattler, gActiveBattler, gActiveBattler, animationId, argument))
         WallyBufferExecCompleted();
     else
-        gBattlerControllerFuncs[gActiveBattler] = sub_8137940;
+        gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedBattleAnimation;
 }
 
-void WallyHandleLinkStandbyMsg(void)
+static void WallyHandleLinkStandbyMsg(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandleResetActionMoveSelection(void)
+static void WallyHandleResetActionMoveSelection(void)
 {
     WallyBufferExecCompleted();
 }
 
-void WallyHandlecmd55(void)
+static void WallyHandleEndLinkBattle(void)
 {
     gBattleOutcome = gBattleBufferA[gActiveBattler][1];
     FadeOutMapMusic(5);
     BeginFastPaletteFade(3);
     WallyBufferExecCompleted();
+
     if ((gBattleTypeFlags & BATTLE_TYPE_LINK) && !(gBattleTypeFlags & BATTLE_TYPE_WILD))
-        gBattlerControllerFuncs[gActiveBattler] = sub_813746C;
+        gBattlerControllerFuncs[gActiveBattler] = WallySetBattleEndCallbacks;
 }
 
-void WallyHandlecmd56(void)
+static void WallyCmdEnd(void)
 {
 }

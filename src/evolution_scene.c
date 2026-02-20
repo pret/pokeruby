@@ -232,7 +232,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     pokePal = (void*) GetMonSpritePalStructFromOtIdPersonality(currSpecies, TiD, PiD);
     LoadCompressedPalette(*pokePal, 0x110, 0x20);
 
-    GetMonSpriteTemplate_803C56C(currSpecies, 1);
+    SetMultiuseSpriteTemplateToPokemon(currSpecies, 1);
     gCreatingSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
     sEvoInfo.preEvoSpriteID = ID = CreateSprite(&gCreatingSpriteTemplate, 120, 64, 30);
 
@@ -249,7 +249,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     pokePal = (void*) GetMonSpritePalStructFromOtIdPersonality(speciesToEvolve, TiD, PiD);
     LoadCompressedPalette(*pokePal, 0x120, 0x20);
 
-    GetMonSpriteTemplate_803C56C(speciesToEvolve, 3);
+    SetMultiuseSpriteTemplateToPokemon(speciesToEvolve, 3);
     gCreatingSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
     sEvoInfo.postEvoSpriteID = ID = CreateSprite(&gCreatingSpriteTemplate, 120, 64, 30);
     gSprites[ID].callback = nullsub_37;
@@ -329,7 +329,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     pokePal = (void*) GetMonSpritePalStructFromOtIdPersonality(postEvoSpecies, TiD, PiD);
     LoadCompressedPalette(*pokePal, 0x120, 0x20);
 
-    GetMonSpriteTemplate_803C56C(postEvoSpecies, 3);
+    SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, 3);
     gCreatingSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
     sEvoInfo.postEvoSpriteID = ID = CreateSprite(&gCreatingSpriteTemplate, 120, 64, 30);
 
@@ -405,7 +405,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
         {
             u8 ID;
 
-            GetMonSpriteTemplate_803C56C(postEvoSpecies, 3);
+            SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, 3);
             gCreatingSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
             sEvoInfo.postEvoSpriteID = ID = CreateSprite(&gCreatingSpriteTemplate, 120, 64, 30);
 
@@ -449,7 +449,7 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpri
     pokePal = (void*) GetMonSpritePalStructFromOtIdPersonality(speciesToEvolve, TiD, PiD);
     LoadCompressedPalette(*pokePal, 0x120, 0x20);
 
-    GetMonSpriteTemplate_803C56C(speciesToEvolve, 1);
+    SetMultiuseSpriteTemplateToPokemon(speciesToEvolve, 1);
     gCreatingSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
     sEvoInfo.postEvoSpriteID = ID = CreateSprite(&gCreatingSpriteTemplate, 120, 64, 30);
 
@@ -556,7 +556,7 @@ static void Task_EvolutionScene(u8 taskID)
     case 2: // wait for string, play cry
         if (gWindowTemplate_Contest_MoveDescription.state == 0)
         {
-            PlayCry1(gTasks[taskID].tPreEvoSpecies, 0);
+            PlayCry_Normal(gTasks[taskID].tPreEvoSpecies, 0);
             gTasks[taskID].tState++;
         }
         break;
@@ -627,7 +627,7 @@ static void Task_EvolutionScene(u8 taskID)
         if (IsSEPlaying())
         {
             m4aMPlayAllStop();
-            PlayCry1(gTasks[taskID].tPostEvoSpecies, 0);
+            PlayCry_Normal(gTasks[taskID].tPostEvoSpecies, 0);
             memcpy(&gPlttBufferUnfaded[0x20], (void *)(EWRAM + 0x9000), 0x60);
             BeginNormalPaletteFade(0x1C, 0, 16, 0, RGB(0, 0, 0));
             gTasks[taskID].tState++;
@@ -698,7 +698,7 @@ static void Task_EvolutionScene(u8 taskID)
     case 17: // play cry of the pokemon trying to evolve again, evolution has been stopped
         if (!gPaletteFade.active)
         {
-            PlayCry1(gTasks[taskID].tPreEvoSpecies, 0);
+            PlayCry_Normal(gTasks[taskID].tPreEvoSpecies, 0);
             gTasks[taskID].tState++;
         }
         break;
@@ -909,7 +909,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
     case 1:
         if (gUnknown_03004828->window.state == 0)
         {
-            PlayCry1(gTasks[taskID].tPreEvoSpecies, 0);
+            PlayCry_Normal(gTasks[taskID].tPreEvoSpecies, 0);
             gTasks[taskID].tState++;
         }
         break;
@@ -981,7 +981,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
     case 11:
         if (IsSEPlaying())
         {
-            PlayCry1(gTasks[taskID].tPostEvoSpecies, 0);
+            PlayCry_Normal(gTasks[taskID].tPostEvoSpecies, 0);
             memcpy(&gPlttBufferUnfaded[0x20], (void *)(EWRAM + 0x9000), 0x60);
             BeginNormalPaletteFade(0x1, 0, 16, 0, RGB(0, 0, 0));
             gTasks[taskID].tState++;

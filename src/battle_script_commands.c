@@ -107,7 +107,7 @@ extern const struct TrainerReward gTrainerMoney[];
 extern u16 gRandomMove;
 extern u8* gBattleScriptsForMoveEffects[];
 extern u16 gChosenMove; //last used move in battle
-extern u8 gBankInMenu;
+extern u8 gBattlerInMenuId;
 extern u8 gActionForBanks[4];
 extern u16 gLastPrintedMoves[4]; //last used moves 2, used by sketch
 extern u16 gLastResultingMoves[4]; //last used moves by banks, another one
@@ -6013,7 +6013,7 @@ static void atk74_hpthresholds2(void)
 
 static void atk75_useitemonopponent(void)
 {
-    gBankInMenu = gBattlerAttacker;
+    gBattlerInMenuId = gBattlerAttacker;
     PokemonUseItemEffects(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker]], gLastUsedItem, gBattlerPartyIndexes[gBattlerAttacker], 0, 1);
     gBattlescriptCurrInstr += 1;
 }

@@ -301,7 +301,7 @@ void ShowContestEntryMonPic(void)
           var1);
         palette = GetMonSpritePalStructFromOtIdPersonality(species, var2, var1);
         LoadCompressedObjectPalette(palette);
-        GetMonSpriteTemplate_803C56C(species, 1);
+        SetMultiuseSpriteTemplateToPokemon(species, 1);
         gCreatingSpriteTemplate.paletteTag = palette->tag;
         spriteId = CreateSprite(&gCreatingSpriteTemplate, 0x78, 0x40, 0);
         gTasks[taskId].data[2] = spriteId;

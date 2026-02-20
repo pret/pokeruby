@@ -182,18 +182,18 @@ u8 GetBattlerSpriteCoord(u8 slot, u8 a2)
             if (GetBattlerSide(slot))
             {
                 transform = &gBattleSpriteInfo[slot];
-                if (!transform->transformedSpecies)
+                if (!transform->transformSpecies)
                     species = GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
                 else
-                    species = transform->transformedSpecies;
+                    species = transform->transformSpecies;
             }
             else
             {
                 transform = &gBattleSpriteInfo[slot];
-                if (!transform->transformedSpecies)
+                if (!transform->transformSpecies)
                     species = GetMonData(&gPlayerParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
                 else
-                    species = transform->transformedSpecies;
+                    species = transform->transformSpecies;
             }
         }
         if (a2 == 3)
@@ -227,7 +227,7 @@ u8 sub_8077BFC(u8 slot, u16 species)
             else
             {
                 transform = &gBattleSpriteInfo[slot];
-                if (!transform->transformedSpecies)
+                if (!transform->transformSpecies)
                     personality = GetMonData(&gPlayerParty[gBattleMonPartyPositions[slot]], MON_DATA_PERSONALITY);
                 else
                     personality = gTransformPersonalities[slot];
@@ -257,7 +257,7 @@ u8 sub_8077BFC(u8 slot, u16 species)
         if (species == SPECIES_UNOWN)
         {
             transform = &gBattleSpriteInfo[slot];
-            if (!transform->transformedSpecies)
+            if (!transform->transformSpecies)
                 personality = GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_PERSONALITY);
             else
                 personality = gTransformPersonalities[slot];
@@ -343,10 +343,10 @@ u8 sub_8077EE4(u8 slot, u8 a2)
         else
         {
             transform = &gBattleSpriteInfo[slot];
-            if (!transform->transformedSpecies)
+            if (!transform->transformSpecies)
                 species = gAnimSpeciesByBanks[slot];
             else
-                species = transform->transformedSpecies;
+                species = transform->transformSpecies;
         }
         if (a2 == 3)
             return GetBattlerSpriteFinal_Y(slot, species, 1);
@@ -359,7 +359,7 @@ u8 sub_8077EE4(u8 slot, u8 a2)
     }
 }
 
-u8 sub_8077F68(u8 slot)
+u8 GetBattlerSpriteDefault_Y(u8 slot)
 {
     return GetBattlerSpriteCoord(slot, 4);
 }
@@ -386,19 +386,19 @@ u8 sub_8077FC0(u8 slot)
         if (GetBattlerSide(slot) != 0)
         {
             transform = &gBattleSpriteInfo[slot];
-            if (!transform->transformedSpecies) {
+            if (!transform->transformSpecies) {
                 var = GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
             } else {
-                var = transform->transformedSpecies;
+                var = transform->transformSpecies;
             }
         }
         else
         {
             transform = &gBattleSpriteInfo[slot];
-            if (!transform->transformedSpecies)
+            if (!transform->transformSpecies)
                 var = GetMonData(&gPlayerParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
             else
-                var = transform->transformedSpecies;
+                var = transform->transformSpecies;
         }
         if (GetBattlerSide(slot) != 0)
             r6 -= sub_8077DD8(slot, var);
@@ -778,7 +778,7 @@ bool8 TranslateAnimArc(struct Sprite *sprite)
     return FALSE;
 }
 
-void oamt_add_pos2_onto_pos1(struct Sprite *sprite)
+void SetSpritePrimaryCoordsFromSecondaryCoords(struct Sprite *sprite)
 {
     sprite->x += sprite->x2;
     sprite->y += sprite->y2;
@@ -1168,7 +1168,7 @@ void PrepareBattlerSpriteForRotScale(u8 sprite, u8 objMode)
     gSprites[sprite].oam.objMode = objMode;
     gSprites[sprite].affineAnimPaused = TRUE;
     if (!IsContest() && !gSprites[sprite].oam.affineMode)
-        gSprites[sprite].oam.matrixNum = ewram17810[r7].unk6;
+        gSprites[sprite].oam.matrixNum = gBattleHealthBoxInfo[r7].unk6;
     gSprites[sprite].oam.affineMode = 3;
     CalcCenterToCornerVec(&gSprites[sprite], gSprites[sprite].oam.shape, gSprites[sprite].oam.size, gSprites[sprite].oam.affineMode);
 }
@@ -1764,19 +1764,19 @@ u16 sub_8079B10(u8 sprite)
                 if (!GetBattlerSide(i))
                 {
                     transform = &gBattleSpriteInfo[slot];
-                    if (!transform->transformedSpecies)
+                    if (!transform->transformSpecies)
                         species = GetMonData(&gPlayerParty[gBattleMonPartyPositions[i]], MON_DATA_SPECIES);
                     else
-                        species = transform->transformedSpecies;
+                        species = transform->transformSpecies;
                     return gMonBackPicCoords[species].y_offset;
                 }
                 else
                 {
                     transform = &gBattleSpriteInfo[slot];
-                    if (!transform->transformedSpecies)
+                    if (!transform->transformSpecies)
                         species = GetMonData(&gEnemyParty[gBattleMonPartyPositions[i]], MON_DATA_SPECIES);
                     else
-                        species = transform->transformedSpecies;
+                        species = transform->transformSpecies;
                     return gMonFrontPicCoords[species].y_offset;
                 }
             }
@@ -1870,13 +1870,13 @@ void UpdateBattlerSpritePriorities()
     {
         if (IsAnimBankSpriteVisible(i))
         {
-            gSprites[gBattleMonSprites[i]].subpriority = GetBattlerSubpriority(i);
+            gSprites[gBattleMonSprites[i]].subpriority = GetBattlerSpriteSubpriority(i);
             gSprites[gBattleMonSprites[i]].oam.priority = 2;
         }
     }
 }
 
-u8 GetBattlerSubpriority(u8 bank)
+u8 GetBattlerSpriteSubpriority(u8 bank)
 {
     u8 identity;
     u8 ret;
@@ -2034,14 +2034,14 @@ s16 GetBattlerSpriteCoordAttr(u8 slot, u8 a2)
         if (!GetBattlerSide(slot))
         {
             transform = &gBattleSpriteInfo[slot];
-            if (!transform->transformedSpecies)
+            if (!transform->transformSpecies)
             {
                 species = GetMonData(&gPlayerParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
                 personality = GetMonData(&gPlayerParty[gBattleMonPartyPositions[slot]], MON_DATA_PERSONALITY);
             }
             else
             {
-                species = transform->transformedSpecies;
+                species = transform->transformSpecies;
                 personality = gTransformPersonalities[slot];
             }
             if (species == SPECIES_UNOWN)
@@ -2065,14 +2065,14 @@ s16 GetBattlerSpriteCoordAttr(u8 slot, u8 a2)
         else
         {
             transform = &gBattleSpriteInfo[slot];
-            if (!transform->transformedSpecies)
+            if (!transform->transformSpecies)
             {
                 species = GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
                 personality = GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_PERSONALITY);
             }
             else
             {
-                species = transform->transformedSpecies;
+                species = transform->transformSpecies;
                 personality = gTransformPersonalities[slot];
             }
             if (species == SPECIES_UNOWN)
@@ -2241,7 +2241,7 @@ void sub_807A69C(u8 taskId)
 
     dest = (task->data[4] + 0x10) * 0x10;
     src = (gSprites[task->data[0]].oam.paletteNum + 0x10) * 0x10;
-    task->data[6] = GetBattlerSubpriority(gBattleAnimAttacker);
+    task->data[6] = GetBattlerSpriteSubpriority(gBattleAnimAttacker);
     if (task->data[6] == 20 || task->data[6] == 40)
         task->data[6] = 2;
     else

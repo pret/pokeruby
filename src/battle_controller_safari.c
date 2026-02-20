@@ -1,19 +1,20 @@
 #include "global.h"
 #include "battle_anim_81258BC.h"
-#include "battle.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_message.h"
+#include "battle.h"
 #include "data2.h"
+#include "ewram.h"
 #include "link.h"
 #include "main.h"
 #include "menu_cursor.h"
 #include "palette.h"
-#include "constants/songs.h"
+#include "pokeball.h"
 #include "sound.h"
 #include "text.h"
 #include "util.h"
-#include "ewram.h"
+#include "constants/songs.h"
 
 extern struct Window gWindowTemplate_Contest_MoveDescription;
 extern u8 gDisplayedStringBattle[];
@@ -32,7 +33,7 @@ extern u16 gBattleTypeFlags;
 extern u32 gBattleControllerExecFlags;
 extern u16 gSpecialVar_ItemId;
 extern MainCallback gPreBattleCallback1;
-extern u8 gBankInMenu;
+extern u8 gBattlerInMenuId;
 extern u8 gHealthboxSpriteIds[];
 extern u16 gBattlerPartyIndexes[];
 extern u16 gIntroSlideFlags;
@@ -41,13 +42,12 @@ extern u8 gBattleOutcome;
 extern u8 GetBattlerSide(u8);
 extern u8 GetBattlerAtPosition(u8);
 extern u8 GetBattlerPosition(u8);
-extern void LoadPlayerTrainerBankSprite();
-extern u8 GetBattlerSubpriority();
-extern void sub_80313A0(struct Sprite *);
+extern void DecompressTrainerBackPic();
+extern u8 GetBattlerSpriteSubpriority();
+extern void SpriteCB_TrainerSlideIn(struct Sprite *);
 extern void sub_810BADC(void);
-extern void StartBattleIntroAnim();
-extern void sub_804777C();
-extern bool8 move_anim_start_t3();
+extern void HandleIntroSlide();
+extern bool8 TryHandleLaunchBattleTableAnimation();
 
 #if ENGLISH
 #define SUB_812BB10_TILE_DATA_OFFSET 440
@@ -272,8 +272,8 @@ void bx_battle_menu_t6_2(void)
 #if DEBUG
     else if (JOY_NEW(R_BUTTON))
     {
-        if (!ewram17810[gActiveBattler].unk0_5)
-            move_anim_start_t3(gActiveBattler, gActiveBattler, gActiveBattler, 4, 0);
+        if (!gBattleHealthBoxInfo[gActiveBattler].animFromTableActive)
+            TryHandleLaunchBattleTableAnimation(gActiveBattler, gActiveBattler, gActiveBattler, 4, 0);
     }
     else if (JOY_NEW(START_BUTTON))
     {
@@ -306,7 +306,7 @@ void sub_812B6AC(void)
 
 void bx_wait_t6(void)
 {
-    if (!gDoingBattleAnim || !ewram17810[gActiveBattler].unk0_6)
+    if (!gDoingBattleAnim || !gBattleHealthBoxInfo[gActiveBattler].specialAnimActive)
         SafariBufferExecCompleted();
 }
 
@@ -330,7 +330,7 @@ void sub_812B758(void)
 
 void sub_812B794(void)
 {
-    if (!ewram17810[gActiveBattler].unk0_5)
+    if (!gBattleHealthBoxInfo[gActiveBattler].animFromTableActive)
         SafariBufferExecCompleted();
 }
 
@@ -352,7 +352,7 @@ void SafariBufferExecCompleted(void)
 
 void unref_sub_812B838(void)
 {
-    if (!ewram17810[gActiveBattler].unk0_4)
+    if (!gBattleHealthBoxInfo[gActiveBattler].statusAnimActive)
         SafariBufferExecCompleted();
 }
 
@@ -393,8 +393,8 @@ void SafariHandleReturnPokeToBall(void)
 
 void SafariHandleTrainerThrow(void)
 {
-    LoadPlayerTrainerBankSprite(gSaveBlock2.playerGender, gActiveBattler);
-    GetMonSpriteTemplate_803C5A0(gSaveBlock2.playerGender, GetBattlerPosition(gActiveBattler));
+    DecompressTrainerBackPic(gSaveBlock2.playerGender, gActiveBattler);
+    SetMultiuseSpriteTemplateToTrainerBack(gSaveBlock2.playerGender, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(
       &gCreatingSpriteTemplate,
       80,
@@ -403,7 +403,7 @@ void SafariHandleTrainerThrow(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
     gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = 240;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80313A0;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
     gBattlerControllerFuncs[gActiveBattler] = sub_812B65C;
 }
 
@@ -431,7 +431,7 @@ void SafariHandlecmd12(void)
 {
     ewram17840.unk8 = 4;
     gDoingBattleAnim = 1;
-    move_anim_start_t4(gActiveBattler, gActiveBattler, GetBattlerAtPosition(1), 4);
+    InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(1), 4);
     gBattlerControllerFuncs[gActiveBattler] = bx_wait_t6;
 }
 
@@ -441,7 +441,7 @@ void SafariHandleBallThrow(void)
 
     ewram17840.unk8 = var;
     gDoingBattleAnim = 1;
-    move_anim_start_t4(gActiveBattler, gActiveBattler, GetBattlerAtPosition(1), 4);
+    InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(1), 4);
     gBattlerControllerFuncs[gActiveBattler] = bx_wait_t6;
 }
 
@@ -512,7 +512,7 @@ void SafariHandleOpenBag(void)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gBattlerControllerFuncs[gActiveBattler] = sub_812B724;
-    gBankInMenu = gActiveBattler;
+    gBattlerInMenuId = gActiveBattler;
 }
 
 void SafariHandlecmd22(void)
@@ -537,7 +537,7 @@ void SafariHandleExpBarUpdate(void)
 
 void SafariHandleStatusIconUpdate(void)
 {
-    sub_8045A5C(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], 11);
+    UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], 11);
     SafariBufferExecCompleted();
 }
 
@@ -643,22 +643,22 @@ void SafariHandleFaintingCry(void)
 {
     u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
-    PlayCry1(species, 25);
+    PlayCry_Normal(species, 25);
     SafariBufferExecCompleted();
 }
 
 void SafariHandleIntroSlide(void)
 {
-    StartBattleIntroAnim(gBattleBufferA[gActiveBattler][1]);
+    HandleIntroSlide(gBattleBufferA[gActiveBattler][1]);
     gIntroSlideFlags |= 1;
     SafariBufferExecCompleted();
 }
 
 void SafariHandleTrainerBallThrow(void)
 {
-    sub_8045A5C(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], 10);
-    sub_804777C(gActiveBattler);
-    sub_8043DFC(gHealthboxSpriteIds[gActiveBattler]);
+    UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], 10);
+    StartHealthboxSlideIn(gActiveBattler);
+    SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
     SafariBufferExecCompleted();
 }
 
@@ -687,7 +687,7 @@ void SafariHandleBattleAnimation(void)
     u8 r3 = gBattleBufferA[gActiveBattler][1];
     u16 r4 = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
 
-    if (move_anim_start_t3(gActiveBattler, gActiveBattler, gActiveBattler, r3, r4) != 0)
+    if (TryHandleLaunchBattleTableAnimation(gActiveBattler, gActiveBattler, gActiveBattler, r3, r4) != 0)
         SafariBufferExecCompleted();
     else
         gBattlerControllerFuncs[gActiveBattler] = sub_812B794;

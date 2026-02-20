@@ -84,7 +84,7 @@ void sub_80CBDF4(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    task->data[4] = GetBattlerSubpriority(gBattleAnimTarget) - 1;
+    task->data[4] = GetBattlerSpriteSubpriority(gBattleAnimTarget) - 1;
     task->data[6] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
     task->data[7] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
     task->data[10] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, 1);

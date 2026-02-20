@@ -661,7 +661,7 @@ void sub_80D4418(struct Task *task, u8 taskId)
     s16 attackerCoordX = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
     s16 attackerCoordY = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     s16 trigIndex = 172;
-    u8 subpriority = GetBattlerSubpriority(gBattleAnimAttacker) - 1;
+    u8 subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 1;
     s16 increment = 4 - task->data[1];
     u8 spriteId;
 
@@ -1060,7 +1060,7 @@ void sub_80D4D64(struct Sprite *sprite, s32 xDiff, s32 yDiff)
         spriteId = CreateSprite(&gSpriteTemplate_83D9420, combinedX, combinedY + something, 130);
         gSprites[spriteId].data[0] = 20;
         gSprites[spriteId].data[1] = randomSomethingY;
-        gSprites[spriteId].subpriority = GetBattlerSubpriority(gBattleAnimAttacker) - 1;
+        gSprites[spriteId].subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 1;
         if (randomSomethingX < 0)
             gSprites[spriteId].data[2] = -randomSomethingX;
         else
@@ -1071,7 +1071,7 @@ void sub_80D4D64(struct Sprite *sprite, s32 xDiff, s32 yDiff)
         spriteId = CreateSprite(&gSpriteTemplate_83D9420, combinedX, combinedY - something, 130);
         gSprites[spriteId].data[0] = 20;
         gSprites[spriteId].data[1] = randomSomethingY;
-        gSprites[spriteId].subpriority = GetBattlerSubpriority(gBattleAnimAttacker) - 1;
+        gSprites[spriteId].subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 1;
         if (randomSomethingX > 0)
             gSprites[spriteId].data[2] = -randomSomethingX;
         else

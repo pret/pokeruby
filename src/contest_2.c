@@ -1018,7 +1018,7 @@ u8 unref_sub_80AE908(void)
         gMonSpriteGfx_Sprite_ptr[1],
         species);
     LoadCompressedPalette(gMonPaletteTable[species].data, 0x110, 32);
-    GetMonSpriteTemplate_803C56C(gContestMons[gContestPlayerMonIndex].species, 1);
+    SetMultiuseSpriteTemplateToPokemon(gContestMons[gContestPlayerMonIndex].species, 1);
     spriteId = CreateSprite(
         &gCreatingSpriteTemplate,
         112, 80 + (8 - gMonFrontPicCoords[gContestMons[gContestPlayerMonIndex].species].coords) * 4,
@@ -1046,11 +1046,11 @@ u8 CreateContestantSprite(u16 species, u32 otId, u32 personality)
         personality);
     lzPaletteData = GetMonSpritePalFromOtIdPersonality(species, otId, personality);
     LoadCompressedPalette(lzPaletteData, 0x120, 32);
-    GetMonSpriteTemplate_803C56C(species, 0);
+    SetMultiuseSpriteTemplateToPokemon(species, 0);
     spriteId = CreateSprite(&gCreatingSpriteTemplate, 112, GetBattlerSpriteFinal_Y(2, species, 0), 30);
     gSprites[spriteId].oam.paletteNum = 2;
     gSprites[spriteId].oam.priority = 2;
-    gSprites[spriteId].subpriority = GetBattlerSubpriority(2);
+    gSprites[spriteId].subpriority = GetBattlerSpriteSubpriority(2);
     gSprites[spriteId].callback = SpriteCallbackDummy;
     gSprites[spriteId].data[0] = gSprites[spriteId].oam.paletteNum;
     gSprites[spriteId].data[2] = species;

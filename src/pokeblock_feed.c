@@ -628,7 +628,7 @@ static bool8 sub_8147B20(struct Pokemon* mon)
             TiD = GetMonData(mon, MON_DATA_OT_ID);
             palette = GetMonSpritePalStructFromOtIdPersonality(species, TiD, PiD);
             LoadCompressedObjectPalette(palette);
-            GetMonSpriteTemplate_803C56C(palette->tag, 1);
+            SetMultiuseSpriteTemplateToPokemon(palette->tag, 1);
             ePokeblockGfxState++;
         }
         break;
@@ -791,7 +791,7 @@ static void sub_8148078(struct Sprite* sprite)
     sprite->y += sprite->data[0];
     sprite->data[0] += sprite->data[1];
     if (sprite->data[0] == 0)
-        PlayCry1(sprite->data[2], 0);
+        PlayCry_Normal(sprite->data[2], 0);
     if (sprite->data[0] == 9)
         sprite->callback = SpriteCallbackDummy;
 }

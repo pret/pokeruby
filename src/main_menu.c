@@ -857,7 +857,7 @@ static void Task_NewGameSpeech7(u8 taskId)
         gTasks[taskId].tFrameCounter++;
         //Play Azurill cry at frame 32
         if (gTasks[taskId].tFrameCounter == 32)
-            PlayCry1(SPECIES_AZURILL, 0);
+            PlayCry_Normal(SPECIES_AZURILL, 0);
     }
 }
 
@@ -1428,7 +1428,7 @@ u8 CreateAzurillSprite(u8 x, u8 y)
         gMonSpriteGfx_Sprite_ptr[1],
         SPECIES_AZURILL);
     LoadCompressedObjectPalette(&gMonPaletteTable[SPECIES_AZURILL]);
-    GetMonSpriteTemplate_803C56C(SPECIES_AZURILL, 1);
+    SetMultiuseSpriteTemplateToPokemon(SPECIES_AZURILL, 1);
     return CreateSprite(&gCreatingSpriteTemplate, x, y, 0);
 }
 

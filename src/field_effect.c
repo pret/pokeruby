@@ -545,7 +545,7 @@ u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
 {
     DecompressPicFromTable_2(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, gMonSpriteGfx_Sprite_ptr[3], gMonSpriteGfx_Sprite_ptr[3], species);
     LoadCompressedObjectPalette(&gMonPaletteTable[species]);
-    GetMonSpriteTemplate_803C56C(species, 3);
+    SetMultiuseSpriteTemplateToPokemon(species, 3);
     gCreatingSpriteTemplate.paletteTag = gMonPaletteTable[0].tag;
     PreservePaletteInWeather(IndexOfSpritePaletteTag(gMonPaletteTable[0].tag) + 0x10);
     return CreateSprite(&gCreatingSpriteTemplate, x, y, subpriority);
@@ -558,7 +558,7 @@ u8 CreateMonSprite_FieldMove(u16 species, u32 d, u32 g, s16 x, s16 y, u8 subprio
     HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, gMonSpriteGfx_Sprite_ptr[3] /* this is actually u8* or something, pointing to ewram */, gMonSpriteGfx_Sprite_ptr[3], species, g);
     spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, d, g);
     LoadCompressedObjectPalette(spritePalette);
-    GetMonSpriteTemplate_803C56C(species, 3);
+    SetMultiuseSpriteTemplateToPokemon(species, 3);
     gCreatingSpriteTemplate.paletteTag = spritePalette->tag;
     PreservePaletteInWeather(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
     return CreateSprite(&gCreatingSpriteTemplate, x, y, subpriority);
@@ -2547,7 +2547,7 @@ void sub_8088890(struct Sprite *sprite)
             PlayCry2(sprite->data[0], 0, 0x7d, 0xa);
         } else
         {
-            PlayCry1(sprite->data[0], 0);
+            PlayCry_Normal(sprite->data[0], 0);
         }
     }
 }

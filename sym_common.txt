@@ -134,7 +134,7 @@ SYMBOL(gBattlerControllerFuncs, 16)
 SYMBOL(gHealthboxSpriteIds, 4)
 SYMBOL(gUnknown_03004344, 4)
 SYMBOL(gUnknown_03004348, 4)
-SYMBOL(gUnknown_0300434C, 4)
+SYMBOL(gBattleControllerData, 4)
 
 // pokemon_1.c
 SYMBOL(gPlayerPartyCount, 4)

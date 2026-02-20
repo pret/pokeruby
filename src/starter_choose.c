@@ -423,7 +423,7 @@ static void Task_StarterChoose3(u8 taskId)
 
 static void Task_StarterChoose4(u8 taskId)
 {
-    PlayCry1(GetStarterPokemon(gTasks[taskId].tStarterSelection), 0);
+    PlayCry_Normal(GetStarterPokemon(gTasks[taskId].tStarterSelection), 0);
     Menu_DrawStdWindowFrame(2, 14, 27, 19);
     //"Do you choose this POKEMON?"
     Menu_PrintText(gOtherText_DoYouChoosePoke, 3, 15);
@@ -575,7 +575,7 @@ static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y)
       gMonSpriteGfx_Sprite_ptr[0], gMonSpriteGfx_Sprite_ptr[1],
       species);
     LoadCompressedObjectPalette(&gMonPaletteTable[species]);
-    GetMonSpriteTemplate_803C56C(species, 1);
+    SetMultiuseSpriteTemplateToPokemon(species, 1);
     spriteId = CreateSprite(&gCreatingSpriteTemplate, x, y, 0);
     gSprites[spriteId].callback = nullsub_72;
     gSprites[spriteId].oam.priority = 0;

@@ -348,7 +348,7 @@ static void sub_807BDAC(u8 taskId)
     gAnimScriptCallback();
     if (!gAnimScriptActive)
     {
-        ewram17810[gTasks[taskId].data[0]].unk0_4 = 0;
+        gBattleHealthBoxInfo[gTasks[taskId].data[0]].statusAnimActive = 0;
         DestroyTask(taskId);
     }
 }

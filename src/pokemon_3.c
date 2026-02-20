@@ -24,9 +24,9 @@
 #include "sprite.h"
 #include "string_util.h"
 #include "text.h"
-#include "trainer.h"
 #include "util.h"
 #include "ewram.h"
+#include "constants/trainers.h"
 
 extern u8 gPlayerPartyCount;
 extern u8 gEnemyPartyCount;
@@ -43,7 +43,7 @@ extern u8 gDisplayedStringBattle[];
 extern u8 gBattlerAttacker;
 extern u8 gBattlerTarget;
 extern u8 gPotentialItemEffectBattler;
-extern u8 gBankInMenu;
+extern u8 gBattlerInMenuId;
 extern struct SpindaSpot gSpindaSpotGraphics[];
 extern s8 gNatureStatTable[][5];
 extern u16 gTrainerBattleOpponent;
@@ -197,7 +197,7 @@ const u8 gUnknown_082082F8[] = {1, 1, 3, 2, 4, 6};
 
 void sub_803F324(int stat)
 {
-    gBattlerTarget = gBankInMenu;
+    gBattlerTarget = gBattlerInMenuId;
     StringCopy(gBattleTextBuff1, gUnknown_08400F58[gUnknown_082082F8[stat]]);
     StringCopy(gBattleTextBuff2, BattleText_Rose);
     BattleStringExpandPlaceholdersToDisplayedString(BattleText_UnknownString3);
@@ -212,7 +212,7 @@ u8 *sub_803F378(u16 itemId)
     {
         if (gMain.inBattle)
         {
-            itemEffect = gEnigmaBerries[gBankInMenu].itemEffect;
+            itemEffect = gEnigmaBerries[gBattlerInMenuId].itemEffect;
         }
         else
         {
@@ -224,7 +224,7 @@ u8 *sub_803F378(u16 itemId)
         itemEffect = gItemEffectTable[itemId - 13];
     }
 
-    gPotentialItemEffectBattler = gBankInMenu;
+    gPotentialItemEffectBattler = gBattlerInMenuId;
 
     for (i = 0; i < 3; i++)
     {
@@ -238,7 +238,7 @@ u8 *sub_803F378(u16 itemId)
             }
             else
             {
-                gBattlerAttacker = gBankInMenu;
+                gBattlerAttacker = gBattlerInMenuId;
                 BattleStringExpandPlaceholdersToDisplayedString(BattleText_GetPumped);
             }
         }
@@ -246,7 +246,7 @@ u8 *sub_803F378(u16 itemId)
 
     if (itemEffect[3] & 0x80)
     {
-        gBattlerAttacker = gBankInMenu;
+        gBattlerAttacker = gBattlerInMenuId;
         BattleStringExpandPlaceholdersToDisplayedString(BattleText_MistShroud);
     }
 
@@ -1311,8 +1311,8 @@ void SetMonPreventsSwitchingString(void)
         gBattleTextBuff1[3] = gBattlerPartyIndexes[gBattleStruct->battlerPreventingSwitchout];
     gBattleTextBuff2[0] = B_BUFF_PLACEHOLDER_BEGIN;
     gBattleTextBuff2[1] = B_BUFF_MON_NICK_WITH_PREFIX;
-    gBattleTextBuff2[2] = gBankInMenu;
-    gBattleTextBuff2[3] = pokemon_order_func(gBattlerPartyIndexes[gBankInMenu]);
+    gBattleTextBuff2[2] = gBattlerInMenuId;
+    gBattleTextBuff2[3] = pokemon_order_func(gBattlerPartyIndexes[gBattlerInMenuId]);
     gBattleTextBuff2[4] = B_BUFF_EOS;
     BattleStringExpandPlaceholders(BattleText_PreventedSwitch, gStringVar4);
 }

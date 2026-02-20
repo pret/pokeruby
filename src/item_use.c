@@ -46,7 +46,7 @@ extern void (*gPokemonItemUseCallback)(u8, u16, TaskFunc);
 
 extern u8 gPokemonItemUseType;
 extern u8 gLastFieldPokeMenuOpened;
-extern u8 gBankInMenu;
+extern u8 gBattlerInMenuId;
 
 extern u8 S_PlantBerryTreeFromBag[];
 extern u8 S_WaterBerryTreeFromBag[];
@@ -905,7 +905,7 @@ void sub_80CA2BC(u8 taskId)
 
 void ItemUseInBattle_StatIncrease(u8 taskId)
 {
-    u16 partyId = gBattlerPartyIndexes[gBankInMenu];
+    u16 partyId = gBattlerPartyIndexes[gBattlerInMenuId];
 
     Menu_EraseWindowRect(0, 13, 13, 20);
 

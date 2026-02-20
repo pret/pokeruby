@@ -35,18 +35,18 @@ extern u8 gSharedMem[];
 #define ewram16400                      (gSharedMem + 0x16400)
 
 // gBattleResources
-#define AI_THINKING_STRUCT              ((struct AI_ThinkingStruct *)(gSharedMem + 0x16800))
-#define AI_BATTLE_HISTORY               ((struct BattleHistory *) (gSharedMem + 0x16A00))
-#define AI_STACK                        ((struct AI_Stack *)         (gSharedMem + 0x16C00))
-#define eSecretBaseRecord               ((struct SecretBaseRecord *)(gSharedMem + 0x17000))
-#define eBattleFlagsArr                 (*(struct ResourceFlags *)(gSharedMem + 0x17100))
-#define B_BATTLESCRIPTS_STACK           ((struct BattleScriptsStack *)     (gSharedMem + 0x17110))
-#define B_FUNCTION_STACK                ((struct BattleCallbacksStack *)        (gSharedMem + 0x17140))
+#define AI_THINKING_STRUCT                ((struct AI_ThinkingStruct *)(gSharedMem + 0x16800))
+#define AI_BATTLE_HISTORY                 ((struct BattleHistory *) (gSharedMem + 0x16A00))
+#define AI_STACK                          ((struct AI_Stack *)         (gSharedMem + 0x16C00))
+#define eSecretBaseRecord                 ((struct SecretBaseRecord *)(gSharedMem + 0x17000))
+#define eBattleFlagsArr                   (*(struct ResourceFlags *)(gSharedMem + 0x17100))
+#define B_BATTLESCRIPTS_STACK             ((struct BattleScriptsStack *)     (gSharedMem + 0x17110))
+#define B_FUNCTION_STACK                  ((struct BattleCallbacksStack *)        (gSharedMem + 0x17140))
 #define gBattleResources_statsBeforeLvlUp ((struct StatsArray *)(gSharedMem + 0x17180))
-#define gBattleSpriteInfo               ((struct BattleSpriteInfo *)    (gSharedMem + 0x17800))
-#define ewram17810                      ((struct Struct2017810 *)    (gSharedMem + 0x17810))
-#define ewram17840                      (*(struct Struct2017840 *)   (gSharedMem + 0x17840))
-#define eBattleBars                     ((struct BattleBar *)(gSharedMem + 0x17850))
+#define gBattleSpriteInfo                 ((struct BattleSpriteInfo *)    (gSharedMem + 0x17800))
+#define gBattleHealthBoxInfo              ((struct BattleHealthboxInfo *)    (gSharedMem + 0x17810))
+#define ewram17840                        (*(struct Struct2017840 *)   (gSharedMem + 0x17840))
+#define eBattleBars                       ((struct BattleBar *)(gSharedMem + 0x17850))
 
 #define eBattleAnimPalBackup_Battle     ((u16 *)(gSharedMem + 0x18000)) // also: shop.c, battle_anim.c
 

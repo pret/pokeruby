@@ -2909,7 +2909,7 @@ static void sub_80A7150(void)
     }
 }
 
-void PrepareBagForWallyTutorial(void)
+void DoWallyTutorialBagMenu(void)
 {
     u8 i;
 

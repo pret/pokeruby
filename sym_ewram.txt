@@ -261,10 +261,10 @@ gActionSelectionCursor = .; /* 2024E60 */
 gMoveSelectionCursor = .; /* 2024E64 */
     . += 0x4;
 
-gUnknown_02024E68 = .; /* 2024E68 */
+gBattlerStatusSummaryTaskId = .; /* 2024E68 */
     . += 0x4;
 
-gBankInMenu = .; /* 2024E6C */
+gBattlerInMenuId = .; /* 2024E6C */
     . += 0x1;
 
 gDoingBattleAnim = .; /* 2024E6D */

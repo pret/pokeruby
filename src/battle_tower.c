@@ -24,8 +24,8 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
-#include "trainer.h"
 #include "tv.h"
+#include "constants/trainers.h"
 
 #if ENGLISH
 #include "data/battle_tower/trainers.h"

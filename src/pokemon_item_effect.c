@@ -18,7 +18,7 @@
 
 extern s32 gBattleMoveDamage;
 extern u8 gAbsentBattlerFlags;
-extern u8 gBankInMenu;
+extern u8 gBattlerInMenuId;
 extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[];
 extern u8 gActiveBattler;
@@ -67,7 +67,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
     if (heldItem == ITEM_ENIGMA_BERRY)
     {
         if (gMain.inBattle)
-            holdEffect = gEnigmaBerries[gBankInMenu].holdEffect;
+            holdEffect = gEnigmaBerries[gBattlerInMenuId].holdEffect;
         else
             holdEffect = gSaveBlock1.enigmaBerry.holdEffect;
     }
@@ -76,10 +76,10 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
         holdEffect = ItemId_GetHoldEffect(heldItem);
     }
 
-    gPotentialItemEffectBattler = gBankInMenu;
+    gPotentialItemEffectBattler = gBattlerInMenuId;
     if (gMain.inBattle)
     {
-        gActiveBattler = gBankInMenu;
+        gActiveBattler = gBattlerInMenuId;
         cmdIndex = (GetBattlerSide(gActiveBattler) != 0);
         while (cmdIndex < gBattlersCount)
         {

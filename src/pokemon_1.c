@@ -10,10 +10,10 @@
 #include "overworld.h"
 #include "sprite.h"
 #include "string_util.h"
-#include "trainer.h"
 #include "text.h"
 #include "ewram.h"
 #include "util.h"
+#include "constants/trainers.h"
 
 extern u16 gMoveToLearn;
 
