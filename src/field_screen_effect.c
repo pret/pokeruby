@@ -102,7 +102,7 @@ static void sub_80814E8(u8 taskId)
 {
     if (!FuncIsActiveTask(UpdateFlashLevelEffect))
     {
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
     }
 }
@@ -145,7 +145,7 @@ void sub_8081594(u8 flashLevel)
         value = 1;
     sub_8081534(120, 80, sFlashLevelPixelRadii[curFlashLevel], sFlashLevelPixelRadii[flashLevel], value, 1);
     sub_8081510();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 void WriteFlashScanlineEffectBuffer(u8 flashLevel)
@@ -234,7 +234,7 @@ static void sub_80816A8(u8 taskId)
     case 2:
         if (!FuncIsActiveTask(UpdateFlashLevelEffect))
         {
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
             data[0] = 3;
         }
         break;
@@ -283,7 +283,7 @@ static void sub_80816A8(u8 taskId)
         REG_BLDALPHA = data[8];
         REG_WININ = data[9];
         REG_WINOUT = data[10];
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
         break;
     }
@@ -337,6 +337,6 @@ static void task50_0807F0C8(u8 taskId)
     if (BGMusicStopped() == TRUE)
     {
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
 }

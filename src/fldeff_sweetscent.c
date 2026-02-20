@@ -84,7 +84,7 @@ static void FailSweetScentEncounter(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        ScriptContext1_SetupScript(SweetScentNothingHereScript);
+        ScriptContext_SetupScript(SweetScentNothingHereScript);
         DestroyTask(taskId);
     }
 }

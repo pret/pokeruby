@@ -208,7 +208,7 @@ static void (*const gUnknown_082166D8[])(struct LinkPlayerObjectEvent *, struct 
 
 static void DoWhiteOut(void)
 {
-    ScriptContext2_RunNewScript(EventScript_WhiteOut);
+    RunScriptImmediately(EventScript_WhiteOut);
     gSaveBlock1.money /= 2;
     ScrSpecial_HealPlayerParty();
     Overworld_ResetStateAfterWhiteOut();
@@ -234,7 +234,7 @@ void Overworld_ResetStateAfterTeleport(void)
     FlagClear(FLAG_SYS_SAFARI_MODE);
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_USE_FLASH);
-    ScriptContext2_RunNewScript(EventScript_ResetMrBriney);
+    RunScriptImmediately(EventScript_ResetMrBriney);
 }
 
 void Overworld_ResetStateAfterDigEscRope(void)
@@ -1202,11 +1202,11 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
     sub_8059204();
     ClearPlayerFieldInput(&fieldInput);
     GetPlayerFieldInput(&fieldInput, newKeys, heldKeys);
-    if (!ScriptContext2_IsEnabled())
+    if (!ArePlayerFieldControlsLocked())
     {
         if (ProcessPlayerFieldInput(&fieldInput) == 1)
         {
-            ScriptContext2_Enable();
+            LockPlayerFieldControls();
             HideMapNamePopup();
         }
         else
@@ -1224,7 +1224,7 @@ static void CB1_Overworld(void)
 
 static void OverworldBasic(void)
 {
-    ScriptContext2_RunScript();
+    ScriptContext_RunScript();
     RunTasks();
     AnimateSprites();
     CameraUpdate();
@@ -1277,8 +1277,8 @@ void CB2_NewGame(void)
     NewGameInitData();
     ResetInitialPlayerAvatarState();
     PlayTimeCounter_Start();
-    ScriptContext1_Init();
-    ScriptContext2_Disable();
+    ScriptContext_Init();
+    UnlockPlayerFieldControls();
     gFieldCallback = ExecuteTruckSequence;
     do_load_map_stuff_loop(&gMain.state);
     SetFieldVBlankCallback();
@@ -1295,8 +1295,8 @@ void debug_sub_8058C00(void)
     ResetSafariZoneFlag_();
     ResetInitialPlayerAvatarState();
     PlayTimeCounter_Start();
-    ScriptContext1_Init();
-    ScriptContext2_Disable();
+    ScriptContext_Init();
+    UnlockPlayerFieldControls();
 
     if (JOY_HELD(R_BUTTON))
         gFieldCallback = ExecuteTruckSequence;
@@ -1322,8 +1322,8 @@ void CB2_WhiteOut(void)
         ResetSafariZoneFlag_();
         DoWhiteOut();
         ResetInitialPlayerAvatarState();
-        ScriptContext1_Init();
-        ScriptContext2_Disable();
+        ScriptContext_Init();
+        UnlockPlayerFieldControls();
         gFieldCallback = sub_8080B60;
         val = 0;
         do_load_map_stuff_loop(&val);
@@ -1336,8 +1336,8 @@ void CB2_WhiteOut(void)
 void CB2_LoadMap(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    ScriptContext1_Init();
-    ScriptContext2_Disable();
+    ScriptContext_Init();
+    UnlockPlayerFieldControls();
     SetMainCallback1(NULL);
     SetMainCallback2(sub_810CC80);
     gMain.savedCallback = CB2_LoadMap2;
@@ -1356,8 +1356,8 @@ void sub_8054534(void)
     if (!gMain.state)
     {
         FieldClearVBlankHBlankCallbacks();
-        ScriptContext1_Init();
-        ScriptContext2_Disable();
+        ScriptContext_Init();
+        UnlockPlayerFieldControls();
         SetMainCallback1(NULL);
     }
     if (sub_805493C(&gMain.state, 1))
@@ -1422,8 +1422,8 @@ void sub_805465C(void)
     SetMainCallback1(sub_8055354);
     sub_80543DC(sub_8055390);
     gFieldCallback = sub_8080A3C;
-    ScriptContext1_Init();
-    ScriptContext2_Disable();
+    ScriptContext_Init();
+    UnlockPlayerFieldControls();
     CB2_ReturnToField();
 }
 
@@ -1478,8 +1478,8 @@ void CB2_ContinueSavedGame(void)
     sub_805308C();
     InitMapFromSavedGame();
     PlayTimeCounter_Start();
-    ScriptContext1_Init();
-    ScriptContext2_Disable();
+    ScriptContext_Init();
+    UnlockPlayerFieldControls();
     if (GetSecretBase2Field_9() == 1)
     {
         ClearSecretBase2Field_9();
@@ -1537,8 +1537,8 @@ static bool32 sub_805483C(u8 *state)
     {
     case 0:
         FieldClearVBlankHBlankCallbacks();
-        ScriptContext1_Init();
-        ScriptContext2_Disable();
+        ScriptContext_Init();
+        UnlockPlayerFieldControls();
         sub_8054F70();
         sub_8054BA8();
         (*state)++;
@@ -2139,7 +2139,7 @@ void sub_8055354(void)
 
 u16 sub_8055390(u32 a1)
 {
-    if (ScriptContext2_IsEnabled() == 1)
+    if (ArePlayerFieldControlsLocked() == 1)
         return 17;
     if (gLink.recvQueue.count > 4)
         return 27;
@@ -2156,7 +2156,7 @@ u16 sub_80553E0(u32 a1)
 u16 sub_80553E4(u32 a1)
 {
     u16 retVal;
-    if (ScriptContext2_IsEnabled() == 1)
+    if (ArePlayerFieldControlsLocked() == 1)
     {
         retVal = 17;
     }
@@ -2178,7 +2178,7 @@ u16 sub_8055408(u32 a1)
     else
     {
         retVal = 26;
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         sub_80543DC(sub_80553E0);
     }
     return retVal;
@@ -2194,7 +2194,7 @@ u16 sub_8055438(u32 a1)
     else
     {
         retVal = 26;
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         sub_80543DC(sub_80553E0);
     }
     return retVal;
@@ -2233,7 +2233,7 @@ u16 sub_80554BC(u32 a1)
 {
     if (sub_8054F88(0x83) == TRUE)
     {
-        ScriptContext1_SetupScript(gUnknown_081A4508);
+        ScriptContext_SetupScript(gUnknown_081A4508);
         sub_80543DC(sub_80554B8);
     }
     return 17;
@@ -2390,41 +2390,41 @@ static u16 sub_8055758(const u8 *script)
 
 void sub_80557E8(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 void sub_80557F4(void)
 {
     PlaySE(SE_WIN_OPEN);
     sub_8071310();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 static void sub_8055808(const u8 *script)
 {
     PlaySE(SE_SELECT);
-    ScriptContext1_SetupScript(script);
-    ScriptContext2_Enable();
+    ScriptContext_SetupScript(script);
+    LockPlayerFieldControls();
 }
 
 void sub_8055824(void)
 {
     PlaySE(SE_WIN_OPEN);
-    ScriptContext1_SetupScript(TradeRoom_PromptToCancelLink);
-    ScriptContext2_Enable();
+    ScriptContext_SetupScript(TradeRoom_PromptToCancelLink);
+    LockPlayerFieldControls();
 }
 
 static void sub_8055840(const u8 *script)
 {
     PlaySE(SE_SELECT);
-    ScriptContext1_SetupScript(script);
-    ScriptContext2_Enable();
+    ScriptContext_SetupScript(script);
+    LockPlayerFieldControls();
 }
 
 void sub_805585C(void)
 {
-    ScriptContext1_SetupScript(TradeRoom_TerminateLink);
-    ScriptContext2_Enable();
+    ScriptContext_SetupScript(TradeRoom_TerminateLink);
+    LockPlayerFieldControls();
 }
 
 bool32 sub_8055870(void)

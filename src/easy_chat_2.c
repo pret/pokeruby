@@ -2925,7 +2925,7 @@ u8 sub_80EB868(u8 arg0)
     return (gSaveBlock1.unk2D8C[index] >> offset) & 1;
 }
 
-void sub_80EB890(u8 arg0)
+void UnlockTrendySaying(u8 arg0)
 {
     int offset;
     int index;
@@ -2966,7 +2966,7 @@ u16 sub_80EB8EC(void)
         {
             if (local2 == 0)
             {
-                sub_80EB890(i);
+                UnlockTrendySaying(i);
                 return (i & 0x1FF) | 0x2800;
             }
             local2--;

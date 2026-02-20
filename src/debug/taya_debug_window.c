@@ -352,7 +352,7 @@ bool8 debug_sub_8090984(void)
 
         for (i = 0; i < 33; i++)
         {
-            sub_80EB890(i);
+            UnlockTrendySaying(i);
         }
     }
     CloseMenu();

@@ -2321,105 +2321,105 @@ static bool8 ControlEvents_Events2_HandleInput(void)
 
 static bool8 CallScript_DoHallOfFame(void)
 {
-    ScriptContext1_SetupScript(DebugScript_081C1CFE);
+    ScriptContext_SetupScript(DebugScript_081C1CFE);
     CloseMenu();
     return TRUE;
 }
 
 static bool8 CallScript_GiveCoinCaseIfNotAlreadyOwned(void)
 {
-    ScriptContext1_SetupScript(DebugScript_081C1D07);
+    ScriptContext_SetupScript(DebugScript_081C1D07);
     CloseMenu();
     return TRUE;
 }
 
 static bool8 CallScript_SetOldaleStateAfterRoute103Rival(void)
 {
-    ScriptContext1_SetupScript(DebugScript_081C1D1E);
+    ScriptContext_SetupScript(DebugScript_081C1D1E);
     CloseMenu();
     return TRUE;
 }
 
 static bool8 CallScript_OpenNewMauville(void)
 {
-    ScriptContext1_SetupScript(DebugScript_081C1D24);
+    ScriptContext_SetupScript(DebugScript_081C1D24);
     CloseMenu();
     return TRUE;
 }
 
 static bool8 CallScript_GiveSSTicketAndDoHallOfFame(void)
 {
-    ScriptContext1_SetupScript(DebugScript_081C1D2A);
+    ScriptContext_SetupScript(DebugScript_081C1D2A);
     CloseMenu();
     return TRUE;
 }
 
 static bool8 CallScript_GiveKyogreEgg(void)
 {
-    ScriptContext1_SetupScript(DebugScript_081C1D35);
+    ScriptContext_SetupScript(DebugScript_081C1D35);
     CloseMenu();
     return TRUE;
 }
 
 static bool8 CallScript_GiveAllItems(void)
 {
-    ScriptContext1_SetupScript(DebugScript_081C1D46);
+    ScriptContext_SetupScript(DebugScript_081C1D46);
     CloseMenu();
     return TRUE;
 }
 
 static bool8 CallScript_GiveAllDecorations(void)
 {
-    ScriptContext1_SetupScript(DebugScript_081C221F);
+    ScriptContext_SetupScript(DebugScript_081C221F);
     CloseMenu();
     return TRUE;
 }
 
 static bool8 CallScript_GiveAllCoins(void)
 {
-    ScriptContext1_SetupScript(DebugScript_081C23E2);
+    ScriptContext_SetupScript(DebugScript_081C23E2);
     CloseMenu();
     return TRUE;
 }
 
 static bool8 CallScript_OpenSootopolisGym(void)
 {
-    ScriptContext1_SetupScript(DebugScript_081C23E6);
+    ScriptContext_SetupScript(DebugScript_081C23E6);
     CloseMenu();
     return TRUE;
 }
 
 static bool8 CallScript_SetMoneyTo0(void)
 {
-    ScriptContext1_SetupScript(DebugScript_081C23F6);
+    ScriptContext_SetupScript(DebugScript_081C23F6);
     CloseMenu();
     return TRUE;
 }
 
 static bool8 CallScript_FillPartyWithBarboach(void)
 {
-    ScriptContext1_SetupScript(DebugScript_081C2482);
+    ScriptContext_SetupScript(DebugScript_081C2482);
     CloseMenu();
     return TRUE;
 }
 
 static bool8 CallScript_FillPartyWithShroomish(void)
 {
-    ScriptContext1_SetupScript(DebugScript_081C23FD);
+    ScriptContext_SetupScript(DebugScript_081C23FD);
     CloseMenu();
     return TRUE;
 }
 
 static bool8 CallScript_GiveBarboachEgg(void)
 {
-    ScriptContext1_SetupScript(DebugScript_081C2518);
+    ScriptContext_SetupScript(DebugScript_081C2518);
     CloseMenu();
     return TRUE;
 }
 
 static bool8 CallScript_GiveShroomishEgg(void)
 {
-    ScriptContext1_SetupScript(DebugScript_081C2507);
+    ScriptContext_SetupScript(DebugScript_081C2507);
     CloseMenu();
     return TRUE;
 }

@@ -82,7 +82,7 @@ bool8 SafariZoneTakeStep(void)
     gSafariZoneStepCounter--;
     if (gSafariZoneStepCounter == 0)
     {
-        ScriptContext1_SetupScript(&gUnknown_081C3448);
+        ScriptContext_SetupScript(&gUnknown_081C3448);
         return TRUE;
     }
     return FALSE;
@@ -90,7 +90,7 @@ bool8 SafariZoneTakeStep(void)
 
 void SafariZoneRetirePrompt(void)
 {
-    ScriptContext1_SetupScript(&gUnknown_081C342D);
+    ScriptContext_SetupScript(&gUnknown_081C342D);
 }
 
 void sub_80C824C(void)
@@ -101,15 +101,15 @@ void sub_80C824C(void)
     }
     else if (gBattleOutcome == 8)
     {
-        ScriptContext2_RunNewScript(&gUnknown_081C340A);
+        RunScriptImmediately(&gUnknown_081C340A);
         WarpIntoMap();
         gFieldCallback = sub_8080E44;
         SetMainCallback2(CB2_LoadMap);
     }
     else if (gBattleOutcome == 7)
     {
-        ScriptContext1_SetupScript(&gUnknown_081C3459);
-        ScriptContext1_Stop();
+        ScriptContext_SetupScript(&gUnknown_081C3459);
+        ScriptContext_Stop();
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
     }
 }

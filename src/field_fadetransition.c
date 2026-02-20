@@ -84,13 +84,13 @@ void task0A_asap_script_env_2_enable_and_set_ctx_running(u8 taskID)
     if (sub_8080E70() == TRUE)
     {
         DestroyTask(taskID);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
 }
 
 void sub_8080990(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     Overworld_PlaySpecialMapMusic();
     pal_fill_black();
     CreateTask(task0A_asap_script_env_2_enable_and_set_ctx_running, 10);
@@ -98,7 +98,7 @@ void sub_8080990(void)
 
 void sub_80809B0(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     pal_fill_black();
     CreateTask(task0A_asap_script_env_2_enable_and_set_ctx_running, 10);
 }
@@ -123,7 +123,7 @@ void task_mpl_807DD60(u8 taskId)
     case 2:
         if (sub_8080E70() == TRUE)
         {
-            ScriptContext2_Disable();
+            UnlockPlayerFieldControls();
             DestroyTask(taskId);
         }
     }
@@ -131,7 +131,7 @@ void task_mpl_807DD60(u8 taskId)
 
 void sub_8080A3C(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     Overworld_PlaySpecialMapMusic();
     palette_bg_fill_black();
     CreateTask(task_mpl_807DD60, 10);
@@ -158,7 +158,7 @@ void sub_8080A5C(u8 taskId)
         if (sub_8080E70() == TRUE)
         {
             sub_8007B14();
-            ScriptContext2_Disable();
+            UnlockPlayerFieldControls();
             DestroyTask(taskId);
         }
     }
@@ -166,7 +166,7 @@ void sub_8080A5C(u8 taskId)
 
 void sub_8080AC4(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     Overworld_PlaySpecialMapMusic();
     palette_bg_fill_black();
     CreateTask(sub_8080A5C, 10);
@@ -193,7 +193,7 @@ void mapldr_default(void)
     Overworld_PlaySpecialMapMusic();
     pal_fill_for_map_transition();
     sub_8080AE4();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 void sub_8080B60(void)
@@ -201,7 +201,7 @@ void sub_8080B60(void)
     Overworld_PlaySpecialMapMusic();
     pal_fill_black();
     sub_8080AE4();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 void sub_8080B78(void)
@@ -210,7 +210,7 @@ void sub_8080B78(void)
     pal_fill_for_map_transition();
     PlaySE(SE_WARP_OUT);
     CreateTask(task_map_chg_seq_0807E2CC, 10);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 void sub_8080B9C(u8 taskId)
@@ -256,7 +256,7 @@ void sub_8080B9C(u8 taskId)
         }
         break;
     case 4:
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         DestroyTask(taskId);
         break;
     }
@@ -294,7 +294,7 @@ void task_map_chg_seq_0807E20C(u8 taskId)
         }
         break;
     case 3:
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         DestroyTask(taskId);
         break;
     }
@@ -306,14 +306,14 @@ void task_map_chg_seq_0807E2CC(u8 taskId)
     {
     case 0:
         FreezeObjectEvents();
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         gTasks[taskId].data[0]++;
         break;
     case 1:
         if (sub_8080E70())
         {
             UnfreezeObjectEvents();
-            ScriptContext2_Disable();
+            UnlockPlayerFieldControls();
             DestroyTask(taskId);
         }
         break;
@@ -333,14 +333,14 @@ void sub_8080DEC(void)
 {
     pal_fill_black();
     CreateStartMenuTask(sub_8080DC4);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 void task_mpl_807E3C8(u8 taskId)
 {
     if (sub_8080E70() == 1)
     {
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         DestroyTask(taskId);
         ScriptUnfreezeObjectEvents();
     }
@@ -348,14 +348,14 @@ void task_mpl_807E3C8(u8 taskId)
 
 void sub_8080E28(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     pal_fill_black();
     CreateTask(task_mpl_807E3C8, 10);
 }
 
 void sub_8080E44(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     Overworld_PlaySpecialMapMusic();
     pal_fill_black();
     CreateTask(task_mpl_807E3C8, 10);
@@ -376,7 +376,7 @@ bool32 sub_8080E70(void)
 
 void sub_8080E88(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     TryFadeOutOldMapMusic();
     WarpFadeScreen();
     PlayRainSoundEffect();
@@ -387,7 +387,7 @@ void sub_8080E88(void)
 
 void sp13E_warp_to_last_warp(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     TryFadeOutOldMapMusic();
     WarpFadeScreen();
     PlayRainSoundEffect();
@@ -397,7 +397,7 @@ void sp13E_warp_to_last_warp(void)
 
 void sub_8080EF0(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gFieldCallback = mapldr_default;
     CreateTask(sub_808115C, 10);
 }
@@ -410,25 +410,25 @@ void DoFallWarp(void)
 
 void sub_8080F2C(u8 metatileBehavior)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     sub_8086A2C(metatileBehavior, 10);
 }
 
 void sub_8080F48(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     sub_80871B8(10);
 }
 
 void sub_8080F58(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     sub_8087654(10);
 }
 
 void sub_8080F68(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     TryFadeOutOldMapMusic();
     WarpFadeScreen();
     PlaySE(SE_WARP_IN);
@@ -438,7 +438,7 @@ void sub_8080F68(void)
 
 void sub_8080F9C(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     WarpFadeScreen();
     CreateTask(task0A_fade_n_map_maybe, 10);
     gFieldCallback = sub_80C791C;
@@ -451,7 +451,7 @@ static void WaitCableClubWarp(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         task->data[0]++;
         break;
     case 1:
@@ -468,7 +468,7 @@ static void WaitCableClubWarp(u8 taskId)
 
 void DoCableClubWarp(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     TryFadeOutOldMapMusic();
     WarpFadeScreen();
     PlaySE(SE_EXIT);
@@ -517,12 +517,12 @@ void debug_sub_80888D8()
 {
     debug_sub_8052E04();
     sub_8080E88();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 /*    asm("\
     PUSH    {LR}\n\
     BL      debug_sub_8052E04\n\
     BL      sub_8080E88\n\
-    BL      ScriptContext2_Enable\n\
+    BL      LockPlayerFieldControls\n\
     POP     {R0}\n\
     BX      R0");*/
 }
@@ -537,7 +537,7 @@ void task0A_fade_n_map_maybe(u8 taskId)
     {
     case 0:
         FreezeObjectEvents();
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         task->data[0]++;
         break;
     case 1:
@@ -615,7 +615,7 @@ void sub_80812C8(u8 taskId)
     {
     case 0:
         FreezeObjectEvents();
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         task->data[0]++;
         break;
     case 1:
@@ -634,7 +634,7 @@ void sub_80812C8(u8 taskId)
 
 void sub_8081334(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     TryFadeOutOldMapMusic();
     WarpFadeScreen();
     PlayRainSoundEffect();

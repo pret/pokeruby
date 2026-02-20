@@ -215,7 +215,7 @@ extern const u8 MauvilleCity_GameCorner_EventScript_1C40AC[];
 u8 debug_sub_8138C14(void)
 {
     unk_203955C = 1;
-    ScriptContext1_SetupScript(MauvilleCity_GameCorner_EventScript_1C407E);
+    ScriptContext_SetupScript(MauvilleCity_GameCorner_EventScript_1C407E);
     CloseMenu();
     return 1;
 }
@@ -223,7 +223,7 @@ u8 debug_sub_8138C14(void)
 u8 debug_sub_8138C34(void)
 {
     unk_203955C = 1;
-    ScriptContext1_SetupScript(MauvilleCity_GameCorner_EventScript_1C40AC);
+    ScriptContext_SetupScript(MauvilleCity_GameCorner_EventScript_1C40AC);
     CloseMenu();
     return 1;
 }
@@ -273,7 +273,7 @@ static void CableCarTask1(u8 taskId)
 
 void CableCar(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     CreateTask(CableCarTask1, 1);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
 }

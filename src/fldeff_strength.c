@@ -39,7 +39,7 @@ void debug_sub_8130318(void)
     }
     else
     {
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
     }
 }
 #endif
@@ -67,7 +67,7 @@ bool8 SetUpFieldMove_Strength(void)
 static void sub_811AA18(void)
 {
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
-    ScriptContext1_SetupScript(S_UseStrength);
+    ScriptContext_SetupScript(S_UseStrength);
 }
 
 static void sub_811AA38(void)
@@ -95,6 +95,6 @@ static void sub_811AA9C(void)
     else
     {
         FieldEffectActiveListRemove(40);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
 }

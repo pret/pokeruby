@@ -19,8 +19,8 @@ const u8 gExpandedPlaceholder_Brendan[] = _("BRENDAN");
 const u8 gExpandedPlaceholder_May[] = _("MAY");
 
 // system text
-const u8 gSystemText_Egg[] = _("EGG");
-const u8 gSystemText_Pokemon2[] = _("POKéMON");
+const u8 gText_EggNickname[] = _("EGG");
+const u8 gText_Pokemon[] = _("POKéMON");
 
 // main menu text
 const u8 gMainMenuString_NewGame[] = _("NEW GAME");
@@ -926,7 +926,7 @@ const u8 gSystemText_ClockResetDataSave[] = _("The clock has been reset.\nData w
 const u8 gSystemText_SaveCompleted[] = _("Save completed.");
 const u8 gSystemText_SaveFailed[] = _("Save failed...");
 const u8 gSystemText_NoSaveFileNoTime[] = _("There is no save file, so the time\ncan't be set.");
-const u8 gSystemText_ClockAdjustmentUsable[] = _("The in-game clock adjustment system\nis now useable.");
+const u8 gText_InGameClockUsable[] = _("The in-game clock adjustment system\nis now useable.");
 const u8 gSystemText_Saving[] = _("SAVING...\nDON'T TURN OFF THE POWER.");
 
 #elif GERMAN
@@ -947,8 +947,8 @@ const u8 gExpandedPlaceholder_Brendan[] = _("BRIX");
 const u8 gExpandedPlaceholder_May[] = _("MAIKE");
 
 // system text
-const u8 gSystemText_Egg[] = _("EI");
-const u8 gSystemText_Pokemon2[] = _("POKéMON");
+const u8 gText_EggNickname[] = _("EI");
+const u8 gText_Pokemon[] = _("POKéMON");
 
 // main menu text
 const u8 gMainMenuString_NewGame[] = _("NEUES SPIEL");
@@ -1851,6 +1851,6 @@ const u8 gSystemText_ClockResetDataSave[] = _("Die Uhr wurde zurückgestellt. Da
 const u8 gSystemText_SaveCompleted[] = _("Speichern beendet.");
 const u8 gSystemText_SaveFailed[] = _("Speichern fehlgeschlagen.");
 const u8 gSystemText_NoSaveFileNoTime[] = _("Es existiert kein Speicherstand. Uhr-\nzeit kann nicht eingestellt werden.");
-const u8 gSystemText_ClockAdjustmentUsable[] = _("Das spielinterne Zeiteingabe-\nSystem ist jetzt verfügbar.");
+const u8 gText_InGameClockUsable[] = _("Das spielinterne Zeiteingabe-\nSystem ist jetzt verfügbar.");
 const u8 gSystemText_Saving[] = _("SPEICHERVORGANG...\nGERÄT NICHT AUSSCHALTEN!");
 #endif

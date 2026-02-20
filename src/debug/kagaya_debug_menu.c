@@ -85,7 +85,7 @@ u8 debug_sub_80B068C(void)
     {
         debug_sub_80A0710(c2_exit_to_overworld_1_sub_8080DEC);
         CloseMenu();
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         return 1;
     }
     return 0;
@@ -104,7 +104,7 @@ u8 debug_sub_80B06E0(void)
     {
         debug_sub_80A073C(c2_exit_to_overworld_1_sub_8080DEC);
         CloseMenu();
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         return 1;
     }
     return 0;
@@ -123,7 +123,7 @@ u8 Kagaya_80B0734(void)
     {
         debug_sub_811609C(Random() % 6, c2_exit_to_overworld_1_sub_8080DEC);
         CloseMenu();
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         return 1;
     }
     return 0;

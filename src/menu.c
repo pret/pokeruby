@@ -55,7 +55,7 @@ void CloseMenu(void)
     PlaySE(SE_SELECT);
     Menu_EraseScreen();
     ScriptUnfreezeObjectEvents();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
     Menu_DestroyCursor();
 }
 

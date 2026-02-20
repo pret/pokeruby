@@ -1443,7 +1443,7 @@ void sub_80FE1DC(void)
 void sub_80FE220(void)
 {
     gUnknown_020388D4 = 0;
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     sub_80FE1DC();
     sub_80FE394();
 }
@@ -1524,7 +1524,7 @@ void gpu_pal_decompress_alloc_tag_and_upload(u8 taskId)
     FreeSpritePaletteByTag(6);
     if (sDecorationContext.isPlayerRoom == 0)
     {
-        ScriptContext1_SetupScript(SecretBase_EventScript_PCCancel);
+        ScriptContext_SetupScript(SecretBase_EventScript_PCCancel);
         DestroyTask(taskId);
     } else
     {
@@ -2564,7 +2564,7 @@ void sub_81000C4(u8 taskId)
     {
         gUnknown_020391A4 = gTasks[taskId].data[0] - 7;
         gUnknown_020391A6 = gTasks[taskId].data[1] - 7;
-        ScriptContext1_SetupScript(gUnknown_081A2F7B);
+        ScriptContext_SetupScript(gUnknown_081A2F7B);
     }
     gSprites[gUnknown_020391A8].y += 2;
     sub_810028C(taskId);
@@ -2629,7 +2629,7 @@ void c1_overworld_prev_quest(u8 taskId)
     switch (gTasks[taskId].data[2])
     {
         case 0:
-            ScriptContext2_Enable();
+            LockPlayerFieldControls();
             if (!gPaletteFade.active)
             {
                 sub_80FF114(taskId);
@@ -2656,7 +2656,7 @@ void sub_8100334(u8 taskId)
 
 void sub_8100364(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     LoadScrollIndicatorPalette();
     pal_fill_black();
     sub_80FE7EC(CreateTask(sub_8100334, 8));
@@ -3147,13 +3147,13 @@ void sub_8100C88(u8 taskId)
             if (!gPaletteFade.active)
             {
                 DrawWholeMapView();
-                ScriptContext1_SetupScript(gUnknown_081A2F8A);
+                ScriptContext_SetupScript(gUnknown_081A2F8A);
                 Menu_EraseWindowRect(0, 0, 29, 19);
                 gTasks[taskId].data[2] = 2;
             }
             break;
         case 2:
-            ScriptContext2_Enable();
+            LockPlayerFieldControls();
             sub_80FED90(taskId);
             pal_fill_black();
             gTasks[taskId].data[2] = 3;

@@ -1598,7 +1598,7 @@ void sub_81175C0(u8 taskid)
     unk_203955C[0] = 0;
 #endif
     Menu_EraseScreen();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
     DestroyTask(taskid);
 }
 
@@ -1609,7 +1609,7 @@ void sub_81175DC(u8 taskid)
         return;
     gSpecialVar_0x8004 = 1;
     Menu_EraseScreen();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
     DestroyTask(taskid);
 }
 
@@ -1783,7 +1783,7 @@ void PlayRoulette(void)
 {
     u8 taskid;
 
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 #if DEBUG
     unk_2039560 = 0;
     if (unk_203955C[0] != 0)

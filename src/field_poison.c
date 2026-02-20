@@ -95,7 +95,7 @@ static void Task_WhiteOut(u8 taskId)
             gSpecialVar_Result = 1;
         else
             gSpecialVar_Result = 0;
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
         break;
     }
@@ -107,7 +107,7 @@ static void Task_WhiteOut(u8 taskId)
 void ExecuteWhiteOut(void)
 {
     CreateTask(Task_WhiteOut, 0x50);
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
 }
 
 s32 DoPoisonFieldEffect(void)

@@ -129,7 +129,7 @@ u8* EasyChat_GetWordText(u8 *, u16);
 u8 *ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16, u16);
 u16 sub_80EB784(u16 group);
 u8 sub_80EB868(u8);
-void sub_80EB890(u8);
+void UnlockTrendySaying(u8);
 u8 sub_80EB8C0(void);
 u16 sub_80EB8EC(void);
 u8 *sub_80EB544(u8 *dst, u16 *words, u16 arg2, u16 arg3);

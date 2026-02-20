@@ -247,7 +247,7 @@ void Task_HandleTruckSequence(u8 taskId)
             DrawWholeMapView();
             PlaySE(SE_TRUCK_DOOR);
             DestroyTask(taskId);
-            ScriptContext2_Disable();
+            UnlockPlayerFieldControls();
         }
         break;
     }
@@ -259,7 +259,7 @@ void ExecuteTruckSequence(void)
     MapGridSetMetatileIdAt(11, 9, METATILE_ID(InsideOfTruck, DoorClosedFloor_Mid));
     MapGridSetMetatileIdAt(11, 10, METATILE_ID(InsideOfTruck, DoorClosedFloor_Bottom));
     DrawWholeMapView();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     CpuFastFill(0, gPlttBufferFaded, 0x400);
     CreateTask(Task_HandleTruckSequence, 0xA);
 }
@@ -370,7 +370,7 @@ void sub_80C791C(void)
     gObjectEvents[gPlayerAvatar.objectEventId].invisible = TRUE;
     pal_fill_black();
     CreateTask(Task_HandlePorthole, 80);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 void sub_80C7958(void)

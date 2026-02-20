@@ -457,7 +457,7 @@ void EndTrainerApproach(void)
 static void Task_DestroyTrainerApproachTask(u8 taskId)
 {
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 static const struct OamData gOamData_839B4D8 = {

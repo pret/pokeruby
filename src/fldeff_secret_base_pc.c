@@ -46,7 +46,7 @@ static void Task_SecretBasePCTurnOn(u8 taskId)
         MapGridSetMetatileIdAt(data[0], data[1], 548);
         CurrentMapDrawMetatileAt(data[0], data[1]);
         FieldEffectActiveListRemove(FLDEFF_SECRET_BASE_PC_TURN_ON);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
         return;
     }

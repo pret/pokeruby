@@ -1882,8 +1882,8 @@ void Task_ContestReturnToField(u8 taskId)
 void FieldCB_ContestReturnToField(void)
 {
     // Why disable and re-enable again?
-    ScriptContext2_Disable();
-    EnableBothScriptContexts();
+    UnlockPlayerFieldControls();
+    ScriptContext_Enable();
 }
 
 // Expands a one-digit number in the string

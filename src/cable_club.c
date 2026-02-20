@@ -506,7 +506,7 @@ static void sub_8083314(u8 taskId)
         }
         sub_8082D4C();
 #endif
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
         return;
     }
@@ -520,7 +520,7 @@ static void sub_80833C4(u8 taskId)
     if (gReceivedRemoteLinkPlayers == FALSE)
     {
         sub_8082D4C();
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
     }
 }
@@ -530,7 +530,7 @@ static void sub_80833EC(u8 taskId)
     gSpecialVar_Result = 5;
     sub_8082D4C();
     HideFieldMessageBox();
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
     DestroyTask(taskId);
 }
 
@@ -539,7 +539,7 @@ static void sub_8083418(u8 taskId)
     gSpecialVar_Result = 6;
     sub_8082D4C();
     HideFieldMessageBox();
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
     DestroyTask(taskId);
 }
 
@@ -617,13 +617,13 @@ static void sub_808353C(u8 taskId)
                 }
             }
         }
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
         break;
     case 1:
         if (gReceivedRemoteLinkPlayers == FALSE)
         {
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
             DestroyTask(taskId);
         }
         break;
@@ -858,7 +858,7 @@ static void sub_80839DC(u8 taskId)
         HideFieldMessageBox();
         Menu_EraseScreen();
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         break;
     }
 }
@@ -867,7 +867,7 @@ void sub_8083A84(TaskFunc followupFunc)
 {
     u8 taskId = CreateTask(sub_80839DC, 80);
     SetTaskFuncWithFollowupFunc(taskId, sub_80839DC, followupFunc);
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
 }
 
 static void sub_8083AAC(u8 taskId)
@@ -877,7 +877,7 @@ static void sub_8083AAC(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         FadeScreen(1, 0);
         ClearLinkCallback_2();
         task->data[0]++;
@@ -922,7 +922,7 @@ static void sub_8083B6C(void)
 void sub_8083B80(void)
 {
     sub_8083B6C();
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
 }
 
 void sub_8083B90(void)
@@ -935,7 +935,7 @@ void unref_sub_8083BB0(void)
 {
     u8 taskId = CreateTask(sub_80839DC, 80);
     SetTaskFuncWithFollowupFunc(taskId, sub_80839DC, Task_RecordMixing_Main);
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
 }
 
 void sub_8083BDC(void)
@@ -1002,7 +1002,7 @@ static void sub_8083CA4(u8 taskId)
 {
     if (!gReceivedRemoteLinkPlayers)
     {
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
     }
 }

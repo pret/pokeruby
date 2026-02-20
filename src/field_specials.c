@@ -70,14 +70,14 @@ static struct ElevatorMenu gUnknown_03000760[20];
 void ScrSpecial_ShowDiploma(void)
 {
     SetMainCallback2(CB2_ShowDiploma);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 void ScrSpecial_ViewWallClock(void)
 {
     gMain.savedCallback = CB2_ReturnToField;
     SetMainCallback2(CB2_ViewWallClock);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 void ResetCyclingRoadChallengeData(void)
@@ -585,7 +585,7 @@ static void Task_SlideOpenPetalburgGymDoors(u8 taskId)
         if ((++gPetalburgGymSlidingDoorIndex) == 5)
         {
             DestroyTask(taskId);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
         }
     }
     else
@@ -1073,7 +1073,7 @@ void ScriptShowElevatorMenu(void)
 static void sub_810E874(void)
 {
     u8 i;
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     if (gUnknown_0203925A > 5)
     {
         Menu_DrawStdWindowFrame(0, 0, 8, 11);
@@ -1257,7 +1257,7 @@ void sub_810EC34(u8 taskId)
 void sub_810EC9C(u8 taskId)
 {
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 void sub_810ECB0(void)
@@ -1456,7 +1456,7 @@ void GlassWorkshopUpdateScrollIndicators(u8, u8);
 void ShowGlassWorkshopMenu(void)
 {
     u8 i;
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     Menu_DrawStdWindowFrame(0, 0, 10, 11);
     InitMenu(0, 1, 1, 5, 0, 9);
     gUnknown_0203925C = 0;
@@ -1830,7 +1830,7 @@ static void sub_810F7A8(u8 taskId)
 static void sub_810F814(u8 taskId)
 {
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 bool8 FoundBlackGlasses(void)

@@ -15,7 +15,7 @@ static void Task_WaitForPaletteFade(u8);
 void AccessHallOfFamePC(void)
 {
     SetMainCallback2(sub_81428CC);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 void ReturnFromHallOfFamePC(void)
@@ -26,7 +26,7 @@ void ReturnFromHallOfFamePC(void)
 
 static void ReshowPCMenuAfterHallOfFamePC(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     Overworld_PlaySpecialMapMusic();
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     ScriptMenu_CreatePCMultichoice();

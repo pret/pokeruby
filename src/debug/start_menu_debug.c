@@ -735,7 +735,7 @@ void DebugMenu_8077020(u8 taskId)
 void DebugMenu_8077048(void)
 {
     gMenuCallback = DebugMenu_807706C;
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     CreateTask(DebugMenu_8077020, 80);
 }
 
@@ -898,7 +898,7 @@ u8 DebugMenu_OpenWatanabe(void)
 {
     CloseMenu();
     SetMainCallback2(InitWatanabeDebugMenu);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     return TRUE;
 }
 
@@ -906,7 +906,7 @@ u8 DebugMenu_EndSequenceDemo(void)
 {
     CloseMenu();
     SetMainCallback2(CB2_StartCreditsSequence);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     return TRUE;
 }
 
@@ -914,7 +914,7 @@ u8 DebugMenu_HallOfFame(void)
 {
     CloseMenu();
     GameClear();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     return TRUE;
 }
 
@@ -922,7 +922,7 @@ u8 DebugMenu_OpenSizeComparison(void)
 {
     CloseMenu();
     InitSizeComparison();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     return TRUE;
 }
 
@@ -1002,7 +1002,7 @@ u8 DebugMenu_BattleForDebug(void)
 {
     CloseMenu();
     InitBattleForDebug();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     return TRUE;
 }
 
@@ -1039,7 +1039,7 @@ u8 DebugMenu_CreatePKMN(void)
 {
     CloseMenu();
     InitCreatePokemon();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     return TRUE;
 }
 
@@ -1047,7 +1047,7 @@ u8 DebugMenu_ViewPokemonGraphics(void)
 {
     CloseMenu();
     InitSeePokemonGraphics();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     return TRUE;
 }
 
@@ -1055,7 +1055,7 @@ u8 DebugMenu_OpenSeeTrainers(void)
 {
     CloseMenu();
     InitSeeTrainers();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     return TRUE;
 }
 
@@ -1094,7 +1094,7 @@ u8 DebugMenu_Teleport(void)
 {
     Overworld_SetWarpDestToLastHealLoc();
     sub_8080E88();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     CloseMenu();
     return TRUE;
 }
@@ -1377,7 +1377,7 @@ u8 DebugMenu_Safari(void)
     ConvertIntToDecimalStringN(gStringVar1, gSafariZoneStepCounter, STR_CONV_MODE_RIGHT_ALIGN, 3);
     sub_8071F40(Str_839BF0C);
     gMenuCallback = DebugMenu_8077B3C;
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     return FALSE;
 }
 
@@ -1621,7 +1621,7 @@ u8 DebugMenu_MakeItems()
 {
     CloseMenu();
     DebugMenu_8077EAC();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     return TRUE;
 }
 
@@ -1698,7 +1698,7 @@ void DebugMenu_8077FFC(u8 taskId)
 void DebugMenu_807806C(u8 taskId)
 {
     Menu_EraseScreen();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
     DestroyTask(taskId);
     DebugMenu_8077048();
 }
@@ -1759,7 +1759,7 @@ void DebugMenu_807817C(u8 taskId)
     {
         Menu_EraseScreen();
         DestroyTask(taskId);
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
     }
 }
 
@@ -1786,7 +1786,7 @@ u8 DebugMenu_ViewPortraits(void)
 {
     CloseMenu();
     CreateTask(DebugMenu_80781A8, 80);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     return TRUE;
 }
 
@@ -1813,7 +1813,7 @@ u8 DebugMenu_TimeRecords(void)
 {
     CloseMenu();
     CreateTask(debug_sub_806F9E4, 80);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     return TRUE;
 }
 
@@ -1821,7 +1821,7 @@ u8 DebugMenu_SetTime(void)
 {
     CloseMenu();
     debug_sub_806F99C();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     return TRUE;
 }
 
@@ -1852,13 +1852,13 @@ void DebugMenu_8078310(u8 taskId)
                 *GetVarPointer(VAR_MIRAGE_RND_H) = data[1];
                 Menu_EraseScreen();
                 DestroyTask(taskId);
-                ScriptContext2_Disable();
+                UnlockPlayerFieldControls();
             }
             else if (JOY_NEW(B_BUTTON))
             {
                 Menu_EraseScreen();
                 DestroyTask(taskId);
-                ScriptContext2_Disable();
+                UnlockPlayerFieldControls();
             }
             else if (DebugMenu_8077DD8(data + 1, 0, 0xFFFF, gMain.newAndRepeatedKeys) == TRUE)
                 DebugMenu_80782EC(data[1]);
@@ -1870,7 +1870,7 @@ u8 DebugMenu_MiragaIslandRND(void)
 {
     CloseMenu();
     CreateTask(DebugMenu_8078310, 80);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     return TRUE;
 }
 
@@ -2129,7 +2129,7 @@ bool32 DebugMenu_807860C(u8 taskId)
             return FALSE;
         case 2:
             Menu_EraseScreen();
-            ScriptContext2_Disable();
+            UnlockPlayerFieldControls();
             DestroyTask(taskId);
             return FALSE;
     }
@@ -2170,7 +2170,7 @@ void DebugMenu_8078714(u8 taskId)
 bool8 DebugMenu_8078758(TaskFunc func)
 {
     CloseMenu();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     CreateTask(func, 80);
     return TRUE;
 }
@@ -2243,7 +2243,7 @@ void DebugMenu_8078880(u8 taskId)
             if (JOY_NEW(A_BUTTON))
             {
                 Menu_EraseScreen();
-                ScriptContext2_Disable();
+                UnlockPlayerFieldControls();
                 DestroyTask(taskId);
             }
             break;
@@ -2255,7 +2255,7 @@ u8 DebugMenu_CellInfo(void)
     CloseMenu();
     CreateTask(DebugMenu_8078880, 80);
     DebugMenu_80787EC();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     return TRUE;
 }
 
@@ -2350,14 +2350,14 @@ void DebugMenu_8078AA4(u8 taskId)
 void DebugMenu_8078B38(u8 taskId)
 {
     Menu_EraseScreen();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
     DestroyTask(taskId);
 }
 
 u8 DebugMenu_BattleTowerStages(void)
 {
     CloseMenu();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     CreateTask(DebugMenu_80789CC, 80);
     return TRUE;
 }
@@ -2438,14 +2438,14 @@ void DebugMenu_8078BD4(u8 taskId)
                 PlaySE(SE_DING_DONG);
                 Menu_EraseScreen();
                 DestroyTask(taskId);
-                ScriptContext2_Disable();
+                UnlockPlayerFieldControls();
                 DebugMenu_8078B94();
             }
             else if (JOY_NEW(B_BUTTON))
             {
                 Menu_EraseScreen();
                 DestroyTask(taskId);
-                ScriptContext2_Disable();
+                UnlockPlayerFieldControls();
             }
             else if (DebugMenu_8077DD8(data + 1, 0, 4, gMain.newAndRepeatedKeys) == TRUE)
             {
@@ -2459,7 +2459,7 @@ u8 DebugMenu_CheckPKBLCK()
 {
     CloseMenu();
     CreateTask(DebugMenu_8078BD4, 80);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     return TRUE;
 }
 
@@ -2676,7 +2676,7 @@ void DebugMenu_8078F68(u8 taskId)
 void DebugMenu_8079020(u8 taskId)
 {
     Menu_EraseScreen();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
     DestroyTask(taskId);
 }
 
@@ -2684,7 +2684,7 @@ u8 DebugMenu_PTime(void)
 {
     CloseMenu();
     CreateTask(DebugMenu_8078F1C, 80);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     return TRUE;
 }
 
@@ -2728,7 +2728,7 @@ void DebugMenu_8079058(u8 taskId)
             gUnknown_Debug_Murakawa2 = 0;
 #endif
             Menu_EraseScreen();
-            ScriptContext2_Disable();
+            UnlockPlayerFieldControls();
             DestroyTask(taskId);
             break;
     }
@@ -2738,7 +2738,7 @@ u8 DebugMenu_OpenMurakawa(void)
 {
     CloseMenu();
     CreateTask(DebugMenu_8079058, 80);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     return TRUE;
 }
 
@@ -2770,7 +2770,7 @@ void DebugMenu_8079110(u8 taskId)
             if (Menu_UpdateWindowText() && JOY_NEW(A_BUTTON))
             {
                 Menu_EraseScreen();
-                ScriptContext2_Disable();
+                UnlockPlayerFieldControls();
                 DestroyTask(taskId);
             }
             break;
@@ -2781,7 +2781,7 @@ u8 DebugMenu_OpenKiwa(void)
 {
     CloseMenu();
     CreateTask(DebugMenu_8079110, 80);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     // return TRUE;
 }
 #endif

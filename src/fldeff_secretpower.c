@@ -255,7 +255,7 @@ void Debug_SetUpFieldMove_SecretPower(void)
 
     if (gSpecialVar_Result == 1 || GetPlayerFacingDirection() != DIR_NORTH)
     {
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         return;
     }
     
@@ -281,7 +281,7 @@ void Debug_SetUpFieldMove_SecretPower(void)
     }
     else
     {
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
     }
 }
 
@@ -328,7 +328,7 @@ bool8 SetUpFieldMove_SecretPower(void)
 static void FieldCallback_SecretBaseCave(void)
 {
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
-    ScriptContext1_SetupScript(DoSecretBaseCaveFieldEffectScript);
+    ScriptContext_SetupScript(DoSecretBaseCaveFieldEffectScript);
 }
 
 bool8 FldEff_UseSecretPowerCave(void)
@@ -383,13 +383,13 @@ static void CaveEntranceSpriteCallback2(struct Sprite *sprite)
 static void CaveEntranceSpriteCallbackEnd(struct Sprite *sprite)
 {
     FieldEffectStop(sprite, FLDEFF_SECRET_POWER_CAVE);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 static void FieldCallback_SecretBaseTree(void)
 {
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
-    ScriptContext1_SetupScript(DoSecretBaseTreeFieldEffectScript);
+    ScriptContext_SetupScript(DoSecretBaseTreeFieldEffectScript);
 }
 
 bool8 FldEff_UseSecretPowerTree(void)
@@ -456,13 +456,13 @@ static void TreeEntranceSpriteCallback2(struct Sprite *sprite)
 static void TreeEntranceSpriteCallbackEnd(struct Sprite *sprite)
 {
     FieldEffectStop(sprite, FLDEFF_SECRET_POWER_TREE);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 static void FieldCallback_SecretBaseShrub(void)
 {
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
-    ScriptContext1_SetupScript(DoSecretBaseShrubFieldEffectScript);
+    ScriptContext_SetupScript(DoSecretBaseShrubFieldEffectScript);
 }
 
 bool8 FldEff_UseSecretPowerShrub(void)
@@ -517,5 +517,5 @@ static void ShrubEntranceSpriteCallback2(struct Sprite *sprite)
 static void ShrubEntranceSpriteCallbackEnd(struct Sprite *sprite)
 {
     FieldEffectStop(sprite, FLDEFF_SECRET_POWER_SHRUB);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }

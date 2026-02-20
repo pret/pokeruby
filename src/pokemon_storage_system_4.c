@@ -1585,7 +1585,7 @@ void sub_809BD14(void)
         sBoxCursorPosition = pssData.monIndex;
 }
 
-s16 party_compaction(void)
+s16 CompactPartySlots(void)
 {
     s16 retVal = -1;
     u16 i;
