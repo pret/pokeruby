@@ -147,7 +147,7 @@ static void InitSinglePlayerBtlControllers(void)
         else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
             gBattlerControllerFuncs[0] = SetControllerToWally;
         else
-            gBattlerControllerFuncs[0] = SetBankFuncToPlayerBufferRunCommand;
+            gBattlerControllerFuncs[0] = SetControllerToPlayer;
         gBattlerPositions[0] = 0;
         gBattlerControllerFuncs[1] = SetBankFuncToOpponentBufferRunCommand;
         gBattlerPositions[1] = 1;
@@ -156,11 +156,11 @@ static void InitSinglePlayerBtlControllers(void)
     else
     {
         gBattleMainFunc = sub_8010800;
-        gBattlerControllerFuncs[0] = SetBankFuncToPlayerBufferRunCommand;
+        gBattlerControllerFuncs[0] = SetControllerToPlayer;
         gBattlerPositions[0] = 0;
         gBattlerControllerFuncs[1] = SetBankFuncToOpponentBufferRunCommand;
         gBattlerPositions[1] = 1;
-        gBattlerControllerFuncs[2] = SetBankFuncToPlayerBufferRunCommand;
+        gBattlerControllerFuncs[2] = SetControllerToPlayer;
         gBattlerPositions[2] = 2;
         gBattlerControllerFuncs[3] = SetBankFuncToOpponentBufferRunCommand;
         gBattlerPositions[3] = 3;
@@ -178,7 +178,7 @@ void InitLinkBtlControllers(void)
         if (gBattleTypeFlags & BATTLE_TYPE_WILD)
         {
             gBattleMainFunc = sub_8010800;
-            gBattlerControllerFuncs[0] = SetBankFuncToPlayerBufferRunCommand;
+            gBattlerControllerFuncs[0] = SetControllerToPlayer;
             gBattlerPositions[0] = 0;
             gBattlerControllerFuncs[1] = SetBankFuncToLinkOpponentBufferRunCommand;
             gBattlerPositions[1] = 1;
@@ -186,7 +186,7 @@ void InitLinkBtlControllers(void)
         }
         else
         {
-            gBattlerControllerFuncs[1] = SetBankFuncToPlayerBufferRunCommand;
+            gBattlerControllerFuncs[1] = SetControllerToPlayer;
             gBattlerPositions[1] = 0;
             gBattlerControllerFuncs[0] = SetBankFuncToLinkOpponentBufferRunCommand;
             gBattlerPositions[0] = 1;
@@ -199,11 +199,11 @@ void InitLinkBtlControllers(void)
         if (gBattleTypeFlags & BATTLE_TYPE_WILD)
         {
             gBattleMainFunc = sub_8010800;
-            gBattlerControllerFuncs[0] = SetBankFuncToPlayerBufferRunCommand;
+            gBattlerControllerFuncs[0] = SetControllerToPlayer;
             gBattlerPositions[0] = 0;
             gBattlerControllerFuncs[1] = SetBankFuncToLinkOpponentBufferRunCommand;
             gBattlerPositions[1] = 1;
-            gBattlerControllerFuncs[2] = SetBankFuncToPlayerBufferRunCommand;
+            gBattlerControllerFuncs[2] = SetControllerToPlayer;
             gBattlerPositions[2] = 2;
             gBattlerControllerFuncs[3] = SetBankFuncToLinkOpponentBufferRunCommand;
             gBattlerPositions[3] = 3;
@@ -211,11 +211,11 @@ void InitLinkBtlControllers(void)
         }
         else
         {
-            gBattlerControllerFuncs[1] = SetBankFuncToPlayerBufferRunCommand;
+            gBattlerControllerFuncs[1] = SetControllerToPlayer;
             gBattlerPositions[1] = 0;
             gBattlerControllerFuncs[0] = SetBankFuncToLinkOpponentBufferRunCommand;
             gBattlerPositions[0] = 1;
-            gBattlerControllerFuncs[3] = SetBankFuncToPlayerBufferRunCommand;
+            gBattlerControllerFuncs[3] = SetControllerToPlayer;
             gBattlerPositions[3] = 2;
             gBattlerControllerFuncs[2] = SetBankFuncToLinkOpponentBufferRunCommand;
             gBattlerPositions[2] = 3;
@@ -243,7 +243,7 @@ void InitLinkBtlControllers(void)
 
         if (i == multiplayerId)
         {
-            gBattlerControllerFuncs[gLinkPlayers[i].id] = SetBankFuncToPlayerBufferRunCommand;
+            gBattlerControllerFuncs[gLinkPlayers[i].id] = SetControllerToPlayer;
             switch (gLinkPlayers[i].id)
             {
             case 0:

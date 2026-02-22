@@ -79,6 +79,6 @@ static void sub_80CBB60(struct Sprite* sprite)
         sprite->y2 = 0;
         sprite->data[0] = 0;
         sprite->callback = sub_80CB8B8;
-        PlaySE12WithPanning(0x7D, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG));
+        PlaySE12WithPanning(0x7D, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER));
     }
 }

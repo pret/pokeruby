@@ -330,7 +330,7 @@ u8 DoPokeballSendOutAnimation(u16 a, u8 side)
 {
     u8 taskId;
 
-    gDoingBattleAnim = 1;
+    gDoingBattleAnim = TRUE;
     gBattleHealthBoxInfo[gActiveBattler].ballAnimActive = 1;
     taskId = CreateTask(SendOutMonAnimation, 5);
     gTasks[taskId].data[1] = a;
@@ -727,7 +727,7 @@ static void sub_8046C78(struct Sprite *sprite)
 
         species = GetMonData(mon, MON_DATA_SPECIES);
         if ((battler == GetBattlerAtPosition(0) || battler == GetBattlerAtPosition(1))
-         && IsDoubleBattle() && ewram17840.unk9_0)
+         && IsDoubleBattle() && gBattleAnimationInfo->unk9_0)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
             {
@@ -740,7 +740,7 @@ static void sub_8046C78(struct Sprite *sprite)
             }
         }
 
-        if (!IsDoubleBattle() || !ewram17840.unk9_0)
+        if (!IsDoubleBattle() || !gBattleAnimationInfo->unk9_0)
             cryBehavior = 0;
         else if (battler == GetBattlerAtPosition(0) || battler == GetBattlerAtPosition(1))
             cryBehavior = 1;
@@ -792,7 +792,7 @@ static void sub_8046E9C(struct Sprite *sprite)
         u32 r3;
 
         gSprites[gBattlerSpriteIds[r4]].y2 = 0;
-        gDoingBattleAnim = 0;
+        gDoingBattleAnim = FALSE;
         gBattleHealthBoxInfo[r4].ballAnimActive = 0;
         FreeSpriteOamMatrix(sprite);
         DestroySprite(sprite);
@@ -820,7 +820,7 @@ static void sub_8046FBC(struct Sprite *sprite)
     }
     else if (sprite->data[4] == 95)
     {
-        gDoingBattleAnim = 0;
+        gDoingBattleAnim = FALSE;
         m4aMPlayAllStop();
         PlaySE(MUS_EVOLVED);
     }
@@ -893,7 +893,7 @@ static void SendOutPlayerMonAnimation_Step1(struct Sprite *sprite)
             sprite->x2 = 0;
             sprite->data[6] = sprite->oam.affineParam & 0xFF;
             sprite->data[0] = 0;
-            if (IsDoubleBattle() && ewram17840.unk9_0 && sprite->data[6] == GetBattlerAtPosition(2))
+            if (IsDoubleBattle() && gBattleAnimationInfo->unk9_0 && sprite->data[6] == GetBattlerAtPosition(2))
                 sprite->callback = SendOutMonAnimation_Delay;
             else
                 sprite->callback = sub_8046C78;
@@ -918,7 +918,7 @@ static void SendOutOpponentMonAnimation_Step0(struct Sprite *sprite)
     if (sprite->data[0] > 15)
     {
         sprite->data[0] = 0;
-        if (IsDoubleBattle() && ewram17840.unk9_0 && sprite->data[6] == GetBattlerAtPosition(3))
+        if (IsDoubleBattle() && gBattleAnimationInfo->unk9_0 && sprite->data[6] == GetBattlerAtPosition(3))
             sprite->callback = SendOutMonAnimation_Delay;
         else
             sprite->callback = sub_8046C78;

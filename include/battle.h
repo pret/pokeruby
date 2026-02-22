@@ -375,7 +375,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x16098*/ u8 unk16098[3]; // unused
     /*0x1609B*/ u8 castformToChangeInto;
     /*0x1609C*/ u8 atk6C_statetracker;
-    /*0x1609D*/ u8 unk1609D;
+    /*0x1609D*/ u8 prevSelectedPartySlot;
     /*0x1609E*/ u8 dbgAICycleMoveTracker[2]; // debug
     /*0x160A0*/ u8 stringMoveType;
     /*0x160A1*/ u8 animTargetsHit;
@@ -464,7 +464,7 @@ struct BattleHealthboxInfo
  /*0x02*/ u8 unk2;
  /*0x03*/ u8 unk3;
  /*0x04*/ u8 animationState;
- /*0x05*/ u8 unk5;
+ /*0x05*/ u8 partyStatusDelayTimer;
  /*0x06*/ u8 unk6;
  /*0x07*/ u8 unk7;
  /*0x08*/ u8 unk8;
@@ -472,21 +472,21 @@ struct BattleHealthboxInfo
  /*0x0A*/ u8 fillerA[2];
 };
 
-struct Struct2017840
+struct BattleAnimationInfo
 {
     u16 unk0;
     u8 filler2[6];
-    u8 unk8;
+    u8 ballThrowCaseId;
     u8 unk9_0:1;
     u8 unk9_1:1;
     u8 unkA;
     u16 unkC;
 };
 
-struct Struct20238C8
+struct UnusedControllerStruct
 {
-    u8 unk0_0:7;
-    u8 unk0_7:1;
+    u8 unk:7;
+    u8 flag:1;
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
@@ -526,7 +526,7 @@ extern struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT];
 extern struct SideTimer gSideTimers[2];
 extern struct WishFutureKnock gWishFutureKnock;
 extern struct AI_ThinkingStruct gAIThinkingSpace;
-extern struct Struct20238C8 gUnknown_020238C8;
+extern struct UnusedControllerStruct gUnusedControllerStruct;
 
 // used in many battle files, it seems as though Hisashi Sogabe wrote
 // some sort of macro to replace the use of actually calling memset.
@@ -620,6 +620,10 @@ void LoadBattleTextboxAndBackground();
 void InitLinkBattleVsScreen(u8);
 void DrawBattleEntryBackground();
 
+// defines for the 'DoBounceEffect' function
+#define BOUNCE_MON          0x0
+#define BOUNCE_HEALTHBOX    0x1
+
 // src/battle_2.o
 void CB2_InitBattle(void);
 void CB2_InitBattleInternal(void);
@@ -631,7 +635,7 @@ void sub_800F838(struct Sprite *);
 u8 CreateNPCTrainerParty(struct Pokemon *, u16);
 void sub_800FCFC(void);
 void nullsub_36(struct Sprite *);
-void c2_8011A1C(void);
+void CB2_InitEndLinkBattle(void);
 void sub_80101B8(void);
 void c2_081284E0(void);
 void sub_8010278(struct Sprite *);
@@ -686,24 +690,24 @@ u8 GetBattlerTurnOrderNum(u8 bank);
 
 // asm/battle_5.o
 void BattleControllerDummy(void);
-void SetBankFuncToPlayerBufferRunCommand(void);
-void sub_802C098();
+void SetControllerToPlayer(void);
+void HandleInputChooseAction();
 void Task_PlayerController_RestoreBgmAfterCry(u8);
 void sub_802E3E4(u8, int);
 void nullsub_8(u8);
-void sub_802E414(void);
-void sub_802E424(void);
+void CB2_SetUpReshowBattleScreenAfterMenu(void);
+void CB2_SetUpReshowBattleScreenAfterMenu2(void);
 
 // asm/battle_7.o
 void InitAndLaunchSpecialAnimation(u8 a, u8 b, u8 c, u8 d);
-void nullsub_9(u16);
-void nullsub_10(int);
+void BattleGfxSfxDummy2(u16);
+void BattleGfxSfxDummy3(int);
 void LoadBattleBarGfx(u8);
 u8 battle_load_something();
-void sub_8031F88(u8);
+void CopyBattleSpriteInvisibility(u8);
 void HandleLowHpMusicChange(struct Pokemon *, u8);
 void sub_8032638();
-void sub_8032AA8(u8, u8);
+void ClearTemporarySpeciesSpriteData(u8, u8);
 void SetBankFuncToOpponentBufferRunCommand(void);
 void BattleStopLowHpSound(void);
 void sub_8031FC4(u8, u8, bool8);

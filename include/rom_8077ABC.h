@@ -34,7 +34,7 @@ u8 GetBattlerPosition(u8 slot);
 u8 GetBattlerAtPosition(u8);
 u8 GetBattlerAtPosition(u8);
 u8 GetBattlerAtPosition(u8 state);
-bool8 IsBankSpritePresent(u8);
+bool8 IsBattlerSpritePresent(u8);
 bool8 IsDoubleBattle();
 u8 IsDoubleBattle(void);
 bool8 IsDoubleBattle(void);

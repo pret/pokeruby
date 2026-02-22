@@ -80,6 +80,12 @@ enum {
 };
 
 enum {
+    RESET_ACTION_MOVE_SELECTION,
+    RESET_ACTION_SELECTION,
+    RESET_MOVE_SELECTION,
+};
+
+enum {
     BALL_NO_SHAKES,
     BALL_1_SHAKE,
     BALL_2_SHAKES,
@@ -88,7 +94,16 @@ enum {
     BALL_TRAINER_BLOCK,
 };
 
+enum {
+    LINK_STANDBY_MSG_STOP_BOUNCE,
+    LINK_STANDBY_STOP_BOUNCE_ONLY,
+    LINK_STANDBY_MSG_ONLY,
+};
+
 #define INSTANT_HP_BAR_DROP     0x7FFF
+
+// Special return values in gBattleBufferB from Battle Controller functions.
+#define RET_VALUE_LEVELED_UP   11
 
 struct HpAndStatus
 {
@@ -217,5 +232,8 @@ void BtlController_EmitBattleAnimation(u8 a, u8 b, u16 c);
 void BtlController_EmitLinkStandbyMsg(u8 a, u8 b);
 void BtlController_EmitResetActionMoveSelection(u8 a, u8 b);
 void BtlController_EmitCmd55(u8 a, u8 b);
+
+// player controller
+void PlayerHandleGetRawMonData(void);
 
 #endif // GUARD_BATTLE_CONTROLLERS_H

@@ -283,7 +283,7 @@ void sub_807BB88(u8 taskId)
     s16 r2;
     s16 r3 = 0;
 
-    switch (ewram17840.unk0)
+    switch (gBattleAnimationInfo->unk0)
     {
     case 15:  r5 = 0;  r2 = 0;  break;
     case 16:  r5 = 0;  r2 = 1;  break;

@@ -412,7 +412,7 @@ u8 GetAnimBattlerSpriteId(u8 whichBank)
 
     if (whichBank == ANIM_BATTLER_ATTACKER)
     {
-        if (IsBankSpritePresent(gBattleAnimAttacker))
+        if (IsBattlerSpritePresent(gBattleAnimAttacker))
         {
             sprites = gBattleMonSprites;
             return sprites[gBattleAnimAttacker];
@@ -424,7 +424,7 @@ u8 GetAnimBattlerSpriteId(u8 whichBank)
     }
     else if (whichBank == ANIM_BATTLER_TARGET)
     {
-        if (IsBankSpritePresent(gBattleAnimTarget))
+        if (IsBattlerSpritePresent(gBattleAnimTarget))
         {
             sprites = gBattleMonSprites;
             return sprites[gBattleAnimTarget];
@@ -835,7 +835,7 @@ u8 GetBattlerAtPosition(u8 slot)
     return i;
 }
 
-bool8 IsBankSpritePresent(u8 slot)
+bool8 IsBattlerSpritePresent(u8 slot)
 {
     if (IsContest())
     {
