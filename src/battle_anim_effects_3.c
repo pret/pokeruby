@@ -2674,6 +2674,9 @@ void AnimTask_DoomDesireLightBeam(u8 taskId)
     }
 }
 
+// Briefly vertically grows and shrinks the attacking mon's sprite.
+// No args.
+
 void AnimTask_StrongFrustrationGrowAndShrink(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
@@ -2689,6 +2692,10 @@ void AnimTask_StrongFrustrationGrowAndShrink(u8 taskId)
         }
     }
 }
+
+// Animates an anger mark near the mon's head.
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
 
 static void AnimWeakFrustrationAngerMark(struct Sprite *sprite)
 {
@@ -2712,6 +2719,11 @@ static void AnimWeakFrustrationAngerMark(struct Sprite *sprite)
             DestroyAnimSprite(sprite);
     }
 }
+
+// Rocks the mon back and forth. This is done on a pivot so it is done via rotation.
+// arg 0: which battler
+// arg 1: number of rocks
+// arg 2: rotation speed increase
 
 void AnimTask_RockMonBackAndForth(u8 taskId)
 {
@@ -2807,6 +2819,11 @@ static void AnimTask_RockMonBackAndForth_Step(u8 taskId)
     }
 }
 
+// Floats a petal across the screen towards the target mon's side.
+// arg 0: initial y pixel offset
+// arg 1: sprite anim num
+// arg 2: unused
+
 static void AnimSweetScentPetal(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
@@ -2849,6 +2866,9 @@ static void AnimSweetScentPetal_Step(struct Sprite *sprite)
         sprite->y2 = Cos(sprite->data[0] & 0xFF, 16);
     }
 }
+
+// Moves the mon sprite in a flailing back-and-forth motion.
+// arg 0: which battler
 
 void AnimTask_FlailMovement(u8 taskId)
 {
@@ -2938,6 +2958,11 @@ static void AnimTask_FlailMovement_Step(u8 taskId)
     }
 }
 
+// Makes a spark-like projectile fall on top of the mon.
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: which battler
+
 static void AnimPainSplitProjectile(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
@@ -2971,6 +2996,10 @@ static void AnimPainSplitProjectile(struct Sprite *sprite)
             DestroyAnimSprite(sprite);
     }
 }
+
+// Performs one of several affine transformations on the mon sprite.
+// arg 0: which battler
+// arg 1: which transformation
 
 void AnimTask_PainSplitMovement(u8 taskId)
 {
@@ -3029,6 +3058,9 @@ void AnimTask_PainSplitMovement(u8 taskId)
     }
 }
 
+// Move a piece of confetti in a slightly-random speed across the screen.
+// arg 0: which battler the confetti starts from
+
 static void AnimFlatterConfetti(struct Sprite *sprite)
 {
     u8 tileOffset;
@@ -3082,6 +3114,11 @@ static void AnimFlatterConfetti_Step(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
+// Uses a spotlight sprite as a light mask to illuminate the target mon. The spotlight grows and shrinks.
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: duration of fully-opened spotlight
+
 static void AnimFlatterSpotlight(struct Sprite *sprite)
 {
     REG_WINOUT = 0x1F3F;
@@ -3128,6 +3165,10 @@ static void AnimFlatterSpotlight_Step(struct Sprite *sprite)
         break;
     }
 }
+
+// Spins an orb around the attacking mon, while its path radius grows and shrinks.
+// arg 0: duration
+// arg 1: initial wave offset
 
 static void AnimReversalOrb(struct Sprite *sprite)
 {
@@ -3282,6 +3323,9 @@ static void AnimTask_RolePlaySilhouette_Step2(u8 taskId)
         gTasks[taskId].func = sub_8078634;
     }
 }
+
+// Performs a wavy transformation on the mon's sprite, and fades out.
+// arg 0: which battler
 
 void AnimTask_AcidArmor(u8 taskId)
 {
@@ -3459,6 +3503,9 @@ static void AnimTask_AcidArmor_Step(u8 taskId)
     }
 }
 
+// Runs an affine animation that makes it look like the mon is inhaling deeply.
+// arg 0: which battler
+
 void AnimTask_DeepInhale(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
@@ -3515,6 +3562,9 @@ void UpdateYawnCloudPosition(struct Sprite *sprite)
     sprite->y = sprite->data[5] >> 4;
 }
 
+// Drifts a cloud in a wavy path towards the target mon.
+// arg 0: which affine anim
+
 static void AnimYawnCloud(struct Sprite *sprite)
 {
     s16 x = sprite->x;
@@ -3547,6 +3597,12 @@ static void AnimYawnCloud_Step(struct Sprite *sprite)
         }
     }
 }
+
+// Animates a cloud coming from the smoke ball.
+// arg 0: ?
+// arg 1: initial x pixel offset
+// arg 2: initial y pixel offset
+// arg 3: time until destroyed
 
 static void AnimSmokeBallEscapeCloud(struct Sprite *sprite)
 {
@@ -3697,6 +3753,10 @@ void AnimTask_SlideMonForFocusBand(u8 taskId)
     gTasks[taskId].func = AnimTask_SlideMonForFocusBand_Step1;
 }
 
+// Squishes the mon vertically and emits sweat droplets a few times.
+// arg 0: battler
+// arg 1: num squishes
+
 void AnimTask_SquishAndSweatDroplets(u8 taskId)
 {
     u8 battler;
@@ -3808,6 +3868,10 @@ static void AnimFacadeSweatDrop(struct Sprite *sprite)
     }
 }
 
+// Blends the mon sprite's color with a rotating set of colors.
+// arg 0: battler
+// arg 1: duration
+
 void AnimTask_FacadeColorBlend(u8 taskId)
 {
     u8 spriteId;
@@ -3836,6 +3900,8 @@ static void AnimTask_FacadeColorBlend_Step(u8 taskId)
     }
 }
 
+// The sliding circle effect used by Refresh and Aromatherapy
+
 void AnimTask_StatusClearedEffect(u8 taskId)
 {
     sub_80E3C4C(
@@ -3851,6 +3917,11 @@ void AnimTask_StatusClearedEffect(u8 taskId)
         gUnknown_08D2E170,
         gUnknown_08D2E150);
 }
+
+// Moves a noise line from the mon.
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: which direction (0 = upward, 1 = downward, 2 = horizontal)
 
 static void AnimRoarNoiseLine(struct Sprite *sprite)
 {
@@ -3894,6 +3965,9 @@ static void AnimRoarNoiseLine_Step(struct Sprite *sprite)
     if (++sprite->data[5] == 14)
         DestroyAnimSprite(sprite);
 }
+
+// Makes a series of dots in a trail from the attacker to the target.
+// arg 0: unused
 
 void AnimTask_GlareEyeDots(u8 taskId)
 {
@@ -4026,6 +4100,13 @@ static void AnimGlareEyeDot(struct Sprite *sprite)
     }
 }
 
+// Moves a pawprint in a straight line.
+// arg 0: initial x position
+// arg 1: initial y position
+// arg 2: destination x position
+// arg 3: destination y position
+// arg 4: duration
+
 static void AnimAssistPawprint(struct Sprite *sprite)
 {
     sprite->x = gBattleAnimArgs[0];
@@ -4036,6 +4117,9 @@ static void AnimAssistPawprint(struct Sprite *sprite)
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
     sprite->callback = sub_8078CC0;
 }
+
+// Moves a ball in an arc twoards the target, and rotates the ball while arcing.
+// No args.
 
 void AnimTask_BarrageBall(u8 taskId)
 {
@@ -4106,6 +4190,11 @@ static void AnimTask_BarrageBall_Step(u8 taskId)
         break;
     }
 }
+
+// Moves a hand back and forth in a squishing motion.
+// arg 0: which battler
+// arg 1: horizontal flip
+// arg 2: num squishes
 
 static void AnimSmellingSaltsHand(struct Sprite *sprite)
 {
@@ -4179,6 +4268,10 @@ static void AnimSmellingSaltsHand_Step(struct Sprite *sprite)
     }
 }
 
+// Squishes the mon horizontally a few times.
+// arg 0: which mon
+// arg 1: number of squishes
+
 void AnimTask_SmellingSaltsSquish(u8 taskId)
 {
     if (gBattleAnimArgs[0] == 0)
@@ -4223,6 +4316,11 @@ static void AnimTask_SmellingSaltsSquish_Step(u8 taskId)
     }
 }
 
+// Blinks an exclamation image over the mon a few times.
+// arg 0: which mon
+// arg 1: blink delay
+// arg 2: number of blinks
+
 static void AnimSmellingSaltExclamation(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
@@ -4257,6 +4355,10 @@ static void AnimSmellingSaltExclamation_Step(struct Sprite *sprite)
             DestroyAnimSprite(sprite);
     }
 }
+
+// Claps a hand several times.
+// arg 0: which hand
+// arg 1:
 
 static void AnimHelpingHandClap(struct Sprite *sprite)
 {
@@ -4358,6 +4460,9 @@ static void AnimHelpingHandClap_Step(struct Sprite *sprite)
         break;
     }
 }
+
+// Repeatedly moves the attacking mon in a horizontal lunging motion.
+// No args.
 
 void AnimTask_HelpingHandAttackerMovement(u8 taskId)
 {
@@ -4472,6 +4577,9 @@ static void AnimTask_HelpingHandAttackerMovement_Step(u8 taskId)
         break;
     }
 }
+
+// Moves a magnifying glass around in straight lines.
+// arg 0: magnifying glass target mon
 
 static void AnimForesightMagnifyingGlass(struct Sprite *sprite)
 {
@@ -4613,6 +4721,13 @@ static void AnimMeteorMashStar_Step(struct Sprite *sprite)
     sprite->data[5]++;
 }
 
+// Moves a shooting star across the screen that leaves little twinkling stars behind its path.
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: destination x pixel offset
+// arg 3: destination y pixel offset
+// arg 4: duration
+
 static void AnimMeteorMashStar(struct Sprite *sprite)
 {
     GetBattlerSpriteCoord(gBattleAnimTarget, 2); // unused local variable
@@ -4731,6 +4846,9 @@ static void AnimTask_MonToSubstituteDoll(u8 taskId)
     }
 }
 
+// Moves down an X that flickers and disappears.
+// No args.
+
 static void AnimBlockX(struct Sprite *sprite)
 {
     s16 y2;
@@ -4805,6 +4923,9 @@ static void AnimBlockX_Step(struct Sprite *sprite)
         break;
     }
 }
+
+// Quickly moves two clones of the target mon back and forth.
+// No args.
 
 void AnimTask_OdorSleuthMovement(u8 taskId)
 {

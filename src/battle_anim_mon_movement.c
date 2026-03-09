@@ -711,6 +711,8 @@ static void AnimTask_WindUpLunge_Step2(u8 taskId)
 
 static void AnimTask_SlideOffScreen_Step(u8 taskId);
 
+// To move a mon off-screen when pushed out by Roar/Whirlwind
+
 void AnimTask_SlideOffScreen(u8 taskId)
 {
     u8 spriteId;
@@ -926,6 +928,8 @@ void AnimTask_RotateMonSpriteToSide(u8 taskId)
     }
     TASK.func = AnimTask_RotateMonSpriteToSide_Step;
 }
+
+// Rotates mon to side and back to original position. For Peck and when a held item activates
 
 void AnimTask_RotateMonToSideAndRestore(u8 taskId)
 {
