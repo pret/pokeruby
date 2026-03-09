@@ -50,7 +50,7 @@ static const struct SpriteTemplate gSpriteTemplate_83931E0 =
     .callback = SpriteCallbackDummy,
 };
 
-static void sub_807B870(struct Sprite *);
+static void AnimFlashingCircleImpact(struct Sprite *);
 static const struct SpriteTemplate gSpriteTemplate_83931F8 =
 {
     .tileTag = ANIM_TAG_CIRCLE_IMPACT,
@@ -59,21 +59,21 @@ static const struct SpriteTemplate gSpriteTemplate_83931F8 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_807B870,
+    .callback = AnimFlashingCircleImpact,
 };
 
-static void sub_807B7E0(u8);
-static void sub_807B8A4(struct Sprite *);
-static void sub_807B9D8(u8);
-static void sub_807BA24(u8);
-static void sub_807BAD4(u8);
-static void sub_807BB24(u8);
-static void sub_807BDAC(u8);
+static void Task_UpdateFlashingCircleImpacts(u8);
+static void AnimFlashingCircleImpact_Step(struct Sprite *);
+static void AnimTask_FrozenIceCube_Step1(u8);
+static void AnimTask_FrozenIceCube_Step2(u8);
+static void AnimTask_FrozenIceCube_Step3(u8);
+static void AnimTask_FrozenIceCube_Step4(u8);
+static void Task_DoStatusAnimation(u8);
 
-u8 unref_sub_807B69C(u8 a, u8 b)
+u8 Task_FlashingCircleImpacts(u8 a, u8 b)
 {
     u8 spriteId1 = gBattlerSpriteIds[a];
-    u8 taskId = CreateTask(sub_807B7E0, 10);
+    u8 taskId = CreateTask(Task_UpdateFlashingCircleImpacts, 10);
     u8 spriteId2;
     u8 i;
 
@@ -110,7 +110,7 @@ u8 unref_sub_807B69C(u8 a, u8 b)
     return taskId;
 }
 
-static void sub_807B7E0(u8 taskId)
+static void Task_UpdateFlashingCircleImpacts(u8 taskId)
 {
     if (gTasks[taskId].data[2] == 2)
     {
@@ -143,13 +143,13 @@ static void sub_807B7E0(u8 taskId)
     }
 }
 
-static void sub_807B870(struct Sprite *sprite)
+static void AnimFlashingCircleImpact(struct Sprite *sprite)
 {
     if (sprite->data[6] == 0)
     {
         sprite->invisible = FALSE;
-        sprite->callback = sub_807B8A4;
-        sub_807B8A4(sprite);
+        sprite->callback = AnimFlashingCircleImpact_Step;
+        AnimFlashingCircleImpact_Step(sprite);
     }
     else
     {
@@ -157,7 +157,7 @@ static void sub_807B870(struct Sprite *sprite)
     }
 }
 
-static void sub_807B8A4(struct Sprite *sprite)
+static void AnimFlashingCircleImpact_Step(struct Sprite *sprite)
 {
     sprite->x2 = Cos(sprite->data[0], 32);
     sprite->y2 = Sin(sprite->data[0], 8);
@@ -178,7 +178,7 @@ static void sub_807B8A4(struct Sprite *sprite)
     }
 }
 
-void sub_807B920(u8 taskId)
+void AnimTask_FrozenIceCube(u8 taskId)
 {
     s16 x = GetBattlerSpriteCoord(gBattleAnimTarget, 2) - 32;
     s16 y = GetBattlerSpriteCoord(gBattleAnimTarget, 3) - 36;
@@ -191,15 +191,15 @@ void sub_807B920(u8 taskId)
     spriteId = CreateSprite(&gSpriteTemplate_83931E0, x, y, 4);
     SetSubspriteTables(&gSprites[spriteId], gSubspriteTables_83931D8);
     gTasks[taskId].data[15] = spriteId;
-    gTasks[taskId].func = sub_807B9D8;
+    gTasks[taskId].func = AnimTask_FrozenIceCube_Step1;
 }
 
-static void sub_807B9D8(u8 taskId)
+static void AnimTask_FrozenIceCube_Step1(u8 taskId)
 {
     gTasks[taskId].data[1]++;
     if (gTasks[taskId].data[1] == 10)
     {
-        gTasks[taskId].func = sub_807BA24;
+        gTasks[taskId].func = AnimTask_FrozenIceCube_Step2;
         gTasks[taskId].data[1] = 0;
     }
     else
@@ -210,7 +210,7 @@ static void sub_807B9D8(u8 taskId)
     }
 }
 
-static void sub_807BA24(u8 taskId)
+static void AnimTask_FrozenIceCube_Step2(u8 taskId)
 {
     u8 r2 = IndexOfSpritePaletteTag(0x271A);
 
@@ -236,19 +236,19 @@ static void sub_807BA24(u8 taskId)
                 if (gTasks[taskId].data[4] == 2)
                 {
                     gTasks[taskId].data[1] = 9;
-                    gTasks[taskId].func = sub_807BAD4;
+                    gTasks[taskId].func = AnimTask_FrozenIceCube_Step3;
                 }
             }
         }
     }
 }
 
-static void sub_807BAD4(u8 taskId)
+static void AnimTask_FrozenIceCube_Step3(u8 taskId)
 {
     gTasks[taskId].data[1]--;
     if (gTasks[taskId].data[1] == -1)
     {
-        gTasks[taskId].func = sub_807BB24;
+        gTasks[taskId].func = AnimTask_FrozenIceCube_Step4;
         gTasks[taskId].data[1] = 0;
     }
     else
@@ -259,7 +259,7 @@ static void sub_807BAD4(u8 taskId)
     }
 }
 
-static void sub_807BB24(u8 taskId)
+static void AnimTask_FrozenIceCube_Step4(u8 taskId)
 {
     gTasks[taskId].data[1]++;
     if (gTasks[taskId].data[1] == 37)
@@ -277,7 +277,7 @@ static void sub_807BB24(u8 taskId)
     }
 }
 
-void sub_807BB88(u8 taskId)
+void AnimTask_StatsChange(u8 taskId)
 {
     s16 r5;
     s16 r2;
@@ -332,18 +332,18 @@ void sub_807BB88(u8 taskId)
     sub_80E32E0(taskId);
 }
 
-void move_anim_start_t2(u8 a, u8 b)
+void LaunchStatusAnimation(u8 a, u8 b)
 {
     u8 taskId;
 
     gBattleAnimAttacker = a;
     gBattleAnimTarget = a;
     LaunchBattleAnimation(gBattleAnims_StatusConditions, b, 0);
-    taskId = CreateTask(sub_807BDAC, 10);
+    taskId = CreateTask(Task_DoStatusAnimation, 10);
     gTasks[taskId].data[0] = a;
 }
 
-static void sub_807BDAC(u8 taskId)
+static void Task_DoStatusAnimation(u8 taskId)
 {
     gAnimScriptCallback();
     if (!gAnimScriptActive)
