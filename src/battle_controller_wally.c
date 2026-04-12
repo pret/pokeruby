@@ -67,7 +67,6 @@ extern void ReshowBattleScreenDummy(void);
 extern void DoWallyTutorialBagMenu(void);
 extern bool8 IsDoubleBattle(void);
 extern void Task_PlayerController_RestoreBgmAfterCry(u8);
-extern void PlayerHandleGetRawMonData(void);
 extern void DecompressTrainerBackPic();
 extern u8 GetBattlerPosition(u8);
 extern void SpriteCB_TrainerSlideIn(struct Sprite *);
@@ -379,7 +378,7 @@ static void Intro_TryShinyAnimShowHealthbox(void)
         StartHealthboxSlideIn(gActiveBattler);
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
 
-        ewram17840.unk9_0 = FALSE;
+        gBattleAnimationInfo->unk9_0 = FALSE;
         gBattlerControllerFuncs[gActiveBattler] = Intro_WaitForShinyAnimAndHealthbox;
     }
 }
@@ -1145,7 +1144,7 @@ static void WallyHandlePaletteFade(void)
 
 static void WallyHandleSuccessBallThrowAnim(void)
 {
-    ewram17840.unk8 = BALL_3_SHAKES_SUCCESS;
+    gBattleAnimationInfo->ballThrowCaseId = BALL_3_SHAKES_SUCCESS;
     gDoingBattleAnim = TRUE;
     InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_BALL_THROW_WITH_TRAINER);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedAnimation;
@@ -1155,7 +1154,7 @@ static void WallyHandleBallThrowAnim(void)
 {
     u8 ballThrowCaseId = gBattleBufferA[gActiveBattler][1];
 
-    ewram17840.unk8 = ballThrowCaseId;
+    gBattleAnimationInfo->ballThrowCaseId = ballThrowCaseId;
     gDoingBattleAnim = TRUE;
     InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_BALL_THROW_WITH_TRAINER);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedAnimation;
@@ -1499,7 +1498,7 @@ static void WallyHandleIntroTrainerBallThrow(void)
     gTasks[taskId].data[0] = gActiveBattler;
 
     if (gBattleHealthBoxInfo[gActiveBattler].partyStatusSummaryShown)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8044CA0;
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
 
     gBattleHealthBoxInfo[4].unk9 |= 1;
     gBattlerControllerFuncs[gActiveBattler] = BattleControllerDummy;

@@ -45,7 +45,7 @@ extern u8 gSharedMem[];
 #define gBattleResources_statsBeforeLvlUp ((struct StatsArray *)(gSharedMem + 0x17180))
 #define gBattleSpriteInfo                 ((struct BattleSpriteInfo *)    (gSharedMem + 0x17800))
 #define gBattleHealthBoxInfo              ((struct BattleHealthboxInfo *)    (gSharedMem + 0x17810))
-#define ewram17840                        (*(struct Struct2017840 *)   (gSharedMem + 0x17840))
+#define gBattleAnimationInfo              ((struct BattleAnimationInfo *)   (gSharedMem + 0x17840))
 #define eBattleBars                       ((struct BattleBar *)(gSharedMem + 0x17850))
 
 #define eBattleAnimPalBackup_Battle     ((u16 *)(gSharedMem + 0x18000)) // also: shop.c, battle_anim.c

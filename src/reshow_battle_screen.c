@@ -29,7 +29,7 @@ void sub_80327CC(void);
 void sub_8032984(u8 a, u16 b);
 void sub_800FCD4(void);
 void BattleLoadOpponentMonSprite(struct Pokemon *, u8 bank);
-void BattleLoadPlayerMonSprite(struct Pokemon *, u8 bank);
+void BattleLoadPlayerMonSpriteGfx(struct Pokemon *, u8 bank);
 void BattleLoadSubstituteSprite(u8 bank, u8 b);
 void DecompressTrainerBackPic(u16 a0, u8 bank);
 u8 sub_8077F7C(u8 bank);
@@ -212,7 +212,7 @@ static bool8 LoadAppropiateBankSprite(u8 bank)
         else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && bank == 0)
             DecompressTrainerBackPic(TRAINER_BACK_PIC_WALLY, 0);
         else if (!gBattleSpriteInfo[bank].behindSubstitute)
-            BattleLoadPlayerMonSprite(&gPlayerParty[gBattlerPartyIndexes[bank]], bank);
+            BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[bank]], bank);
         else
             BattleLoadSubstituteSprite(bank, 0);
 

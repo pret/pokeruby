@@ -307,7 +307,7 @@ void PlayCry2(u16 species, s8 pan, s8 volume, u8 priority)
     PlayCryInternal(species, pan, volume, priority, 0);
 }
 
-void PlayCry3(u16 species, s8 pan, u8 mode)
+void PlayCry_ByMode(u16 species, s8 pan, u8 mode)
 {
     if (mode == 1)
     {

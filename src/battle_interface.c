@@ -1001,7 +1001,7 @@ void PrintSafariMonInfo(u8 a, struct Pokemon *pkmn)
 
 extern u8 gUnknown_020297ED;
 
-void sub_804454C(void)
+void SwapHpBarsWithHpText(void)
 {
     s32 i;
     u8 spriteId;
@@ -1281,7 +1281,7 @@ u8 CreatePartyStatusSummarySprites(u8 a, const struct HpAndStatus *b, u8 c, u8 d
     return taskId;
 }
 
-void sub_8044CA0(u8 taskId)
+void Task_HidePartyStatusSummary(u8 taskId)
 {
     u8 sp[6];
     u8 r9;
