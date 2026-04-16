@@ -594,7 +594,7 @@ bool8 FieldIsDoorAnimationRunning(void)
     return FuncIsActiveTask(Task_AnimateDoor);
 }
 
-u32 GetDoorSoundEffect(u32 x, u32 y)
+u16 GetDoorSoundEffect(u32 x, u32 y)
 {
     if (cur_mapdata_get_door_x2_at(gDoorAnimGraphicsTable, x, y) == 0)
         return SE_DOOR;
