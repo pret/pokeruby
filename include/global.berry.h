@@ -22,7 +22,7 @@ struct Berry
 struct EnigmaBerry
 {
     /*0x000*/ struct Berry berry;
-    /*0x01B*/ u8 pic[(6 * 6) * TILE_SIZE_4BPP];
+    /*0x01C*/ u8 pic[(6 * 6) * TILE_SIZE_4BPP];
     /*0x49C*/ u16 palette[16];
     /*0x4BC*/ u8 description1[45];
     /*0x4E9*/ u8 description2[45];

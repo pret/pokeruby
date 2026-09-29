@@ -66,7 +66,7 @@ struct UnkPokenavStruct {
     /*0x0300*/ void (*unk300)(void);
     /*0x0304*/ u16 unk304;
     /*0x0306*/ u16 unk306;
-    /*0x0306*/ int unk308;
+    /*0x0308*/ int unk308;
     /*0x030C*/ s16 unk030C;
     /*0x030E*/ s8 unk30E;
     /*0x030F*/ u8 unk30F;

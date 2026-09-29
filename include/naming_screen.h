@@ -48,8 +48,8 @@ struct NamingScreenData
  /*0x3C*/ u16 keyRepeatStartDelayCopy;
  /*0x3E*/ u16 speciesOrPlayerGender;
  /*0x40*/ u16 monGender;
- /*0x42*/ u32 monPersonality;
- /*0x46*/ MainCallback returnCallback;
+ /*0x44*/ u32 monPersonality;
+ /*0x48*/ MainCallback returnCallback;
 };
 
 enum
