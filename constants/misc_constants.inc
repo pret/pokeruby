@@ -37,8 +37,8 @@
 	.endif
 	.endif
 
-	.equiv ENEMY_TYPE1,  0
-	.equiv ENEMY_TYPE2,  1
-	.equiv PLAYER_TYPE1,  2
-	.equiv PLAYER_TYPE2,  3
-	.equiv CURRENT_MOVE,  4
+	.equiv AI_TYPE1_TARGET,  0
+	.equiv AI_TYPE1_USER,  1
+	.equiv AI_TYPE2_TARGET,  2
+	.equiv AI_TYPE2_USER,  3
+	.equiv AI_TYPE_MOVE,  4

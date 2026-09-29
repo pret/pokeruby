@@ -58,17 +58,17 @@ AI_CheckBadMove: @ 81DA09C
 	jump AI_CheckBadMove_CheckSoundproof
 
 CheckIfVoltAbsorbCancelsElectric: @ 81DA0CE
-	get_type CURRENT_MOVE
+	get_type AI_TYPE_MOVE
 	if_arg_equal TYPE_ELECTRIC, Score_Minus12
 	jump AI_CheckBadMove_CheckSoundproof
 
 CheckIfWaterAbsorbCancelsWater: @ 81DA0DB
-	get_type CURRENT_MOVE
+	get_type AI_TYPE_MOVE
 	if_arg_equal TYPE_WATER, Score_Minus12
 	jump AI_CheckBadMove_CheckSoundproof
 
 CheckIfFlashFireCancelsFire: @ 81DA0E8
-	get_type CURRENT_MOVE
+	get_type AI_TYPE_MOVE
 	if_arg_equal TYPE_FIRE, Score_Minus12
 	jump AI_CheckBadMove_CheckSoundproof
 
@@ -77,7 +77,7 @@ CheckIfWonderGuardCancelsMove: @ 81DA0F5
 	jump Score_Minus10
 
 CheckIfLevitateCancelsGroundMove: @ 81DA100
-	get_type CURRENT_MOVE
+	get_type AI_TYPE_MOVE
 	if_arg_equal TYPE_GROUND, Score_Minus10
 
 AI_CheckBadMove_CheckSoundproof: @ 81DA108
@@ -331,10 +331,10 @@ AI_CBM_Roar: @ 81DA572
 	end
 
 AI_CBM_Toxic: @ 81DA583
-	get_type ENEMY_TYPE1
+	get_type AI_TYPE1_TARGET
 	if_equal TYPE_STEEL, Score_Minus10
 	if_equal TYPE_POISON, Score_Minus10
-	get_type PLAYER_TYPE1
+	get_type AI_TYPE2_TARGET
 	if_equal TYPE_STEEL, Score_Minus10
 	if_equal TYPE_POISON, Score_Minus10
 	get_ability TARGET
@@ -399,9 +399,9 @@ AI_CBM_Substitute: @ 81DA641
 
 AI_CBM_LeechSeed: @ 81DA653
 	if_status3 TARGET, S_LEECH_SEED, Score_Minus10
-	get_type ENEMY_TYPE1
+	get_type AI_TYPE1_TARGET
 	if_equal TYPE_GRASS, Score_Minus10
-	get_type PLAYER_TYPE1
+	get_type AI_TYPE2_TARGET
 	if_equal TYPE_GRASS, Score_Minus10
 	end
 
@@ -1120,9 +1120,9 @@ AI_CV_AttackDown3: @ 81DAECF
 	score -2
 
 AI_CV_AttackDown4: @ 81DAED8
-	get_type ENEMY_TYPE1
+	get_type AI_TYPE1_TARGET
 	if_in_bytes AI_CV_AttackDown_UnknownTypeList, AI_CV_AttackDown_End
-	get_type PLAYER_TYPE1
+	get_type AI_TYPE2_TARGET
 	if_in_bytes AI_CV_AttackDown_UnknownTypeList, AI_CV_AttackDown_End
 	if_random_less_than 50, AI_CV_AttackDown_End
 	score -2
@@ -1189,9 +1189,9 @@ AI_CV_SpAtkDown3: @ 81DAF6E
 	score -2
 
 AI_CV_SpAtkDown4: @ 81DAF77
-	get_type ENEMY_TYPE1
+	get_type AI_TYPE1_TARGET
 	if_in_bytes AI_CV_SpAtkDown_SpecialTypeList, AI_CV_SpAtkDown_End
-	get_type PLAYER_TYPE1
+	get_type AI_TYPE2_TARGET
 	if_in_bytes AI_CV_SpAtkDown_SpecialTypeList, AI_CV_SpAtkDown_End
 	if_random_less_than 50, AI_CV_SpAtkDown_End
 	score -2
@@ -1427,9 +1427,9 @@ AI_CV_Toxic_End: @ 81DB242
 
 AI_CV_LightScreen: @ 81DB243
 	if_hp_less_than USER, 50, AI_CV_LightScreen_ScoreDown2
-	get_type ENEMY_TYPE1
+	get_type AI_TYPE1_TARGET
 	if_in_bytes AI_CV_LightScreen_SpecialTypeList, AI_CV_LightScreen_End
-	get_type PLAYER_TYPE1
+	get_type AI_TYPE2_TARGET
 	if_in_bytes AI_CV_LightScreen_SpecialTypeList, AI_CV_LightScreen_End
 	if_random_less_than 50, AI_CV_LightScreen_End
 
@@ -1543,9 +1543,9 @@ AI_CV_Confuse_End: @ 81DB363
 
 AI_CV_Reflect: @ 81DB364
 	if_hp_less_than USER, 50, AI_CV_Reflect_ScoreDown2
-	get_type ENEMY_TYPE1
+	get_type AI_TYPE1_TARGET
 	if_in_bytes AI_CV_Reflect_PhysicalTypeList, AI_CV_Reflect_End
-	get_type PLAYER_TYPE1
+	get_type AI_TYPE2_TARGET
 	if_in_bytes AI_CV_Reflect_PhysicalTypeList, AI_CV_Reflect_End
 	if_random_less_than 50, AI_CV_Reflect_End
 
@@ -1715,9 +1715,9 @@ AI_CV_Counter5: @ 81DB52D
 	score +1
 
 AI_CV_Counter6: @ 81DB53A
-	get_type ENEMY_TYPE1
+	get_type AI_TYPE1_TARGET
 	if_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_Counter_End
-	get_type PLAYER_TYPE1
+	get_type AI_TYPE2_TARGET
 	if_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_Counter_End
 	if_random_less_than 50, AI_CV_Counter_End
 
@@ -1933,9 +1933,9 @@ AI_CV_Thief_EncourageItemsToSteal: @ 81DB6B3
 	.byte -1
 
 AI_CV_Curse: @ 81DB6BB
-	get_type ENEMY_TYPE2
+	get_type AI_TYPE1_USER
 	if_equal TYPE_GHOST, AI_CV_Curse4
-	get_type PLAYER_TYPE2
+	get_type AI_TYPE2_USER
 	if_equal TYPE_GHOST, AI_CV_Curse4
 	if_stat_level_more_than USER, DEFENSE, 9, AI_CV_Curse_End
 	if_random_less_than 128, AI_CV_Curse2
@@ -2004,9 +2004,9 @@ AI_CV_Protect_End: @ 81DB7CA
 	end
 
 AI_CV_Foresight: @ 81DB7CB
-	get_type ENEMY_TYPE2
+	get_type AI_TYPE1_USER
 	if_equal TYPE_GHOST, AI_CV_Foresight2
-	get_type PLAYER_TYPE2
+	get_type AI_TYPE2_USER
 	if_equal TYPE_GHOST, AI_CV_Foresight2
 	if_stat_level_more_than USER, EVASION, 8, AI_CV_Foresight3
 	score -2
@@ -2083,13 +2083,13 @@ AI_CV_BatonPass_End: @ 81DB8B2
 AI_CV_Pursuit: @ 81DB8B3
 	is_first_turn USER
 	if_not_equal 0, AI_CV_Pursuit_End
-	get_type ENEMY_TYPE1
+	get_type AI_TYPE1_TARGET
 	if_equal TYPE_GHOST, AI_CV_Pursuit2
-	get_type ENEMY_TYPE1
+	get_type AI_TYPE1_TARGET
 	if_equal TYPE_PSYCHIC, AI_CV_Pursuit2
-	get_type PLAYER_TYPE1
+	get_type AI_TYPE2_TARGET
 	if_equal TYPE_GHOST, AI_CV_Pursuit2
-	get_type PLAYER_TYPE1
+	get_type AI_TYPE2_TARGET
 	if_equal TYPE_PSYCHIC, AI_CV_Pursuit2
 	jump AI_CV_Pursuit_End
 
@@ -2218,9 +2218,9 @@ AI_CV_MirrorCoat5: @ 81DBA38
 	score +1
 
 AI_CV_MirrorCoat6: @ 81DBA45
-	get_type ENEMY_TYPE1
+	get_type AI_TYPE1_TARGET
 	if_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_MirrorCoat_End
-	get_type PLAYER_TYPE1
+	get_type AI_TYPE2_TARGET
 	if_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_MirrorCoat_End
 	if_random_less_than 50, AI_CV_MirrorCoat_End
 
@@ -2270,16 +2270,16 @@ AI_CV_Fly2: @ 81DBA9F
 	jump AI_CV_Fly5
 
 AI_CV_Fly3: @ 81DBACF
-	get_type ENEMY_TYPE2
+	get_type AI_TYPE1_USER
 	if_in_bytes AI_CV_Fly_TypesToEncourage, AI_CV_Fly6
-	get_type PLAYER_TYPE2
+	get_type AI_TYPE2_USER
 	if_in_bytes AI_CV_Fly_TypesToEncourage, AI_CV_Fly6
 	jump AI_CV_Fly5
 
 AI_CV_Fly4: @ 81DBAEA
-	get_type ENEMY_TYPE2
+	get_type AI_TYPE1_USER
 	if_equal TYPE_ICE, AI_CV_Fly6
-	get_type PLAYER_TYPE2
+	get_type AI_TYPE2_USER
 	if_equal TYPE_ICE, AI_CV_Fly6
 
 AI_CV_Fly5: @ 81DBAFA
@@ -2629,9 +2629,9 @@ AI_CV_Snatch_End: @ 81DBDFF
 
 AI_CV_MudSport: @ 81DBE00
 	if_hp_less_than USER, 50, AI_CV_MudSport_ScoreDown1
-	get_type ENEMY_TYPE1
+	get_type AI_TYPE1_TARGET
 	if_equal TYPE_ELECTRIC, AI_CV_MudSport2
-	get_type PLAYER_TYPE1
+	get_type AI_TYPE2_TARGET
 	if_equal TYPE_ELECTRIC, AI_CV_MudSport2
 	jump AI_CV_MudSport_ScoreDown1
 
@@ -2663,9 +2663,9 @@ AI_CV_Overheat_End: @ 81DBE4D
 
 AI_CV_WaterSport: @ 81DBE4E
 	if_hp_less_than USER, 50, AI_CV_WaterSport_ScoreDown1
-	get_type ENEMY_TYPE1
+	get_type AI_TYPE1_TARGET
 	if_equal TYPE_FIRE, AI_CV_WaterSport2
-	get_type PLAYER_TYPE1
+	get_type AI_TYPE2_TARGET
 	if_equal TYPE_FIRE, AI_CV_WaterSport2
 	jump AI_CV_WaterSport_ScoreDown1
 

@@ -917,16 +917,16 @@ static void BattleAICmd_get_type(void)
 {
     switch (gAIScriptPtr[1])
     {
-    case 1: // player primary type
+    case 1: // user primary type
         AI_THINKING_STRUCT->funcResult = gBattleMons[gBattlerAttacker].type1;
         break;
-    case 0: // enemy primary type
+    case 0: // target primary type
         AI_THINKING_STRUCT->funcResult = gBattleMons[gBattlerTarget].type1;
         break;
-    case 3: // player secondary type
+    case 3: // user secondary type
         AI_THINKING_STRUCT->funcResult = gBattleMons[gBattlerAttacker].type2;
         break;
-    case 2: // enemy secondary type
+    case 2: // target secondary type
         AI_THINKING_STRUCT->funcResult = gBattleMons[gBattlerTarget].type2;
         break;
     case 4: // type of move being pointed to
