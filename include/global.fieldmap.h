@@ -129,9 +129,9 @@ struct MapEvents
 struct MapConnection
 {
  /*0x00*/ u8 direction;
- /*0x01*/ u32 offset;
- /*0x05*/ u8 mapGroup;
- /*0x06*/ u8 mapNum;
+ /*0x04*/ u32 offset;
+ /*0x08*/ u8 mapGroup;
+ /*0x09*/ u8 mapNum;
 };
 
 struct MapConnections
