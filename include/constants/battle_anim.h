@@ -318,8 +318,7 @@
 //          127
 //        
 #define SOUND_PAN_TARGET        63
-#define SOUND_PAN_ATTACKER     192
-#define SOUND_PAN_ATTACKER_NEG -64
+#define SOUND_PAN_ATTACKER     -64
 
 // move background ids
 #define BG_DARK_ 0 // the same as BG_DARK but is unused

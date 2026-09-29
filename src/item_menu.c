@@ -2864,8 +2864,8 @@ static void OnItemSelect_Battle(u8 taskId)
 
 void sub_80A7094(u8 taskId)
 {
-    gTasks[taskId].data[8] = (u32)sub_802E424 >> 16;
-    gTasks[taskId].data[9] = (u32)sub_802E424;
+    gTasks[taskId].data[8] = (u32)CB2_SetUpReshowBattleScreenAfterMenu2 >> 16;
+    gTasks[taskId].data[9] = (u32)CB2_SetUpReshowBattleScreenAfterMenu2;
     gTasks[taskId].func = HandleItemMenuPaletteFade;
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
 }
@@ -2965,8 +2965,8 @@ static void sub_80A7230(u8 taskId)
         memcpy(gSaveBlock1.bagPocket_Items, ewramSavedItemsPocket, sizeof(gSaveBlock1.bagPocket_Items));
         memcpy(gSaveBlock1.bagPocket_PokeBalls, ewramSavedPokeballsPocket, sizeof(gSaveBlock1.bagPocket_PokeBalls));
 
-        taskData[8] = (u32)sub_802E424 >> 16;
-        taskData[9] = (u32)sub_802E424;
+        taskData[8] = (u32)CB2_SetUpReshowBattleScreenAfterMenu2 >> 16;
+        taskData[9] = (u32)CB2_SetUpReshowBattleScreenAfterMenu2;
         gTasks[taskId].func = HandleItemMenuPaletteFade;
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         return;

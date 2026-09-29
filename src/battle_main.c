@@ -115,8 +115,8 @@ extern u8 gActionSelectionCursor[];
 extern u8 gMoveSelectionCursor[];
 extern u8 gBattlePartyCurrentOrder[];
 MainCallback gPreBattleCallback1;
-u8 gUnknown_03004344;
-u8 gUnknown_03004348;
+u8 gMultiUsePlayerCursor;
+u8 gNumberOfMovesToChoose;
 extern void (*gBattleMainFunc)(void);
 u8 gLeveledUpInBattle;
 void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
@@ -1272,7 +1272,7 @@ void sub_800FE40(u8 taskId)
     gTasks[taskId].data[4] = r7;
 }
 
-void c2_8011A1C(void)
+void CB2_InitEndLinkBattle(void)
 {
     s32 i;
     u8 taskId;
@@ -3205,7 +3205,7 @@ void sub_801053C(struct Sprite *sprite)
     }
 }
 
-void sub_8010574(struct Sprite *sprite)
+void SpriteCB_HideAsMoveTarget(struct Sprite *sprite)
 {
     sprite->invisible = sprite->data[4];
     sprite->data[4] = FALSE;
@@ -3239,7 +3239,7 @@ void nullsub_86(struct Sprite *sprite)
 {
 }
 
-void sub_80105EC(struct Sprite *sprite)
+void SpriteCB_FaintSlideAnim(struct Sprite *sprite)
 {
     if ((gIntroSlideFlags & 1) == 0)
     {
@@ -3248,7 +3248,7 @@ void sub_80105EC(struct Sprite *sprite)
     }
 }
 
-void dp11b_obj_instanciate(u8 bank, u8 b, s8 c, s8 d)
+void DoBounceEffect(u8 bank, u8 b, s8 c, s8 d)
 {
     u8 spriteId;
     u8 objectID;
@@ -3287,7 +3287,7 @@ void dp11b_obj_instanciate(u8 bank, u8 b, s8 c, s8 d)
     gSprites[objectID].y2 = 0;
 }
 
-void dp11b_obj_free(u8 a, u8 b)
+void EndBounceEffect(u8 a, u8 b)
 {
     u8 r4;
 
@@ -3344,7 +3344,7 @@ void debug_sub_80138CC(void)
         switch (gBattleStruct->unk160FD)
         {
         case 0:
-            if (gBattlerControllerFuncs[gActiveBattler] == sub_802C098)
+            if (gBattlerControllerFuncs[gActiveBattler] == HandleInputChooseAction)
                 gBattleStruct->unk160FD++;
             break;
         case 1:

@@ -1908,7 +1908,7 @@ bool8 IsAnimBankSpriteVisible(u8 bank)
         else
             return FALSE;
     }
-    if (!IsBankSpritePresent(bank))
+    if (!IsBattlerSpritePresent(bank))
         return FALSE;
     if (IsContest())
         return TRUE; // this line wont ever be reached.
@@ -2531,7 +2531,7 @@ s8 BattleAnimAdjustPanning(s8 pan)
         if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
             pan = SOUND_PAN_TARGET;
         else
-            pan = SOUND_PAN_ATTACKER_NEG;
+            pan = SOUND_PAN_ATTACKER;
     }
     else if (IsContest())
     {
@@ -2543,14 +2543,14 @@ s8 BattleAnimAdjustPanning(s8 pan)
         if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
         {
             if (pan == SOUND_PAN_TARGET)
-                pan = SOUND_PAN_ATTACKER_NEG;
-            else if (pan != SOUND_PAN_ATTACKER_NEG)
+                pan = SOUND_PAN_ATTACKER;
+            else if (pan != SOUND_PAN_ATTACKER)
                 pan *= -1;
         }
     }
     else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_OPPONENT)
     {
-        if (pan == SOUND_PAN_ATTACKER_NEG)
+        if (pan == SOUND_PAN_ATTACKER)
             pan = SOUND_PAN_TARGET;
     }
     else
@@ -2560,8 +2560,8 @@ s8 BattleAnimAdjustPanning(s8 pan)
 
     if (pan > SOUND_PAN_TARGET)
         pan = SOUND_PAN_TARGET;
-    else if (pan < SOUND_PAN_ATTACKER_NEG)
-        pan = SOUND_PAN_ATTACKER_NEG;
+    else if (pan < SOUND_PAN_ATTACKER)
+        pan = SOUND_PAN_ATTACKER;
 
     return pan;
 }
@@ -2589,8 +2589,8 @@ s16 sub_8077104(s16 newPan, int oldPan)
 
     if (var > SOUND_PAN_TARGET)
         var = SOUND_PAN_TARGET;
-    else if (var < SOUND_PAN_ATTACKER_NEG)
-        var = SOUND_PAN_ATTACKER_NEG;
+    else if (var < SOUND_PAN_ATTACKER)
+        var = SOUND_PAN_ATTACKER;
     return var;
 }
 

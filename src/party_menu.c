@@ -109,7 +109,7 @@ void (*gPokemonItemUseCallback)(u8 taskId, u16 itemId, TaskFunc taskFunc);
 extern u16 Random();
 
 EWRAM_DATA u8 gUnknown_0202E8F4 = 0;
-EWRAM_DATA u8 gUnknown_0202E8F5 = 0;
+EWRAM_DATA u8 gSelectedMonPartyId = 0;
 EWRAM_DATA u8 gPartyMenuMessage_IsPrinting = 0;
 EWRAM_DATA u16 gUnknown_0202E8F8 = 0;
 EWRAM_DATA u8 gPartyMenuType = 0;

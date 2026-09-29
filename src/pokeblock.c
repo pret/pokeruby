@@ -125,7 +125,7 @@ void (*const gUnknown_083F7EA8[])(void) =
 {
     sub_80A5B40,
     CB2_ReturnToField,
-    sub_802E424,
+    CB2_SetUpReshowBattleScreenAfterMenu2,
     CB2_ReturnToField
 };
 

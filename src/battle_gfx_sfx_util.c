@@ -94,7 +94,7 @@ const struct SpritePalette gUnknown_0820A4D4[] =
 };
 
 extern void Task_PlayerController_RestoreBgmAfterCry(u8);
-extern u8 IsBankSpritePresent(u8);
+extern u8 IsBattlerSpritePresent(u8);
 extern u8 GetBattlerSpriteDefault_Y(u8);
 extern u8 sub_8077F7C(u8);
 extern void sub_8094958(void);
@@ -149,7 +149,7 @@ void SpriteCB_TrainerSlideIn(struct Sprite *sprite)
     }
 }
 
-void move_anim_start_t2_for_situation(u8 a, u32 b)
+void InitAndLaunchChosenStatusAnimation(u8 a, u32 b)
 {
     gBattleHealthBoxInfo[gActiveBattler].statusAnimActive = 1;
     if (a == 0)
@@ -203,7 +203,7 @@ bool8 TryHandleLaunchBattleTableAnimation(u8 a, u8 b, u8 c, u8 d, u16 e)
     }
     gBattleAnimAttacker = b;
     gBattleAnimTarget = c;
-    ewram17840.unk0 = e;
+    gBattleAnimationInfo->unk0 = e;
     LaunchBattleAnimation(gBattleAnims_General, d, 0);
     taskId = CreateTask(sub_80315E8, 10);
     gTasks[taskId].data[0] = a;
@@ -264,7 +264,7 @@ u8 IsMoveWithoutAnimation(int unused1, int unused2)
     return 0;
 }
 
-bool8 mplay_80342A4(u8 a)
+bool8 IsBattleSEPlaying(u8 a)
 {
     u8 zero = 0;
 
@@ -336,7 +336,7 @@ void BattleLoadOpponentMonSprite(struct Pokemon *pkmn, u8 b)
     }
 }
 
-void BattleLoadPlayerMonSprite(struct Pokemon *pkmn, u8 b)
+void BattleLoadPlayerMonSpriteGfx(struct Pokemon *pkmn, u8 b)
 {
     u32 personalityValue;
     u16 species;
@@ -392,7 +392,7 @@ void unref_sub_8031A64(void)
 {
 }
 
-void nullsub_9(u16 unused)
+void BattleGfxSfxDummy2(u16 unused)
 {
 }
 
@@ -431,7 +431,7 @@ void DecompressTrainerBackPic(u16 a, u8 b)
     LoadCompressedPalette(gTrainerBackPicPaletteTable[a].data, 0x100 + b * 16, 32);
 }
 
-void nullsub_10(int unused)
+void BattleGfxSfxDummy3(int unused)
 {
 }
 
@@ -604,7 +604,7 @@ u8 battle_load_something(u8 *pState, u8 *b)
 void sub_8031EE8(void)
 {
     memset(gBattleHealthBoxInfo, 0, 0x30);
-    memset(&ewram17840, 0, 0x10);
+    memset(gBattleAnimationInfo, 0, 0x10);
 }
 
 void sub_8031F0C(void)
@@ -621,7 +621,7 @@ void CopyAllBattleSpritesInvisibilities(void)
         gBattleSpriteInfo[i].invisible = gSprites[gBattlerSpriteIds[i]].invisible;
 }
 
-void sub_8031F88(u8 a)
+void CopyBattleSpriteInvisibility(u8 a)
 {
     gBattleSpriteInfo[a].invisible = gSprites[gBattlerSpriteIds[a]].invisible;
 }
@@ -637,10 +637,10 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
 
     if (c)
     {
-        StartSpriteAnim(&gSprites[gBattlerSpriteIds[a]], ewram17840.unk0);
+        StartSpriteAnim(&gSprites[gBattlerSpriteIds[a]], gBattleAnimationInfo->unk0);
         paletteOffset = 0x100 + a * 16;
-        LoadPalette(ewram16400 + ewram17840.unk0 * 32, paletteOffset, 32);
-        gBattleMonForms[a] = ewram17840.unk0;
+        LoadPalette(ewram16400 + gBattleAnimationInfo->unk0 * 32, paletteOffset, 32);
+        gBattleMonForms[a] = gBattleAnimationInfo->unk0;
         if (gBattleSpriteInfo[a].transformSpecies != 0)
         {
             BlendPalette(paletteOffset, 16, 6, RGB(31, 31, 31));
@@ -758,7 +758,7 @@ void BattleLoadSubstituteSprite(u8 a, u8 b)
             if (GetBattlerSide(a) != 0)
                 BattleLoadOpponentMonSprite(&gEnemyParty[gBattlerPartyIndexes[a]], a);
             else
-                BattleLoadPlayerMonSprite(&gPlayerParty[gBattlerPartyIndexes[a]], a);
+                BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[a]], a);
         }
     }
 }
@@ -857,7 +857,7 @@ void SetBattlerSpriteAffineMode(u8 a)
 
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (IsBankSpritePresent(i) != 0)
+        if (IsBattlerSpritePresent(i) != 0)
         {
             gSprites[gBattlerSpriteIds[i]].oam.affineMode = a;
             if (a == 0)
@@ -895,7 +895,7 @@ void sub_80328A4(struct Sprite *sprite)
     u8 r4 = sprite->data[0];
     struct Sprite *r7 = &gSprites[gBattlerSpriteIds[r4]];
 
-    if (!r7->inUse || IsBankSpritePresent(r4) == 0)
+    if (!r7->inUse || IsBattlerSpritePresent(r4) == 0)
     {
         sprite->callback = sub_8032978;
         return;
@@ -957,7 +957,7 @@ void sub_8032A38(void)
     }
 }
 
-void sub_8032AA8(u8 a, u8 b)
+void ClearTemporarySpeciesSpriteData(u8 a, u8 b)
 {
     gBattleSpriteInfo[a].transformSpecies = 0;
     gBattleMonForms[a] = 0;

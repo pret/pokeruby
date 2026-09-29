@@ -27,7 +27,7 @@ void sub_812AF30(u8 taskId)
     TASK.data[0] = gBattleAnimArgs[0];
     TASK.data[1] = gBattleAnimArgs[1];
 
-    sourcePan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG);
+    sourcePan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
     targetPan = BattleAnimAdjustPanning(SOUND_PAN_TARGET);
     panIncrement = CalculatePanIncrement(sourcePan, targetPan, 2);
 
@@ -142,7 +142,7 @@ static void sub_812B108(u8 taskId)
 void sub_812B18C(u8 taskId)
 {
     u16 species = 0;
-    s8 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG);
+    s8 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
 
     if (IsContest())
     {
@@ -184,7 +184,7 @@ void sub_812B18C(u8 taskId)
         if (mode == 0xFF)
             PlayCry_Normal(species, pan);
         else
-            PlayCry3(species, pan, mode);
+            PlayCry_ByMode(species, pan, mode);
     }
 
     DestroyAnimVisualTask(taskId);
@@ -194,7 +194,7 @@ void sub_812B18C(u8 taskId)
 void sub_812B2B8(u8 taskId)
 {
     u16 species;
-    s8 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG);
+    s8 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
 
     if (IsContest())
         species = gContestResources__moveAnim.species;
@@ -202,7 +202,7 @@ void sub_812B2B8(u8 taskId)
         species = gAnimSpeciesByBanks[gBattleAnimAttacker];
 
     if (species != 0)
-        PlayCry3(species, pan, 4);
+        PlayCry_ByMode(species, pan, 4);
 
     DestroyAnimVisualTask(taskId);
 }

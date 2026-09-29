@@ -41,7 +41,7 @@ static bool8 ShouldSwitchIfPerishSong(void)
         && gDisableStructs[gActiveBattler].perishSongTimer1 == 0)
     {
         gSharedMem[BSTRUCT_OFF(AI_monToSwitchIntoId) + (GetBattlerPosition(gActiveBattler)) / 2] = 6;
-        BtlController_EmitTwoReturnValues(1, 2, 0);
+        BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, 2, 0);
         return TRUE;
     }
 
@@ -94,7 +94,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
                 {
                     // We found a mon.
                     gSharedMem[BSTRUCT_OFF(AI_monToSwitchIntoId) + (GetBattlerPosition(gActiveBattler) / 2)] = i;
-                    BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
+                    BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_SWITCH, 0);
                     return TRUE;
                 }
             }
@@ -174,7 +174,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
         {
             // we found a mon
             gSharedMem[BSTRUCT_OFF(AI_monToSwitchIntoId) + (GetBattlerPosition(gActiveBattler) / 2)] = i;
-            BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_SWITCH, 0);
             return TRUE;
         }
     }
@@ -194,13 +194,13 @@ static bool8 ShouldSwitchIfNaturalCure(void)
     if ((gLastLandedMoves[gActiveBattler] == 0 || gLastLandedMoves[gActiveBattler] == 0xFFFF) && Random() & 1)
     {
         gSharedMem[BSTRUCT_OFF(AI_monToSwitchIntoId) + (GetBattlerPosition(gActiveBattler) / 2)] = 6;
-        BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
+        BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_SWITCH, 0);
         return TRUE;
     }
     else if (gBattleMoves[gLastLandedMoves[gActiveBattler]].power == 0 && Random() & 1)
     {
         gSharedMem[BSTRUCT_OFF(AI_monToSwitchIntoId) + (GetBattlerPosition(gActiveBattler) / 2)] = 6;
-        BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
+        BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_SWITCH, 0);
         return TRUE;
     }
 
@@ -211,7 +211,7 @@ static bool8 ShouldSwitchIfNaturalCure(void)
     if (Random() & 1)
     {
         gSharedMem[BSTRUCT_OFF(AI_monToSwitchIntoId) + (GetBattlerPosition(gActiveBattler) / 2)] = 6;
-        BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
+        BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_SWITCH, 0);
         return TRUE;
     }
 
@@ -355,7 +355,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
                 if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE && Random() % moduloPercent == 0)
                 {
                     gSharedMem[BSTRUCT_OFF(AI_monToSwitchIntoId) + (GetBattlerPosition(gActiveBattler) / 2)] = i;
-                    BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
+                    BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_SWITCH, 0);
                     return TRUE;
                 }
             }
@@ -502,7 +502,7 @@ void AI_TrySwitchOrUseItem(void)
         }
     }
 
-    BtlController_EmitTwoReturnValues(1, B_ACTION_USE_MOVE, (gActiveBattler ^ BIT_SIDE) << 8);
+    BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_USE_MOVE, (gActiveBattler ^ BIT_SIDE) << 8);
 }
 
 static void ModulateByTypeEffectiveness(u8 attackType, u8 defenseType1, u8 defenseType2, u8 *var)
@@ -794,7 +794,7 @@ static bool8 ShouldUseItem(void)
 
         if (shouldUse)
         {
-            BtlController_EmitTwoReturnValues(1, B_ACTION_USE_ITEM, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_USE_ITEM, 0);
             // The AI will only ever use an item whose ID fits in 8 bits.
             // If you want the AI to use an item with a higher ID, uncomment the line below.
             // See also: battle_controller_opponent.c:OpponentHandleOpenBag

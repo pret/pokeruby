@@ -215,16 +215,16 @@ void bx_battle_menu_t6_2(void)
         switch (gActionSelectionCursor[gActiveBattler])
         {
         case 0:
-            BtlController_EmitTwoReturnValues(1, 5, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, 5, 0);
             break;
         case 1:
-            BtlController_EmitTwoReturnValues(1, 6, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, 6, 0);
             break;
         case 2:
-            BtlController_EmitTwoReturnValues(1, 7, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, 7, 0);
             break;
         case 3:
-            BtlController_EmitTwoReturnValues(1, 8, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, 8, 0);
             break;
         }
         SafariBufferExecCompleted();
@@ -277,7 +277,7 @@ void bx_battle_menu_t6_2(void)
     }
     else if (JOY_NEW(START_BUTTON))
     {
-        sub_804454C();
+        SwapHpBarsWithHpText();
     }
 #endif
 }
@@ -323,7 +323,7 @@ void sub_812B758(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
-        BtlController_EmitOneReturnValue(1, gSpecialVar_ItemId);
+        BtlController_EmitOneReturnValue(B_COMM_TO_ENGINE, gSpecialVar_ItemId);
         SafariBufferExecCompleted();
     }
 }
@@ -429,8 +429,8 @@ void SafariHandlecmd11(void)
 
 void SafariHandlecmd12(void)
 {
-    ewram17840.unk8 = 4;
-    gDoingBattleAnim = 1;
+    gBattleAnimationInfo->ballThrowCaseId = 4;
+    gDoingBattleAnim = TRUE;
     InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(1), 4);
     gBattlerControllerFuncs[gActiveBattler] = bx_wait_t6;
 }
@@ -439,8 +439,8 @@ void SafariHandleBallThrow(void)
 {
     u8 var = gBattleBufferA[gActiveBattler][1];
 
-    ewram17840.unk8 = var;
-    gDoingBattleAnim = 1;
+    gBattleAnimationInfo->ballThrowCaseId = var;
+    gDoingBattleAnim = TRUE;
     InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(1), 4);
     gBattlerControllerFuncs[gActiveBattler] = bx_wait_t6;
 }

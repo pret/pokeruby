@@ -88,7 +88,7 @@ extern void SetSpritePrimaryCoordsFromSecondaryCoords();
 extern void StoreSpriteCallbackInData();
 extern void sub_803311C(void);
 extern void sub_8010384(struct Sprite *);
-extern bool8 mplay_80342A4(u8);
+extern bool8 IsBattleSEPlaying(u8);
 extern u8 IsMoveWithoutAnimation();
 extern void SetBattlerSpriteAffineMode();
 extern void CopyAllBattleSpritesInvisibilities(void);
@@ -99,12 +99,12 @@ extern void AI_TrySwitchOrUseItem(void);
 extern u8 GetBattlerAtPosition(u8);
 extern void sub_80330C8(void);
 void sub_8033494(void);
-extern void move_anim_start_t2_for_situation();
+extern void InitAndLaunchChosenStatusAnimation();
 extern void bx_blink_t7(void);
 extern void DoHitAnimHealthboxEffect();
 extern u8 GetBattlerSide(u8);
 extern void HandleIntroSlide();
-extern void sub_8044CA0(u8);
+extern void Task_HidePartyStatusSummary(u8);
 extern void nullsub_45(void);
 extern void sub_8031B74();
 extern bool8 IsDoubleBattle(void);
@@ -372,7 +372,7 @@ void sub_8032E2C(void)
           gActiveBattler,
           GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES));
 
-        ewram17840.unk9_0 = 0;
+        gBattleAnimationInfo->unk9_0 = 0;
         gBattlerControllerFuncs[gActiveBattler] = sub_8032C88;
     }
 }
@@ -445,7 +445,7 @@ void bx_blink_t7(void)
     {
         gSprites[spriteId].data[1] = 0;
         gSprites[spriteId].invisible = FALSE;
-        gDoingBattleAnim = 0;
+        gDoingBattleAnim = FALSE;
         OpponentBufferExecCompleted();
     }
     else
@@ -490,7 +490,7 @@ void sub_8033308(void)
           0);
         StartHealthboxSlideIn(gActiveBattler);
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
-        sub_8031F88(gActiveBattler);
+        CopyBattleSpriteInvisibility(gActiveBattler);
         gBattlerControllerFuncs[gActiveBattler] = sub_8033264;
     }
 }
@@ -547,7 +547,7 @@ void OpponentHandleGetAttributes(void)
             r4 >>= 1;
         }
     }
-    BtlController_EmitDataTransfer(1, r6, buffer);
+    BtlController_EmitDataTransfer(B_COMM_TO_ENGINE, r6, buffer);
     OpponentBufferExecCompleted();
 }
 
@@ -861,7 +861,7 @@ void OpponentHandlecmd1(void)
     u8 *dst;
 
     MEMSET_ALT(&buffer + gBattleBufferA[gActiveBattler][1], src[i], gBattleBufferA[gActiveBattler][2], i, dst);
-    BtlController_EmitDataTransfer(1, gBattleBufferA[gActiveBattler][2], dst);
+    BtlController_EmitDataTransfer(B_COMM_TO_ENGINE, gBattleBufferA[gActiveBattler][2], dst);
     OpponentBufferExecCompleted();
 }
 
@@ -1145,7 +1145,7 @@ void sub_803495C(u8 a, u8 b)
 {
     u16 species;
 
-    sub_8032AA8(a, b);
+    ClearTemporarySpeciesSpriteData(a, b);
     gBattlerPartyIndexes[a] = gBattleBufferA[a][1];
     species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[a]], MON_DATA_SPECIES);
     gBattleControllerData[a] = CreateInvisibleSpriteWithCallback(SpriteCB_WaitForBattlerBallReleaseAnim);
@@ -1323,7 +1323,7 @@ void OpponentHandlePuase(void)
 
 void OpponentHandleMoveAnimation(void)
 {
-    if (!mplay_80342A4(gActiveBattler))
+    if (!IsBattleSEPlaying(gActiveBattler))
     {
         u32 r0 = gBattleBufferA[gActiveBattler][1]
                | (gBattleBufferA[gActiveBattler][2] << 8);
@@ -1373,7 +1373,7 @@ void sub_8035238(void)
     case 1:
         if (!gBattleHealthBoxInfo[gActiveBattler].specialAnimActive)
         {
-            SetBattlerSpriteAffineMode(0);
+            SetBattlerSpriteAffineMode(ST_OAM_AFFINE_OFF);
             DoMoveAnim(r4);
             gBattleHealthBoxInfo[gActiveBattler].animationState = 2;
         }
@@ -1382,7 +1382,7 @@ void sub_8035238(void)
         gAnimScriptCallback();
         if (!gAnimScriptActive)
         {
-            SetBattlerSpriteAffineMode(1);
+            SetBattlerSpriteAffineMode(ST_OAM_AFFINE_NORMAL);
             if ((gBattleSpriteInfo[gActiveBattler].behindSubstitute) && r7 <= 1)
             {
                 InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, 6);
@@ -1484,7 +1484,7 @@ void OpponentHandlecmd20(void)
         {
             battler = GetBattlerAtPosition(0);
         }
-        BtlController_EmitTwoReturnValues(1, B_ACTION_EXEC_SCRIPT, (battler << 8) | chosenMoveId);
+        BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_EXEC_SCRIPT, (battler << 8) | chosenMoveId);
         OpponentBufferExecCompleted();
     }
     else
@@ -1497,10 +1497,10 @@ void OpponentHandlecmd20(void)
         switch (chosenMoveId)
         {
         case 5: // AI_CHOICE_WATCH
-            BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_WATCH_CAREFULLY, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_SAFARI_WATCH_CAREFULLY, 0);
             break;
         case 4: // AI_CHOICE_FLEE
-            BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_RUN, 0);
             break;
         default:
             if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
@@ -1511,7 +1511,7 @@ void OpponentHandlecmd20(void)
                 if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
                     gBattlerTarget = GetBattlerAtPosition(2);
             }
-            BtlController_EmitTwoReturnValues(1, B_ACTION_EXEC_SCRIPT, chosenMoveId | (gBattlerTarget << 8));
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_EXEC_SCRIPT, chosenMoveId | (gBattlerTarget << 8));
             break;
         }
         OpponentBufferExecCompleted();
@@ -1529,11 +1529,11 @@ void OpponentHandlecmd20(void)
         }
 
         if (gBattleMoves[move].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
-            BtlController_EmitTwoReturnValues(1, B_ACTION_EXEC_SCRIPT, chosenMoveId | (gActiveBattler << 8));
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_EXEC_SCRIPT, chosenMoveId | (gActiveBattler << 8));
         else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-            BtlController_EmitTwoReturnValues(1, B_ACTION_EXEC_SCRIPT, chosenMoveId | (GetBattlerAtPosition(Random() & BIT_FLANK) << 8));
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_EXEC_SCRIPT, chosenMoveId | (GetBattlerAtPosition(Random() & BIT_FLANK) << 8));
         else
-            BtlController_EmitTwoReturnValues(1, B_ACTION_EXEC_SCRIPT, chosenMoveId | (GetBattlerAtPosition(0) << 8));
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_EXEC_SCRIPT, chosenMoveId | (GetBattlerAtPosition(0) << 8));
         OpponentBufferExecCompleted();
     }
 }
@@ -1543,7 +1543,7 @@ void OpponentHandleOpenBag(void)
     // The AI will only ever use an item whose ID fits in 8 bits.
     // If you want the AI to use an item with a higher ID, uncomment the code
     // in the line below.
-    BtlController_EmitOneReturnValue(1, gSharedMem[BSTRUCT_OFF(AI_usedItemId) + (gActiveBattler / 2) * 2]/* | (gSharedMem[BSTRUCT_OFF(AI_usedItemId) + (gActiveBattler / 2) * 2 + 1] */);
+    BtlController_EmitOneReturnValue(B_COMM_TO_ENGINE, gSharedMem[BSTRUCT_OFF(AI_usedItemId) + (gActiveBattler / 2) * 2]/* | (gSharedMem[BSTRUCT_OFF(AI_usedItemId) + (gActiveBattler / 2) * 2 + 1] */);
     OpponentBufferExecCompleted();
 }
 
@@ -1584,7 +1584,7 @@ void OpponentHandlecmd22(void)
         gSharedMem[BSTRUCT_OFF(AI_monToSwitchIntoId) + (GetBattlerPosition(gActiveBattler) / 2)] = PARTY_SIZE;
     }
     gSharedMem[BSTRUCT_OFF(monToSwitchIntoId) + gActiveBattler] = r4;
-    BtlController_EmitChosenMonReturnValue(1, r4, 0);
+    BtlController_EmitChosenMonReturnValue(B_COMM_TO_ENGINE, r4, 0);
     OpponentBufferExecCompleted();
 }
 
@@ -1622,7 +1622,7 @@ void OpponentHandleExpBarUpdate(void)
 
 void OpponentHandleStatusIconUpdate(void)
 {
-    if (mplay_80342A4(gActiveBattler) == 0)
+    if (IsBattleSEPlaying(gActiveBattler) == 0)
     {
         UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], 9);
         gBattleHealthBoxInfo[gActiveBattler].statusAnimActive = 0;
@@ -1632,9 +1632,9 @@ void OpponentHandleStatusIconUpdate(void)
 
 void OpponentHandleStatusAnimation(void)
 {
-    if (mplay_80342A4(gActiveBattler) == 0)
+    if (IsBattleSEPlaying(gActiveBattler) == 0)
     {
-        move_anim_start_t2_for_situation(
+        InitAndLaunchChosenStatusAnimation(
           gBattleBufferA[gActiveBattler][1],
           gBattleBufferA[gActiveBattler][2]
           | (gBattleBufferA[gActiveBattler][3] << 8)
@@ -1691,25 +1691,25 @@ void OpponentHandlecmd36(void)
 
 void OpponentHandlecmd37(void)
 {
-    gUnknown_020238C8.unk0_0 = 0;
+    gUnusedControllerStruct.unk = 0;
     OpponentBufferExecCompleted();
 }
 
 void OpponentHandlecmd38(void)
 {
-    gUnknown_020238C8.unk0_0 = gBattleBufferA[gActiveBattler][1];
+    gUnusedControllerStruct.unk = gBattleBufferA[gActiveBattler][1];
     OpponentBufferExecCompleted();
 }
 
 void OpponentHandlecmd39(void)
 {
-    gUnknown_020238C8.unk0_7 = 0;
+    gUnusedControllerStruct.flag = 0;
     OpponentBufferExecCompleted();
 }
 
 void OpponentHandlecmd40(void)
 {
-    gUnknown_020238C8.unk0_7 ^= 1;
+    gUnusedControllerStruct.flag ^= 1;
     OpponentBufferExecCompleted();
 }
 
@@ -1753,7 +1753,7 @@ void OpponentHandlecmd44(void)
 
 void OpponentHandleFaintingCry(void)
 {
-    PlayCry3(
+    PlayCry_ByMode(
       GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES),
       25, 5);
     OpponentBufferExecCompleted();
@@ -1779,8 +1779,8 @@ void OpponentHandleTrainerBallThrow(void)
     taskId = CreateTask(sub_8035C44, 5);
     gTasks[taskId].data[0] = gActiveBattler;
     if (gBattleHealthBoxInfo[gActiveBattler].partyStatusSummaryShown)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8044CA0;
-    ewram17840.unk9_0 = 1;
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
+    gBattleAnimationInfo->unk9_0 = 1;
     gBattlerControllerFuncs[gActiveBattler] = nullsub_45;
 }
 
@@ -1843,17 +1843,17 @@ void OpponentHandlecmd48(void)
       (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4],
       gBattleBufferA[gActiveBattler][1],
       gBattleBufferA[gActiveBattler][2]);
-    gBattleHealthBoxInfo[gActiveBattler].unk5 = 0;
+    gBattleHealthBoxInfo[gActiveBattler].partyStatusDelayTimer = 0;
     if (gBattleBufferA[gActiveBattler][2] != 0)
-        gBattleHealthBoxInfo[gActiveBattler].unk5 = 0x5D;
+        gBattleHealthBoxInfo[gActiveBattler].partyStatusDelayTimer = 0x5D;
     gBattlerControllerFuncs[gActiveBattler] = sub_8035E2C;
 }
 
 void sub_8035E2C(void)
 {
-    if (gBattleHealthBoxInfo[gActiveBattler].unk5++ >= 93)
+    if (gBattleHealthBoxInfo[gActiveBattler].partyStatusDelayTimer++ >= 93)
     {
-        gBattleHealthBoxInfo[gActiveBattler].unk5 = 0;
+        gBattleHealthBoxInfo[gActiveBattler].partyStatusDelayTimer = 0;
         OpponentBufferExecCompleted();
     }
 }
@@ -1861,7 +1861,7 @@ void sub_8035E2C(void)
 void OpponentHandlecmd49(void)
 {
     if (gBattleHealthBoxInfo[gActiveBattler].partyStatusSummaryShown)
-        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = sub_8044CA0;
+        gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
     OpponentBufferExecCompleted();
 }
 
@@ -1872,17 +1872,17 @@ void OpponentHandlecmd50(void)
 
 void OpponentHandleSpriteInvisibility(void)
 {
-    if (IsBankSpritePresent(gActiveBattler) != 0)
+    if (IsBattlerSpritePresent(gActiveBattler) != 0)
     {
         gSprites[gBattlerSpriteIds[gActiveBattler]].invisible = gBattleBufferA[gActiveBattler][1];
-        sub_8031F88(gActiveBattler);
+        CopyBattleSpriteInvisibility(gActiveBattler);
     }
     OpponentBufferExecCompleted();
 }
 
 void OpponentHandleBattleAnimation(void)
 {
-    if (mplay_80342A4(gActiveBattler) == 0)
+    if (IsBattleSEPlaying(gActiveBattler) == 0)
     {
         u8 r3 = gBattleBufferA[gActiveBattler][1];
         u16 r4 = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);

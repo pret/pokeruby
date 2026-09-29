@@ -11,7 +11,7 @@
 /* battle */
 
 	. = ALIGN(4);
-gUnknown_020238C8 = .; /* 20238C8 */
+gUnusedControllerStruct = .; /* 20238C8 */
     . += 0x4;
 
 gDisplayedStringBattle = .; /* 20238CC */

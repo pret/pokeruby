@@ -26,7 +26,7 @@ EWRAM_DATA u8 gUnknown_02038473 = 0;
 extern u8 sub_806BD58(u8, u8);
 extern void PartyMenuPrintMonsLevelOrStatus(void);
 extern void nullsub_13(void);
-extern void sub_802E414(void);
+extern void CB2_SetUpReshowBattleScreenAfterMenu(void);
 extern void sub_80A6DCC(void);
 extern u8 *sub_8040D08();
 extern void SetMonPreventsSwitchingString(void);
@@ -38,7 +38,7 @@ extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[];
 extern u8 gBattlerInMenuId;
 extern u8 gUnknown_0202E8F4;
-extern u8 gUnknown_0202E8F5;
+extern u8 gSelectedMonPartyId;
 extern u8 gPartyMenuMessage_IsPrinting;
 extern u8 gUnknown_020384F0;
 extern void (*gPokemonItemUseCallback)();  //don't know types yet
@@ -528,7 +528,7 @@ static void Task_80952B4(u8 taskId)
     {
         sub_8094D60();
         DestroyTask(taskId);
-        SetMainCallback2(sub_802E414);
+        SetMainCallback2(CB2_SetUpReshowBattleScreenAfterMenu);
     }
 }
 
@@ -687,7 +687,7 @@ static void Task_BattlePartyMenuShift(u8 taskId)
         gTasks[taskId].func = Task_80954C0;
         return;
     }
-    if (sub_8094C20(partySelection) == gBattleStruct->unk1609D)
+    if (sub_8094C20(partySelection) == gBattleStruct->prevSelectedPartySlot)
     {
         PartyMenuEraseMsgBoxAndFrame();
         GetMonNickname(&gPlayerParty[partySelection], gStringVar1);
@@ -717,7 +717,7 @@ static void Task_BattlePartyMenuShift(u8 taskId)
         gTasks[taskId].func = Task_80954C0;
         return;
     }
-    gUnknown_0202E8F5 = sub_8094C20(partySelection);
+    gSelectedMonPartyId = sub_8094C20(partySelection);
     gUnknown_0202E8F4 = 1;
     r4 = pokemon_order_func(gBattlerPartyIndexes[gBattlerInMenuId]);
     sub_8094C98(r4, partySelection);
