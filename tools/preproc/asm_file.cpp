@@ -668,7 +668,7 @@ void AsmFile::RaiseWarning(const char* format, ...)
 int AsmFile::SkipWhitespaceAndEol()
 {
     int newlines = 0;
-    while (m_buffer[m_pos] == '\t' || m_buffer[m_pos] == ' ' || m_buffer[m_pos] == '\n')
+    while (m_buffer[m_pos] == '\t' || m_buffer[m_pos] == ' ' || m_buffer[m_pos] == '\n' || m_buffer[m_pos] == '\r')
     {
         if (m_buffer[m_pos] == '\n')
             newlines++;
