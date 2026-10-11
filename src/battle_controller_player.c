@@ -2675,7 +2675,7 @@ void PlayerHandleYesNoBox()
 
 void PlayerHandleChooseMove(void)
 {
-    MenuCursor_Create814A5C0(0, 0xFFFF, 12, 0x2D9F, 0);
+    MenuCursor_Create814A5C0(0, 0xFFFF, 12, MENU_CURSOR_COLOR, 0);
     sub_80304A8();
     gBattlerControllerFuncs[gActiveBattler] = HandleInputChooseMove;
 }

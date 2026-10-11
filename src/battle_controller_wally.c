@@ -1264,7 +1264,7 @@ static void WallyHandleChooseAction(void)
     gBattlerControllerFuncs[gActiveBattler] = WallyHandleActions;
     Text_InitWindow(&gWindowTemplate_Contest_MoveDescription, BattleText_MenuOptions, 400, 18, 35);
     Text_PrintWindow8002F44(&gWindowTemplate_Contest_MoveDescription);
-    MenuCursor_Create814A5C0(0, 0xFFFF, 12, 0x2D9F, 0);
+    MenuCursor_Create814A5C0(0, 0xFFFF, 12, MENU_CURSOR_COLOR, 0);
     for (i = 0; i < 4; i++)
         nullsub_8(i);
     sub_802E3E4(0, 0);

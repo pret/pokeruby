@@ -2153,7 +2153,7 @@ static void sub_80508FC(void)
 {
     gBerryBlenderData->field_AA = 0;
     Menu_DrawStdWindowFrame(23, 8, 28, 13);
-    MenuCursor_Create814A5C0(0, -1, 12, 0x2D9F, 32);
+    MenuCursor_Create814A5C0(0, -1, 12, MENU_CURSOR_COLOR, 32);
     Menu_PrintText(gOtherText_YesNoTerminating, 24, 9);
     sub_80508D4(gBerryBlenderData->field_AA);
 }
