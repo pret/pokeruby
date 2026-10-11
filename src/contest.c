@@ -524,7 +524,7 @@ void Task_ShowMoveSelectScreen(u8 taskId)
         Text_PrintWindow8002F44(&gWindowTemplate_Contest_MoveDescription);
     }
 
-    MenuCursor_Create814A5C0(0, 0xFFFF, 12, 0x2D9F, 72);
+    MenuCursor_Create814A5C0(0, 0xFFFF, 12, MENU_CURSOR_COLOR, 72);
     DrawMoveSelectArrow(sContest.playerMoveChoice);
     PrintContestMoveDescription(gContestMons[gContestPlayerMonIndex].moves[sContest.playerMoveChoice]);
     gTasks[taskId].func = Task_HandleMoveSelectInput;

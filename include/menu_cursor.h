@@ -3,6 +3,8 @@
 
 #include "sprite.h"
 
+#define MENU_CURSOR_COLOR RGB(31, 12, 11)
+
 void sub_814A590(void);
 u8 MenuCursor_Create814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5);
 u8 sub_814A758(u8 a1, u8 a2, u8 a3, u8 a4);

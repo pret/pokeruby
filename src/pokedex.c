@@ -4991,7 +4991,7 @@ static void Task_SelectSearchMenuItem(u8 taskId)
     gTasks[taskId].data[14] = *p1;
     gTasks[taskId].data[15] = *p2;
     PrintSearchParameterText(taskId);
-    CreateBlendedOutlineCursor(16, 0xFFFF, 12, 0x2D9F, 11);
+    CreateBlendedOutlineCursor(16, 0xFFFF, 12, MENU_CURSOR_COLOR, 11);
     PrintSelectorArrow(*p1, 1);
     gTasks[taskId].func = Task_HandleSearchParameterInput;
 }

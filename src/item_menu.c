@@ -2977,7 +2977,7 @@ static void sub_80A7230(u8 taskId)
 static void ItemListMenu_InitMenu(void)
 {
     InitMenu(0, 14, 2, gBagPocketScrollStates[sCurrentBagPocket].cursorMax + 1, gBagPocketScrollStates[sCurrentBagPocket].cursorPos, 0);
-    CreateBlendedOutlineCursor(16, 0xFFFF, 12, 0x2D9F, 15);
+    CreateBlendedOutlineCursor(16, 0xFFFF, 12, MENU_CURSOR_COLOR, 15);
     sub_80A73C0();
 }
 

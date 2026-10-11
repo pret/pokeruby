@@ -800,7 +800,7 @@ static void InitMoveTutorMenuSprites(void)
     for (i = 0; i < 20; i++)
         gSprites[sMoveTutorMenu->spriteIDs[i]].invisible = TRUE;
 
-    CreateBlendedOutlineCursor(16, 0xFFFF, 12, 0x2D9F, 18);
+    CreateBlendedOutlineCursor(16, 0xFFFF, 12, MENU_CURSOR_COLOR, 18);
 }
 
 static void InitMoveTutorMenuStrings(void)
