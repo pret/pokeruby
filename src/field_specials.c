@@ -1151,13 +1151,10 @@ void sub_810E984(u8 taskId)
     }
 }
 
-/* Removing the NONMATCHING block will swap the roles of r4 and r5 throughout.
-Could possibly be fixed by writing code which increases the amount of references to newPos,
-or decreasing the amount of references to i.*/
 bool8 sub_810EAC8(u8 prevMenuPos, u8 dpadInput)
 {
-    u8 i;
-    bool8 flag = 0;
+    u8 i, j;
+    bool8 flag = FALSE;
     u8 newPos = 0;
     if (gUnknown_0203925A < 5)
     {
@@ -1168,7 +1165,7 @@ bool8 sub_810EAC8(u8 prevMenuPos, u8 dpadInput)
         if (prevMenuPos == 0)
         {
             newPos = gUnknown_0203925B;
-            flag = 1;
+            flag = TRUE;
         }
     }
     else if (dpadInput == DPAD_DOWN)
@@ -1176,21 +1173,17 @@ bool8 sub_810EAC8(u8 prevMenuPos, u8 dpadInput)
         if (prevMenuPos == 4)
         {
             newPos = gUnknown_0203925B - 4;
-            flag = 1;
+            flag = TRUE;
         }
     }
     if (flag)
     {
         sub_810EB90(newPos, 5);
         Menu_BlankWindowRect(2, 1, 7, 10);
-        for (i=0; i<5 && gUnknown_03000760[newPos].var0 != 16; newPos++, i++)
+        for (j = newPos, i=0; i<5; j++, i++)
         {
-            Menu_PrintText(gUnknown_083F8380[gUnknown_03000760[newPos].var0], 1, i * 2 + 1);
-#ifndef NONMATCHING
-            asm(""::"r"(newPos));
-            asm(""::"r"(newPos));
-            asm(""::"r"(newPos));
-#endif
+            if (gUnknown_03000760[j].var0 == 16) break; // Has to be one line to match
+            Menu_PrintText(gUnknown_083F8380[gUnknown_03000760[j].var0], 1, i * 2 + 1);
         }
     }
     return flag;
@@ -1514,8 +1507,8 @@ Could possibly be fixed by writing code which increases the amount of references
 or decreasing the amount of references to i.*/
 bool8 sub_810F1F4(u8 prevCursorPos, u8 dpadInput)
 {
-    u8 i;
-    u8 flag = 0;
+    u8 i, j;
+    bool8 flag = FALSE;
     u8 newPos = 0;
     if (gUnknown_0203925A < 5)
     {
@@ -1541,14 +1534,9 @@ bool8 sub_810F1F4(u8 prevCursorPos, u8 dpadInput)
     {
         GlassWorkshopUpdateScrollIndicators(newPos, 5);
         Menu_BlankWindowRect(2, 1, 9, 10);
-        for (i=0; i<5; newPos++, i++)
+        for (j = newPos, i=0; i<5; j++, i++)
         {
-            Menu_PrintText(gUnknown_083F83C0[newPos], 1, 2 * i + 1);
-#ifndef NONMATCHING
-            asm(""::"r"(newPos));
-            asm(""::"r"(newPos));
-            asm(""::"r"(newPos));
-#endif
+            Menu_PrintText(gUnknown_083F83C0[j], 1, 2 * i + 1);
         }
     }
     return flag;
